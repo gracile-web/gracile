@@ -4,7 +4,7 @@ A thin, full-stack, **web** framework.
 
 ---
 
-- [Documentation website (gracile.netlify.app)](https://gracile.netlify.app/)
+- [Documentation website (gracile.js.org)](https://gracile.js.org/)
 - [Documentation website repository](https://github.com/gracile-web/website)
 
 ---
