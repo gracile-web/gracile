@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" data-path="/04-polyfills/00-polyfills/">
+  <head>
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <title>Document - With polyfills</title>
+
+    <!-- Not well tested enough -->
+
+    <script
+      type="module"
+      src="/@id/__x00__/04-polyfills/00-polyfills/index.html?html-proxy&index=0.js"
+    ></script>
+
+    <!--  -->
+
+    <script>
+      // REQUEST IDLE CALLBACK
+      "use strict";
+      /* eslint-disable func-names */
+      // Taken from: https://github.com/pladaria/requestidlecallback-polyfill/blob/master/index.js
+      window.requestIdleCallback =
+        window.requestIdleCallback ||
+        function (cb) {
+          const start = Date.now();
+          return setTimeout(() => {
+            cb({
+              didTimeout: false,
+              timeRemaining: () => {
+                return Math.max(0, 50 - (Date.now() - start));
+              },
+            });
+          }, 1);
+        };
+      window.cancelIdleCallback =
+        window.cancelIdleCallback ||
+        function (id) {
+          clearTimeout(id);
+        };
+    </script>
+
+    <!--  -->
+
+    <!-- PAGE ASSETS -->
+    <script
+      type="module"
+      src="/src/routes/04-polyfills/00-polyfills.client.ts"
+    ></script>
+    <!-- /PAGE ASSETS -->
+  </head>
+
+  <body>
+    <!--lit-part K56I6EYXJVE=-->
+    <h1>Hello Polyfills</h1>
+    <hr />
+    <code><!--lit-part-->/04-polyfills/00-polyfills/<!--/lit-part--></code>
+
+    <div>
+      <template shadowrootmode="open">
+        <!--  -->
+        Hello shadow
+      </template>
+    </div>
+    <!--/lit-part-->
+  </body>
+</html>

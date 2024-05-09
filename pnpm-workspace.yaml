@@ -1,0 +1,21 @@
+packages:
+  - ./packages/gracile
+  - ./packages/client
+  - ./packages/server
+
+  - ./packages/engine
+  - ./packages/cli
+  - ./packages/create-gracile
+
+  - ./packages/internal/tsconfigs
+  - ./packages/internal/utils
+
+  - ./packages/addons/metadata
+  - ./packages/addons/svg
+  - ./packages/addons/sitemap
+  - ./packages/addons/markdown
+  - ./packages/addons/markdown-old
+  - ./packages/addons/markdown-preset-marked
+  # - ./packages/addons/minify
+  # - ./packages/addons/minify-html-literals
+  - ./integration

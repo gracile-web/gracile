@@ -1,0 +1,62 @@
+{
+  "name": "@gracile/svg",
+  "version": "0.0.0",
+  "description": "A thin, full-stack, web framework",
+  "keywords": [
+    "full-stack",
+    "meta-framework",
+    "custom-elements",
+    "ssr",
+    "server",
+    "server-side-rendering",
+    "static",
+    "web-components",
+    "lit"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/addons/svg"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js",
+    "./ambient": {
+      "types": "./ambient.d.ts"
+    }
+  },
+  "files": [
+    "./ambient.d.ts",
+    "./dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@gracile/internal-utils": "workspace:^",
+    "svgo": "^3.2.0"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@types/node": "^20.11.25",
+    "typescript": "5.5.0-beta"
+  },
+  "peerDependencies": {
+    "lit": "3.x",
+    "vite": "5.x"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

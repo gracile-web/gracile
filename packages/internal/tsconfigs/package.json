@@ -1,0 +1,18 @@
+{
+  "name": "@gracile/internal-tsconfigs",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/internal/tsconfigs"
+  },
+  "type": "module",
+  "files": [],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "devDependencies": {
+    "typescript": "5.5.0-beta"
+  }
+}

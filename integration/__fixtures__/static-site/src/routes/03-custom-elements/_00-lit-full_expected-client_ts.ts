@@ -1,0 +1,3 @@
+import "/src/routes/03-custom-elements/_lit-element.ts";
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIjAwLWxpdC1mdWxsLmNsaWVudC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgJy4vX2xpdC1lbGVtZW50LmpzJztcbiJdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTzsiLCJuYW1lcyI6W119

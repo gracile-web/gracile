@@ -1,0 +1,155 @@
+# https://help.github.com/en/categories/automating-your-workflow-with-github-actions
+# See: https://github.com/JulianCataldo/gh-actions
+
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '([0-9])?(.{+([0-9]),x}).x'
+      - main
+      - next
+      - next-major
+      - alpha
+      - beta
+      # - to-integrate
+      # - to-integrate-next
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+
+    steps:
+      # MARK: Setup GH Action
+
+      - name: 'Harden Runner'
+        uses: 'step-security/harden-runner@63c24ba6bd7ba022e95695ff85de572c04a18142' # v2.7.0
+        with:
+          egress-policy: 'audit'
+
+      - name: Git checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.2
+        # run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+        with:
+          fetch-depth: 0
+
+      # - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+      #   persist-credentials: false
+      # env:
+      #   GIT_COMMITTER_NAME: "GitHub Actions Shell"
+      #   GIT_AUTHOR_NAME: "GitHub Actions Shell"
+      #   EMAIL: "github-actions[bot]@users.noreply.github.com"
+
+      # MARK: Setup Node env.
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3.0.0
+        with:
+          run_install: false
+
+      - name: Use Node.js 21.7.2
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        with:
+          # registry-url: "https://registry.npmjs.org"
+          node-version: 21.7.2
+          cache: pnpm
+
+      - name: Install packages
+        shell: bash
+        run: pnpm install --frozen-lockfile
+
+      - name: 'Verify the integrity of provenance attestations and registry signatures for installed dependencies'
+        run: 'pnpm audit signatures'
+
+      # MARK: Lint/Checks pre-build
+
+      - name: Lint last commit — Commitlint
+        shell: bash
+        run: pnpm run lint:commit
+
+      # - name: Lint CSS — Stylelint
+      #   shell: bash
+      #   run: pnpm run lint:css
+
+      - name: Check all formatting — Prettier
+        shell: bash
+        run: pnpm run format
+
+      # MARK: Build packages
+
+      - name: Setup Turbo cache
+        uses: dtinth/setup-github-actions-caching-for-turbo@a0e976d970c2a94366a26984efcef3030e2c0115 # v1.2.0
+
+      - name: Build all packages
+        shell: bash
+        run: pnpm build
+
+      # MARK: Lint/Checks post-build
+
+      - name: Lint JS/TS — ESLint
+        shell: bash
+        run: pnpm run lint:js
+
+      # MARK:Tests
+
+      - name: Tests — Integration
+        shell: bash
+        run: pnpm run test
+
+      # MARK: Publish packages
+
+      - name: Create temporary NPM identity # + Enable Provenance
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # run: |
+        #   echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN\nprovenance=true" > .npmrc
+        #   echo "provenance=true" > .npmrc
+        run: |
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+
+      - name: Git user configuration
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      # MARK: [MAIN]
+      - name: 'Lerna publish [main]'
+        # if: github.ref == 'refs/heads/to-integrate'
+        if: github.ref == 'refs/heads/main'
+        # https://github.com/lerna/lerna/issues/2532
+        id: graduateRelease
+        continue-on-error: true
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          NPM_TOKEN: '${{ secrets.NPM_TOKEN }}' # Not really needed (already global)
+        run: |
+          pnpm lerna publish --conventional-commits --exact --conventional-graduate --create-release=github --yes
+
+      - name: Bump Prod Version Fallback
+        if: ${{ always() && steps.graduateRelease.outcome == 'failure'  }}
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          NPM_TOKEN: '${{ secrets.NPM_TOKEN }}'
+        run: |
+          echo Falling back to non-graduate release due to https://github.com/lerna/lerna/issues/2532
+          git stash
+          pnpm lerna publish --conventional-commits --exact --create-release=github --yes
+
+      # MARK: [NEXT]
+      - name: 'Lerna publish [next]'
+        if: github.ref == 'refs/heads/next'
+        # if: github.ref == 'refs/heads/to-integrate-next'
+        env:
+          NPM_TOKEN: '${{ secrets.NPM_TOKEN }}' # Not really needed (already global)
+        run: |
+          pnpm lerna publish --conventional-commits --exact --conventional-prerelease --canary --dist-tag=next --preid=next --yes

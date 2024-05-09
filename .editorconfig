@@ -1,0 +1,21 @@
+# https://EditorConfig.org
+
+root = true
+
+[*]
+indent_style = tab
+indent_size = 2
+
+max_line_length = 80
+
+charset = utf-8
+end_of_line = lf
+
+trim_trailing_whitespace = false
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.md,*.yaml,*.json,.*rc*]
+indent_style = space

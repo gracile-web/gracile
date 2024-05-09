@@ -1,0 +1,33 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+
+  "pipeline": {
+    "dev": {
+      "outputs": ["dist/**"],
+
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "outputs": ["dist/**"],
+      "cache": false
+      // "persistent": true
+    },
+    "test": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:dev2": {
+      "cache": false
+    },
+    "build": {
+      "cache": false,
+      "dependsOn": [
+        //
+        "^clean",
+        "^build"
+      ],
+      "outputs": ["dist/**"]
+    }
+  }
+}

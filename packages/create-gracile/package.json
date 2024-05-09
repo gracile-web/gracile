@@ -1,0 +1,75 @@
+{
+  "name": "create-gracile",
+  "version": "0.0.0",
+  "description": "A thin, full-stack, web framework",
+  "keywords": [
+    "full-stack",
+    "meta-framework",
+    "custom-elements",
+    "ssr",
+    "server",
+    "server-side-rendering",
+    "static",
+    "web-components",
+    "lit"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/create-gracile"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    "./*": "./dist/*.js"
+  },
+  "bin": {
+    "create-gracile": "./dist/cli.js"
+  },
+  "files": [
+    "./dist/**/*",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "// test": "node --test dist/**/*.ts",
+    "// test:dev": "npm run test -- --watch",
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch",
+    "dev:cli": "pnpm tsx -C development src/cli.ts"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "@commander-js/extra-typings": "^12.0.1",
+    "@gracile/internal-utils": "workspace:^",
+    "commander": "^12.0.0",
+    "conf": "^12.0.0",
+    "esm-env": "^1.0.0",
+    "fast-glob": "^3.3.2",
+    "latest-version": "^9.0.0",
+    "picocolors": "^1.0.0",
+    "random-words": "^2.0.1"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@types/degit": "^2.8.6",
+    "@types/node": "^20.11.25",
+    "cli-testing-library": "^2.0.2",
+    "typescript": "5.5.0-beta"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "// disabledDeps": {
+    "@gracile/engine": "workspace:^",
+    "@gracile/internal-utils": "workspace:^",
+    "ts-to-jsdoc": "^1.5.1"
+  }
+}

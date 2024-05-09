@@ -1,0 +1,61 @@
+{
+  "name": "@gracile/server",
+  "version": "0.0.0",
+  "description": "A thin, full-stack, web framework",
+  "keywords": [
+    "full-stack",
+    "meta-framework",
+    "custom-elements",
+    "ssr",
+    "server",
+    "server-side-rendering",
+    "static",
+    "web-components",
+    "lit"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/server"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    "./*": "./dist/*.js"
+  },
+  "main": "index.js",
+  "files": [
+    "./dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@gracile/engine": "workspace:^",
+    "import-meta-resolve": "^4.0.0"
+  },
+  "devDependencies": {
+    "@gracile/client": "workspace:^",
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@types/node": "^20.11.25",
+    "tsx": "^4.7.1",
+    "typescript": "5.5.0-beta"
+  },
+  "peerDependencies": {
+    "@lit-labs/ssr": "3.x",
+    "lit": "3.x"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "// name": "@gracile/server"
+}

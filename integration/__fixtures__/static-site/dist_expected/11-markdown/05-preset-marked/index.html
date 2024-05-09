@@ -1,0 +1,1270 @@
+
+		<!doctype html>
+		<html lang="en" data-path="/11-markdown/05-preset-marked/">
+			<head>
+				<meta charset="UTF-8" />
+				<title>Document - With sibling assets</title>
+
+				
+			<!-- PAGE ASSETS -->
+			
+			<!-- /PAGE ASSETS -->
+		
+			</head>
+
+			<body>
+				<!--lit-part SwzIL7pqyYA=-->
+		<h1>Hello Markown - Marked</h1>
+		<hr />
+		<code><!--lit-part-->/11-markdown/05-preset-marked/<!--/lit-part--></code>
+		<hr />
+
+		1
+		<details>
+			<summary>body.lit</summary>
+			<div><!--lit-part C+bidty1zEQ=--><h1 id="shoelace-typography">Shoelace Typography</h1>
+<p>Inspired by Tailwind Typography, adapted for usage with Shoelace.</p>
+<blockquote>
+<p>[!NOTE]
+Sample text below copied from the Tailwind playground.</p>
+</blockquote>
+<h1 id="sample-prose">Sample prose</h1>
+<!-- (BREAKS MARKED) -->
+<!-- <p class="lead"> -->
+
+<p>Until now, trying to style an article, document, or blog post with Tailwind has been a tedious
+task that required a keen eye for typography and a lot of complex custom CSS.</p>
+<!-- </p> -->
+
+<p>By default, Tailwind removes all of the default browser styling from paragraphs, headings, lists and more. This ends up being really useful for building application UIs because you spend less time undoing user-agent styles, but when you <em>really are</em> just trying to style some content that came from a rich-text editor in a CMS or a markdown file, it can be surprising and unintuitive.</p>
+<p>We get lots of complaints about it actually, with people regularly asking us things like:</p>
+<blockquote>
+<p>Why is Tailwind removing the default styles on my <code>h1</code> elements? How do I disable this? What do you mean I lose all the other base styles too?</p>
+</blockquote>
+<p>We hear you, but we&#39;re not convinced that simply disabling our base styles is what you really want. You don&#39;t want to have to remove annoying margins every time you use a <code>p</code> element in a piece of your dashboard UI. And I doubt you really want your blog posts to use the user-agent styles either — you want them to look <em>awesome</em>, not awful.</p>
+<p>The <code>@tailwindcss/typography</code> plugin is our attempt to give you what you <em>actually</em> want, without any of the downsides of doing something stupid like disabling our base styles.</p>
+<p>It adds a new <code>prose</code> class that you can slap on any block of vanilla HTML content and turn it into a beautiful, well-formatted document:</p>
+<pre><code class="language-html">&lt;article class=&quot;prose&quot;&gt;
+  &lt;h1&gt;Garlic bread with cheese: What the science tells us&lt;/h1&gt;
+  &lt;p&gt;
+    For years parents have espoused the health benefits of eating garlic bread
+    with cheese to their children, with the food earning such an iconic status
+    in our culture that kids will often dress up as warm, cheesy loaf for
+    Halloween.
+  &lt;/p&gt;
+  &lt;p&gt;
+    But a recent study shows that the celebrated appetizer may be linked to a
+    series of rabies cases springing up around the country.
+  &lt;/p&gt;
+  &lt;!-- ... --&gt;
+&lt;/article&gt;
+</code></pre>
+<p>For more information about how to use the plugin and the features it includes, <a href="https://github.com/tailwindcss/typography/blob/master/README.md">read the documentation</a>.</p>
+<hr>
+<h2 id="what-to-expect-from-here-on-out">What to expect from here on out</h2>
+<p>What follows from here is just a bunch of absolute nonsense I&#39;ve written to dogfood the plugin itself. It includes every sensible typographic element I could think of, like <strong>bold text</strong>, unordered lists, ordered lists, code blocks, block quotes, <em>and even italics</em>.</p>
+<p>It&#39;s important to cover all of these use cases for a few reasons:</p>
+<ol>
+<li>We want everything to look good out of the box.</li>
+<li>Really just the first reason, that&#39;s the whole point of the plugin.</li>
+<li>Here&#39;s a third pretend reason though a list with three items looks more realistic than a list with two items.</li>
+</ol>
+<p>Now we&#39;re going to try out another header style.</p>
+<h3 id="typography-should-be-easy">Typography should be easy</h3>
+<p>So that&#39;s a header for you — with any luck if we&#39;ve done our job correctly that will look pretty reasonable.</p>
+<p>Something a wise person once told me about typography is:</p>
+<blockquote>
+<p>Typography is pretty important if you don&#39;t want your stuff to look like trash. Make it good then it won&#39;t be bad.</p>
+</blockquote>
+<p>It&#39;s probably important that images look okay here by default as well:</p>
+<figure>
+  <img
+    src="https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
+    alt=""
+  />
+  <figcaption>
+    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+    classical Latin literature from 45 BC, making it over 2000 years old.
+  </figcaption>
+</figure>
+
+<p>Now I&#39;m going to show you an example of an unordered list to make sure that looks good, too:</p>
+<ul>
+<li>So here is the first item in this list.</li>
+<li>In this example we&#39;re keeping the items short.</li>
+<li>Later, we&#39;ll use longer, more complex list items.</li>
+</ul>
+<p>And that&#39;s the end of this section.</p>
+<h2 id="what-if-we-stack-headings">What if we stack headings?</h2>
+<h3 id="we-should-make-sure-that-looks-good-too">We should make sure that looks good, too.</h3>
+<p>Sometimes you have headings directly underneath each other. In those cases you often have to undo the top margin on the second heading because it usually looks better for the headings to be closer together than a paragraph followed by a heading should be.</p>
+<h3 id="when-a-heading-comes-after-a-paragraph-">When a heading comes after a paragraph …</h3>
+<p>When a heading comes after a paragraph, we need a bit more space, like I already mentioned above. Now let&#39;s see what a more complex list would look like.</p>
+<ul>
+<li><p><strong>I often do this thing where list items have headings.</strong></p>
+<p>For some reason I think this looks cool which is unfortunate because it&#39;s pretty annoying to get the styles right.</p>
+<p>I often have two or three paragraphs in these list items, too, so the hard part is getting the spacing between the paragraphs, list item heading, and separate list items to all make sense. Pretty tough honestly, you could make a strong argument that you just shouldn&#39;t write this way.</p>
+</li>
+<li><p><strong>Since this is a list, I need at least two items.</strong></p>
+<p>I explained what I&#39;m doing already in the previous list item, but a list wouldn&#39;t be a list if it only had one item, and we really want this to look realistic. That&#39;s why I&#39;ve added this second list item so I actually have something to look at when writing the styles.</p>
+</li>
+<li><p><strong>It&#39;s not a bad idea to add a third item either.</strong></p>
+<p>I think it probably would&#39;ve been fine to just use two items but three is definitely not worse, and since I seem to be having no trouble making up arbitrary things to type, I might as well include it. I&#39;m going to press <kbd>Enter</kbd> now.</p>
+</li>
+</ul>
+<p>After this sort of list I usually have a closing statement or paragraph, because it kinda looks weird jumping right to a heading.</p>
+<h2 id="code-should-look-okay-by-default">Code should look okay by default.</h2>
+<p>I think most people are going to use <a href="https://highlightjs.org/">highlight.js</a> or <a href="https://prismjs.com/">Prism</a> or something if they want to style their code blocks but it wouldn&#39;t hurt to make them look <em>okay</em> out of the box, even with no syntax highlighting.</p>
+<p>Here&#39;s what a default <code>tailwind.config.js</code> file looks like at the time of writing:</p>
+<pre><code class="language-js">module.exports = {
+  purge: [],
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+};
+</code></pre>
+<p>Hopefully that looks good enough to you.</p>
+<h3 id="what-about-nested-lists">What about nested lists?</h3>
+<p>Nested lists basically always look bad which is why editors like Medium don&#39;t even let you do it, but I guess since some of you goofballs are going to do it we have to carry the burden of at least making it work.</p>
+<ol>
+<li><strong>Nested lists are rarely a good idea.</strong><ul>
+<li>You might feel like you are being really &quot;organized&quot; or something but you are just creating a gross shape on the screen that is hard to read.</li>
+<li>Nested navigation in UIs is a bad idea too, keep things as flat as possible.</li>
+<li>Nesting tons of folders in your source code is also not helpful.</li>
+</ul>
+</li>
+<li><strong>Since we need to have more items, here&#39;s another one.</strong><ul>
+<li>I&#39;m not sure if we&#39;ll bother styling more than two levels deep.</li>
+<li>Two is already too much, three is guaranteed to be a bad idea.</li>
+<li>If you nest four levels deep you belong in prison.</li>
+</ul>
+</li>
+<li><strong>Two items isn&#39;t really a list, three is good though.</strong><ul>
+<li>Again please don&#39;t nest lists if you want people to actually read your content.</li>
+<li>Nobody wants to look at this.</li>
+<li>I&#39;m upset that we even have to bother styling this.</li>
+</ul>
+</li>
+</ol>
+<p>The most annoying thing about lists in Markdown is that <code>&lt;li&gt;</code> elements aren&#39;t given a child <code>&lt;p&gt;</code> tag unless there are multiple paragraphs in the list item. That means I have to worry about styling that annoying situation too.</p>
+<ul>
+<li><p><strong>For example, here&#39;s another nested list.</strong></p>
+<p>But this time with a second paragraph.</p>
+<ul>
+<li>These list items won&#39;t have <code>&lt;p&gt;</code> tags</li>
+<li>Because they are only one line each</li>
+</ul>
+</li>
+<li><p><strong>But in this second top-level list item, they will.</strong></p>
+<p>This is especially annoying because of the spacing on this paragraph.</p>
+<ul>
+<li><p>As you can see here, because I&#39;ve added a second line, this list item now has a <code>&lt;p&gt;</code> tag.</p>
+<p>This is the second line I&#39;m talking about by the way.</p>
+</li>
+<li><p>Finally here&#39;s another list item so it&#39;s more like a list.</p>
+</li>
+</ul>
+</li>
+<li><p>A closing list item, but with no nested list, because why not?</p>
+</li>
+</ul>
+<p>And finally a sentence to close off this section.</p>
+<h2 id="we-didnt-forget-about-description-lists">We didn&#39;t forget about description lists</h2>
+<p>Well, that&#39;s not exactly true, we first released this plugin back in 2020 and it took three years before we added description lists. But they&#39;re here now, so let&#39;s just be happy about that&hellip;okay? They can be great for things like FAQs.</p>
+<dl>
+  <dt>Why do you never see elephants hiding in trees?</dt>
+  <dd>
+    Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+    cupiditate laboriosam fugiat.
+  </dd>
+  <dt>What do you call someone with no body and no nose?</dt>
+  <dd>
+    Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia
+    excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.
+  </dd>
+  <dt>Why can't you hear a pterodactyl go to the bathroom?</dt>
+  <dd>
+    Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quas
+    voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam suscipit deserunt illum
+    natus facilis atque vero consequatur! Quisquam, debitis error.
+  </dd>
+</dl>
+
+<h2 id="there-are-other-elements-we-need-to-style">There are other elements we need to style</h2>
+<p>I almost forgot to mention links, like <a href="https://tailwindcss.com">this link to the Tailwind CSS website</a>. We almost made them blue but that&#39;s so yesterday, so we went with dark gray, feels edgier.</p>
+<p>We even included table styles, check it out:</p>
+<table>
+<thead>
+<tr>
+<th>Wrestler</th>
+<th>Origin</th>
+<th>Finisher</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Bret &quot;The Hitman&quot; Hart</td>
+<td>Calgary, AB</td>
+<td>Sharpshooter</td>
+</tr>
+<tr>
+<td>Stone Cold Steve Austin</td>
+<td>Austin, TX</td>
+<td>Stone Cold Stunner</td>
+</tr>
+<tr>
+<td>Randy Savage</td>
+<td>Sarasota, FL</td>
+<td>Elbow Drop</td>
+</tr>
+<tr>
+<td>Vader</td>
+<td>Boulder, CO</td>
+<td>Vader Bomb</td>
+</tr>
+<tr>
+<td>Razor Ramon</td>
+<td>Chuluota, FL</td>
+<td>Razor&#39;s Edge</td>
+</tr>
+</tbody></table>
+<p>We also need to make sure inline code looks good, like if I wanted to talk about <code>&lt;span&gt;</code> elements or tell you the good news about <code>@tailwindcss/typography</code>.</p>
+<h3 id="sometimes-i-even-use-code-in-headings">Sometimes I even use <code>code</code> in headings</h3>
+<p>Even though it&#39;s probably a bad idea, and historically I&#39;ve had a hard time making it look good. This <em>&quot;wrap the code blocks in backticks&quot;</em> trick works pretty well though really.</p>
+<p>Another thing I&#39;ve done in the past is put a <code>code</code> tag inside of a link, like if I wanted to tell you about the <a href="https://github.com/tailwindcss/docs"><code>tailwindcss/docs</code></a> repository. I don&#39;t love that there is an underline below the backticks but it is absolutely not worth the madness it would require to avoid it.</p>
+<h4 id="we-havent-used-an-h4-yet">We haven&#39;t used an <code>h4</code> yet</h4>
+<p>But now we have. Please don&#39;t use <code>h5</code> or <code>h6</code> in your content, Medium only supports two heading levels for a reason, you animals. I honestly considered using a <code>before</code> pseudo-element to scream at you if you use an <code>h5</code> or <code>h6</code>.</p>
+<p>We don&#39;t style them at all out of the box because <code>h4</code> elements are already so small that they are the same size as the body copy. What are we supposed to do with an <code>h5</code>, make it <em>smaller</em> than the body copy? No thanks.</p>
+<h3 id="we-still-need-to-think-about-stacked-headings-though">We still need to think about stacked headings though.</h3>
+<h4 id="lets-make-sure-we-dont-screw-that-up-with-h4-elements-either">Let&#39;s make sure we don&#39;t screw that up with <code>h4</code> elements, either.</h4>
+<p>Phew, with any luck we have styled the headings above this text and they look pretty good.</p>
+<p>Let&#39;s add a closing paragraph here so things end with a decently sized block of text. I can&#39;t explain why I want things to end that way but I have to assume it&#39;s because I think things will look weird or unbalanced if there is a heading too close to the end of the document.</p>
+<p>What I&#39;ve written here is probably long enough, but adding this final sentence can&#39;t hurt.</p>
+<h1 id="some-second-h1-for-test">Some second H1 for test</h1>
+<h2 id="hey-im-nested">Hey I&#39;m nested!</h2>
+<!--/lit-part--></div>
+		</details>
+		<hr />
+
+		2
+		<details>
+			<summary>path.absolute</summary>
+			<code><!--lit-part-->d<!--/lit-part--></code>
+		</details>
+		<hr />
+
+		3
+		<details>
+			<summary>path.relative</summary>
+			<code><!--lit-part-->src/routes/11-markdown/_assets/typography.md<!--/lit-part--></code>
+		</details>
+		<hr />
+
+		4
+		<details>
+			<summary>source.file</summary>
+			<pre><!--lit-part-->---
+id: 10
+title: SuperPC
+description: Super PC is awesome...
+price: 1099
+discountPercentage: 6.18
+rating: 4.43
+stock: 89
+brand: PCMaster
+category: laptops
+thumbnail: foo.svg
+images:
+  - abc.png
+  - abc1.png
+  - abc2.png
+  - abc3.png
+---
+
+# Shoelace Typography
+
+Inspired by Tailwind Typography, adapted for usage with Shoelace.
+
+&gt; [!NOTE]
+&gt; Sample text below copied from the Tailwind playground.
+
+# Sample prose
+
+&lt;!-- (BREAKS MARKED) --&gt;
+&lt;!-- &lt;p class=&quot;lead&quot;&gt; --&gt;
+
+Until now, trying to style an article, document, or blog post with Tailwind has been a tedious
+task that required a keen eye for typography and a lot of complex custom CSS.
+
+&lt;!-- &lt;/p&gt; --&gt;
+
+By default, Tailwind removes all of the default browser styling from paragraphs, headings, lists and more. This ends up being really useful for building application UIs because you spend less time undoing user-agent styles, but when you _really are_ just trying to style some content that came from a rich-text editor in a CMS or a markdown file, it can be surprising and unintuitive.
+
+We get lots of complaints about it actually, with people regularly asking us things like:
+
+&gt; Why is Tailwind removing the default styles on my `h1` elements? How do I disable this? What do you mean I lose all the other base styles too?
+
+We hear you, but we&#39;re not convinced that simply disabling our base styles is what you really want. You don&#39;t want to have to remove annoying margins every time you use a `p` element in a piece of your dashboard UI. And I doubt you really want your blog posts to use the user-agent styles either — you want them to look _awesome_, not awful.
+
+The `@tailwindcss/typography` plugin is our attempt to give you what you _actually_ want, without any of the downsides of doing something stupid like disabling our base styles.
+
+It adds a new `prose` class that you can slap on any block of vanilla HTML content and turn it into a beautiful, well-formatted document:
+
+```html
+&lt;article class=&quot;prose&quot;&gt;
+  &lt;h1&gt;Garlic bread with cheese: What the science tells us&lt;/h1&gt;
+  &lt;p&gt;
+    For years parents have espoused the health benefits of eating garlic bread
+    with cheese to their children, with the food earning such an iconic status
+    in our culture that kids will often dress up as warm, cheesy loaf for
+    Halloween.
+  &lt;/p&gt;
+  &lt;p&gt;
+    But a recent study shows that the celebrated appetizer may be linked to a
+    series of rabies cases springing up around the country.
+  &lt;/p&gt;
+  &lt;!-- ... --&gt;
+&lt;/article&gt;
+```
+
+For more information about how to use the plugin and the features it includes, [read the documentation](https://github.com/tailwindcss/typography/blob/master/README.md).
+
+---
+
+## What to expect from here on out
+
+What follows from here is just a bunch of absolute nonsense I&#39;ve written to dogfood the plugin itself. It includes every sensible typographic element I could think of, like **bold text**, unordered lists, ordered lists, code blocks, block quotes, _and even italics_.
+
+It&#39;s important to cover all of these use cases for a few reasons:
+
+1. We want everything to look good out of the box.
+2. Really just the first reason, that&#39;s the whole point of the plugin.
+3. Here&#39;s a third pretend reason though a list with three items looks more realistic than a list with two items.
+
+Now we&#39;re going to try out another header style.
+
+### Typography should be easy
+
+So that&#39;s a header for you — with any luck if we&#39;ve done our job correctly that will look pretty reasonable.
+
+Something a wise person once told me about typography is:
+
+&gt; Typography is pretty important if you don&#39;t want your stuff to look like trash. Make it good then it won&#39;t be bad.
+
+It&#39;s probably important that images look okay here by default as well:
+
+&lt;figure&gt;
+  &lt;img
+    src=&quot;https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80&quot;
+    alt=&quot;&quot;
+  /&gt;
+  &lt;figcaption&gt;
+    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+    classical Latin literature from 45 BC, making it over 2000 years old.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+Now I&#39;m going to show you an example of an unordered list to make sure that looks good, too:
+
+- So here is the first item in this list.
+- In this example we&#39;re keeping the items short.
+- Later, we&#39;ll use longer, more complex list items.
+
+And that&#39;s the end of this section.
+
+## What if we stack headings?
+
+### We should make sure that looks good, too.
+
+Sometimes you have headings directly underneath each other. In those cases you often have to undo the top margin on the second heading because it usually looks better for the headings to be closer together than a paragraph followed by a heading should be.
+
+### When a heading comes after a paragraph …
+
+When a heading comes after a paragraph, we need a bit more space, like I already mentioned above. Now let&#39;s see what a more complex list would look like.
+
+- **I often do this thing where list items have headings.**
+
+  For some reason I think this looks cool which is unfortunate because it&#39;s pretty annoying to get the styles right.
+
+  I often have two or three paragraphs in these list items, too, so the hard part is getting the spacing between the paragraphs, list item heading, and separate list items to all make sense. Pretty tough honestly, you could make a strong argument that you just shouldn&#39;t write this way.
+
+- **Since this is a list, I need at least two items.**
+
+  I explained what I&#39;m doing already in the previous list item, but a list wouldn&#39;t be a list if it only had one item, and we really want this to look realistic. That&#39;s why I&#39;ve added this second list item so I actually have something to look at when writing the styles.
+
+- **It&#39;s not a bad idea to add a third item either.**
+
+  I think it probably would&#39;ve been fine to just use two items but three is definitely not worse, and since I seem to be having no trouble making up arbitrary things to type, I might as well include it. I&#39;m going to press &lt;kbd&gt;Enter&lt;/kbd&gt; now.
+
+After this sort of list I usually have a closing statement or paragraph, because it kinda looks weird jumping right to a heading.
+
+## Code should look okay by default.
+
+I think most people are going to use [highlight.js](https://highlightjs.org/) or [Prism](https://prismjs.com/) or something if they want to style their code blocks but it wouldn&#39;t hurt to make them look _okay_ out of the box, even with no syntax highlighting.
+
+Here&#39;s what a default `tailwind.config.js` file looks like at the time of writing:
+
+```js
+module.exports = {
+  purge: [],
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+};
+```
+
+Hopefully that looks good enough to you.
+
+### What about nested lists?
+
+Nested lists basically always look bad which is why editors like Medium don&#39;t even let you do it, but I guess since some of you goofballs are going to do it we have to carry the burden of at least making it work.
+
+1. **Nested lists are rarely a good idea.**
+   - You might feel like you are being really &quot;organized&quot; or something but you are just creating a gross shape on the screen that is hard to read.
+   - Nested navigation in UIs is a bad idea too, keep things as flat as possible.
+   - Nesting tons of folders in your source code is also not helpful.
+2. **Since we need to have more items, here&#39;s another one.**
+   - I&#39;m not sure if we&#39;ll bother styling more than two levels deep.
+   - Two is already too much, three is guaranteed to be a bad idea.
+   - If you nest four levels deep you belong in prison.
+3. **Two items isn&#39;t really a list, three is good though.**
+   - Again please don&#39;t nest lists if you want people to actually read your content.
+   - Nobody wants to look at this.
+   - I&#39;m upset that we even have to bother styling this.
+
+The most annoying thing about lists in Markdown is that `&lt;li&gt;` elements aren&#39;t given a child `&lt;p&gt;` tag unless there are multiple paragraphs in the list item. That means I have to worry about styling that annoying situation too.
+
+- **For example, here&#39;s another nested list.**
+
+  But this time with a second paragraph.
+
+  - These list items won&#39;t have `&lt;p&gt;` tags
+  - Because they are only one line each
+
+- **But in this second top-level list item, they will.**
+
+  This is especially annoying because of the spacing on this paragraph.
+
+  - As you can see here, because I&#39;ve added a second line, this list item now has a `&lt;p&gt;` tag.
+
+    This is the second line I&#39;m talking about by the way.
+
+  - Finally here&#39;s another list item so it&#39;s more like a list.
+
+- A closing list item, but with no nested list, because why not?
+
+And finally a sentence to close off this section.
+
+## We didn&#39;t forget about description lists
+
+Well, that&#39;s not exactly true, we first released this plugin back in 2020 and it took three years before we added description lists. But they&#39;re here now, so let&#39;s just be happy about that&amp;hellip;okay? They can be great for things like FAQs.
+
+&lt;dl&gt;
+  &lt;dt&gt;Why do you never see elephants hiding in trees?&lt;/dt&gt;
+  &lt;dd&gt;
+    Because they&#39;re so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+    cupiditate laboriosam fugiat.
+  &lt;/dd&gt;
+  &lt;dt&gt;What do you call someone with no body and no nose?&lt;/dt&gt;
+  &lt;dd&gt;
+    Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia
+    excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.
+  &lt;/dd&gt;
+  &lt;dt&gt;Why can&#39;t you hear a pterodactyl go to the bathroom?&lt;/dt&gt;
+  &lt;dd&gt;
+    Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quas
+    voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam suscipit deserunt illum
+    natus facilis atque vero consequatur! Quisquam, debitis error.
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+## There are other elements we need to style
+
+I almost forgot to mention links, like [this link to the Tailwind CSS website](https://tailwindcss.com). We almost made them blue but that&#39;s so yesterday, so we went with dark gray, feels edgier.
+
+We even included table styles, check it out:
+
+| Wrestler                | Origin       | Finisher           |
+| ----------------------- | ------------ | ------------------ |
+| Bret &quot;The Hitman&quot; Hart  | Calgary, AB  | Sharpshooter       |
+| Stone Cold Steve Austin | Austin, TX   | Stone Cold Stunner |
+| Randy Savage            | Sarasota, FL | Elbow Drop         |
+| Vader                   | Boulder, CO  | Vader Bomb         |
+| Razor Ramon             | Chuluota, FL | Razor&#39;s Edge       |
+
+We also need to make sure inline code looks good, like if I wanted to talk about `&lt;span&gt;` elements or tell you the good news about `@tailwindcss/typography`.
+
+### Sometimes I even use `code` in headings
+
+Even though it&#39;s probably a bad idea, and historically I&#39;ve had a hard time making it look good. This _&quot;wrap the code blocks in backticks&quot;_ trick works pretty well though really.
+
+Another thing I&#39;ve done in the past is put a `code` tag inside of a link, like if I wanted to tell you about the [`tailwindcss/docs`](https://github.com/tailwindcss/docs) repository. I don&#39;t love that there is an underline below the backticks but it is absolutely not worth the madness it would require to avoid it.
+
+#### We haven&#39;t used an `h4` yet
+
+But now we have. Please don&#39;t use `h5` or `h6` in your content, Medium only supports two heading levels for a reason, you animals. I honestly considered using a `before` pseudo-element to scream at you if you use an `h5` or `h6`.
+
+We don&#39;t style them at all out of the box because `h4` elements are already so small that they are the same size as the body copy. What are we supposed to do with an `h5`, make it _smaller_ than the body copy? No thanks.
+
+### We still need to think about stacked headings though.
+
+#### Let&#39;s make sure we don&#39;t screw that up with `h4` elements, either.
+
+Phew, with any luck we have styled the headings above this text and they look pretty good.
+
+Let&#39;s add a closing paragraph here so things end with a decently sized block of text. I can&#39;t explain why I want things to end that way but I have to assume it&#39;s because I think things will look weird or unbalanced if there is a heading too close to the end of the document.
+
+What I&#39;ve written here is probably long enough, but adding this final sentence can&#39;t hurt.
+
+# Some second H1 for test
+
+## Hey I&#39;m nested!
+<!--/lit-part--></pre>
+		</details>
+		<hr />
+
+		5
+		<details>
+			<summary>source.markdown</summary>
+			<pre><!--lit-part--># Shoelace Typography
+
+Inspired by Tailwind Typography, adapted for usage with Shoelace.
+
+&gt; [!NOTE]
+&gt; Sample text below copied from the Tailwind playground.
+
+# Sample prose
+
+&lt;!-- (BREAKS MARKED) --&gt;
+&lt;!-- &lt;p class=&quot;lead&quot;&gt; --&gt;
+
+Until now, trying to style an article, document, or blog post with Tailwind has been a tedious
+task that required a keen eye for typography and a lot of complex custom CSS.
+
+&lt;!-- &lt;/p&gt; --&gt;
+
+By default, Tailwind removes all of the default browser styling from paragraphs, headings, lists and more. This ends up being really useful for building application UIs because you spend less time undoing user-agent styles, but when you _really are_ just trying to style some content that came from a rich-text editor in a CMS or a markdown file, it can be surprising and unintuitive.
+
+We get lots of complaints about it actually, with people regularly asking us things like:
+
+&gt; Why is Tailwind removing the default styles on my `h1` elements? How do I disable this? What do you mean I lose all the other base styles too?
+
+We hear you, but we&#39;re not convinced that simply disabling our base styles is what you really want. You don&#39;t want to have to remove annoying margins every time you use a `p` element in a piece of your dashboard UI. And I doubt you really want your blog posts to use the user-agent styles either — you want them to look _awesome_, not awful.
+
+The `@tailwindcss/typography` plugin is our attempt to give you what you _actually_ want, without any of the downsides of doing something stupid like disabling our base styles.
+
+It adds a new `prose` class that you can slap on any block of vanilla HTML content and turn it into a beautiful, well-formatted document:
+
+```html
+&lt;article class=&quot;prose&quot;&gt;
+  &lt;h1&gt;Garlic bread with cheese: What the science tells us&lt;/h1&gt;
+  &lt;p&gt;
+    For years parents have espoused the health benefits of eating garlic bread
+    with cheese to their children, with the food earning such an iconic status
+    in our culture that kids will often dress up as warm, cheesy loaf for
+    Halloween.
+  &lt;/p&gt;
+  &lt;p&gt;
+    But a recent study shows that the celebrated appetizer may be linked to a
+    series of rabies cases springing up around the country.
+  &lt;/p&gt;
+  &lt;!-- ... --&gt;
+&lt;/article&gt;
+```
+
+For more information about how to use the plugin and the features it includes, [read the documentation](https://github.com/tailwindcss/typography/blob/master/README.md).
+
+---
+
+## What to expect from here on out
+
+What follows from here is just a bunch of absolute nonsense I&#39;ve written to dogfood the plugin itself. It includes every sensible typographic element I could think of, like **bold text**, unordered lists, ordered lists, code blocks, block quotes, _and even italics_.
+
+It&#39;s important to cover all of these use cases for a few reasons:
+
+1. We want everything to look good out of the box.
+2. Really just the first reason, that&#39;s the whole point of the plugin.
+3. Here&#39;s a third pretend reason though a list with three items looks more realistic than a list with two items.
+
+Now we&#39;re going to try out another header style.
+
+### Typography should be easy
+
+So that&#39;s a header for you — with any luck if we&#39;ve done our job correctly that will look pretty reasonable.
+
+Something a wise person once told me about typography is:
+
+&gt; Typography is pretty important if you don&#39;t want your stuff to look like trash. Make it good then it won&#39;t be bad.
+
+It&#39;s probably important that images look okay here by default as well:
+
+&lt;figure&gt;
+  &lt;img
+    src=&quot;https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80&quot;
+    alt=&quot;&quot;
+  /&gt;
+  &lt;figcaption&gt;
+    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+    classical Latin literature from 45 BC, making it over 2000 years old.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+Now I&#39;m going to show you an example of an unordered list to make sure that looks good, too:
+
+- So here is the first item in this list.
+- In this example we&#39;re keeping the items short.
+- Later, we&#39;ll use longer, more complex list items.
+
+And that&#39;s the end of this section.
+
+## What if we stack headings?
+
+### We should make sure that looks good, too.
+
+Sometimes you have headings directly underneath each other. In those cases you often have to undo the top margin on the second heading because it usually looks better for the headings to be closer together than a paragraph followed by a heading should be.
+
+### When a heading comes after a paragraph …
+
+When a heading comes after a paragraph, we need a bit more space, like I already mentioned above. Now let&#39;s see what a more complex list would look like.
+
+- **I often do this thing where list items have headings.**
+
+  For some reason I think this looks cool which is unfortunate because it&#39;s pretty annoying to get the styles right.
+
+  I often have two or three paragraphs in these list items, too, so the hard part is getting the spacing between the paragraphs, list item heading, and separate list items to all make sense. Pretty tough honestly, you could make a strong argument that you just shouldn&#39;t write this way.
+
+- **Since this is a list, I need at least two items.**
+
+  I explained what I&#39;m doing already in the previous list item, but a list wouldn&#39;t be a list if it only had one item, and we really want this to look realistic. That&#39;s why I&#39;ve added this second list item so I actually have something to look at when writing the styles.
+
+- **It&#39;s not a bad idea to add a third item either.**
+
+  I think it probably would&#39;ve been fine to just use two items but three is definitely not worse, and since I seem to be having no trouble making up arbitrary things to type, I might as well include it. I&#39;m going to press &lt;kbd&gt;Enter&lt;/kbd&gt; now.
+
+After this sort of list I usually have a closing statement or paragraph, because it kinda looks weird jumping right to a heading.
+
+## Code should look okay by default.
+
+I think most people are going to use [highlight.js](https://highlightjs.org/) or [Prism](https://prismjs.com/) or something if they want to style their code blocks but it wouldn&#39;t hurt to make them look _okay_ out of the box, even with no syntax highlighting.
+
+Here&#39;s what a default `tailwind.config.js` file looks like at the time of writing:
+
+```js
+module.exports = {
+  purge: [],
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+};
+```
+
+Hopefully that looks good enough to you.
+
+### What about nested lists?
+
+Nested lists basically always look bad which is why editors like Medium don&#39;t even let you do it, but I guess since some of you goofballs are going to do it we have to carry the burden of at least making it work.
+
+1. **Nested lists are rarely a good idea.**
+   - You might feel like you are being really &quot;organized&quot; or something but you are just creating a gross shape on the screen that is hard to read.
+   - Nested navigation in UIs is a bad idea too, keep things as flat as possible.
+   - Nesting tons of folders in your source code is also not helpful.
+2. **Since we need to have more items, here&#39;s another one.**
+   - I&#39;m not sure if we&#39;ll bother styling more than two levels deep.
+   - Two is already too much, three is guaranteed to be a bad idea.
+   - If you nest four levels deep you belong in prison.
+3. **Two items isn&#39;t really a list, three is good though.**
+   - Again please don&#39;t nest lists if you want people to actually read your content.
+   - Nobody wants to look at this.
+   - I&#39;m upset that we even have to bother styling this.
+
+The most annoying thing about lists in Markdown is that `&lt;li&gt;` elements aren&#39;t given a child `&lt;p&gt;` tag unless there are multiple paragraphs in the list item. That means I have to worry about styling that annoying situation too.
+
+- **For example, here&#39;s another nested list.**
+
+  But this time with a second paragraph.
+
+  - These list items won&#39;t have `&lt;p&gt;` tags
+  - Because they are only one line each
+
+- **But in this second top-level list item, they will.**
+
+  This is especially annoying because of the spacing on this paragraph.
+
+  - As you can see here, because I&#39;ve added a second line, this list item now has a `&lt;p&gt;` tag.
+
+    This is the second line I&#39;m talking about by the way.
+
+  - Finally here&#39;s another list item so it&#39;s more like a list.
+
+- A closing list item, but with no nested list, because why not?
+
+And finally a sentence to close off this section.
+
+## We didn&#39;t forget about description lists
+
+Well, that&#39;s not exactly true, we first released this plugin back in 2020 and it took three years before we added description lists. But they&#39;re here now, so let&#39;s just be happy about that&amp;hellip;okay? They can be great for things like FAQs.
+
+&lt;dl&gt;
+  &lt;dt&gt;Why do you never see elephants hiding in trees?&lt;/dt&gt;
+  &lt;dd&gt;
+    Because they&#39;re so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+    cupiditate laboriosam fugiat.
+  &lt;/dd&gt;
+  &lt;dt&gt;What do you call someone with no body and no nose?&lt;/dt&gt;
+  &lt;dd&gt;
+    Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia
+    excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.
+  &lt;/dd&gt;
+  &lt;dt&gt;Why can&#39;t you hear a pterodactyl go to the bathroom?&lt;/dt&gt;
+  &lt;dd&gt;
+    Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quas
+    voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam suscipit deserunt illum
+    natus facilis atque vero consequatur! Quisquam, debitis error.
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+## There are other elements we need to style
+
+I almost forgot to mention links, like [this link to the Tailwind CSS website](https://tailwindcss.com). We almost made them blue but that&#39;s so yesterday, so we went with dark gray, feels edgier.
+
+We even included table styles, check it out:
+
+| Wrestler                | Origin       | Finisher           |
+| ----------------------- | ------------ | ------------------ |
+| Bret &quot;The Hitman&quot; Hart  | Calgary, AB  | Sharpshooter       |
+| Stone Cold Steve Austin | Austin, TX   | Stone Cold Stunner |
+| Randy Savage            | Sarasota, FL | Elbow Drop         |
+| Vader                   | Boulder, CO  | Vader Bomb         |
+| Razor Ramon             | Chuluota, FL | Razor&#39;s Edge       |
+
+We also need to make sure inline code looks good, like if I wanted to talk about `&lt;span&gt;` elements or tell you the good news about `@tailwindcss/typography`.
+
+### Sometimes I even use `code` in headings
+
+Even though it&#39;s probably a bad idea, and historically I&#39;ve had a hard time making it look good. This _&quot;wrap the code blocks in backticks&quot;_ trick works pretty well though really.
+
+Another thing I&#39;ve done in the past is put a `code` tag inside of a link, like if I wanted to tell you about the [`tailwindcss/docs`](https://github.com/tailwindcss/docs) repository. I don&#39;t love that there is an underline below the backticks but it is absolutely not worth the madness it would require to avoid it.
+
+#### We haven&#39;t used an `h4` yet
+
+But now we have. Please don&#39;t use `h5` or `h6` in your content, Medium only supports two heading levels for a reason, you animals. I honestly considered using a `before` pseudo-element to scream at you if you use an `h5` or `h6`.
+
+We don&#39;t style them at all out of the box because `h4` elements are already so small that they are the same size as the body copy. What are we supposed to do with an `h5`, make it _smaller_ than the body copy? No thanks.
+
+### We still need to think about stacked headings though.
+
+#### Let&#39;s make sure we don&#39;t screw that up with `h4` elements, either.
+
+Phew, with any luck we have styled the headings above this text and they look pretty good.
+
+Let&#39;s add a closing paragraph here so things end with a decently sized block of text. I can&#39;t explain why I want things to end that way but I have to assume it&#39;s because I think things will look weird or unbalanced if there is a heading too close to the end of the document.
+
+What I&#39;ve written here is probably long enough, but adding this final sentence can&#39;t hurt.
+
+# Some second H1 for test
+
+## Hey I&#39;m nested!
+<!--/lit-part--></pre>
+		</details>
+		<hr />
+
+		6
+		<details>
+			<summary>source.yaml</summary>
+			<pre><!--lit-part-->id: 10
+title: SuperPC
+description: Super PC is awesome...
+price: 1099
+discountPercentage: 6.18
+rating: 4.43
+stock: 89
+brand: PCMaster
+category: laptops
+thumbnail: foo.svg
+images:
+  - abc.png
+  - abc1.png
+  - abc2.png
+  - abc3.png<!--/lit-part--></pre>
+		</details>
+		<hr />
+
+		7
+		<details>
+			<summary>body.html</summary>
+			<pre><!--lit-part-->&lt;h1 id=&quot;shoelace-typography&quot;&gt;Shoelace Typography&lt;/h1&gt;
+&lt;p&gt;Inspired by Tailwind Typography, adapted for usage with Shoelace.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!NOTE]
+Sample text below copied from the Tailwind playground.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;sample-prose&quot;&gt;Sample prose&lt;/h1&gt;
+&lt;!-- (BREAKS MARKED) --&gt;
+&lt;!-- &lt;p class=&quot;lead&quot;&gt; --&gt;
+
+&lt;p&gt;Until now, trying to style an article, document, or blog post with Tailwind has been a tedious
+task that required a keen eye for typography and a lot of complex custom CSS.&lt;/p&gt;
+&lt;!-- &lt;/p&gt; --&gt;
+
+&lt;p&gt;By default, Tailwind removes all of the default browser styling from paragraphs, headings, lists and more. This ends up being really useful for building application UIs because you spend less time undoing user-agent styles, but when you &lt;em&gt;really are&lt;/em&gt; just trying to style some content that came from a rich-text editor in a CMS or a markdown file, it can be surprising and unintuitive.&lt;/p&gt;
+&lt;p&gt;We get lots of complaints about it actually, with people regularly asking us things like:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Why is Tailwind removing the default styles on my &lt;code&gt;h1&lt;/code&gt; elements? How do I disable this? What do you mean I lose all the other base styles too?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We hear you, but we&amp;#39;re not convinced that simply disabling our base styles is what you really want. You don&amp;#39;t want to have to remove annoying margins every time you use a &lt;code&gt;p&lt;/code&gt; element in a piece of your dashboard UI. And I doubt you really want your blog posts to use the user-agent styles either — you want them to look &lt;em&gt;awesome&lt;/em&gt;, not awful.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;@tailwindcss/typography&lt;/code&gt; plugin is our attempt to give you what you &lt;em&gt;actually&lt;/em&gt; want, without any of the downsides of doing something stupid like disabling our base styles.&lt;/p&gt;
+&lt;p&gt;It adds a new &lt;code&gt;prose&lt;/code&gt; class that you can slap on any block of vanilla HTML content and turn it into a beautiful, well-formatted document:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;article class=&amp;quot;prose&amp;quot;&amp;gt;
+  &amp;lt;h1&amp;gt;Garlic bread with cheese: What the science tells us&amp;lt;/h1&amp;gt;
+  &amp;lt;p&amp;gt;
+    For years parents have espoused the health benefits of eating garlic bread
+    with cheese to their children, with the food earning such an iconic status
+    in our culture that kids will often dress up as warm, cheesy loaf for
+    Halloween.
+  &amp;lt;/p&amp;gt;
+  &amp;lt;p&amp;gt;
+    But a recent study shows that the celebrated appetizer may be linked to a
+    series of rabies cases springing up around the country.
+  &amp;lt;/p&amp;gt;
+  &amp;lt;!-- ... --&amp;gt;
+&amp;lt;/article&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For more information about how to use the plugin and the features it includes, &lt;a href=&quot;https://github.com/tailwindcss/typography/blob/master/README.md&quot;&gt;read the documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;what-to-expect-from-here-on-out&quot;&gt;What to expect from here on out&lt;/h2&gt;
+&lt;p&gt;What follows from here is just a bunch of absolute nonsense I&amp;#39;ve written to dogfood the plugin itself. It includes every sensible typographic element I could think of, like &lt;strong&gt;bold text&lt;/strong&gt;, unordered lists, ordered lists, code blocks, block quotes, &lt;em&gt;and even italics&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;It&amp;#39;s important to cover all of these use cases for a few reasons:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;We want everything to look good out of the box.&lt;/li&gt;
+&lt;li&gt;Really just the first reason, that&amp;#39;s the whole point of the plugin.&lt;/li&gt;
+&lt;li&gt;Here&amp;#39;s a third pretend reason though a list with three items looks more realistic than a list with two items.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now we&amp;#39;re going to try out another header style.&lt;/p&gt;
+&lt;h3 id=&quot;typography-should-be-easy&quot;&gt;Typography should be easy&lt;/h3&gt;
+&lt;p&gt;So that&amp;#39;s a header for you — with any luck if we&amp;#39;ve done our job correctly that will look pretty reasonable.&lt;/p&gt;
+&lt;p&gt;Something a wise person once told me about typography is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Typography is pretty important if you don&amp;#39;t want your stuff to look like trash. Make it good then it won&amp;#39;t be bad.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;It&amp;#39;s probably important that images look okay here by default as well:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img
+    src=&quot;https://images.unsplash.com/photo-1556740758-90de374c12ad?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80&quot;
+    alt=&quot;&quot;
+  /&gt;
+  &lt;figcaption&gt;
+    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
+    classical Latin literature from 45 BC, making it over 2000 years old.
+  &lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Now I&amp;#39;m going to show you an example of an unordered list to make sure that looks good, too:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;So here is the first item in this list.&lt;/li&gt;
+&lt;li&gt;In this example we&amp;#39;re keeping the items short.&lt;/li&gt;
+&lt;li&gt;Later, we&amp;#39;ll use longer, more complex list items.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And that&amp;#39;s the end of this section.&lt;/p&gt;
+&lt;h2 id=&quot;what-if-we-stack-headings&quot;&gt;What if we stack headings?&lt;/h2&gt;
+&lt;h3 id=&quot;we-should-make-sure-that-looks-good-too&quot;&gt;We should make sure that looks good, too.&lt;/h3&gt;
+&lt;p&gt;Sometimes you have headings directly underneath each other. In those cases you often have to undo the top margin on the second heading because it usually looks better for the headings to be closer together than a paragraph followed by a heading should be.&lt;/p&gt;
+&lt;h3 id=&quot;when-a-heading-comes-after-a-paragraph-&quot;&gt;When a heading comes after a paragraph …&lt;/h3&gt;
+&lt;p&gt;When a heading comes after a paragraph, we need a bit more space, like I already mentioned above. Now let&amp;#39;s see what a more complex list would look like.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;I often do this thing where list items have headings.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For some reason I think this looks cool which is unfortunate because it&amp;#39;s pretty annoying to get the styles right.&lt;/p&gt;
+&lt;p&gt;I often have two or three paragraphs in these list items, too, so the hard part is getting the spacing between the paragraphs, list item heading, and separate list items to all make sense. Pretty tough honestly, you could make a strong argument that you just shouldn&amp;#39;t write this way.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Since this is a list, I need at least two items.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I explained what I&amp;#39;m doing already in the previous list item, but a list wouldn&amp;#39;t be a list if it only had one item, and we really want this to look realistic. That&amp;#39;s why I&amp;#39;ve added this second list item so I actually have something to look at when writing the styles.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;It&amp;#39;s not a bad idea to add a third item either.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I think it probably would&amp;#39;ve been fine to just use two items but three is definitely not worse, and since I seem to be having no trouble making up arbitrary things to type, I might as well include it. I&amp;#39;m going to press &lt;kbd&gt;Enter&lt;/kbd&gt; now.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;After this sort of list I usually have a closing statement or paragraph, because it kinda looks weird jumping right to a heading.&lt;/p&gt;
+&lt;h2 id=&quot;code-should-look-okay-by-default&quot;&gt;Code should look okay by default.&lt;/h2&gt;
+&lt;p&gt;I think most people are going to use &lt;a href=&quot;https://highlightjs.org/&quot;&gt;highlight.js&lt;/a&gt; or &lt;a href=&quot;https://prismjs.com/&quot;&gt;Prism&lt;/a&gt; or something if they want to style their code blocks but it wouldn&amp;#39;t hurt to make them look &lt;em&gt;okay&lt;/em&gt; out of the box, even with no syntax highlighting.&lt;/p&gt;
+&lt;p&gt;Here&amp;#39;s what a default &lt;code&gt;tailwind.config.js&lt;/code&gt; file looks like at the time of writing:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-js&quot;&gt;module.exports = {
+  purge: [],
+  theme: {
+    extend: {},
+  },
+  variants: {},
+  plugins: [],
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Hopefully that looks good enough to you.&lt;/p&gt;
+&lt;h3 id=&quot;what-about-nested-lists&quot;&gt;What about nested lists?&lt;/h3&gt;
+&lt;p&gt;Nested lists basically always look bad which is why editors like Medium don&amp;#39;t even let you do it, but I guess since some of you goofballs are going to do it we have to carry the burden of at least making it work.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Nested lists are rarely a good idea.&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;You might feel like you are being really &amp;quot;organized&amp;quot; or something but you are just creating a gross shape on the screen that is hard to read.&lt;/li&gt;
+&lt;li&gt;Nested navigation in UIs is a bad idea too, keep things as flat as possible.&lt;/li&gt;
+&lt;li&gt;Nesting tons of folders in your source code is also not helpful.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Since we need to have more items, here&amp;#39;s another one.&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;I&amp;#39;m not sure if we&amp;#39;ll bother styling more than two levels deep.&lt;/li&gt;
+&lt;li&gt;Two is already too much, three is guaranteed to be a bad idea.&lt;/li&gt;
+&lt;li&gt;If you nest four levels deep you belong in prison.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Two items isn&amp;#39;t really a list, three is good though.&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;Again please don&amp;#39;t nest lists if you want people to actually read your content.&lt;/li&gt;
+&lt;li&gt;Nobody wants to look at this.&lt;/li&gt;
+&lt;li&gt;I&amp;#39;m upset that we even have to bother styling this.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The most annoying thing about lists in Markdown is that &lt;code&gt;&amp;lt;li&amp;gt;&lt;/code&gt; elements aren&amp;#39;t given a child &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; tag unless there are multiple paragraphs in the list item. That means I have to worry about styling that annoying situation too.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;For example, here&amp;#39;s another nested list.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;But this time with a second paragraph.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;These list items won&amp;#39;t have &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; tags&lt;/li&gt;
+&lt;li&gt;Because they are only one line each&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;But in this second top-level list item, they will.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This is especially annoying because of the spacing on this paragraph.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;As you can see here, because I&amp;#39;ve added a second line, this list item now has a &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; tag.&lt;/p&gt;
+&lt;p&gt;This is the second line I&amp;#39;m talking about by the way.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Finally here&amp;#39;s another list item so it&amp;#39;s more like a list.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A closing list item, but with no nested list, because why not?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And finally a sentence to close off this section.&lt;/p&gt;
+&lt;h2 id=&quot;we-didnt-forget-about-description-lists&quot;&gt;We didn&amp;#39;t forget about description lists&lt;/h2&gt;
+&lt;p&gt;Well, that&amp;#39;s not exactly true, we first released this plugin back in 2020 and it took three years before we added description lists. But they&amp;#39;re here now, so let&amp;#39;s just be happy about that&amp;hellip;okay? They can be great for things like FAQs.&lt;/p&gt;
+&lt;dl&gt;
+  &lt;dt&gt;Why do you never see elephants hiding in trees?&lt;/dt&gt;
+  &lt;dd&gt;
+    Because they&#39;re so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+    cupiditate laboriosam fugiat.
+  &lt;/dd&gt;
+  &lt;dt&gt;What do you call someone with no body and no nose?&lt;/dt&gt;
+  &lt;dd&gt;
+    Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia
+    excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.
+  &lt;/dd&gt;
+  &lt;dt&gt;Why can&#39;t you hear a pterodactyl go to the bathroom?&lt;/dt&gt;
+  &lt;dd&gt;
+    Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quas
+    voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam suscipit deserunt illum
+    natus facilis atque vero consequatur! Quisquam, debitis error.
+  &lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;h2 id=&quot;there-are-other-elements-we-need-to-style&quot;&gt;There are other elements we need to style&lt;/h2&gt;
+&lt;p&gt;I almost forgot to mention links, like &lt;a href=&quot;https://tailwindcss.com&quot;&gt;this link to the Tailwind CSS website&lt;/a&gt;. We almost made them blue but that&amp;#39;s so yesterday, so we went with dark gray, feels edgier.&lt;/p&gt;
+&lt;p&gt;We even included table styles, check it out:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Wrestler&lt;/th&gt;
+&lt;th&gt;Origin&lt;/th&gt;
+&lt;th&gt;Finisher&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;Bret &amp;quot;The Hitman&amp;quot; Hart&lt;/td&gt;
+&lt;td&gt;Calgary, AB&lt;/td&gt;
+&lt;td&gt;Sharpshooter&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Stone Cold Steve Austin&lt;/td&gt;
+&lt;td&gt;Austin, TX&lt;/td&gt;
+&lt;td&gt;Stone Cold Stunner&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Randy Savage&lt;/td&gt;
+&lt;td&gt;Sarasota, FL&lt;/td&gt;
+&lt;td&gt;Elbow Drop&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Vader&lt;/td&gt;
+&lt;td&gt;Boulder, CO&lt;/td&gt;
+&lt;td&gt;Vader Bomb&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Razor Ramon&lt;/td&gt;
+&lt;td&gt;Chuluota, FL&lt;/td&gt;
+&lt;td&gt;Razor&amp;#39;s Edge&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;We also need to make sure inline code looks good, like if I wanted to talk about &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; elements or tell you the good news about &lt;code&gt;@tailwindcss/typography&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;sometimes-i-even-use-code-in-headings&quot;&gt;Sometimes I even use &lt;code&gt;code&lt;/code&gt; in headings&lt;/h3&gt;
+&lt;p&gt;Even though it&amp;#39;s probably a bad idea, and historically I&amp;#39;ve had a hard time making it look good. This &lt;em&gt;&amp;quot;wrap the code blocks in backticks&amp;quot;&lt;/em&gt; trick works pretty well though really.&lt;/p&gt;
+&lt;p&gt;Another thing I&amp;#39;ve done in the past is put a &lt;code&gt;code&lt;/code&gt; tag inside of a link, like if I wanted to tell you about the &lt;a href=&quot;https://github.com/tailwindcss/docs&quot;&gt;&lt;code&gt;tailwindcss/docs&lt;/code&gt;&lt;/a&gt; repository. I don&amp;#39;t love that there is an underline below the backticks but it is absolutely not worth the madness it would require to avoid it.&lt;/p&gt;
+&lt;h4 id=&quot;we-havent-used-an-h4-yet&quot;&gt;We haven&amp;#39;t used an &lt;code&gt;h4&lt;/code&gt; yet&lt;/h4&gt;
+&lt;p&gt;But now we have. Please don&amp;#39;t use &lt;code&gt;h5&lt;/code&gt; or &lt;code&gt;h6&lt;/code&gt; in your content, Medium only supports two heading levels for a reason, you animals. I honestly considered using a &lt;code&gt;before&lt;/code&gt; pseudo-element to scream at you if you use an &lt;code&gt;h5&lt;/code&gt; or &lt;code&gt;h6&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We don&amp;#39;t style them at all out of the box because &lt;code&gt;h4&lt;/code&gt; elements are already so small that they are the same size as the body copy. What are we supposed to do with an &lt;code&gt;h5&lt;/code&gt;, make it &lt;em&gt;smaller&lt;/em&gt; than the body copy? No thanks.&lt;/p&gt;
+&lt;h3 id=&quot;we-still-need-to-think-about-stacked-headings-though&quot;&gt;We still need to think about stacked headings though.&lt;/h3&gt;
+&lt;h4 id=&quot;lets-make-sure-we-dont-screw-that-up-with-h4-elements-either&quot;&gt;Let&amp;#39;s make sure we don&amp;#39;t screw that up with &lt;code&gt;h4&lt;/code&gt; elements, either.&lt;/h4&gt;
+&lt;p&gt;Phew, with any luck we have styled the headings above this text and they look pretty good.&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s add a closing paragraph here so things end with a decently sized block of text. I can&amp;#39;t explain why I want things to end that way but I have to assume it&amp;#39;s because I think things will look weird or unbalanced if there is a heading too close to the end of the document.&lt;/p&gt;
+&lt;p&gt;What I&amp;#39;ve written here is probably long enough, but adding this final sentence can&amp;#39;t hurt.&lt;/p&gt;
+&lt;h1 id=&quot;some-second-h1-for-test&quot;&gt;Some second H1 for test&lt;/h1&gt;
+&lt;h2 id=&quot;hey-im-nested&quot;&gt;Hey I&amp;#39;m nested!&lt;/h2&gt;
+<!--/lit-part--></pre>
+		</details>
+		<hr />
+
+		8
+		<details>
+			<summary>meta.frontmatter</summary>
+			<pre><!--lit-part-->{
+  &quot;id&quot;: 10,
+  &quot;title&quot;: &quot;SuperPC&quot;,
+  &quot;description&quot;: &quot;Super PC is awesome...&quot;,
+  &quot;price&quot;: 1099,
+  &quot;discountPercentage&quot;: 6.18,
+  &quot;rating&quot;: 4.43,
+  &quot;stock&quot;: 89,
+  &quot;brand&quot;: &quot;PCMaster&quot;,
+  &quot;category&quot;: &quot;laptops&quot;,
+  &quot;thumbnail&quot;: &quot;foo.svg&quot;,
+  &quot;images&quot;: [
+    &quot;abc.png&quot;,
+    &quot;abc1.png&quot;,
+    &quot;abc2.png&quot;,
+    &quot;abc3.png&quot;
+  ]
+}<!--/lit-part--></pre>
+		</details>
+		<hr />
+
+		9
+		<details>
+			<summary>meta.tableOfContents</summary>
+			<pre><!--lit-part-->[
+  {
+    &quot;text&quot;: &quot;Shoelace Typography&quot;,
+    &quot;depth&quot;: 1,
+    &quot;slug&quot;: &quot;shoelace-typography&quot;,
+    &quot;children&quot;: []
+  },
+  {
+    &quot;text&quot;: &quot;Sample prose&quot;,
+    &quot;depth&quot;: 1,
+    &quot;slug&quot;: &quot;sample-prose&quot;,
+    &quot;children&quot;: [
+      {
+        &quot;text&quot;: &quot;What to expect from here on out&quot;,
+        &quot;depth&quot;: 2,
+        &quot;slug&quot;: &quot;what-to-expect-from-here-on-out&quot;,
+        &quot;children&quot;: [
+          {
+            &quot;text&quot;: &quot;Typography should be easy&quot;,
+            &quot;depth&quot;: 3,
+            &quot;slug&quot;: &quot;typography-should-be-easy&quot;,
+            &quot;children&quot;: []
+          }
+        ]
+      },
+      {
+        &quot;text&quot;: &quot;What if we stack headings?&quot;,
+        &quot;depth&quot;: 2,
+        &quot;slug&quot;: &quot;what-if-we-stack-headings&quot;,
+        &quot;children&quot;: [
+          {
+            &quot;text&quot;: &quot;We should make sure that looks good, too.&quot;,
+            &quot;depth&quot;: 3,
+            &quot;slug&quot;: &quot;we-should-make-sure-that-looks-good-too&quot;,
+            &quot;children&quot;: []
+          },
+          {
+            &quot;text&quot;: &quot;When a heading comes after a paragraph …&quot;,
+            &quot;depth&quot;: 3,
+            &quot;slug&quot;: &quot;when-a-heading-comes-after-a-paragraph-&quot;,
+            &quot;children&quot;: []
+          }
+        ]
+      },
+      {
+        &quot;text&quot;: &quot;Code should look okay by default.&quot;,
+        &quot;depth&quot;: 2,
+        &quot;slug&quot;: &quot;code-should-look-okay-by-default&quot;,
+        &quot;children&quot;: [
+          {
+            &quot;text&quot;: &quot;What about nested lists?&quot;,
+            &quot;depth&quot;: 3,
+            &quot;slug&quot;: &quot;what-about-nested-lists&quot;,
+            &quot;children&quot;: []
+          }
+        ]
+      },
+      {
+        &quot;text&quot;: &quot;We didn&#39;t forget about description lists&quot;,
+        &quot;depth&quot;: 2,
+        &quot;slug&quot;: &quot;we-didnt-forget-about-description-lists&quot;,
+        &quot;children&quot;: []
+      },
+      {
+        &quot;text&quot;: &quot;There are other elements we need to style&quot;,
+        &quot;depth&quot;: 2,
+        &quot;slug&quot;: &quot;there-are-other-elements-we-need-to-style&quot;,
+        &quot;children&quot;: [
+          {
+            &quot;text&quot;: &quot;Sometimes I even use `code` in headings&quot;,
+            &quot;depth&quot;: 3,
+            &quot;slug&quot;: &quot;sometimes-i-even-use-code-in-headings&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;text&quot;: &quot;We haven&#39;t used an `h4` yet&quot;,
+                &quot;depth&quot;: 4,
+                &quot;slug&quot;: &quot;we-havent-used-an-h4-yet&quot;,
+                &quot;children&quot;: []
+              }
+            ]
+          },
+          {
+            &quot;text&quot;: &quot;We still need to think about stacked headings though.&quot;,
+            &quot;depth&quot;: 3,
+            &quot;slug&quot;: &quot;we-still-need-to-think-about-stacked-headings-though&quot;,
+            &quot;children&quot;: [
+              {
+                &quot;text&quot;: &quot;Let&#39;s make sure we don&#39;t screw that up with `h4` elements, either.&quot;,
+                &quot;depth&quot;: 4,
+                &quot;slug&quot;: &quot;lets-make-sure-we-dont-screw-that-up-with-h4-elements-either&quot;,
+                &quot;children&quot;: []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;text&quot;: &quot;Some second H1 for test&quot;,
+    &quot;depth&quot;: 1,
+    &quot;slug&quot;: &quot;some-second-h1-for-test&quot;,
+    &quot;children&quot;: [
+      {
+        &quot;text&quot;: &quot;Hey I&#39;m nested!&quot;,
+        &quot;depth&quot;: 2,
+        &quot;slug&quot;: &quot;hey-im-nested&quot;,
+        &quot;children&quot;: []
+      }
+    ]
+  }
+]<!--/lit-part--></pre>
+		</details>
+		<hr />
+
+		10
+		<details>
+			<summary>meta.tableOfContentsFlat</summary>
+			<pre>
+<!--lit-part-->[
+  {
+    &quot;text&quot;: &quot;Shoelace Typography&quot;,
+    &quot;depth&quot;: 1,
+    &quot;slug&quot;: &quot;shoelace-typography&quot;
+  },
+  {
+    &quot;text&quot;: &quot;Sample prose&quot;,
+    &quot;depth&quot;: 1,
+    &quot;slug&quot;: &quot;sample-prose&quot;
+  },
+  {
+    &quot;text&quot;: &quot;What to expect from here on out&quot;,
+    &quot;depth&quot;: 2,
+    &quot;slug&quot;: &quot;what-to-expect-from-here-on-out&quot;
+  },
+  {
+    &quot;text&quot;: &quot;Typography should be easy&quot;,
+    &quot;depth&quot;: 3,
+    &quot;slug&quot;: &quot;typography-should-be-easy&quot;
+  },
+  {
+    &quot;text&quot;: &quot;What if we stack headings?&quot;,
+    &quot;depth&quot;: 2,
+    &quot;slug&quot;: &quot;what-if-we-stack-headings&quot;
+  },
+  {
+    &quot;text&quot;: &quot;We should make sure that looks good, too.&quot;,
+    &quot;depth&quot;: 3,
+    &quot;slug&quot;: &quot;we-should-make-sure-that-looks-good-too&quot;
+  },
+  {
+    &quot;text&quot;: &quot;When a heading comes after a paragraph …&quot;,
+    &quot;depth&quot;: 3,
+    &quot;slug&quot;: &quot;when-a-heading-comes-after-a-paragraph-&quot;
+  },
+  {
+    &quot;text&quot;: &quot;Code should look okay by default.&quot;,
+    &quot;depth&quot;: 2,
+    &quot;slug&quot;: &quot;code-should-look-okay-by-default&quot;
+  },
+  {
+    &quot;text&quot;: &quot;What about nested lists?&quot;,
+    &quot;depth&quot;: 3,
+    &quot;slug&quot;: &quot;what-about-nested-lists&quot;
+  },
+  {
+    &quot;text&quot;: &quot;We didn&#39;t forget about description lists&quot;,
+    &quot;depth&quot;: 2,
+    &quot;slug&quot;: &quot;we-didnt-forget-about-description-lists&quot;
+  },
+  {
+    &quot;text&quot;: &quot;There are other elements we need to style&quot;,
+    &quot;depth&quot;: 2,
+    &quot;slug&quot;: &quot;there-are-other-elements-we-need-to-style&quot;
+  },
+  {
+    &quot;text&quot;: &quot;Sometimes I even use `code` in headings&quot;,
+    &quot;depth&quot;: 3,
+    &quot;slug&quot;: &quot;sometimes-i-even-use-code-in-headings&quot;
+  },
+  {
+    &quot;text&quot;: &quot;We haven&#39;t used an `h4` yet&quot;,
+    &quot;depth&quot;: 4,
+    &quot;slug&quot;: &quot;we-havent-used-an-h4-yet&quot;
+  },
+  {
+    &quot;text&quot;: &quot;We still need to think about stacked headings though.&quot;,
+    &quot;depth&quot;: 3,
+    &quot;slug&quot;: &quot;we-still-need-to-think-about-stacked-headings-though&quot;
+  },
+  {
+    &quot;text&quot;: &quot;Let&#39;s make sure we don&#39;t screw that up with `h4` elements, either.&quot;,
+    &quot;depth&quot;: 4,
+    &quot;slug&quot;: &quot;lets-make-sure-we-dont-screw-that-up-with-h4-elements-either&quot;
+  },
+  {
+    &quot;text&quot;: &quot;Some second H1 for test&quot;,
+    &quot;depth&quot;: 1,
+    &quot;slug&quot;: &quot;some-second-h1-for-test&quot;
+  },
+  {
+    &quot;text&quot;: &quot;Hey I&#39;m nested!&quot;,
+    &quot;depth&quot;: 2,
+    &quot;slug&quot;: &quot;hey-im-nested&quot;
+  }
+]<!--/lit-part--></pre
+			>
+		</details>
+		<hr />
+
+		11
+		<details>
+			<summary>meta.title</summary>
+			<code><!--lit-part-->Shoelace Typography<!--/lit-part--></code>
+		</details>
+		<hr />
+	<!--/lit-part-->			</body>
+		</html>
+	

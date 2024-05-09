@@ -1,0 +1,72 @@
+{
+  "name": "@gracile/gracile",
+  "version": "0.0.0",
+  "description": "A thin, full-stack, web framework",
+  "keywords": [
+    "full-stack",
+    "meta-framework",
+    "custom-elements",
+    "ssr",
+    "server",
+    "server-side-rendering",
+    "static",
+    "web-components",
+    "lit"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/gracile"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js",
+    "./ambient": {
+      "types": "./ambient.d.ts"
+    },
+    "./tsconfigs/*": "./tsconfigs/*.json",
+    "./tsconfigs/*.json": "./tsconfigs/*"
+  },
+  "bin": {
+    "gracile-dev": "./dist/bin/gracile-watch.js",
+    "gracile": "./dist/bin/gracile.js"
+  },
+  "files": [
+    "./ambient.d.ts",
+    "./dist/**/*",
+    "./tsconfigs/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@gracile/cli": "workspace:^",
+    "@gracile/client": "workspace:^",
+    "@gracile/engine": "workspace:^",
+    "@gracile/internal-utils": "workspace:^",
+    "@gracile/server": "workspace:^",
+    "@lit-labs/ssr": "^3.2.2",
+    "tsx": "^4.7.2",
+    "urlpattern-polyfill": "^10.0.0"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@types/node": "^20.11.25",
+    "typescript": "5.5.0-beta"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "// @gracile/add": "workspace:^"
+}

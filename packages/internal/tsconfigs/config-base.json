@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2022",
+
+    "lib": ["ES2022", "DOM"],
+
+    "strict": true,
+
+    "checkJs": true,
+    "skipLibCheck": true,
+
+    "moduleResolution": "Bundler",
+
+    "incremental": true,
+
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    "noEmitOnError": false,
+
+    "declaration": true,
+    "declarationMap": true
+  }
+}

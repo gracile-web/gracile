@@ -1,0 +1,33 @@
+{
+  "name": "@gracile/test",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsx --test 'src/**/*.test.ts'",
+    "test:dev": "tsx --watch --test 'src/**/*.test.ts'",
+    "dev:server": "tsx --watch 'src/test-server.ts'"
+  },
+  "dependencies": {
+    "@gracile/client": "workspace:^",
+    "@gracile/engine": "workspace:^",
+    "@gracile/gracile": "workspace:^",
+    "@gracile/internal-utils": "workspace:^",
+    "@gracile/markdown": "workspace:^",
+    "@gracile/markdown-preset-marked": "workspace:^",
+    "@gracile/metadata": "workspace:^",
+    "@gracile/server": "workspace:^",
+    "@gracile/svg": "workspace:^",
+    "@lit-labs/ssr": "^3",
+    "@lit-labs/ssr-client": "^1.1.7",
+    "cheerio": "1.0.0-rc.12",
+    "fast-glob": "^3.3.2",
+    "lit": "^3",
+    "prettier": "^3.2.5",
+    "snapshot-fixtures": "^1.1.0"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "tsx": "^4.7.1",
+    "typescript": "5.5.0-beta"
+  }
+}

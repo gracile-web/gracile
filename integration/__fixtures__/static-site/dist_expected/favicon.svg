@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 630 630" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(0.876996,0.23499,-0.256354,0.956727,119.498,-60.3908)">
+        <circle cx="315" cy="315" r="315" style="fill:rgb(87,213,163);"/>
+        <path d="M315,0C488.853,0 630,141.147 630,315C630,488.853 488.853,630 315,630C141.147,630 0,488.853 -0,315C0,141.147 141.147,0 315,0ZM315,13.125C481.309,13.125 615.682,148.691 615.682,315C615.682,481.309 481.309,616.875 315,616.875C148.691,616.875 14.318,481.309 14.318,315C14.318,148.691 148.691,13.125 315,13.125Z" style="fill:rgb(26,26,30);"/>
+    </g>
+    <g transform="matrix(0.513437,0,0,0.513437,-2990.38,-2125.78)">
+        <text x="6023.96px" y="5121.61px" style="font-family:'DancingScript-Bold', 'Dancing Script';font-size:1200px;">G</text>
+    </g>
+</svg>

@@ -1,0 +1,9 @@
+{
+  "extends": "@gracile/internal-tsconfigs/config-base.json",
+
+  "include": ["./src/**/*", "src/.dev.logger.ts"],
+
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
+}

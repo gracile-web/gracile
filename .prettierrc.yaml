@@ -1,0 +1,9 @@
+# EditorConfig not taken into account.
+# editorConfig: true
+singleQuote: true
+useTabs: true
+
+overrides:
+  - files: ['*.md', '*.yaml', '*.json', '.*rc*']
+    options:
+      useTabs: false

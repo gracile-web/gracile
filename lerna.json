@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/@lerna-lite/cli/schemas/lerna-schema.json",
+  "version": "independent",
+  "npmClient": "pnpm",
+
+  "command": {
+    "publish": {
+      "cleanupTempFiles": true,
+      "removePackageFields": ["devDependencies", "scripts"],
+
+      "message": "chore: publish release"
+    }
+  },
+
+  "packages": [
+    "./packages/gracile",
+
+    "./packages/cli",
+    "./packages/client",
+    "./packages/server",
+    "./packages/engine",
+
+    "./packages/create-gracile",
+
+    "./packages/internal/tsconfigs",
+    "./packages/internal/utils",
+
+    "./packages/addons/metadata",
+    "./packages/addons/svg",
+    "./packages/addons/sitemap",
+    "./packages/addons/markdown",
+    "./packages/addons/markdown-preset-marked"
+    // "./packages/addons/minify"
+  ]
+}

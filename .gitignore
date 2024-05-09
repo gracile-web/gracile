@@ -28,6 +28,10 @@ dist-ssr
 
 .turbo*
 
-
 .old*
 .dev*
+
+/docs
+
+packages/labs/*
+packages/addons/markdown-old

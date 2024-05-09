@@ -1,0 +1,10 @@
+{
+  "entryPoints": ["packages/**/*"],
+  "name": "Gracile",
+  "entryPointStrategy": "packages",
+  "includeVersion": false,
+
+  "plugin": ["typedoc-plugin-markdown"]
+  // Potentially useful for debugging
+  // "logLevel": "Verbose"
+}
