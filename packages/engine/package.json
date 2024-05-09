@@ -1,6 +1,6 @@
 {
   "name": "@gracile/engine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "full-stack",
