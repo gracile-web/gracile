@@ -6,7 +6,7 @@ import { logger } from '@gracile/internal-utils/logger';
 import c from 'picocolors';
 import type { ViteDevServer } from 'vite';
 
-import { renderRouteTempalte } from '../render/route-template.js';
+import { renderRouteTemplate } from '../render/route-template.js';
 import { collectRoutes, routes } from '../routes/collect.js';
 import { loadForeignRouteObject } from '../routes/load-module.js';
 
@@ -94,7 +94,7 @@ export async function renderRoutes(vite: ViteDevServer, root = process.cwd()) {
 
 					// MARK: Render
 
-					const { output } = await renderRouteTempalte(
+					const { output } = await renderRouteTemplate(
 						//
 						{ url: url.href },
 						vite,

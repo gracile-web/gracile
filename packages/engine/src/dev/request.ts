@@ -13,7 +13,7 @@ import type { ViteDevServer } from 'vite';
 import { /*  errorInline, */ errorPage } from '../errors/templates.js';
 import {
 	type HandlerInfos,
-	renderRouteTempalte,
+	renderRouteTemplate,
 } from '../render/route-template.js';
 import { getRoute, type RouteInfos } from '../routes/match.js';
 import { renderSsrTemplate } from '../vite/utils.js';
@@ -50,7 +50,7 @@ export function createDevRequestHandler(vite: ViteDevServer) {
 			handlerInfos: HandlerInfos,
 			routeInfos: RouteInfos,
 		) {
-			const { output } = await renderRouteTempalte(
+			const { output } = await renderRouteTemplate(
 				requestPonyfilled,
 				vite,
 				'dev',

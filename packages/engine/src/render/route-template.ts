@@ -1,8 +1,8 @@
-import { Readable } from 'node:stream';
-
 import { html } from '@gracile/internal-utils/dummy-literals';
 import { html as LitSsrHtml, render as renderLitSsr } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
+import { RenderResultReadable as LitReadable } from '@lit-labs/ssr/lib/render-result-readable.js';
+import type { Readable } from 'stream';
 import type { ViteDevServer } from 'vite';
 
 import { isLitServerTemplate, isLitTemplate } from '../assertions.js';
@@ -30,7 +30,7 @@ export const pageAssets = LitSsrHtml`<!--__GRACILE_PAGE_ASSETS__-->`;
 
 export type HandlerInfos = { data: unknown; method: string };
 
-export async function renderRouteTempalte(
+export async function renderRouteTemplate(
 	request: Request | StaticRequest,
 	vite: ViteDevServer,
 	mode: 'dev' | 'build',
@@ -58,8 +58,7 @@ export async function renderRouteTempalte(
 				`Wrong template result for fragment template ${routeInfos.foundRoute.filePath}.`,
 			);
 		const fragmentRender = renderLitSsr(fragmentOutput);
-		// NOTE: Should use RenderResultReadable instead?
-		const output = Readable.from(fragmentRender);
+		const output = LitReadable.from(fragmentRender);
 
 		return { output };
 	}
@@ -117,8 +116,10 @@ export async function renderRouteTempalte(
 			: baseDocRenderedWithAssets;
 
 	const index = baseDocHtml.indexOf(SSR_OUTLET_MARKER);
-	const baseDocRenderStreamPre = Readable.from(baseDocHtml.substring(0, index));
-	const baseDocRenderStreamPost = Readable.from(
+	const baseDocRenderStreamPre = LitReadable.from(
+		baseDocHtml.substring(0, index),
+	);
+	const baseDocRenderStreamPost = LitReadable.from(
 		baseDocHtml.substring(index + SSR_OUTLET_MARKER.length + 1),
 	);
 
@@ -133,9 +134,9 @@ export async function renderRouteTempalte(
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);
 
-		const renderStream = Readable.from(renderLitSsr(routeOutput));
+		const renderStream = LitReadable.from(renderLitSsr(routeOutput));
 
-		const output = Readable.from(
+		const output = LitReadable.from(
 			concatStreams(
 				baseDocRenderStreamPre,
 				renderStream,
@@ -145,7 +146,7 @@ export async function renderRouteTempalte(
 
 		return { output };
 	}
-	const output = Readable.from(baseDocHtml);
+	const output = LitReadable.from(baseDocHtml);
 
 	return { output };
 }

@@ -75,7 +75,11 @@ function handleCancel(result: unknown) {
 
 // eslint-disable-next-line no-console
 console.log('' /* Blank line */);
-clack.intro(c.cyan(`✨🧚 Create your new ${c.bold('Gracile')} project`)); // 🧚🏻‍♀️
+clack.intro(
+	c.cyan(
+		`✨🧚 Create your new ${c.underline(c.white(c.italic('Gracile')))} project`,
+	),
+); // 🧚🏻‍♀️
 
 if (DEV) clack.log.warn(c.yellow(`Development mode`));
 clack.log.info(
