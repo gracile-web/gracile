@@ -1,8 +1,7 @@
 import { html } from '@gracile/internal-utils/dummy-literals';
 import { html as LitSsrHtml, render as renderLitSsr } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
-import { RenderResultReadable as LitReadable } from '@lit-labs/ssr/lib/render-result-readable.js';
-import type { Readable } from 'stream';
+import { Readable } from 'stream';
 import type { ViteDevServer } from 'vite';
 
 import { isLitServerTemplate, isLitTemplate } from '../assertions.js';
@@ -58,7 +57,7 @@ export async function renderRouteTemplate(
 				`Wrong template result for fragment template ${routeInfos.foundRoute.filePath}.`,
 			);
 		const fragmentRender = renderLitSsr(fragmentOutput);
-		const output = LitReadable.from(fragmentRender);
+		const output = Readable.from(fragmentRender);
 
 		return { output };
 	}
@@ -116,10 +115,8 @@ export async function renderRouteTemplate(
 			: baseDocRenderedWithAssets;
 
 	const index = baseDocHtml.indexOf(SSR_OUTLET_MARKER);
-	const baseDocRenderStreamPre = LitReadable.from(
-		baseDocHtml.substring(0, index),
-	);
-	const baseDocRenderStreamPost = LitReadable.from(
+	const baseDocRenderStreamPre = Readable.from(baseDocHtml.substring(0, index));
+	const baseDocRenderStreamPost = Readable.from(
 		baseDocHtml.substring(index + SSR_OUTLET_MARKER.length + 1),
 	);
 
@@ -134,9 +131,9 @@ export async function renderRouteTemplate(
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);
 
-		const renderStream = LitReadable.from(renderLitSsr(routeOutput));
+		const renderStream = Readable.from(renderLitSsr(routeOutput));
 
-		const output = LitReadable.from(
+		const output = Readable.from(
 			concatStreams(
 				baseDocRenderStreamPre,
 				renderStream,
@@ -146,7 +143,7 @@ export async function renderRouteTemplate(
 
 		return { output };
 	}
-	const output = LitReadable.from(baseDocHtml);
+	const output = Readable.from(baseDocHtml);
 
 	return { output };
 }
