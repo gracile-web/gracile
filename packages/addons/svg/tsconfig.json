@@ -1,7 +1,7 @@
 {
   "extends": "@gracile/internal-tsconfigs/config-base.json",
 
-  "include": ["./src/**/*", "./ambient.d.ts"],
+  "include": ["./src/**/*"],
 
   "compilerOptions": {
     "outDir": "./dist"

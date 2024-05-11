@@ -1,7 +1,7 @@
 {
   "extends": "./packages/internal/tsconfigs/config-base.json",
 
-  "include": ["./*.js", "./*.ts", "packages/engine/test"],
+  "include": ["./*.js", "./*.ts"],
 
   "compilerOptions": {
     "noEmit": true
