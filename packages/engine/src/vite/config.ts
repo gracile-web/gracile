@@ -35,8 +35,14 @@ export async function getConfigs(root: string, mode: 'dev' | 'build') {
 			return null;
 		});
 
+	// NOTE: Harmonize `import.meta.env.(MODE|DEV|PROD)`
+	// See https://vitejs.dev/guide/api-javascript#createserver
+	if (mode === 'build') process.env['NODE_ENV'] = 'production';
+
 	const baseConfigVite = {
 		root,
+
+		mode: mode === 'dev' ? 'development' : 'production',
 
 		server:
 			mode === 'dev'
