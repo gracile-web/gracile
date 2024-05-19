@@ -12,6 +12,7 @@ import { REGEXES } from './load-module.js';
 import type { Route } from './route.js';
 
 export const routes = new Map<string, Route>();
+export type Routes = typeof routes;
 
 function extractRoutePatterns(
 	absoluteFilePath: string,
@@ -146,4 +147,6 @@ export async function collectRoutes(root: string /* vite: ViteDevServer */) {
 				route.pageAssets.push(assetPathWithExt);
 		});
 	});
+
+	return routes;
 }

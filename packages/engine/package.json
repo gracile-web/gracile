@@ -31,6 +31,11 @@
     "./*": "./dist/*.js",
     "./ambient": {
       "types": "./ambient.d.ts"
+    },
+    "./server": {
+      "types": "./dist/dev/server.js",
+      "development": "./dist/dev/server.js",
+      "default": "./dist/server/server.js"
     }
   },
   "files": [
