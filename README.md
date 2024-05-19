@@ -4,19 +4,32 @@ A thin, full-stack, **web** framework.
 
 ---
 
-Gracile is a meta-framework powered by Vite and Lit SSR.
+## A platform-minded meta-framework
+
+Gracile is powered by **Vite** and **Lit SSR**.
 
 With it, you can achieve:
 
-- Progressive enhancements
-- Content websites
-- Multi or Single Page Application
+- File-based routing
 - Server Side Rendering
 - Static Site Generation
-- Server handler backend integration
+- Server handler backend integration (`Request`/`Response`)
+- Full-stack Custom Elements (Lit), with hydration
+- Content websites
+- Multi or Single Page Applications
+- Progressive enhancements
 - And more, via Add-ons (Markdown, Metadata, SVG…)
 
 All that, with a **few conventions**, a **platform-minded** approach and a very **contained footprint** 🤏.
+
+Web Components, TypeScript, SASS, Lit, etc. are all at your fingertips; while remaining optional.
+
+Thanks to the Vite modular architecture, and Node.js versatility, **developer experience** is smoothed up
+across the board, while in **development** and when building for **production**.
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ---
 
