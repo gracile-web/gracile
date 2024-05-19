@@ -6,6 +6,8 @@ name: Release
 on:
   workflow_dispatch:
   push:
+    paths-ignore:
+      - .github/**
     branches:
       - '([0-9])?(.{+([0-9]),x}).x'
       - main
