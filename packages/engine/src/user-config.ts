@@ -3,7 +3,16 @@ import type { UserConfig } from 'vite';
 export class GracileConfig {
 	port?: number;
 
+	/**
+	 * @defaultValue 'static'
+	 */
+	output?: 'static' | 'server';
+
 	vite?: UserConfig;
+
+	server?: {
+		entrypoint?: string;
+	};
 
 	constructor(options: GracileConfig) {
 		Object.assign(this, options);

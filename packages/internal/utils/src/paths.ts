@@ -2,9 +2,10 @@ import path from 'node:path';
 
 let cwd = process.cwd();
 
-export function setCurrentWorkingDirectory(root: string) {
-	cwd = root;
-	process.env['GRACILE_PROJECT_CWD'] = root;
+export function setCurrentWorkingDirectory(root?: string | undefined) {
+	if (root) cwd = root;
+	process.env['GRACILE_PROJECT_CWD'] = cwd;
+	return cwd;
 }
 
 export function user(p: string | string[]) {

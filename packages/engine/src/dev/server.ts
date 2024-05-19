@@ -2,27 +2,37 @@ import type { Server } from 'node:http';
 
 import { logger } from '@gracile/internal-utils/logger';
 import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
-import express, { type RequestHandler } from 'express';
+import express, { type Express, type RequestHandler } from 'express';
 import c from 'picocolors';
+import { createViteRuntime } from 'vite';
 
 import { collectRoutes, routes } from '../routes/collect.js';
 import { createViteServer } from '../vite/server.js';
 import { createDevRequestHandler } from './request.js';
 
-async function createServer(_hmrPort: number, root = process.cwd()) {
+export async function handleWithExpressApp({
+	root = process.cwd(),
+	// hmrPort,
+	app,
+}: {
+	hmrPort?: number;
+	root?: string;
+	app?: Express;
+}) {
 	logger.info(c.green('starting engine…'), {
 		timestamp: true,
 	});
 
-	setCurrentWorkingDirectory(root);
+	const isStandalone = Boolean(app);
+	const expressApp = app || express();
 
-	const app = express();
+	if (isStandalone === false) setCurrentWorkingDirectory(root);
 
 	const vite = await createViteServer(root, 'dev');
 
-	app.use(vite.middlewares);
+	expressApp.use(vite.middlewares);
 
-	app.get('/__routes', (req, res) => {
+	expressApp.get('/__routes', (req, res) => {
 		return res.json([...routes]);
 	});
 
@@ -33,29 +43,36 @@ async function createServer(_hmrPort: number, root = process.cwd()) {
 	});
 
 	const handler = createDevRequestHandler(vite);
-	/* NOTE: Types are wrong! Should accept an async request handler. */
-	app.use('*', handler as RequestHandler);
+	// NOTE: Types are wrong! Should accept an async request handler.
+	expressApp.use('*', handler as RequestHandler);
 
-	return { app, vite };
+	return { app: expressApp, vite };
 }
 
+export const DEFAULT_DEV_SERVER_PORT = 9090;
+
+export const DEV_SERVER_EXPOSED_HOST = '0.0.0.0';
+export const DEV_SERVER_HOST = '127.0.0.1';
+export const RANDOM_PORT = 0;
+
 export async function startServer(options: {
-	port?: number | undefined;
-	root?: string;
+	port: number;
+	root: string;
 	expose?: boolean | undefined;
 }) {
-	const port = options.port ?? 9090;
-
-	const server = await createServer(port + 1, options.root);
+	const server = await handleWithExpressApp({
+		// hmrPort: options.port + 1,
+		root: options.root,
+	});
 
 	// NOTE: `0` will auto-alocate a random available port.
-	let resultingPort = port;
+	let resultingPort = options.port;
 	let resultingHost: undefined | string;
 
 	const instance: Server = await new Promise((resolve) => {
 		const inst = server.app.listen(
-			port,
-			options.expose ? '0.0.0.0' : '127.0.0.1',
+			options.port,
+			options.expose ? DEV_SERVER_EXPOSED_HOST : DEV_SERVER_HOST,
 			() => {
 				logger.info(c.green('development server started'), { timestamp: true });
 				resolve(inst);
@@ -80,4 +97,16 @@ ${c.dim('┃')} Network  ${options.expose ? c.cyan(`http://${resultingHost}:${re
 	});
 
 	return { port: resultingPort, instance };
+}
+
+export const DEFAULT_USER_SERVER_MODULE_ENTRYPOINT = '/src/server';
+
+export async function startUserProvidedServer(options: {
+	root: string;
+	entrypoint: string;
+}) {
+	const runtimeServer = await createViteServer(options.root, 'dev');
+
+	const runtime = await createViteRuntime(runtimeServer);
+	await runtime.executeEntrypoint(options.entrypoint);
 }
