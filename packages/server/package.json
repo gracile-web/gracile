@@ -47,7 +47,8 @@
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "^20.11.25",
     "tsx": "^4.7.1",
-    "typescript": "5.5.0-beta"
+    "typescript": "5.5.0-beta",
+    "vite": "5.x"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "3.x",
