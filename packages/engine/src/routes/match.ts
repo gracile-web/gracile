@@ -2,7 +2,7 @@ import type { ViteDevServer } from 'vite';
 
 import { routes } from './collect.js';
 import { loadForeignRouteObject } from './load-module.js';
-import * as R from './route.js';
+import type * as R from './route.js';
 
 type Params = Record<string, string | undefined>;
 
@@ -12,14 +12,19 @@ type MatchedRoute = {
 	params: Params;
 	pathname: string;
 };
-function matchRouteFromUrl(url: string): MatchedRoute {
+
+// FIXME: proper DI for routes
+function matchRouteFromUrl(
+	url: string,
+	routess: R.RoutesManifest = routes,
+): MatchedRoute {
 	let match: URLPatternResult | undefined;
 	let foundRoute: R.Route | undefined;
 
 	const pathname = new URL(url).pathname;
 
 	// eslint-disable-next-line no-restricted-syntax
-	for (const [, route] of routes) {
+	for (const [, route] of routess) {
 		if (match) break;
 
 		const matchResult =
@@ -92,13 +97,21 @@ export type RouteInfos = {
 };
 export async function getRoute(options: {
 	url: string;
-	vite: ViteDevServer;
+	vite?: ViteDevServer | undefined;
+	routes: R.RoutesManifest | undefined;
+	routeImports?: R.RoutesImports | undefined;
 }): Promise<RouteInfos> {
-	const { foundRoute, pathname, params } = matchRouteFromUrl(options.url);
+	const { foundRoute, pathname, params } = matchRouteFromUrl(
+		options.url,
+		options.routes,
+	);
 
-	const routePath = foundRoute.filePath;
-
-	const routeModule = await loadForeignRouteObject(options.vite, routePath);
+	// TODO: Simplify all the routes things
+	const routeModule = await loadForeignRouteObject({
+		vite: options.vite,
+		route: foundRoute,
+		routeImports: options.routeImports,
+	});
 
 	const staticPaths = extractStaticPaths({
 		routeModule,

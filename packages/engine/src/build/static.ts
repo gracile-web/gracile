@@ -10,10 +10,14 @@ import { renderRouteTemplate } from '../render/route-template.js';
 import { collectRoutes, routes } from '../routes/collect.js';
 import { loadForeignRouteObject } from '../routes/load-module.js';
 
-export interface RouteDefinition {
+export interface RenderedRouteDefinition {
 	absoluteId: string;
 	name: string;
 	html: string;
+
+	handlerAssets?: string;
+
+	savePrerender: boolean | null;
 }
 
 async function streamToString(stream: Readable) {
@@ -29,7 +33,11 @@ async function streamToString(stream: Readable) {
 	return Buffer.concat(chunks).toString('utf-8');
 }
 
-export async function renderRoutes(vite: ViteDevServer, root = process.cwd()) {
+export async function renderRoutes(
+	vite: ViteDevServer,
+	serverMode: boolean,
+	root = process.cwd(),
+) {
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 
 	// MARK: Collect
@@ -37,12 +45,15 @@ export async function renderRoutes(vite: ViteDevServer, root = process.cwd()) {
 
 	logger.info(c.green('Rendering routes finished'), { timestamp: true });
 
-	const renderedRoutes: RouteDefinition[] = [];
+	const renderedRoutes: RenderedRouteDefinition[] = [];
 
 	// MARK: Iterate modules
 	await Promise.all(
-		[...routes].map(async ([patternString, options]) => {
-			const routeModule = await loadForeignRouteObject(vite, options.filePath);
+		[...routes].map(async ([patternString, route]) => {
+			const routeModule = await loadForeignRouteObject({
+				vite,
+				route,
+			});
 
 			const routeStaticPaths = routeModule.staticPaths?.();
 
@@ -94,19 +105,20 @@ export async function renderRoutes(vite: ViteDevServer, root = process.cwd()) {
 
 					// MARK: Render
 
-					const { output } = await renderRouteTemplate(
+					const { output } = await renderRouteTemplate({
 						//
-						{ url: url.href },
+						request: { url: url.href },
 						vite,
-						'build',
-						{
+						mode: 'build',
+						routeInfos: {
 							routeModule,
 							params,
-							foundRoute: options,
+							foundRoute: route,
 							pathname: pathnameWithParams,
 							props,
 						},
-					);
+						root,
+					});
 
 					const htmlString = await streamToString(output);
 
@@ -126,6 +138,7 @@ export async function renderRoutes(vite: ViteDevServer, root = process.cwd()) {
 						absoluteId: join(root, name),
 						name,
 						html: htmlString,
+						savePrerender: route.prerender,
 					});
 				}),
 			);

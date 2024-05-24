@@ -14,15 +14,30 @@ export const REGEXES = {
 	index: /\((.*)\)/,
 };
 
-export async function loadForeignRouteObject(
-	vite: ViteDevServer,
-	routePath: string,
-) {
+export async function loadForeignRouteObject({
+	vite,
+	route,
+	routeImports,
+}: {
+	vite?: ViteDevServer | undefined;
+	route: R.Route;
+	routeImports?: R.RoutesImports | undefined;
+}) {
 	// NOTE: Check and assert unknown userland module to correct RouteModule instance (in the engine's realm)
-	const rm = await vite.ssrLoadModule(routePath);
-	const routeModuleFactory = rm['default'] as unknown;
 
-	const errorBase = `Incorrect route module ${routePath}!`;
+	let unknownRouteModule: Record<string, unknown> | null = null;
+
+	if (vite) unknownRouteModule = await vite.ssrLoadModule(route.filePath);
+	else if (routeImports) {
+		const ri = routeImports.get(route.pattern.pathname);
+		if (ri) unknownRouteModule = ri();
+	}
+
+	if (unknownRouteModule === null) throw new Error('Cannot find route module.');
+
+	const routeModuleFactory = unknownRouteModule['default'];
+
+	const errorBase = `Incorrect route module ${route.filePath}!`;
 
 	if (typeof routeModuleFactory !== 'function')
 		throw new Error(`${errorBase} Not a function.`);

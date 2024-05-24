@@ -1,5 +1,6 @@
 import path from 'node:path';
 
+import { createStandaloneDevServer } from '@gracile/engine/dev/server';
 import { RANDOM_PORT } from '@gracile/engine/server/env';
 import { viteBuild } from '@gracile/engine/vite/build';
 import { logger } from '@gracile/internal-utils/logger';
@@ -11,7 +12,7 @@ function getProjectPath(projectName: string) {
 }
 
 export async function createServer(project: string, port?: number) {
-	const { port: foundPort, instance } = await startServer({
+	const { port: foundPort, instance } = await createStandaloneDevServer({
 		port: typeof port !== 'undefined' ? port : RANDOM_PORT,
 		root: getProjectPath(project),
 	});

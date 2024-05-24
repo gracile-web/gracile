@@ -9,14 +9,13 @@ import { URLPattern } from 'urlpattern-polyfill/urlpattern';
 // import type { ViteDevServer } from 'vite';
 import { prepareSortableRoutes, routeComparator } from './comparator.js';
 import { REGEXES } from './load-module.js';
-import type { Route } from './route.js';
+import type * as R from './route.js';
 
-export const routes = new Map<string, Route>();
-export type Routes = typeof routes;
+export const routes: R.RoutesManifest = new Map<string, R.Route>();
 
 function extractRoutePatterns(
 	absoluteFilePath: string,
-): Pick<Route, 'pattern' | 'hasParams'> & { patternString: string } {
+): Pick<R.Route, 'pattern' | 'hasParams'> & { patternString: string } {
 	const routePathname = path
 		.relative('src/routes', paths.relativeToProject(absoluteFilePath))
 		.replace(/\.[j|t]s$/, '');
@@ -127,6 +126,8 @@ export async function collectRoutes(root: string /* vite: ViteDevServer */) {
 
 			hasParams: routeWithPatterns.hasParams,
 			pageAssets: [],
+			// NOTE: Not implemented!
+			prerender: null,
 		});
 	});
 

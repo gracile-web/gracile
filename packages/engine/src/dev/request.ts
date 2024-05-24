@@ -1,4 +1,4 @@
-import { type Readable, Writable } from 'node:stream';
+import { Readable, Writable } from 'node:stream';
 
 import { logger } from '@gracile/internal-utils/logger';
 import { createServerAdapter } from '@whatwg-node/server';
@@ -15,14 +15,27 @@ import {
 	type HandlerInfos,
 	renderRouteTemplate,
 } from '../render/route-template.js';
+import { renderSsrTemplate } from '../render/utils.js';
 import { getRoute, type RouteInfos } from '../routes/match.js';
-import { renderSsrTemplate } from '../vite/utils.js';
+import type * as R from '../routes/route.js';
 
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
 // @ts-expect-error Abusing this feature!
 const adapter = createServerAdapter((request) => request);
 
-export function createDevRequestHandler(vite: ViteDevServer) {
+export function createRequestHandler({
+	vite,
+	routes,
+	routeImports,
+	routeAssets,
+	root,
+}: {
+	vite?: ViteDevServer | undefined;
+	routes?: R.RoutesManifest | undefined;
+	routeImports?: R.RoutesImports | undefined;
+	routeAssets?: R.RoutesAssets;
+	root: string;
+}) {
 	return async (
 		req: ExpressRequest,
 		res: ExpressResponse,
@@ -50,13 +63,15 @@ export function createDevRequestHandler(vite: ViteDevServer) {
 			handlerInfos: HandlerInfos,
 			routeInfos: RouteInfos,
 		) {
-			const { output } = await renderRouteTemplate(
-				requestPonyfilled,
+			const { output } = await renderRouteTemplate({
+				request: requestPonyfilled,
 				vite,
-				'dev',
+				mode: 'dev',
 				routeInfos,
 				handlerInfos,
-			);
+				routeAssets,
+				root,
+			});
 
 			return output;
 		}
@@ -67,6 +82,8 @@ export function createDevRequestHandler(vite: ViteDevServer) {
 			const moduleInfos = await getRoute({
 				url: requestPonyfilled.url,
 				vite,
+				routes,
+				routeImports,
 			});
 
 			let output: Readable | Response | undefined;
@@ -190,11 +207,12 @@ export function createDevRequestHandler(vite: ViteDevServer) {
 						// Maybe just returning nothing is better to not break the page?
 						// Should send a overlay message anyway via WebSocket
 						// vite.ws.send()
-						setTimeout(() => {
-							vite.hot.send('gracile:ssr-error', {
-								message: errorMessage,
-							});
-						}, 500);
+						if (vite)
+							setTimeout(() => {
+								vite.hot.send('gracile:ssr-error', {
+									message: errorMessage,
+								});
+							}, 500);
 						res.end('' /* errorInline(error) */);
 					})
 					.pipe(res);
@@ -203,16 +221,22 @@ export function createDevRequestHandler(vite: ViteDevServer) {
 			// MARK: Errors
 		} catch (e) {
 			const error = e as Error;
-			vite.ssrFixStacktrace(error);
+			if (vite) vite.ssrFixStacktrace(error);
 
 			if (error.cause === 404) {
+				// TODO: Handle 404 with dedicated page
+				if (!vite) return next(e);
+
 				return res.status(404).end('404');
 				// TODO: use a nice framework service page
 				// .redirect(new URL('/__404/', requestPonyfilled.url).href)
 			}
 
-			const errorTemplate = await renderSsrTemplate(errorPage(error));
-			res.status(500).end(await vite.transformIndexHtml(url, errorTemplate));
+			let errorTemplate = await renderSsrTemplate(errorPage(error));
+			if (vite)
+				errorTemplate = await vite.transformIndexHtml(url, errorTemplate);
+
+			res.status(500).end(errorTemplate);
 		}
 
 		return next();
