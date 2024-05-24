@@ -6,7 +6,7 @@ import type { ViteDevServer } from 'vite';
 
 import { isLitServerTemplate, isLitTemplate } from '../assertions.js';
 import type { RouteInfos } from '../routes/match.js';
-import type { RouteContextGeneric, StaticRequest } from '../routes/route.js';
+import type * as R from '../routes/route.js';
 
 async function* concatStreams(...readables: Readable[]) {
 	// eslint-disable-next-line no-restricted-syntax
@@ -27,17 +27,32 @@ export const PAGE_ASSETS_MARKER = '<!--__GRACILE_PAGE_ASSETS__-->';
 // FIXME: cannot be used with `unsafeHTML`, so must be duplicated…
 export const pageAssets = LitSsrHtml`<!--__GRACILE_PAGE_ASSETS__-->`;
 
+const REGEX_TAG_SCRIPT =
+	/\s<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script\s*>\s/gi;
+
+const REGEX_TAG_LINK = /\s<link\b[^>]*?>\s/gi;
+
 export type HandlerInfos = { data: unknown; method: string };
 
-export async function renderRouteTemplate(
-	request: Request | StaticRequest,
-	vite: ViteDevServer,
-	mode: 'dev' | 'build',
-	routeInfos: RouteInfos,
-	handlerInfos?: HandlerInfos,
-) {
+export async function renderRouteTemplate({
+	request,
+	vite,
+	mode,
+	routeInfos,
+	handlerInfos,
+	routeAssets,
+	// root,
+}: {
+	request: Request | R.StaticRequest;
+	vite?: ViteDevServer | undefined;
+	mode: 'dev' | 'build';
+	routeInfos: RouteInfos;
+	handlerInfos?: HandlerInfos | undefined;
+	routeAssets?: R.RoutesAssets | undefined;
+	root: string;
+}) {
 	// MARK: Context
-	const context: RouteContextGeneric = {
+	const context: R.RouteContextGeneric = {
 		url: new URL(request.url),
 		params: routeInfos.params,
 		props: handlerInfos?.data
@@ -85,7 +100,7 @@ export async function renderRouteTemplate(
 	);
 
 	// MARK: Sibling assets
-	const baseDocRenderedWithAssets = baseDocRendered.replace(
+	let baseDocRenderedWithAssets = baseDocRendered.replace(
 		PAGE_ASSETS_MARKER,
 		html`
 			<!-- PAGE ASSETS -->
@@ -105,9 +120,24 @@ export async function renderRouteTemplate(
 		`,
 	);
 
+	const routeAssetsString = routeAssets?.get?.(
+		routeInfos.foundRoute.pattern.pathname,
+	);
+	if (routeAssetsString)
+		baseDocRenderedWithAssets = baseDocRenderedWithAssets
+			.replace(REGEX_TAG_SCRIPT, (s) => {
+				if (s.includes(`type="module"`)) return '';
+				return s;
+			})
+			.replace(REGEX_TAG_LINK, (s) => {
+				if (s.includes(`rel="stylesheet"`)) return '';
+				return s;
+			})
+			.replace('</head>', `${routeAssetsString}\n</head>`);
+
 	// MARK: Base document
 	const baseDocHtml =
-		mode === 'dev'
+		vite && mode === 'dev'
 			? await vite.transformIndexHtml(
 					routeInfos.pathname,
 					baseDocRenderedWithAssets,

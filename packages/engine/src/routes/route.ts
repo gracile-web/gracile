@@ -139,10 +139,18 @@ export type BodyTemplate<RouteContext> = (
 ) => RouteTemplateResult;
 
 // -----------------------------------------------------------------------------
+// NOTE: Should be kept as internals?
 
 export interface Route {
 	filePath: string;
 	pattern: URLPattern;
 	hasParams: boolean;
 	pageAssets: string[];
+	prerender: boolean | null;
 }
+
+// -----------------------------------------------------------------------------
+
+export type RoutesManifest = Map<string, Route>;
+export type RoutesImports = Map<string, () => Record<string, unknown>>;
+export type RoutesAssets = Map<string, string>;

@@ -4,9 +4,9 @@ import c from 'picocolors';
 
 import { getConfigs } from '../vite/config.js';
 import {
+	createStandaloneDevServer,
 	DEFAULT_DEV_SERVER_PORT,
 	DEFAULT_USER_SERVER_MODULE_ENTRYPOINT,
-	startServer,
 	startUserProvidedServer,
 } from './server.js';
 
@@ -33,6 +33,8 @@ export async function dev(options: {
 			entrypoint,
 		}).catch((e) => logger.error(String(e)));
 	} else {
-		startServer({ root, port }).catch((e) => logger.error(String(e)));
+		createStandaloneDevServer({ root, port }).catch((e) =>
+			logger.error(String(e)),
+		);
 	}
 }

@@ -4,13 +4,16 @@ import { logger } from '@gracile/internal-utils/logger';
 import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
 import express, { type Express, type RequestHandler } from 'express';
 import c from 'picocolors';
-import { createViteRuntime } from 'vite';
+import { createViteRuntime, type ViteDevServer } from 'vite';
 
 import { collectRoutes, routes } from '../routes/collect.js';
+import { IP_EXPOSED, IP_LOCALHOST } from '../server/env.js';
 import { createViteServer } from '../vite/server.js';
-import { createDevRequestHandler } from './request.js';
+import { createRequestHandler } from './request.js';
 
-export async function handleWithExpressApp({
+export type HandleWithExpressApp = typeof withExpress;
+
+export async function withExpress({
 	root = process.cwd(),
 	// hmrPort,
 	app,
@@ -18,7 +21,10 @@ export async function handleWithExpressApp({
 	hmrPort?: number;
 	root?: string;
 	app?: Express;
-}) {
+}): Promise<{
+	app: express.Express;
+	vite: ViteDevServer | null;
+}> {
 	logger.info(c.green('starting engine…'), {
 		timestamp: true,
 	});
@@ -42,7 +48,7 @@ export async function handleWithExpressApp({
 			collectRoutes(root /* , vite */).catch((e) => logger.error(String(e)));
 	});
 
-	const handler = createDevRequestHandler(vite);
+	const handler = createRequestHandler({ vite, root });
 	// NOTE: Types are wrong! Should accept an async request handler.
 	expressApp.use('*', handler as RequestHandler);
 
@@ -51,16 +57,15 @@ export async function handleWithExpressApp({
 
 export const DEFAULT_DEV_SERVER_PORT = 9090;
 
-export const DEV_SERVER_EXPOSED_HOST = '0.0.0.0';
-export const DEV_SERVER_HOST = '127.0.0.1';
-export const RANDOM_PORT = 0;
+export const DEV_SERVER_EXPOSED_HOST = IP_EXPOSED;
+export const DEV_SERVER_HOST = IP_LOCALHOST;
 
-export async function startServer(options: {
+export async function createStandaloneDevServer(options: {
 	port: number;
 	root: string;
 	expose?: boolean | undefined;
 }) {
-	const server = await handleWithExpressApp({
+	const server = await withExpress({
 		// hmrPort: options.port + 1,
 		root: options.root,
 	});
