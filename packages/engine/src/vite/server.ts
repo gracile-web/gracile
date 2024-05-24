@@ -14,7 +14,9 @@ export async function createViteServer(root: string, mode: 'dev' | 'build') {
 }
 
 export async function vitePreview(
-	/* _root: string, */ port = 9091,
+	/* _root: string, */
+	//
+	port = 9091,
 	expose?: boolean | undefined,
 ) {
 	const previewer = await preview({
