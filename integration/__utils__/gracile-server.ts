@@ -1,6 +1,6 @@
 import path from 'node:path';
 
-import { RANDOM_PORT, startServer } from '@gracile/engine/dev/server';
+import { RANDOM_PORT } from '@gracile/engine/server/env';
 import { viteBuild } from '@gracile/engine/vite/build';
 import { logger } from '@gracile/internal-utils/logger';
 
