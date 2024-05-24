@@ -4,7 +4,7 @@ let cwd = process.cwd();
 
 export function setCurrentWorkingDirectory(root?: string | undefined) {
 	if (root) cwd = root;
-	process.env['GRACILE_PROJECT_CWD'] = cwd;
+	process.env['__GRACILE_PROJECT_CWD'] = cwd;
 	return cwd;
 }
 

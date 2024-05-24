@@ -18,6 +18,7 @@ export async function getConfigs(root: string, mode: 'dev' | 'build') {
 	// NOTE: Extension omitted so `tsx` choose automatically JS or TS.
 	// Also, beware with absolute paths with Windows. They need the `file://` protocol.
 	const userConfigGracile = await import(
+		/* @vite-ignore */
 		pathToFileURL(path.join(root, 'gracile.config')).href
 	)
 		.then((module: unknown) => {
@@ -58,6 +59,8 @@ export async function getConfigs(root: string, mode: 'dev' | 'build') {
 
 		appType: 'custom',
 
+		envPrefix: 'GRACILE',
+
 		css: {
 			devSourcemap: true,
 		},
@@ -72,6 +75,8 @@ export async function getConfigs(root: string, mode: 'dev' | 'build') {
 		resolve: {
 			// TODO: Suppress message "Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information."
 			// conditions: mode === 'dev' ? ['development'] : ['production'],
+			// preserveSymlinks: true,
+			// conditions: ['development', 'default'],
 		},
 	} satisfies UserConfig;
 

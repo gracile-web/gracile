@@ -10,4 +10,4 @@ export const version = (
 
 if (!version) throw new Error('Incorrect package.json.');
 
-process.env['GRACILE_VERSION'] = version;
+process.env['__GRACILE_VERSION'] = version;
