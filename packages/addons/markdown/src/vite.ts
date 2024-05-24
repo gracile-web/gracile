@@ -40,7 +40,7 @@ export function viteMarkdownPlugin(options?: {
 export default Object.freeze({
 	path: Object.freeze({
 		absolute: ${JSON.stringify(id)},
-		relative: ${JSON.stringify(relative(process.env['GRACILE_PROJECT_CWD'] ?? process.cwd(), id))},
+		relative: ${JSON.stringify(relative(process.env['__GRACILE_PROJECT_CWD'] ?? process.cwd(), id))},
 	}),
 
 	body: Object.freeze({
