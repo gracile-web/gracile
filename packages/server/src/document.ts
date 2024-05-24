@@ -1,9 +1,7 @@
-import { readFile } from 'node:fs/promises';
-import { fileURLToPath /* pathToFileURL */ } from 'node:url';
+/* eslint-disable import/no-extraneous-dependencies */
 
 import { pageAssets } from '@gracile/engine/render/route-template';
 import { html } from '@lit-labs/ssr';
-import { resolve } from 'import-meta-resolve';
 import { html as LitHtml, LitElement } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
@@ -36,27 +34,13 @@ const polyfills = {
 		${unsafeHTML(`
       <script>
 				// REQUEST IDLE CALLBACK
-				${await readFile(
-					// NOTE: This is ugly, but… that's the way.
-					// IDEA: Extract an helper dedicated to inline script loading
-					fileURLToPath(
-						resolve(
-							'@gracile/client/polyfills/request-idle-callback',
-							import.meta.url,
-							/// / NOTE: Trailing slash matters
-							// pathToFileURL(`${process.cwd()}/`).href,
-						),
-					),
-					'utf8',
-				)}
+				${await import('@gracile/client/polyfills/request-idle-callback?raw').then((m) => m.default)}
       </script>
 			`)}
 	`,
 };
 
-// -
-
-// export { html };
+// ---
 
 export const helpers = {
 	fullHydration,
