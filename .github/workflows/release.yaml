@@ -16,7 +16,8 @@ on:
       - next-major
       - alpha
       - beta
-      - '^(feat|fix)\/(.*)'
+      - 'feat/*'
+      - 'fix/*'
       # - to-integrate
       # - to-integrate-next
 
