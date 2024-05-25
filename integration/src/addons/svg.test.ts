@@ -14,7 +14,7 @@ const currentTestRoutes = '10-svg';
 
 // ---
 
-it('Must have good SVGs', async () => {
+it('svg', async () => {
 	const route = '00-svg';
 
 	await tryOrClose(async () => {

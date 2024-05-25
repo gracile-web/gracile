@@ -14,7 +14,7 @@ const currentTestRoutes = '00-routes';
 
 // ---
 
-it('Must return basic route', async () => {
+it('return basic route', async () => {
 	const route = '00-basic';
 
 	await tryOrClose(async () => {
@@ -32,7 +32,7 @@ it('Must return basic route', async () => {
 
 //
 
-it('Must return 1 param static route', async () => {
+it('return 1 param static route', async () => {
 	const route = '01-param';
 
 	await tryOrClose(async () => {

@@ -37,6 +37,7 @@ export async function createStaticDevServer({
 	project: string;
 	port?: number;
 }) {
+	// NOTE: Should just use dev, like `createDynamicDevServer` does
 	const { port: foundPort, instance } = await createStandaloneDevServer({
 		port: typeof port !== 'undefined' ? port : RANDOM_PORT,
 		root: getProjectPath(project),

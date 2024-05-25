@@ -56,7 +56,7 @@ const routes = [
 	{ path: 'car/bike/boat/rain', h1: 'car / bike / boat / "Rain"' },
 ];
 
-it('Must return all correct routes', async () => {
+it('return all correct routes', async () => {
 	const route = '05-torture-test';
 
 	await tryOrClose(async () => {

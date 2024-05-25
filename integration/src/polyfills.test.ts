@@ -16,7 +16,7 @@ const currentTestRoutes = '04-polyfills';
 
 // NOTE: Not well tested enough. Should check for inline module content.
 // Maybe change the polyfill to `<script src`…
-it('Must have polyfills', async () => {
+it('client polyfills', async () => {
 	const route = '00-polyfills';
 
 	await tryOrClose(async () => {

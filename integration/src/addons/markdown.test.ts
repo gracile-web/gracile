@@ -14,7 +14,7 @@ const currentTestRoutes = '11-markdown';
 
 // ---
 
-it('Must have good MD rendering with marked', async () => {
+it('MD rendering with marked', async () => {
 	const route = '05-preset-marked';
 
 	await tryOrClose(async () => {
