@@ -143,6 +143,9 @@ importers:
       cheerio:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
+      express:
+        specifier: 4.x.x
+        version: 4.19.2
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -159,6 +162,9 @@ importers:
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../packages/internal/tsconfigs
+      '@types/express':
+        specifier: ^4.x.x
+        version: 4.17.21
       tsx:
         specifier: ^4.7.1
         version: 4.9.5
@@ -417,7 +423,7 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       express:
-        specifier: ^4.19.2
+        specifier: 4.x.x
         version: 4.19.2
       fast-glob:
         specifier: ^3.3.2
@@ -442,7 +448,7 @@ importers:
         specifier: workspace:^
         version: link:../internal/tsconfigs
       '@types/express':
-        specifier: ^4.17.21
+        specifier: ^4.x.x
         version: 4.17.21
       '@types/node':
         specifier: ^20.11.25

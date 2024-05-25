@@ -1,12 +1,15 @@
 // NOTE: shebang via `@gracile/gracile`
 
 import { program } from '@commander-js/extra-typings';
-import { dev } from '@gracile/engine/dev/dev';
 import { logger } from '@gracile/internal-utils/logger';
 
-import { greet } from '../utils.js';
+import { greet, suppressLitWarnings } from '../utils.js';
 
 greet();
+
+suppressLitWarnings();
+
+const { dev } = await import('@gracile/engine/dev/dev');
 
 // DEV
 program
