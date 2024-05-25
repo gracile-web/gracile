@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.4](https://github.com/gracile-web/gracile/compare/@gracile/server@0.0.3...@gracile/server@0.0.4) (2024-05-25)
+
+**Note:** Version bump only for package @gracile/server
+
 ## [0.0.3](https://github.com/gracile-web/gracile/compare/@gracile/server@0.0.2...@gracile/server@0.0.3) (2024-05-09)
 
 **Note:** Version bump only for package @gracile/server
