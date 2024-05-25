@@ -28,13 +28,13 @@ export async function dev(options: {
 		DEFAULT_USER_SERVER_MODULE_ENTRYPOINT;
 
 	if (userConfigGracile?.output === 'server') {
-		startUserProvidedServer({
+		logger.info(c.gray(`\n— User provided ${c.cyan('server')} mode —\n`));
+
+		return startUserProvidedServer({
 			root,
 			entrypoint,
-		}).catch((e) => logger.error(String(e)));
-	} else {
-		createStandaloneDevServer({ root, port }).catch((e) =>
-			logger.error(String(e)),
-		);
+		});
 	}
+
+	return createStandaloneDevServer({ root, port });
 }

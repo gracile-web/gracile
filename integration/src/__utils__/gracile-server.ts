@@ -1,5 +1,6 @@
 import path from 'node:path';
 
+import { dev } from '@gracile/engine/dev/dev';
 import { createStandaloneDevServer } from '@gracile/engine/dev/server';
 import { RANDOM_PORT } from '@gracile/engine/server/env';
 import { viteBuild } from '@gracile/engine/vite/build';
@@ -11,7 +12,31 @@ function getProjectPath(projectName: string) {
 	return path.join(process.cwd(), '__fixtures__', projectName);
 }
 
-export async function createServer(project: string, port?: number) {
+export async function createDynamicDevServer({
+	project,
+	port,
+}: {
+	project: string;
+	port?: number;
+}) {
+	/* const devServer =  */ await dev({ root: getProjectPath(project), port });
+
+	return {
+		close: async () => {
+			await fetch('http://localhost:3033/__close');
+
+			// await devServer.close();
+		},
+	};
+}
+
+export async function createStaticDevServer({
+	project,
+	port,
+}: {
+	project: string;
+	port?: number;
+}) {
 	const { port: foundPort, instance } = await createStandaloneDevServer({
 		port: typeof port !== 'undefined' ? port : RANDOM_PORT,
 		root: getProjectPath(project),

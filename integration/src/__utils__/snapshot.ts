@@ -14,7 +14,11 @@ export async function snapshotAssertEqual(options: {
 	prettier?: boolean;
 	lang?: 'ts';
 }) {
-	const dest = join('__fixtures__', join(...options.expectedPath));
+	const dest = join(
+		// process.cwd(),
+		'__fixtures__',
+		join(...options.expectedPath),
+	);
 	const resultFormatted =
 		options.prettier === false
 			? options.actualContent

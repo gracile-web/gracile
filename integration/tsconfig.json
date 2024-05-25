@@ -1,13 +1,15 @@
 {
   "extends": "@gracile/internal-tsconfigs/config-base.json",
   "include": [
+    //
     "./src/**/*.ts",
     "./src/env.d.ts",
-    "./__fixtures__/**/*.ts",
-    "./__utils__/**/*.ts"
+    "./__fixtures__/**/*.ts"
   ],
   "compilerOptions": {
     "noEmit": true,
+
+    "outDir": "dist",
 
     "experimentalDecorators": true,
     "useDefineForClassFields": false

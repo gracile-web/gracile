@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { after, it } from 'node:test';
 
-import { fetchResource } from '../__utils__/fetch.js';
-import { createServer } from '../__utils__/gracile-server.js';
-import { snapshotAssertEqual } from '../__utils__/snapshot.js';
-import { removeLocalPathsInDevAssets } from '../__utils__/vite.js';
+import { fetchResource } from './__utils__/fetch.js';
+import { createStaticDevServer } from './__utils__/gracile-server.js';
+import { snapshotAssertEqual } from './__utils__/snapshot.js';
+import { removeLocalPathsInDevAssets } from './__utils__/vite.js';
 
-const { address, close, tryOrClose } = await createServer('static-site');
+const { address, close, tryOrClose } = await createStaticDevServer({
+	project: 'static-site',
+});
 
 const projectRoutes = 'static-site/src/routes';
 const currentTestRoutes = '03-custom-elements';

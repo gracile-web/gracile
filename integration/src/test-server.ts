@@ -1,9 +1,16 @@
-// For keeping it long running with manual tests.
+// DISABLED
 
-import { logger } from '@gracile/internal-utils/logger';
+// // For keeping it long running with manual tests.
 
-import { createServer } from '../__utils__/gracile-server.js';
+// import { logger } from '@gracile/internal-utils/logger';
 
-const { address } = await createServer('static-site', 7878);
+// import { createStaticDevServer } from './__utils__/gracile-server.js';
 
-logger.info(address);
+// const { address } = await createStaticDevServer({
+// 	project: {
+// 		project: 'static-site',
+// 		port: 7878,
+// 	},
+// });
+
+// logger.info(address);
