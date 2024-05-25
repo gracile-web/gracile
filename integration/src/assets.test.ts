@@ -15,7 +15,7 @@ const currentTestRoutes = '01-assets';
 
 // ---
 
-it('Must have sibling assets', async () => {
+it('sibling assets', async () => {
 	const route = '00-siblings';
 
 	await tryOrClose(async () => {

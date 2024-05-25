@@ -15,7 +15,7 @@ const currentTestRoutes = '03-custom-elements';
 
 // ---
 
-it('Must render Lit element - Full', async () => {
+it('render Lit element - Full', async () => {
 	const route = '00-lit-full';
 
 	await tryOrClose(async () => {

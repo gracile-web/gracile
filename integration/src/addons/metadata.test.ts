@@ -14,7 +14,7 @@ const currentTestRoutes = '09-metadata';
 
 // ---
 
-it('Must have good SVGs', async () => {
+it('metadata', async () => {
 	const route = '00-metadata';
 
 	await tryOrClose(async () => {

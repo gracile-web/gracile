@@ -8,7 +8,7 @@ const projectDistExpected = 'static-site/dist_expected';
 
 // ---
 
-await it('Built the same output - Project Core', async () => {
+await it('build and compare outputs', async () => {
 	await build('static-site');
 
 	await compareFolder({
