@@ -1,0 +1,33 @@
+{
+  "name": "gracile",
+  "version": "1.1.0-pre3",
+  "description": "A thin, full-stack, web framework.\nPowered by Vite and Lit SSR.",
+  "author": "Julian Cataldo",
+  "license": "ISC",
+  "homepage": "https://gracile.js.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile"
+  },
+  "keywords": [
+    "ssr",
+    "ssg",
+    "mpa",
+    "spa",
+    "full-stack",
+    "web-components",
+    "custom-elements",
+    "markdown",
+    "static",
+    "dynamic",
+    "server",
+    "client",
+    "framework",
+    "bundler",
+    "lit",
+    "web-apis",
+    "declarative-shadow-dom",
+    "forms",
+    "handlers"
+  ]
+}
