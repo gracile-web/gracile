@@ -40,7 +40,8 @@
     "prepare": "husky",
     "sort-pjson": "pnpm sort-package-json package.json packages/{addons,userland,cli,internal}/*/package.json packages/engine/package.json integration/package.json",
     "test": "pnpm --prefix integration test",
-    "test:dev": "pnpm --prefix integration test:dev"
+    "test:dev": "pnpm --prefix integration test:dev",
+    "copy-readmes": "cp README.md packages/gracile/README.md"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.2",
