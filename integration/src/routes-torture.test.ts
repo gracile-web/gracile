@@ -5,10 +5,15 @@ import { after, it } from 'node:test';
 import { logger } from '@gracile/internal-utils/logger';
 import * as cheerio from 'cheerio';
 
-import { fetchResource } from '../__utils__/fetch.js';
-import { createServer, ERROR_HEADING } from '../__utils__/gracile-server.js';
+import { fetchResource } from './__utils__/fetch.js';
+import {
+	createStaticDevServer,
+	ERROR_HEADING,
+} from './__utils__/gracile-server.js';
 
-const { address, close, tryOrClose } = await createServer('static-site');
+const { address, close, tryOrClose } = await createStaticDevServer({
+	project: 'static-site',
+});
 
 const currentTestRoutes = '00-routes';
 

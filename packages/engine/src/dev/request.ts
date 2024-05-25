@@ -222,6 +222,7 @@ export function createRequestHandler({
 		} catch (e) {
 			const error = e as Error;
 			if (vite) vite.ssrFixStacktrace(error);
+			else logger.error(error.message);
 
 			if (error.cause === 404) {
 				// TODO: Handle 404 with dedicated page

@@ -30,19 +30,19 @@ export function virtualRoutes({
 				if (id === resolvedVirtualModuleId) {
 					// TODO: Harmonize serialization
 					return `
-const routeModules = new Map();
+const routeImports = new Map();
 
 ${[...routes]
 	.map(([pattern, route]) => {
 		return `
-routeModules.set('${pattern}', () => import('/${route.filePath}'))
+routeImports.set('${pattern}', () => import('/${route.filePath}'))
 `.trim();
 	})
 	.join('\n')}
 
 const routes = new Map(${JSON.stringify([...routes], null, 2)})
 
-export { routes, routeModules };
+export { routes, routeImports };
 
 export const routeAssets = new Map();
 

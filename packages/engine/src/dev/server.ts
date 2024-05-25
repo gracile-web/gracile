@@ -114,4 +114,11 @@ export async function startUserProvidedServer(options: {
 
 	const runtime = await createViteRuntime(runtimeServer);
 	await runtime.executeEntrypoint(options.entrypoint);
+
+	// return {
+	// 	close: async () => {
+	// 		await runtime.destroy();
+	// 		await runtimeServer.close();
+	// 	},
+	// };
 }

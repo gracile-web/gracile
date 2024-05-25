@@ -20,5 +20,15 @@ export async function preview({
 		'build',
 	);
 
+	if (userConfigGracile?.output === 'server')
+		throw new Error(
+			c.red(
+				`Vite preview is unnecessary when using the ${c.yellow('server mode')}.\n\n`,
+			) +
+				c.yellow(
+					`You can use a \`preview\` script with this command:\n\n${c.white('node --env-file=.env --watch dist/server/server.js')}\n`,
+				),
+		);
+
 	await vitePreview(port ?? userConfigGracile?.port ?? 9797, expose);
 }
