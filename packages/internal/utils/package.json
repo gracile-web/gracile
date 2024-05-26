@@ -29,10 +29,10 @@
   "exports": {
     "./*": "./dist/*.js",
     "./logger": {
-      "development": "./dist/logger.js",
-      "test": "./dist/logger.js",
+      "development": "./dist/logger.dev.js",
+      "test": "./dist/logger.dev.js",
       "preview": "./dist/logger.preview.js",
-      "default": "./dist/logger.prod.js"
+      "default": "./dist/logger.build.js"
     }
   },
   "files": [

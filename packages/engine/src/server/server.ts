@@ -31,3 +31,5 @@ export const createHandler: CreateHandler = async ({
 
 	return { handlers: [gracileHandler as RequestHandler], vite: null };
 };
+
+export { printNodeHttpServerAddressInfos as printAddressInfos } from './utils.js';

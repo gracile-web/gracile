@@ -134,28 +134,36 @@ const routeAssets = new Map([
   ]
 ]);
 
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck TODO: Implement stubs
+const NOT_PROD = process.env.NODE_ENV !== 'production';
 const logger = {
     info(msg, options) {
-        // throw new Error('Function not implemented.');
+        if (NOT_PROD)
+            console.info(msg);
     },
     warn(msg, options) {
-        // throw new Error('Function not implemented.');
+        if (NOT_PROD)
+            console.warn(msg);
     },
     warnOnce(msg, options) {
-        // throw new Error('Function not implemented.');
+        if (NOT_PROD)
+            console.warn(msg);
     },
     error(msg, options) {
-        // throw new Error('Function not implemented.');
+        if (NOT_PROD)
+            console.error(msg);
     },
     clearScreen(type) {
-        // throw new Error('Function not implemented.');
+        if (NOT_PROD)
+            console.clear();
     },
     // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     hasErrorLogged(error) {
-        // throw new Error('Function not implemented.');
+        if (NOT_PROD)
+            console.error(error);
     },
     hasWarned: false,
 };
@@ -8021,6 +8029,9 @@ function createRequestHandler({ vite, routes, routeImports, routeAssets, root, s
     };
 }
 
+const IP_LOCALHOST = "127.0.0.1";
+const PUBLIC_DIR = "./dist/client";
+
 routes.forEach((route, pattern) => {
     routes.set(pattern, {
         ...route,
@@ -8042,9 +8053,6 @@ const createHandler = async ({ root = process.cwd(),
     });
     return { handlers: [gracileHandler], vite: null };
 };
-
-const IP_LOCALHOST = "127.0.0.1";
-const PUBLIC_DIR = "./dist/client";
 
 var define_import_meta_env_default = { BASE_URL: "/", MODE: "production", DEV: false, PROD: true, SSR: true };
 const importMetaEnv = define_import_meta_env_default;

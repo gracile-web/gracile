@@ -1,28 +1,31 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck TODO: Implement stubs
 
 import type { Logger } from 'vite';
 
+const NOT_PROD = process.env.NODE_ENV !== 'production';
+
 export const logger: Logger = {
 	info(msg: string, options?: LogOptions): void {
-		// throw new Error('Function not implemented.');
+		if (NOT_PROD) console.info(msg);
 	},
 	warn(msg: string, options?: LogOptions): void {
-		// throw new Error('Function not implemented.');
+		if (NOT_PROD) console.warn(msg);
 	},
 	warnOnce(msg: string, options?: LogOptions): void {
-		// throw new Error('Function not implemented.');
+		if (NOT_PROD) console.warn(msg);
 	},
 	error(msg: string, options?: LogErrorOptions): void {
-		// throw new Error('Function not implemented.');
+		if (NOT_PROD) console.error(msg);
 	},
 	clearScreen(type: LogType): void {
-		// throw new Error('Function not implemented.');
+		if (NOT_PROD) console.clear();
 	},
 	// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 	hasErrorLogged(error: Error | RollupError): boolean {
-		// throw new Error('Function not implemented.');
+		if (NOT_PROD) console.error(error);
 	},
 	hasWarned: false,
 };
