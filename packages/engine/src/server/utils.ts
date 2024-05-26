@@ -1,29 +1,32 @@
 // NOTE: Util. to pretty print for user provided server.
 
-// import { logger } from '@gracile/internal-utils/logger';
-// import { DEV } from 'esm-env';
-// import type { Server } from 'http';
-// import c from 'picocolors';
+import { logger } from '@gracile/internal-utils/logger';
+import { DEV } from 'esm-env';
+import type { Server } from 'http';
+import c from 'picocolors';
 
-// export function printNodeHttpServerAddressInfos(
-// 	instance: Server,
-// 	expose: boolean = true,
-// ) {
-// 	const infos = instance.address();
-// 	logger.info(c.green(`${DEV ? 'development' : 'production'} server started`), {
-// 		timestamp: true,
-// 	});
+import { IP_EXPOSED } from './env.js';
 
-// 	if (typeof infos === 'object' && infos && infos.port && infos.address) {
-// 		logger.info(
-// 			`
-// ${c.dim('┃')} Local    ${c.cyan(`http://localhost:${infos.port}/`)}
-// ${c.dim('┃')} Network  ${expose ? c.cyan(`http://${infos.address}:${infos.port}/`) : c.dim(`use ${c.bold('--host')} to expose`)}
-// 				`,
-// 		);
+export function printNodeHttpServerAddressInfos(instance: Server) {
+	const infos = instance.address();
+	logger.info(c.green(`${DEV ? 'development' : 'production'} server started`), {
+		timestamp: true,
+	});
 
-// 		return infos;
-// 	}
+	if (typeof infos === 'object' && infos && infos.port && infos.address) {
+		logger.info(
+			`
+${c.dim('┃')} Local    ${c.cyan(`http://localhost:${infos.port}/`)}` +
+				`${
+					infos.address === IP_EXPOSED
+						? `${c.dim('┃')} Network  ${c.cyan(`http://${infos.address}:${infos.port}/`)}`
+						: ''
+				}
+`,
+		);
 
-// 	throw Error('Invalid address/port.');
-// }
+		return infos;
+	}
+
+	throw Error('Invalid address/port.');
+}
