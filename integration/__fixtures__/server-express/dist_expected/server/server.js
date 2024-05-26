@@ -8027,24 +8027,20 @@ routes.forEach((route, pattern) => {
         pattern: new URLPattern(pattern, 'http://gracile'),
     });
 });
-const withExpress = async ({ root = process.cwd(), 
+const createHandler = async ({ root = process.cwd(),
 // hmrPort,
-app: expressApp,
 // NOTE: We need type parity with the dev. version of this function
 // eslint-disable-next-line @typescript-eslint/require-await
- }) => {
-    if (!expressApp)
-        throw new Error();
+ } = {}) => {
     setCurrentWorkingDirectory(root);
-    const handler = createRequestHandler({
+    const gracileHandler = createRequestHandler({
         root,
         routes,
         routeImports,
         routeAssets,
         serverMode: true,
     });
-    expressApp.use('*', handler);
-    return { app: expressApp, vite: null };
+    return { handlers: [gracileHandler], vite: null };
 };
 
 const IP_LOCALHOST = "127.0.0.1";
@@ -8116,6 +8112,9 @@ const env = safeEnvLoader({
 });
 console.log(env.GRACILE_SITE_URL);
 const app = express();
+const { handlers } = await createHandler({
+  root: join(process.cwd(), ROOT)
+});
 app.get("*", (req, res, next) => {
   console.log("request: " + req.url);
   return next();
@@ -8132,11 +8131,8 @@ app.get("/__close", (req, res) => {
   setTimeout(() => server.close(() => process.exit()));
   return res.end("Closing…");
 });
-app.use(express.static(ROOT + PUBLIC_DIR));
-await withExpress({
-  app,
-  root: join(process.cwd(), ROOT)
-});
+app.use(express.static(join(ROOT, PUBLIC_DIR)));
+app.use(handlers);
 const server = app.listen(3033, IP_LOCALHOST, () => {
   console.log(server.address());
 });

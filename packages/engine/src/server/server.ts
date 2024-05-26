@@ -2,7 +2,7 @@ import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
 import { type RequestHandler } from 'express';
 import { routeAssets, routeImports, routes } from 'gracile:routes';
 
-import type { HandleWithExpressApp } from '../dev/server.js';
+import type { CreateHandler } from '../dev/server.js';
 import { createRequestHandler } from './request.js';
 
 routes.forEach((route, pattern) => {
@@ -12,17 +12,16 @@ routes.forEach((route, pattern) => {
 	});
 });
 
-export const withExpress: HandleWithExpressApp = async ({
+export const createHandler: CreateHandler = async ({
 	root = process.cwd(),
+
 	// hmrPort,
-	app: expressApp,
 	// NOTE: We need type parity with the dev. version of this function
 	// eslint-disable-next-line @typescript-eslint/require-await
-}) => {
-	if (!expressApp) throw new Error();
+} = {}) => {
 	setCurrentWorkingDirectory(root);
 
-	const handler = createRequestHandler({
+	const gracileHandler = createRequestHandler({
 		root,
 		routes,
 		routeImports,
@@ -30,7 +29,5 @@ export const withExpress: HandleWithExpressApp = async ({
 		serverMode: true,
 	});
 
-	expressApp.use('*', handler as RequestHandler);
-
-	return { app: expressApp, vite: null };
+	return { handlers: [gracileHandler as RequestHandler], vite: null };
 };
