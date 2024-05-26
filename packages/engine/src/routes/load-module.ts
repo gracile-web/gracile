@@ -30,7 +30,8 @@ export async function loadForeignRouteObject({
 	if (vite) unknownRouteModule = await vite.ssrLoadModule(route.filePath);
 	else if (routeImports) {
 		const ri = routeImports.get(route.pattern.pathname);
-		if (ri) unknownRouteModule = ri();
+
+		if (ri) unknownRouteModule = await Promise.resolve(ri());
 	}
 
 	if (unknownRouteModule === null) throw new Error('Cannot find route module.');

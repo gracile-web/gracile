@@ -24,10 +24,10 @@ export const withExpress: HandleWithExpressApp = async ({
 
 	const handler = createRequestHandler({
 		root,
-		vite: undefined,
 		routes,
 		routeImports,
 		routeAssets,
+		serverMode: true,
 	});
 
 	expressApp.use('*', handler as RequestHandler);

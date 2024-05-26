@@ -33,11 +33,15 @@ async function streamToString(stream: Readable) {
 	return Buffer.concat(chunks).toString('utf-8');
 }
 
-export async function renderRoutes(
-	vite: ViteDevServer,
-	serverMode: boolean,
+export async function renderRoutes({
+	vite,
+	serverMode,
 	root = process.cwd(),
-) {
+}: {
+	vite: ViteDevServer;
+	serverMode: boolean;
+	root?: string;
+}) {
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 
 	// MARK: Collect
@@ -118,6 +122,7 @@ export async function renderRoutes(
 							props,
 						},
 						root,
+						serverMode,
 					});
 
 					const htmlString = await streamToString(output);

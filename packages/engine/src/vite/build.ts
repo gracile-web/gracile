@@ -25,12 +25,12 @@ export async function viteBuild(root = process.cwd()) {
 
 	const serverMode = userConfigGracile?.output === 'server';
 
-	const htmlPages = await buildRoutes(
+	const htmlPages = await buildRoutes({
 		viteServerForBuild,
 		root,
-		userConfigGracile || {},
+		_config: userConfigGracile || {},
 		serverMode,
-	);
+	});
 
 	const baseBuildConfig = {
 		root,
@@ -60,7 +60,7 @@ export async function viteBuild(root = process.cwd()) {
 				// 		'src/server.ts' /* DEFAULT_USER_SERVER_MODULE_ENTRYPOINT + '.ts' */,
 				// },
 				output: {
-					...(serverMode ? { dir: 'dist/client' } : {}),
+					...(serverMode ? { dir: `${root}/dist/client` } : {}),
 				},
 			},
 		},
@@ -90,8 +90,13 @@ export async function viteBuild(root = process.cwd()) {
 
 				rollupOptions: {
 					external: [
+						// '*',
+						// '!*',
 						// '*node_modules*',
-						'@gracile/gracile/*',
+						'@gracile/*',
+						// 'fsevents',
+						// 'express',
+						// 'vite',
 						// '@whatwg-node/server',
 						// '@lit/*',
 						// '@lit-labs/*',
@@ -113,7 +118,7 @@ export async function viteBuild(root = process.cwd()) {
 					},
 
 					output: {
-						dir: 'dist/server',
+						dir: `${root}/dist/server`,
 						entryFileNames: '[name].js',
 						assetFileNames: 'assets/[name].js',
 						chunkFileNames: 'chunk/[name].js',

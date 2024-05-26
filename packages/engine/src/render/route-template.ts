@@ -27,10 +27,10 @@ export const PAGE_ASSETS_MARKER = '<!--__GRACILE_PAGE_ASSETS__-->';
 // FIXME: cannot be used with `unsafeHTML`, so must be duplicated…
 export const pageAssets = LitSsrHtml`<!--__GRACILE_PAGE_ASSETS__-->`;
 
-const REGEX_TAG_SCRIPT =
-	/\s<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script\s*>\s/gi;
+export const REGEX_TAG_SCRIPT =
+	/\s?<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script\s*>\s?/gi;
 
-const REGEX_TAG_LINK = /\s<link\b[^>]*?>\s/gi;
+export const REGEX_TAG_LINK = /\s?<link\b[^>]*?>\s?/gi;
 
 export type HandlerInfos = { data: unknown; method: string };
 
@@ -42,6 +42,7 @@ export async function renderRouteTemplate({
 	handlerInfos,
 	routeAssets,
 	// root,
+	serverMode,
 }: {
 	request: Request | R.StaticRequest;
 	vite?: ViteDevServer | undefined;
@@ -50,6 +51,7 @@ export async function renderRouteTemplate({
 	handlerInfos?: HandlerInfos | undefined;
 	routeAssets?: R.RoutesAssets | undefined;
 	root: string;
+	serverMode?: boolean | undefined;
 }) {
 	// MARK: Context
 	const context: R.RouteContextGeneric = {
@@ -107,11 +109,17 @@ export async function renderRouteTemplate({
 			${routeInfos.foundRoute.pageAssets.map((path) => {
 				//
 				if (/\.(js|ts)$/.test(path)) {
-					return html`<script type="module" src="/${path}"></script>`;
+					return html`
+						<script type="module" src="/${path}"></script>
+						<!--  -->
+					`;
 				}
 
 				if (/\.(scss|css)$/.test(path)) {
-					return html`<link rel="stylesheet" href="/${path}" />`;
+					return html`
+						<link rel="stylesheet" href="/${path}" />
+						<!--  -->
+					`;
 				}
 
 				throw new Error('Unknown asset.');
@@ -151,10 +159,15 @@ export async function renderRouteTemplate({
 	);
 
 	// MARK: Page
-	if (routeInfos.routeModule.template) {
-		const routeOutput = (await Promise.resolve(
-			routeInfos.routeModule.template(context),
-		)) as unknown;
+	// Skipped with server mode in production build
+	if (
+		routeInfos.routeModule.template && serverMode
+			? serverMode && mode !== 'build'
+			: true
+	) {
+		const routeOutput = await Promise.resolve(
+			routeInfos.routeModule.template?.(context),
+		);
 
 		if (isLitTemplate(routeOutput) === false)
 			throw Error(
@@ -173,6 +186,8 @@ export async function renderRouteTemplate({
 
 		return { output };
 	}
+
+	// MARK: Just the document
 	const output = Readable.from(baseDocHtml);
 
 	return { output };
