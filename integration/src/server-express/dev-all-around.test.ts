@@ -10,6 +10,6 @@ const { /* address, */ close } = await createDynamicDevServer({
 
 // ---
 
-await common('dev', false);
+common('dev', false);
 
 after(async () => close());

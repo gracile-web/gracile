@@ -10,49 +10,58 @@ const currentTestRoutes = '';
 
 const ADDRESS = 'http://localhost:3033';
 
-export async function common(mode: string, writeActual = false) {
-	await describe(`load all server routes ${mode}`, async () => {
-		const expectedPath = (name: string) => [
-			projectRoutes,
-			currentTestRoutes,
-			`_${name}_${mode}_expected._html`,
-		];
+async function tests(mode: string, writeActual: boolean) {
+	const expectedPath = (name: string) => [
+		projectRoutes,
+		currentTestRoutes,
+		`_${name}_${mode}_expected._html`,
+	];
 
-		await it('load a static asset from public directory', async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('favicon.svg'),
-				actualContent: await fetchResource([ADDRESS, 'favicon.svg'], {
-					trailingSlash: false,
-				}),
-				writeActual,
-			}));
-		await it('guard by user server middleware', async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('private'),
-				actualContent: await fetchResource([ADDRESS, 'private']),
-				writeActual,
-			}));
-		await it('load an user server API route', async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('api'),
-				actualContent: await fetchResource([ADDRESS, 'api']),
-				writeActual,
-			}));
-		await it('load a basic page', async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('about'),
-				actualContent: removeLocalPathsInDevAssets(
-					await fetchResource([ADDRESS, 'about']),
-				),
-				writeActual,
-			}));
-		await it('load homepage with a get query param', async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('home'),
-				actualContent: removeLocalPathsInDevAssets(
-					await fetchResource([ADDRESS, '?q=123'], { trailingSlash: false }),
-				),
-				writeActual,
-			}));
+	await it('load a static asset from public directory', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('favicon.svg'),
+			actualContent: await fetchResource([ADDRESS, 'favicon.svg'], {
+				trailingSlash: false,
+			}),
+			writeActual,
+		}));
+	await it('guard by user server middleware', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('private'),
+			actualContent: await fetchResource([ADDRESS, 'private']),
+			writeActual,
+		}));
+	await it('load an user server API route', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('api'),
+			actualContent: await fetchResource([ADDRESS, 'api']),
+			writeActual,
+		}));
+	await it('load a basic page', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('about'),
+			actualContent: removeLocalPathsInDevAssets(
+				await fetchResource([ADDRESS, 'about']),
+			),
+			writeActual,
+		}));
+	await it('load homepage with a get query param', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('home'),
+			actualContent: removeLocalPathsInDevAssets(
+				await fetchResource([ADDRESS, '?q=123'], { trailingSlash: false }),
+			),
+			writeActual,
+		}));
+}
+
+export async function commonAsync(mode: string, writeActual = false) {
+	await describe(`load all server routes ${mode}`, async () => {
+		await tests(mode, writeActual);
+	});
+}
+export function common(mode: string, writeActual = false) {
+	describe(`load all server routes ${mode}`, async () => {
+		await tests(mode, writeActual);
 	});
 }

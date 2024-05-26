@@ -3,7 +3,7 @@ import { after, it } from 'node:test';
 
 import { build } from '../__utils__/gracile-server.js';
 import { compareFolder } from '../__utils__/snapshot.js';
-import { common } from './_common.js';
+import { commonAsync } from './_common.js';
 
 const projectDist = 'server-express/dist';
 const projectDistExpected = 'server-express/dist_expected';
@@ -12,7 +12,8 @@ const projectDistExpected = 'server-express/dist_expected';
 
 let gracileProcess: ChildProcessWithoutNullStreams | null = null;
 
-await it('build and compare outputs', async () => {
+// eslint-disable-next-line @typescript-eslint/no-floating-promises
+it('build and compare outputs', async () => {
 	await build('server-express');
 
 	await compareFolder({
@@ -39,7 +40,8 @@ await it('build and compare outputs', async () => {
 			const d = String(data);
 			if (d.includes('3033')) {
 				boostrapped = true;
-				common('prod', false)
+
+				commonAsync('prod', false)
 					.then(() => {
 						resolve(null);
 					})
