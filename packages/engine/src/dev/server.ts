@@ -6,10 +6,10 @@ import express, { type Express, type RequestHandler } from 'express';
 import c from 'picocolors';
 import { createViteRuntime, type ViteDevServer } from 'vite';
 
-import { collectRoutes, routes } from '../routes/collect.js';
+import { collectRoutes } from '../routes/collect.js';
 import { IP_EXPOSED, IP_LOCALHOST } from '../server/env.js';
+import { createRequestHandler } from '../server/request.js';
 import { createViteServer } from '../vite/server.js';
-import { createRequestHandler } from './request.js';
 
 export type HandleWithExpressApp = typeof withExpress;
 
@@ -40,17 +40,18 @@ export async function withExpress({
 
 	expressApp.use(vite.middlewares);
 
+	const routes = await collectRoutes(root /* vite */);
+
 	expressApp.get('/__routes', (req, res) => {
 		return res.json([...routes]);
 	});
 
-	await collectRoutes(root /* vite */);
 	vite.watcher.on('all', (event, _file) => {
 		if (['add', 'unlink'].includes(event))
 			collectRoutes(root /* , vite */).catch((e) => logger.error(String(e)));
 	});
 
-	const handler = createRequestHandler({ vite, root, serverMode });
+	const handler = createRequestHandler({ vite, root, serverMode, routes });
 	// NOTE: Types are wrong! Should accept an async request handler.
 	expressApp.use('*', handler as RequestHandler);
 

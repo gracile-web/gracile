@@ -32,7 +32,7 @@ export function createRequestHandler({
 	serverMode,
 }: {
 	vite?: ViteDevServer | undefined;
-	routes?: R.RoutesManifest | undefined;
+	routes: R.RoutesManifest;
 	routeImports?: R.RoutesImports | undefined;
 	routeAssets?: R.RoutesAssets;
 	root: string;

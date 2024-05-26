@@ -4,7 +4,6 @@ import require$$0$6 from 'tty';
 import { html as html$1, render } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import require$$0$1, { Readable } from 'stream';
-import 'fast-glob';
 import require$$0$5 from 'fs';
 import require$$1$2 from 'url';
 import require$$0$3 from 'http';
@@ -44,7 +43,7 @@ function setCurrentWorkingDirectory(root) {
     return cwd;
 }
 
-const routes$1 = new Map([
+const routes = new Map([
   [
     "/",
     {
@@ -7792,15 +7791,13 @@ async function loadForeignRouteObject({ vite, route, routeImports, }) {
     return routeModule;
 }
 
-const routes = new Map();
-
 // FIXME: proper DI for routes
-function matchRouteFromUrl(url, routess = routes) {
+function matchRouteFromUrl(url, routes) {
     let match;
     let foundRoute;
     const pathname = new URL(url).pathname;
     // eslint-disable-next-line no-restricted-syntax
-    for (const [, route] of routess) {
+    for (const [, route] of routes) {
         if (match)
             break;
         const matchResult = route.pattern.exec(`http://gracile${pathname}`) || undefined;
@@ -8024,8 +8021,8 @@ function createRequestHandler({ vite, routes, routeImports, routeAssets, root, s
     };
 }
 
-routes$1.forEach((route, pattern) => {
-    routes$1.set(pattern, {
+routes.forEach((route, pattern) => {
+    routes.set(pattern, {
         ...route,
         pattern: new URLPattern(pattern, 'http://gracile'),
     });
@@ -8041,7 +8038,7 @@ app: expressApp,
     setCurrentWorkingDirectory(root);
     const handler = createRequestHandler({
         root,
-        routes: routes$1,
+        routes,
         routeImports,
         routeAssets,
         serverMode: true,

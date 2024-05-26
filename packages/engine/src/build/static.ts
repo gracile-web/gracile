@@ -7,7 +7,7 @@ import c from 'picocolors';
 import type { ViteDevServer } from 'vite';
 
 import { renderRouteTemplate } from '../render/route-template.js';
-import { collectRoutes, routes } from '../routes/collect.js';
+import { collectRoutes } from '../routes/collect.js';
 import { loadForeignRouteObject } from '../routes/load-module.js';
 
 export interface RenderedRouteDefinition {
@@ -45,7 +45,7 @@ export async function renderRoutes({
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 
 	// MARK: Collect
-	await collectRoutes(root /* vite */);
+	const routes = await collectRoutes(root /* vite */);
 
 	logger.info(c.green('Rendering routes finished'), { timestamp: true });
 
@@ -150,5 +150,10 @@ export async function renderRoutes({
 		}),
 	);
 
-	return renderedRoutes.sort((a, b) => (a.absoluteId < b.absoluteId ? -1 : 1));
+	return {
+		routes,
+		renderedRoutes: renderedRoutes.sort((a, b) =>
+			a.absoluteId < b.absoluteId ? -1 : 1,
+		),
+	};
 }

@@ -4,7 +4,6 @@ import c from 'picocolors';
 import { build, mergeConfig, type UserConfig } from 'vite';
 
 import { DEFAULT_USER_SERVER_MODULE_ENTRYPOINT } from '../dev/server.js';
-import { routes } from '../routes/collect.js';
 import { getConfigs } from './config.js';
 import { buildRoutes } from './plugins/build-routes.js';
 import { virtualRoutes } from './plugins/virtual-routes.js';
@@ -109,7 +108,7 @@ export async function viteBuild(root = process.cwd()) {
 					plugins: [
 						virtualRoutes({
 							// root,
-							routes,
+							routes: htmlPages.routes,
 							renderedRoutes: htmlPages.renderedRoutes,
 						}),
 					],

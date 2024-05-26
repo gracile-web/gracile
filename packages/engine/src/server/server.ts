@@ -2,8 +2,8 @@ import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
 import { type RequestHandler } from 'express';
 import { routeAssets, routeImports, routes } from 'gracile:routes';
 
-import { createRequestHandler } from '../dev/request.js';
 import type { HandleWithExpressApp } from '../dev/server.js';
+import { createRequestHandler } from './request.js';
 
 routes.forEach((route, pattern) => {
 	routes.set(pattern, {

@@ -7,7 +7,6 @@ import 'tty';
 import '@lit-labs/ssr';
 import '@lit-labs/ssr/lib/render-result.js';
 import 'stream';
-import 'fast-glob';
 import 'fs';
 import 'url';
 import 'http';

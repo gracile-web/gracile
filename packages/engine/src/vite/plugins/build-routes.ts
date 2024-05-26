@@ -18,13 +18,14 @@ export const buildRoutes = async ({
 	_config: GracileConfig;
 	serverMode?: boolean;
 }) => {
-	const renderedRoutes = await renderRoutes({
+	const { renderedRoutes, routes } = await renderRoutes({
 		vite: viteServerForBuild,
 		serverMode,
 		root,
 	});
 	const inputList = renderedRoutes.map((input) => input.name);
 	return {
+		routes,
 		renderedRoutes,
 		inputList,
 		plugin: [
