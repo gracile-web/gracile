@@ -1,20 +1,28 @@
-import * as cheerio from 'cheerio';
 import { type Plugin, type ViteDevServer } from 'vite';
 
 import { renderRoutes } from '../../build/static.js';
+import {
+	REGEX_TAG_LINK,
+	REGEX_TAG_SCRIPT,
+} from '../../render/route-template.js';
 import type { GracileConfig } from '../../user-config.js';
 
-export const buildRoutes = async (
-	viteServerForBuild: ViteDevServer,
-	root: string,
-	_config: GracileConfig,
+export const buildRoutes = async ({
+	viteServerForBuild,
+	root,
+	_config,
 	serverMode = false,
-) => {
-	const renderedRoutes = await renderRoutes(
-		viteServerForBuild,
+}: {
+	viteServerForBuild: ViteDevServer;
+	root: string;
+	_config: GracileConfig;
+	serverMode?: boolean;
+}) => {
+	const renderedRoutes = await renderRoutes({
+		vite: viteServerForBuild,
 		serverMode,
 		root,
-	);
+	});
 	const inputList = renderedRoutes.map((input) => input.name);
 
 	return {
@@ -84,30 +92,18 @@ export const buildRoutes = async (
 						const file = bundle[fileKey];
 
 						if (fileKey.endsWith('.html') && file && 'source' in file) {
-							let alteredContent = file.source.toString();
-							const $ = cheerio.load(alteredContent, {
-								sourceCodeLocationInfo: true,
-							});
+							const source = file.source.toString();
 
-							let collectedAssets = '';
-
-							const scriptsAndStyles = [
-								// NOTE: Only works in this order.
-								// Also, cannot do apparition order
-								...$('head link[rel="stylesheet"][href^="/assets/"]'),
-								...$('head link[rel="modulepreload"][href^="/assets/"]'),
-								...$('head script[type="module"][src^="/assets/"]'),
-							];
-							scriptsAndStyles.forEach((elem) => {
-								const slice = alteredContent.slice(
-									elem.sourceCodeLocation?.startOffset,
-									elem.sourceCodeLocation?.endOffset,
-								);
-
-								collectedAssets += slice;
-
-								alteredContent = alteredContent.replace(slice, '');
-							});
+							const collectedAssets = [
+								...[...source.matchAll(REGEX_TAG_SCRIPT)]
+									.map((v) => v[0])
+									// NOTE: Too brittle
+									.filter((v) => v.includes(`type="module"`)),
+								...[...source.matchAll(REGEX_TAG_LINK)]
+									.map((v) => v[0])
+									// NOTE: Too brittle
+									.filter((v) => /rel="(stylesheet|modulepreload)"/.test(v)),
+							].join('\n');
 
 							// NOTE: Not used (for now?)
 							// file.source = alteredContent;

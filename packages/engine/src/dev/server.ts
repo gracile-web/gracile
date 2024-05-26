@@ -17,10 +17,12 @@ export async function withExpress({
 	root = process.cwd(),
 	// hmrPort,
 	app,
+	serverMode,
 }: {
 	hmrPort?: number;
 	root?: string;
 	app?: Express;
+	serverMode?: boolean | undefined;
 }): Promise<{
 	app: express.Express;
 	vite: ViteDevServer | null;
@@ -48,7 +50,7 @@ export async function withExpress({
 			collectRoutes(root /* , vite */).catch((e) => logger.error(String(e)));
 	});
 
-	const handler = createRequestHandler({ vite, root });
+	const handler = createRequestHandler({ vite, root, serverMode });
 	// NOTE: Types are wrong! Should accept an async request handler.
 	expressApp.use('*', handler as RequestHandler);
 
@@ -68,6 +70,7 @@ export async function createStandaloneDevServer(options: {
 	const server = await withExpress({
 		// hmrPort: options.port + 1,
 		root: options.root,
+		serverMode: false,
 	});
 
 	// NOTE: `0` will auto-alocate a random available port.
@@ -80,6 +83,7 @@ export async function createStandaloneDevServer(options: {
 			options.expose ? DEV_SERVER_EXPOSED_HOST : DEV_SERVER_HOST,
 			() => {
 				logger.info(c.green('development server started'), { timestamp: true });
+				logger.info(c.dim(`CWD: ${process.env['__GRACILE_PROJECT_CWD']}`));
 				resolve(inst);
 				const addressInfo = inst.address();
 				if (typeof addressInfo === 'object' && addressInfo) {

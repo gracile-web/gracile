@@ -29,12 +29,14 @@ export function createRequestHandler({
 	routeImports,
 	routeAssets,
 	root,
+	serverMode,
 }: {
 	vite?: ViteDevServer | undefined;
 	routes?: R.RoutesManifest | undefined;
 	routeImports?: R.RoutesImports | undefined;
 	routeAssets?: R.RoutesAssets;
 	root: string;
+	serverMode?: boolean | undefined;
 }) {
 	return async (
 		req: ExpressRequest,
@@ -71,6 +73,7 @@ export function createRequestHandler({
 				handlerInfos,
 				routeAssets,
 				root,
+				serverMode,
 			});
 
 			return output;
