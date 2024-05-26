@@ -25,9 +25,11 @@ export type ModuleOptions = {
 	staticPaths?: StaticPathsGeneric /* | undefined */;
 	handler?: HandlerGeneric;
 
-	template?: (context: RouteContextGeneric) => RouteTemplateResult;
+	prerender?: boolean | undefined;
 
 	document?: DocumentTemplate<RouteContextGeneric>;
+
+	template?: (context: RouteContextGeneric) => RouteTemplateResult;
 };
 
 // TODO: put in engine
@@ -50,6 +52,12 @@ export class RouteModule {
 		return this.#document;
 	}
 
+	readonly #prerender;
+
+	public get prerender() {
+		return this.#prerender;
+	}
+
 	readonly #template;
 
 	public get template() {
@@ -59,17 +67,22 @@ export class RouteModule {
 	constructor(options: ModuleOptions) {
 		if (typeof options.staticPaths === 'function')
 			this.#staticPaths = options.staticPaths;
+
 		if (
 			(typeof options.handler === 'object' ||
 				typeof options.handler === 'function') &&
 			options.handler
 		)
 			this.#handler = options.handler;
-		// if (options.fragment) this.#fragment = options.fragment;
+
 		if (typeof options.template === 'function')
 			this.#template = options.template;
+
 		if (typeof options.document === 'function')
 			this.#document = options.document;
+
+		if (typeof options.prerender === 'boolean')
+			this.#prerender = options.prerender;
 	}
 }
 

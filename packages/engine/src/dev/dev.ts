@@ -12,7 +12,7 @@ import {
 
 export async function dev(options: {
 	port?: number | undefined;
-	root?: string;
+	root?: string | undefined;
 	expose?: boolean | undefined;
 }) {
 	logger.info(c.gray('\n— Development mode —\n'));

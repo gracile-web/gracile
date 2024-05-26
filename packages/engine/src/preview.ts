@@ -11,7 +11,7 @@ export async function preview({
 }: {
 	port?: number | undefined;
 	expose?: boolean | undefined;
-	root?: string;
+	root?: string | undefined;
 }) {
 	logger.info(c.gray('\n— Preview mode —\n'));
 
