@@ -1,7 +1,7 @@
 {
   "name": "@gracile/gracile",
   "version": "0.0.4",
-  "description": "A thin, full-stack, web framework",
+  "description": "A thin, full-stack, web framework.\nPowered by Vite and Lit SSR.",
   "keywords": [
     "full-stack",
     "meta-framework",

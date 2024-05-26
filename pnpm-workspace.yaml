@@ -18,3 +18,4 @@ packages:
   # - ./packages/addons/minify
   # - ./packages/addons/minify-html-literals
   - ./integration
+  # - integration/__fixtures__/server-express

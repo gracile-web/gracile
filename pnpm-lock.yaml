@@ -416,9 +416,6 @@ importers:
       '@whatwg-node/server':
         specifier: ^0.9.25
         version: 0.9.34
-      cheerio:
-        specifier: 1.0.0-rc.12
-        version: 1.0.0-rc.12
       esm-env:
         specifier: ^1.0.0
         version: 1.0.0
@@ -434,9 +431,6 @@ importers:
       picocolors:
         specifier: ^1.0.0
         version: 1.0.0
-      sass:
-        specifier: ^1.x.x
-        version: 1.77.1
       urlpattern-polyfill:
         specifier: ^10.0.0
         version: 10.0.0
@@ -5314,6 +5308,7 @@ snapshots:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
+    optional: true
 
   aproba@2.0.0: {}
 
@@ -5415,7 +5410,8 @@ snapshots:
       jsonpointer: 5.0.1
       leven: 3.1.0
 
-  binary-extensions@2.3.0: {}
+  binary-extensions@2.3.0:
+    optional: true
 
   bl@4.1.0:
     dependencies:
@@ -5552,6 +5548,7 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+    optional: true
 
   chownr@2.0.0: {}
 
@@ -6693,7 +6690,8 @@ snapshots:
 
   ignore@5.3.1: {}
 
-  immutable@4.3.5: {}
+  immutable@4.3.5:
+    optional: true
 
   import-fresh@3.3.0:
     dependencies:
@@ -6769,6 +6767,7 @@ snapshots:
   is-binary-path@2.1.0:
     dependencies:
       binary-extensions: 2.3.0
+    optional: true
 
   is-boolean-object@1.1.2:
     dependencies:
@@ -7680,6 +7679,7 @@ snapshots:
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
+    optional: true
 
   redent@3.0.0:
     dependencies:
@@ -7797,6 +7797,7 @@ snapshots:
       chokidar: 3.6.0
       immutable: 4.3.5
       source-map-js: 1.2.0
+    optional: true
 
   sax@1.3.0: {}
 
