@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import { cp, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { styleText } from 'node:util';
 
 import { logger } from '@gracile/internal-utils/logger';
 import fastGlob from 'fast-glob';
@@ -62,7 +63,12 @@ export async function compareFolder(options: {
 	writeActual?: boolean;
 }) {
 	if (options.writeActual) {
-		logger.warn(`WRITING ACTUAL TO EXPECTED! Don't forget to remove it after.`);
+		logger.warn(
+			styleText(
+				'red',
+				`WRITING ACTUAL TO EXPECTED! Don't forget to remove it after.`,
+			),
+		);
 		const destination = join(
 			process.cwd(),
 			'__fixtures__',

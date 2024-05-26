@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "tsx --test 'src/**/*.test.ts'",
-    "test:dev": "tsx --watch --test 'src/**/*.test.ts'",
+    "test": "tsx --test -C test 'src/**/*.test.ts'",
+    "test:dev": "tsx --watch --test -C test 'src/**/*.test.ts'",
     "dev:server": "tsx --watch 'src/test-server.ts'"
   },
   "dependencies": {

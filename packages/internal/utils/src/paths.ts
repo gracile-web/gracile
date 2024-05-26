@@ -1,12 +1,9 @@
 import path from 'node:path';
 
-import { logger } from './logger.js';
-
 let cwd = process.env['__GRACILE_PROJECT_CWD'] || process.cwd();
 
 export function setCurrentWorkingDirectory(root?: string | undefined) {
 	if (root && root !== cwd) {
-		logger.info(`Settings cwd to:${root}`);
 		cwd = root;
 	}
 	process.env['__GRACILE_PROJECT_CWD'] = cwd;

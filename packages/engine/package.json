@@ -51,7 +51,6 @@
     "@gracile/client": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@whatwg-node/server": "^0.9.25",
-    "cheerio": "1.0.0-rc.12",
     "esm-env": "^1.0.0",
     "express": "4.x.x",
     "fast-glob": "^3.3.2",
@@ -70,17 +69,11 @@
   "peerDependencies": {
     "@lit-labs/ssr": "3.x",
     "@lit-labs/ssr-client": "1.x",
-    "lit": "3.x",
-    "sass": "^1.x.x"
+    "lit": "3.x"
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "peerDependenciesMeta": {
-    "sass": {
-      "optional": true
-    }
   },
   "// disabledDeps": {
     "rollup-plugin-typescript2": "^0.36.0",

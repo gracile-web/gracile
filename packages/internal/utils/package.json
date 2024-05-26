@@ -27,7 +27,13 @@
   },
   "type": "module",
   "exports": {
-    "./*": "./dist/*.js"
+    "./*": "./dist/*.js",
+    "./logger": {
+      "development": "./dist/logger.js",
+      "test": "./dist/logger.js",
+      "preview": "./dist/logger.preview.js",
+      "default": "./dist/logger.prod.js"
+    }
   },
   "files": [
     "./dist/**/*"
