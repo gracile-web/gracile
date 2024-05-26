@@ -1,28 +1,11 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script type="module" src="/@vite/client"></script>
-
     <!-- Helpers -->
 
-    <script
-      type="module"
-      src="/@id/__x00__/index.html?html-proxy&index=0.js"
-    ></script>
-
     <!--  -->
 
-    <script
-      type="module"
-      src="/@id/__x00__/index.html?html-proxy&index=1.js"
-    ></script>
-
     <!--  -->
-
-    <script
-      type="module"
-      src="/@id/__x00__/index.html?html-proxy&index=2.js"
-    ></script>
 
     <script>
       // REQUEST IDLE CALLBACK
@@ -50,20 +33,11 @@
     </script>
 
     <!-- Global assets -->
-    <link
-      rel="stylesheet"
-      href="__REPLACED_FOR_TESTS__/__fixtures__/server-express/src/document.css"
-    />
-    <script
-      type="module"
-      src="__REPLACED_FOR_TESTS__/__fixtures__/server-express/src/document.client.ts"
-    ></script>
 
     <!-- Page assets -->
 
     <!-- PAGE ASSETS -->
-    <script type="module" src="/src/routes/(home).client.ts"></script>
-    <link rel="stylesheet" href="/src/routes/(home).css" />
+
     <!-- /PAGE ASSETS -->
 
     <!-- SEO and page metadata -->
@@ -71,23 +45,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
-    <title>Gracile Home</title>
+    <title>Gracile About</title>
+    <script
+      type="module"
+      crossorigin
+      src="/assets/document.client-Cu8CxlfV.js"
+    ></script>
+
+    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
   </head>
 
   <body>
     <!--  -->
-    <h1><img src="/favicon.svg" height="25" /> - Hello Gracile (Home)</h1>
+    <h1>the About Page</h1>
 
-    <ul>
-      <li><a href="/api">JSON API</a></li>
-    </ul>
-
-    <div>QUERY: <code>123/</code></div>
-    <!--  -->
-
-    <code
-      >file://__REPLACED_FOR_TESTS__/__fixtures__/server-express/src/routes/(home).css</code
-    >
     <!--  -->
   </body>
 </html>
