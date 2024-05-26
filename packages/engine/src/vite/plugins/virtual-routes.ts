@@ -28,33 +28,33 @@ export function virtualRoutes({
 
 			load(id) {
 				if (id === resolvedVirtualModuleId) {
-					// TODO: Harmonize serialization
 					return `
-const routeImports = new Map();
-
-${[...routes]
-	.map(([pattern, route]) => {
-		return `
-routeImports.set('${pattern}', () => import('/${route.filePath}'))
-`.trim();
-	})
-	.join('\n')}
-
 const routes = new Map(${JSON.stringify([...routes], null, 2)})
 
-export { routes, routeImports };
+const routeImports = new Map(
+	[
+	  ${[...routes]
+			.map(
+				([pattern, route]) =>
+					`['${pattern}', () => import('/${route.filePath}')],`,
+			)
+			.join('\n    ')}
+	]
+);
 
-export const routeAssets = new Map();
+const routeAssets = new Map(${JSON.stringify(
+						[
+							...renderedRoutes.map((r) => [
+								`/${r.name.replace(/index\.html$/, '')}`,
+								r.handlerAssets,
+							]),
+						],
+						null,
+						2,
+					)});
 
-${renderedRoutes
-	.map(
-		(r) => `
-routeAssets.set('${`/${r.name.replace(/index\.html$/, '')}`}', ${JSON.stringify(r.handlerAssets)});
-`,
-	)
-	.join('\n')}
-
-					`;
+export { routes, routeImports, routeAssets };
+`;
 				}
 
 				return null;

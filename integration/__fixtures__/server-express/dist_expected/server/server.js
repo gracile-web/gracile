@@ -44,12 +44,6 @@ function setCurrentWorkingDirectory(root) {
     return cwd;
 }
 
-const routeImports = new Map();
-
-routeImports.set('/', () => import('./chunk/(home).js'));
-routeImports.set('/about/', () => import('./chunk/about.js'));
-routeImports.set('/{:test}/', () => import('./chunk/_test_.js'));
-
 const routes$1 = new Map([
   [
     "/",
@@ -75,6 +69,28 @@ const routes$1 = new Map([
     }
   ],
   [
+    "/foo/bar/",
+    {
+      "filePath": "src/routes/foo/bar.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": [
+        "src/routes/foo/bar.client.ts"
+      ],
+      "prerender": null
+    }
+  ],
+  [
+    "/private/",
+    {
+      "filePath": "src/routes/private/index.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": [],
+      "prerender": null
+    }
+  ],
+  [
     "/{:test}/",
     {
       "filePath": "src/routes/[test].ts",
@@ -86,16 +102,38 @@ const routes$1 = new Map([
   ]
 ]);
 
-const routeAssets = new Map();
+const routeImports = new Map(
+	[
+	  ['/', () => import('./chunk/(home).js')],
+    ['/about/', () => import('./chunk/about.js')],
+    ['/foo/bar/', () => import('./chunk/bar.js')],
+    ['/private/', () => import('./chunk/index.js')],
+    ['/{:test}/', () => import('./chunk/_test_.js')],
+	]
+);
 
-
-routeAssets.set('/about/', "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n");
-
-
-routeAssets.set('/{:test}/', "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n");
-
-
-routeAssets.set('/', "\t<script type=\"module\" crossorigin src=\"/assets/index-DyfSbze4.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cu8CxlfV.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/index-C17FHxsp.css\">\n");
+const routeAssets = new Map([
+  [
+    "/about/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/foo/bar/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/index-BW8UKosA.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cu8CxlfV.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/index-DyfSbze4.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cu8CxlfV.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/index-C17FHxsp.css\">\n"
+  ],
+  [
+    "/private/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/{:test}/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ]
+]);
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
