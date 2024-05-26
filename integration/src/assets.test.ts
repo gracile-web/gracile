@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { after, it } from 'node:test';
+import { after, describe, it } from 'node:test';
 
 import { fetchResource } from './__utils__/fetch.js';
 import { createStaticDevServer } from './__utils__/gracile-server.js';
@@ -15,50 +15,61 @@ const currentTestRoutes = '01-assets';
 
 // ---
 
-it('sibling assets', async () => {
+// FIXME: the async await stuff is superfluous
+// Also, one failing test will close the server and prevent other test to happen,
+// which is unwanted.
+// More refinements has to be made for all tests using the dev. server.
+
+describe('sibling assets', async () => {
 	const route = '00-siblings';
 
 	await tryOrClose(async () => {
-		await snapshotAssertEqual({
-			expectedPath: [
-				projectRoutes,
-				currentTestRoutes,
-				`_${route}_expected.html`,
-			],
-			actualContent: await fetchResource([address, currentTestRoutes, route]),
-			writeActual: false,
+		await it('render the route', async () => {
+			await snapshotAssertEqual({
+				expectedPath: [
+					projectRoutes,
+					currentTestRoutes,
+					`_${route}_expected.html`,
+				],
+				actualContent: await fetchResource([address, currentTestRoutes, route]),
+				writeActual: false,
+			});
 		});
 
-		await snapshotAssertEqual({
-			expectedPath: [
-				projectRoutes,
-				currentTestRoutes,
-				`_${route}_expected-client_ts.ts`,
-			],
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(
-					[address, '/src/routes', currentTestRoutes, `${route}.client.ts`],
-					{ trailingSlash: false },
+		await it('has route client script', async () => {
+			await snapshotAssertEqual({
+				expectedPath: [
+					projectRoutes,
+					currentTestRoutes,
+					`_${route}_expected-client_ts.ts`,
+				],
+				actualContent: removeLocalPathsInDevAssets(
+					await fetchResource(
+						[address, '/src/routes', currentTestRoutes, `${route}.client.ts`],
+						{ trailingSlash: false },
+					),
 				),
-			),
-			writeActual: false,
-			prettier: false,
+				writeActual: false,
+				prettier: false,
+			});
 		});
 
-		await snapshotAssertEqual({
-			expectedPath: [
-				projectRoutes,
-				currentTestRoutes,
-				`_${route}_expected-scss.ts`,
-			],
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(
-					[address, '/src/routes', currentTestRoutes, `${route}.scss`],
-					{ trailingSlash: false },
+		await it('has route css', async () => {
+			await snapshotAssertEqual({
+				expectedPath: [
+					projectRoutes,
+					currentTestRoutes,
+					`_${route}_expected-scss.ts`,
+				],
+				actualContent: removeLocalPathsInDevAssets(
+					await fetchResource(
+						[address, '/src/routes', currentTestRoutes, `${route}.scss`],
+						{ trailingSlash: false },
+					),
 				),
-			),
-			writeActual: false,
-			prettier: false,
+				writeActual: false,
+				prettier: false,
+			});
 		});
 	});
 });
