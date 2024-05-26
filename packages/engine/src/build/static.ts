@@ -47,8 +47,6 @@ export async function renderRoutes({
 	// MARK: Collect
 	const routes = await collectRoutes(root /* vite */);
 
-	logger.info(c.green('Rendering routes finished'), { timestamp: true });
-
 	const renderedRoutes: RenderedRouteDefinition[] = [];
 
 	// MARK: Iterate modules
@@ -149,6 +147,8 @@ export async function renderRoutes({
 			);
 		}),
 	);
+
+	logger.info(c.green('Rendering routes finished'), { timestamp: true });
 
 	return {
 		routes,

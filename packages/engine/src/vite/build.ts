@@ -15,7 +15,7 @@ export async function viteBuild(root = process.cwd()) {
 	logger.info(`${c.dim(`Project root:`)} ${root}\n`);
 
 	// SHOULD BE Vite for SSR?
-	const viteServerForBuild = await createViteServer(root, 'build');
+	const { vite: viteServerForBuild } = await createViteServer(root, 'build');
 
 	const { userConfigGracile, finalCommonConfigVite } = await getConfigs(
 		root,

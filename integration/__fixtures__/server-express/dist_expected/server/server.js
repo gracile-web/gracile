@@ -7720,9 +7720,9 @@ serverMode, }) {
     const baseDocRenderStreamPost = Readable.from(baseDocHtml.substring(index + SSR_OUTLET_MARKER.length + 1));
     // MARK: Page
     // Skipped with server mode in production build
-    if (routeInfos.routeModule.template && serverMode
-        ? serverMode && mode !== 'build'
-        : true) {
+    if ((serverMode === false && routeInfos.routeModule.template) ||
+        //
+        (serverMode && routeInfos.routeModule.template && mode !== 'build')) {
         const routeOutput = await Promise.resolve(routeInfos.routeModule.template?.(context));
         if (isLitTemplate(routeOutput) === false)
             throw Error(`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`);

@@ -8,6 +8,8 @@ const projectDistExpected = 'static-site/dist_expected';
 
 // ---
 
+// FIXME: Missing a proper close on crash (like for dev.)
+
 await it('build and compare outputs', async () => {
 	await build('static-site');
 

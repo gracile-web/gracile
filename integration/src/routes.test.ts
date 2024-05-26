@@ -30,6 +30,22 @@ it('return basic route', async () => {
 	});
 });
 
+it('return doc only route', async () => {
+	const route = '01-doc-only';
+
+	await tryOrClose(async () => {
+		await snapshotAssertEqual({
+			expectedPath: [
+				projectRoutes,
+				currentTestRoutes,
+				`_${route}_expected.html`,
+			],
+			actualContent: await fetchResource([address, currentTestRoutes, route]),
+			writeActual: false,
+		});
+	});
+});
+
 //
 
 it('return 1 param static route', async () => {
