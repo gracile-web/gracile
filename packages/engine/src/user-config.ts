@@ -4,6 +4,11 @@ export class GracileConfig {
 	port?: number;
 
 	/**
+	 * Root directory for the project
+	 */
+	root?: string;
+
+	/**
 	 * @defaultValue 'static'
 	 */
 	output?: 'static' | 'server';

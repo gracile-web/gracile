@@ -50,6 +50,9 @@ export function defineRoute<
 
 	staticPaths?: (() => StaticPathOptions[]) | undefined;
 
+	// TODO: Make it type dependent with handler
+	prerender?: boolean | undefined;
+
 	document?: R.DocumentTemplate<RouteContext>;
 
 	template?: R.BodyTemplate<RouteContext>;
