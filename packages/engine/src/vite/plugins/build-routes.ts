@@ -24,7 +24,6 @@ export const buildRoutes = async ({
 		root,
 	});
 	const inputList = renderedRoutes.map((input) => input.name);
-
 	return {
 		renderedRoutes,
 		inputList,

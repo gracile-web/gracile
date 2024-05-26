@@ -150,5 +150,5 @@ export async function renderRoutes({
 		}),
 	);
 
-	return renderedRoutes;
+	return renderedRoutes.sort((a, b) => (a.absoluteId < b.absoluteId ? -1 : 1));
 }

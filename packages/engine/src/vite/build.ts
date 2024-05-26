@@ -93,7 +93,7 @@ export async function viteBuild(root = process.cwd()) {
 						// '*',
 						// '!*',
 						// '*node_modules*',
-						'@gracile/*',
+						// 'node_modules/@gracile/gracile',
 						// 'fsevents',
 						// 'express',
 						// 'vite',
