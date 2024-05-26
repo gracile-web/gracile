@@ -16,14 +16,12 @@ export type CreateHandler = typeof createHandler;
 export async function createHandler({
 	root = process.cwd(),
 	// hmrPort,
-	serverMode,
+
 	isStandalone,
 }: {
 	isStandalone?: boolean;
 	hmrPort?: number;
 	root?: string;
-
-	serverMode?: boolean | undefined;
 } = {}): Promise<{
 	vite: ViteDevServer | null;
 	handlers: RequestHandler[];
@@ -34,7 +32,7 @@ export async function createHandler({
 		timestamp: true,
 	});
 
-	const vite = await createViteServer(root, 'dev');
+	const { vite, gracileConfig } = await createViteServer(root, 'dev');
 
 	const routes = await collectRoutes(root /* vite */);
 
@@ -48,6 +46,7 @@ export async function createHandler({
 			collectRoutes(root /* , vite */).catch((e) => logger.error(String(e)));
 	});
 
+	const serverMode = gracileConfig?.output === 'server';
 	const handler = createRequestHandler({ vite, root, serverMode, routes });
 
 	return { handlers: [debugRoutes, vite.middlewares, handler], vite };
@@ -66,7 +65,6 @@ export async function createStandaloneDevServer(options: {
 	const { handlers: handler } = await createHandler({
 		// hmrPort: options.port + 1,
 		root: options.root,
-		serverMode: false,
 	});
 
 	// NOTE: `0` will auto-alocate a random available port.
@@ -116,7 +114,7 @@ export async function startUserProvidedServer(options: {
 	root: string;
 	entrypoint: string;
 }) {
-	const runtimeServer = await createViteServer(options.root, 'dev');
+	const { vite: runtimeServer } = await createViteServer(options.root, 'dev');
 
 	const runtime = await createViteRuntime(runtimeServer);
 	await runtime.executeEntrypoint(options.entrypoint);

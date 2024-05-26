@@ -11,7 +11,9 @@ export function isUnknownObject(input: unknown): input is UnknownObject {
 	return typeof input === 'object' && input !== null && !Array.isArray(input);
 }
 
-export function isLitTemplate(input: unknown): input is TemplateResult<1> {
+export function isLitTemplate(
+	input: unknown,
+): input is TemplateResult<1> | ServerRenderedTemplate {
 	return (
 		(typeof input === 'object' &&
 			input &&
