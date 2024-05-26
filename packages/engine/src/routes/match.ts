@@ -1,6 +1,5 @@
 import type { ViteDevServer } from 'vite';
 
-import { routes } from './collect.js';
 import { loadForeignRouteObject } from './load-module.js';
 import type * as R from './route.js';
 
@@ -16,7 +15,7 @@ type MatchedRoute = {
 // FIXME: proper DI for routes
 function matchRouteFromUrl(
 	url: string,
-	routess: R.RoutesManifest = routes,
+	routes: R.RoutesManifest,
 ): MatchedRoute {
 	let match: URLPatternResult | undefined;
 	let foundRoute: R.Route | undefined;
@@ -24,7 +23,7 @@ function matchRouteFromUrl(
 	const pathname = new URL(url).pathname;
 
 	// eslint-disable-next-line no-restricted-syntax
-	for (const [, route] of routess) {
+	for (const [, route] of routes) {
 		if (match) break;
 
 		const matchResult =
@@ -98,7 +97,7 @@ export type RouteInfos = {
 export async function getRoute(options: {
 	url: string;
 	vite?: ViteDevServer | undefined;
-	routes: R.RoutesManifest | undefined;
+	routes: R.RoutesManifest;
 	routeImports?: R.RoutesImports | undefined;
 }): Promise<RouteInfos> {
 	const { foundRoute, pathname, params } = matchRouteFromUrl(

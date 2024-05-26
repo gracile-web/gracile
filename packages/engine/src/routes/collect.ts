@@ -11,8 +11,6 @@ import { prepareSortableRoutes, routeComparator } from './comparator.js';
 import { REGEXES } from './load-module.js';
 import type * as R from './route.js';
 
-export const routes: R.RoutesManifest = new Map<string, R.Route>();
-
 function extractRoutePatterns(
 	absoluteFilePath: string,
 ): Pick<R.Route, 'pattern' | 'hasParams'> & { patternString: string } {
@@ -67,6 +65,8 @@ function extractRoutePatterns(
 		hasParams,
 	};
 }
+
+const routes: R.RoutesManifest = new Map<string, R.Route>();
 
 export async function collectRoutes(root: string /* vite: ViteDevServer */) {
 	routes.clear();
