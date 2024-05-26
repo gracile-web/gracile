@@ -2,7 +2,7 @@ import type { Server } from 'node:http';
 
 import { logger } from '@gracile/internal-utils/logger';
 import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
-import express, { type Express, type RequestHandler } from 'express';
+import express, { type RequestHandler } from 'express';
 import c from 'picocolors';
 import { createViteRuntime, type ViteDevServer } from 'vite';
 
@@ -11,40 +11,37 @@ import { IP_EXPOSED, IP_LOCALHOST } from '../server/env.js';
 import { createRequestHandler } from '../server/request.js';
 import { createViteServer } from '../vite/server.js';
 
-export type HandleWithExpressApp = typeof withExpress;
+export type CreateHandler = typeof createHandler;
 
-export async function withExpress({
+export async function createHandler({
 	root = process.cwd(),
 	// hmrPort,
-	app,
 	serverMode,
+	isStandalone,
 }: {
+	isStandalone?: boolean;
 	hmrPort?: number;
 	root?: string;
-	app?: Express;
+
 	serverMode?: boolean | undefined;
-}): Promise<{
-	app: express.Express;
+} = {}): Promise<{
 	vite: ViteDevServer | null;
+	handlers: RequestHandler[];
 }> {
-	logger.info(c.green('starting engine…'), {
+	if (isStandalone !== true) setCurrentWorkingDirectory(root);
+
+	logger.info(c.green('creating handler…'), {
 		timestamp: true,
 	});
 
-	const isStandalone = Boolean(app);
-	const expressApp = app || express();
-
-	if (isStandalone === false) setCurrentWorkingDirectory(root);
-
 	const vite = await createViteServer(root, 'dev');
-
-	expressApp.use(vite.middlewares);
 
 	const routes = await collectRoutes(root /* vite */);
 
-	expressApp.get('/__routes', (req, res) => {
-		return res.json([...routes]);
-	});
+	const debugRoutes: RequestHandler = (req, res, next) => {
+		if (req.url === '__routes') return res.json([...routes]);
+		return next();
+	};
 
 	vite.watcher.on('all', (event, _file) => {
 		if (['add', 'unlink'].includes(event))
@@ -52,10 +49,8 @@ export async function withExpress({
 	});
 
 	const handler = createRequestHandler({ vite, root, serverMode, routes });
-	// NOTE: Types are wrong! Should accept an async request handler.
-	expressApp.use('*', handler as RequestHandler);
 
-	return { app: expressApp, vite };
+	return { handlers: [debugRoutes, vite.middlewares, handler], vite };
 }
 
 export const DEFAULT_DEV_SERVER_PORT = 9090;
@@ -68,7 +63,7 @@ export async function createStandaloneDevServer(options: {
 	root: string;
 	expose?: boolean | undefined;
 }) {
-	const server = await withExpress({
+	const { handlers: handler } = await createHandler({
 		// hmrPort: options.port + 1,
 		root: options.root,
 		serverMode: false,
@@ -78,12 +73,18 @@ export async function createStandaloneDevServer(options: {
 	let resultingPort = options.port;
 	let resultingHost: undefined | string;
 
+	const expressApp = express();
+
+	expressApp.use(handler);
+
 	const instance: Server = await new Promise((resolve) => {
-		const inst = server.app.listen(
+		const inst = expressApp.listen(
 			options.port,
 			options.expose ? DEV_SERVER_EXPOSED_HOST : DEV_SERVER_HOST,
 			() => {
-				logger.info(c.green('development server started'), { timestamp: true });
+				logger.info(c.green('development server started'), {
+					timestamp: true,
+				});
 				logger.info(c.dim(`CWD: ${process.env['__GRACILE_PROJECT_CWD']}`));
 				resolve(inst);
 				const addressInfo = inst.address();

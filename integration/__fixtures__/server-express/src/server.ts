@@ -1,4 +1,6 @@
-import { withExpress } from '@gracile/engine/server';
+// Based on "starter-projects/minimal-server-express/src/server.ts"
+
+import { createHandler } from '@gracile/gracile/express';
 import { IP_LOCALHOST, PUBLIC_DIR, safeEnvLoader } from '@gracile/gracile/env';
 import express from 'express';
 
@@ -15,6 +17,9 @@ const env = safeEnvLoader({
 console.log(env.GRACILE_SITE_URL);
 
 const app = express();
+const { handlers } = await createHandler({
+	root: join(process.cwd(), ROOT) /*  printAddress: true */,
+});
 
 app.get('*', (req, res, next) => {
 	// return res.end('OK');
@@ -40,12 +45,10 @@ app.get('/__close', (req, res) => {
 });
 
 // Static assets or pre-rendered routes
-app.use(express.static(ROOT + PUBLIC_DIR));
+app.use(express.static(join(ROOT, PUBLIC_DIR)));
 
-await withExpress({
-	app,
-	root: join(process.cwd(), ROOT) /*  printAddress: true */,
-});
+// Gracile routes
+app.use(handlers);
 
 const server = app.listen(3033, IP_LOCALHOST, () => {
 	console.log(server.address());
