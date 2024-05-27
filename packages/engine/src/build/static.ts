@@ -20,7 +20,7 @@ export interface RenderedRouteDefinition {
 	savePrerender: boolean | null;
 }
 
-async function streamToString(stream: Readable) {
+async function streamToString(stream: Readable): Promise<string> {
 	const chunks: Buffer[] = [];
 
 	// eslint-disable-next-line no-restricted-syntax
@@ -123,7 +123,7 @@ export async function renderRoutes({
 						serverMode,
 					});
 
-					const htmlString = await streamToString(output);
+					const htmlString = output ? await streamToString(output) : '';
 
 					const existing = renderedRoutes.find(
 						(rendered) => rendered?.name === name,

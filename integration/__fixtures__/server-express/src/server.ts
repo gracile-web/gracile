@@ -1,6 +1,6 @@
 // Based on "starter-projects/minimal-server-express/src/server.ts"
 
-import { createHandler } from '@gracile/gracile/express';
+import { createHandlers } from '@gracile/gracile/node';
 import { IP_LOCALHOST, PUBLIC_DIR, safeEnvLoader } from '@gracile/gracile/env';
 import express from 'express';
 
@@ -17,7 +17,7 @@ const env = safeEnvLoader({
 console.log(env.GRACILE_SITE_URL);
 
 const app = express();
-const { handlers } = await createHandler({
+const { handlers } = await createHandlers({
 	root: join(process.cwd(), ROOT) /*  printAddress: true */,
 });
 

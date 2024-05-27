@@ -1,12 +1,8 @@
+import type { IncomingMessage, ServerResponse } from 'node:http';
 import { Readable, Writable } from 'node:stream';
 
 import { logger } from '@gracile/internal-utils/logger';
 import { createServerAdapter } from '@whatwg-node/server';
-import type {
-	NextFunction,
-	Request as ExpressRequest,
-	Response as ExpressResponse,
-} from 'express';
 import c from 'picocolors';
 import type { ViteDevServer } from 'vite';
 
@@ -19,11 +15,28 @@ import { renderSsrTemplate } from '../render/utils.js';
 import { getRoute, type RouteInfos } from '../routes/match.js';
 import type * as R from '../routes/route.js';
 
+type NextFunction = (error?: unknown) => void | Promise<void>;
+
+/**
+ * This is fully compatible with Express or bare Node HTTP
+ * What it adds on top of Connect-style middleware:
+ * 1. Async.
+ * 2. Can return a `ServerResponse`
+ */
+export type ConnectLikeAsyncMiddleware = (
+	req: IncomingMessage,
+	res: ServerResponse,
+	next: NextFunction,
+) => // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+| Promise<void | NextFunction | ServerResponse>
+	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+	| (void | NextFunction | ServerResponse);
+
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
 // @ts-expect-error Abusing this feature!
 const adapter = createServerAdapter((request) => request);
 
-export function createRequestHandler({
+export function createGracileMiddleware({
 	vite,
 	routes,
 	routeImports,
@@ -38,13 +51,13 @@ export function createRequestHandler({
 	root: string;
 	serverMode?: boolean | undefined;
 }) {
-	return async (
-		req: ExpressRequest,
-		res: ExpressResponse,
-		next: NextFunction,
-	) => {
-		const url = req.originalUrl;
-		logger.info(`[${c.yellow(req.method)}] ${c.yellow(url)}`, {
+	const middleware: ConnectLikeAsyncMiddleware = async (req, res, next) => {
+		// Typing workaround
+		if (!req.url) throw Error('Incorrect url');
+		if (!req.method) throw Error('Incorrect method');
+		const nodeRequest = { ...req, url: req.url, method: req.method };
+
+		logger.info(`[${c.yellow(req.method)}] ${c.yellow(req.url)}`, {
 			timestamp: true,
 		});
 
@@ -52,19 +65,19 @@ export function createRequestHandler({
 
 		if (
 			//
-			url.endsWith('favicon.ico') ||
-			url.endsWith('favicon.svg')
+			req.url.endsWith('favicon.ico') ||
+			req.url.endsWith('favicon.svg')
 		)
 			return next();
 
 		const requestPonyfilled = (await Promise.resolve(
-			adapter.handleNodeRequest(req),
+			adapter.handleNodeRequest(nodeRequest),
 		)) as unknown as Request;
 
 		async function renderPageFn(
 			handlerInfos: HandlerInfos,
 			routeInfos: RouteInfos,
-		) {
+		): Promise<Readable | undefined> {
 			const { output } = await renderRouteTemplate({
 				request: requestPonyfilled,
 				vite,
@@ -76,7 +89,7 @@ export function createRequestHandler({
 				serverMode,
 			});
 
-			return output;
+			return output || undefined;
 		}
 
 		try {
@@ -166,10 +179,17 @@ export function createRequestHandler({
 				if (output.status >= 300 && output.status <= 303) {
 					const location = output.headers.get('location');
 
-					if (location) return res.redirect(location);
+					// if (location) return res.redirect(location);
+					if (location) {
+						res.statusCode = output.status;
+						res.setHeader('location', location);
+						return res.end(`Found. Redirecting to ${location}`);
+					}
 				}
 
-				output.headers?.forEach((content, header) => res.set(header, content));
+				output.headers?.forEach((content, header) =>
+					res.setHeader(header, content),
+				);
 				if (output.status) res.statusCode = output.status;
 				if (output.statusText) res.statusMessage = output.statusText;
 
@@ -181,17 +201,18 @@ export function createRequestHandler({
 					output.body
 						.pipeTo(Writable.toWeb(res))
 						.catch((e) => logger.error(String(e)));
-				else throw new Error('Missing body.');
+				// else throw new Error('Missing body.');
+				else return res.end(output);
 
 				// MARK: Stream page render
 			} else {
 				new Headers(response.headers)?.forEach((content, header) =>
-					res.set(header, content),
+					res.setHeader(header, content),
 				);
 				if (response.status) res.statusCode = response.status;
 				if (response.statusText) res.statusMessage = response.statusText;
 
-				res.set({ 'Content-Type': 'text/html' });
+				res.setHeader('Content-Type', 'text/html');
 
 				// MARK: Page stream error
 
@@ -225,24 +246,29 @@ export function createRequestHandler({
 		} catch (e) {
 			const error = e as Error;
 			if (vite) vite.ssrFixStacktrace(error);
-			else logger.error(error.message);
+			// else
+			logger.error(error.message);
 
 			if (error.cause === 404) {
 				// TODO: Handle 404 with dedicated page
-				if (!vite) return next(e);
+				if (!vite) return next();
 
-				return res.status(404).end('404');
+				res.statusCode = 404;
+				return res.end('404');
 				// TODO: use a nice framework service page
 				// .redirect(new URL('/__404/', requestPonyfilled.url).href)
 			}
 
 			let errorTemplate = await renderSsrTemplate(errorPage(error));
 			if (vite)
-				errorTemplate = await vite.transformIndexHtml(url, errorTemplate);
+				errorTemplate = await vite.transformIndexHtml(req.url, errorTemplate);
 
-			res.status(500).end(errorTemplate);
+			res.statusCode = 500;
+			return res.end(errorTemplate);
 		}
 
 		return next();
 	};
+
+	return middleware;
 }

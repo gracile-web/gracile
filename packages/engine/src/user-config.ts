@@ -24,6 +24,8 @@ export class GracileConfig {
 	}
 }
 
-export function defineConfig(options: GracileConfig) {
+export function defineConfig(
+	options: GracileConfig,
+): (ConfigClass: typeof GracileConfig) => GracileConfig {
 	return (ConfigClass: typeof GracileConfig) => new ConfigClass(options);
 }

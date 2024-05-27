@@ -1,7 +1,6 @@
 import { d as defineRoute, a as document } from './document.js';
 import { html } from '@lit-labs/ssr/lib/server-template.js';
 import '../server.js';
-import 'express';
 import 'node:stream';
 import 'tty';
 import '@lit-labs/ssr';
@@ -17,6 +16,7 @@ import 'buffer';
 import 'crypto';
 import 'querystring';
 import 'stream/web';
+import 'express';
 import 'path';
 import 'lit';
 import 'lit/directives/unsafe-html.js';

@@ -3,11 +3,12 @@
 import { logger } from '@gracile/internal-utils/logger';
 import { DEV } from 'esm-env';
 import type { Server } from 'http';
+import type { AddressInfo } from 'net';
 import c from 'picocolors';
 
 import { IP_EXPOSED } from './env.js';
 
-export function printNodeHttpServerAddressInfos(instance: Server) {
+export function printNodeHttpServerAddressInfos(instance: Server): AddressInfo {
 	const infos = instance.address();
 	logger.info(c.green(`${DEV ? 'development' : 'production'} server started`), {
 		timestamp: true,

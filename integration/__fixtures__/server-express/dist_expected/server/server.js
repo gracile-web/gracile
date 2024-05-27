@@ -1,4 +1,3 @@
-import express from 'express';
 import { Writable } from 'node:stream';
 import require$$0$6 from 'tty';
 import { html as html$1, render } from '@lit-labs/ssr';
@@ -14,6 +13,7 @@ import require$$1 from 'buffer';
 import require$$2 from 'crypto';
 import require$$0$4 from 'querystring';
 import require$$3$1 from 'stream/web';
+import express from 'express';
 import { join } from 'path';
 
 function _mergeNamespaces(n, m) {
@@ -7649,6 +7649,8 @@ const REGEX_TAG_LINK = /\s?<link\b[^>]*?>\s?/gi;
 async function renderRouteTemplate({ request, vite, mode, routeInfos, handlerInfos, routeAssets, 
 // root,
 serverMode, }) {
+    if (!routeInfos.routeModule.document && !routeInfos.routeModule.template)
+        return { output: null };
     // MARK: Context
     const context = {
         url: new URL(request.url),
@@ -7660,7 +7662,7 @@ serverMode, }) {
             : routeInfos.props,
     };
     // MARK: Fragment
-    if (!routeInfos.routeModule.document) {
+    if (!routeInfos.routeModule.document && routeInfos.routeModule.template) {
         const fragmentOutput = await Promise.resolve(routeInfos.routeModule.template?.(context));
         if (isLitTemplate(fragmentOutput) === false)
             throw Error(`Wrong template result for fragment template ${routeInfos.foundRoute.filePath}.`);
@@ -7868,19 +7870,24 @@ async function getRoute(options) {
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
 // @ts-expect-error Abusing this feature!
 const adapter = createServerAdapter((request) => request);
-function createRequestHandler({ vite, routes, routeImports, routeAssets, root, serverMode, }) {
-    return async (req, res, next) => {
-        const url = req.originalUrl;
-        logger.info(`[${c.yellow(req.method)}] ${c.yellow(url)}`, {
+function createGracileMiddleware({ vite, routes, routeImports, routeAssets, root, serverMode, }) {
+    const middleware = async (req, res, next) => {
+        // Typing workaround
+        if (!req.url)
+            throw Error('Incorrect url');
+        if (!req.method)
+            throw Error('Incorrect method');
+        const nodeRequest = { ...req, url: req.url, method: req.method };
+        logger.info(`[${c.yellow(req.method)}] ${c.yellow(req.url)}`, {
             timestamp: true,
         });
         // MARK: Skip unwanted requests
         if (
         //
-        url.endsWith('favicon.ico') ||
-            url.endsWith('favicon.svg'))
+        req.url.endsWith('favicon.ico') ||
+            req.url.endsWith('favicon.svg'))
             return next();
-        const requestPonyfilled = (await Promise.resolve(adapter.handleNodeRequest(req)));
+        const requestPonyfilled = (await Promise.resolve(adapter.handleNodeRequest(nodeRequest)));
         async function renderPageFn(handlerInfos, routeInfos) {
             const { output } = await renderRouteTemplate({
                 request: requestPonyfilled,
@@ -7892,7 +7899,7 @@ function createRequestHandler({ vite, routes, routeImports, routeAssets, root, s
                 root,
                 serverMode,
             });
-            return output;
+            return output || undefined;
         }
         try {
             // MARK: Get route infos
@@ -7955,10 +7962,14 @@ function createRequestHandler({ vite, routes, routeImports, routeAssets, root, s
             if (output instanceof Response) {
                 if (output.status >= 300 && output.status <= 303) {
                     const location = output.headers.get('location');
-                    if (location)
-                        return res.redirect(location);
+                    // if (location) return res.redirect(location);
+                    if (location) {
+                        res.statusCode = output.status;
+                        res.setHeader('location', location);
+                        return res.end(`Found. Redirecting to ${location}`);
+                    }
                 }
-                output.headers?.forEach((content, header) => res.set(header, content));
+                output.headers?.forEach((content, header) => res.setHeader(header, content));
                 if (output.status)
                     res.statusCode = output.status;
                 if (output.statusText)
@@ -7970,17 +7981,18 @@ function createRequestHandler({ vite, routes, routeImports, routeAssets, root, s
                     output.body
                         .pipeTo(Writable.toWeb(res))
                         .catch((e) => logger.error(String(e)));
+                // else throw new Error('Missing body.');
                 else
-                    throw new Error('Missing body.');
+                    return res.end(output);
                 // MARK: Stream page render
             }
             else {
-                new Headers(response.headers)?.forEach((content, header) => res.set(header, content));
+                new Headers(response.headers)?.forEach((content, header) => res.setHeader(header, content));
                 if (response.status)
                     res.statusCode = response.status;
                 if (response.statusText)
                     res.statusMessage = response.statusText;
-                res.set({ 'Content-Type': 'text/html' });
+                res.setHeader('Content-Type', 'text/html');
                 // MARK: Page stream error
                 output
                     ?.on('error', (error) => {
@@ -8010,23 +8022,26 @@ function createRequestHandler({ vite, routes, routeImports, routeAssets, root, s
             const error = e;
             if (vite)
                 vite.ssrFixStacktrace(error);
-            else
-                logger.error(error.message);
+            // else
+            logger.error(error.message);
             if (error.cause === 404) {
                 // TODO: Handle 404 with dedicated page
                 if (!vite)
-                    return next(e);
-                return res.status(404).end('404');
+                    return next();
+                res.statusCode = 404;
+                return res.end('404');
                 // TODO: use a nice framework service page
                 // .redirect(new URL('/__404/', requestPonyfilled.url).href)
             }
             let errorTemplate = await renderSsrTemplate(errorPage(error));
             if (vite)
-                errorTemplate = await vite.transformIndexHtml(url, errorTemplate);
-            res.status(500).end(errorTemplate);
+                errorTemplate = await vite.transformIndexHtml(req.url, errorTemplate);
+            res.statusCode = 500;
+            return res.end(errorTemplate);
         }
         return next();
     };
+    return middleware;
 }
 
 const IP_LOCALHOST = "127.0.0.1";
@@ -8038,20 +8053,20 @@ routes.forEach((route, pattern) => {
         pattern: new URLPattern(pattern, 'http://gracile'),
     });
 });
-const createHandler = async ({ root = process.cwd(),
+const createHandlers = async ({ root = process.cwd(),
 // hmrPort,
 // NOTE: We need type parity with the dev. version of this function
 // eslint-disable-next-line @typescript-eslint/require-await
  } = {}) => {
     setCurrentWorkingDirectory(root);
-    const gracileHandler = createRequestHandler({
+    const gracileHandler = createGracileMiddleware({
         root,
         routes,
         routeImports,
         routeAssets,
         serverMode: true,
     });
-    return { handlers: [gracileHandler], vite: null };
+    return { handlers: [gracileHandler /* as RequestHandler */], vite: null };
 };
 
 var define_import_meta_env_default = { BASE_URL: "/", MODE: "production", DEV: false, PROD: true, SSR: true };
@@ -8120,7 +8135,7 @@ const env = safeEnvLoader({
 });
 console.log(env.GRACILE_SITE_URL);
 const app = express();
-const { handlers } = await createHandler({
+const { handlers } = await createHandlers({
   root: join(process.cwd(), ROOT)
 });
 app.get("*", (req, res, next) => {

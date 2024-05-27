@@ -68,7 +68,9 @@ function extractRoutePatterns(
 
 const routes: R.RoutesManifest = new Map<string, R.Route>();
 
-export async function collectRoutes(root: string /* vite: ViteDevServer */) {
+export async function collectRoutes(
+	root: string /* vite: ViteDevServer */,
+): Promise<R.RoutesManifest> {
 	routes.clear();
 
 	const serverEntrypoints = await fastGlob(

@@ -2,18 +2,21 @@ import type { Server } from 'node:http';
 
 import { logger } from '@gracile/internal-utils/logger';
 import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
-import express, { type RequestHandler } from 'express';
+import express from 'express';
 import c from 'picocolors';
 import { createViteRuntime, type ViteDevServer } from 'vite';
 
 import { collectRoutes } from '../routes/collect.js';
 import { IP_EXPOSED, IP_LOCALHOST } from '../server/env.js';
-import { createRequestHandler } from '../server/request.js';
+import {
+	type ConnectLikeAsyncMiddleware,
+	createGracileMiddleware,
+} from '../server/request.js';
 import { createViteServer } from '../vite/server.js';
 
-export type CreateHandler = typeof createHandler;
+export type CreateMiddleware = typeof createHandlers;
 
-export async function createHandler({
+export async function createHandlers({
 	root = process.cwd(),
 	// hmrPort,
 
@@ -24,7 +27,7 @@ export async function createHandler({
 	root?: string;
 } = {}): Promise<{
 	vite: ViteDevServer | null;
-	handlers: RequestHandler[];
+	handlers: ConnectLikeAsyncMiddleware[];
 }> {
 	if (isStandalone !== true) setCurrentWorkingDirectory(root);
 
@@ -36,9 +39,10 @@ export async function createHandler({
 
 	const routes = await collectRoutes(root /* vite */);
 
-	const debugRoutes: RequestHandler = (req, res, next) => {
-		if (req.url === '__routes') return res.json([...routes]);
-		return next();
+	const debugRoutes: ConnectLikeAsyncMiddleware = (req, res, next) => {
+		if (req.url !== '__routes') return next();
+		res.setHeader('content-type', 'application/json');
+		return res.end(JSON.stringify([...routes]));
 	};
 
 	vite.watcher.on('all', (event, _file) => {
@@ -47,9 +51,9 @@ export async function createHandler({
 	});
 
 	const serverMode = gracileConfig?.output === 'server';
-	const handler = createRequestHandler({ vite, root, serverMode, routes });
+	const gracile = createGracileMiddleware({ vite, root, serverMode, routes });
 
-	return { handlers: [debugRoutes, vite.middlewares, handler], vite };
+	return { handlers: [debugRoutes, vite.middlewares, gracile], vite };
 }
 
 export const DEFAULT_DEV_SERVER_PORT = 9090;
@@ -62,7 +66,7 @@ export async function createStandaloneDevServer(options: {
 	root: string;
 	expose?: boolean | undefined;
 }) {
-	const { handlers: handler } = await createHandler({
+	const { handlers: handler } = await createHandlers({
 		// hmrPort: options.port + 1,
 		root: options.root,
 	});

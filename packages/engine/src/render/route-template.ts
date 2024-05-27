@@ -52,7 +52,10 @@ export async function renderRouteTemplate({
 	routeAssets?: R.RoutesAssets | undefined;
 	root: string;
 	serverMode?: boolean | undefined;
-}) {
+}): Promise<{ output: null | Readable }> {
+	if (!routeInfos.routeModule.document && !routeInfos.routeModule.template)
+		return { output: null };
+
 	// MARK: Context
 	const context: R.RouteContextGeneric = {
 		url: new URL(request.url),
@@ -65,7 +68,7 @@ export async function renderRouteTemplate({
 	};
 
 	// MARK: Fragment
-	if (!routeInfos.routeModule.document) {
+	if (!routeInfos.routeModule.document && routeInfos.routeModule.template) {
 		const fragmentOutput = await Promise.resolve(
 			routeInfos.routeModule.template?.(context) as unknown,
 		);

@@ -1,9 +1,8 @@
 import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
-import { type RequestHandler } from 'express';
 import { routeAssets, routeImports, routes } from 'gracile:routes';
 
-import type { CreateHandler } from '../dev/server.js';
-import { createRequestHandler } from './request.js';
+import type { CreateMiddleware } from '../dev/server.js';
+import { createGracileMiddleware } from './request.js';
 
 routes.forEach((route, pattern) => {
 	routes.set(pattern, {
@@ -12,16 +11,15 @@ routes.forEach((route, pattern) => {
 	});
 });
 
-export const createHandler: CreateHandler = async ({
+export const createHandlers: CreateMiddleware = async ({
 	root = process.cwd(),
-
 	// hmrPort,
 	// NOTE: We need type parity with the dev. version of this function
 	// eslint-disable-next-line @typescript-eslint/require-await
 } = {}) => {
 	setCurrentWorkingDirectory(root);
 
-	const gracileHandler = createRequestHandler({
+	const gracileHandler = createGracileMiddleware({
 		root,
 		routes,
 		routeImports,
@@ -29,7 +27,7 @@ export const createHandler: CreateHandler = async ({
 		serverMode: true,
 	});
 
-	return { handlers: [gracileHandler as RequestHandler], vite: null };
+	return { handlers: [gracileHandler /* as RequestHandler */], vite: null };
 };
 
 export { printNodeHttpServerAddressInfos as printAddressInfos } from './utils.js';
