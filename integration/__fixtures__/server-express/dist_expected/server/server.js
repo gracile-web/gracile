@@ -7673,10 +7673,10 @@ serverMode, }) {
     // MARK: Document
     if (!routeInfos.routeModule.document ||
         typeof routeInfos.routeModule.document !== 'function')
-        throw new Error(`Route document must be a function ${routeInfos.foundRoute.filePath}.`);
+        throw new TypeError(`Route document must be a function ${routeInfos.foundRoute.filePath}.`);
     const baseDocTemplateResult = await Promise.resolve(routeInfos.routeModule.document?.(context));
     if (isLitServerTemplate(baseDocTemplateResult) === false)
-        throw new Error(`Incorrect document template result for ${routeInfos.foundRoute.filePath}.`);
+        throw new TypeError(`Incorrect document template result for ${routeInfos.foundRoute.filePath}.`);
     const baseDocRendered = await collectResult(render(baseDocTemplateResult));
     // MARK: Sibling assets
     let baseDocRenderedWithAssets = baseDocRendered.replace(PAGE_ASSETS_MARKER, html `
@@ -7794,10 +7794,10 @@ async function loadForeignRouteObject({ vite, route, routeImports, }) {
     const routeModuleFactory = unknownRouteModule['default'];
     const errorBase = `Incorrect route module ${route.filePath}!`;
     if (typeof routeModuleFactory !== 'function')
-        throw new Error(`${errorBase} Not a function.`);
+        throw new TypeError(`${errorBase} Not a function.`);
     const routeModule = routeModuleFactory(RouteModule);
     if (routeModule instanceof RouteModule === false)
-        throw new Error(`${errorBase} Not a RouteModule.`);
+        throw new TypeError(`${errorBase} Not a RouteModule.`);
     return routeModule;
 }
 
@@ -7929,13 +7929,13 @@ function createGracileMiddleware({ vite, routes, routeImports, routeAssets, root
                     if (handlerOutput instanceof Response)
                         output = handlerOutput;
                     else
-                        throw new Error('Catch-all handler must return a Response object.');
+                        throw new TypeError('Catch-all handler must return a Response object.');
                     // MARK: Handler with method
                 }
                 else if (requestPonyfilled.method in handler) {
                     const handlerWithMethod = handler[requestPonyfilled.method];
                     if (typeof handlerWithMethod !== 'function')
-                        throw Error('Handler must be a function.');
+                        throw TypeError('Handler must be a function.');
                     const handlerOutput = await Promise.resolve(handlerWithMethod(options));
                     if (handlerOutput instanceof Response)
                         output = handlerOutput;
@@ -8088,14 +8088,14 @@ function safeEnvLoader(vars) {
           else if (v === "false")
             coercedValue = false;
           else
-            throw new Error("Should be a boolean.");
+            throw new TypeError("Should be a boolean.");
           break;
         }
         case Number:
           if (Number.isNaN(fullEnv[variable]) === false)
             coercedValue = Number(fullEnv[variable]);
           else
-            throw new Error("Should be a number.");
+            throw new TypeError("Should be a number.");
           break;
         case String:
           {
@@ -8103,12 +8103,12 @@ function safeEnvLoader(vars) {
             if (v.length > 0)
               coercedValue = v;
             else
-              throw new Error("String should not be empty.");
+              throw new TypeError("String should not be empty.");
           }
           break;
       }
     if (Boolean(value.optional) === false && coercedValue === null && Boolean(value.fallback) === false)
-      throw new Error(`Environment variable \`${variable}\` must be defined!`);
+      throw new TypeError(`Environment variable \`${variable}\` must be defined!`);
     if (coercedValue === null && value.fallback)
       coercedValue = value.fallback;
     return [variable, coercedValue];
