@@ -27,7 +27,7 @@ async function streamToString(stream: Readable): Promise<string> {
 	for await (const chunk of stream) {
 		if (typeof chunk === 'string') {
 			chunks.push(Buffer.from(chunk));
-		} else throw new Error('Wrong buffer');
+		} else throw new TypeError('Wrong buffer');
 	}
 
 	return Buffer.concat(chunks).toString('utf-8');

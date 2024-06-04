@@ -41,12 +41,12 @@ export async function loadForeignRouteObject({
 	const errorBase = `Incorrect route module ${route.filePath}!`;
 
 	if (typeof routeModuleFactory !== 'function')
-		throw new Error(`${errorBase} Not a function.`);
+		throw new TypeError(`${errorBase} Not a function.`);
 
 	const routeModule = routeModuleFactory(R.RouteModule) as unknown;
 
 	if (routeModule instanceof R.RouteModule === false)
-		throw new Error(`${errorBase} Not a RouteModule.`);
+		throw new TypeError(`${errorBase} Not a RouteModule.`);
 
 	return routeModule;
 }

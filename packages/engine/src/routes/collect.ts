@@ -22,7 +22,8 @@ function extractRoutePatterns(
 		process.platform === 'win32' ? '\\' : '/',
 	);
 	const last = pathParts.at(-1);
-	if (typeof last === 'undefined') throw new Error('Cannot parse file path.');
+	if (typeof last === 'undefined')
+		throw new TypeError('Cannot parse file path.');
 
 	if (
 		// NOTE: /foo/(foo) => /foo

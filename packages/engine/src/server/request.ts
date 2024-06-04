@@ -131,7 +131,9 @@ export function createGracileMiddleware({
 					)) as unknown;
 					if (handlerOutput instanceof Response) output = handlerOutput;
 					else
-						throw new Error('Catch-all handler must return a Response object.');
+						throw new TypeError(
+							'Catch-all handler must return a Response object.',
+						);
 
 					// MARK: Handler with method
 				} else if (requestPonyfilled.method in handler) {
@@ -139,7 +141,7 @@ export function createGracileMiddleware({
 						handler[requestPonyfilled.method as keyof typeof handler];
 
 					if (typeof handlerWithMethod !== 'function')
-						throw Error('Handler must be a function.');
+						throw TypeError('Handler must be a function.');
 
 					const handlerOutput = await Promise.resolve(
 						handlerWithMethod(options) as unknown,

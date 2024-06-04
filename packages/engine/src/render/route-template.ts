@@ -87,7 +87,7 @@ export async function renderRouteTemplate({
 		!routeInfos.routeModule.document ||
 		typeof routeInfos.routeModule.document !== 'function'
 	)
-		throw new Error(
+		throw new TypeError(
 			`Route document must be a function ${routeInfos.foundRoute.filePath}.`,
 		);
 
@@ -96,7 +96,7 @@ export async function renderRouteTemplate({
 	);
 
 	if (isLitServerTemplate(baseDocTemplateResult) === false)
-		throw new Error(
+		throw new TypeError(
 			`Incorrect document template result for ${routeInfos.foundRoute.filePath}.`,
 		);
 

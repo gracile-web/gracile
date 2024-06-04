@@ -57,21 +57,21 @@ export function safeEnvLoader<
 						const v = String(fullEnv[variable]);
 						if (v === 'true') coercedValue = true;
 						else if (v === 'false') coercedValue = false;
-						else throw new Error('Should be a boolean.');
+						else throw new TypeError('Should be a boolean.');
 						break;
 					}
 
 					case Number:
 						if (Number.isNaN(fullEnv[variable]) === false)
 							coercedValue = Number(fullEnv[variable]);
-						else throw new Error('Should be a number.');
+						else throw new TypeError('Should be a number.');
 						break;
 
 					case String:
 						{
 							const v = String(fullEnv[variable]);
 							if (v.length > 0) coercedValue = v;
-							else throw new Error('String should not be empty.');
+							else throw new TypeError('String should not be empty.');
 						}
 						break;
 
@@ -84,7 +84,7 @@ export function safeEnvLoader<
 				coercedValue === null &&
 				Boolean(value.fallback) === false
 			)
-				throw new Error(
+				throw new TypeError(
 					`Environment variable \`${variable}\` must be defined!`,
 				);
 
