@@ -64,15 +64,15 @@ async function tests(mode: string, writeActual: boolean) {
 		}));
 }
 
-export async function commonAsync(mode: string, writeActual = false) {
+export async function common(mode: string, writeActual = false) {
 	await describe(`load all server routes ${mode}`, async () => {
 		await tests(mode, writeActual);
 		await api();
 	});
 }
-export function common(mode: string, writeActual = false) {
-	describe(`load all server routes ${mode}`, () => {
-		tests(mode, writeActual);
-		api();
-	});
-}
+// export function commonSync(mode: string, writeActual = false) {
+// 	describe(`load all server routes ${mode}`, () => {
+// 		tests(mode, writeActual);
+// 		api();
+// 	});
+// }

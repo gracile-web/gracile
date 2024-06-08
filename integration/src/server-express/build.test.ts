@@ -3,7 +3,7 @@ import { after, it } from 'node:test';
 
 import { build } from '../__utils__/gracile-server.js';
 import { compareFolder } from '../__utils__/snapshot.js';
-import { commonAsync } from './_common.js';
+import { common } from './_common.js';
 
 const projectDist = 'server-express/dist';
 const projectDistExpected = 'server-express/dist_expected';
@@ -42,7 +42,7 @@ it('build and compare outputs', async () => {
 			if (d.includes('3033')) {
 				bootStrapped = true;
 
-				commonAsync('prod', false)
+				common('prod', false)
 					.then(() => {
 						resolve(null);
 					})
