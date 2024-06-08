@@ -1,6 +1,6 @@
 {
   "name": "@gracile/internal-utils",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "full-stack",

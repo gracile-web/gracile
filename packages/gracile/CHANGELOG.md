@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.0.5...@gracile/gracile@0.1.0) (2024-06-08)
+
+### Bug Fixes
+
+* prefix gracile env, set dev condition for dev cli ([8f96a21](https://github.com/gracile-web/gracile/commit/8f96a2175c6d554a9e21126bdb023248a40c5647))
+
+### Features
+
+* cleaner, less intrusive server api ([301de32](https://github.com/gracile-web/gracile/commit/301de329f0ae91efee471a2db94cfe4baa5fc57a))
+* env loader for userland server, extract internal envs ([1370c08](https://github.com/gracile-web/gracile/commit/1370c08c0cabd9416f741f7eb93fc15f4906432e))
+* genericize gracile handler to connect like ([d6fd2cf](https://github.com/gracile-web/gracile/commit/d6fd2cfbd9d2e22aa99e9b4cc8763ed099e1643e))
+* multi-modal logger for node export conditions ([976153c](https://github.com/gracile-web/gracile/commit/976153cbc44031fa8d67c963d6b38d5e96fec7ee))
+
 ## [0.0.5](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.0.4...@gracile/gracile@0.0.5) (2024-05-25)
 
 **Note:** Version bump only for package @gracile/gracile
