@@ -28,6 +28,7 @@ export async function api() {
 		'POST',
 		'PATCH',
 		'DELETE',
+		// NOTE: Node 22+
 		'QUERY',
 		//
 		// 'HEAD',
@@ -84,7 +85,6 @@ export async function api() {
 			fetch(url, {
 				method: 'POST',
 				body,
-				// body: 'aa',
 			}),
 			{
 				json: {

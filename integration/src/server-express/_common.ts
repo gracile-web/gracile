@@ -71,8 +71,8 @@ export async function commonAsync(mode: string, writeActual = false) {
 	});
 }
 export function common(mode: string, writeActual = false) {
-	describe(`load all server routes ${mode}`, async () => {
-		await tests(mode, writeActual);
-		await api();
+	describe(`load all server routes ${mode}`, () => {
+		tests(mode, writeActual);
+		api();
 	});
 }

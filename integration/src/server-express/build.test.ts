@@ -12,8 +12,9 @@ const projectDistExpected = 'server-express/dist_expected';
 
 let gracileProcess: ChildProcessWithoutNullStreams | null = null;
 
+// NOTE: No await here!!
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-await it('build and compare outputs', async () => {
+it('build and compare outputs', async () => {
 	await build('server-express');
 
 	await compareFolder({
@@ -33,13 +34,13 @@ await it('build and compare outputs', async () => {
 			],
 			// { cwd: '__fixtures__/server-express' },
 		);
-		let boostrapped = false;
+		let bootStrapped = false;
 
 		gracileProcess.stdout.on('data', (data: unknown) => {
-			if (boostrapped) return;
+			if (bootStrapped) return;
 			const d = String(data);
 			if (d.includes('3033')) {
-				boostrapped = true;
+				bootStrapped = true;
 
 				commonAsync('prod', false)
 					.then(() => {

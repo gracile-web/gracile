@@ -62,11 +62,11 @@ jobs:
         with:
           run_install: false
 
-      - name: Use Node.js 21.7.2
+      - name: Use Node.js 22.2.0
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           # registry-url: "https://registry.npmjs.org"
-          node-version: 21.7.2
+          node-version: 22.2.0
           cache: pnpm
 
       - name: Install packages
