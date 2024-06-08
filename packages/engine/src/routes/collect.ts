@@ -129,8 +129,8 @@ export async function collectRoutes(
 
 			hasParams: routeWithPatterns.hasParams,
 			pageAssets: [],
-			// NOTE: Not implemented!
-			prerender: null,
+			// NOTE: Not implemented here!
+			// prerender: null,
 		});
 	});
 

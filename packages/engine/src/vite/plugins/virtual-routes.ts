@@ -15,6 +15,16 @@ export function virtualRoutes({
 	const virtualModuleId = 'gracile:routes';
 	const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 
+	// TODO: Remove handler when prerendering route
+	const routesWithoutPrerender = [...routes];
+	const renderedRoutesWithoutPrerender = renderedRoutes;
+	// const routesWithoutPrerender = [...routes].filter(
+	// 	([, r]) => r.prerender !== true,
+	// );
+	// const renderedRoutesWithoutPrerender = renderedRoutes.filter(
+	// 	(r) => r.savePrerender !== true,
+	// );
+
 	return [
 		{
 			name: 'gracile-server-routes',
@@ -29,11 +39,11 @@ export function virtualRoutes({
 			load(id) {
 				if (id === resolvedVirtualModuleId) {
 					return `
-const routes = new Map(${JSON.stringify([...routes], null, 2)})
+const routes = new Map(${JSON.stringify(routesWithoutPrerender, null, 2)})
 
 const routeImports = new Map(
 	[
-	  ${[...routes]
+	  ${routesWithoutPrerender
 			.map(
 				([pattern, route]) =>
 					`['${pattern}', () => import('/${route.filePath}')],`,
@@ -44,7 +54,7 @@ const routeImports = new Map(
 
 const routeAssets = new Map(${JSON.stringify(
 						[
-							...renderedRoutes.map((r) => [
+							...renderedRoutesWithoutPrerender.map((r) => [
 								`/${r.name.replace(/index\.html$/, '')}`,
 								r.handlerAssets,
 							]),

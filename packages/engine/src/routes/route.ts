@@ -175,7 +175,7 @@ export interface Route {
 	pattern: URLPattern;
 	hasParams: boolean;
 	pageAssets: string[];
-	prerender: boolean | null;
+	// prerender: boolean | null;
 }
 
 // -----------------------------------------------------------------------------

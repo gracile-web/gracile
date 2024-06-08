@@ -55,7 +55,6 @@ export function createGracileMiddleware({
 		// Typing workaround
 		if (!req.url) throw Error('Incorrect url');
 		if (!req.method) throw Error('Incorrect method');
-		const nodeRequest = { ...req, url: req.url, method: req.method };
 
 		logger.info(`[${c.yellow(req.method)}] ${c.yellow(req.url)}`, {
 			timestamp: true,
@@ -71,7 +70,9 @@ export function createGracileMiddleware({
 			return next();
 
 		const requestPonyfilled = (await Promise.resolve(
-			adapter.handleNodeRequest(nodeRequest),
+			adapter.handleNodeRequest(
+				req as IncomingMessage & { url: string; method: string },
+			),
 		)) as unknown as Request;
 
 		async function renderPageFn(

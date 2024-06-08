@@ -123,7 +123,7 @@ export async function renderRoutes({
 						serverMode,
 					});
 
-					const htmlString = output ? await streamToString(output) : '';
+					const htmlString = output ? await streamToString(output) : null;
 
 					const existing = renderedRoutes.find(
 						(rendered) => rendered?.name === name,
@@ -133,16 +133,18 @@ export async function renderRoutes({
 							`${c.red(`"${existing.name}" page was defined twice!`)}\n`,
 						);
 
-					renderedRoutes.push({
+					const savePrerender = routeModule.prerender || null;
+					const rendered = {
 						// NOTE:
 						// Vite's internal build-html plugin only expects *absolute* ids.
 						// See https://github.com/vitejs/vite/issues/13406#issuecomment-1801659561
-
 						absoluteId: join(root, name),
+
 						name,
 						html: htmlString,
-						savePrerender: route.prerender,
-					});
+						savePrerender,
+					} satisfies RenderedRouteDefinition;
+					renderedRoutes.push(rendered);
 				}),
 			);
 		}),

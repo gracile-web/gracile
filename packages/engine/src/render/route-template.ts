@@ -166,7 +166,9 @@ export async function renderRouteTemplate({
 	if (
 		(serverMode === false && routeInfos.routeModule.template) ||
 		//
-		(serverMode && routeInfos.routeModule.template && mode !== 'build')
+		(serverMode &&
+			routeInfos.routeModule.template &&
+			(mode !== 'build' || routeInfos.routeModule.prerender === true))
 	) {
 		const routeOutput = await Promise.resolve(
 			routeInfos.routeModule.template?.(context),

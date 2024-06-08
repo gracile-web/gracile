@@ -23,7 +23,11 @@ export const buildRoutes = async ({
 		serverMode,
 		root,
 	});
-	const inputList = renderedRoutes.map((input) => input.name);
+
+	const inputList = renderedRoutes
+		.filter((i) => i.html)
+		.map((input) => input.name);
+
 	return {
 		routes,
 		renderedRoutes,
@@ -64,7 +68,8 @@ export const buildRoutes = async ({
 				resolveId(id) {
 					if (id.endsWith('.html')) {
 						const input = renderedRoutes.find((i) => i.name === id);
-						return input ? input.absoluteId : null;
+
+						if (input) return input.absoluteId;
 					}
 					return null;
 				},
@@ -111,13 +116,13 @@ export const buildRoutes = async ({
 							const route = renderedRoutes.find((r) => {
 								return r.name === fileKey;
 							});
-							if (route) {
-								route.handlerAssets = collectedAssets;
-							}
+							if (route) route.handlerAssets = collectedAssets;
 
-							if (route?.savePrerender !== true)
+							if (route?.savePrerender !== true) {
 								// eslint-disable-next-line no-param-reassign, @typescript-eslint/no-dynamic-delete
 								delete bundle[fileKey];
+								if (route?.html) route.html = null;
+							}
 						}
 					}
 				},
