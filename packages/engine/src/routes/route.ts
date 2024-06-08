@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import type { ServerRenderedTemplate } from '@lit-labs/ssr';
 import type { TemplateResult } from 'lit';
 
@@ -10,19 +12,21 @@ export type Method = MethodHtml & MethodNonHtml;
 
 // export type KnownMethod = typeof knownMethods[number];
 
-// export const knownMethods = [
-//   "GET",
-//   "QUERY",
-//   "HEAD",
-//   "POST",
-//   "PUT",
-//   "DELETE",
-//   "OPTIONS",
-//   "PATCH",
-// ] as const;
+export const RequestMethod = {
+	GET: 'GET',
+	QUERY: 'QUERY',
+	HEAD: 'HEAD',
+	POST: 'POST',
+	PUT: 'PUT',
+	DELETE: 'DELETE',
+	OPTIONS: 'OPTIONS',
+	PATCH: 'PATCH',
+} as const;
 
 export type ModuleOptions = {
 	staticPaths?: StaticPathsGeneric /* | undefined */;
+
+	locals?: (locals: any) => any;
 	handler?: HandlerGeneric;
 
 	prerender?: boolean | undefined;
@@ -38,6 +42,12 @@ export class RouteModule {
 
 	public get staticPaths() {
 		return this.#staticPaths;
+	}
+
+	readonly #locals;
+
+	public get locals() {
+		return this.#locals;
 	}
 
 	readonly #handler;
@@ -74,6 +84,7 @@ export class RouteModule {
 			options.handler
 		)
 			this.#handler = options.handler;
+		this.#locals = options.locals;
 
 		if (typeof options.template === 'function')
 			this.#template = options.template;
@@ -88,27 +99,32 @@ export class RouteModule {
 
 export type Params = Record<string, string | undefined>;
 
-export type Handler<Data extends HandlerData | HandlerDataHtml = never> =
-	(context: {
-		url: URL;
+export type Handler<
+	Data extends HandlerData | HandlerDataHtml = never,
+	Locals = any,
+	// Locals extends Record<string, any> = Record<string, any>,
+> = (context: {
+	url: URL;
 
-		/**
-		 * Parameters from dynamic route.
-		 *
-		 * E.g. `src/routes/foo/[bar]/[baz].ts` -\> `{ bar: string; baz: string; }`
-		 */
-		params: Params;
+	/**
+	 * Parameters from dynamic route.
+	 *
+	 * E.g. `src/routes/foo/[bar]/[baz].ts` -\> `{ bar: string; baz: string; }`
+	 */
+	params: Params;
 
-		request: Request;
+	request: Request;
 
-		/**
-		 * Let you mutate the downstream **page** response.
-		 *
-		 * It doesn't take effect if you're returning the
-		 * response yourself before (within your request handler).
-		 * */
-		response: ResponseInit;
-	}) => MaybePromise<Data> | MaybePromise<void>;
+	locals?: Locals;
+
+	/**
+	 * Let you mutate the downstream **page** response.
+	 *
+	 * It doesn't take effect if you're returning the
+	 * response yourself before (within your request handler).
+	 * */
+	response: ResponseInit;
+}) => MaybePromise<Data> | MaybePromise<void>;
 
 export type HandlerGeneric =
 	| Handler<HandlerData | HandlerDataHtml>

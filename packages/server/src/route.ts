@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type * as R from '@gracile/engine/routes/route';
+import * as R from '@gracile/engine/routes/route';
+
+export { R as Route };
 
 /**
  * **Defines** a route.
@@ -8,6 +10,7 @@ import type * as R from '@gracile/engine/routes/route';
  * See in the [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/).
  */
 export function defineRoute<
+	Locals = any,
 	GetHandlerData extends R.HandlerDataHtml = undefined,
 	PostHandlerData extends R.HandlerDataHtml = undefined,
 	StaticPathOptions extends R.StaticPathOptionsGeneric | undefined = undefined,
@@ -33,19 +36,21 @@ export function defineRoute<
 			: R.Params;
 	},
 >(options: {
+	locals?: (locals: any) => R.MaybePromise<Locals>;
+
 	handler?: StaticPathOptions extends object
 		? never
 		:
 				| R.Handler<Response>
 				| {
-						GET?: R.Handler<GetHandlerData>;
-						POST?: R.Handler<PostHandlerData>;
-						QUERY?: R.Handler;
-						PUT?: R.Handler;
-						PATCH?: R.Handler;
-						DELETE?: R.Handler;
-						HEAD?: R.Handler;
-						OPTIONS?: R.Handler;
+						GET?: R.Handler<GetHandlerData, Locals>;
+						POST?: R.Handler<PostHandlerData, Locals>;
+						QUERY?: R.Handler<Response, Locals>;
+						PUT?: R.Handler<Response, Locals>;
+						PATCH?: R.Handler<Response, Locals>;
+						DELETE?: R.Handler<Response, Locals>;
+						HEAD?: R.Handler<Response, Locals>;
+						OPTIONS?: R.Handler<Response, Locals>;
 				  };
 
 	staticPaths?: (() => StaticPathOptions[]) | undefined;

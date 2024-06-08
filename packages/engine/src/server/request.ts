@@ -108,6 +108,11 @@ export function createGracileMiddleware({
 			// + we would be able to do some route codegen.
 			const response: ResponseInit = {};
 
+			// NOTE: Only for Express for now.
+			let locals: unknown = null;
+			if ('locals' in res)
+				locals = moduleInfos.routeModule.locals?.(res.locals);
+
 			// MARK: Server handler
 
 			const handler = moduleInfos.routeModule.handler;
@@ -121,6 +126,7 @@ export function createGracileMiddleware({
 					url: new URL(requestPonyfilled.url),
 					response,
 					params: moduleInfos.params,
+					locals,
 				};
 
 				// MARK: Top level handler

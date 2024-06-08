@@ -13,7 +13,7 @@ import { loadForeignRouteObject } from '../routes/load-module.js';
 export interface RenderedRouteDefinition {
 	absoluteId: string;
 	name: string;
-	html: string;
+	html: string | null;
 
 	handlerAssets?: string;
 
