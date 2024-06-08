@@ -1,6 +1,6 @@
 // Based on "starter-projects/minimal-server-express/src/server.ts"
 
-import { createHandlers } from '@gracile/gracile/node';
+import { createHandlers, printAddressInfos } from '@gracile/gracile/node';
 import { IP_LOCALHOST, PUBLIC_DIR, safeEnvLoader } from '@gracile/gracile/env';
 import express from 'express';
 
@@ -15,6 +15,14 @@ const env = safeEnvLoader({
 });
 
 console.log(env.GRACILE_SITE_URL);
+
+declare global {
+	namespace Express {
+		interface Locals {
+			traceId: string;
+		}
+	}
+}
 
 const app = express();
 const { handlers } = await createHandlers({
@@ -34,6 +42,14 @@ app.use('/api', (_req, res, _next) =>
 	}),
 );
 
+app.use((req, res, next) => {
+	const traceId = crypto.randomUUID();
+
+	res.locals.traceId = traceId;
+
+	next();
+});
+
 // Protected route with middleware
 app.use('/private/', authentication);
 
@@ -52,7 +68,7 @@ app.use(handlers);
 
 const server = app.listen(3033, IP_LOCALHOST, () => {
 	console.log(server.address());
-	// printAddressInfos(server);
+	printAddressInfos(server);
 });
 
 // NOTE: DISABLED FOR TESTS

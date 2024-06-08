@@ -1,5 +1,6 @@
-import { d as defineRoute, a as document } from './document.js';
+import { d as defineRoute } from './route.js';
 import { html } from '@lit-labs/ssr/lib/server-template.js';
+import { d as document } from './document.js';
 import '../server.js';
 import 'node:stream';
 import 'tty';

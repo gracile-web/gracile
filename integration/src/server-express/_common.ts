@@ -4,6 +4,7 @@ import { describe, it } from 'node:test';
 import { fetchResource } from '../__utils__/fetch.js';
 import { snapshotAssertEqual } from '../__utils__/snapshot.js';
 import { removeLocalPathsInDevAssets } from '../__utils__/vite.js';
+import { api } from './_api.js';
 
 const projectRoutes = 'server-express/src/routes';
 const currentTestRoutes = '';
@@ -45,6 +46,14 @@ async function tests(mode: string, writeActual: boolean) {
 			),
 			writeActual,
 		}));
+	await it('load a basic page with [prerendering]', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('contact'),
+			actualContent: removeLocalPathsInDevAssets(
+				await fetchResource([ADDRESS, 'contact']),
+			),
+			writeActual,
+		}));
 	await it('load homepage with a get query param', async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('home'),
@@ -58,10 +67,12 @@ async function tests(mode: string, writeActual: boolean) {
 export async function commonAsync(mode: string, writeActual = false) {
 	await describe(`load all server routes ${mode}`, async () => {
 		await tests(mode, writeActual);
+		await api();
 	});
 }
 export function common(mode: string, writeActual = false) {
 	describe(`load all server routes ${mode}`, async () => {
 		await tests(mode, writeActual);
+		await api();
 	});
 }

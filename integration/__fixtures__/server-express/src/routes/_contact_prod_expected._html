@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Helpers -->
+
+    <!--  -->
+
+    <!--  -->
+
+    <script>
+      // REQUEST IDLE CALLBACK
+      "use strict";
+      /* eslint-disable func-names */
+      // Taken from: https://github.com/pladaria/requestidlecallback-polyfill/blob/master/index.js
+      window.requestIdleCallback =
+        window.requestIdleCallback ||
+        function (cb) {
+          const start = Date.now();
+          return setTimeout(() => {
+            cb({
+              didTimeout: false,
+              timeRemaining: () => {
+                return Math.max(0, 50 - (Date.now() - start));
+              },
+            });
+          }, 1);
+        };
+      window.cancelIdleCallback =
+        window.cancelIdleCallback ||
+        function (id) {
+          clearTimeout(id);
+        };
+    </script>
+
+    <!-- Global assets -->
+
+    <!-- Page assets -->
+
+    <!-- PAGE ASSETS -->
+
+    <!-- /PAGE ASSETS -->
+
+    <!-- SEO and page metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/favicon.svg" />
+
+    <title>Gracile Contact</title>
+    <script
+      type="module"
+      crossorigin
+      src="/assets/document.client-Cu8CxlfV.js"
+    ></script>
+    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
+  </head>
+
+  <body>
+    <!--  -->
+    <h1>the Contact Page</h1>
+
+    <!--  -->
+  </body>
+</html>

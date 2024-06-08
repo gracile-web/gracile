@@ -22,19 +22,17 @@ import 'path';
 import 'lit';
 import 'lit/directives/unsafe-html.js';
 
-const bar = defineRoute({
-  document: (context) => document({ ...context, title: "Gracile Foo/Bar" }),
+const contact = defineRoute({
+  // TODO:
+  prerender: true,
+  document: (context) => document({ ...context, title: "Gracile Contact" }),
   template: () => html`
 		<!--  -->
-		<h1><img src="/favicon.svg" height="25" /> - Hello Gracile (foo/bar)</h1>
-
-		<ul>
-			<li><a href="/api">JSON API</a></li>
-		</ul>
+		<h1>the Contact Page</h1>
 
 		<!--  -->
 	`
 });
 
-export { bar as default };
-//# sourceMappingURL=bar.js.map
+export { contact as default };
+//# sourceMappingURL=contact.js.map

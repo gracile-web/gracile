@@ -53,8 +53,7 @@ const routes = new Map([
       "pageAssets": [
         "src/routes/(home).client.ts",
         "src/routes/(home).css"
-      ],
-      "prerender": null
+      ]
     }
   ],
   [
@@ -63,8 +62,16 @@ const routes = new Map([
       "filePath": "src/routes/about.ts",
       "pattern": {},
       "hasParams": false,
-      "pageAssets": [],
-      "prerender": null
+      "pageAssets": []
+    }
+  ],
+  [
+    "/contact/",
+    {
+      "filePath": "src/routes/contact.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
     }
   ],
   [
@@ -75,8 +82,25 @@ const routes = new Map([
       "hasParams": false,
       "pageAssets": [
         "src/routes/foo/bar.client.ts"
-      ],
-      "prerender": null
+      ]
+    }
+  ],
+  [
+    "/gracile-api-endpoint/basic/",
+    {
+      "filePath": "src/routes/gracile-api-endpoint/basic.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
+    }
+  ],
+  [
+    "/gracile-api-endpoint/:path*/",
+    {
+      "filePath": "src/routes/gracile-api-endpoint/[...path].ts",
+      "pattern": {},
+      "hasParams": true,
+      "pageAssets": []
     }
   ],
   [
@@ -85,8 +109,16 @@ const routes = new Map([
       "filePath": "src/routes/private/index.ts",
       "pattern": {},
       "hasParams": false,
-      "pageAssets": [],
-      "prerender": null
+      "pageAssets": []
+    }
+  ],
+  [
+    "/redirect/",
+    {
+      "filePath": "src/routes/redirect.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
     }
   ],
   [
@@ -95,8 +127,7 @@ const routes = new Map([
       "filePath": "src/routes/[test].ts",
       "pattern": {},
       "hasParams": true,
-      "pageAssets": [],
-      "prerender": null
+      "pageAssets": []
     }
   ]
 ]);
@@ -105,8 +136,12 @@ const routeImports = new Map(
 	[
 	  ['/', () => import('./chunk/(home).js')],
     ['/about/', () => import('./chunk/about.js')],
+    ['/contact/', () => import('./chunk/contact.js')],
     ['/foo/bar/', () => import('./chunk/bar.js')],
+    ['/gracile-api-endpoint/basic/', () => import('./chunk/basic.js')],
+    ['/gracile-api-endpoint/:path*/', () => import('./chunk/_...path_.js')],
     ['/private/', () => import('./chunk/index.js')],
+    ['/redirect/', () => import('./chunk/redirect.js')],
     ['/{:test}/', () => import('./chunk/_test_.js')],
 	]
 );
@@ -117,8 +152,20 @@ const routeAssets = new Map([
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
+    "/contact/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
     "/foo/bar/",
     "\t<script type=\"module\" crossorigin src=\"/assets/index-BW8UKosA.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cu8CxlfV.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/gracile-api-endpoint/:path*/",
+    null
+  ],
+  [
+    "/gracile-api-endpoint/basic/",
+    null
   ],
   [
     "/",
@@ -127,6 +174,10 @@ const routeAssets = new Map([
   [
     "/private/",
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/redirect/",
+    null
   ],
   [
     "/{:test}/",
@@ -6551,7 +6602,7 @@ var WritableStream = nodePonyfill.WritableStream = ponyfills.WritableStream;
 var TransformStream = nodePonyfill.TransformStream = ponyfills.TransformStream;
 var Blob = nodePonyfill.Blob = ponyfills.Blob;
 var File = nodePonyfill.File = ponyfills.File;
-var crypto = nodePonyfill.crypto = ponyfills.crypto;
+var crypto$1 = nodePonyfill.crypto = ponyfills.crypto;
 var btoa = nodePonyfill.btoa = ponyfills.btoa;
 var TextEncoder = nodePonyfill.TextEncoder = ponyfills.TextEncoder;
 var TextDecoder$1 = nodePonyfill.TextDecoder = ponyfills.TextDecoder;
@@ -6579,7 +6630,7 @@ const DefaultFetchAPI = /*#__PURE__*/_mergeNamespaces({
     WritableStream,
     btoa,
     createFetch,
-    crypto,
+    crypto: crypto$1,
     default: nodePonyfill,
     fetch
 }, [nodePonyfill]);
@@ -7724,7 +7775,9 @@ serverMode, }) {
     // Skipped with server mode in production build
     if ((serverMode === false && routeInfos.routeModule.template) ||
         //
-        (serverMode && routeInfos.routeModule.template && mode !== 'build')) {
+        (serverMode &&
+            routeInfos.routeModule.template &&
+            (mode !== 'build' || routeInfos.routeModule.prerender === true))) {
         const routeOutput = await Promise.resolve(routeInfos.routeModule.template?.(context));
         if (isLitTemplate(routeOutput) === false)
             throw Error(`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`);
@@ -7741,11 +7794,27 @@ async function renderSsrTemplate(template) {
     return collectResult(render(template));
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// export type KnownMethod = typeof knownMethods[number];
+const RequestMethod = {
+    GET: 'GET',
+    QUERY: 'QUERY',
+    HEAD: 'HEAD',
+    POST: 'POST',
+    PUT: 'PUT',
+    DELETE: 'DELETE',
+    OPTIONS: 'OPTIONS',
+    PATCH: 'PATCH',
+};
 // TODO: put in engine
 class RouteModule {
     #staticPaths;
     get staticPaths() {
         return this.#staticPaths;
+    }
+    #locals;
+    get locals() {
+        return this.#locals;
     }
     #handler;
     get handler() {
@@ -7770,6 +7839,7 @@ class RouteModule {
             typeof options.handler === 'function') &&
             options.handler)
             this.#handler = options.handler;
+        this.#locals = options.locals;
         if (typeof options.template === 'function')
             this.#template = options.template;
         if (typeof options.document === 'function')
@@ -7877,7 +7947,6 @@ function createGracileMiddleware({ vite, routes, routeImports, routeAssets, root
             throw Error('Incorrect url');
         if (!req.method)
             throw Error('Incorrect method');
-        const nodeRequest = { ...req, url: req.url, method: req.method };
         logger.info(`[${c.yellow(req.method)}] ${c.yellow(req.url)}`, {
             timestamp: true,
         });
@@ -7887,7 +7956,7 @@ function createGracileMiddleware({ vite, routes, routeImports, routeAssets, root
         req.url.endsWith('favicon.ico') ||
             req.url.endsWith('favicon.svg'))
             return next();
-        const requestPonyfilled = (await Promise.resolve(adapter.handleNodeRequest(nodeRequest)));
+        const requestPonyfilled = (await Promise.resolve(adapter.handleNodeRequest(req)));
         async function renderPageFn(handlerInfos, routeInfos) {
             const { output } = await renderRouteTemplate({
                 request: requestPonyfilled,
@@ -7913,6 +7982,10 @@ function createGracileMiddleware({ vite, routes, routeImports, routeAssets, root
             // TODO: should move this to `special-file` so we don't recalculate on each request
             // + we would be able to do some route codegen.
             const response = {};
+            // NOTE: Only for Express for now.
+            let locals = null;
+            if ('locals' in res)
+                locals = moduleInfos.routeModule.locals?.(res.locals);
             // MARK: Server handler
             const handler = moduleInfos.routeModule.handler;
             if ('handler' in moduleInfos.routeModule &&
@@ -7922,6 +7995,7 @@ function createGracileMiddleware({ vite, routes, routeImports, routeAssets, root
                     url: new URL(requestPonyfilled.url),
                     response,
                     params: moduleInfos.params,
+                    locals,
                 };
                 // MARK: Top level handler
                 if (typeof handler === 'function') {
@@ -8045,7 +8119,26 @@ function createGracileMiddleware({ vite, routes, routeImports, routeAssets, root
 }
 
 const IP_LOCALHOST = "127.0.0.1";
+const IP_EXPOSED = "0.0.0.0";
 const PUBLIC_DIR = "./dist/client";
+
+// NOTE: Util. to pretty print for user provided server.
+function printNodeHttpServerAddressInfos(instance) {
+    const infos = instance.address();
+    logger.info(c.green(`${'production'} server started`), {
+        timestamp: true,
+    });
+    if (typeof infos === 'object' && infos && infos.port && infos.address) {
+        logger.info(`
+${c.dim('┃')} Local    ${c.cyan(`http://localhost:${infos.port}/`)}` +
+            `${infos.address === IP_EXPOSED
+                ? `${c.dim('┃')} Network  ${c.cyan(`http://${infos.address}:${infos.port}/`)}`
+                : ''}
+`);
+        return infos;
+    }
+    throw Error('Invalid address/port.');
+}
 
 routes.forEach((route, pattern) => {
     routes.set(pattern, {
@@ -8148,6 +8241,11 @@ app.use(
     hello: "world"
   })
 );
+app.use((req, res, next) => {
+  const traceId = crypto.randomUUID();
+  res.locals.traceId = traceId;
+  next();
+});
 app.use("/private/", authentication);
 app.get("/__close", (req, res) => {
   console.log("closing…");
@@ -8158,7 +8256,8 @@ app.use(express.static(join(ROOT, PUBLIC_DIR)));
 app.use(handlers);
 const server = app.listen(3033, IP_LOCALHOST, () => {
   console.log(server.address());
+  printNodeHttpServerAddressInfos(server);
 });
 
-export { pageAssets as p };
+export { RequestMethod as R, pageAssets as p };
 //# sourceMappingURL=server.js.map
