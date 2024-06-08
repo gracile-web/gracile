@@ -13,7 +13,7 @@ const projectDistExpected = 'server-express/dist_expected';
 let gracileProcess: ChildProcessWithoutNullStreams | null = null;
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
-it('build and compare outputs', async () => {
+await it('build and compare outputs', async () => {
 	await build('server-express');
 
 	await compareFolder({
