@@ -1,4 +1,4 @@
-import { rename, rm } from 'node:fs/promises';
+import { rename /* , rm */ } from 'node:fs/promises';
 
 import { logger } from '@gracile/internal-utils/logger';
 import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
