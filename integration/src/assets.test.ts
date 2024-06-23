@@ -75,6 +75,8 @@ describe('sibling assets', async () => {
 });
 
 // TODO: This test need a bit more work, notably for hydration
+// FIXME: `/@fs/` is wrong. In build and dev.
+// It works outside this test environment otherwise.
 describe('assets with query url', async () => {
 	const route = '01-import-with-query-url';
 
