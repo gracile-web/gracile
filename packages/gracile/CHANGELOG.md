@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.1.0...@gracile/gracile@0.1.1) (2024-06-23)
+
+### Bug Fixes
+
+* request idle callback polyfill wrong loading ([ad8099e](https://github.com/gracile-web/gracile/commit/ad8099e8d26d9ee80c18389c1d0ec9b2c8b9db29))
+
 # [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.0.5...@gracile/gracile@0.1.0) (2024-06-08)
 
 ### Bug Fixes

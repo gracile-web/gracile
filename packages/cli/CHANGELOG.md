@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile/cli@0.1.0...@gracile/cli@0.1.1) (2024-06-23)
+
+**Note:** Version bump only for package @gracile/cli
+
 # [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/cli@0.0.4...@gracile/cli@0.1.0) (2024-06-08)
 
 ### Bug Fixes
