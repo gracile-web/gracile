@@ -1,6 +1,7 @@
 /* eslint-disable func-names */
 // Taken from: https://github.com/pladaria/requestidlecallback-polyfill/blob/master/index.js
 
+export const requestIdleCallback = `
 window.requestIdleCallback =
 	window.requestIdleCallback ||
 	function (cb) {
@@ -20,3 +21,4 @@ window.cancelIdleCallback =
 	function (id) {
 		clearTimeout(id);
 	};
+`;

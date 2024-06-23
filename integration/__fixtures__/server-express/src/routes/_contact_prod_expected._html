@@ -8,10 +8,8 @@
     <!--  -->
 
     <script>
-      // REQUEST IDLE CALLBACK
-      "use strict";
-      /* eslint-disable func-names */
-      // Taken from: https://github.com/pladaria/requestidlecallback-polyfill/blob/master/index.js
+      // REQUEST IDLE CALLBACK - POLYFILL
+
       window.requestIdleCallback =
         window.requestIdleCallback ||
         function (cb) {
@@ -25,6 +23,7 @@
             });
           }, 1);
         };
+
       window.cancelIdleCallback =
         window.cancelIdleCallback ||
         function (id) {

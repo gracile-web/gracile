@@ -4,6 +4,30 @@ import 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { html as html$1 } from '@lit-labs/ssr/lib/server-template.js';
 
+/* eslint-disable func-names */
+// Taken from: https://github.com/pladaria/requestidlecallback-polyfill/blob/master/index.js
+const requestIdleCallback = `
+window.requestIdleCallback =
+	window.requestIdleCallback ||
+	function (cb) {
+		const start = Date.now();
+		return setTimeout(() => {
+			cb({
+				didTimeout: false,
+				timeRemaining: () => {
+					return Math.max(0, 50 - (Date.now() - start));
+				},
+			});
+		}, 1);
+	};
+
+window.cancelIdleCallback =
+	window.cancelIdleCallback ||
+	function (id) {
+		clearTimeout(id);
+	};
+`;
+
 const errors = html`
 	<script type="module">
 		if (import.meta.hot) {
@@ -29,8 +53,8 @@ const polyfills = {
   requestIdleCallback: html`
 		${unsafeHTML(`
       <script>
-				// REQUEST IDLE CALLBACK
-				${await import('./request-idle-callback.js').then((m) => m.default)}
+				// REQUEST IDLE CALLBACK - POLYFILL
+				${requestIdleCallback}
       </script>
 			`)}
 	`

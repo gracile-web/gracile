@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
+import { requestIdleCallback } from '@gracile/client/polyfills/request-idle-callback.raw';
 import { pageAssets } from '@gracile/engine/render/route-template';
 import { html } from '@lit-labs/ssr';
 import { html as LitHtml, LitElement } from 'lit';
@@ -33,8 +34,8 @@ const polyfills = {
 	requestIdleCallback: html`
 		${unsafeHTML(`
       <script>
-				// REQUEST IDLE CALLBACK
-				${await import('@gracile/client/polyfills/request-idle-callback?raw').then((m) => m.default)}
+				// REQUEST IDLE CALLBACK - POLYFILL
+				${requestIdleCallback}
       </script>
 			`)}
 	`,

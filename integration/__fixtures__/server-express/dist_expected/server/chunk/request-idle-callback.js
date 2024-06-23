@@ -1,4 +1,0 @@
-const requestIdleCallback = "\"use strict\";\n/* eslint-disable func-names */\n// Taken from: https://github.com/pladaria/requestidlecallback-polyfill/blob/master/index.js\nwindow.requestIdleCallback =\n    window.requestIdleCallback ||\n        function (cb) {\n            const start = Date.now();\n            return setTimeout(() => {\n                cb({\n                    didTimeout: false,\n                    timeRemaining: () => {\n                        return Math.max(0, 50 - (Date.now() - start));\n                    },\n                });\n            }, 1);\n        };\nwindow.cancelIdleCallback =\n    window.cancelIdleCallback ||\n        function (id) {\n            clearTimeout(id);\n        };\n";
-
-export { requestIdleCallback as default };
-//# sourceMappingURL=request-idle-callback.js.map

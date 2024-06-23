@@ -1,1 +1,1 @@
-import '@gracile/client/polyfills/request-idle-callback';
+export { requestIdleCallback } from '@gracile/client/polyfills/request-idle-callback.raw';
