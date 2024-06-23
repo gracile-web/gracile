@@ -62,6 +62,14 @@ async function tests(mode: string, writeActual: boolean) {
 			),
 			writeActual,
 		}));
+	await it('load a page with various asset loading methods', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('assets'),
+			actualContent: removeLocalPathsInDevAssets(
+				await fetchResource([ADDRESS, 'assets']),
+			),
+			writeActual,
+		}));
 }
 
 export async function common(mode: string, writeActual = false) {

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module" src="/@vite/client"></script>
+
+    <!-- Helpers -->
+
+    <script
+      type="module"
+      src="/@id/__x00__/assets/index.html?html-proxy&index=0.js"
+    ></script>
+
+    <!--  -->
+
+    <script
+      type="module"
+      src="/@id/__x00__/assets/index.html?html-proxy&index=1.js"
+    ></script>
+
+    <!--  -->
+
+    <script
+      type="module"
+      src="/@id/__x00__/assets/index.html?html-proxy&index=2.js"
+    ></script>
+
+    <script>
+      // REQUEST IDLE CALLBACK - POLYFILL
+
+      window.requestIdleCallback =
+        window.requestIdleCallback ||
+        function (cb) {
+          const start = Date.now();
+          return setTimeout(() => {
+            cb({
+              didTimeout: false,
+              timeRemaining: () => {
+                return Math.max(0, 50 - (Date.now() - start));
+              },
+            });
+          }, 1);
+        };
+
+      window.cancelIdleCallback =
+        window.cancelIdleCallback ||
+        function (id) {
+          clearTimeout(id);
+        };
+    </script>
+
+    <!-- Global assets -->
+    <link
+      rel="stylesheet"
+      href="__REPLACED_FOR_TESTS__/__fixtures__/server-express/src/document.css"
+    />
+    <script
+      type="module"
+      src="__REPLACED_FOR_TESTS__/__fixtures__/server-express/src/document.client.ts"
+    ></script>
+
+    <!-- Page assets -->
+
+    <!-- PAGE ASSETS -->
+
+    <!-- /PAGE ASSETS -->
+
+    <!-- SEO and page metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/favicon.svg" />
+
+    <title>Gracile Home</title>
+  </head>
+
+  <body>
+    <!--  -->
+
+    <my-el extra-styles="/src/routes/_assets-my-el-2.scss"
+      ><template shadowroot="open" shadowrootmode="open"
+        ><style>
+          :host {
+            display: block;
+          }</style
+        ><!--lit-part +EMEfM/KnnU=-->
+        <!--  -->
+        <!--lit-node 1--><link
+          rel="stylesheet"
+          href="/src/routes/_assets-my-el.scss"
+        />
+
+        <!--lit-part-->/src/routes/_assets-my-el-2.scss<!--/lit-part-->
+        <!--lit-part--><!--lit-part F3m906AMGI4=--><!--lit-node 0--><link
+          rel="stylesheet"
+          href="/src/routes/_assets-my-el-2.scss"
+        /><!--/lit-part--><!--/lit-part-->
+
+        <div class="color-me-red">RED</div>
+        <div class="color-me-green">GREEN</div>
+
+        <!--lit-part vW82zcUQXes=-->
+        <!--  -->
+        <h2>lion</h2>
+        <div class="color-me-red">RED</div>
+        <div class="color-me-green">GREEN</div>
+
+        <!--lit-node 4--><button>CLICK ME</button
+        ><!--/lit-part-->
+        <!--/lit-part--></template
+      ></my-el
+    >
+  </body>
+</html>

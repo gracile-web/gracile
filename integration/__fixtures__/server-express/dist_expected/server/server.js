@@ -66,6 +66,15 @@ const routes = new Map([
     }
   ],
   [
+    "/assets/",
+    {
+      "filePath": "src/routes/assets.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
+    }
+  ],
+  [
     "/contact/",
     {
       "filePath": "src/routes/contact.ts",
@@ -136,6 +145,7 @@ const routeImports = new Map(
 	[
 	  ['/', () => import('./chunk/(home).js')],
     ['/about/', () => import('./chunk/about.js')],
+    ['/assets/', () => import('./chunk/assets.js')],
     ['/contact/', () => import('./chunk/contact.js')],
     ['/foo/bar/', () => import('./chunk/bar.js')],
     ['/gracile-api-endpoint/basic/', () => import('./chunk/basic.js')],
@@ -149,6 +159,10 @@ const routeImports = new Map(
 const routeAssets = new Map([
   [
     "/about/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/assets/",
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
