@@ -79,5 +79,8 @@
     "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "5.5.0-beta"
   },
-  "packageManager": "pnpm@9.0.6"
+  "packageManager": "pnpm@9.0.6",
+  "resolutions": {
+    "braces": "3.0.3"
+  }
 }
