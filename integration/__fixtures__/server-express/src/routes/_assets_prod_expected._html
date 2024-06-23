@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Helpers -->
+
+    <!--  -->
+
+    <!--  -->
+
+    <script>
+      // REQUEST IDLE CALLBACK - POLYFILL
+
+      window.requestIdleCallback =
+        window.requestIdleCallback ||
+        function (cb) {
+          const start = Date.now();
+          return setTimeout(() => {
+            cb({
+              didTimeout: false,
+              timeRemaining: () => {
+                return Math.max(0, 50 - (Date.now() - start));
+              },
+            });
+          }, 1);
+        };
+
+      window.cancelIdleCallback =
+        window.cancelIdleCallback ||
+        function (id) {
+          clearTimeout(id);
+        };
+    </script>
+
+    <!-- Global assets -->
+
+    <!-- Page assets -->
+
+    <!-- PAGE ASSETS -->
+
+    <!-- /PAGE ASSETS -->
+
+    <!-- SEO and page metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/favicon.svg" />
+
+    <title>Gracile Home</title>
+    <script
+      type="module"
+      crossorigin
+      src="/assets/document.client-Cu8CxlfV.js"
+    ></script>
+
+    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
+  </head>
+
+  <body>
+    <!--  -->
+
+    <my-el extra-styles="/assets/_assets-my-el-2-DCQzUQg2.css"
+      ><template shadowroot="open" shadowrootmode="open"
+        ><style>
+          :host {
+            display: block;
+          }</style
+        ><!--lit-part +EMEfM/KnnU=-->
+        <!--  -->
+        <!--lit-node 1--><link
+          rel="stylesheet"
+          href="/assets/_assets-my-el-DqDti0gB.css"
+        />
+
+        <!--lit-part-->/assets/_assets-my-el-2-DCQzUQg2.css<!--/lit-part-->
+        <!--lit-part--><!--lit-part F3m906AMGI4=--><!--lit-node 0--><link
+          rel="stylesheet"
+          href="/assets/_assets-my-el-2-DCQzUQg2.css"
+        /><!--/lit-part--><!--/lit-part-->
+
+        <div class="color-me-red">RED</div>
+        <div class="color-me-green">GREEN</div>
+
+        <!--lit-part vW82zcUQXes=-->
+        <!--  -->
+        <h2>lion</h2>
+        <div class="color-me-red">RED</div>
+        <div class="color-me-green">GREEN</div>
+
+        <!--lit-node 4--><button>CLICK ME</button
+        ><!--/lit-part-->
+        <!--/lit-part--></template
+      ></my-el
+    >
+  </body>
+</html>
