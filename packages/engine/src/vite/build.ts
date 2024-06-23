@@ -144,7 +144,8 @@ export async function viteBuild(root = process.cwd()) {
 										);
 									}),
 								);
-								await rm(`${root}/dist/server/assets`, { recursive: true });
+								// NOTE: Disabled for now, because it conflict with test's folder comparer
+								// await rm(`${root}/dist/server/assets`, { recursive: true });
 							},
 						},
 					],
