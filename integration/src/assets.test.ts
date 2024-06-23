@@ -74,4 +74,23 @@ describe('sibling assets', async () => {
 	});
 });
 
+// TODO: This test need a bit more work, notably for hydration
+describe('assets with query url', async () => {
+	const route = '01-import-with-query-url';
+
+	await tryOrClose(async () => {
+		await it('render the route with links stylesheets', async () => {
+			await snapshotAssertEqual({
+				expectedPath: [
+					projectRoutes,
+					currentTestRoutes,
+					`_${route}_expected.html`,
+				],
+				actualContent: await fetchResource([address, currentTestRoutes, route]),
+				writeActual: false,
+			});
+		});
+	});
+});
+
 after(async () => close());

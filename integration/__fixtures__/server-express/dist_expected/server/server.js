@@ -7766,7 +7766,13 @@ serverMode, }) {
             .replace('</head>', `${routeAssetsString}\n</head>`);
     // MARK: Base document
     const baseDocHtml = vite && mode === 'dev'
-        ? await vite.transformIndexHtml(routeInfos.pathname, baseDocRenderedWithAssets)
+        ? await vite.transformIndexHtml(
+        // HACK: Sometimes, we need to invalidate for server asset url
+        // imports to work. So we keep this hack around just in case.
+        // Maybe it's linked to the way hashed assets are invalidating
+        // the html proxy module…
+        // `${routeInfos.pathname}?r=${Math.random()}`,
+        routeInfos.pathname, baseDocRenderedWithAssets)
         : baseDocRenderedWithAssets;
     const index = baseDocHtml.indexOf(SSR_OUTLET_MARKER);
     const baseDocRenderStreamPre = Readable.from(baseDocHtml.substring(0, index));
