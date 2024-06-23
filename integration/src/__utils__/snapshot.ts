@@ -8,6 +8,8 @@ import fastGlob from 'fast-glob';
 import { format } from 'prettier';
 import { assertEqual } from 'snapshot-fixtures';
 
+import { removeLocalPathsInDevAssets } from './vite.js';
+
 export async function snapshotAssertEqual(options: {
 	expectedPath: string[];
 	actualContent: string;
@@ -20,32 +22,32 @@ export async function snapshotAssertEqual(options: {
 		'__fixtures__',
 		join(...options.expectedPath),
 	);
-	const resultFormatted =
+
+	// TODO: remove removeLocalPathsInDevAssets elsewhere ?
+	const resultFormatted = removeLocalPathsInDevAssets(
 		options.prettier === false
 			? options.actualContent
-			: await format(options.actualContent, { parser: 'html' });
+			: await format(options.actualContent, { parser: 'html' }),
+	);
 
 	if (options.writeActual) {
 		await writeFile(dest, resultFormatted);
 		return;
 	}
 	const expectedContent = await readFile(dest, 'utf8');
-	const expectedContentFormatted =
-		options.prettier === false
-			? expectedContent
-			: await format(expectedContent, { parser: options.lang ?? 'html' });
 
 	try {
-		assertEqual(resultFormatted, expectedContentFormatted);
+		assertEqual(resultFormatted, expectedContent);
 	} catch (e) {
 		if (e instanceof Error) throw Error(e.message);
 		throw Error(e as string);
 	}
 }
 
+// TODO: delete then exclude source map files from git
 async function getFiles(path: string) {
 	const projectGlob = join('__fixtures__', path, '**/*');
-	const fileList = (await fastGlob(projectGlob))
+	const fileList = (await fastGlob([projectGlob, '!**/*.js.map']))
 		.sort()
 		.map(async (filePath) => {
 			const fileContent = await readFile(filePath, 'utf8');
