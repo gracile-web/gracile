@@ -150,6 +150,11 @@ export async function renderRouteTemplate({
 	const baseDocHtml =
 		vite && mode === 'dev'
 			? await vite.transformIndexHtml(
+					// HACK: Sometimes, we need to invalidate for server asset url
+					// imports to work. So we keep this hack around just in case.
+					// Maybe it's linked to the way hashed assets are invalidating
+					// the html proxy module…
+					// `${routeInfos.pathname}?r=${Math.random()}`,
 					routeInfos.pathname,
 					baseDocRenderedWithAssets,
 				)

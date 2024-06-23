@@ -1,3 +1,5 @@
+import { rename, rm } from 'node:fs/promises';
+
 import { logger } from '@gracile/internal-utils/logger';
 import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
 import c from 'picocolors';
@@ -47,12 +49,27 @@ export async function viteBuild(root = process.cwd()) {
 
 	const finalConfig = mergeConfig(finalCommonConfigVite, baseBuildConfig);
 
+	const clientAssets: Record<string, string> = {};
+
 	const clientConfig = mergeConfig(finalConfig, {
 		build: {
 			rollupOptions: {
 				// NOTE: Cannot be set in a plugin
 				input: htmlPages.inputList,
-				plugins: [htmlPages.plugin],
+				plugins: [
+					htmlPages.plugin,
+
+					{
+						name: 'gracile-collect-client-assets',
+
+						writeBundle(_, bundle) {
+							Object.entries(bundle).forEach(([, file]) => {
+								if (file.type === 'asset' && file.name)
+									clientAssets[file.name] = file.fileName;
+							});
+						},
+					},
+				],
 
 				// input: {
 				// 	server:
@@ -87,6 +104,9 @@ export async function viteBuild(root = process.cwd()) {
 			build: {
 				ssr: true,
 
+				// NOTE: We copy them to Gracile client bundle, when only imported via `?url` from server
+				ssrEmitAssets: true,
+
 				rollupOptions: {
 					external: [
 						// '*',
@@ -111,7 +131,24 @@ export async function viteBuild(root = process.cwd()) {
 							routes: htmlPages.routes,
 							renderedRoutes: htmlPages.renderedRoutes,
 						}),
+
+						{
+							name: 'gracile-move-server-assets',
+							async writeBundle(_, bundle) {
+								await Promise.all(
+									Object.entries(bundle).map(async ([file]) => {
+										if (file.startsWith('assets/') === false) return;
+										await rename(
+											`${root}/dist/server/${file}`,
+											`${root}/dist/client/${file}`,
+										);
+									}),
+								);
+								await rm(`${root}/dist/server/assets`, { recursive: true });
+							},
+						},
 					],
+
 					input: {
 						server: DEFAULT_USER_SERVER_MODULE_ENTRYPOINT,
 					},
@@ -119,7 +156,20 @@ export async function viteBuild(root = process.cwd()) {
 					output: {
 						dir: `${root}/dist/server`,
 						entryFileNames: '[name].js',
-						assetFileNames: 'assets/[name].js',
+						// assetFileNames: 'assets/[name].[ext]',
+						// NOTE: Useful for, e.g., link tag with `?url`
+						assetFileNames: (chunkInfo) => {
+							if (chunkInfo.name) {
+								// console.log(chunkInfo);
+								const fileName = clientAssets[chunkInfo.name];
+								if (fileName) return fileName;
+
+								// NOTE: When not imported at all from client
+								return `assets/${chunkInfo.name.replace(/\.(.*)$/, '')}-[hash].[ext]`;
+							}
+							// throw new Error(`Not client asset`);
+							return 'assets/[name]-[hash].[ext]';
+						},
 						chunkFileNames: 'chunk/[name].js',
 					},
 				},
