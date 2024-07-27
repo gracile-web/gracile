@@ -10,7 +10,6 @@ export { R as Route };
  * See in the [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/).
  */
 export function defineRoute<
-	Locals = any,
 	GetHandlerData extends R.HandlerDataHtml = undefined,
 	PostHandlerData extends R.HandlerDataHtml = undefined,
 	StaticPathOptions extends R.StaticPathOptionsGeneric | undefined = undefined,
@@ -36,21 +35,21 @@ export function defineRoute<
 			: R.Params;
 	},
 >(options: {
-	locals?: (locals: any) => R.MaybePromise<Locals>;
+	// locals?: (locals: any) => R.MaybePromise<Locals>;
 
 	handler?: StaticPathOptions extends object
 		? never
 		:
 				| R.Handler<Response>
 				| {
-						GET?: R.Handler<GetHandlerData, Locals>;
-						POST?: R.Handler<PostHandlerData, Locals>;
-						QUERY?: R.Handler<Response, Locals>;
-						PUT?: R.Handler<Response, Locals>;
-						PATCH?: R.Handler<Response, Locals>;
-						DELETE?: R.Handler<Response, Locals>;
-						HEAD?: R.Handler<Response, Locals>;
-						OPTIONS?: R.Handler<Response, Locals>;
+						GET?: R.Handler<GetHandlerData>;
+						POST?: R.Handler<PostHandlerData>;
+						QUERY?: R.Handler<Response>;
+						PUT?: R.Handler<Response>;
+						PATCH?: R.Handler<Response>;
+						DELETE?: R.Handler<Response>;
+						HEAD?: R.Handler<Response>;
+						OPTIONS?: R.Handler<Response>;
 				  };
 
 	staticPaths?: (() => StaticPathOptions[]) | undefined;

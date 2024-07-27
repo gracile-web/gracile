@@ -100,9 +100,8 @@ export class RouteModule {
 export type Params = Record<string, string | undefined>;
 
 export type Handler<
+	// Locals,
 	Data extends HandlerData | HandlerDataHtml = never,
-	Locals = any,
-	// Locals extends Record<string, any> = Record<string, any>,
 > = (context: {
 	url: URL;
 
@@ -115,7 +114,7 @@ export type Handler<
 
 	request: Request;
 
-	locals?: Locals;
+	locals: App.Locals;
 
 	/**
 	 * Let you mutate the downstream **page** response.

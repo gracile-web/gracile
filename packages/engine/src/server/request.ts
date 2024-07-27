@@ -6,6 +6,7 @@ import { createServerAdapter } from '@whatwg-node/server';
 import c from 'picocolors';
 import type { ViteDevServer } from 'vite';
 
+import { isUnknownObject, type UnknownObject } from '../assertions.js';
 import { /*  errorInline, */ errorPage } from '../errors/templates.js';
 import {
 	type HandlerInfos,
@@ -110,9 +111,9 @@ export function createGracileMiddleware({
 			const response: ResponseInit = {};
 
 			// NOTE: Only for Express for now.
-			let locals: unknown = null;
-			if ('locals' in res)
-				locals = moduleInfos.routeModule.locals?.(res.locals);
+
+			let locals: UnknownObject = {};
+			if ('locals' in res && isUnknownObject(res.locals)) locals = res.locals;
 
 			// MARK: Server handler
 
