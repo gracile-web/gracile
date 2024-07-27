@@ -19,3 +19,12 @@ packages:
   # - ./packages/addons/minify-html-literals
   - ./integration
   # - integration/__fixtures__/server-express
+
+catalog:
+  vite: ^5.3.5
+  lit: ^3.1.3
+  '@lit-labs/ssr': '^3.2.2'
+  '@lit-labs/ssr-client': '^1.1.7'
+  typescript: 5.5.4
+  '@types/node': '^20.12.7'
+  'picocolors': '^1.0.0'

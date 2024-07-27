@@ -41,16 +41,16 @@
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
-    "picocolors": "^1.0.0",
+    "picocolors": "catalog:",
     "sitemap": "^7.1.1"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^20.11.25",
-    "typescript": "5.5.0-beta"
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
-    "vite": "5.x"
+    "vite": "catalog:"
   },
   "publishConfig": {
     "access": "public",

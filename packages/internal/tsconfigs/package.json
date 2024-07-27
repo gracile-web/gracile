@@ -13,6 +13,6 @@
     "provenance": true
   },
   "devDependencies": {
-    "typescript": "5.5.0-beta"
+    "typescript": "catalog:"
   }
 }

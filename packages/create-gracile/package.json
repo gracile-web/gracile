@@ -53,15 +53,15 @@
     "esm-env": "^1.0.0",
     "fast-glob": "^3.3.2",
     "latest-version": "^9.0.0",
-    "picocolors": "^1.0.0",
+    "picocolors": "catalog:",
     "random-words": "^2.0.1"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/degit": "^2.8.6",
-    "@types/node": "^20.11.25",
+    "@types/node": "catalog:",
     "cli-testing-library": "^2.0.2",
-    "typescript": "5.5.0-beta"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",
