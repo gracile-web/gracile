@@ -39,8 +39,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@gracile/engine": "workspace:^",
-    "import-meta-resolve": "^4.0.0"
+    "@gracile/engine": "workspace:^"
   },
   "devDependencies": {
     "@gracile/client": "workspace:^",

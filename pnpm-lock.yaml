@@ -533,9 +533,6 @@ importers:
       '@lit-labs/ssr':
         specifier: 3.x
         version: 3.2.2
-      import-meta-resolve:
-        specifier: ^4.0.0
-        version: 4.1.0
       lit:
         specifier: 3.x
         version: 3.1.3
