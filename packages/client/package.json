@@ -39,7 +39,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@lit-labs/ssr-client": "1.x.x"
+    "@lit-labs/ssr-client": "catalog:"
   },
   "// disabledDeps": {
     "@webcomponents/template-shadowroot": "0.x"
@@ -48,10 +48,10 @@
     "@gracile/internal-tsconfigs": "workspace:^",
     "tsx": "^4.7.1",
     "typedoc": "^0.25.8",
-    "typescript": "5.5.0-beta"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@lit-labs/ssr": "3.x"
+    "@lit-labs/ssr": "catalog:"
   },
   "publishConfig": {
     "access": "public",

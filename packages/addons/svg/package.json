@@ -48,12 +48,12 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^20.11.25",
-    "typescript": "5.5.0-beta"
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
-    "lit": "3.x",
-    "vite": "5.x"
+    "lit": "catalog:",
+    "vite": "catalog:"
   },
   "publishConfig": {
     "access": "public",

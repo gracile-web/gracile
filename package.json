@@ -52,7 +52,7 @@
     "@lerna-lite/list": "^3.5.1",
     "@lerna-lite/publish": "^3.5.2",
     "@types/eslint": "^8.56.9",
-    "@types/node": "^20.12.7",
+    "@types/node": "catalog:",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
     "c8": "^9.1.0",
@@ -77,7 +77,7 @@
     "turbo": "^1.13.2",
     "typedoc": "^0.25.13",
     "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "5.5.0-beta"
+    "typescript": "catalog:"
   },
   "packageManager": "pnpm@9.0.6",
   "resolutions": {

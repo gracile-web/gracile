@@ -44,14 +44,14 @@
   "devDependencies": {
     "@gracile/client": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^20.11.25",
+    "@types/node": "catalog:",
     "tsx": "^4.7.1",
-    "typescript": "5.5.0-beta",
-    "vite": "5.x"
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "peerDependencies": {
-    "@lit-labs/ssr": "3.x",
-    "lit": "3.x"
+    "@lit-labs/ssr": "catalog:",
+    "lit": "catalog:"
   },
   "publishConfig": {
     "access": "public",

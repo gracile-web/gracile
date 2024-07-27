@@ -55,14 +55,14 @@
     "@gracile/engine": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@gracile/server": "workspace:^",
-    "@lit-labs/ssr": "^3.2.2",
+    "@lit-labs/ssr": "catalog:",
     "tsx": "^4.7.2",
     "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^20.11.25",
-    "typescript": "5.5.0-beta"
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",
