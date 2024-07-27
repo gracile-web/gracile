@@ -7588,6 +7588,30 @@ picocolors.exports.createColors = createColors;
 var picocolorsExports = picocolors.exports;
 const c = /*@__PURE__*/getDefaultExportFromCjs(picocolorsExports);
 
+/**
+ * Used for user provided modules with unknown/possibly malformed shapes.
+ * Avoid this for well typed sources.
+ */
+function isUnknownObject(input) {
+    return typeof input === 'object' && input !== null && !Array.isArray(input);
+}
+function isLitTemplate(input) {
+    return ((typeof input === 'object' &&
+        input &&
+        '_$litType$' in input &&
+        // eslint-disable-next-line no-underscore-dangle
+        input._$litType$ === 1 &&
+        'strings' in input &&
+        Array.isArray(input.strings)) ||
+        false);
+}
+function isLitServerTemplate(input) {
+    return (isLitTemplate(input) &&
+        '_$litServerRenderMode' in input &&
+        // eslint-disable-next-line no-underscore-dangle
+        input._$litServerRenderMode === 1);
+}
+
 function errorPage(error) {
     return html$1 `
 		<!--  -->
@@ -7676,23 +7700,6 @@ function dummyLiteral(templateStrings, ...args) {
  * \> You might want also to checkout [Lit server-side only `html` template rendering](https://github.com/lit/lit/tree/350147d608cc34fe926dd2bced0e25748c726c59/packages/labs/ssr#server-only-templates).
  */
 const html = dummyLiteral;
-
-function isLitTemplate(input) {
-    return ((typeof input === 'object' &&
-        input &&
-        '_$litType$' in input &&
-        // eslint-disable-next-line no-underscore-dangle
-        input._$litType$ === 1 &&
-        'strings' in input &&
-        Array.isArray(input.strings)) ||
-        false);
-}
-function isLitServerTemplate(input) {
-    return (isLitTemplate(input) &&
-        '_$litServerRenderMode' in input &&
-        // eslint-disable-next-line no-underscore-dangle
-        input._$litServerRenderMode === 1);
-}
 
 async function* concatStreams(...readables) {
     // eslint-disable-next-line no-restricted-syntax
@@ -8003,9 +8010,9 @@ function createGracileMiddleware({ vite, routes, routeImports, routeAssets, root
             // + we would be able to do some route codegen.
             const response = {};
             // NOTE: Only for Express for now.
-            let locals = null;
-            if ('locals' in res)
-                locals = moduleInfos.routeModule.locals?.(res.locals);
+            let locals = {};
+            if ('locals' in res && isUnknownObject(res.locals))
+                locals = res.locals;
             // MARK: Server handler
             const handler = moduleInfos.routeModule.handler;
             if ('handler' in moduleInfos.routeModule &&
