@@ -106,6 +106,9 @@ export async function viteBuild(root = process.cwd()) {
 
 				// NOTE: We copy them to Gracile client bundle, when only imported via `?url` from server
 				ssrEmitAssets: true,
+				cssMinify: true,
+				cssCodeSplit: true,
+				// sourcemap: true,
 
 				rollupOptions: {
 					external: [
