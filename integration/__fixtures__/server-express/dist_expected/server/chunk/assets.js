@@ -23,9 +23,9 @@ import 'express';
 import 'path';
 import 'lit/directives/unsafe-html.js';
 
-const customStylesheet = "/assets/_assets-my-el-2-DCQzUQg2.css";
+const customStylesheet = "/assets/_assets-my-el-2-_K7WEQ-5.css";
 
-const styles = "/assets/_assets-my-el-DqDti0gB.css";
+const styles = "/assets/_assets-my-el-BZ8-Dbhw.css";
 
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -34,8 +34,7 @@ var __decorateClass = (decorators, target, key, kind) => {
   for (var i = decorators.length - 1, decorator; i >= 0; i--)
     if (decorator = decorators[i])
       result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-  if (kind && result)
-    __defProp(target, key, result);
+  if (kind && result) __defProp(target, key, result);
   return result;
 };
 let MyEl = class extends LitElement {
@@ -45,8 +44,7 @@ let MyEl = class extends LitElement {
     this["extra-styles"] = null;
   }
   render() {
-    if (typeof this["extra-styles"] === "string")
-      throw new Error();
+    if (typeof this["extra-styles"] === "string") throw new Error();
     return html`
 			<!--  -->
 			<link rel="stylesheet" href=${styles} />

@@ -5,8 +5,7 @@ var __decorateClass = (decorators, target, key, kind) => {
   for (var i = decorators.length - 1, decorator; i >= 0; i--)
     if (decorator = decorators[i])
       result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-  if (kind && result)
-    __defProp(target, key, result);
+  if (kind && result) __defProp(target, key, result);
   return result;
 };
 import { css, html, LitElement } from "/@fs__REPLACED_FOR_TESTS__/node_modules/.vite/deps/lit.js?v=__REPLACED_FOR_TESTS__";
