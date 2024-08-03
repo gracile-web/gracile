@@ -7,21 +7,21 @@
 
     <script
       type="module"
-      src="/@id/__x00__/assets/index.html?html-proxy&index=0.js"
+      src="/@id/__x00__/assets-methods/index.html?html-proxy&index=0.js"
     ></script>
 
     <!--  -->
 
     <script
       type="module"
-      src="/@id/__x00__/assets/index.html?html-proxy&index=1.js"
+      src="/@id/__x00__/assets-methods/index.html?html-proxy&index=1.js"
     ></script>
 
     <!--  -->
 
     <script
       type="module"
-      src="/@id/__x00__/assets/index.html?html-proxy&index=2.js"
+      src="/@id/__x00__/assets-methods/index.html?html-proxy&index=2.js"
     ></script>
 
     <script>
@@ -49,13 +49,10 @@
     </script>
 
     <!-- Global assets -->
-    <link
-      rel="stylesheet"
-      href="__REPLACED_FOR_TESTS__/__fixtures__/server-express/src/document.css"
-    />
+    <link rel="stylesheet" href="__REPLACED_FOR_TESTS__/src/document.css" />
     <script
       type="module"
-      src="__REPLACED_FOR_TESTS__/__fixtures__/server-express/src/document.client.ts"
+      src="__REPLACED_FOR_TESTS__/src/document.client.ts"
     ></script>
 
     <!-- Page assets -->
@@ -69,13 +66,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
-    <title>Gracile Home</title>
+    <title>Gracile Assets</title>
   </head>
 
   <body>
     <!--  -->
 
-    <my-el extra-styles="/src/routes/_assets-my-el-2.scss"
+    <my-el extra-styles="/src/routes/_assets-methods-my-el-2.scss"
       ><template shadowroot="open" shadowrootmode="open"
         ><style>
           :host {
@@ -85,13 +82,13 @@
         <!--  -->
         <!--lit-node 1--><link
           rel="stylesheet"
-          href="/src/routes/_assets-my-el.scss"
+          href="/src/routes/_assets-methods-my-el.scss"
         />
 
-        <!--lit-part-->/src/routes/_assets-my-el-2.scss<!--/lit-part-->
+        <!--lit-part-->/src/routes/_assets-methods-my-el-2.scss<!--/lit-part-->
         <!--lit-part--><!--lit-part F3m906AMGI4=--><!--lit-node 0--><link
           rel="stylesheet"
-          href="/src/routes/_assets-my-el-2.scss"
+          href="/src/routes/_assets-methods-my-el-2.scss"
         /><!--/lit-part--><!--/lit-part-->
 
         <div class="color-me-red">RED</div>

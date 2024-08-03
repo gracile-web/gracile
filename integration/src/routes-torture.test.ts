@@ -8,11 +8,12 @@ import * as cheerio from 'cheerio';
 import { fetchResource } from './__utils__/fetch.js';
 import {
 	createStaticDevServer,
-	ERROR_HEADING,
+	ERROR_404,
 } from './__utils__/gracile-server.js';
 
-const { address, close, tryOrClose } = await createStaticDevServer({
+const { address, close } = await createStaticDevServer({
 	project: 'static-site',
+	port: 2555,
 });
 
 const currentTestRoutes = '00-routes';
@@ -34,10 +35,10 @@ const routes = [
 	{ path: 'popular/brave', h1: '"Popular" - "Brave"' },
 
 	// DEACTIVATED
-	{ path: 'dance-noon', h1: ERROR_HEADING /* '"Dance" (arrow) - noon' */ },
+	{ path: 'dance-noon', include: ERROR_404 /* '"Dance" (arrow) - noon' */ },
 	{
 		path: 'creation-noon',
-		h1: ERROR_HEADING /* '"Creation" (zebras) - noon' */,
+		include: ERROR_404 /* '"Creation" (zebras) - noon' */,
 	},
 
 	// DEACTIVATED
@@ -45,7 +46,7 @@ const routes = [
 
 	// DEACTIVATED
 	{ path: 'make/best', h1: '"Best" [advance]' },
-	{ path: 'make/done', h1: ERROR_HEADING /* '"Done" [vast]' */ },
+	{ path: 'make/done', include: ERROR_404 /* '"Done" [vast]' */ },
 
 	{ path: 'car/bike/boat', h1: 'car / bike / boat - index' },
 	{ path: 'car/bike/boat/train', h1: 'car / bike / boat / train' },
@@ -56,30 +57,28 @@ const routes = [
 	{ path: 'car/bike/boat/rain', h1: 'car / bike / boat / "Rain"' },
 ];
 
-it('return all correct routes', async () => {
-	const route = '05-torture-test';
+// eslint-disable-next-line no-restricted-syntax
+for (const routeToTest of routes) {
+	it(`return ${routeToTest.path}`, async () => {
+		const route = '05-torture-test';
 
-	await tryOrClose(async () => {
 		// eslint-disable-next-line no-restricted-syntax
-		for (const routeToTest of routes) {
-			const url = [address, currentTestRoutes, route, routeToTest.path];
+		const url = [currentTestRoutes, route, routeToTest.path];
 
-			// eslint-disable-next-line no-await-in-loop
-			const resource = await fetchResource(url);
+		// eslint-disable-next-line no-await-in-loop
+		const resource = await fetchResource(address, url);
 
+		if (routeToTest.include) {
+			assert.equal(resource.includes(routeToTest.include), true);
+		} else if (routeToTest.h1) {
 			const $ = cheerio.load(resource);
 
 			const h1 = $('h1').text();
-
-			// const body = $('body').text();
-			// console.log({ url, body });
-
 			assert.equal(routeToTest.h1, h1);
 		}
+		logger.info(`${routes.length} routes matched!`);
 	});
-
-	logger.info(`${routes.length} routes matched!`);
-});
+}
 
 //
 

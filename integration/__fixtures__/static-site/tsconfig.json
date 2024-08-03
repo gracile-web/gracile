@@ -12,5 +12,5 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false
   },
-  "include": ["src/**/*.js", "src/**/*.js", "./gracile.config.js"]
+  "include": ["src/**/*.js", "src/**/*.ts" /* , "_vite.config.ts" */]
 }

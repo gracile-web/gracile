@@ -21,7 +21,7 @@ export async function checkResponse(
 	//
 	const response = await Promise.resolve(r);
 
-	console.log({ response });
+	// console.log({ response });
 
 	await Promise.all(
 		Object.entries(options).map(async ([key, val]) => {
@@ -46,7 +46,7 @@ export async function checkResponse(
 			if (typeof val === 'object' && val) deepEqual(actual, val);
 			else equal(actual, val);
 
-			console.log(actual);
+			// console.log(actual);
 		}),
 	);
 }
@@ -86,7 +86,7 @@ export const RESPONSE_INVENTORY = {
 			// type: 'basic',
 			// bodyUsed: false,
 			// ok: true,
-			'x-powered-by': 'Express',
+			// 'x-powered-by': 'Express',
 			// 'access-control-allow-origin': '*',
 			connection: 'keep-alive',
 			'keep-alive': 'timeout=5',

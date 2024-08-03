@@ -1,4 +1,4 @@
-import { d as defineRoute } from './route.js';
+import { defineRoute } from '@gracile/gracile/route';
 
 const redirect = defineRoute({
   handler: {
@@ -11,4 +11,3 @@ const redirect = defineRoute({
 });
 
 export { redirect as default };
-//# sourceMappingURL=redirect.js.map

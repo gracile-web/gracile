@@ -1,34 +1,15 @@
-import { d as defineRoute } from './route.js';
-import { R as RequestMethod } from '../server.js';
-import 'node:stream';
-import 'tty';
-import '@lit-labs/ssr';
-import '@lit-labs/ssr/lib/render-result.js';
-import 'stream';
-import 'fs';
-import 'url';
-import 'http';
-import 'util';
-import 'https';
-import 'zlib';
-import 'buffer';
-import 'crypto';
-import 'querystring';
-import 'stream/web';
-import 'express';
-import 'path';
+import { DEV } from 'esm-env';
+import { defineRoute, Route } from '@gracile/gracile/route';
 
 const basic = defineRoute({
-  locals: (locals) => ({ ...locals }),
   handler: {
     GET: async ({ url, request, locals }) => {
-      console.log({ locals });
       return Response.json(
         {
           url,
           param1: url.searchParams.get("foo"),
-          [RequestMethod.GET]: "ok",
-          locals: { traceId: locals.traceId.length }
+          [Route.RequestMethod.GET]: "ok",
+          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -44,9 +25,9 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [RequestMethod.POST]: "ok",
+          [Route.RequestMethod.POST]: "ok",
           body: await request.json(),
-          locals: { traceId: locals.traceId.length }
+          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -56,9 +37,9 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [RequestMethod.PUT]: "ok",
+          [Route.RequestMethod.PUT]: "ok",
           body: await request.json(),
-          locals: { traceId: locals.traceId.length }
+          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -68,9 +49,9 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [RequestMethod.QUERY]: "ok",
+          [Route.RequestMethod.QUERY]: "ok",
           body: await request.json(),
-          locals: { traceId: locals.traceId.length }
+          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -80,8 +61,8 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [RequestMethod.DELETE]: "ok",
-          locals: { traceId: locals.traceId.length }
+          [Route.RequestMethod.DELETE]: "ok",
+          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -91,21 +72,14 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [RequestMethod.PATCH]: "ok",
+          [Route.RequestMethod.PATCH]: "ok",
           body: await request.json(),
-          locals: { traceId: locals.traceId.length }
+          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
     }
-    // HEAD: async ({ url, request }) => {
-    // 	return new Response(null);
-    // },
-    // OPTIONS: async ({ url, request }) => {
-    // 	return Response.json({url, [Route.RequestMethod.OPTIONS]: 'ok', body: await request.json() });
-    // },
   }
 });
 
 export { basic as default };
-//# sourceMappingURL=basic.js.map

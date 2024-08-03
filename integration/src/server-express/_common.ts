@@ -9,7 +9,7 @@ import { api } from './_api.js';
 const projectRoutes = 'server-express/src/routes';
 const currentTestRoutes = '';
 
-const ADDRESS = 'http://localhost:3033';
+const ADDRESS = 'http://localhost:9874';
 
 async function tests(mode: string, writeActual: boolean) {
 	const expectedPath = (name: string) => [
@@ -21,28 +21,30 @@ async function tests(mode: string, writeActual: boolean) {
 	await it('load a static asset from public directory', async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('favicon.svg'),
-			actualContent: await fetchResource([ADDRESS, 'favicon.svg'], {
+			actualContent: await fetchResource(ADDRESS, ['favicon.svg'], {
 				trailingSlash: false,
 			}),
 			writeActual,
 		}));
-	await it('guard by user server middleware', async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('private'),
-			actualContent: await fetchResource([ADDRESS, 'private']),
-			writeActual,
-		}));
-	await it('load an user server API route', async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('api'),
-			actualContent: await fetchResource([ADDRESS, 'api']),
-			writeActual,
-		}));
+
+	// NOTE: Reactivate when Vite Environment API will be setup
+	// await it('guard by user server middleware', async () =>
+	// 	snapshotAssertEqual({
+	// 		expectedPath: expectedPath('private'),
+	// 		actualContent: await fetchResource(ADDRESS, ['private']),
+	// 		writeActual,
+	// 	}));
+	// await it('load an user server API route', async () =>
+	// 	snapshotAssertEqual({
+	// 		expectedPath: expectedPath('api'),
+	// 		actualContent: await fetchResource(ADDRESS, ['api']),
+	// 		writeActual,
+	// 	}));
 	await it('load a basic page', async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('about'),
 			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource([ADDRESS, 'about']),
+				await fetchResource(ADDRESS, ['about']),
 			),
 			writeActual,
 		}));
@@ -50,7 +52,7 @@ async function tests(mode: string, writeActual: boolean) {
 		snapshotAssertEqual({
 			expectedPath: expectedPath('contact'),
 			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource([ADDRESS, 'contact']),
+				await fetchResource(ADDRESS, ['contact']),
 			),
 			writeActual,
 		}));
@@ -58,15 +60,15 @@ async function tests(mode: string, writeActual: boolean) {
 		snapshotAssertEqual({
 			expectedPath: expectedPath('home'),
 			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource([ADDRESS, '?q=123'], { trailingSlash: false }),
+				await fetchResource(ADDRESS, ['?q=123'], { trailingSlash: false }),
 			),
 			writeActual,
 		}));
 	await it('load a page with various asset loading methods', async () =>
 		snapshotAssertEqual({
-			expectedPath: expectedPath('assets'),
+			expectedPath: expectedPath('assets-methods'),
 			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource([ADDRESS, 'assets']),
+				await fetchResource(ADDRESS, ['assets-methods']),
 			),
 			writeActual,
 		}));

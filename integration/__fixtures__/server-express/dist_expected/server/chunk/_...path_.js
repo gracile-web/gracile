@@ -1,4 +1,4 @@
-import { d as defineRoute } from './route.js';
+import { defineRoute } from '@gracile/gracile/route';
 
 const ____path_ = defineRoute({
   handler: {
@@ -15,4 +15,3 @@ const ____path_ = defineRoute({
 });
 
 export { ____path_ as default };
-//# sourceMappingURL=_...path_.js.map
