@@ -32,7 +32,7 @@ pnpm format:fix
 
 pnpm build
 
-pnpm lint:js:fix
+pnpm lint:es:fix
 
 pnpm test
 
@@ -48,3 +48,11 @@ Then open a Pull Request named "feat/my-feat", from the `feat/my-feat` branch to
 
 See also the [Starter projects repository](https://github.com/gracile-web/starter-projects) and use the `link:` protocol inside their package.json files, while testing.  
 That way, you'll be able to use them with your locally developed Gracile version.
+
+---
+
+<!--
+
+nodemon -w 'node_modules/@gracile' -x 'vite dev'
+
+-->

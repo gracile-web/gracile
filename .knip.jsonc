@@ -1,0 +1,26 @@
+{
+	"workspaces": {
+		// ".": {
+		//   "entry": "scripts/*.js",
+		//   "project": "scripts/**/*.js"
+		// },
+		"packages/gracile": {
+			"entry": "src/index.ts",
+			"project": "src/**/*.ts",
+		},
+		// "packages/*": {
+		//   "entry": "{index,cli}.ts",
+		//   "project": "**/*.ts"
+		// },
+		// "packages/cli": {
+		//   "entry": "bin/cli.js"
+		// }
+	},
+	// "entry": [
+	// 	"packages/gracile/src/index.ts",
+	// 	// "plugin.ts",
+	// 	//
+	// 	// "src/index.{js,ts}",
+	// ],
+	// "project": ["packages/**/*.{js,ts}"],
+}

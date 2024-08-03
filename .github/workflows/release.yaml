@@ -1,7 +1,7 @@
 # https://help.github.com/en/categories/automating-your-workflow-with-github-actions
 # See: https://github.com/JulianCataldo/gh-actions
 
-name: Release
+name: CI / Release
 
 on:
   workflow_dispatch:
@@ -73,6 +73,11 @@ jobs:
         shell: bash
         run: pnpm install --frozen-lockfile
 
+      # TODO: More tests
+      # - name: Syncpack Lint
+      #   shell: bash
+      #   run: node --run syncpack:lint
+
       - name: 'Verify the integrity of provenance attestations and registry signatures for installed dependencies'
         run: 'pnpm audit signatures'
 
@@ -80,15 +85,15 @@ jobs:
 
       - name: Lint last commit — Commitlint
         shell: bash
-        run: pnpm run lint:commit
+        run: node --run lint:commit
 
       # - name: Lint CSS — Stylelint
       #   shell: bash
-      #   run: pnpm run lint:css
+      #   run: node --run lint:css
 
       - name: Check all formatting — Prettier
         shell: bash
-        run: pnpm run format
+        run: node --run format
 
       # MARK: Build packages
 
@@ -97,19 +102,23 @@ jobs:
 
       - name: Build all packages
         shell: bash
-        run: pnpm build
+        run: node --run build
 
       # MARK: Lint/Checks post-build
 
       - name: Lint JS/TS — ESLint
         shell: bash
-        run: pnpm run lint:js
+        run: node --run lint:es
 
       # MARK:Tests
 
+      - name: Tests — Units
+        shell: bash
+        run: node --run test:unit
+
       - name: Tests — Integration
         shell: bash
-        run: pnpm run test
+        run: node --run test:integration
 
       # MARK: Publish packages
 

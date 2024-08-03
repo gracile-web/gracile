@@ -4,20 +4,17 @@
   "private": true,
   "description": "A thin, full-stack, web framework",
   "keywords": [
-    "full-stack",
     "custom-elements",
-    "ssr",
+    "full-stack",
+    "lit",
     "server",
     "server-side-rendering",
+    "ssr",
     "static",
-    "web-components",
-    "lit"
+    "web-components"
   ],
   "homepage": "https://gracile.js.org",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gracile-web/gracile"
-  },
+  "repository": "gracile-web/gracile",
   "license": "ISC",
   "author": {
     "name": "Julian Cataldo",
@@ -27,32 +24,41 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "// postsyncpack": "pnpm i",
     "build": "turbo build --concurrency 20",
+    "check-all": "pnpm build && (pnpm test & pnpm lint:es & pnpm format)",
     "clean": "turbo clean --concurrency 20",
     "dev": "turbo dev --concurrency 20",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "preinstall": "npx only-allow pnpm",
-    "check-all": "pnpm build && (pnpm test & pnpm lint:js & pnpm format)",
+    "knip": "knip",
     "lint:commit": "commitlint --from=HEAD~1",
-    "lint:js": "eslint .",
-    "lint:js:fix": "eslint --fix .",
+    "lint:es": "eslint .",
+    "lint:es:fix": "eslint --fix .",
     "list-pkg": "pnpm m ls --json --depth=-1 | node -e \"const path = require('path'); console.log(JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf-8')).map((m) => path.relative(__dirname, m.path)).filter(Boolean))\" # From https://github.com/pnpm/pnpm/issues/1519",
+    "nolyfill": "pnpm dlx nolyfill install",
+    "postnolyfill": "pnpm install",
     "prepare": "husky",
-    "sort-pjson": "pnpm sort-package-json package.json packages/{addons,userland,cli,internal}/*/package.json packages/engine/package.json integration/package.json",
-    "test": "pnpm --prefix integration test",
-    "test:dev": "pnpm --prefix integration test:dev",
-    "copy-readmes": "cp README.md packages/gracile/README.md"
+    "sort-pjson": "pnpm sort-package-json '**/package.json'",
+    "syncpack:lint": "syncpack lint",
+    "test:integration": "pnpm --prefix integration test",
+    "test:integration:dev": "pnpm --prefix integration test:dev",
+    "test:unit": "turbo test:unit",
+    "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel test:unit:dev"
+  },
+  "resolutions": {
+    "braces": "3.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.2",
     "@commitlint/config-conventional": "^19.2.2",
     "@eslint/eslintrc": "^3.0.2",
-    "@lerna-lite/cli": "^3.5.1",
-    "@lerna-lite/list": "^3.5.1",
-    "@lerna-lite/publish": "^3.5.2",
+    "@lerna-lite/cli": "^3.7.1",
+    "@lerna-lite/list": "^3.7.1",
+    "@lerna-lite/publish": "^3.7.1",
     "@types/eslint": "^8.56.9",
-    "@types/node": "catalog:",
+    "@types/node": "^20.14.8",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",
     "c8": "^9.1.0",
@@ -71,16 +77,31 @@
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "eslint-plugin-tsdoc": "^0.2.17",
     "husky": "^9.0.11",
+    "knip": "^5.27.0",
     "prettier": "^3.2.5",
     "sort-package-json": "^2.10.0",
+    "syncpack": "^12.4.0",
     "tsx": "^4.7.2",
     "turbo": "^1.13.2",
     "typedoc": "^0.25.13",
     "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "catalog:"
+    "typescript": "5.5.4"
   },
   "packageManager": "pnpm@9.0.6",
-  "resolutions": {
-    "braces": "3.0.3"
+  "pnpm": {
+    "overrides": {
+      "array-includes": "npm:@nolyfill/array-includes@^1",
+      "array.prototype.findlastindex": "npm:@nolyfill/array.prototype.findlastindex@^1",
+      "array.prototype.flat": "npm:@nolyfill/array.prototype.flat@^1",
+      "array.prototype.flatmap": "npm:@nolyfill/array.prototype.flatmap@^1",
+      "hasown": "npm:@nolyfill/hasown@^1",
+      "is-core-module": "npm:@nolyfill/is-core-module@^1",
+      "object.assign": "npm:@nolyfill/object.assign@^1",
+      "object.entries": "npm:@nolyfill/object.entries@^1",
+      "object.fromentries": "npm:@nolyfill/object.fromentries@^1",
+      "object.groupby": "npm:@nolyfill/object.groupby@^1",
+      "object.values": "npm:@nolyfill/object.values@^1",
+      "side-channel": "npm:@nolyfill/side-channel@^1"
+    }
   }
 }

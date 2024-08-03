@@ -15,7 +15,7 @@
   "packages": [
     "./packages/gracile",
 
-    "./packages/cli",
+    // "./packages/cli",
     "./packages/client",
     "./packages/server",
     "./packages/engine",

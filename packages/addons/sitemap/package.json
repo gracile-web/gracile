@@ -3,15 +3,15 @@
   "version": "0.0.5",
   "description": "A thin, full-stack, web framework",
   "keywords": [
-    "full-stack",
-    "meta-framework",
     "custom-elements",
-    "ssr",
+    "full-stack",
+    "lit",
+    "meta-framework",
     "server",
     "server-side-rendering",
+    "ssr",
     "static",
-    "web-components",
-    "lit"
+    "web-components"
   ],
   "homepage": "https://gracile.js.org",
   "repository": {
@@ -41,16 +41,16 @@
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
-    "picocolors": "catalog:",
+    "picocolors": "^1.0.0",
     "sitemap": "^7.1.1"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "@types/node": "^20.14.8",
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
-    "vite": "catalog:"
+    "vite": "^5.3.5"
   },
   "publishConfig": {
     "access": "public",
