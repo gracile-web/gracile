@@ -3,6 +3,9 @@
   "version": "independent",
   "npmClient": "pnpm",
 
+  "conventionalCommits": true,
+  "exact": true,
+
   "command": {
     "publish": {
       "cleanupTempFiles": true,

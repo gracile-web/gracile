@@ -8,6 +8,7 @@ on:
   push:
     paths-ignore:
       - .github/**
+      - '!.github/workflows/release.yaml'
       - '**/*.md'
     branches:
       - '([0-9])?(.{+([0-9]),x}).x'
@@ -147,7 +148,7 @@ jobs:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           NPM_TOKEN: '${{ secrets.NPM_TOKEN }}' # Not really needed (already global)
         run: |
-          pnpm lerna publish --conventional-commits --exact --conventional-graduate --create-release=github --yes
+          pnpm lerna publish --create-release=github --conventional-graduate --yes
 
       - name: Bump Prod Version Fallback
         if: ${{ always() && steps.graduateRelease.outcome == 'failure'  }}
@@ -157,7 +158,7 @@ jobs:
         run: |
           echo Falling back to non-graduate release due to https://github.com/lerna/lerna/issues/2532
           git stash
-          pnpm lerna publish --conventional-commits --exact --create-release=github --yes
+          pnpm lerna publish --create-release=github --yes
 
       # MARK: [NEXT]
       - name: 'Lerna publish [next]'
@@ -169,4 +170,4 @@ jobs:
         # NOTE: Not sure if `--canary="next"` is needed.
         # https://github.com/lerna/lerna/issues/1433
         run: |
-          pnpm lerna publish --conventional-commits --exact --conventional-prerelease --canary="next" --dist-tag=next --preid=next --yes
+          pnpm lerna publish --conventional-prerelease --canary next --dist-tag next --preid next --no-changelog --yes
