@@ -50,16 +50,17 @@ export function defineRoute<
 						DELETE?: R.Handler<Response>;
 						HEAD?: R.Handler<Response>;
 						OPTIONS?: R.Handler<Response>;
-				  };
+				  }
+				| undefined;
 
 	staticPaths?: (() => StaticPathOptions[]) | undefined;
 
 	// TODO: Make it type dependent with handler
 	prerender?: boolean | undefined;
 
-	document?: R.DocumentTemplate<RouteContext>;
+	document?: R.DocumentTemplate<RouteContext> | undefined;
 
-	template?: R.BodyTemplate<RouteContext>;
+	template?: R.BodyTemplate<RouteContext> | undefined;
 }) {
 	// NOTE: We need a factory so `instanceof` will work cross-realm.
 	// Otherwise it breaks. when invoked from an `ssrLoadModule` context

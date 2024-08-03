@@ -57,7 +57,7 @@ export const helpers = {
 /**
  * Server-rendered page marker
  */
-class RouteTemplateOutlet extends LitElement {
+export class RouteTemplateOutlet extends LitElement {
 	// eslint-disable-next-line class-methods-use-this
 	render() {
 		return LitHtml`Something went wrong during server side rendering!`;
