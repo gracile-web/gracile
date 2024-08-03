@@ -167,7 +167,7 @@ jobs:
         env:
           NPM_TOKEN: '${{ secrets.NPM_TOKEN }}' # Not really needed (already global)
 
-        # NOTE: Not sure if `--canary="next"` is needed.
+        # --canary next
         # https://github.com/lerna/lerna/issues/1433
         run: |
-          pnpm lerna publish --conventional-prerelease --canary next --dist-tag next --preid next --no-changelog --yes
+          pnpm lerna publish --conventional-prerelease --dist-tag=next --preid=next --no-changelog --yes

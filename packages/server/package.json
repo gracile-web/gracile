@@ -29,7 +29,6 @@
   "exports": {
     "./*": "./dist/*.js"
   },
-  "main": "index.js",
   "files": [
     "./dist/**/*",
     "!/dist/**/*.test.ts"
