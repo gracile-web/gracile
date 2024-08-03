@@ -22,13 +22,18 @@ export async function createHandlers({
 	const routes = await collectRoutes(root /* vite */);
 
 	vite.watcher.on('all', (event, file) => {
+		// console.log({ event });
 		if (
-			file.match(/\/src\/routes\/(.*)\.(ts|js)$/) /*  &&
+			file.match(/\/src\/routes\/(.*)\.(ts|js)$/) &&
+			event === 'add'
+			/*  &&
 			['add', 'unlink',''].includes(event) */
 		)
-			collectRoutes(root, file /* , vite */).catch((e) =>
-				logger.error(String(e)),
-			);
+			collectRoutes(root /* { file, event } */ /* , vite */)
+				.then(() => {
+					vite.hot.send('vite:invalidate');
+				})
+				.catch((e) => logger.error(String(e)));
 	});
 	//
 

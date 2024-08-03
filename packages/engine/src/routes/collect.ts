@@ -72,19 +72,19 @@ const routes: R.RoutesManifest = new Map<string, R.Route>();
 
 export async function collectRoutes(
 	root: string /* vite: ViteDevServer */,
-	file?: string,
+	// single: { file?: string; event: 'add' },
 ): Promise<R.RoutesManifest> {
 	routes.clear();
 
 	const routesFolder = 'src/routes';
 	const routesFolderAbsolute = join(root, routesFolder);
 
-	const allFilesInRoutes: string[] = file
-		? [file]
-		: await new Fdir()
-				.withRelativePaths()
-				.crawl(routesFolderAbsolute)
-				.withPromise();
+	// relative(routesFolderAbsolute, file);
+
+	const allFilesInRoutes: string[] = await new Fdir()
+		.withRelativePaths()
+		.crawl(routesFolderAbsolute)
+		.withPromise();
 
 	// console.log({ allFilesInRoutes });
 
