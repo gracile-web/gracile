@@ -20,6 +20,13 @@
     "test:dev2": {
       "cache": false
     },
+    "test:unit": {
+      "cache": false,
+      "persistent": true
+    },
+    "test:unit:dev": {
+      "cache": false
+    },
     "build": {
       "cache": false,
       "dependsOn": [

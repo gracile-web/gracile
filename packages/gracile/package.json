@@ -3,15 +3,15 @@
   "version": "0.1.1",
   "description": "A thin, full-stack, web framework",
   "keywords": [
-    "full-stack",
-    "meta-framework",
     "custom-elements",
-    "ssr",
+    "full-stack",
+    "lit",
+    "meta-framework",
     "server",
     "server-side-rendering",
+    "ssr",
     "static",
-    "web-components",
-    "lit"
+    "web-components"
   ],
   "homepage": "https://gracile.js.org",
   "repository": {
@@ -36,18 +36,22 @@
     "./tsconfigs/*.json": "./tsconfigs/*"
   },
   "bin": {
-    "gracile-dev": "./dist/bin/gracile-watch.js",
-    "gracile": "./dist/bin/gracile.js"
+    "gracile": "./dist/bin/gracile.js",
+    "gracile-dev": "./dist/bin/gracile-watch.js"
   },
   "files": [
     "./ambient.d.ts",
     "./dist/**/*",
-    "./tsconfigs/*"
+    "./tsconfigs/*",
+    "!/dist/**/*.test.ts"
   ],
   "scripts": {
+    "// pretest": "node --run build",
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test": "c8 node --test --enable-source-maps 'dist/**/*.test.js'",
+    "test:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
   },
   "dependencies": {
     "@gracile/cli": "workspace:^",
@@ -55,14 +59,14 @@
     "@gracile/engine": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@gracile/server": "workspace:^",
-    "@lit-labs/ssr": "catalog:",
+    "@lit-labs/ssr": "^3.2.2",
     "tsx": "^4.7.2",
     "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "@types/node": "^20.14.8",
+    "typescript": "5.5.4"
   },
   "publishConfig": {
     "access": "public",

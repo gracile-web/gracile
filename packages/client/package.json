@@ -3,15 +3,15 @@
   "version": "0.0.4",
   "description": "A thin, full-stack, web framework",
   "keywords": [
-    "full-stack",
-    "meta-framework",
     "custom-elements",
-    "ssr",
+    "full-stack",
+    "lit",
+    "meta-framework",
     "server",
     "server-side-rendering",
+    "ssr",
     "static",
-    "web-components",
-    "lit"
+    "web-components"
   ],
   "homepage": "https://gracile.js.org",
   "repository": {
@@ -39,22 +39,22 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@lit-labs/ssr-client": "catalog:"
-  },
-  "// disabledDeps": {
-    "@webcomponents/template-shadowroot": "0.x"
+    "@lit-labs/ssr-client": " ^1.1.7"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "^4.7.1",
-    "typedoc": "^0.25.8",
-    "typescript": "catalog:"
+    "tsx": "^4.7.2",
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
-    "@lit-labs/ssr": "catalog:"
+    "@lit-labs/ssr": "^3.2.2"
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
+  },
+  "// disabledDeps": {
+    "@webcomponents/template-shadowroot": "0.x",
+    "typedoc": "^0.25.8"
   }
 }

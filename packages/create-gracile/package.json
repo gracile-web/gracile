@@ -3,15 +3,15 @@
   "version": "0.0.6",
   "description": "A thin, full-stack, web framework",
   "keywords": [
-    "full-stack",
-    "meta-framework",
     "custom-elements",
-    "ssr",
+    "full-stack",
+    "lit",
+    "meta-framework",
     "server",
     "server-side-rendering",
+    "ssr",
     "static",
-    "web-components",
-    "lit"
+    "web-components"
   ],
   "homepage": "https://gracile.js.org",
   "repository": {
@@ -53,15 +53,15 @@
     "esm-env": "^1.0.0",
     "fast-glob": "^3.3.2",
     "latest-version": "^9.0.0",
-    "picocolors": "catalog:",
+    "picocolors": "^1.0.0",
     "random-words": "^2.0.1"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/degit": "^2.8.6",
-    "@types/node": "catalog:",
+    "@types/node": "^20.14.8",
     "cli-testing-library": "^2.0.2",
-    "typescript": "catalog:"
+    "typescript": "5.5.4"
   },
   "publishConfig": {
     "access": "public",

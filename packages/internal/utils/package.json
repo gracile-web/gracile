@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "description": "A thin, full-stack, web framework",
   "keywords": [
-    "full-stack",
-    "meta-framework",
     "custom-elements",
-    "ssr",
+    "full-stack",
+    "lit",
+    "meta-framework",
     "server",
     "server-side-rendering",
+    "ssr",
     "static",
-    "web-components",
-    "lit"
+    "web-components"
   ],
   "homepage": "https://gracile.js.org",
   "repository": {
@@ -30,9 +30,9 @@
     "./*": "./dist/*.js",
     "./logger": {
       "development": "./dist/logger.dev.js",
+      "default": "./dist/logger.build.js",
       "test": "./dist/logger.dev.js",
-      "preview": "./dist/logger.preview.js",
-      "default": "./dist/logger.build.js"
+      "preview": "./dist/logger.preview.js"
     }
   },
   "files": [
@@ -43,13 +43,13 @@
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch"
   },
-  "peerDependencies": {
-    "vite": "catalog:"
-  },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "@types/node": "^20.14.8",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "vite": "^5.3.5"
   },
   "publishConfig": {
     "access": "public",
