@@ -38,7 +38,7 @@ function matchRouteFromUrl(
 	if (!match || !foundRoute)
 		throw new Error(`No route matching for ${url}`, { cause: 404 });
 
-	const params: Params = match.pathname?.groups;
+	const params: Params = Object.freeze({ ...match.pathname.groups });
 
 	return { match, foundRoute, params, pathname };
 }

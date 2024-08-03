@@ -1,10 +1,11 @@
-import path, { join, relative } from 'node:path';
+import { join } from 'node:path';
 
 import { logger } from '@gracile/internal-utils/logger';
 import * as paths from '@gracile/internal-utils/paths';
-import fastGlob from 'fast-glob';
+import { fdir as Fdir } from 'fdir';
 import c from 'picocolors';
 import { URLPattern } from 'urlpattern-polyfill/urlpattern';
+import { createFilter } from 'vite';
 
 // import type { ViteDevServer } from 'vite';
 import { prepareSortableRoutes, routeComparator } from './comparator.js';
@@ -12,11 +13,9 @@ import { REGEXES } from './load-module.js';
 import type * as R from './route.js';
 
 function extractRoutePatterns(
-	absoluteFilePath: string,
+	routeFilePath: string,
 ): Pick<R.Route, 'pattern' | 'hasParams'> & { patternString: string } {
-	const routePathname = path
-		.relative('src/routes', paths.relativeToProject(absoluteFilePath))
-		.replace(/\.[j|t]s$/, '');
+	const routePathname = routeFilePath.replace(/\.[j|t]s$/, '');
 
 	let pathParts = routePathname.split(
 		process.platform === 'win32' ? '\\' : '/',
@@ -34,8 +33,10 @@ function extractRoutePatterns(
 		pathParts.pop();
 
 	if (pathParts.length === 1 && pathParts.at(0) === 'index') pathParts = [];
-	if (pathParts.length === 1 && pathParts.at(0) === '404')
-		pathParts = ['__404'];
+
+	// NOTE: Disabled for now, but might be useful later
+	// if (pathParts.length === 1 && pathParts.at(0) === '404')
+	// 	pathParts = ['__404'];
 
 	let hasParams = false;
 
@@ -71,39 +72,56 @@ const routes: R.RoutesManifest = new Map<string, R.Route>();
 
 export async function collectRoutes(
 	root: string /* vite: ViteDevServer */,
+	file?: string,
 ): Promise<R.RoutesManifest> {
 	routes.clear();
 
-	const serverEntrypoints = await fastGlob(
+	const routesFolder = 'src/routes';
+	const routesFolderAbsolute = join(root, routesFolder);
+
+	const allFilesInRoutes: string[] = file
+		? [file]
+		: await new Fdir()
+				.withRelativePaths()
+				.crawl(routesFolderAbsolute)
+				.withPromise();
+
+	// console.log({ allFilesInRoutes });
+
+	const serverEntrypointsFilter = createFilter(
+		['**/*.{js,ts}'],
 		[
-			'src/routes/**/*.{js,ts}',
-			'!**/src/routes/**/*.client.{js,ts}',
-			'!**/src/routes/**/*.document.{js,ts}',
-			'!**/src/routes/**/_*/**',
-			'!**/src/routes/**/_*',
+			//
+			'**/*.client.{js,ts}',
+			'**/*.document.{js,ts}',
+			'**/_*/**',
+			'**/_*',
+			'**/.*',
 		],
-		{ ignore: [], cwd: root, absolute: true },
+	);
+	const serverEntrypoints = allFilesInRoutes.filter((f) =>
+		serverEntrypointsFilter(f),
 	);
 
 	// MARK: Routes priority order
+	// TODO: `prepareSortableRoutes` and `routeComparator` in same function `sortRoutes`
 	const serverEntrypointsSorted = prepareSortableRoutes(serverEntrypoints)
 		.sort((a, b) => routeComparator(a, b))
 		.map((r) => r.route);
 
-	const serverPageClientAssets = await fastGlob(
-		[
-			//
-			'src/routes/**/*.{css,scss}',
-			'src/routes/**/*.client.{js,ts}',
-		],
-		{ ignore: [], cwd: root, absolute: true },
+	const serverPageClientAssetsFilter = createFilter([
+		'**/*.client.{js,ts}',
+		'**/*.{css,scss,sass,less,styl,stylus}',
+	]);
+	const serverPageClientAssets = allFilesInRoutes.filter((f) =>
+		serverPageClientAssetsFilter(f),
 	);
 
 	logger.info(
 		`\n${c.underline(`Found ${c.bold('routes')}`)}:\n` +
 			`${c.dim('- ')}${serverEntrypointsSorted
 				.map((f) => {
-					const pathParts = relative(join(root, 'src/routes'), f).split('/');
+					const pathParts = f.split('/');
 
 					return pathParts
 						.map((part, index) => {
@@ -120,11 +138,12 @@ export async function collectRoutes(
 
 	// MARK: Associate
 
-	serverEntrypointsSorted.forEach((filePath) => {
-		const routeWithPatterns = extractRoutePatterns(filePath);
+	serverEntrypointsSorted.forEach((routePath) => {
+		const filePath = join(routesFolder, routePath);
+		const routeWithPatterns = extractRoutePatterns(routePath);
 
 		routes.set(routeWithPatterns.patternString, {
-			filePath: paths.relativeToProject(filePath),
+			filePath,
 			pattern: routeWithPatterns.pattern,
 
 			hasParams: routeWithPatterns.hasParams,
@@ -134,19 +153,14 @@ export async function collectRoutes(
 		});
 	});
 
-	serverPageClientAssets.forEach((filePath) => {
+	serverPageClientAssets.forEach((routePath) => {
 		// NOTE: Exact extension needed client side by Vite.
-		const assetPathWithExt = paths.relativeToProject(filePath);
-		const associatedRoutePath = assetPathWithExt.replace(
-			/\.(.*)$/,
-			// FIXME: Don't need this anymore?
-			(_a, b) => `.${String(b)}`,
-		);
+		const assetPathWithExt = join(routesFolder, routePath);
 
 		routes.forEach((route) => {
 			if (
 				paths.removeAllExt(route.filePath) ===
-				paths.removeAllExt(associatedRoutePath)
+				paths.removeAllExt(assetPathWithExt)
 			)
 				route.pageAssets.push(assetPathWithExt);
 		});
