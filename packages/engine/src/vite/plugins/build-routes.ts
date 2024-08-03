@@ -18,6 +18,7 @@ export const buildRoutes = async ({
 	_config: GracileConfig;
 	serverMode?: boolean;
 }) => {
+	// TODO: extract upstream, return just the plugins
 	const { renderedRoutes, routes } = await renderRoutes({
 		vite: viteServerForBuild,
 		serverMode,

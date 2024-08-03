@@ -1,40 +1,40 @@
 import { logger } from '@gracile/internal-utils/logger';
-import { setCurrentWorkingDirectory } from '@gracile/internal-utils/paths';
 import c from 'picocolors';
+import { type ViteDevServer } from 'vite';
 
-import { getConfigs } from '../vite/config.js';
+import { collectRoutes } from '../routes/collect.js';
 import {
-	createStandaloneDevServer,
-	DEFAULT_DEV_SERVER_PORT,
-	DEFAULT_USER_SERVER_MODULE_ENTRYPOINT,
-	startUserProvidedServer,
-} from './server.js';
+	type ConnectLikeAsyncMiddleware,
+	createGracileMiddleware,
+} from '../server/request.js';
 
-export async function dev(options: {
-	port?: number | undefined;
-	root?: string | undefined;
-	expose?: boolean | undefined;
-}) {
-	logger.info(c.gray('\n— Development mode —\n'));
+export async function createHandlers({
+	vite,
+}: {
+	vite: ViteDevServer;
+}): Promise<{
+	handlers: ConnectLikeAsyncMiddleware;
+}> {
+	const root = vite.config.root;
 
-	const root = setCurrentWorkingDirectory(options.root);
+	logger.info(c.green('creating handler…'), { timestamp: true });
 
-	const { userConfigGracile } = await getConfigs(root, 'dev');
-	const port =
-		options.port ?? userConfigGracile?.port ?? DEFAULT_DEV_SERVER_PORT;
+	const routes = await collectRoutes(root /* vite */);
 
-	const entrypoint =
-		userConfigGracile?.server?.entrypoint ??
-		DEFAULT_USER_SERVER_MODULE_ENTRYPOINT;
+	vite.watcher.on('all', (event, file) => {
+		if (
+			file.match(/\/src\/routes\/(.*)\.(ts|js)$/) /*  &&
+			['add', 'unlink',''].includes(event) */
+		)
+			collectRoutes(root, file /* , vite */).catch((e) =>
+				logger.error(String(e)),
+			);
+	});
+	//
 
-	if (userConfigGracile?.output === 'server') {
-		logger.info(c.gray(`\n— User provided ${c.cyan('server')} mode —\n`));
+	// NOTE: Wrong place?
+	const serverMode = false;
+	const gracile = createGracileMiddleware({ vite, root, serverMode, routes });
 
-		return startUserProvidedServer({
-			root,
-			entrypoint,
-		});
-	}
-
-	return createStandaloneDevServer({ root, port });
+	return { handlers: gracile };
 }
