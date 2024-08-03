@@ -9,6 +9,7 @@ const basic = defineRoute({
           url,
           param1: url.searchParams.get("foo"),
           [Route.RequestMethod.GET]: "ok",
+          // TODO: When middleware are implemented, mock this properly
           locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
