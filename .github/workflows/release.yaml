@@ -165,5 +165,8 @@ jobs:
         # if: github.ref == 'refs/heads/to-integrate-next'
         env:
           NPM_TOKEN: '${{ secrets.NPM_TOKEN }}' # Not really needed (already global)
+
+        # NOTE: Not sure if `--canary="next"` is needed.
+        # https://github.com/lerna/lerna/issues/1433
         run: |
-          pnpm lerna publish --conventional-commits --exact --conventional-prerelease --canary --dist-tag=next --preid=next --yes
+          pnpm lerna publish --conventional-commits --exact --conventional-prerelease --canary="next" --dist-tag=next --preid=next --yes
