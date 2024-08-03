@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.7-next.0](https://github.com/gracile-web/gracile/compare/create-gracile@0.0.6...create-gracile@0.0.7-next.0) (2024-08-03)
+
+**Note:** Version bump only for package create-gracile
+
 ## [0.0.6](https://github.com/gracile-web/gracile/compare/create-gracile@0.0.5...create-gracile@0.0.6) (2024-06-08)
 
 **Note:** Version bump only for package create-gracile
