@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2-next.0](https://github.com/gracile-web/gracile/compare/@gracile/server@0.1.1...@gracile/server@0.1.2-next.0) (2024-08-03)
+
+### Bug Fixes
+
+* global app handler locals ([b3a4eaf](https://github.com/gracile-web/gracile/commit/b3a4eaf159d804ae3102753a37c90da571675287))
+* minify server emitted css, remove old dep ([c5e39d6](https://github.com/gracile-web/gracile/commit/c5e39d6e018ca0b673b89f734b454adcb230bf83))
+
 ## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile/server@0.1.0...@gracile/server@0.1.1) (2024-06-23)
 
 ### Bug Fixes
