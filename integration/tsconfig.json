@@ -9,8 +9,6 @@
   "compilerOptions": {
     "noEmit": true,
 
-    "outDir": "dist",
-
     "experimentalDecorators": true,
     "useDefineForClassFields": false
   }

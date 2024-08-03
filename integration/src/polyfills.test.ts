@@ -5,8 +5,9 @@ import { fetchResource } from './__utils__/fetch.js';
 import { createStaticDevServer } from './__utils__/gracile-server.js';
 import { snapshotAssertEqual } from './__utils__/snapshot.js';
 
-const { address, close, tryOrClose } = await createStaticDevServer({
+const { address, close } = await createStaticDevServer({
 	project: 'static-site',
+	port: 5941,
 });
 
 const projectRoutes = 'static-site/src/routes';
@@ -19,17 +20,16 @@ const currentTestRoutes = '04-polyfills';
 it('client polyfills', async () => {
 	const route = '00-polyfills';
 
-	await tryOrClose(async () => {
-		await snapshotAssertEqual({
-			expectedPath: [
-				projectRoutes,
-				currentTestRoutes,
-				`_${route}_expected.html`,
-			],
-			actualContent: await fetchResource([address, currentTestRoutes, route]),
-			writeActual: false,
-		});
+	await snapshotAssertEqual({
+		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
+		actualContent: await fetchResource(address, [currentTestRoutes, route]),
+		writeActual: false,
 	});
 });
 
-after(async () => close());
+after(async () => {
+	await close();
+	// HACK: This is a bug :/
+	// Only with this test, IDK why
+	process.exit();
+});

@@ -54,4 +54,3 @@ import"./modulepreload-polyfill-B5Qt9EMX.js";/**
 				display: block;
 			}
 		`];gt([Yt({type:Number})],L.prototype,"count",2);L=gt([Gt("lit-element")],L);
-//# sourceMappingURL=index-CuWS9hnN.js.map

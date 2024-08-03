@@ -4,19 +4,18 @@ import { it } from 'node:test';
 import { build } from '../__utils__/gracile-server.js';
 import { compareFolder } from '../__utils__/snapshot.js';
 
-const projectDist = 'static-site/dist';
-const projectDistExpected = 'static-site/dist_expected';
+const projectDist = 'server-express/dist';
+const projectDistExpected = 'server-express/dist_expected';
 
 // ---
 
-// FIXME: Missing a proper close on crash (like for dev.)
+const writeActual = false;
 
-it('build and compare outputs', async () => {
-	await build('static-site');
-
+await it('build and compare outputs', async () => {
+	await build('server-express', 'server');
 	await compareFolder({
 		actualPath: projectDist,
 		expectedPath: projectDistExpected,
-		writeActual: false,
+		writeActual,
 	});
 });

@@ -1,2 +1,1 @@
 import"./modulepreload-polyfill-B5Qt9EMX.js";function c(){return HTMLTemplateElement.prototype.hasOwnProperty("shadowRoot")}c()||function e(a){a.querySelectorAll("template[shadowroot]").forEach(n=>{const o=n,r=o.getAttribute("shadowroot")||"open",t=o.parentNode.attachShadow({mode:r});t.appendChild(o.content),o.remove(),e(t)})}(document);requestIdleCallback(()=>{console.log("REQUEST IDLE CALLBACK PLEASE!")});
-//# sourceMappingURL=index-yDvPqK9r.js.map

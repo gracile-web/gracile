@@ -1,26 +1,7 @@
-import { d as defineRoute } from './route.js';
-import { html } from '@lit-labs/ssr/lib/server-template.js';
+import { defineRoute } from '@gracile/gracile/route';
+import { html } from '@gracile/gracile/server-html';
 import { d as document } from './document.js';
-import '../server.js';
-import 'node:stream';
-import 'tty';
-import '@lit-labs/ssr';
-import '@lit-labs/ssr/lib/render-result.js';
-import 'stream';
-import 'fs';
-import 'url';
-import 'http';
-import 'util';
-import 'https';
-import 'zlib';
-import 'buffer';
-import 'crypto';
-import 'querystring';
-import 'stream/web';
-import 'express';
-import 'path';
-import 'lit';
-import 'lit/directives/unsafe-html.js';
+import '@gracile/gracile/document';
 
 const bar = defineRoute({
   document: (context) => document({ ...context, title: "Gracile Foo/Bar" }),
@@ -37,4 +18,3 @@ const bar = defineRoute({
 });
 
 export { bar as default };
-//# sourceMappingURL=bar.js.map

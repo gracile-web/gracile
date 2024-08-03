@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { checkResponse, RESPONSE_INVENTORY } from '../__utils__/fetch-utils.js';
 
-const ADDRESS = 'http://localhost:3033';
+const ADDRESS = 'http://localhost:9874';
 const API = '/gracile-api-endpoint';
 // const API_URL = ADDRESS + API;
 
@@ -55,7 +55,7 @@ export async function api() {
 						? {
 								url: url.href,
 								[method]: 'ok',
-								locals: { traceId: 36 },
+								locals: { requestIdLength: 36 },
 								param1: 'bar',
 								...(hasBody ? { body } : {}),
 							}

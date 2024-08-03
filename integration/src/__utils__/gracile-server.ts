@@ -1,76 +1,100 @@
+import { /* cp,  */ rm } from 'node:fs/promises';
 import path from 'node:path';
 
-import { dev } from '@gracile/engine/dev/dev';
-import { createStandaloneDevServer } from '@gracile/engine/dev/server';
-import { RANDOM_PORT } from '@gracile/engine/server/env';
-import { viteBuild } from '@gracile/engine/vite/build';
 import { logger } from '@gracile/internal-utils/logger';
+import { build as viteBuild, createServer /* , type UserConfig */ } from 'vite';
 
-export const ERROR_HEADING = '😵 An error has occurred!';
+// NOTE: This method is flaky (creating folders on the fly)
+// import { defineConfig } from 'vite';
+// import { gracile } from '@gracile/gracile/plugin';
 
-function getProjectPath(projectName: string) {
-	return path.join(process.cwd(), '__fixtures__', projectName);
-}
+// import { viteSvgPlugin } from '@gracile/svg/vite';
+// import { viteMarkdownPlugin } from '@gracile/markdown/vite';
+// import { MarkdownRenderer } from '@gracile/markdown-preset-marked';
 
-export async function createDynamicDevServer({
-	project,
-	port,
-}: {
-	project: string;
-	port?: number;
-}) {
-	/* const devServer =  */ await dev({ root: getProjectPath(project), port });
+//
 
-	return {
-		close: async () => {
-			await fetch('http://localhost:3033/__close');
+// const configStatic = {
+// 	plugins: [
+// 		viteSvgPlugin(),
+// 		viteMarkdownPlugin({ MarkdownRenderer }),
+// 		gracile(),
+// 	],
+// } satisfies UserConfig;
+// const configServer = {
+// 	plugins: [
+// 		viteSvgPlugin(),
+// 		viteMarkdownPlugin({ MarkdownRenderer }),
+// 		gracile({ mode: 'server' }),
+// 	],
+// } satisfies UserConfig;
 
-			// await devServer.close();
-		},
-	};
+// export const ERROR_HEADING = '😵 An error has occurred!';
+
+await rm(path.join(process.cwd(), '.tmp'), { recursive: true }).catch(
+	() => null,
+);
+
+export const ERROR_404 = `404 not found!`;
+
+/* async  */ function getProjectTempPath(projectName: string) {
+	const source = path.join(process.cwd(), '__fixtures__', projectName);
+
+	// const temp = path.join(
+	// 	process.cwd(),
+	// 	'.tmp',
+	// 	projectName,
+	// 	crypto.randomUUID(),
+	// );
+
+	// await cp(source, temp, { recursive: true });
+
+	// return temp;
+
+	return source;
 }
 
 export async function createStaticDevServer({
 	project,
 	port,
+	// mode = 'static',
 }: {
 	project: string;
-	port?: number;
+	port: number;
+	mode?: 'static' | 'server';
 }) {
-	// NOTE: Should just use dev, like `createDynamicDevServer` does
-	const { port: foundPort, instance } = await createStandaloneDevServer({
-		port: typeof port !== 'undefined' ? port : RANDOM_PORT,
-		root: getProjectPath(project),
+	logger.info('creating server…');
+	if (!port) throw new Error('No port');
+
+	const server = await createServer({
+		// plugins: [
+		// 	gracile({ mode }),
+		// 	viteSvgPlugin(),
+		// 	viteMarkdownPlugin({ MarkdownRenderer }),
+		// ],
+		// configFile: false,
+		// mode,
+		server: { port },
+		root: /* await */ getProjectTempPath(project),
 	});
 
-	async function close(code = 0) {
-		logger.info('closing server…');
+	await server.listen();
 
-		return new Promise((resolve) => {
-			instance.close(() => {
-				resolve('server closed');
-				process.exit(code);
-			});
-		});
-	}
-
-	async function tryOrClose(fn: () => Promise<void> | void) {
-		try {
-			await Promise.resolve(fn());
-		} catch (e) {
-			logger.error(String(String(e)));
-			await close(1);
-		}
-	}
-
-	return {
-		port: foundPort,
-		address: `http://localhost:${foundPort}`,
-		close,
-		tryOrClose,
-	};
+	return { address: `http://localhost:${port}`, close: () => server.close() };
 }
 
-export async function build(project: string) {
-	await viteBuild(getProjectPath(project));
+export async function build(project: string, _mode = 'static') {
+	//
+	return viteBuild({
+		// configFile: false,
+
+		// plugins: [
+		// 	viteSvgPlugin(),
+		// 	viteMarkdownPlugin({ MarkdownRenderer }),
+		// 	gracile({ mode }),
+		// ],
+		// mode,
+
+		root: /* await */ getProjectTempPath(project),
+	});
 }
