@@ -18,10 +18,13 @@
     "verbatimModuleSyntax": true,
     "exactOptionalPropertyTypes": true,
     "noPropertyAccessFromIndexSignature": true,
-
     "noEmitOnError": false,
 
     "declaration": true,
-    "declarationMap": true
-  }
+    "declarationMap": true,
+
+    "outDir": "${configDir}/dist"
+  },
+
+  "include": ["${configDir}/src/**/*", "${configDir}/ambient.d.ts"]
 }

@@ -8,11 +8,11 @@
   },
   "type": "module",
   "files": [],
+  "devDependencies": {
+    "typescript": "5.5.4"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "devDependencies": {
-    "typescript": "catalog:"
   }
 }

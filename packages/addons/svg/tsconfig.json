@@ -1,9 +1,3 @@
 {
-  "extends": "@gracile/internal-tsconfigs/config-base.json",
-
-  "include": ["./src/**/*"],
-
-  "compilerOptions": {
-    "outDir": "./dist"
-  }
+  "extends": "@gracile/internal-tsconfigs/config-base.json"
 }
