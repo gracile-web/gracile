@@ -3,20 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.1.1...@gracile/engine@0.2.0-next.0) (2024-08-03)
-
-### Bug Fixes
-
-* global app handler locals ([b3a4eaf](https://github.com/gracile-web/gracile/commit/b3a4eaf159d804ae3102753a37c90da571675287))
-* minify server emitted css, remove old dep ([c5e39d6](https://github.com/gracile-web/gracile/commit/c5e39d6e018ca0b673b89f734b454adcb230bf83))
-
-### Features
-
-* convert standalone custom vite app to just a plugin ([e0c44c2](https://github.com/gracile-web/gracile/commit/e0c44c29a8221f652256ad3f120626512e579f32))
-* handle server asset url imports ([d6dfb98](https://github.com/gracile-web/gracile/commit/d6dfb983f6472fef3f0fa62a55e60c1e6b8430af))
-* hmr invalidation on route changes, revert single file update, prevent duplicate events ([90d9957](https://github.com/gracile-web/gracile/commit/90d99576d3ae8c572b12ef2c8a4e384fa9a41a2e))
-* use fdir instead of fast-glob, refresh with only one file instead of the whole routes folder ([c2b53cd](https://github.com/gracile-web/gracile/commit/c2b53cdbe74dc753f6eb7081c95e6000cb3ada58))
-
 ## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.1.0...@gracile/engine@0.1.1) (2024-06-23)
 
 **Note:** Version bump only for package @gracile/engine

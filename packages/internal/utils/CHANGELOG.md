@@ -3,12 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.1.0...@gracile/internal-utils@0.2.0-next.0) (2024-08-03)
-
-### Features
-
-* convert standalone custom vite app to just a plugin ([e0c44c2](https://github.com/gracile-web/gracile/commit/e0c44c29a8221f652256ad3f120626512e579f32))
-
 # [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.0.4...@gracile/internal-utils@0.1.0) (2024-06-08)
 
 ### Bug Fixes
