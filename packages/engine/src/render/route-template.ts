@@ -118,7 +118,7 @@ export async function renderRouteTemplate({
 					`;
 				}
 
-				if (/\.(scss|css)$/.test(path)) {
+				if (/\.(css|scss|sass|less|styl|stylus)$/.test(path)) {
 					return html`
 						<link rel="stylesheet" href="/${path}" />
 						<!--  -->
@@ -169,15 +169,23 @@ export async function renderRouteTemplate({
 	// MARK: Page
 	// Skipped with server mode in production build
 	if (
-		(serverMode === false && routeInfos.routeModule.template) ||
-		//
-		(serverMode &&
-			routeInfos.routeModule.template &&
-			(mode !== 'build' || routeInfos.routeModule.prerender === true))
+		routeInfos.routeModule.template &&
+		(serverMode === false ||
+			//
+			(serverMode &&
+				(mode !== 'build' || routeInfos.routeModule.prerender === true)))
 	) {
 		const routeOutput = await Promise.resolve(
-			routeInfos.routeModule.template?.(context),
+			routeInfos.routeModule.template(context),
 		);
+
+		// NOTE: Explicitely unset template (maybe a bad idea as a feature. We'll see)
+		// if (routeOutput === null || routeOutput === undefined) {
+		// 	const output = Readable.from(
+		// 		concatStreams(baseDocRenderStreamPre, baseDocRenderStreamPost),
+		// 	);
+		// 	return { output };
+		// }
 
 		if (isLitTemplate(routeOutput) === false)
 			throw Error(

@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// NOTE: Tested in @gracile/server, but could add more test here
+
 import type { ServerRenderedTemplate } from '@lit-labs/ssr';
 import type { TemplateResult } from 'lit';
 
@@ -26,7 +28,6 @@ export const RequestMethod = {
 export type ModuleOptions = {
 	staticPaths?: StaticPathsGeneric /* | undefined */;
 
-	locals?: (locals: any) => any;
 	handler?: HandlerGeneric;
 
 	prerender?: boolean | undefined;
@@ -36,7 +37,6 @@ export type ModuleOptions = {
 	template?: (context: RouteContextGeneric) => RouteTemplateResult;
 };
 
-// TODO: put in engine
 export class RouteModule {
 	readonly #staticPaths;
 
@@ -84,7 +84,8 @@ export class RouteModule {
 			options.handler
 		)
 			this.#handler = options.handler;
-		this.#locals = options.locals;
+
+		this.#locals = {};
 
 		if (typeof options.template === 'function')
 			this.#template = options.template;

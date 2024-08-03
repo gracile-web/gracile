@@ -15,11 +15,18 @@ export function viteMarkdownPlugin(options?: {
 	const MarkdownDocumentRenderer =
 		options?.MarkdownRenderer ?? MarkdownDocumentRendererEmpty;
 
+	let root: string | null = null;
 	return {
 		name: VITE_PLUGIN_NAME,
 		enforce: 'pre',
 
+		config(config) {
+			root = config.root || null;
+		},
+
 		async load(id: string) {
+			if (!root) throw new Error('Missing server');
+
 			if (fileRegex.test(id)) {
 				let markdownCode: string | undefined;
 				try {
@@ -40,7 +47,7 @@ export function viteMarkdownPlugin(options?: {
 export default Object.freeze({
 	path: Object.freeze({
 		absolute: ${JSON.stringify(id)},
-		relative: ${JSON.stringify(relative(process.env['__GRACILE_PROJECT_CWD'] ?? process.cwd(), id))},
+		relative: ${JSON.stringify(relative(root ?? process.cwd(), id))},
 	}),
 
 	body: Object.freeze({

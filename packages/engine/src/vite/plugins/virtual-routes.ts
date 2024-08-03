@@ -39,7 +39,12 @@ export function virtualRoutes({
 			load(id) {
 				if (id === resolvedVirtualModuleId) {
 					return `
+import { URLPattern } from '@gracile/gracile/url-pattern';
+
 const routes = new Map(${JSON.stringify(routesWithoutPrerender, null, 2)})
+routes.forEach((route, pattern) => {
+	route.pattern = new URLPattern(pattern, 'http://gracile');
+});
 
 const routeImports = new Map(
 	[
@@ -48,7 +53,7 @@ const routeImports = new Map(
 				([pattern, route]) =>
 					`['${pattern}', () => import('/${route.filePath}')],`,
 			)
-			.join('\n    ')}
+			.join('\n')}
 	]
 );
 
