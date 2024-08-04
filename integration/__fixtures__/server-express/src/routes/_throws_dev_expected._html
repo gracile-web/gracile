@@ -44,7 +44,7 @@
 
       <pre>
 Error: !!! OH NO !!! I AM A FAKE ERROR !!!
-    at RouteModule.template (__REPLACED_FOR_TESTS__/__fixtures__/server-express/src/routes/throws.ts:7:2)
+    at RouteModule.template (__REPLACED_FOR_TESTS__)
     at renderRouteTemplate (__REPLACED_FOR_TESTS__)
     at async middleware (__REPLACED_FOR_TESTS__)
     at async nodeMiddleware (__REPLACED_FOR_TESTS__)</pre

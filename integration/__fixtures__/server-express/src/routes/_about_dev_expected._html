@@ -49,10 +49,10 @@
     </script>
 
     <!-- Global assets -->
-    <link rel="stylesheet" href="__REPLACED_FOR_TESTS__/src/document.css" />
+    <link rel="stylesheet" href="__REPLACED_FOR_TESTS__/document.css" />
     <script
       type="module"
-      src="__REPLACED_FOR_TESTS__/src/document.client.ts"
+      src="__REPLACED_FOR_TESTS__/document.client.ts"
     ></script>
 
     <!-- Page assets -->
