@@ -11,7 +11,9 @@ const fileRegex = /\.svg$/;
 
 export function viteSvgPlugin(
 	svgoOptimizeOptions: Omit<Config, 'path'> = {},
-): Plugin {
+	// NOTE:(for Vite versions mismatches)
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any {
 	return {
 		name: VITE_PLUGIN_NAME,
 		enforce: 'pre',
@@ -43,5 +45,5 @@ export default html\`${optimizedSvg.data}\`;`;
 			}
 			return null;
 		},
-	};
+	} satisfies Plugin;
 }

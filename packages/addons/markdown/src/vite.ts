@@ -11,7 +11,9 @@ const fileRegex = /\.md$/;
 
 export function viteMarkdownPlugin(options?: {
 	MarkdownRenderer: typeof MarkdownDocumentRendererEmpty;
-}): Plugin {
+	// NOTE:(for Vite versions mismatches)
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+}): any {
 	const MarkdownDocumentRenderer =
 		options?.MarkdownRenderer ?? MarkdownDocumentRendererEmpty;
 
@@ -21,7 +23,7 @@ export function viteMarkdownPlugin(options?: {
 		enforce: 'pre',
 
 		config(config) {
-			root = config.root || null;
+			root = config.root || process.cwd();
 		},
 
 		async load(id: string) {
@@ -85,5 +87,5 @@ export default Object.freeze({
 			}
 			return null;
 		},
-	};
+	} satisfies Plugin;
 }
