@@ -8,17 +8,24 @@ const writeActual = false;
 let gracileProcess: ChildProcessWithoutNullStreams | null = null;
 
 await it('runs and execute test suites', async () => {
-	await new Promise((resolve) => {
+	await new Promise((resolve, reject) => {
 		gracileProcess = spawn(
 			'node',
-			[
-				//
-				'express.js',
-			],
+			['express.js'],
+			//
 			{ cwd: '__fixtures__/server-express' },
 		);
 		let bootStrapped = false;
 
+		gracileProcess.stdout.on('close', (/* data: unknown */) => {
+			reject(new Error(`CLOSED UNEXPECTEDLY!`));
+		});
+		gracileProcess.stderr.on('data', (data: unknown) => {
+			reject(new Error(String(data)));
+		});
+		gracileProcess.on('error', (err) => {
+			reject(err);
+		});
 		gracileProcess.stdout.on('data', (data: unknown) => {
 			console.log(String(data));
 

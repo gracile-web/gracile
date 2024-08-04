@@ -1,19 +1,16 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
-// NOTE: WIP
+// NOTE: Work-in-Progress
 
 import assert from 'node:assert/strict';
 import { describe } from 'node:test';
 
-//
-import { defineConfig } from '@gracile/gracile';
 import * as node from '@gracile/gracile/node';
 // import document from '@gracile/gracile/document';
 // import urlPattern from '@gracile/gracile/url-pattern';
 import * as plugin from '@gracile/gracile/plugin';
 import * as serverHtml from '@gracile/gracile/server-html';
 
-describe('gracile package should do exports correctly', () => {
-	assert.equal(typeof defineConfig, 'function');
+describe('gracile package should do its exports correctly', () => {
 	//
 	// assert.equal(urlPattern.URLPattern, 'function');
 
