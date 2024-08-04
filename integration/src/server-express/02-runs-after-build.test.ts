@@ -1,9 +1,8 @@
 import { type ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 import { after, it } from 'node:test';
 
+import { writeActual } from '../config.js';
 import { common } from './_common.js';
-
-const writeActual = false;
 
 let gracileProcess: ChildProcessWithoutNullStreams | null = null;
 

@@ -8,8 +8,8 @@ var __decorateClass = (decorators, target, key, kind) => {
   if (kind && result) __defProp(target, key, result);
   return result;
 };
-import { css, html, LitElement } from "/@fs__REPLACED_FOR_TESTS__/node_modules/.vite/deps/lit.js?v=__REPLACED_FOR_TESTS__";
-import { customElement, property } from "/@fs__REPLACED_FOR_TESTS__/node_modules/.vite/deps/lit_decorators__js.js?v=__REPLACED_FOR_TESTS__";
+import { css, html, LitElement } from "/@fs/__REPLACED_FOR_TESTS__/integration/node_modules/.vite/deps/lit.js?v=__REPLACED_FOR_TESTS__";
+import { customElement, property } from "/@fs/__REPLACED_FOR_TESTS__/integration/node_modules/.vite/deps/lit_decorators__js.js?v=__REPLACED_FOR_TESTS__";
 export let MyLitElement = class extends LitElement {
   constructor() {
     super(...arguments);

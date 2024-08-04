@@ -3,9 +3,8 @@ import { after } from 'node:test';
 
 import { createStaticDevServer } from '../__utils__/gracile-server.js';
 // import { createDynamicDevServer } from '../__utils__/gracile-server.js';
+import { writeActual } from '../config.js';
 import { common } from './_common.js';
-
-const writeActual = false;
 
 const { /* address, */ close } = await createStaticDevServer({
 	project: 'server-express',

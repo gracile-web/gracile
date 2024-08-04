@@ -5,6 +5,7 @@ import { fetchResource } from './__utils__/fetch.js';
 import { createStaticDevServer } from './__utils__/gracile-server.js';
 import { snapshotAssertEqual } from './__utils__/snapshot.js';
 import { removeLocalPathsInDevAssets } from './__utils__/vite.js';
+import { writeActual } from './config.js';
 
 const { address, close } = await createStaticDevServer({
 	project: 'static-site',
@@ -13,8 +14,6 @@ const { address, close } = await createStaticDevServer({
 
 const projectRoutes = 'static-site/src/routes';
 const currentTestRoutes = '01-assets';
-
-const writeActual = false;
 
 // ---
 

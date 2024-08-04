@@ -52,11 +52,11 @@
     <!-- Global assets -->
     <link
       rel="stylesheet"
-      href="__REPLACED_FOR_TESTS__/__fixtures__/server-express/dist/server/chunk/document.css"
+      href="__REPLACED_FOR_TESTS__/server/chunk/document.css"
     />
     <script
       type="module"
-      src="__REPLACED_FOR_TESTS__/__fixtures__/server-express/dist/server/chunk/document.client.ts"
+      src="__REPLACED_FOR_TESTS__/server/chunk/document.client.ts"
     ></script>
 
     <!-- Page assets -->
