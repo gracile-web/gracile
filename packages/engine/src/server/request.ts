@@ -1,8 +1,6 @@
-import type { IncomingMessage, ServerResponse } from 'node:http';
-import { Readable, Writable } from 'node:stream';
+import { Readable } from 'node:stream';
 
 import { logger } from '@gracile/internal-utils/logger';
-import { createServerAdapter } from '@whatwg-node/server';
 import c from 'picocolors';
 import type { ViteDevServer } from 'vite';
 
@@ -13,7 +11,7 @@ import { renderSsrTemplate } from '../render/utils.js';
 import { getRoute } from '../routes/match.js';
 import type * as R from '../routes/route.js';
 
-type NextFunction = (error?: unknown) => void | Promise<void>;
+// type NextFunction = (error?: unknown) => void | Promise<void>;
 
 /**
  * This is fully compatible with Express or bare Node HTTP
@@ -21,19 +19,10 @@ type NextFunction = (error?: unknown) => void | Promise<void>;
  * 1. Async.
  * 2. Can return a `ServerResponse`
  */
-export type ConnectLikeAsyncMiddleware = (
-	req: IncomingMessage,
-	res: ServerResponse,
-	next: NextFunction,
+export type GracileAsyncMiddleware = (
+	request: Request,
 	locals?: unknown,
-) => // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-| Promise<void | NextFunction | ServerResponse>
-	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-	| (void | NextFunction | ServerResponse);
-
-// NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
-// @ts-expect-error Abusing this feature!
-const adapter = createServerAdapter((request) => request);
+) => Promise<Response | Readable | null>;
 
 export function createGracileMiddleware({
 	vite,
@@ -50,38 +39,26 @@ export function createGracileMiddleware({
 	root: string;
 	serverMode?: boolean | undefined;
 }) {
-	const middleware: ConnectLikeAsyncMiddleware = async (
-		req,
-		res,
-		next,
-		locals,
-	) => {
+	async function createErrorPage(urlPath: string, e: Error) {
+		logger.error(e.message);
+
+		let errorPageHtml = await renderSsrTemplate(errorPage(e));
+		if (vite)
+			errorPageHtml = await vite.transformIndexHtml(urlPath, errorPageHtml);
+		return errorPageHtml;
+	}
+
+	const middleware: GracileAsyncMiddleware = async (request, locals) => {
 		// HACK: Typing workaround
-		if (!req.url) throw Error('Incorrect url');
-		if (!req.method) throw Error('Incorrect method');
-		const { url: urlPath, method } = req;
+		if (!request.url) throw Error('Incorrect url');
+		if (!request.method) throw Error('Incorrect method');
+		const { url: urlPath, method } = request;
 
 		// if (urlPath === '/favicon.ico') return next();
 
-		async function createErrorPage(e: Error) {
-			logger.error(e.message);
-
-			let errorPageHtml = await renderSsrTemplate(errorPage(e));
-			if (vite)
-				errorPageHtml = await vite.transformIndexHtml(urlPath, errorPageHtml);
-			return errorPageHtml;
-		}
-
 		try {
-			const requestPonyfilled = (await Promise.resolve(
-				adapter.handleNodeRequest(
-					// HACK: Incorrect typings
-					req as IncomingMessage & { url: string; method: string },
-				),
-			)) as unknown as Request;
-
 			// NOTE: Maybe it should be constructed from `req`
-			const fullUrl = requestPonyfilled.url;
+			const fullUrl = request.url;
 
 			// MARK: Get route infos
 
@@ -104,14 +81,16 @@ export function createGracileMiddleware({
 			if (routeInfos === null) {
 				// MARK: Default, fallback 404
 				const message = `404 not found!\n\n---\n\nCreate a /src/routes/404.{js,ts} to get a custom page.\n${method} - ${urlPath}`;
-				res.statusCode = 404;
-				res.statusMessage = '404 not found!';
-				const errorPage404 = await createErrorPage(new Error(message));
-				return res.end(errorPage404);
+
+				const errorPage404 = await createErrorPage(urlPath, new Error(message));
+				return new Response(errorPage404, {
+					status: 404,
+					statusText: '404 not found!',
+				});
 			}
 
 			const routeTemplateOptions = {
-				request: requestPonyfilled,
+				request,
 				vite,
 				mode: 'dev', // vite && vite.config.mode === 'dev' ? 'dev' : 'build',
 				routeAssets,
@@ -126,29 +105,26 @@ export function createGracileMiddleware({
 
 			let output: Readable | Response | null;
 
-			// TODO: should move this to `special-file` so we don't recalculate on each request
-			// + we would be able to do some route codegen.
-			const response: ResponseInit = {};
-
-			// NOTE: Only for Express for now.
-
-			// console.log({ locals });
 			let providedLocals: UnknownObject = {};
-			// if ('locals' in res && isUnknownObject(res.locals)) locals = res.locals;
 			if (locals && isUnknownObject(locals)) providedLocals = locals;
 
 			// MARK: Server handler
 
 			const handler = routeInfos.routeModule.handler;
 
+			const responseInit: ResponseInit = {};
+			// TODO: should move this to `special-file` so we don't recalculate on each request
+			// + we would be able to do some route codegen.
+
 			if (
-				'handler' in routeInfos.routeModule &&
-				typeof handler !== 'undefined'
+				('handler' in routeInfos.routeModule &&
+					typeof handler !== 'undefined') ||
+				(handler && 'GET' in handler === false && method !== 'GET')
 			) {
 				const routeContext = Object.freeze({
-					request: requestPonyfilled,
+					request,
 					url: new URL(fullUrl),
-					response,
+					response: responseInit,
 					params: routeInfos.params,
 					locals: providedLocals,
 				});
@@ -189,9 +165,8 @@ export function createGracileMiddleware({
 						);
 
 					// MARK: Handler with method
-				} else if (requestPonyfilled.method in handler) {
-					const handlerWithMethod =
-						handler[requestPonyfilled.method as keyof typeof handler];
+				} else if (method in handler) {
+					const handlerWithMethod = handler[method as keyof typeof handler];
 
 					if (typeof handlerWithMethod !== 'function')
 						throw TypeError('Handler must be a function.');
@@ -205,30 +180,20 @@ export function createGracileMiddleware({
 						output = await renderRouteTemplate({
 							...routeTemplateOptions,
 							handlerInfos: { data: handlerOutput, method },
+							routeInfos,
 						}).then((r) => r.output);
 					}
 
 					// MARK: No GET, render page
-				} else if (
-					handler &&
-					'GET' in handler === false &&
-					requestPonyfilled.method === 'GET'
-				) {
-					output = await renderRouteTemplate({
-						...routeTemplateOptions,
-						handlerInfos: { data: null, method: 'GET' },
-						routeInfos,
-					}).then((r) => r.output);
 				} else {
-					const message = `This route doesn't handle the \`${method}\` method!`;
-					res.statusCode = 404;
-					res.statusMessage = message;
-					return res.end(await createErrorPage(new Error(message)));
+					const statusText = `This route doesn't handle the \`${method}\` method!`;
+					return new Response(statusText, { status: 405, statusText });
 				}
 			} else {
 				output = await renderRouteTemplate({
 					...routeTemplateOptions,
 					handlerInfos: { data: null, method: 'GET' },
+					routeInfos,
 				}).then((r) => r.output);
 			}
 
@@ -239,71 +204,34 @@ export function createGracileMiddleware({
 				if (output.status >= 300 && output.status <= 303) {
 					const location = output.headers.get('location');
 
-					// if (location) return res.redirect(location);
 					if (location) {
-						res.statusCode = output.status;
-						res.setHeader('location', location);
-						return res.end(`Found. Redirecting to ${location}`);
+						return Response.redirect(location, output.status);
 					}
 				}
 
-				output.headers?.forEach((content, header) =>
-					res.setHeader(header, content),
-				);
-				if (output.status) res.statusCode = output.status;
-				if (output.statusText) res.statusMessage = output.statusText;
-
-				// TODO: use this with page only?
-				// if (output.bodyUsed === false)
-				//   throw new Error('Missing body.');
-
-				if (output.body) {
-					const piped = await output.body
-						.pipeTo(Writable.toWeb(res))
-						.catch((e) => logger.error(String(e)));
-					return piped;
-				}
-				// else throw new Error('Missing body.');
-				// NOTE: Other shapes
-				return res.end(output);
+				return output;
 
 				// MARK: Stream page render
 			}
 
-			new Headers(response.headers)?.forEach((content, header) =>
-				res.setHeader(header, content),
-			);
-			if (response.status) res.statusCode = response.status;
-			if (response.statusText) res.statusMessage = response.statusText;
-
-			res.setHeader('Content-Type', 'text/html');
-
 			// MARK: Page stream error
 
-			return output
-				?.on('error', (error) => {
-					const errorMessage =
-						`There was an error while rendering a template chunk on server-side.\n` +
-						`It was omitted from the resulting HTML.`;
-					logger.error(errorMessage);
-					logger.error(error.message);
+			return !output
+				? null
+				: output.on('error', (error) => {
+						const errorMessage =
+							`There was an error while rendering a template chunk on server-side.\n` +
+							`It was omitted from the resulting HTML.`;
+						logger.error(errorMessage);
+						logger.error(error.message);
 
-					res.statusCode = 500;
-					res.statusMessage = errorMessage;
-
-					/* NOTE: Safety closing tags, maybe add more */
-					// Maybe just returning nothing is better to not break the page?
-					// Should send a overlay message anyway via WebSocket
-					// vite.ws.send()
-					if (vite)
-						setTimeout(() => {
-							vite.hot.send('gracile:ssr-error', {
-								message: errorMessage,
-							});
-						}, 500);
-					return res.end('' /* errorInline(error) */);
-				})
-				.pipe(res);
+						if (vite)
+							setTimeout(() => {
+								vite.hot.send('gracile:ssr-error', {
+									message: errorMessage,
+								});
+							}, 500);
+					});
 
 			// MARK: Errors
 		} catch (e) {
@@ -311,11 +239,12 @@ export function createGracileMiddleware({
 
 			if (vite) vite.ssrFixStacktrace(error);
 
-			const ultimateErrorPage = await createErrorPage(error);
+			const ultimateErrorPage = await createErrorPage('__gracile_error', error);
 
-			res.statusCode = 500;
-			res.statusMessage = 'Gracile middleware error';
-			return res.end(ultimateErrorPage);
+			return new Response(String(ultimateErrorPage), {
+				status: 500,
+				statusText: 'Gracile middleware error',
+			});
 		}
 	};
 

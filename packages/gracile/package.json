@@ -35,7 +35,7 @@
     "./tsconfigs/*": "./tsconfigs/*.json",
     "./tsconfigs/*.json": "./tsconfigs/*"
   },
-  "bin": {
+  "// bin": {
     "gracile": "./dist/bin/gracile.js",
     "gracile-dev": "./dist/bin/gracile-watch.js"
   },

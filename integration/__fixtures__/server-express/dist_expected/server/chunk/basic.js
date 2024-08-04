@@ -1,16 +1,15 @@
-import { DEV } from 'esm-env';
 import { defineRoute, Route } from '@gracile/gracile/route';
 
 const basic = defineRoute({
   handler: {
-    GET: async ({ url, request, locals }) => {
+    GET: async ({ url, locals }) => {
       return Response.json(
         {
           url,
           param1: url.searchParams.get("foo"),
           [Route.RequestMethod.GET]: "ok",
           // TODO: When middleware are implemented, mock this properly
-          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
+          locals: { requestIdLength: locals.requestId.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -28,7 +27,7 @@ const basic = defineRoute({
           param1: url.searchParams.get("foo"),
           [Route.RequestMethod.POST]: "ok",
           body: await request.json(),
-          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
+          locals: { requestIdLength: locals.requestId.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -40,7 +39,7 @@ const basic = defineRoute({
           param1: url.searchParams.get("foo"),
           [Route.RequestMethod.PUT]: "ok",
           body: await request.json(),
-          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
+          locals: { requestIdLength: locals.requestId.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -52,7 +51,7 @@ const basic = defineRoute({
           param1: url.searchParams.get("foo"),
           [Route.RequestMethod.QUERY]: "ok",
           body: await request.json(),
-          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
+          locals: { requestIdLength: locals.requestId.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -63,7 +62,7 @@ const basic = defineRoute({
           url,
           param1: url.searchParams.get("foo"),
           [Route.RequestMethod.DELETE]: "ok",
-          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
+          locals: { requestIdLength: locals.requestId.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );
@@ -75,7 +74,7 @@ const basic = defineRoute({
           param1: url.searchParams.get("foo"),
           [Route.RequestMethod.PATCH]: "ok",
           body: await request.json(),
-          locals: { requestIdLength: DEV ? 36 : locals.requestId?.length }
+          locals: { requestIdLength: locals.requestId.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
       );

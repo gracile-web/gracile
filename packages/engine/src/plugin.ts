@@ -1,20 +1,26 @@
+import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
+import { logger } from '@gracile/internal-utils/logger';
 import { rename, rm } from 'fs/promises';
-import { build, createServer, type PluginOption } from 'vite';
+import c from 'picocolors';
+import { build, createServer, type Plugin } from 'vite';
 
 import {
 	type RenderedRouteDefinition /* renderRoutes */,
 } from './build/static.js';
-import { createHandlers } from './dev/dev.js';
+import { createDevHandler } from './dev/dev.js';
 import type { RoutesManifest } from './routes/route.js';
+import { nodeAdapter } from './server/node.js';
+import type { GracileConfig } from './user-config.js';
 import { buildRoutes } from './vite/plugins/build-routes.js';
 import { virtualRoutes } from './vite/plugins/virtual-routes.js';
 
-export const gracile = (config?: {
-	mode: 'server' | 'static';
-}): PluginOption => {
-	const mode = config?.mode || 'static';
+// Return as `any` to avoid Plugin type mismatches when there are multiple Vite versions installed
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
+	const outputMode = config?.output || 'static';
 
 	const clientAssets: Record<string, string> = {};
 
@@ -37,13 +43,26 @@ export const gracile = (config?: {
 			},
 
 			async configureServer(server) {
-				//  ({ plmugi: server.config.root });
-				const { handlers } = await createHandlers({ vite: server });
+				// Infos
+				const mainPjson = fileURLToPath(
+					new URL('../../gracile/package.json', import.meta.url),
+				);
+				const { version } = JSON.parse(await readFile(mainPjson, 'utf-8')) as {
+					version: number;
+				};
+				logger.info(
+					`${c.cyan(c.italic(c.underline('🧚 Gracile ')))}` +
+						` ${c.green(` v${version}`)}`,
+				);
+				// ---
+
+				const { handler } = await createDevHandler({ vite: server });
 
 				return () => {
 					server.middlewares.use((req, res, next) => {
-						Promise.resolve(handlers(req, res, next)).catch((error) =>
-							next(error),
+						const locals = config?.dev?.locals?.({ nodeRequest: req });
+						Promise.resolve(nodeAdapter(handler)(req, res, locals)).catch(
+							(error) => next(error),
 						);
 					});
 				};
@@ -64,7 +83,7 @@ export const gracile = (config?: {
 					viteServerForBuild: viteServerForClientHtmlBuild,
 					root: viteConfig.root || process.cwd(),
 					_config: {},
-					serverMode: mode === 'server',
+					serverMode: outputMode === 'server',
 				});
 
 				routes = htmlPages.routes;
@@ -81,7 +100,7 @@ export const gracile = (config?: {
 							input: htmlPages.inputList,
 							plugins: [htmlPages.plugin],
 						},
-						outDir: mode === 'server' ? 'dist/client' : 'dist',
+						outDir: outputMode === 'server' ? 'dist/client' : 'dist',
 					},
 				};
 			},
@@ -91,7 +110,7 @@ export const gracile = (config?: {
 			name: 'vite-plugin-gracile-collect-client-assets-for-server',
 
 			writeBundle(_, bundle) {
-				if (mode === 'static') return;
+				if (outputMode === 'static') return;
 
 				Object.entries(bundle).forEach(([, file]) => {
 					if (file.type === 'asset' && file.name)
@@ -109,7 +128,7 @@ export const gracile = (config?: {
 			},
 
 			async closeBundle() {
-				if (mode === 'static' || !routes || !renderedRoutes) return;
+				if (outputMode === 'static' || !routes || !renderedRoutes) return;
 
 				await build({
 					configFile: false,
@@ -219,5 +238,5 @@ export const handler = createGracileMiddleware({
 				});
 			},
 		},
-	];
+	] satisfies Plugin[];
 };

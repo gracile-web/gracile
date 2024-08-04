@@ -7,6 +7,6 @@
 // 	export const routeAssets: import('./src/routes/route.js').RoutesAssets;
 // }
 
-declare namespace App {
+declare namespace Gracile {
 	interface Locals {}
 }
