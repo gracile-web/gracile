@@ -96,12 +96,13 @@ export async function renderRoutes({
 						? path.dirname(pathnameWithParams.slice(1))
 						: pathnameWithParams.slice(1);
 
-					const name = path.join(
+					let name = path.join(
 						base,
 						isErrorPage
 							? `${pathnameWithParams.split('/').at(-2)?.replace('__', '')}.html`
 							: 'index.html',
 					);
+					if (name === '404/index.html') name = '404.html';
 
 					const url = new URL(pathnameWithParams, 'http://gracile-static');
 
