@@ -1,10 +1,13 @@
 #!/bin/bash
 
+node --run format:fix
+node --run lint:es:fix
+
 set -e
 
 pnpm install --frozen-lockfile
 
-# TODO: More tests
+# TODO: More
 # node --run syncpack:lint
 
 pnpm audit signatures

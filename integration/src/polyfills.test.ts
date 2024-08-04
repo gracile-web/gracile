@@ -13,6 +13,8 @@ const { address, close } = await createStaticDevServer({
 const projectRoutes = 'static-site/src/routes';
 const currentTestRoutes = '04-polyfills';
 
+const writeActual = false;
+
 // ---
 
 // NOTE: Not well tested enough. Should check for inline module content.
@@ -23,7 +25,7 @@ it('client polyfills', async () => {
 	await snapshotAssertEqual({
 		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
 		actualContent: await fetchResource(address, [currentTestRoutes, route]),
-		writeActual: false,
+		writeActual,
 	});
 });
 

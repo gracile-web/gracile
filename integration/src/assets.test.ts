@@ -14,6 +14,8 @@ const { address, close } = await createStaticDevServer({
 const projectRoutes = 'static-site/src/routes';
 const currentTestRoutes = '01-assets';
 
+const writeActual = false;
+
 // ---
 
 // FIXME: the async await stuff is superfluous
@@ -32,7 +34,7 @@ describe('sibling assets', async () => {
 				`_${route}_expected.html`,
 			],
 			actualContent: await fetchResource(address, [currentTestRoutes, route]),
-			writeActual: false,
+			writeActual,
 		});
 	});
 
@@ -50,7 +52,7 @@ describe('sibling assets', async () => {
 					{ trailingSlash: false },
 				),
 			),
-			writeActual: false,
+			writeActual,
 			prettier: false,
 		});
 	});
@@ -69,7 +71,7 @@ describe('sibling assets', async () => {
 					{ trailingSlash: false },
 				),
 			),
-			writeActual: false,
+			writeActual,
 			prettier: false,
 		});
 	});
@@ -89,7 +91,7 @@ describe('assets with query url', async () => {
 				`_${route}_expected.html`,
 			],
 			actualContent: await fetchResource(address, [currentTestRoutes, route]),
-			writeActual: false,
+			writeActual,
 		});
 	});
 });

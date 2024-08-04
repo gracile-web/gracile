@@ -15,6 +15,15 @@ const routes = new Map([
     }
   ],
   [
+    "/404/",
+    {
+      "filePath": "src/routes/404.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
+    }
+  ],
+  [
     "/about/",
     {
       "filePath": "src/routes/about.ts",
@@ -87,6 +96,15 @@ const routes = new Map([
       "hasParams": false,
       "pageAssets": []
     }
+  ],
+  [
+    "/throws/",
+    {
+      "filePath": "src/routes/throws.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
+    }
   ]
 ]);
 routes.forEach((route, pattern) => {
@@ -96,6 +114,7 @@ routes.forEach((route, pattern) => {
 const routeImports = new Map(
 	[
 	  ['/', () => import('./chunk/(home).js')],
+['/404/', () => import('./chunk/404.js')],
 ['/about/', () => import('./chunk/about.js')],
 ['/api/basic/', () => import('./chunk/basic.js')],
 ['/api/:path*/', () => import('./chunk/_...path_.js')],
@@ -104,10 +123,15 @@ const routeImports = new Map(
 ['/foo/bar/', () => import('./chunk/bar.js')],
 ['/private/', () => import('./chunk/index.js')],
 ['/redirect/', () => import('./chunk/redirect.js')],
+['/throws/', () => import('./chunk/throws.js')],
 	]
 );
 
 const routeAssets = new Map([
+  [
+    "/404.html",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
   [
     "/about/",
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
@@ -143,6 +167,10 @@ const routeAssets = new Map([
   [
     "/redirect/",
     null
+  ],
+  [
+    "/throws/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ]
 ]);
 
