@@ -2,6 +2,9 @@ export interface Settings {
 	packageManager: string;
 	location: string;
 	template: string; // 'minimal' | 'blog' | 'empty';
+
+	next: boolean;
+
 	tooling: (
 		| 'typescript'
 		| 'prettier_editorconfig'
@@ -49,7 +52,8 @@ export type FilesMap = Map<string, string>;
 export const TEMPLATE_LIST = [
 	//
 	'minimal-static',
-	'basic-blog-static',
-	'simple-server',
+	'minimal-server-express',
+	'basics-blog-static',
+	'basics-server',
 ] as const;
 export const TEMPLATE_LIST_ANON = [...(TEMPLATE_LIST as unknown as string[])];

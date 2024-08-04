@@ -22,6 +22,7 @@ import { type Settings, TEMPLATE_LIST, TEMPLATE_LIST_ANON } from './types.js';
 const program = new Command()
 	.name(c.bold('create-gracile'))
 	.description(`${c.gray(`Creates a new ${c.bold('Gracile')} project.`)}`)
+
 	.option(
 		'-d, --location <string>',
 		`${c.yellow(`Project directory location.\n`)}`,
@@ -33,6 +34,10 @@ const program = new Command()
 				c.green(name),
 			).join(', ')}\n`,
 		)}`,
+	)
+	.option(
+		'-n, --next',
+		`${c.yellow(`Choose from the \`next\` versions of template.\n`)}`,
 	)
 	.option(
 		'-i, --install-dependencies',
@@ -116,6 +121,10 @@ function settingsNote(settings: PartialSettings, title: string) {
 		savedSettingsNote.push(
 			`${c.green('Template')}: ${c.bold(settings.template)}`,
 		);
+	if (typeof settings.next !== 'undefined')
+		savedSettingsNote.push(
+			`${c.green('Next version')}: ${c.bold(String(settings.next))}`,
+		);
 	if (typeof settings.initializeGit !== 'undefined')
 		savedSettingsNote.push(
 			`${c.green('Initialize git')}: ${c.bold(String(settings.initializeGit))}`,
@@ -189,9 +198,26 @@ const template = templateFound
 			.select({
 				message: `Choose your ${c.cyan('starter template')}`,
 				options: [
-					{ value: 'basic-blog-static', label: 'Basic Blog (static)' },
-					{ value: 'minimal-static', label: 'Minimal setup (static)' },
-					{ value: 'simple-server', label: 'Simple Server' },
+					{
+						value: 'minimal-static',
+						label: 'Minimal - Static',
+						hint: 'Just the minimum to get started with a SSG website',
+					},
+					{
+						value: 'minimal-server-express',
+						label: 'Minimal - Server express',
+						hint: 'Just the minimum to get started with a dynamic SSRed website',
+					},
+					{
+						value: 'basics-blog-static',
+						label: 'Basics - Blog static',
+						hint: 'Show features and conventions for a Gracile static website',
+					},
+					{
+						value: 'basics-server',
+						label: 'Basics - Server',
+						hint: 'Show features and conventions for a Gracile dynamic website',
+					},
 				] satisfies {
 					value: (typeof TEMPLATE_LIST)[number];
 					label: string;
@@ -204,6 +230,9 @@ const template = templateFound
 			});
 
 savedConfig.set('template', template);
+
+const next = cliSettings.next;
+// savedConfig.set('next', next);
 
 // MARK: Post actions
 
@@ -241,6 +270,7 @@ const settings: PartialSettings = {
 	packageManager,
 	location,
 	template,
+	next,
 	installDependencies,
 	initializeGit,
 };
@@ -268,15 +298,21 @@ const REPO_BASE = 'https://github.com/gracile-web/starter-projects';
 const projectDestinationTmp = `${projectDestination}__tmp_clone`;
 
 await exec(
-	`git clone -n --depth=1 --filter=tree:0 ${REPO_BASE} ${projectDestinationTmp}`,
+	`git clone${settings.next ? ' -b next' : ''} -n --depth=1 --filter=tree:0 ${REPO_BASE} ${projectDestinationTmp}`,
 );
 
-await exec(`git sparse-checkout set --no-cone ${template}`, {
+await exec(`git sparse-checkout set --no-cone templates/${template}`, {
 	cwd: projectDestinationTmp,
 });
-await exec(`git checkout`, { cwd: projectDestinationTmp });
 
-await rename(join(projectDestinationTmp, template), projectDestination);
+await exec(`git checkout`, {
+	cwd: projectDestinationTmp,
+});
+
+await rename(
+	join(projectDestinationTmp, 'templates', template),
+	projectDestination,
+);
 await rm(projectDestinationTmp, { force: true, recursive: true });
 
 await rm(join(process.cwd(), projectDestination, '.git'), {
@@ -299,12 +335,19 @@ const pJson = await readFile(pJsonPath).then(
 			devDependencies: Record<string, string>;
 		},
 );
+
+const gracileVersion = next ? 'next' : 'latest';
 async function update(
 	[packageName, version]: [string, string],
 	type: keyof typeof pJson,
 ) {
-	const updatedVersion = await latestVersion(packageName, { version });
-	pJson[type][packageName] = updatedVersion;
+	const shiftedVersion = packageName.startsWith('@gracile/')
+		? gracileVersion
+		: version;
+	const updatedVersion = await latestVersion(packageName, {
+		version: shiftedVersion,
+	});
+	pJson[type][packageName] = `^${updatedVersion}`;
 }
 await Promise.all([
 	...Object.entries(pJson.dependencies).map((args) =>
@@ -339,9 +382,10 @@ if (settings.initializeGit) {
 
 	await exec(`git init`, { cwd: projectDestination });
 	await exec(`git add .`, { cwd: projectDestination });
-	await exec(`git commit -m "chore: initial commit"`, {
-		cwd: projectDestination,
-	});
+	// NOTE: Maybe it's preferable to let the user commit himself.
+	// await exec(`git commit -m "chore: initial commit"`, {
+	// 	cwd: projectDestination,
+	// });
 
 	initGitSpinner.stop(`${c.cyan('Git repository')} initialization finished`);
 }
