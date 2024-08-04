@@ -1,6 +1,4 @@
-import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { logger } from '@gracile/internal-utils/logger';
 import { rename, rm } from 'fs/promises';
@@ -46,15 +44,24 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 
 			async configureServer(server) {
 				// Infos
-				const mainPjson = fileURLToPath(
-					new URL('../../gracile/package.json', import.meta.url),
-				);
-				const { version } = JSON.parse(await readFile(mainPjson, 'utf-8')) as {
-					version: number;
-				};
+
+				// // NOTE: Beware import.meta.resolve is only compatible
+				// // with v20.6.0 (without cli flag)and upward
+				// // Not working with StackBlitz ATM?
+				// const mainPjson = import.meta
+				// 	.resolve('@gracile/gracile')
+				// 	// NOTE: Weirdly, it will assume that it's `dist/**.js`,
+				// 	// even after fiddling with pjson exports.
+				// 	.replace('/dist/index.js', '/package.json');
+				// const { version } = JSON.parse(
+				// 	await readFile(new URL(mainPjson), 'utf-8'),
+				// ) as {
+				// 	version: number;
+				// };
+				const version = process.env['__GRACILE_VERSION__'];
 				logger.info(
 					`${c.cyan(c.italic(c.underline('🧚 Gracile ')))}` +
-						` ${c.green(` v${version}`)}`,
+						` ${c.green(` v${version ?? 'X'}`)}`,
 				);
 				// ---
 
