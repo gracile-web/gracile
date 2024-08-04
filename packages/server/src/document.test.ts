@@ -7,25 +7,35 @@ import { html } from 'lit';
 
 import { helpers, RouteTemplateOutlet } from './document.js';
 
-describe('should exports lit template', () => {
-	test('assert lit', () => {
+describe('should exports helpers', () => {
+	test('helpers errors', () => {
 		assert.equal(isLitServerTemplate(helpers.dev.errors), true);
+	});
+	test('hydration', () => {
 		assert.equal(isLitServerTemplate(helpers.fullHydration), true);
+	});
+	test('pageAssets', () => {
 		assert.equal(isLitServerTemplate(helpers.pageAssets), true);
+	});
+	test('dsd', () => {
 		assert.equal(
 			isLitServerTemplate(helpers.polyfills.declarativeShadowDom),
 			true,
 		);
+	});
+	test('requestIdleCallback', () => {
 		assert.equal(
 			isLitServerTemplate(helpers.polyfills.requestIdleCallback),
 			true,
 		);
-
+	});
+	test('RouteTemplateOutlet render', () => {
 		assert.notStrictEqual(
 			new RouteTemplateOutlet().render(),
 			html`Something went wrong during server side rendering!`,
 		);
-
+	});
+	test('RouteTemplateOutlet types', () => {
 		/* Types Tests */
 		new RouteTemplateOutlet() satisfies HTMLElementTagNameMap['route-template-outlet'];
 	});

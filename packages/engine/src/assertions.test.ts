@@ -12,25 +12,29 @@ import {
 	isUnknownObject,
 } from './assertions.js';
 
-describe('should assert lit templates', () => {
-	test('assert lit', () => {
-		const lit = html` <div>Hello</div> `;
-		const litServer = serverHtml` <div>Hello</div> `;
+describe('should assert lit templates, unknown objects', () => {
+	const lit = html` <div>Hello</div> `;
+	const litServer = serverHtml` <div>Hello</div> `;
 
+	test('assert lit any', () => {
 		assert.equal(isLitTemplate(lit), true);
 		assert.equal(isLitTemplate(litServer), true);
+	});
 
+	test('assert lit normal', () => {
 		assert.equal(isLitNormalTemplate(lit), true);
+	});
+	test('assert lit server', () => {
 		assert.equal(isLitServerTemplate(litServer), true);
-
-		assert.equal(isUnknownObject({ something: 'something' } as never), true);
-
-		//
-
+	});
+	test('wrong lit templates', () => {
 		assert.equal(isLitTemplate([]), false);
-		assert.equal(isLitTemplate([]), false);
-
 		assert.equal(isLitNormalTemplate([]), false);
 		assert.equal(isLitServerTemplate([]), false);
 	});
+
+	test('unknown object', () => {
+		assert.equal(isUnknownObject({ something: 'something' } as never), true);
+	});
+	//
 });
