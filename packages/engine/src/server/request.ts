@@ -45,7 +45,8 @@ export function createGracileMiddleware({
 		let errorPageHtml = await renderSsrTemplate(errorPage(e));
 		if (vite)
 			errorPageHtml = await vite.transformIndexHtml(urlPath, errorPageHtml);
-		return errorPageHtml;
+
+		return { errorPageHtml, headers: { 'Content-Type': 'text-html' } };
 	}
 
 	const middleware: GracileAsyncMiddleware = async (request, locals) => {
@@ -82,8 +83,12 @@ export function createGracileMiddleware({
 				// MARK: Default, fallback 404
 				const message = `404 not found!\n\n---\n\nCreate a /src/routes/404.{js,ts} to get a custom page.\n${method} - ${urlPath}`;
 
-				const errorPage404 = await createErrorPage(urlPath, new Error(message));
-				return new Response(errorPage404, {
+				const { errorPageHtml, headers } = await createErrorPage(
+					urlPath,
+					new Error(message),
+				);
+				return new Response(errorPageHtml, {
+					headers,
 					status: 404,
 					statusText: '404 not found!',
 				});
@@ -239,9 +244,11 @@ export function createGracileMiddleware({
 
 			if (vite) vite.ssrFixStacktrace(error);
 
-			const ultimateErrorPage = await createErrorPage('__gracile_error', error);
+			const { errorPageHtml: ultimateErrorPage, headers } =
+				await createErrorPage('__gracile_error', error);
 
 			return new Response(String(ultimateErrorPage), {
+				headers,
 				status: 500,
 				statusText: 'Gracile middleware error',
 			});
