@@ -9,6 +9,7 @@ import type { ViteDevServer } from 'vite';
 import { renderRouteTemplate } from '../render/route-template.js';
 import { collectRoutes } from '../routes/collect.js';
 import { loadForeignRouteObject } from '../routes/load-module.js';
+import type { GracileConfig } from '../user-config.js';
 
 export interface RenderedRouteDefinition {
 	absoluteId: string;
@@ -37,15 +38,17 @@ export async function renderRoutes({
 	vite,
 	serverMode,
 	root = process.cwd(),
+	gracileConfig,
 }: {
 	vite: ViteDevServer;
 	serverMode: boolean;
 	root?: string;
+	gracileConfig: GracileConfig;
 }) {
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 
 	// MARK: Collect
-	const routes = await collectRoutes(root /* vite */);
+	const routes = await collectRoutes(root, gracileConfig.routes?.exclude);
 
 	const renderedRoutes: RenderedRouteDefinition[] = [];
 

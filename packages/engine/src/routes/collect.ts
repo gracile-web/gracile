@@ -72,6 +72,7 @@ const routes: R.RoutesManifest = new Map<string, R.Route>();
 
 export async function collectRoutes(
 	root: string /* vite: ViteDevServer */,
+	excludePatterns: string[] = [],
 	// single: { file?: string; event: 'add' },
 ): Promise<R.RoutesManifest> {
 	routes.clear();
@@ -97,6 +98,7 @@ export async function collectRoutes(
 			'**/_*/**',
 			'**/_*',
 			'**/.*',
+			...excludePatterns,
 		],
 	);
 	const serverEntrypoints = allFilesInRoutes.filter((f) =>
@@ -109,10 +111,10 @@ export async function collectRoutes(
 		.sort((a, b) => routeComparator(a, b))
 		.map((r) => r.route);
 
-	const serverPageClientAssetsFilter = createFilter([
-		'**/*.client.{js,ts}',
-		'**/*.{css,scss,sass,less,styl,stylus}',
-	]);
+	const serverPageClientAssetsFilter = createFilter(
+		['**/*.client.{js,ts}', '**/*.{css,scss,sass,less,styl,stylus}'],
+		[...excludePatterns],
+	);
 	const serverPageClientAssets = allFilesInRoutes.filter((f) =>
 		serverPageClientAssetsFilter(f),
 	);

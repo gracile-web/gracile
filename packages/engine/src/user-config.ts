@@ -9,4 +9,8 @@ export interface GracileConfig {
 	dev?: {
 		locals?: (context: { nodeRequest: Connect.IncomingMessage }) => unknown;
 	};
+
+	routes?: {
+		exclude?: string[];
+	};
 }

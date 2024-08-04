@@ -7,11 +7,14 @@ import {
 	createGracileMiddleware,
 	type GracileAsyncMiddleware,
 } from '../server/request.js';
+import type { GracileConfig } from '../user-config.js';
 
 export async function createDevHandler({
 	vite,
+	gracileConfig,
 }: {
 	vite: ViteDevServer;
+	gracileConfig: GracileConfig;
 }): Promise<{
 	handler: GracileAsyncMiddleware;
 }> {
@@ -19,7 +22,7 @@ export async function createDevHandler({
 
 	logger.info(c.dim('\nCreating handler…'), { timestamp: true });
 
-	const routes = await collectRoutes(root /* vite */);
+	const routes = await collectRoutes(root, gracileConfig.routes?.exclude);
 
 	vite.watcher.on('all', (event, file) => {
 		// console.log({ event });
@@ -29,7 +32,7 @@ export async function createDevHandler({
 			/*  &&
 			['add', 'unlink',''].includes(event) */
 		)
-			collectRoutes(root /* { file, event } */ /* , vite */)
+			collectRoutes(root, gracileConfig.routes?.exclude)
 				.then(() => {
 					vite.hot.send('vite:invalidate');
 				})
