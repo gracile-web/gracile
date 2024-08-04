@@ -115,7 +115,7 @@ export type Handler<
 
 	request: Request;
 
-	locals: App.Locals;
+	locals: Gracile.Locals;
 
 	/**
 	 * Let you mutate the downstream **page** response.

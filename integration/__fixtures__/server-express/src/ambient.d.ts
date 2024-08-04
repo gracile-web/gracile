@@ -1,7 +1,7 @@
 /// <reference types="@gracile/gracile/ambient" />
 
-declare namespace App {
+declare namespace Gracile {
 	interface Locals {
-		requestId?: import('node:crypto').UUID;
+		requestId: import('node:crypto').UUID;
 	}
 }

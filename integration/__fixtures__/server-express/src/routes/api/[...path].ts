@@ -1,5 +1,7 @@
 import { defineRoute } from '@gracile/gracile/route';
 
+// NOTE: Unused
+
 export default defineRoute({
 	handler: {
 		GET: ({ url }) => {

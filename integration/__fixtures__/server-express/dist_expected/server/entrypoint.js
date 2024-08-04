@@ -24,6 +24,24 @@ const routes = new Map([
     }
   ],
   [
+    "/api/basic/",
+    {
+      "filePath": "src/routes/api/basic.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
+    }
+  ],
+  [
+    "/api/:path*/",
+    {
+      "filePath": "src/routes/api/[...path].ts",
+      "pattern": {},
+      "hasParams": true,
+      "pageAssets": []
+    }
+  ],
+  [
     "/assets-methods/",
     {
       "filePath": "src/routes/assets-methods.ts",
@@ -53,24 +71,6 @@ const routes = new Map([
     }
   ],
   [
-    "/gracile-api-endpoint/basic/",
-    {
-      "filePath": "src/routes/gracile-api-endpoint/basic.ts",
-      "pattern": {},
-      "hasParams": false,
-      "pageAssets": []
-    }
-  ],
-  [
-    "/gracile-api-endpoint/:path*/",
-    {
-      "filePath": "src/routes/gracile-api-endpoint/[...path].ts",
-      "pattern": {},
-      "hasParams": true,
-      "pageAssets": []
-    }
-  ],
-  [
     "/private/",
     {
       "filePath": "src/routes/private/index.ts",
@@ -97,11 +97,11 @@ const routeImports = new Map(
 	[
 	  ['/', () => import('./chunk/(home).js')],
 ['/about/', () => import('./chunk/about.js')],
+['/api/basic/', () => import('./chunk/basic.js')],
+['/api/:path*/', () => import('./chunk/_...path_.js')],
 ['/assets-methods/', () => import('./chunk/assets-methods.js')],
 ['/contact/', () => import('./chunk/contact.js')],
 ['/foo/bar/', () => import('./chunk/bar.js')],
-['/gracile-api-endpoint/basic/', () => import('./chunk/basic.js')],
-['/gracile-api-endpoint/:path*/', () => import('./chunk/_...path_.js')],
 ['/private/', () => import('./chunk/index.js')],
 ['/redirect/', () => import('./chunk/redirect.js')],
 	]
@@ -111,6 +111,14 @@ const routeAssets = new Map([
   [
     "/about/",
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/api/:path*/",
+    null
+  ],
+  [
+    "/api/basic/",
+    null
   ],
   [
     "/assets-methods/",
@@ -123,14 +131,6 @@ const routeAssets = new Map([
   [
     "/foo/bar/",
     "\t<script type=\"module\" crossorigin src=\"/assets/index-BW8UKosA.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cu8CxlfV.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
-  ],
-  [
-    "/gracile-api-endpoint/:path*/",
-    null
-  ],
-  [
-    "/gracile-api-endpoint/basic/",
-    null
   ],
   [
     "/",

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
+import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
 import { fetchResource } from '../__utils__/fetch.js';
@@ -40,6 +41,14 @@ async function tests(mode: string, writeActual: boolean) {
 	// 		actualContent: await fetchResource(ADDRESS, ['api']),
 	// 		writeActual,
 	// 	}));
+	await it('page has html mime type', async () =>
+		fetch(new URL(`${ADDRESS}/about/`, ADDRESS)).then((r) =>
+			assert.equal(
+				r.headers.get('Content-Type')?.startsWith('text/html'),
+				true,
+			),
+		));
+
 	await it('load a basic page', async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('about'),

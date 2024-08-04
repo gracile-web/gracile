@@ -7,7 +7,16 @@ import { MarkdownRenderer } from '@gracile/markdown-preset-marked';
 
 export default defineConfig({
 	plugins: [
-		gracile({ mode: 'server' }),
+		gracile({
+			output: 'server',
+			dev: {
+				locals: () => {
+					return {
+						requestId: crypto.randomUUID(),
+					};
+				},
+			},
+		}),
 		// TODO: Test addons with server
 		viteSvgPlugin(),
 		viteMarkdownPlugin({ MarkdownRenderer }),
