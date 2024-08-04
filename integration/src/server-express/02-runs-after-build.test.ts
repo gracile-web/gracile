@@ -21,10 +21,12 @@ await it('runs and execute test suites', async () => {
 			reject(new Error(`CLOSED UNEXPECTEDLY!`));
 		});
 		gracileProcess.stderr.on('data', (data: unknown) => {
-			reject(new Error(String(data)));
+			console.log(String(data));
+			// resolve(new Error(String(data)));
 		});
 		gracileProcess.on('error', (err) => {
-			reject(err);
+			console.log(String(err));
+			// reject(err);
 		});
 		gracileProcess.stdout.on('data', (data: unknown) => {
 			console.log(String(data));

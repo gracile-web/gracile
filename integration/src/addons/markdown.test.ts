@@ -13,6 +13,7 @@ const { address, close } = await createStaticDevServer({
 const projectRoutes = 'static-site/src/routes';
 const currentTestRoutes = '11-markdown';
 
+const writeActual = false;
 // ---
 
 it('MD rendering with marked', async () => {
@@ -21,7 +22,7 @@ it('MD rendering with marked', async () => {
 	await snapshotAssertEqual({
 		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
 		actualContent: await fetchResource(address, [currentTestRoutes, route]),
-		writeActual: false,
+		writeActual,
 	});
 });
 

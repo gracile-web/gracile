@@ -14,6 +14,7 @@ const { address, close } = await createStaticDevServer({
 const projectRoutes = 'static-site/src/routes';
 const currentTestRoutes = '03-custom-elements';
 
+const writeActual = false;
 // ---
 
 it('render Lit element - Full', async () => {
@@ -22,7 +23,7 @@ it('render Lit element - Full', async () => {
 	await snapshotAssertEqual({
 		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
 		actualContent: await fetchResource(address, [currentTestRoutes, route]),
-		writeActual: false,
+		writeActual,
 	});
 
 	await snapshotAssertEqual({
@@ -36,7 +37,7 @@ it('render Lit element - Full', async () => {
 			['/src/routes', currentTestRoutes, `${route}.client.ts`],
 			{ trailingSlash: false },
 		),
-		writeActual: false,
+		writeActual,
 		prettier: false,
 	});
 
@@ -51,7 +52,7 @@ it('render Lit element - Full', async () => {
 			['/src/routes', currentTestRoutes, '_lit-element.ts'],
 			{ trailingSlash: false },
 		).then((r) => removeLocalPathsInDevAssets(r)),
-		writeActual: false,
+		writeActual,
 		prettier: false,
 	});
 });

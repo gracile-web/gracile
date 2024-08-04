@@ -7,6 +7,8 @@ import { compareFolder } from '../__utils__/snapshot.js';
 const projectDist = 'static-site/dist';
 const projectDistExpected = 'static-site/dist_expected';
 
+const writeActual = false;
+
 // ---
 
 // FIXME: Missing a proper close on crash (like for dev.)
@@ -17,6 +19,6 @@ it('build and compare outputs', async () => {
 	await compareFolder({
 		actualPath: projectDist,
 		expectedPath: projectDistExpected,
-		writeActual: false,
+		writeActual,
 	});
 });

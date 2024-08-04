@@ -5,6 +5,10 @@ export function removeLocalPathsInDevAssets(input: string) {
 			'"__REPLACED_FOR_TESTS__/src/',
 		)
 		.replaceAll(/>file:\/\/(.*)</g, '>__REPLACED_FOR_TESTS__<')
+		.replaceAll(
+			/\((.*)\/packages\/@gracile\/gracile\/packages\/(.*)\)/g,
+			'(__REPLACED_FOR_TESTS__)',
+		)
 		.replaceAll(process.cwd(), '__REPLACED_FOR_TESTS__')
 		.replaceAll(
 			/\/\*# sourceMappingURL=(.*) \*\//g,

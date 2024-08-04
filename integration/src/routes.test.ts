@@ -8,21 +8,49 @@ import { snapshotAssertEqual } from './__utils__/snapshot.js';
 const projectRoutes = 'static-site/src/routes';
 const currentTestRoutes = '00-routes';
 
+const writeActual = false;
+
 const { address, close } = await createStaticDevServer({
 	project: 'static-site',
 	port: 4549,
 });
 
+it('return basic 404', async () => {
+	const route = 'does_not_exist';
+
+	await snapshotAssertEqual({
+		expectedPath: [projectRoutes, `_${route}_expected.html`],
+		actualContent: await fetchResource(address, [route]),
+		writeActual,
+	});
+});
+it('return basic 404 - direct', async () => {
+	const route = '404';
+
+	await snapshotAssertEqual({
+		expectedPath: [projectRoutes, `_${route}_expected.html`],
+		actualContent: await fetchResource(address, [route]),
+		writeActual,
+	});
+});
+it('return an error page on route error', async () => {
+	const route = 'throws';
+
+	await snapshotAssertEqual({
+		expectedPath: [projectRoutes, `_${route}_expected.html`],
+		actualContent: await fetchResource(address, [route]),
+		writeActual,
+	});
+});
+
 it('return basic route', async () => {
 	const route = '00-basic';
 
-	// await tryOrClose(async () => {
 	await snapshotAssertEqual({
-		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
+		expectedPath: [projectRoutes, `_${route}_expected.html`],
 		actualContent: await fetchResource(address, [currentTestRoutes, route]),
-		writeActual: false,
+		writeActual,
 	});
-	// });
 });
 
 it('return doc only route', async () => {
@@ -31,7 +59,7 @@ it('return doc only route', async () => {
 	await snapshotAssertEqual({
 		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
 		actualContent: await fetchResource(address, [currentTestRoutes, route]),
-		writeActual: false,
+		writeActual,
 	});
 });
 
@@ -49,7 +77,7 @@ it('return 1 param static route', async () => {
 			route,
 			'omega',
 		]),
-		writeActual: false,
+		writeActual,
 	});
 
 	await snapshotAssertEqual({
@@ -63,7 +91,7 @@ it('return 1 param static route', async () => {
 			route,
 			'jupiter',
 		]),
-		writeActual: false,
+		writeActual,
 	});
 });
 

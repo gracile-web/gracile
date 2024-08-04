@@ -49,6 +49,15 @@ async function tests(mode: string, writeActual: boolean) {
 			),
 		));
 
+	await it('load the 404 page', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('404'),
+			actualContent: removeLocalPathsInDevAssets(
+				await fetchResource(ADDRESS, ['404']),
+			),
+			writeActual,
+		}));
+
 	await it('load a basic page', async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('about'),
@@ -78,6 +87,15 @@ async function tests(mode: string, writeActual: boolean) {
 			expectedPath: expectedPath('assets-methods'),
 			actualContent: removeLocalPathsInDevAssets(
 				await fetchResource(ADDRESS, ['assets-methods']),
+			),
+			writeActual,
+		}));
+
+	await it('load an error page when a route throws', async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('throws'),
+			actualContent: removeLocalPathsInDevAssets(
+				await fetchResource(ADDRESS, ['throws']),
 			),
 			writeActual,
 		}));

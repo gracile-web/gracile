@@ -5,6 +5,8 @@ import { createStaticDevServer } from '../__utils__/gracile-server.js';
 // import { createDynamicDevServer } from '../__utils__/gracile-server.js';
 import { common } from './_common.js';
 
+const writeActual = false;
+
 const { /* address, */ close } = await createStaticDevServer({
 	project: 'server-express',
 	port: 9874,
@@ -13,6 +15,6 @@ const { /* address, */ close } = await createStaticDevServer({
 
 // ---
 
-common('dev', true);
+common('dev', writeActual);
 
 after(async () => close());
