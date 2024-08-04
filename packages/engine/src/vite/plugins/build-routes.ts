@@ -10,12 +10,12 @@ import type { GracileConfig } from '../../user-config.js';
 export const buildRoutes = async ({
 	viteServerForBuild,
 	root,
-	_config,
+	gracileConfig,
 	serverMode = false,
 }: {
 	viteServerForBuild: ViteDevServer;
 	root: string;
-	_config: GracileConfig;
+	gracileConfig: GracileConfig;
 	serverMode?: boolean;
 }) => {
 	// TODO: extract upstream, return just the plugins
@@ -23,6 +23,7 @@ export const buildRoutes = async ({
 		vite: viteServerForBuild,
 		serverMode,
 		root,
+		gracileConfig,
 	});
 
 	const inputList = renderedRoutes

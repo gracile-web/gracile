@@ -29,6 +29,8 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 
 	let root: string | null = null;
 
+	const gracileConfig = config || {};
+
 	return [
 		{
 			name: 'vite-plugin-gracile-serve-middleware',
@@ -56,7 +58,10 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 				);
 				// ---
 
-				const { handler } = await createDevHandler({ vite: server });
+				const { handler } = await createDevHandler({
+					vite: server,
+					gracileConfig,
+				});
 
 				return () => {
 					server.middlewares.use((req, res, next) => {
@@ -82,7 +87,7 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 				const htmlPages = await buildRoutes({
 					viteServerForBuild: viteServerForClientHtmlBuild,
 					root: viteConfig.root || process.cwd(),
-					_config: {},
+					gracileConfig,
 					serverMode: outputMode === 'server',
 				});
 
