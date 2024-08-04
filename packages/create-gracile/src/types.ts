@@ -3,7 +3,7 @@ export interface Settings {
 	location: string;
 	template: string; // 'minimal' | 'blog' | 'empty';
 
-	next: boolean;
+	next: boolean | undefined;
 
 	tooling: (
 		| 'typescript'
