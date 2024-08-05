@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.2.2-next.0...@gracile/engine@0.2.2) (2024-08-05)
+
+**Note:** Version bump only for package @gracile/engine
+
 ## [0.2.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.2.0-next.5...@gracile/engine@0.2.1) (2024-08-05)
 
 **Note:** Version bump only for package @gracile/engine
