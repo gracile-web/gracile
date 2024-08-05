@@ -1,9 +1,12 @@
+import { fileURLToPath } from 'node:url';
+
 import { logger } from '@gracile/internal-utils/logger.build';
 import { createServerAdapter } from '@whatwg-node/server';
 import type { IncomingMessage, ServerResponse } from 'http';
 import { Readable, Writable } from 'stream';
 
-import { type GracileAsyncMiddleware } from './request.js';
+import { CLIENT_DIST_DIR } from '../env.js';
+import { type GracileAsyncMiddleware } from '../request.js';
 
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
 // @ts-expect-error Abusing this feature!
@@ -56,3 +59,9 @@ export function nodeAdapter(middleware: GracileAsyncMiddleware) {
 		return null;
 	};
 }
+
+export function getClientDistPath(root: string) {
+	return fileURLToPath(new URL(CLIENT_DIST_DIR, root));
+}
+
+export { printAddressInfos } from '../utils.js';

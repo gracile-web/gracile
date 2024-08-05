@@ -37,7 +37,7 @@ const program = new Command()
 	)
 	.option(
 		'-n, --next',
-		`${c.yellow(`Choose from the \`next\` versions of template.\n`)}`,
+		`${c.yellow(`Use the \`next\` version of the selected template.\n`)}`,
 	)
 	.option(
 		'-i, --install-dependencies',
@@ -209,7 +209,12 @@ const template = templateFound
 						hint: 'Just the minimum to get started with a dynamic SSRed website',
 					},
 					{
-						value: 'basics-blog-static',
+						value: 'minimal-server-hono',
+						label: 'Minimal - Server Hono',
+						hint: 'Just the minimum to get started with a dynamic SSRed website',
+					},
+					{
+						value: 'basics-static-blog',
 						label: 'Basics - Blog static',
 						hint: 'Show features and conventions for a Gracile static website',
 					},

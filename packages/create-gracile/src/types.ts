@@ -53,7 +53,9 @@ export const TEMPLATE_LIST = [
 	//
 	'minimal-static',
 	'minimal-server-express',
-	'basics-blog-static',
+	'minimal-server-hono',
+
+	'basics-static-blog',
 	'basics-server',
 ] as const;
 export const TEMPLATE_LIST_ANON = [...(TEMPLATE_LIST as unknown as string[])];
