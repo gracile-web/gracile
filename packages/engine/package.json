@@ -64,7 +64,7 @@
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/express": "^4.x.x",
     "@types/node": "^20.14.8",
-    "c8": "^9.1.0",
+    "c8": "^10.1.2",
     "sinon": "^18.0.0",
     "tsx": "^4.7.2",
     "typescript": "5.5.4"

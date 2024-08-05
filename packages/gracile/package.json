@@ -58,7 +58,6 @@
     "@gracile/internal-utils": "workspace:^",
     "@gracile/server": "workspace:^",
     "@lit-labs/ssr": "^3.2.2",
-    "tsx": "^4.7.2",
     "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {

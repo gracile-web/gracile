@@ -41,7 +41,7 @@
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
     "picocolors": "^1.0.0",
-    "sitemap": "^7.1.1"
+    "sitemap": "8.0.0"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
