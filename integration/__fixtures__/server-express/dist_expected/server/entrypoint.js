@@ -98,6 +98,15 @@ const routes = new Map([
     }
   ],
   [
+    "/response-init/",
+    {
+      "filePath": "src/routes/response-init.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
+    }
+  ],
+  [
     "/throws/",
     {
       "filePath": "src/routes/throws.ts",
@@ -123,6 +132,7 @@ const routeImports = new Map(
 ['/foo/bar/', () => import('./chunk/bar.js')],
 ['/private/', () => import('./chunk/index.js')],
 ['/redirect/', () => import('./chunk/redirect.js')],
+['/response-init/', () => import('./chunk/response-init.js')],
 ['/throws/', () => import('./chunk/throws.js')],
 	]
 );
@@ -167,6 +177,10 @@ const routeAssets = new Map([
   [
     "/redirect/",
     null
+  ],
+  [
+    "/response-init/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-Cu8CxlfV.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/throws/",

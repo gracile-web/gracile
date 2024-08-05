@@ -13,18 +13,18 @@ import type * as R from '../routes/route.js';
 
 // type NextFunction = (error?: unknown) => void | Promise<void>;
 
-/**
- * This is fully compatible with Express or bare Node HTTP
- * What it adds on top of Connect-style middleware:
- * 1. Async.
- * 2. Can return a `ServerResponse`
- */
-export type GracileAsyncMiddleware = (
+export type GracileHandler = (
 	request: Request,
 	locals?: unknown,
-) => Promise<Response | Readable | null>;
+) => Promise<
+	| { response: Response; body?: never; init?: never }
+	| { response?: never; body: Readable; init: ResponseInit }
+	| null
+>;
 
-export function createGracileMiddleware({
+const CONTENT_TYPE_HTML = { 'Content-Type': 'text/html' };
+
+export function createGracileHandler({
 	vite,
 	routes,
 	routeImports,
@@ -46,10 +46,11 @@ export function createGracileMiddleware({
 		if (vite)
 			errorPageHtml = await vite.transformIndexHtml(urlPath, errorPageHtml);
 
-		return { errorPageHtml, headers: { 'Content-Type': 'text-html' } };
+		console.log({ errorPageHtml });
+		return { errorPageHtml, headers: { ...CONTENT_TYPE_HTML } };
 	}
 
-	const middleware: GracileAsyncMiddleware = async (request, locals) => {
+	const middleware: GracileHandler = async (request, locals) => {
 		// HACK: Typing workaround
 		if (!request.url) throw Error('Incorrect url');
 		if (!request.method) throw Error('Incorrect method');
@@ -87,11 +88,13 @@ export function createGracileMiddleware({
 					urlPath,
 					new Error(message),
 				);
-				return new Response(errorPageHtml, {
-					headers,
-					status: 404,
-					statusText: '404 not found!',
-				});
+				return {
+					response: new Response(errorPageHtml, {
+						headers,
+						status: 404,
+						statusText: '404 not found!',
+					}),
+				};
 			}
 
 			const routeTemplateOptions = {
@@ -129,7 +132,7 @@ export function createGracileMiddleware({
 				const routeContext = Object.freeze({
 					request,
 					url: new URL(fullUrl),
-					response: responseInit,
+					responseInit,
 					params: routeInfos.params,
 					locals: providedLocals,
 				});
@@ -192,7 +195,9 @@ export function createGracileMiddleware({
 					// MARK: No GET, render page
 				} else {
 					const statusText = `This route doesn't handle the \`${method}\` method!`;
-					return new Response(statusText, { status: 405, statusText });
+					return {
+						response: new Response(statusText, { status: 405, statusText }),
+					};
 				}
 			} else {
 				output = await renderRouteTemplate({
@@ -210,20 +215,24 @@ export function createGracileMiddleware({
 					const location = output.headers.get('location');
 
 					if (location) {
-						return Response.redirect(location, output.status);
+						return { response: Response.redirect(location, output.status) };
 					}
 				}
 
-				return output;
+				return { response: output };
 
 				// MARK: Stream page render
 			}
 
 			// MARK: Page stream error
 
-			return !output
-				? null
-				: output.on('error', (error) => {
+			if (output instanceof Readable) {
+				responseInit.headers = {
+					...responseInit.headers,
+					...CONTENT_TYPE_HTML,
+				};
+				return {
+					body: output.on('error', (error) => {
 						const errorMessage =
 							`There was an error while rendering a template chunk on server-side.\n` +
 							`It was omitted from the resulting HTML.`;
@@ -236,7 +245,12 @@ export function createGracileMiddleware({
 									message: errorMessage,
 								});
 							}, 500);
-					});
+					}),
+					init: responseInit,
+				};
+			}
+
+			return null;
 
 			// MARK: Errors
 		} catch (e) {
@@ -247,11 +261,13 @@ export function createGracileMiddleware({
 			const { errorPageHtml: ultimateErrorPage, headers } =
 				await createErrorPage('__gracile_error', error);
 
-			return new Response(String(ultimateErrorPage), {
-				headers,
-				status: 500,
-				statusText: 'Gracile middleware error',
-			});
+			return {
+				response: new Response(String(ultimateErrorPage), {
+					headers,
+					status: 500,
+					statusText: 'Gracile middleware error',
+				}),
+			};
 		}
 	};
 

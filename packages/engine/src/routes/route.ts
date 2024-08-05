@@ -123,7 +123,7 @@ export type Handler<
 	 * It doesn't take effect if you're returning the
 	 * response yourself before (within your request handler).
 	 * */
-	response: ResponseInit;
+	responseInit: ResponseInit;
 }) => MaybePromise<Data> | MaybePromise<void>;
 
 export type HandlerGeneric =

@@ -5,34 +5,28 @@ import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 
 import { CLIENT_DIST_DIR } from '../env.js';
-import { type GracileAsyncMiddleware } from '../request.js';
+import type { GracileHandler } from '../request.js';
 
-export function honoAdapter(middleware: GracileAsyncMiddleware) {
-	return async function honoMiddleware(context: {
-		req: { raw: Request };
-		res: ResponseInit;
-		var: unknown;
-	}) {
-		const result = await middleware(context.req.raw, context.var);
+export type GracileHonoHandler = (context: {
+	req: { raw: Request };
+	var: unknown;
+}) => Promise<Response>;
 
-		if (result instanceof Readable) {
-			return new Response(Readable.toWeb(result) as ReadableStream, {
-				headers: { 'content-type': 'html' },
-			});
+export const honoAdapter =
+	(handler: GracileHandler): GracileHonoHandler =>
+	async (context) => {
+		const result = await handler(context.req.raw, context.var);
 
-			// context.res.headers.set('content-type', 'html');
-			// return stream(c, async (stream) => {
-			// 	stream.onAbort(() => {
-			// 		throw new Error('Stream aborted!');
-			// 	});
-			// 	await stream.pipe(/** @type {ReadableStream} */ Readable.toWeb(result));
-			// });
-		}
+		if (result?.body)
+			return new Response(
+				Readable.toWeb(result.body) as ReadableStream,
+				result.init,
+			);
 
-		if (result) return result;
+		if (result?.response) return result.response;
+
 		throw new Error('Rendering was impossible in the Hono adapter!');
 	};
-}
 
 export function getClientDistPath(root: string) {
 	return relative(process.cwd(), fileURLToPath(new URL(CLIENT_DIST_DIR, root)));

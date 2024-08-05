@@ -3,20 +3,34 @@ import { fileURLToPath } from 'node:url';
 import { logger } from '@gracile/internal-utils/logger.build';
 import { createServerAdapter } from '@whatwg-node/server';
 import type { IncomingMessage, ServerResponse } from 'http';
-import { Readable, Writable } from 'stream';
+import { Writable } from 'stream';
 
 import { CLIENT_DIST_DIR } from '../env.js';
-import { type GracileAsyncMiddleware } from '../request.js';
+import type { GracileHandler } from '../request.js';
 
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
 // @ts-expect-error Abusing this feature!
 const nodeRequestToStandardRequest = createServerAdapter((request) => request);
 
-export function nodeAdapter(middleware: GracileAsyncMiddleware) {
-	return async function nodeMiddleware(
+function standardResponseInitToNodeResponse(
+	responseInit: ResponseInit | Response,
+	res: ServerResponse,
+) {
+	const headers =
+		responseInit instanceof Response
+			? responseInit.headers
+			: new Headers(responseInit.headers);
+
+	headers.forEach((content, header) => res.setHeader(header, content));
+	if (responseInit.status) res.statusCode = responseInit.status;
+	if (responseInit.statusText) res.statusMessage = responseInit.statusText;
+}
+
+export function nodeAdapter(handler: GracileHandler) {
+	return async function nodeHandler(
 		req: IncomingMessage,
 		res: ServerResponse,
-		// next: (error?: unknown) => void,
+
 		locals?: unknown,
 	) {
 		const request = (await Promise.resolve(
@@ -30,32 +44,25 @@ export function nodeAdapter(middleware: GracileAsyncMiddleware) {
 			...(locals ?? {}),
 			...('locals' in res && typeof res.locals === 'object' ? res.locals : {}),
 		};
-		const result = await middleware(request, mergedLocals).catch((error) =>
-			// next(error),
-			res.end(String(error)),
-		);
+		const result = await handler(request, mergedLocals);
 
-		// console.log({ result });
-		if (result instanceof Readable) {
-			res.setHeader('Content-Type', 'text/html');
-			return result.pipe(res);
+		if (result?.body) {
+			standardResponseInitToNodeResponse(result.init, res);
+
+			return result.body.pipe(res);
 		}
-		if (result instanceof Response) {
-			if (result.status) res.statusCode = result.status;
-			if (result.statusText) res.statusMessage = result.statusText;
+		if (result?.response) {
+			standardResponseInitToNodeResponse(result.response, res);
 
-			result.headers?.forEach((content, header) =>
-				res.setHeader(header, content),
-			);
-
-			if (result.body) {
-				const piped = await result.body
+			if (result.response.body) {
+				const piped = await result.response.body
 					.pipeTo(Writable.toWeb(res))
 					.catch((e) => logger.error(String(e)));
 				return piped;
 			}
 			return null;
 		}
+
 		return null;
 	};
 }

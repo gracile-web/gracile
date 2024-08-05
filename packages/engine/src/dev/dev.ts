@@ -4,8 +4,8 @@ import { type ViteDevServer } from 'vite';
 
 import { collectRoutes } from '../routes/collect.js';
 import {
-	createGracileMiddleware,
-	type GracileAsyncMiddleware,
+	createGracileHandler,
+	type GracileHandler,
 } from '../server/request.js';
 import type { GracileConfig } from '../user-config.js';
 
@@ -16,7 +16,7 @@ export async function createDevHandler({
 	vite: ViteDevServer;
 	gracileConfig: GracileConfig;
 }): Promise<{
-	handler: GracileAsyncMiddleware;
+	handler: GracileHandler;
 }> {
 	const root = vite.config.root;
 
@@ -42,7 +42,7 @@ export async function createDevHandler({
 
 	// NOTE: Wrong place?
 	const serverMode = false;
-	const gracile = createGracileMiddleware({ vite, root, serverMode, routes });
+	const gracile = createGracileHandler({ vite, root, serverMode, routes });
 
 	return { handler: gracile };
 }

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
 import { fetchResource } from '../__utils__/fetch.js';
+import { checkResponse } from '../__utils__/fetch-utils.js';
 import { snapshotAssertEqual } from '../__utils__/snapshot.js';
 import { removeLocalPathsInDevAssets } from '../__utils__/vite.js';
 import { api } from './_api.js';
@@ -90,6 +91,29 @@ async function tests(mode: string, writeActual: boolean) {
 			),
 			writeActual,
 		}));
+
+	await it('should forward response init when returning an html template via GET', async () =>
+		checkResponse(
+			fetch(new URL(`/response-init/`, ADDRESS), { headers: { hey: '__abc' } }),
+			{
+				headers: { bar: 'baz', daz: 'doze' },
+				status: 210,
+				statusText: 'Hi there__abc',
+			},
+		));
+	await it('should forward response init when returning an html template via POST', async () =>
+		checkResponse(
+			fetch(new URL(`/response-init/`, ADDRESS), {
+				method: 'POST',
+				headers: { hey: '__oi' },
+			}),
+			{
+				headers: { azz: 'ozz', dizz: 'duzz' },
+				status: 211,
+				statusText: 'Ola__oi',
+			},
+		));
+	// TODO: Test with "accept: json" when implemented
 
 	await it('load an error page when a route throws', async () =>
 		snapshotAssertEqual({
