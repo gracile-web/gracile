@@ -62,7 +62,12 @@ export async function api() {
 						: null,
 
 					...RESPONSE_INVENTORY.ok,
-					statusText: 'DONE',
+
+					// FIXME: Hono doesn't understand custom statusText
+					// It will just return the default message for each status code
+					// statusText: 'unknown',
+					// statusText: 'DONE',
+
 					headers: {
 						...RESPONSE_INVENTORY.headers.common,
 						...RESPONSE_INVENTORY.headers.json,

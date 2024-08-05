@@ -4,7 +4,7 @@ import { logger } from '@gracile/internal-utils/logger';
 import c from 'picocolors';
 import type { ViteDevServer } from 'vite';
 
-import { isUnknownObject, type UnknownObject } from '../assertions.js';
+import * as assert from '../assertions.js';
 import { errorPage } from '../errors/templates.js';
 import { renderRouteTemplate } from '../render/route-template.js';
 import { renderSsrTemplate } from '../render/utils.js';
@@ -46,21 +46,13 @@ export function createGracileHandler({
 		if (vite)
 			errorPageHtml = await vite.transformIndexHtml(urlPath, errorPageHtml);
 
-		console.log({ errorPageHtml });
 		return { errorPageHtml, headers: { ...CONTENT_TYPE_HTML } };
 	}
 
 	const middleware: GracileHandler = async (request, locals) => {
-		// HACK: Typing workaround
-		if (!request.url) throw Error('Incorrect url');
-		if (!request.method) throw Error('Incorrect method');
-		const { url: urlPath, method } = request;
-
-		// if (urlPath === '/favicon.ico') return next();
-
 		try {
 			// NOTE: Maybe it should be constructed from `req`
-			const fullUrl = request.url;
+			const { url: fullUrl, method } = request;
 
 			// MARK: Get route infos
 
@@ -82,10 +74,10 @@ export function createGracileHandler({
 
 			if (routeInfos === null) {
 				// MARK: Default, fallback 404
-				const message = `404 not found!\n\n---\n\nCreate a /src/routes/404.{js,ts} to get a custom page.\n${method} - ${urlPath}`;
+				const message = `404 not found!\n\n---\n\nCreate a /src/routes/404.{js,ts} to get a custom page.\n${method} - ${fullUrl}`;
 
 				const { errorPageHtml, headers } = await createErrorPage(
-					urlPath,
+					fullUrl,
 					new Error(message),
 				);
 				return {
@@ -107,14 +99,14 @@ export function createGracileHandler({
 				routeInfos,
 			} as const;
 
-			logger.info(`[${c.yellow(method)}] ${c.yellow(urlPath)}`, {
+			logger.info(`[${c.yellow(method)}] ${c.yellow(fullUrl)}`, {
 				timestamp: true,
 			});
 
 			let output: Readable | Response | null;
 
-			let providedLocals: UnknownObject = {};
-			if (locals && isUnknownObject(locals)) providedLocals = locals;
+			let providedLocals: assert.UnknownObject = {};
+			if (locals && assert.isUnknownObject(locals)) providedLocals = locals;
 
 			// MARK: Server handler
 
@@ -166,7 +158,8 @@ export function createGracileHandler({
 					const handlerOutput = (await Promise.resolve(
 						handler(routeContext),
 					)) as unknown;
-					if (handlerOutput instanceof Response) output = handlerOutput;
+					if (assert.isResponseOrPatchedResponse(handlerOutput))
+						output = handlerOutput;
 					else
 						throw new TypeError(
 							'Catch-all handler must return a Response object.',
@@ -183,7 +176,8 @@ export function createGracileHandler({
 						handlerWithMethod(routeContext) as unknown,
 					);
 
-					if (handlerOutput instanceof Response) output = handlerOutput;
+					if (assert.isResponseOrPatchedResponse(handlerOutput))
+						output = handlerOutput;
 					else {
 						output = await renderRouteTemplate({
 							...routeTemplateOptions,
@@ -210,7 +204,7 @@ export function createGracileHandler({
 			// MARK: Return response
 
 			// NOTE: try directly with the requestPonyfill. This might not be necessary
-			if (output instanceof Response) {
+			if (assert.isResponseOrPatchedResponse(output)) {
 				if (output.status >= 300 && output.status <= 303) {
 					const location = output.headers.get('location');
 

@@ -158,6 +158,9 @@ importers:
       '@gracile/svg':
         specifier: workspace:^
         version: link:../packages/addons/svg
+      '@hono/node-server':
+        specifier: ^1.12.0
+        version: 1.12.0
       '@lit-labs/ssr':
         specifier: ^3.2.2
         version: 3.2.2
@@ -176,6 +179,9 @@ importers:
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
+      hono:
+        specifier: ^4.5.3
+        version: 4.5.3
       lit:
         specifier: ^3.1.3
         version: 3.1.3
@@ -979,6 +985,10 @@ packages:
   '@eslint/js@8.57.0':
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  '@hono/node-server@1.12.0':
+    resolution: {integrity: sha512-e6oHjNiErRxsZRZBmc2KucuvY3btlO/XPncIpP2X75bRdTilF9GLjm3NHvKKunpJbbJJj31/FoPTksTf8djAVw==}
+    engines: {node: '>=18.14.1'}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -2756,6 +2766,10 @@ packages:
 
   has-unicode@2.0.1:
     resolution: {integrity: sha512-8Rf9Y83NBReMnx0gFzA8JImQACstCYWUplepDa9xprwwtmgEZUF0h/i5xSA625zB/I37EtrswSST6OXxwaaIJQ==}
+
+  hono@4.5.3:
+    resolution: {integrity: sha512-r26WwwbKD3BAYdfB294knNnegNda7VfV1tVn66D9Kvl9WQTdrR+5eKdoeaQNHQcC3Gr0KBikzAtjd6VsRGVSaw==}
+    engines: {node: '>=16.0.0'}
 
   hosted-git-info@7.0.2:
     resolution: {integrity: sha512-puUZAUKT5m8Zzvs72XWy3HtvVbTWljRE66cP60bxJzAqf2DgICo7lYTY2IHUmLnNpjYvw5bvmoHvPc0QO2a62w==}
@@ -4859,6 +4873,8 @@ snapshots:
       - supports-color
 
   '@eslint/js@8.57.0': {}
+
+  '@hono/node-server@1.12.0': {}
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
@@ -7092,6 +7108,8 @@ snapshots:
   has-flag@4.0.0: {}
 
   has-unicode@2.0.1: {}
+
+  hono@4.5.3: {}
 
   hosted-git-info@7.0.2:
     dependencies:

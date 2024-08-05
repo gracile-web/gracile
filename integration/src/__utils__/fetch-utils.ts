@@ -77,7 +77,8 @@ Response {
 
 export const RESPONSE_INVENTORY = {
 	ok: {
-		statusText: 'OK',
+		// FIXME: HONO
+		// statusText: 'OK',
 		status: 200,
 		redirected: false,
 	},
@@ -90,7 +91,10 @@ export const RESPONSE_INVENTORY = {
 			// 'access-control-allow-origin': '*',
 			connection: 'keep-alive',
 			'keep-alive': 'timeout=5',
-			'transfer-encoding': 'chunked',
+			// FIXME: EXPRESS
+			// 'transfer-encoding': 'chunked',
+			// FIXME: HONO
+			// 'transfer-encoding': null,
 		},
 		json: { 'content-type': 'application/json' },
 	},

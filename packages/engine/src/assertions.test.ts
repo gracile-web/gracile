@@ -9,6 +9,7 @@ import {
 	isLitNormalTemplate,
 	isLitServerTemplate,
 	isLitTemplate,
+	isResponseOrPatchedResponse,
 	isUnknownObject,
 } from './assertions.js';
 
@@ -32,9 +33,44 @@ describe('should assert lit templates, unknown objects', () => {
 		assert.equal(isLitNormalTemplate([]), false);
 		assert.equal(isLitServerTemplate([]), false);
 	});
+});
 
+describe('should assert unknown objects', () => {
 	test('unknown object', () => {
 		assert.equal(isUnknownObject({ something: 'something' } as never), true);
 	});
 	//
+});
+
+describe('should assert responses', () => {
+	test('assert standard response', () => {
+		assert.equal(
+			isResponseOrPatchedResponse(
+				new Response('hey', { headers: { foo: 'bar' } }),
+			),
+			true,
+		);
+	});
+
+	test('assert patched standard response', () => {
+		assert.equal(
+			isResponseOrPatchedResponse(
+				// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+				new (class Response {
+					url: null = null;
+
+					body: null = null;
+
+					bodyUsed: null = null;
+
+					headers: null = null;
+
+					status: null = null;
+
+					statusText: null = null;
+				})(),
+			),
+			true,
+		);
+	});
 });

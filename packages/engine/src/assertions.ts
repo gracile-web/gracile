@@ -42,3 +42,25 @@ export function isLitServerTemplate(
 		input._$litServerRenderMode === 1
 	);
 }
+
+export function isResponseOrPatchedResponse(input: unknown): input is Response {
+	if (input instanceof Response) return true;
+
+	// NOTE: We have to use that because Hono breaks with `Response.json`
+	// (IDK why, maybe some global patching somewhere,
+	// not found in the Hono codebase).
+	if (
+		input &&
+		typeof input === 'object' &&
+		input.constructor.name === 'Response' &&
+		'url' in input &&
+		'body' in input &&
+		'bodyUsed' in input &&
+		'headers' in input &&
+		'status' in input &&
+		'statusText' in input
+	)
+		return true;
+
+	return false;
+}

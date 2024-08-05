@@ -17,11 +17,11 @@ export const honoAdapter =
 	async (context) => {
 		const result = await handler(context.req.raw, context.var);
 
-		if (result?.body)
-			return new Response(
-				Readable.toWeb(result.body) as ReadableStream,
-				result.init,
-			);
+		if (result?.body) {
+			// NOTE: Typings mismatches
+			const body = Readable.toWeb(result.body) as ReadableStream;
+			return new Response(body, result.init);
+		}
 
 		if (result?.response) return result.response;
 
