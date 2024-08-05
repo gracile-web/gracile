@@ -19,8 +19,13 @@ import { type Settings, TEMPLATE_LIST, TEMPLATE_LIST_ANON } from './types.js';
 
 // MARK: Create CLI
 
+const cliPjson = JSON.parse(
+	await readFile(new URL('../package.json', import.meta.url), 'utf8'),
+) as unknown as { version: string };
+const cliVersion = `v${cliPjson.version}`;
+
 const program = new Command()
-	.name(c.bold('create-gracile'))
+	.name(c.bold(`create-gracile`))
 	.description(`${c.gray(`Creates a new ${c.bold('Gracile')} project.`)}`)
 
 	.option(
@@ -55,6 +60,13 @@ const program = new Command()
 		'-r, --clear-previous-settings',
 		`${c.yellow(`Clear previously saved settings.\n`)}`,
 	)
+	.version(
+		cliVersion,
+		'-v, --version',
+		`${c.yellow(`Output the version number.\n`)}`,
+	)
+	// TODO: Find how to customize `-h, --help    display help for command`
+	// .configureHelp({ })
 	.addHelpText(
 		'after',
 		`\n---\nOnline docs: ${c.cyan('https://gracile.js.org/')}`,
@@ -85,6 +97,8 @@ clack.intro(
 		`✨🧚 Create your new ${c.underline(c.white(c.italic('Gracile')))} project`,
 	),
 ); // 🧚🏻‍♀️
+
+clack.log.info(c.dim(`CLI ${cliVersion}`));
 
 if (DEV) clack.log.warn(c.yellow(`Development mode`));
 clack.log.info(
@@ -201,27 +215,27 @@ const template = templateFound
 					{
 						value: 'minimal-static',
 						label: 'Minimal - Static',
-						hint: 'Just the minimum to get started with a SSG website',
+						hint: 'Get started with a statically generated project (SSG)',
 					},
 					{
 						value: 'minimal-server-express',
-						label: 'Minimal - Server express',
-						hint: 'Just the minimum to get started with a dynamic SSRed website',
+						label: 'Minimal - Server Express',
+						hint: 'Get started with a server-side rendered project (SSR)',
 					},
 					{
 						value: 'minimal-server-hono',
 						label: 'Minimal - Server Hono',
-						hint: 'Just the minimum to get started with a dynamic SSRed website',
+						hint: 'Get started with a server-side rendered project (SSR)',
 					},
 					{
 						value: 'basics-static-blog',
 						label: 'Basics - Blog static',
-						hint: 'Show features and conventions for a Gracile static website',
+						hint: 'Features and conventions hints for a Gracile static website',
 					},
 					{
 						value: 'basics-server',
 						label: 'Basics - Server',
-						hint: 'Show features and conventions for a Gracile dynamic website',
+						hint: 'Features and conventions hints for a Gracile dynamic application',
 					},
 				] satisfies {
 					value: (typeof TEMPLATE_LIST)[number];
@@ -317,7 +331,12 @@ await exec(`git checkout`, {
 await rename(
 	join(projectDestinationTmp, 'templates', template),
 	projectDestination,
-);
+).catch(() => {
+	clack.log.error(
+		'It looks like this template is not available in the starter-projects repository.\nIt may be a Gracile error, or you have a CLI version mismatch.',
+	);
+	process.exit(1);
+});
 await rm(projectDestinationTmp, { force: true, recursive: true });
 
 await rm(join(process.cwd(), projectDestination, '.git'), {
