@@ -1,15 +1,6 @@
 import { type ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
-import { after, it } from 'node:test';
 
-import { writeActual } from '../config.js';
-import { common } from './_common.js';
-
-// eslint-disable-next-line prefer-const
-let gracileProcessExpress: ChildProcessWithoutNullStreams | null = null;
-// eslint-disable-next-line prefer-const
-let gracileProcessHono: ChildProcessWithoutNullStreams | null = null;
-
-function launch(file: string) {
+export function launch(file: string, callback: () => Promise<unknown>) {
 	let gracileProcess: ChildProcessWithoutNullStreams | null = null;
 	return new Promise<ChildProcessWithoutNullStreams | null>(
 		(resolve, reject) => {
@@ -40,7 +31,7 @@ function launch(file: string) {
 
 				bootStrapped = true;
 
-				common('prod', writeActual)
+				callback()
 					.then(() => {
 						resolve(gracileProcess);
 					})
@@ -65,14 +56,3 @@ function launch(file: string) {
 		},
 	);
 }
-await it('runs and execute test suites with EXPRESS', async () => {
-	gracileProcessExpress = await launch('express.js');
-});
-await it('runs and execute test suites with HONO', async () => {
-	gracileProcessHono = await launch('hono.js');
-});
-
-after(() => {
-	if (gracileProcessExpress) gracileProcessExpress.kill();
-	if (gracileProcessHono) gracileProcessHono.kill();
-});
