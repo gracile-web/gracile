@@ -11,7 +11,7 @@
       "cleanupTempFiles": true,
       "removePackageFields": ["devDependencies", "scripts"],
 
-      "message": "chore: publish release"
+      "message": "chore: publish release [skip ci]"
     }
   },
 
