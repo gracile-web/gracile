@@ -10,7 +10,7 @@ import {
 } from './build/static.js';
 import { createDevHandler } from './dev/dev.js';
 import type { RoutesManifest } from './routes/route.js';
-import { nodeAdapter } from './server/node.js';
+import { nodeAdapter } from './server/adapters/node.js';
 import type { GracileConfig } from './user-config.js';
 import { buildRoutes } from './vite/plugins/build-routes.js';
 import { virtualRoutes } from './vite/plugins/virtual-routes.js';

@@ -18,8 +18,8 @@ describe('gracile package should do its exports correctly', () => {
 	assert.equal(typeof plugin.createGracileMiddleware, 'function');
 
 	assert.equal(typeof node.printAddressInfos, 'function');
-	assert.equal(typeof node.authenticateBasic, 'function');
-	assert.equal(typeof node.notFoundHandler, 'function');
+	// assert.equal(typeof node.authenticateBasic, 'function');
+	// assert.equal(typeof node.notFoundHandler, 'function');
 
 	assert.equal(typeof serverHtml.html, 'function');
 

@@ -1,18 +1,18 @@
 // NOTE: Util. to pretty print for user provided server.
 
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
-import { fileURLToPath } from 'node:url';
 
 // import type { AddressInfo } from 'node:net';
 import { logger } from '@gracile/internal-utils/logger';
 import { DEV } from 'esm-env';
 import c from 'picocolors';
 
-import { CLIENT_DIST_DIR, IP_EXPOSED } from './env.js';
+import { IP_EXPOSED } from './env.js';
 
 export function printAddressInfos(options: {
 	server?: Server;
 	address?: string;
+	port?: number;
 }) {
 	let address: null | string = null;
 
@@ -23,7 +23,7 @@ export function printAddressInfos(options: {
 			address = `http://${infos.address}:${infos.port}/`;
 		}
 	} else if (options.address) {
-		address = options.address;
+		address = `http://${options.address}${options.port ? `:${String(options.port)}` : ''}`;
 	}
 	if (!address) throw new Error('Incorrect options');
 
@@ -31,18 +31,22 @@ export function printAddressInfos(options: {
 		timestamp: true,
 	});
 
-	logger.info(
-		`
-${c.dim('┃')} Local    ${c.cyan(address.replace(/::1?/, 'localhost'))}` +
+	if (address?.includes(IP_EXPOSED))
+		logger.info(
 			`${
 				address?.includes(IP_EXPOSED)
 					? `\n${c.dim('┃')} Network  ${c.cyan(address)}`
 					: ''
-			}
-`,
-	);
+			}`,
+		);
+	else
+		logger.info(
+			`
+${c.dim('┃')} Local    ${c.cyan(address.replace(/::1?/, 'localhost'))}`,
+		);
 }
 
+// NOTE: UNUSED (keep?)
 function sendHtml(res: ServerResponse, payload: unknown) {
 	res.setHeader('content/type', 'text/html');
 	res.end(payload);
@@ -70,6 +74,7 @@ export type LocalMiddlewareContext = {
 	response: ResponseInit;
 };
 
+// NOTE: NOT EXPOSED FOR NOW. Maybe just put in docs.
 export type BasicAuthUser = { userName: string | null };
 
 /**
@@ -104,7 +109,3 @@ export const authenticateBasic = (
 
 	return { userName: null };
 };
-
-export function getClientDistPath(root: string) {
-	return fileURLToPath(new URL(CLIENT_DIST_DIR, root));
-}
