@@ -489,9 +489,6 @@ importers:
 
   packages/gracile:
     dependencies:
-      '@gracile/cli':
-        specifier: workspace:^
-        version: link:../cli
       '@gracile/client':
         specifier: workspace:^
         version: link:../client
