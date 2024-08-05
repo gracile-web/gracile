@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/markdown@0.0.5...@gracile/markdown@0.1.0) (2024-08-05)
+
+### Bug Fixes
+
+* vite plugin versions mismatches, error page mime type ([4065dea](https://github.com/gracile-web/gracile/commit/4065dea8f4ed7b9364a2b4a6a85836335f44f913))
+
+### Features
+
+* convert standalone custom vite app to just a plugin ([9ea8ca1](https://github.com/gracile-web/gracile/commit/9ea8ca18deb82265a7791e2d0f311b35b36b560b))
+
+### Reverts
+
+* "chore: publish release" (just unwanted `next` changelogs) ([a4147b9](https://github.com/gracile-web/gracile/commit/a4147b91192482adcab39140907a127bc5ecdb1e))
+
 ## [0.0.5](https://github.com/gracile-web/gracile/compare/@gracile/markdown@0.0.4...@gracile/markdown@0.0.5) (2024-06-08)
 
 ### Bug Fixes

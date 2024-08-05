@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.1.1...@gracile/engine@0.2.0) (2024-08-05)
+
+### Bug Fixes
+
+* global app handler locals ([c1565f9](https://github.com/gracile-web/gracile/commit/c1565f9a2c6e2cf94d0931efe887ff27f2cc7f88))
+* gracile version loading, put it upstream ([75a4470](https://github.com/gracile-web/gracile/commit/75a447099df31fec361362fe7088fb784b71566b))
+* minify server emitted css, remove old dep ([1960c38](https://github.com/gracile-web/gracile/commit/1960c38aaa7623bcc8d868ca7eff6a1d1fb10866))
+* vite plugin versions mismatches, error page mime type ([4065dea](https://github.com/gracile-web/gracile/commit/4065dea8f4ed7b9364a2b4a6a85836335f44f913))
+
+### Features
+
+* add exclude route patterns user option ([ed5c2ec](https://github.com/gracile-web/gracile/commit/ed5c2ec4a806d16c3597d23abb434fdfad265d74))
+* convert standalone custom vite app to just a plugin ([9ea8ca1](https://github.com/gracile-web/gracile/commit/9ea8ca18deb82265a7791e2d0f311b35b36b560b))
+* handle server asset url imports ([c2283c7](https://github.com/gracile-web/gracile/commit/c2283c7be2ba1dbc88283b3bff08963c16c9b361))
+* hmr invalidation on route changes, revert single file update, prevent duplicate events ([f6a166e](https://github.com/gracile-web/gracile/commit/f6a166ef7218ff5b24869921c9d584ea2213fd6d))
+* init hono adapter, reference starter ([4e10395](https://github.com/gracile-web/gracile/commit/4e10395229aa511e5ec3aa5ab710f1b2f06682e6))
+* pure standard request internal handling, create node adapter ([3482729](https://github.com/gracile-web/gracile/commit/34827298f11689406605d086b098c4a7842f9068))
+* rename 404 index to just 404 for routes rendering ([689ed8f](https://github.com/gracile-web/gracile/commit/689ed8f1b68f916ea4a0958ff807d10f444b113d))
+* use fdir instead of fast-glob, refresh with only one file instead of the whole routes folder ([f3e4e98](https://github.com/gracile-web/gracile/commit/f3e4e98ea5d381a19ddc4ddb68f0ac4d1fd65a5e))
+
+### Reverts
+
+* "chore: publish release" (just unwanted `next` changelogs) ([a4147b9](https://github.com/gracile-web/gracile/commit/a4147b91192482adcab39140907a127bc5ecdb1e))
+
 ## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.1.0...@gracile/engine@0.1.1) (2024-06-23)
 
 **Note:** Version bump only for package @gracile/engine

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.6](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.5...@gracile/markdown-preset-marked@0.0.6) (2024-08-05)
+
+### Reverts
+
+* "chore: publish release" (just unwanted `next` changelogs) ([a4147b9](https://github.com/gracile-web/gracile/commit/a4147b91192482adcab39140907a127bc5ecdb1e))
+
 ## [0.0.5](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.4...@gracile/markdown-preset-marked@0.0.5) (2024-06-08)
 
 **Note:** Version bump only for package @gracile/markdown-preset-marked

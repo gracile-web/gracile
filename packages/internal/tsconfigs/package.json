@@ -1,6 +1,6 @@
 {
   "name": "@gracile/internal-tsconfigs",
-  "version": "0.0.4-next.1",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/gracile-web/gracile",

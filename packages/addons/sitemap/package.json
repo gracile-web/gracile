@@ -1,6 +1,6 @@
 {
   "name": "@gracile/sitemap",
-  "version": "0.0.6-next.3",
+  "version": "0.0.6",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
