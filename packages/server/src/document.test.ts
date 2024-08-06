@@ -17,12 +17,7 @@ describe('should exports helpers', () => {
 	test('pageAssets', () => {
 		assert.equal(isLitServerTemplate(helpers.pageAssets), true);
 	});
-	test('dsd', () => {
-		assert.equal(
-			isLitServerTemplate(helpers.polyfills.declarativeShadowDom),
-			true,
-		);
-	});
+
 	test('requestIdleCallback', () => {
 		assert.equal(
 			isLitServerTemplate(helpers.polyfills.requestIdleCallback),

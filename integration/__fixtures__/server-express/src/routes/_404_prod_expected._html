@@ -20,12 +20,6 @@
 
     <!--  -->
 
-    <script type="module">
-      // DECLARATIVE SHADOW DOM
-      import { checkDsd } from "@gracile/gracile/_internals/polyfills/declarative-shadow-dom";
-      checkDsd();
-    </script>
-
     <script>
       // REQUEST IDLE CALLBACK - POLYFILL
 

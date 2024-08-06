@@ -24,14 +24,6 @@ const fullHydration = html`
 `;
 
 const polyfills = {
-	declarativeShadowDom: html`
-		<script type="module">
-			// DECLARATIVE SHADOW DOM
-			import { checkDsd } from '@gracile/gracile/_internals/polyfills/declarative-shadow-dom';
-			checkDsd();
-		</script>
-	`,
-
 	requestIdleCallback: html`
 		${unsafeHTML(`
       <script>

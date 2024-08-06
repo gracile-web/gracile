@@ -9,7 +9,6 @@ import test, { describe } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import * as env from '@gracile/engine/server/env';
-import * as dsd from '@gracile/gracile/_internals/polyfills/declarative-shadow-dom';
 import * as requestIdleC from '@gracile/gracile/_internals/polyfills/request-idle-callback';
 import * as serverRuntime from '@gracile/gracile/_internals/server-runtime';
 import * as document from '@gracile/gracile/document';
@@ -85,9 +84,7 @@ describe('gracile package should do its exports correctly', () => {
 	test('internals - lit hydrate', () => {
 		assert.equal('litElementHydrateSupport' in globalThis, true);
 	});
-	test('internals - polyfills - dsd', () => {
-		assert.equal(typeof dsd.checkDsd, 'function');
-	});
+
 	test('internals - polyfills - requestIdleCallback', () => {
 		assert.equal(typeof requestIdleC.requestIdleCallback, 'string');
 	});

@@ -45,13 +45,11 @@
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
     <title>Gracile Assets</title>
-    <script type="module" crossorigin src="/assets/index-M5WC9mrg.js"></script>
-
-    <link
-      rel="modulepreload"
+    <script
+      type="module"
       crossorigin
-      href="/assets/document.client-Cca60DWw.js"
-    />
+      src="/assets/document.client-CMOVr55R.js"
+    ></script>
 
     <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
   </head>

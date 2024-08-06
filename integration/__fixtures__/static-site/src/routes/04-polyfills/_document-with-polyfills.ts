@@ -9,8 +9,6 @@ export function document(context: { url: URL }) {
 				<meta charset="UTF-8" />
 				<title>Document - With polyfills</title>
 
-				<!-- Not well tested enough -->
-				${helpers.polyfills.declarativeShadowDom}
 				<!--  -->
 				${helpers.polyfills.requestIdleCallback}
 				<!--  -->

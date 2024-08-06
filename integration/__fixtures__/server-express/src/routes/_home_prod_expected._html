@@ -49,12 +49,12 @@
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
     <title>Gracile Home</title>
-    <script type="module" crossorigin src="/assets/index-bQOEfuds.js"></script>
+    <script type="module" crossorigin src="/assets/index-CKZBGRGy.js"></script>
 
     <link
       rel="modulepreload"
       crossorigin
-      href="/assets/document.client-Cca60DWw.js"
+      href="/assets/document.client-CMOVr55R.js"
     />
 
     <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />

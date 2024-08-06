@@ -19,11 +19,6 @@
 
     <!--  -->
 
-    <script
-      type="module"
-      src="/@id/__x00__/about/index.html?html-proxy&index=2.js"
-    ></script>
-
     <script>
       // REQUEST IDLE CALLBACK - POLYFILL
 
