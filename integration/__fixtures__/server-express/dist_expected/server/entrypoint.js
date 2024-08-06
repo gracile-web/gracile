@@ -160,7 +160,7 @@ const routeAssets = new Map([
   ],
   [
     "/contact/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/index-Bo3GL0oc.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cca60DWw.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    "\t<script type=\"module\" crossorigin src=\"/assets/index-CzX5SsJy.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cca60DWw.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/foo/bar/",
@@ -184,7 +184,7 @@ const routeAssets = new Map([
   ],
   [
     "/throws/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/index-CzX5SsJy.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cca60DWw.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    "\t<script type=\"module\" crossorigin src=\"/assets/index-Bo3GL0oc.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-Cca60DWw.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ]
 ]);
 

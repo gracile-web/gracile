@@ -4,11 +4,14 @@
     //
     "./src/**/*.ts",
     "./src/env.d.ts",
-    "./__fixtures__/**/*.ts"
+    "./__fixtures__/**/*.d.ts",
+    "./__fixtures__/**/*.ts",
+    "./__fixtures__/**/*.js"
   ],
   "compilerOptions": {
     "noEmit": true,
 
+    // "checkJs": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false
   }
