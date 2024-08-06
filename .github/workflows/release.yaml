@@ -160,13 +160,14 @@ jobs:
           git stash
           pnpm lerna publish --create-release=github --yes
 
-      - name: Merge (rebase) back main into next
-        env:
-          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        run: |
-          git checkout next
-          git rebase main
-          git push
+      # # TRY: https://www.jessesquires.com/blog/2021/10/17/github-actions-workflows-for-automatic-rebasing-and-merging/
+      # - name: Merge (rebase) back main into next
+      #   env:
+      #     GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      #   run: |
+      #     git checkout next
+      #     git rebase main
+      #     git push
 
       # MARK: [NEXT]
       - name: 'Lerna publish [next]'
