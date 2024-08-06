@@ -45,11 +45,12 @@
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
     <title>Gracile About</title>
-    <script
-      type="module"
+    <script type="module" crossorigin src="/assets/index-YV9WDv3j.js"></script>
+    <link
+      rel="modulepreload"
       crossorigin
-      src="/assets/document.client-Cu8CxlfV.js"
-    ></script>
+      href="/assets/document.client-Cca60DWw.js"
+    />
     <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
   </head>
 

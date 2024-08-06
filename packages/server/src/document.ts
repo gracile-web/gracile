@@ -19,7 +19,7 @@ const errors = html`
 const fullHydration = html`
 	<script type="module">
 		// HYDRATE
-		import '@gracile/gracile/hydrate';
+		import '@gracile/gracile/_internals/hydrate';
 	</script>
 `;
 
@@ -27,7 +27,8 @@ const polyfills = {
 	declarativeShadowDom: html`
 		<script type="module">
 			// DECLARATIVE SHADOW DOM
-			import '@gracile/gracile/polyfills/declarative-shadow-dom';
+			import { checkDsd } from '@gracile/gracile/_internals/polyfills/declarative-shadow-dom';
+			checkDsd();
 		</script>
 	`,
 

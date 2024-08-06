@@ -1,25 +1,27 @@
 // Polyfill Declarative Shadow DOM if it's not supported in the browser (currently non-Chromium).
 
 // Polyfill 1
-export function supportsDeclarativeShadowDOM() {
-	// eslint-disable-next-line no-prototype-builtins
-	return HTMLTemplateElement.prototype.hasOwnProperty('shadowRoot');
-}
+export function checkDsd() {
+	function supportsDeclarativeShadowDOM() {
+		// eslint-disable-next-line no-prototype-builtins
+		return HTMLTemplateElement.prototype.hasOwnProperty('shadowRoot');
+	}
 
-if (!supportsDeclarativeShadowDOM()) {
-	(function attachShadowRoots(root: Document | ShadowRoot) {
-		root.querySelectorAll('template[shadowroot]').forEach((el) => {
-			const template = el as HTMLTemplateElement;
-			const mode = (template.getAttribute('shadowroot') ||
-				'open') as ShadowRootMode;
-			const shadowRoot = (template.parentNode as HTMLElement).attachShadow({
-				mode,
+	if (!supportsDeclarativeShadowDOM()) {
+		(function attachShadowRoots(root: Document | ShadowRoot) {
+			root.querySelectorAll('template[shadowroot]').forEach((el) => {
+				const template = el as HTMLTemplateElement;
+				const mode = (template.getAttribute('shadowroot') ||
+					'open') as ShadowRootMode;
+				const shadowRoot = (template.parentNode as HTMLElement).attachShadow({
+					mode,
+				});
+				shadowRoot.appendChild(template.content);
+				template.remove();
+				attachShadowRoots(shadowRoot);
 			});
-			shadowRoot.appendChild(template.content);
-			template.remove();
-			attachShadowRoots(shadowRoot);
-		});
-	})(document);
+		})(document);
+	}
 }
 
 // Polyfill 2

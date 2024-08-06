@@ -204,6 +204,9 @@ importers:
       '@types/express':
         specifier: ^4.x.x
         version: 4.17.21
+      import-meta-resolve:
+        specifier: ^4.1.0
+        version: 4.1.0
       tsx:
         specifier: ^4.7.2
         version: 4.9.5
