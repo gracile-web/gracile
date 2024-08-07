@@ -1,5 +1,3 @@
-// import { logger } from '@gracile/internal-utils/logger.build';
-
 import { relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';

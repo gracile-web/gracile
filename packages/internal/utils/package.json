@@ -29,10 +29,26 @@
   "exports": {
     "./*": "./dist/*.js",
     "./logger": {
-      "development": "./dist/logger.dev.js",
-      "default": "./dist/logger.build.js",
-      "test": "./dist/logger.dev.js",
-      "preview": "./dist/logger.preview.js"
+      "development": "./dist/logger/logger.dev.js",
+      "production": "./dist/logger/logger.build.js",
+      "test": "./dist/logger/logger.dev.js",
+      "preview": "./dist/logger/logger.dev.js",
+      "default": "./dist/logger/logger.build.js"
+    },
+    "./env": {
+      "types": "./dist/env/index.d.ts",
+      "browser": {
+        "development": "./dist/env/dev-browser.js",
+        "preview": "./dist/env/preview-browser.js",
+        "test": "./dist/env/test-browser.js",
+        "default": "./dist/env/prod-browser.js"
+      },
+      "default": {
+        "development": "./dist/env/dev-ssr.js",
+        "preview": "./dist/env/preview-ssr.js",
+        "test": "./dist/env/test-ssr.js",
+        "default": "./dist/env/prod-ssr.js"
+      }
     }
   },
   "files": [

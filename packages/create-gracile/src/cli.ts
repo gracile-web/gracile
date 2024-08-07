@@ -8,9 +8,9 @@ import { promisify } from 'node:util';
 
 import * as clack from '@clack/prompts';
 import { Command } from '@commander-js/extra-typings';
+import { DEV } from '@gracile/internal-utils/env';
 import { logger } from '@gracile/internal-utils/logger';
 import Conf from 'conf';
-import { DEV } from 'esm-env';
 import latestVersion from 'latest-version';
 import c from 'picocolors';
 import { generate } from 'random-words';

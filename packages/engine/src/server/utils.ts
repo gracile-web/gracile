@@ -2,11 +2,15 @@
 
 import type { AddressInfo } from 'node:net';
 
+import { DEV, PREVIEW, TEST } from '@gracile/internal-utils/env';
 import { logger } from '@gracile/internal-utils/logger';
-import { DEV } from 'esm-env';
 import c from 'picocolors';
 
 import { IP_EXPOSED } from './env.js';
+
+// setTimeout(() => {
+// 	logger.info('HY');
+// });
 
 export function printAddressInfos(server: string | AddressInfo | null) {
 	let address: null | string = null;
@@ -17,7 +21,19 @@ export function printAddressInfos(server: string | AddressInfo | null) {
 		address = `http://${server.address}${server.port ? `:${String(server.port)}` : ''}`;
 	}
 
-	logger.info(c.green(`${DEV ? 'development' : 'production'} server started`), {
+	// NOTE: Might move this to internal util env
+	const envs = {
+		PROD: 'production',
+		DEV: 'development',
+		PREVIEW: 'preview',
+		TEST: 'testing',
+	};
+	let env: keyof typeof envs = 'PROD';
+	if (DEV) env = 'DEV';
+	if (PREVIEW) env = 'PREVIEW';
+	if (TEST) env = 'TEST';
+
+	logger.info(c.green(`${envs[env]} ${c.yellow('server started')}`), {
 		timestamp: true,
 	});
 

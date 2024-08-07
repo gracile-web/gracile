@@ -8,10 +8,10 @@ import { existsSync } from 'node:fs';
 import test, { describe } from 'node:test';
 import { fileURLToPath } from 'node:url';
 
-import * as env from '@gracile/engine/server/env';
-import * as requestIdleC from '@gracile/gracile/_internals/polyfills/request-idle-callback';
+import type * as serverEnv from '@gracile/engine/server/env';
 import * as serverRuntime from '@gracile/gracile/_internals/server-runtime';
 import * as document from '@gracile/gracile/document';
+import * as env from '@gracile/gracile/env';
 import * as hono from '@gracile/gracile/hono';
 import * as node from '@gracile/gracile/node';
 import * as plugin from '@gracile/gracile/plugin';
@@ -27,14 +27,15 @@ import * as urlPattern from '@gracile/gracile/url-pattern';
 // import * as markdown from '@gracile/markdown';
 import { resolve } from 'import-meta-resolve';
 
+function checkEnv(input: typeof serverEnv) {
+	assert.equal(typeof input.CLIENT_DIST_DIR, 'string');
+	assert.equal(typeof input.IP_EXPOSED, 'string');
+	assert.equal(typeof input.IP_LOCALHOST, 'string');
+	assert.equal(typeof input.PUBLIC_DIR, 'string');
+	assert.equal(typeof input.RANDOM_PORT, 'number');
+}
+
 describe('gracile package should do its exports correctly', () => {
-	function checkEnv(input: typeof env) {
-		assert.equal(typeof input.CLIENT_DIST_DIR, 'string');
-		assert.equal(typeof input.IP_EXPOSED, 'string');
-		assert.equal(typeof input.IP_LOCALHOST, 'string');
-		assert.equal(typeof input.PUBLIC_DIR, 'string');
-		assert.equal(typeof input.RANDOM_PORT, 'number');
-	}
 	test('node adapter', () => {
 		assert.equal(typeof node.printAddressInfos, 'function');
 		assert.equal(typeof node.getClientDistPath, 'function');
@@ -85,8 +86,11 @@ describe('gracile package should do its exports correctly', () => {
 		assert.equal('litElementHydrateSupport' in globalThis, true);
 	});
 
-	test('internals - polyfills - requestIdleCallback', () => {
-		assert.equal(typeof requestIdleC.requestIdleCallback, 'string');
+	test('env', () => {
+		assert.equal('DEV' in env, true);
+		assert.equal('TEST' in env, true);
+		assert.equal('PREVIEW' in env, true);
+		assert.equal('BROWSER' in env, true);
 	});
 
 	test('tsconfigs', () => {
