@@ -24,8 +24,6 @@ export const SSR_OUTLET_MARKER =
 // const SSR_OUTLET = unsafeHTML(SSR_OUTLET_MARKER);
 
 export const PAGE_ASSETS_MARKER = '<!--__GRACILE_PAGE_ASSETS__-->';
-// FIXME: cannot be used with `unsafeHTML`, so must be duplicated…
-export const pageAssets = LitSsrHtml`<!--__GRACILE_PAGE_ASSETS__-->`;
 
 export const REGEX_TAG_SCRIPT =
 	/\s?<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script\s*>\s?/gi;

@@ -5,33 +5,21 @@ import test, { describe } from 'node:test';
 import { isLitServerTemplate } from '@gracile/engine/assertions';
 import { html } from 'lit';
 
-import { helpers, RouteTemplateOutlet } from './document.js';
+import * as doc from './document.js';
 
 describe('should exports helpers', () => {
-	test('helpers errors', () => {
-		assert.equal(isLitServerTemplate(helpers.dev.errors), true);
-	});
-	test('hydration', () => {
-		assert.equal(isLitServerTemplate(helpers.fullHydration), true);
-	});
 	test('pageAssets', () => {
-		assert.equal(isLitServerTemplate(helpers.pageAssets), true);
+		assert.equal(isLitServerTemplate(doc.pageAssetsCustomLocation()), true);
 	});
 
-	test('requestIdleCallback', () => {
-		assert.equal(
-			isLitServerTemplate(helpers.polyfills.requestIdleCallback),
-			true,
-		);
-	});
 	test('RouteTemplateOutlet render', () => {
 		assert.notStrictEqual(
-			new RouteTemplateOutlet().render(),
+			new doc.RouteTemplateOutlet().render(),
 			html`Something went wrong during server side rendering!`,
 		);
 	});
 	test('RouteTemplateOutlet types', () => {
 		/* Types Tests */
-		new RouteTemplateOutlet() satisfies HTMLElementTagNameMap['route-template-outlet'];
+		new doc.RouteTemplateOutlet() satisfies HTMLElementTagNameMap['route-template-outlet'];
 	});
 });

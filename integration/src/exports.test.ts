@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 // NOTE: Work-in-Progress
 
-import '@gracile/gracile/_internals/hydrate';
+import '@gracile/gracile/hydration';
 
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
@@ -50,14 +50,17 @@ describe('gracile package should do its exports correctly', () => {
 
 		checkEnv(hono);
 	});
+
 	//
 	test('vite plugin', () => {
 		assert.equal(typeof plugin.gracile, 'function');
 		assert.equal(typeof serverRuntime.createGracileMiddleware, 'function');
 	});
+
 	test('url pattern', () => {
 		assert.equal(urlPattern.URLPattern.constructor.name, 'Function');
 	});
+
 	//
 	test('server-html', () => {
 		assert.equal(typeof serverHtml.html, 'function');
@@ -66,22 +69,22 @@ describe('gracile package should do its exports correctly', () => {
 	test('route', () => {
 		assert.equal(typeof defineRoute, 'function');
 	});
+
 	test('document', () => {
 		assert.equal(typeof document.RouteTemplateOutlet, 'function');
 
-		assert.equal(typeof document.helpers.dev, 'object');
-		assert.equal(typeof document.helpers.fullHydration, 'object');
-		assert.equal(typeof document.helpers.pageAssets, 'object');
-		assert.equal(typeof document.helpers.polyfills, 'object');
+		assert.equal(typeof document.pageAssetsCustomLocation(), 'object');
 	});
+
 	test('server utils', () => {
-		// eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-unused-vars
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/require-await
 		const testGracileHandler: server.GracileHandler = async () => ({
 			response: new Response(),
 		});
 
 		checkEnv(server);
 	});
+
 	test('internals - lit hydrate', () => {
 		assert.equal('litElementHydrateSupport' in globalThis, true);
 	});
