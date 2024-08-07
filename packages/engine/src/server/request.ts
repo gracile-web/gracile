@@ -2,7 +2,7 @@ import { Readable } from 'node:stream';
 
 import { logger } from '@gracile/internal-utils/logger';
 import c from 'picocolors';
-import type { ViteDevServer } from 'vite';
+import type { ErrorPayload, ViteDevServer } from 'vite';
 
 import * as assert from '../assertions.js';
 import { errorPage } from '../errors/templates.js';
@@ -227,18 +227,32 @@ export function createGracileHandler({
 				};
 				return {
 					body: output.on('error', (error) => {
-						const errorMessage =
-							`There was an error while rendering a template chunk on server-side.\n` +
-							`It was omitted from the resulting HTML.`;
-						logger.error(errorMessage);
-						logger.error(error.message);
+						// NOTE: I think it's not usable here
+						// if (vite) vite.ssrFixStacktrace(error);
 
-						if (vite)
-							setTimeout(() => {
-								vite.hot.send('gracile:ssr-error', {
+						const errorMessage =
+							`[SSR Error] There was an error while rendering a template chunk on server-side.\n` +
+							`It was omitted from the resulting HTML.\n`;
+
+						if (vite) {
+							logger.error(errorMessage + error.stack);
+							const payload = {
+								type: 'error',
+								err: {
 									message: errorMessage,
-								});
-							}, 500);
+									stack: error.stack ?? '',
+									plugin: 'gracile',
+
+									// NOTE: Other options seems to be unused by the overlay
+								},
+							} satisfies ErrorPayload;
+							setTimeout(() => {
+								vite.hot.send(payload);
+								// NOTE: Arbitrary value. Lower seems to be too fast, higher is not guaranteed to work.
+							}, 750);
+						}
+
+						logger.error(errorMessage);
 					}),
 					init: responseInit,
 				};

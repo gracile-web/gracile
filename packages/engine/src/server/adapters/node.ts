@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url';
 
-import { logger } from '@gracile/internal-utils/logger.build';
+import { DEV } from '@gracile/internal-utils/env';
+import { logger } from '@gracile/internal-utils/logger';
 import { createServerAdapter } from '@whatwg-node/server';
 import type { IncomingMessage, ServerResponse } from 'http';
 import { Writable } from 'stream';
@@ -49,6 +50,13 @@ export function nodeAdapter(handler: GracileHandler) {
 		if (result?.body) {
 			standardResponseInitToNodeResponse(result.init, res);
 
+			// NOTE: We can't do similar thing with Hono with just
+			// a standard Response workflow, it seems
+			result.body.addListener('error', (error) => {
+				if (DEV) logger.error(String(error));
+
+				res.end(DEV ? '__SSR_ERROR__' : undefined);
+			});
 			return result.body.pipe(res);
 		}
 		if (result?.response) {
