@@ -7,7 +7,7 @@ import type { IncomingMessage, ServerResponse } from 'http';
 import { Writable } from 'stream';
 
 import { CLIENT_DIST_DIR } from '../env.js';
-import type { GracileHandler } from '../request.js';
+import { type GracileHandler, isRedirect } from '../request.js';
 
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
 // @ts-expect-error Abusing this feature!
@@ -62,6 +62,9 @@ export function nodeAdapter(handler: GracileHandler) {
 		}
 		if (result?.response) {
 			standardResponseInitToNodeResponse(result.response, res);
+
+			const redirect = isRedirect(result.response);
+			if (redirect) return res.end(result.body);
 
 			if (result.response.body) {
 				const piped = await result.response.body

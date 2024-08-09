@@ -24,6 +24,15 @@ export type GracileHandler = (
 
 const CONTENT_TYPE_HTML = { 'Content-Type': 'text/html' };
 
+export function isRedirect(response: Response): { location: string } | null {
+	const location = response.headers.get('location');
+	if (response.status >= 300 && response.status <= 303 && location) {
+		return { location };
+	}
+
+	return null;
+}
+
 export function createGracileHandler({
 	vite,
 	routes,
@@ -205,13 +214,11 @@ export function createGracileHandler({
 
 			// NOTE: try directly with the requestPonyfill. This might not be necessary
 			if (assert.isResponseOrPatchedResponse(output)) {
-				if (output.status >= 300 && output.status <= 303) {
-					const location = output.headers.get('location');
-
-					if (location) {
-						return { response: Response.redirect(location, output.status) };
-					}
-				}
+				const redirect = isRedirect(output);
+				if (redirect?.location)
+					return {
+						response: Response.redirect(redirect.location, output.status),
+					};
 
 				return { response: output };
 
