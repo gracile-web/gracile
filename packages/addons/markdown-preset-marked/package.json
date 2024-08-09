@@ -1,6 +1,6 @@
 {
   "name": "@gracile/markdown-preset-marked",
-  "version": "0.0.10-next.0",
+  "version": "0.0.10",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",

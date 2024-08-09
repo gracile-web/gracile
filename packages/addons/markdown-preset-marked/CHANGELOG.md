@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.10](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.10-next.0...@gracile/markdown-preset-marked@0.0.10) (2024-08-09)
+
+**Note:** Version bump only for package @gracile/markdown-preset-marked
+
 ## [0.0.9](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.9-next.0...@gracile/markdown-preset-marked@0.0.9) (2024-08-06)
 
 **Note:** Version bump only for package @gracile/markdown-preset-marked

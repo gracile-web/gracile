@@ -1,6 +1,6 @@
 {
   "name": "@gracile/markdown",
-  "version": "0.1.2-next.0",
+  "version": "0.1.2",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
