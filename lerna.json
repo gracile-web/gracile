@@ -9,9 +9,7 @@
   "command": {
     "publish": {
       "cleanupTempFiles": true,
-      "removePackageFields": ["devDependencies", "scripts"],
-
-      "message": "chore: publish release [skip ci]"
+      "removePackageFields": ["devDependencies", "scripts"]
     }
   },
 
