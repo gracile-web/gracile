@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream';
 
-import { logger } from '@gracile/internal-utils/logger.dev';
+import { logger } from '@gracile/internal-utils/logger/vite-logger';
 import c from 'picocolors';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import type { Plugin } from 'vite';

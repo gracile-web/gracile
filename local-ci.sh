@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# NOTE: Mac only
+killall node
+
 node --run format:fix
 node --run lint:es:fix
 

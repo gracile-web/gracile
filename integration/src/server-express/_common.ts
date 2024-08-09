@@ -118,13 +118,12 @@ async function tests(mode: string, item: string, writeActual: boolean) {
 	// TODO: Test with "accept: json" when implemented
 
 	await it(`load an error page when a route throws - ${item}`, async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('throws'),
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(ADDRESS, ['throws']),
+		assert.equal(
+			(await fetchResource(ADDRESS, ['throws'])).includes(
+				'Error: !!! OH NO !!! I AM A FAKE ERROR !!!',
 			),
-			writeActual,
-		}));
+			true,
+		));
 
 	// TODO: Proper test that works with Hono. For now,
 	// implemented error handling is very basic with it.

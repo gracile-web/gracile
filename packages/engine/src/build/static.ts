@@ -60,6 +60,9 @@ export async function renderRoutes({
 				route,
 			});
 
+			// NOTE: Skip rendering base document for server
+			if (serverMode && typeof routeModule.document !== 'function') return;
+
 			const routeStaticPaths = routeModule.staticPaths?.();
 
 			// MARK: Extract data

@@ -3,7 +3,7 @@ export function removeLocalPathsInDevAssets(input: string) {
 		input
 			.replaceAll(/>file:\/\/(.*)</g, '>__REPLACED_FOR_TESTS__<')
 			.replaceAll(/\(file:\/\/\/(.*)\)/g, '(__REPLACED_FOR_TESTS__)')
-			.replaceAll(/at (.*) file:\/\/(.*)\n/g, 'at __REPLACED_FOR_TESTS__\n')
+			.replaceAll(/file:\/\/(.*):(.*):(.*)\n/g, '__REPLACED_FOR_TESTS__\n')
 			// .replaceAll(
 			// 	/\((.*)\/gracile\/packages\/(.*)\)/g,
 			// 	'(__REPLACED_FOR_TESTS__)',

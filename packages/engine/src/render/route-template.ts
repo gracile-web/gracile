@@ -1,5 +1,5 @@
 import { html } from '@gracile/internal-utils/dummy-literals';
-import { html as LitSsrHtml, render as renderLitSsr } from '@lit-labs/ssr';
+import { render as renderLitSsr } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import { Readable } from 'stream';
 import type { ViteDevServer } from 'vite';
@@ -103,32 +103,61 @@ export async function renderRouteTemplate({
 	);
 
 	// MARK: Sibling assets
-	let baseDocRenderedWithAssets = baseDocRendered.replace(
-		PAGE_ASSETS_MARKER,
-		html`
-			<!-- PAGE ASSETS -->
-			${routeInfos.foundRoute.pageAssets.map((path) => {
-				//
-				if (/\.(js|ts)$/.test(path)) {
-					return html`
-						<script type="module" src="/${path}"></script>
-						<!--  -->
-					`;
-				}
+	let baseDocRenderedWithAssets = baseDocRendered;
 
-				if (/\.(css|scss|sass|less|styl|stylus)$/.test(path)) {
-					return html`
-						<link rel="stylesheet" href="/${path}" />
-						<!--  -->
-					`;
-				}
+	// If the user doesnt use `pageAssetCustomLocation`, we put this as a fallback
 
-				throw new Error('Unknown asset.');
-			})}
-			<!-- /PAGE ASSETS -->
-		`,
-	);
+	baseDocRenderedWithAssets = baseDocRenderedWithAssets
+		.replace('</head>', `${PAGE_ASSETS_MARKER}</head>`)
+		.replace(
+			PAGE_ASSETS_MARKER,
+			// eslint-disable-next-line prefer-template
+			html`
+				<!-- PAGE ASSETS -->
+				${routeInfos.foundRoute.pageAssets.map((path) => {
+					//
+					if (/\.(js|ts)$/.test(path)) {
+						return html`
+							<script type="module" src="/${path}"></script>
+							<!--  -->
+						`;
+					}
 
+					if (/\.(css|scss|sass|less|styl|stylus)$/.test(path)) {
+						return html`
+							<link rel="stylesheet" href="/${path}" />
+							<!--  -->
+						`;
+					}
+
+					throw new Error('Unknown asset.');
+				})}
+				<!-- /PAGE ASSETS -->
+			`,
+		);
+
+	// MARK: Dev. overlay
+	// TODO: Need more testing and refinement (refreshes kills its usefulness)
+	const overlay = () => html`
+		<script type="module">
+			if (import.meta.hot) {
+				import.meta.hot.on('gracile:ssr-error', (error) => {
+					console.error(error.message);
+				});
+				import.meta.hot.on('error', (payload) => {
+					console.error(payload.err.message);
+				});
+			}
+		</script>
+	`;
+
+	if (mode === 'dev')
+		baseDocRenderedWithAssets = baseDocRenderedWithAssets.replace(
+			'<head>',
+			`<head>\n${overlay()}`,
+		);
+
+	// // MARK: Inject assets for server output runtime only
 	const routeAssetsString = routeAssets?.get?.(
 		routeInfos.foundRoute.pattern.pathname,
 	);

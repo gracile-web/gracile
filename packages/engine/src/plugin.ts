@@ -96,6 +96,8 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 					root: viteConfig.root || process.cwd(),
 
 					server: { middlewareMode: true },
+					// NOTE: Stub
+					optimizeDeps: { include: [] },
 				});
 
 				const htmlPages = await buildRoutes({
@@ -112,6 +114,7 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 
 				return {
 					build: {
+						// ssrManifest: true,
 						rollupOptions: {
 							input: htmlPages.inputList,
 							plugins: [htmlPages.plugin],
@@ -147,18 +150,15 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 				if (outputMode === 'static' || !routes || !renderedRoutes) return;
 
 				await build({
-					configFile: false,
-
 					root: root || process.cwd(),
 
-					ssr: {
-						external: ['@gracile/gracile'],
-					},
+					ssr: { external: ['@gracile/gracile'] },
 
 					build: {
 						target: 'esnext',
 
 						ssr: true,
+						// ssrManifest: true,
 
 						copyPublicDir: false,
 						outDir: 'dist/server',
