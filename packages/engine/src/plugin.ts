@@ -15,6 +15,7 @@ import type { GracileConfig } from './user-config.js';
 import { buildRoutes } from './vite/plugins/build-routes.js';
 import { virtualRoutes } from './vite/plugins/virtual-routes.js';
 
+let isClientBuilt = false;
 // Return as `any` to avoid Plugin type mismatches when there are multiple Vite versions installed
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
@@ -28,6 +29,9 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 	let root: string | null = null;
 
 	const gracileConfig = config || {};
+
+	if (isClientBuilt) return [];
+	isClientBuilt = true;
 
 	return [
 		{
@@ -85,10 +89,13 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 			name: 'vite-plugin-gracile-build',
 
 			apply: 'build',
+
 			async config(viteConfig) {
 				const viteServerForClientHtmlBuild = await createServer({
 					// configFile: false,
 					root: viteConfig.root || process.cwd(),
+
+					server: { middlewareMode: true },
 				});
 
 				const htmlPages = await buildRoutes({
@@ -104,9 +111,6 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 				await viteServerForClientHtmlBuild.close();
 
 				return {
-					plugins: viteServerForClientHtmlBuild.config.plugins.filter(
-						(p) => p.name,
-					),
 					build: {
 						rollupOptions: {
 							input: htmlPages.inputList,

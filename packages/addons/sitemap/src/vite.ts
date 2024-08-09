@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { logger } from '@gracile/internal-utils/logger.dev';
 import c from 'picocolors';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import type { Plugin } from 'vite';
@@ -20,11 +20,23 @@ export function viteSitemapPlugin(options: {
 	// NOTE:(for Vite versions mismatches)
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): any {
+	let isSsrBuild = false;
 	return {
 		name: VITE_PLUGIN_NAME,
 		enforce: 'post',
 
+		config(_, env) {
+			isSsrBuild = env.isSsrBuild || false;
+		},
+
 		async generateBundle(_, bundle) {
+			if (isSsrBuild) {
+				logger.error(
+					`\n${VITE_PLUGIN_NAME} is only compatible with static output!\n`,
+				);
+				return;
+			}
+
 			const links = Object.entries(bundle)
 
 				.filter(([, asset]) => asset.fileName.endsWith('.html'))

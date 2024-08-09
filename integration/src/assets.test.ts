@@ -95,4 +95,20 @@ describe('assets with query url', async () => {
 	});
 });
 
+describe('assets with query inline', async () => {
+	const route = '02-import-with-query-css-inline';
+
+	await it('render the route with inline stylesheets', async () => {
+		await snapshotAssertEqual({
+			expectedPath: [
+				projectRoutes,
+				currentTestRoutes,
+				`_${route}_expected.html`,
+			],
+			actualContent: await fetchResource(address, [currentTestRoutes, route]),
+			writeActual,
+		});
+	});
+});
+
 after(async () => close());

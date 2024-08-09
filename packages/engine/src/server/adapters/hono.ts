@@ -1,3 +1,4 @@
+// import { logger } from '@gracile/internal-utils/logger';
 import { relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
@@ -15,6 +16,7 @@ export const honoAdapter =
 	async (context) => {
 		const result = await handler(context.req.raw, context.var);
 
+		// TODO: Hhandle stream abortion as gracefully as with Express.
 		if (result?.body) {
 			// NOTE: Typings mismatches
 			const body = Readable.toWeb(result.body) as ReadableStream;

@@ -54,7 +54,8 @@ export function nodeAdapter(handler: GracileHandler) {
 			// a standard Response workflow, it seems
 			result.body.addListener('error', (error) => {
 				if (DEV) logger.error(String(error));
-
+				// NOTE: res.writeHead doesn't seems to take effect, too (too late)
+				// res.statusCode = 500;
 				res.end(DEV ? '__SSR_ERROR__' : undefined);
 			});
 			return result.body.pipe(res);

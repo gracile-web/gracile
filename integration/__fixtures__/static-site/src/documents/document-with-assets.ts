@@ -1,4 +1,3 @@
-import { helpers } from '@gracile/server/document';
 import { html } from '@lit-labs/ssr';
 
 export function document(context: { url: URL }) {
@@ -8,8 +7,6 @@ export function document(context: { url: URL }) {
 			<head>
 				<meta charset="UTF-8" />
 				<title>Document - With sibling assets</title>
-
-				${helpers.pageAssets}
 			</head>
 
 			<body>
