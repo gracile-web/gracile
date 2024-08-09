@@ -125,6 +125,17 @@ async function tests(mode: string, item: string, writeActual: boolean) {
 			true,
 		));
 
+	await it(`should redirect`, async () =>
+		checkResponse(
+			fetch(new URL(`/redirect/`, ADDRESS), {
+				method: 'GET',
+			}),
+			{
+				redirected: true,
+				url: 'http://localhost:9874/about/',
+			},
+		));
+
 	// TODO: Proper test that works with Hono. For now,
 	// implemented error handling is very basic with it.
 	// It doesn't handle stream abortion as gracefully as with Express.

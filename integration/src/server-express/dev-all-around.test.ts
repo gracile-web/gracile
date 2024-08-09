@@ -14,6 +14,6 @@ const { /* address, */ close } = await createStaticDevServer({
 
 // ---
 
-common('dev', writeActual);
+common('dev', 'express', writeActual);
 
 after(async () => close());

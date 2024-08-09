@@ -157,14 +157,6 @@ const routeAssets = new Map([
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
-    "/api/:path*/",
-    null
-  ],
-  [
-    "/api/basic/",
-    null
-  ],
-  [
     "/assets-methods/",
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
@@ -183,10 +175,6 @@ const routeAssets = new Map([
   [
     "/private/",
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
-  ],
-  [
-    "/redirect/",
-    null
   ],
   [
     "/response-init/",

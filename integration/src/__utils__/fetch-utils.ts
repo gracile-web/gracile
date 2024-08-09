@@ -7,6 +7,7 @@ interface Options {
 	text?: string;
 	json?: unknown;
 	redirected?: boolean;
+	url?: string;
 	// body: ReadableStream { locked: false state: 'readable' supportsBYOB: true }
 	// bodyUsed: false
 	// ok: true
