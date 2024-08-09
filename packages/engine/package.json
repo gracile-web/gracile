@@ -54,7 +54,6 @@
     "@gracile/client": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@whatwg-node/server": "^0.9.25",
-    "esm-env": "^1.0.0",
     "fdir": "^6.2.0",
     "picocolors": "^1.0.0",
     "urlpattern-polyfill": "^10.0.0",

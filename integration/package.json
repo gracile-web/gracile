@@ -22,7 +22,6 @@
     "@lit-labs/ssr": "^3.2.2",
     "@lit-labs/ssr-client": " ^1.1.7",
     "cheerio": "1.0.0-rc.12",
-    "esm-env": "^1.0.0",
     "express": "4.x.x",
     "fast-glob": "^3.3.2",
     "hono": "^4.5.3",
