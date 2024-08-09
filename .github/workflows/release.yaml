@@ -182,4 +182,4 @@ jobs:
         # pnpm lerna publish --conventional-prerelease --pre-dist-tag=next --preid=next --yes
         # pnpm lerna publish --force-publish='*' --canary --pre-dist-tag=next --preid=next --yes
         run: |
-          pnpm lerna publish --message 'chore: publish [next] pre-release' --conventional-prerelease --pre-dist-tag=next --preid=next --no-changelog --yes
+          pnpm lerna publish --message 'chore: publish [next] pre-release' --conventional-prerelease --pre-dist-tag=next --preid=next --yes
