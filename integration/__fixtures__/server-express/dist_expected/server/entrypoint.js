@@ -107,6 +107,15 @@ const routes = new Map([
     }
   ],
   [
+    "/template-failure/",
+    {
+      "filePath": "src/routes/template-failure.ts",
+      "pattern": {},
+      "hasParams": false,
+      "pageAssets": []
+    }
+  ],
+  [
     "/throws/",
     {
       "filePath": "src/routes/throws.ts",
@@ -133,6 +142,7 @@ const routeImports = new Map(
 ['/private/', () => import('./chunk/index.js')],
 ['/redirect/', () => import('./chunk/redirect.js')],
 ['/response-init/', () => import('./chunk/response-init.js')],
+['/template-failure/', () => import('./chunk/template-failure.js')],
 ['/throws/', () => import('./chunk/throws.js')],
 	]
 );
@@ -180,6 +190,10 @@ const routeAssets = new Map([
   ],
   [
     "/response-init/",
+    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/template-failure/",
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [

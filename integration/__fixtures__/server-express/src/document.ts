@@ -1,4 +1,3 @@
-import { helpers } from '@gracile/gracile/document';
 import { html } from '@gracile/gracile/server-html';
 
 export const document = (options: { url: URL; title?: string }) => html`
@@ -6,11 +5,6 @@ export const document = (options: { url: URL; title?: string }) => html`
 	<html lang="en">
 		<head>
 			<!-- Helpers -->
-			${Object.values(helpers.dev)}
-			<!--  -->
-			${helpers.fullHydration}
-			<!--  -->
-			${Object.values(helpers.polyfills)}
 
 			<!-- Global assets -->
 			<link
@@ -23,7 +17,6 @@ export const document = (options: { url: URL; title?: string }) => html`
 			></script>
 
 			<!-- Page assets -->
-			${helpers.pageAssets}
 
 			<!-- SEO and page metadata -->
 			<meta charset="UTF-8" />

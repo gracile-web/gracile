@@ -4,7 +4,7 @@ import { describe, it } from 'node:test';
 
 import { fetchResource } from '../__utils__/fetch.js';
 import { checkResponse } from '../__utils__/fetch-utils.js';
-import { snapshotAssertEqual } from '../__utils__/snapshot.js';
+import { removeLitParts, snapshotAssertEqual } from '../__utils__/snapshot.js';
 import { removeLocalPathsInDevAssets } from '../__utils__/vite.js';
 import { api } from './_api.js';
 
@@ -13,14 +13,14 @@ const currentTestRoutes = '';
 
 const ADDRESS = 'http://localhost:9874';
 
-async function tests(mode: string, writeActual: boolean) {
+async function tests(mode: string, item: string, writeActual: boolean) {
 	const expectedPath = (name: string) => [
 		projectRoutes,
 		currentTestRoutes,
 		`_${name}_${mode}_expected._html`,
 	];
 
-	await it('load a static asset from public directory', async () =>
+	await it(`load a static asset from public directory - ${item}`, async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('favicon.svg'),
 			actualContent: await fetchResource(ADDRESS, ['favicon.svg'], {
@@ -42,7 +42,7 @@ async function tests(mode: string, writeActual: boolean) {
 	// 		actualContent: await fetchResource(ADDRESS, ['api']),
 	// 		writeActual,
 	// 	}));
-	await it('page has html mime type', async () =>
+	await it(`page has html mime type - ${item}`, async () =>
 		fetch(new URL(`${ADDRESS}/about/`, ADDRESS)).then((r) =>
 			assert.equal(
 				r.headers.get('Content-Type')?.startsWith('text/html'),
@@ -50,7 +50,7 @@ async function tests(mode: string, writeActual: boolean) {
 			),
 		));
 
-	await it('load the 404 page', async () =>
+	await it(`load the 404 page - ${item}`, async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('404'),
 			actualContent: removeLocalPathsInDevAssets(
@@ -59,7 +59,7 @@ async function tests(mode: string, writeActual: boolean) {
 			writeActual,
 		}));
 
-	await it('load a basic page', async () =>
+	await it(`load a basic page - ${item}`, async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('about'),
 			actualContent: removeLocalPathsInDevAssets(
@@ -67,7 +67,7 @@ async function tests(mode: string, writeActual: boolean) {
 			),
 			writeActual,
 		}));
-	await it('load a basic page with [prerendering]', async () =>
+	await it('load a basic page with [prerenderin- g ]+item', async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('contact'),
 			actualContent: removeLocalPathsInDevAssets(
@@ -75,7 +75,7 @@ async function tests(mode: string, writeActual: boolean) {
 			),
 			writeActual,
 		}));
-	await it('load homepage with a get query param', async () =>
+	await it(`load homepage with a get query param - ${item}`, async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('home'),
 			actualContent: removeLocalPathsInDevAssets(
@@ -83,7 +83,7 @@ async function tests(mode: string, writeActual: boolean) {
 			),
 			writeActual,
 		}));
-	await it('load a page with various asset loading methods', async () =>
+	await it(`load a page with various asset loading methods - ${item}`, async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('assets-methods'),
 			actualContent: removeLocalPathsInDevAssets(
@@ -92,7 +92,7 @@ async function tests(mode: string, writeActual: boolean) {
 			writeActual,
 		}));
 
-	await it('should forward response init when returning an html template via GET', async () =>
+	await it(`should forward response init when returning an html template via GET - ${item}`, async () =>
 		checkResponse(
 			fetch(new URL(`/response-init/`, ADDRESS), { headers: { hey: '__abc' } }),
 			{
@@ -102,7 +102,7 @@ async function tests(mode: string, writeActual: boolean) {
 				// statusText: 'Hi there__abc',
 			},
 		));
-	await it('should forward response init when returning an html template via POST', async () =>
+	await it(`should forward response init when returning an html template via POST - ${item}`, async () =>
 		checkResponse(
 			fetch(new URL(`/response-init/`, ADDRESS), {
 				method: 'POST',
@@ -117,20 +117,33 @@ async function tests(mode: string, writeActual: boolean) {
 		));
 	// TODO: Test with "accept: json" when implemented
 
-	// await it('load an error page when a route throws', async () =>
-	// 	snapshotAssertEqual({
-	// 		expectedPath: expectedPath('throws'),
-	// 		actualContent: removeLocalPathsInDevAssets(
-	// 			await fetchResource(ADDRESS, ['throws']),
-	// 		),
-	// 		writeActual,
-	// 	}));
+	await it(`load an error page when a route throws - ${item}`, async () =>
+		snapshotAssertEqual({
+			expectedPath: expectedPath('throws'),
+			actualContent: removeLocalPathsInDevAssets(
+				await fetchResource(ADDRESS, ['throws']),
+			),
+			writeActual,
+		}));
+
+	// TODO: Proper test that works with Hono. For now,
+	// implemented error handling is very basic with it.
+	// It doesn't handle stream abortion as gracefully as with Express.
+	if (item === 'express')
+		await it(`should return a route with failing template - ${item}`, async () =>
+			snapshotAssertEqual({
+				expectedPath: expectedPath('template-failure'),
+				actualContent: removeLocalPathsInDevAssets(
+					removeLitParts(await fetchResource(ADDRESS, ['template-failure'])),
+				),
+				writeActual,
+			}));
 }
 
-export async function common(mode: string, writeActual = false) {
-	await describe(`load all server routes ${mode}`, async () => {
-		await tests(mode, writeActual);
-		await api();
+export async function common(mode: string, item: string, writeActual = false) {
+	await describe(`load all server routes ${mode} - ${item}`, async () => {
+		await tests(mode, item, writeActual);
+		await api(item);
 	});
 }
 // export function commonSync(mode: string, writeActual = false) {

@@ -1,9 +1,9 @@
-// NOTE: WIP
+// // NOTE: WIP
 
-export default (context, next) => {
-	console.log({ context, next });
-};
+// export default (context, next) => {
+// 	console.log({ context, next });
+// };
 
-// defineMiddleware((context, next) => {
-// 	//
-// });
+// // defineMiddleware((context, next) => {
+// // 	//
+// // });

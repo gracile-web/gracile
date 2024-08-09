@@ -1,7 +1,6 @@
 import { defineRoute } from '@gracile/gracile/route';
 import { html } from '@gracile/gracile/server-html';
 import { d as document } from './document.js';
-import '@gracile/gracile/document';
 
 const responseInit = defineRoute({
   handler: {

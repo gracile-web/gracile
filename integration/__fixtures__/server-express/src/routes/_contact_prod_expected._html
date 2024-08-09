@@ -3,41 +3,9 @@
   <head>
     <!-- Helpers -->
 
-    <!--  -->
-
-    <!--  -->
-
-    <script>
-      // REQUEST IDLE CALLBACK - POLYFILL
-
-      window.requestIdleCallback =
-        window.requestIdleCallback ||
-        function (cb) {
-          const start = Date.now();
-          return setTimeout(() => {
-            cb({
-              didTimeout: false,
-              timeRemaining: () => {
-                return Math.max(0, 50 - (Date.now() - start));
-              },
-            });
-          }, 1);
-        };
-
-      window.cancelIdleCallback =
-        window.cancelIdleCallback ||
-        function (id) {
-          clearTimeout(id);
-        };
-    </script>
-
     <!-- Global assets -->
 
     <!-- Page assets -->
-
-    <!-- PAGE ASSETS -->
-
-    <!-- /PAGE ASSETS -->
 
     <!-- SEO and page metadata -->
     <meta charset="UTF-8" />
@@ -45,6 +13,10 @@
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
     <title>Gracile Contact</title>
+
+    <!-- PAGE ASSETS -->
+
+    <!-- /PAGE ASSETS -->
     <script
       type="module"
       crossorigin

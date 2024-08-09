@@ -3,37 +3,16 @@
   <head>
     <!-- Helpers -->
 
-    <!--  -->
-
-    <!--  -->
-
-    <script>
-      // REQUEST IDLE CALLBACK - POLYFILL
-
-      window.requestIdleCallback =
-        window.requestIdleCallback ||
-        function (cb) {
-          const start = Date.now();
-          return setTimeout(() => {
-            cb({
-              didTimeout: false,
-              timeRemaining: () => {
-                return Math.max(0, 50 - (Date.now() - start));
-              },
-            });
-          }, 1);
-        };
-
-      window.cancelIdleCallback =
-        window.cancelIdleCallback ||
-        function (id) {
-          clearTimeout(id);
-        };
-    </script>
-
     <!-- Global assets -->
 
     <!-- Page assets -->
+
+    <!-- SEO and page metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/favicon.svg" />
+
+    <title>Gracile Home</title>
 
     <!-- PAGE ASSETS -->
 
@@ -42,13 +21,6 @@
     <!--  -->
 
     <!-- /PAGE ASSETS -->
-
-    <!-- SEO and page metadata -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg" href="/favicon.svg" />
-
-    <title>Gracile Home</title>
     <script type="module" crossorigin src="/assets/index-CKZBGRGy.js"></script>
 
     <link

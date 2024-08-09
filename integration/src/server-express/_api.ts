@@ -7,7 +7,7 @@ const ADDRESS = 'http://localhost:9874';
 const API = '/api';
 // const API_URL = ADDRESS + API;
 
-export async function api() {
+export async function api(item: string) {
 	// await it('return 404 response not found', async () => {
 	// 	const url = new URL(`${API}/basic/NOT_EXISTING`, ADDRESS);
 	// 	await checkResponse(fetch(url), {
@@ -35,7 +35,7 @@ export async function api() {
 		// 'OPTIONS',
 	]) {
 		// eslint-disable-next-line no-await-in-loop
-		await it(`return after ${method}`, async () => {
+		await it(`return after ${method} - ${item}`, async () => {
 			// console.log(new URL(`${API}/basic/`, ADDRESS));
 			const hasBody = ['GET', 'HEAD', 'DELETE'].includes(method) === false;
 			const hasResponse = ['HEAD'].includes(method) === false;
@@ -78,7 +78,7 @@ export async function api() {
 		});
 	}
 
-	await it(`return after POST with form data`, async () => {
+	await it(`return after POST with form data - ${item}`, async () => {
 		const url = new URL(`${API}/basic/`, ADDRESS);
 
 		url.searchParams.set('form', 'true');

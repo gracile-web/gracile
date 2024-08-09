@@ -108,3 +108,9 @@ export async function compareFolder(options: {
 		}
 	}
 }
+
+export function removeLitParts(input: string) {
+	return input
+		.replaceAll(/lit\$(.*)\$/g, '')
+		.replaceAll(/<!-- lit(.*) -->/g, '');
+}

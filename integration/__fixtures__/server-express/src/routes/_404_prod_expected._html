@@ -1,48 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Helpers -->
-
     <script type="module">
       if (import.meta.hot) {
         import.meta.hot.on("gracile:ssr-error", (error) => {
-          throw new Error(error.message);
+          console.error(error.message);
+        });
+        import.meta.hot.on("error", (payload) => {
+          console.error(payload.err.message);
         });
       }
     </script>
 
-    <!--  -->
-
-    <script type="module">
-      // HYDRATE
-      import "@gracile/gracile/_internals/hydrate";
-    </script>
-
-    <!--  -->
-
-    <script>
-      // REQUEST IDLE CALLBACK - POLYFILL
-
-      window.requestIdleCallback =
-        window.requestIdleCallback ||
-        function (cb) {
-          const start = Date.now();
-          return setTimeout(() => {
-            cb({
-              didTimeout: false,
-              timeRemaining: () => {
-                return Math.max(0, 50 - (Date.now() - start));
-              },
-            });
-          }, 1);
-        };
-
-      window.cancelIdleCallback =
-        window.cancelIdleCallback ||
-        function (id) {
-          clearTimeout(id);
-        };
-    </script>
+    <!-- Helpers -->
 
     <!-- Global assets -->
     <link
@@ -56,16 +26,16 @@
 
     <!-- Page assets -->
 
-    <!-- PAGE ASSETS -->
-
-    <!-- /PAGE ASSETS -->
-
     <!-- SEO and page metadata -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
     <title>Gracile - 404</title>
+
+    <!-- PAGE ASSETS -->
+
+    <!-- /PAGE ASSETS -->
   </head>
 
   <body>

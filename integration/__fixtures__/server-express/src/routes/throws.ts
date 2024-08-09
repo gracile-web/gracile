@@ -8,7 +8,7 @@ export default defineRoute({
 
 	template: (context) => {
 		throw new Error('!!! OH NO !!! I AM A FAKE ERROR !!!');
-		html`
+		return html`
 			<h1>⚠️ Arrrrrhh !!</h1>
 
 			<p><code>${context.url.toString()}</code> not found.</p>

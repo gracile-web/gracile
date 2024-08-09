@@ -10,7 +10,7 @@ let gracileProcess: ChildProcessWithoutNullStreams | null = null;
 
 it('runs and execute test suites with EXPRESS', async () => {
 	gracileProcess = await launch('express.js', async () => {
-		await common('prod', writeActual);
+		await common('prod', 'express', writeActual);
 	});
 });
 

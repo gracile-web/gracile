@@ -3,7 +3,6 @@ import { html as html$1 } from '@gracile/gracile/server-html';
 import { d as document } from './document.js';
 import { css, LitElement, html } from 'lit';
 import { state, property, customElement } from 'lit/decorators.js';
-import '@gracile/gracile/document';
 
 const customStylesheet = "/assets/_assets-methods-my-el-2-_K7WEQ-5.css";
 

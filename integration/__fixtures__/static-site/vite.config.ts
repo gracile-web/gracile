@@ -11,7 +11,8 @@ export default defineConfig(({ command }) => {
 		plugins: [
 			gracile({
 				routes: {
-					exclude: command === 'build' ? ['**/throws.ts'] : [],
+					exclude:
+						command === 'build' ? ['**/throws.ts', '**/*-failure.ts'] : [],
 				},
 			}),
 			viteSvgPlugin(),
