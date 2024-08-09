@@ -90,10 +90,10 @@ describe('gracile package should do its exports correctly', () => {
 	});
 
 	test('env', () => {
-		assert.equal('DEV' in env, true);
-		assert.equal('TEST' in env, true);
-		assert.equal('PREVIEW' in env, true);
-		assert.equal('BROWSER' in env, true);
+		assert.equal(typeof env.DEV === 'boolean', true);
+		assert.equal(typeof env.TEST === 'boolean', true);
+		assert.equal(typeof env.PREVIEW === 'boolean', true);
+		assert.equal(typeof env.BROWSER === 'boolean', true);
 	});
 
 	test('tsconfigs', () => {

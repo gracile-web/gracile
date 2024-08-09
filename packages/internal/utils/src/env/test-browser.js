@@ -1,4 +1,4 @@
 export const BROWSER = true;
-export const DEV = true;
+export const DEV = false;
 export const PREVIEW = false;
-export const TEST = false;
+export const TEST = true;

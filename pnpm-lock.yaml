@@ -170,9 +170,6 @@ importers:
       cheerio:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
-      esm-env:
-        specifier: ^1.0.0
-        version: 1.0.0
       express:
         specifier: 4.x.x
         version: 4.19.2
@@ -406,9 +403,6 @@ importers:
       conf:
         specifier: ^13.0.1
         version: 13.0.1
-      esm-env:
-        specifier: ^1.0.0
-        version: 1.0.0
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
@@ -455,9 +449,6 @@ importers:
       '@whatwg-node/server':
         specifier: ^0.9.25
         version: 0.9.34
-      esm-env:
-        specifier: ^1.0.0
-        version: 1.0.0
       fdir:
         specifier: ^6.2.0
         version: 6.2.0(picomatch@4.0.2)
@@ -2518,9 +2509,6 @@ packages:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     hasBin: true
-
-  esm-env@1.0.0:
-    resolution: {integrity: sha512-Cf6VksWPsTuW01vU9Mk/3vRue91Zevka5SjyNf3nEpokFRuqt/KjUQoGAwq9qMmhpLTHmXzSIrFRw8zxWzmFBA==}
 
   espree@10.1.0:
     resolution: {integrity: sha512-M1M6CpiE6ffoigIOWYO9UDP8TMUw9kqb21tf+08IgDYjCsOvCuDt4jQcZmoYxx+w7zlKw9/N0KXfto+I8/FrXA==}
@@ -6999,8 +6987,6 @@ snapshots:
       text-table: 0.2.0
     transitivePeerDependencies:
       - supports-color
-
-  esm-env@1.0.0: {}
 
   espree@10.1.0:
     dependencies:
