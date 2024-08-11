@@ -1,1 +1,4 @@
-export * from '@gracile/server/document';
+export {
+	pageAssetsCustomLocation,
+	RouteTemplateOutlet,
+} from '@gracile/server/document';

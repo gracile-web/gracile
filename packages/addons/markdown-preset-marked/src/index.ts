@@ -1,1 +1,1 @@
-export * from './renderer.js';
+export { MarkdownRenderer } from './renderer.js';

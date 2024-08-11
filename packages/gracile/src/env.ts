@@ -1,1 +1,1 @@
-export * from '@gracile/internal-utils/env';
+export { BROWSER, DEV, PREVIEW, TEST } from '@gracile/internal-utils/env';

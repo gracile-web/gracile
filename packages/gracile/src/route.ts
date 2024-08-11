@@ -1,1 +1,1 @@
-export * from '@gracile/server/route';
+export { defineRoute, type Route } from '@gracile/server/route';
