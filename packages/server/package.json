@@ -31,7 +31,7 @@
   },
   "files": [
     "./dist/**/*",
-    "!/dist/**/*.test.ts"
+    "!/dist/**/*.test.*"
   ],
   "scripts": {
     "// pretest": "node --run build",

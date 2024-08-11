@@ -42,7 +42,7 @@
     "./ambient.d.ts",
     "./dist/**/*",
     "./tsconfigs/*",
-    "!/dist/**/*.test.ts"
+    "!/dist/**/*.test.*"
   ],
   "scripts": {
     "// pretest": "node --run build",

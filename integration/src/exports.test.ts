@@ -31,6 +31,7 @@ function checkEnv(input: typeof serverEnv) {
 	assert.equal(typeof input.CLIENT_DIST_DIR, 'string');
 	assert.equal(typeof input.IP_EXPOSED, 'string');
 	assert.equal(typeof input.IP_LOCALHOST, 'string');
+	assert.equal(typeof input.LOCALHOST, 'string');
 	assert.equal(typeof input.PUBLIC_DIR, 'string');
 	assert.equal(typeof input.RANDOM_PORT, 'number');
 }

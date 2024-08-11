@@ -41,7 +41,8 @@
   "files": [
     "./ambient.d.ts",
     "./dist/**/*",
-    "!/dist/**/*.test.ts"
+    "!/dist/**/*.test.*",
+    "!/dist/typedoc-entrypoint.*"
   ],
   "scripts": {
     "build": "tsc",
