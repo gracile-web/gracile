@@ -228,14 +228,9 @@ const template = templateFound
 						hint: 'Get started with a server-side rendered project (SSR)',
 					},
 					{
-						value: 'basics-static-blog',
-						label: 'Basics - Blog static',
-						hint: 'Features and conventions hints for a Gracile static website',
-					},
-					{
-						value: 'basics-server',
-						label: 'Basics - Server',
-						hint: 'Features and conventions hints for a Gracile dynamic application',
+						value: 'basics',
+						label: 'Basics',
+						hint: 'Get up and running with this all around demo of Gracile features',
 					},
 				] satisfies {
 					value: (typeof TEMPLATE_LIST)[number];
