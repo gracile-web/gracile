@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.4.0...@gracile/gracile@0.5.0-next.0) (2024-08-11)
+
+### Features
+
+* exports "localhost" env and exclude all test dist files ([9af46de](https://github.com/gracile-web/gracile/commit/9af46de74c613d5a21f4b816f1b0b250b37aaee0))
+
 # [0.4.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.4.0-next.0...@gracile/gracile@0.4.0) (2024-08-09)
 
 **Note:** Version bump only for package @gracile/gracile

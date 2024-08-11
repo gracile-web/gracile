@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/create-gracile@0.2.0...create-gracile@0.3.0-next.0) (2024-08-11)
+
+### Features
+
+* reflect back basics server and blog templates merged into one ([f5732d1](https://github.com/gracile-web/gracile/commit/f5732d194d793eabc1ffdad8ed9d48f9095d5377))
+
 # [0.2.0](https://github.com/gracile-web/gracile/compare/create-gracile@0.2.0-next.0...create-gracile@0.2.0) (2024-08-09)
 
 **Note:** Version bump only for package create-gracile
