@@ -1,6 +1,6 @@
 {
   "name": "@gracile/svg",
-  "version": "0.0.8",
+  "version": "0.0.9-next.0",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.5.0...@gracile/engine@0.6.0-next.0) (2024-08-13)
+
+### Bug Fixes
+
+* 404 assets not linked, sitemap crashing server build, correct error page forwarding in request ([afdcc77](https://github.com/gracile-web/gracile/commit/afdcc770ebc274fff484c93e19b405b7d9ffe8a5))
+
+### Features
+
+* experimental simple routes typings code generation ([bf89de2](https://github.com/gracile-web/gracile/commit/bf89de21ded08c0a6226f7ae5be73b99d77b2564))
+
 # [0.5.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.5.0-next.0...@gracile/engine@0.5.0) (2024-08-11)
 
 **Note:** Version bump only for package @gracile/engine
