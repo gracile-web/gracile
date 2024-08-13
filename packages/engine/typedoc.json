@@ -1,0 +1,12 @@
+{
+  "extends": ["../../typedoc.base.jsonc"],
+  // If not set, will result in a warning being printed since it's likely a misconfiguration
+  "entryPoints": [
+    //
+    "./src/index.ts"
+    // "./src/plugin.ts",
+    // "./src/server-html.ts"
+    // "./src/route.ts",
+    // "./src/document.ts",
+  ]
+}

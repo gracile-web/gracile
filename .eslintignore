@@ -9,3 +9,5 @@ dist
 .old*
 
 labs
+
+/index.ts

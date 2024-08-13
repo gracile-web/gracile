@@ -12,6 +12,25 @@ import { server as serverConstants } from './constants.js';
 // 	logger.info('HY');
 // });
 
+/**
+ * Pretty print your server instance address as soon as it is listening.
+ * Matches the dev. server CLI output style.
+ *
+ * @param server - Takes an `node:net` `AddressInfo` like object (address, family, port) or just a provided, pre-constructed string.
+ * @example
+ *
+ * ```js
+ * import * as gracile from '@gracile/gracile/hono';
+ * import { serve } from '@hono/node-server';
+ *
+ * // ...
+ *
+ * serve(
+ * 	{ fetch: app.fetch, port: 3030, hostname: 'localhost' },
+ * 	(address) => gracile.printAddressInfos(address),
+ * );
+ * ```
+ */
 export function printAddressInfos(server: string | AddressInfo | null) {
 	let address: null | string = null;
 	if (!server) throw new Error('Incorrect address infos');

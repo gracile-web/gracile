@@ -1,10 +1,45 @@
 {
-  "entryPoints": ["packages/**/*"],
+  "entryPoints": [
+    "packages/gracile"
+    // , "packages/engine"
+  ],
   "name": "Gracile",
   "entryPointStrategy": "packages",
-  "includeVersion": false,
+  // "includeVersion": false,
 
-  "plugin": ["typedoc-plugin-markdown"]
+  "plugin": ["typedoc-plugin-markdown"],
   // Potentially useful for debugging
   // "logLevel": "Verbose"
+
+  //
+  // "excludeScopesInPaths": true,
+  // "outputFileStrategy": "members",
+
+  "flattenOutputFiles": true,
+  "hidePageHeader": true,
+  "hideBreadcrumbs": true,
+  // "hidePageTitle": true,
+  "hideGroupHeadings": true,
+  "useCodeBlocks": true,
+  // "expandObjects": false,
+  // "expandParameters": false,
+
+  "indexFormat": "htmlTable",
+  "parametersFormat": "htmlTable",
+  "interfacePropertiesFormat": "htmlTable",
+  "classPropertiesFormat": "htmlTable",
+  "enumMembersFormat": "htmlTable",
+  "typeDeclarationFormat": "htmlTable",
+  "propertyMembersFormat": "htmlTable",
+  "tableColumnSettings": {
+    // "hideDefaults": false,
+    // "hideInherited": false,
+    // "hideModifiers": false,
+    // "hideOverrides": false,
+    // "hideSources": false,
+    // "hideValues": false,
+    // "leftAlignHeaders": false
+  }
+
+  // "publicPath": "http://abc.com"
 }

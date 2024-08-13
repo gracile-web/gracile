@@ -13,14 +13,20 @@ import type * as R from '../routes/route.js';
 
 // type NextFunction = (error?: unknown) => void | Promise<void>;
 
+type StandardResponse = { response: Response; body?: never; init?: never };
+type ResponseWithNodeReadable = {
+	response?: never;
+	body: Readable;
+	init: ResponseInit;
+};
+
+/**
+ * The underlying handler interface that you can use to build your own adapter.
+ */
 export type GracileHandler = (
 	request: Request,
 	locals?: unknown,
-) => Promise<
-	| { response: Response; body?: never; init?: never }
-	| { response?: never; body: Readable; init: ResponseInit }
-	| null
->;
+) => Promise<StandardResponse | ResponseWithNodeReadable | null>;
 
 const CONTENT_TYPE_HTML = { 'Content-Type': 'text/html' };
 

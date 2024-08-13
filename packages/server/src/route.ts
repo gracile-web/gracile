@@ -2,12 +2,13 @@
 
 import * as R from '@gracile/engine/routes/route';
 
-export { R as Route };
+// export const RequestMethod = R.RequestMethod;
+// export { R as Route };
 
 /**
- * **Defines** a route.
+ * **Defines a file-based route** for Gracile to consume.
  *
- * See in the [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/).
+ * @see full guide in the [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/).
  */
 export function defineRoute<
 	GetHandlerData extends R.HandlerDataHtml = undefined,
@@ -34,34 +35,71 @@ export function defineRoute<
 			? StaticPathOptions['params']
 			: R.Params;
 	},
->(options: {
-	// locals?: (locals: any) => R.MaybePromise<Locals>;
+>(
+	/**
+	 * Options to populate the current route module.
+	 */
+	options: {
+		/**
+		 * A function or an object containing functions named after HTTP methods.
+		 * A handler can return either a standard `Response` that will terminate the
+		 * request pipeline, or any object to populate the current route template
+		 * and document contexts.
+		 *
+		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_handler)
+		 */
+		handler?: StaticPathOptions extends object
+			? never
+			:
+					| R.Handler<Response>
+					| {
+							GET?: R.Handler<GetHandlerData>;
+							POST?: R.Handler<PostHandlerData>;
+							QUERY?: R.Handler<Response>;
+							PUT?: R.Handler<Response>;
+							PATCH?: R.Handler<Response>;
+							DELETE?: R.Handler<Response>;
+							HEAD?: R.Handler<Response>;
+							OPTIONS?: R.Handler<Response>;
+					  }
+					| undefined;
 
-	handler?: StaticPathOptions extends object
-		? never
-		:
-				| R.Handler<Response>
-				| {
-						GET?: R.Handler<GetHandlerData>;
-						POST?: R.Handler<PostHandlerData>;
-						QUERY?: R.Handler<Response>;
-						PUT?: R.Handler<Response>;
-						PATCH?: R.Handler<Response>;
-						DELETE?: R.Handler<Response>;
-						HEAD?: R.Handler<Response>;
-						OPTIONS?: R.Handler<Response>;
-				  }
-				| undefined;
+		/**
+		 * A function that returns an array of route definition object.
+		 * Only available in `static` output mode.
+		 *
+		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_staticpaths)
+		 */
+		staticPaths?: (() => StaticPathOptions[]) | undefined;
 
-	staticPaths?: (() => StaticPathOptions[]) | undefined;
+		// TODO: Make it type dependent with handler, typing-wise.
+		/**
+		 * A switch to produce an HTML file as it was built with the `static` mode,
+		 * in the `dist/client` build directory.
+		 *
+		 * Only available in `static` output mode.
+		 *
+		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_prerender)
+		 */
+		prerender?: boolean | undefined;
 
-	// TODO: Make it type dependent with handler
-	prerender?: boolean | undefined;
+		/**
+		 * A function that returns a server only template.
+		 * Route context is provided at runtime during the build.
+		 *
+		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_document)
+		 */
+		document?: R.DocumentTemplate<RouteContext> | undefined;
 
-	document?: R.DocumentTemplate<RouteContext> | undefined;
-
-	template?: R.BodyTemplate<RouteContext> | undefined;
-}) {
+		/**
+		 * A function that returns a server only or a Lit client hydratable template.
+		 * Route context is provided at runtime during the build.
+		 *
+		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_template)
+		 */
+		template?: R.BodyTemplate<RouteContext> | undefined;
+	},
+) {
 	// NOTE: We need a factory so `instanceof` will work cross-realm.
 	// Otherwise it breaks. when invoked from an `ssrLoadModule` context
 	// (due to JS>TS transpilation?). Hence "userland".

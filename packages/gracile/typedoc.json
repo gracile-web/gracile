@@ -1,0 +1,8 @@
+{
+  "extends": ["../../typedoc.base.jsonc"],
+  // If not set, will result in a warning being printed since it's likely a misconfiguration
+  "entryPoints": [
+    //
+    "./src/_typedoc-entrypoint.ts"
+  ]
+}

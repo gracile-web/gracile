@@ -1,0 +1,1 @@
+// Makes Typedoc happy

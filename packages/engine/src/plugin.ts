@@ -14,9 +14,29 @@ import { nodeAdapter } from './server/adapters/node.js';
 import type { GracileConfig } from './user-config.js';
 import { buildRoutes } from './vite/plugins/build-routes.js';
 import { virtualRoutes } from './vite/plugins/virtual-routes.js';
+
 export type { GracileConfig };
 
 let isClientBuilt = false;
+
+/**
+ * The main Vite plugin for loading the Gracile framework.
+ *
+ * @param config - Gracile configuration.
+ * @returns Vite plugins. `any` is used to prevent Vite typings version mismatches for the plugin API.
+ * @example
+ * `/vite.config.js`
+ * ```js
+ * import { gracile } from '@gracile/gracile/plugin';
+ * import { defineConfig } from 'vite';
+ *
+ * export default defineConfig({
+ * 	plugins: [
+ * 		gracile({ output: 'server' }),
+ * 	],
+ * });
+ * ```
+ */
 // Return as `any` to avoid Plugin type mismatches when there are multiple Vite versions installed
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const gracile = (config?: GracileConfig): any /* Plugin */[] => {

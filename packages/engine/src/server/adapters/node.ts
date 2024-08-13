@@ -27,7 +27,34 @@ function standardResponseInitToNodeResponse(
 	if (responseInit.statusText) res.statusMessage = responseInit.statusText;
 }
 
-export function nodeAdapter(handler: GracileHandler) {
+export type { GracileHandler };
+
+export type GracileNodeHandler = (
+	req: IncomingMessage,
+	res: ServerResponse,
+	locals?: unknown,
+	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+) => Promise<ServerResponse<IncomingMessage> | null | void>;
+
+/**
+ * @param handler - Takes a pre-built Gracile handler from `./dist/server/entrypoint.js`.
+ * @example
+ * `/src/server.js`
+ * ```js
+ * import express from 'express';
+ *
+ * import * as gracile from '@gracile/gracile/node';
+ *
+ * import { handler } from './dist/server/entrypoint.js';
+ *
+ * const app = express();
+ *
+ * app.use(gracile.nodeAdapter(handler));
+ *
+ * const server = app.listen();
+ * ```
+ */
+export function nodeAdapter(handler: GracileHandler): GracileNodeHandler {
 	return async function nodeHandler(
 		req: IncomingMessage,
 		res: ServerResponse,
@@ -79,8 +106,21 @@ export function nodeAdapter(handler: GracileHandler) {
 	};
 }
 
+/**
+ * @param root - resolve `dist/client` from this file path.
+ * @example
+ * ```js
+ * `/src/server.js`
+ * import * as gracile from '@gracile/gracile/node';
+ * import express from 'express';
+ *
+ * const app = express();
+ *
+ * app.use(express.static(gracile.getClientDistPath(import.meta.url)));
+ * ```
+ */
 export function getClientDistPath(root: string) {
-	return fileURLToPath(new URL(CLIENT_DIST_DIR, root));
+	return fileURLToPath(new URL(server.CLIENT_DIST_DIR, root));
 }
 
 export { printAddressInfos } from '../utils.js';

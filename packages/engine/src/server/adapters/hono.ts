@@ -13,6 +13,25 @@ export type GracileHonoHandler = (context: {
 	var: unknown;
 }) => Promise<Response>;
 
+/**
+ * @param handler - Takes a pre-built Gracile handler from `./dist/server/entrypoint.js`.
+ * @example
+ * `/src/server.js`
+ * ```js
+ * import { Hono } from 'hono';
+ * import { serve } from '@hono/node-server';
+ *
+ * import * as gracile from '@gracile/gracile/hono';
+ *
+ * import { handler } from './dist/server/entrypoint.js';
+ *
+ * const app = new Hono();
+ *
+ * app.use(gracile.honoAdapter(handler));
+ *
+ * serve(app);
+ * ```
+ */
 export const honoAdapter =
 	(handler: GracileHandler): GracileHonoHandler =>
 	async (context) => {
@@ -30,6 +49,21 @@ export const honoAdapter =
 		throw new Error('Rendering was impossible in the Hono adapter!');
 	};
 
+/**
+ *
+ * @param root - resolve `dist/client` from this file path.
+ * @example
+ * `/src/server.js`
+ * ```js
+ * import * as gracile from '@gracile/gracile/node';
+ * import { Hono } from 'hono';
+ * import { serveStatic } from '@hono/node-server/serve-static';
+ *
+ * const app = new Hono();
+ *
+ * app.get('*', serveStatic({ root: gracile.getClientDistPath(import.meta.url) }));
+ * ```
+ */
 export function getClientDistPath(root: string) {
 	return relative(
 		process.cwd(),
