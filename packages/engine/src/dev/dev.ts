@@ -28,9 +28,7 @@ export async function createDevHandler({
 		// console.log({ event });
 		if (
 			file.match(/\/src\/routes\/(.*)\.(ts|js)$/) &&
-			event === 'add'
-			/*  &&
-			['add', 'unlink',''].includes(event) */
+			['add', 'unlink'].includes(event)
 		)
 			collectRoutes(root, gracileConfig.routes?.exclude)
 				.then(() => {

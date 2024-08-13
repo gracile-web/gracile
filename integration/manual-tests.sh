@@ -12,7 +12,6 @@ pnpm tsx --test src/exports.test.ts
 pnpm tsx --test src/custom-elements.test.ts
 pnpm tsx --test src/build-mode/project-core.test.ts
 pnpm tsx --test src/template-failure.test.ts
-pnpm tsx --test --test-concurrency=1 src/polyfills.test.ts # aa
 
 pnpm tsx --test --test-concurrency=1,1 \
 	src/addons/markdown.test.ts \

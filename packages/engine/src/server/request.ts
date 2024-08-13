@@ -83,17 +83,17 @@ export function createGracileHandler({
 				logger.error(String(error));
 				const url = new URL('/404/', fullUrl).href;
 				const options = { ...routeOptions, url };
-				const notFound = await getRoute(options).catch(() => null);
+				const notFound = await getRoute(options).catch((err) => err as Error);
 				return notFound;
 			});
 
-			if (routeInfos === null) {
+			if (routeInfos instanceof Error) {
 				// MARK: Default, fallback 404
-				const message = `404 not found!\n\n---\n\nCreate a /src/routes/404.{js,ts} to get a custom page.\n${method} - ${fullUrl}`;
+				// const message = `404 not found!\n\n---\n\nCreate a /src/routes/404.{js,ts} to get a custom page.\n${method} - ${fullUrl}`;
 
 				const { errorPageHtml, headers } = await createErrorPage(
 					fullUrl,
-					new Error(message),
+					routeInfos,
 				);
 				return {
 					response: new Response(errorPageHtml, {

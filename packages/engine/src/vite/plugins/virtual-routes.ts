@@ -60,7 +60,10 @@ const routeImports = new Map(
 const routeAssets = new Map(${JSON.stringify(
 						[
 							...renderedRoutesWithoutPrerender.map((r) => [
-								`/${r.name.replace(/index\.html$/, '')}`,
+								`/${r.name
+									//
+									.replace(/index\.html$/, '')
+									.replace(/* Error pages */ /\.html$/, '/')}`,
 								r.handlerAssets,
 							]),
 						],

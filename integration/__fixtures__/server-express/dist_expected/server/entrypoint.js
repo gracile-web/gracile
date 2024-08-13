@@ -149,7 +149,7 @@ const routeImports = new Map(
 
 const routeAssets = new Map([
   [
-    "/404.html",
+    "/404/",
     "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [

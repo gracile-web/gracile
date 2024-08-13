@@ -31,18 +31,24 @@ export function viteSitemapPlugin(options: {
 
 		async generateBundle(_, bundle) {
 			if (isSsrBuild) {
-				logger.error(
-					`\n${VITE_PLUGIN_NAME} is only compatible with static output!\n`,
+				logger.warn(
+					`\n${VITE_PLUGIN_NAME} is only compatible with static output! Skipping…\n`,
 				);
 				return;
 			}
 
 			const links = Object.entries(bundle)
-
 				.filter(([, asset]) => asset.fileName.endsWith('.html'))
 				.map(([, asset]) =>
 					`/${asset.fileName}`.replace(/\/index\.html$/, '/'),
 				);
+
+			if (links.length < 2) {
+				logger.warn(
+					`\n${VITE_PLUGIN_NAME} hasn't found any built HTML pages! Skipping…\n`,
+				);
+				return;
+			}
 
 			const hostname = options.siteUrl.endsWith('/')
 				? options.siteUrl
