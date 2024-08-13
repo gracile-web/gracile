@@ -61,4 +61,14 @@ export interface GracileConfig {
 		 */
 		exclude?: string[];
 	};
+
+	/**
+	 * Future, unstable features flags.
+	 */
+	experimental?: {
+		/**
+		 * Exclude routes with an array of patterns. Useful for debugging.
+		 */
+		generateRoutesTypings?: boolean;
+	};
 }

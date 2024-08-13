@@ -8,6 +8,7 @@ import {
 	type GracileHandler,
 } from '../server/request.js';
 import type { GracileConfig } from '../user-config.js';
+import { generateRoutesTypings } from './route-typings.js';
 
 export async function createDevHandler({
 	vite,
@@ -24,6 +25,11 @@ export async function createDevHandler({
 
 	const routes = await collectRoutes(root, gracileConfig.routes?.exclude);
 
+	if (gracileConfig.experimental?.generateRoutesTypings)
+		generateRoutesTypings(root, routes).catch((error) =>
+			logger.error(String(error)),
+		);
+
 	vite.watcher.on('all', (event, file) => {
 		// console.log({ event });
 		if (
@@ -33,6 +39,11 @@ export async function createDevHandler({
 			collectRoutes(root, gracileConfig.routes?.exclude)
 				.then(() => {
 					vite.hot.send('vite:invalidate');
+
+					if (gracileConfig.experimental?.generateRoutesTypings)
+						generateRoutesTypings(root, routes).catch((error) =>
+							logger.error(String(error)),
+						);
 				})
 				.catch((e) => logger.error(String(e)));
 	});

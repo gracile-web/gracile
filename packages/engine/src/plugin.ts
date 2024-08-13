@@ -56,6 +56,37 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 
 	return [
 		{
+			name: 'gracile-routes-codegen',
+
+			// watchChange(change) {
+			// 	console.log({ change });
+			// },
+
+			resolveId(id) {
+				const virtualModuleId = 'gracile:route';
+				const resolvedVirtualModuleId = `\0${virtualModuleId}`;
+
+				if (id === virtualModuleId) {
+					return resolvedVirtualModuleId;
+				}
+				return null;
+			},
+
+			load(id) {
+				const virtualModuleId = 'gracile:route';
+				const resolvedVirtualModuleId = `\0${virtualModuleId}`;
+
+				if (id === resolvedVirtualModuleId) {
+					return `
+export function route(input){
+return input;
+}`;
+				}
+				return null;
+			},
+		},
+
+		{
 			name: 'vite-plugin-gracile-serve-middleware',
 
 			apply: 'serve',
@@ -117,7 +148,7 @@ export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
 					root: viteConfig.root || process.cwd(),
 
 					server: { middlewareMode: true },
-					// NOTE: Stub
+					// NOTE: Stub. KEEP IT!
 					optimizeDeps: { include: [] },
 				});
 
