@@ -1,4 +1,5 @@
-import { defineRoute, Route } from '@gracile/gracile/route';
+import { defineRoute } from '@gracile/gracile/route';
+import * as Route from '@gracile/gracile/_internals/route';
 
 const basic = defineRoute({
   handler: {

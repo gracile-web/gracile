@@ -14,6 +14,7 @@ import { nodeAdapter } from './server/adapters/node.js';
 import type { GracileConfig } from './user-config.js';
 import { buildRoutes } from './vite/plugins/build-routes.js';
 import { virtualRoutes } from './vite/plugins/virtual-routes.js';
+export type { GracileConfig };
 
 let isClientBuilt = false;
 // Return as `any` to avoid Plugin type mismatches when there are multiple Vite versions installed

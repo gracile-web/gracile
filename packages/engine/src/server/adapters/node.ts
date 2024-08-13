@@ -1,12 +1,12 @@
 import { fileURLToPath } from 'node:url';
 
-import { DEV } from '@gracile/internal-utils/env';
+import { env } from '@gracile/internal-utils/env';
 import { logger } from '@gracile/internal-utils/logger';
 import { createServerAdapter } from '@whatwg-node/server';
 import type { IncomingMessage, ServerResponse } from 'http';
 import { Writable } from 'stream';
 
-import { CLIENT_DIST_DIR } from '../env.js';
+import { server } from '../constants.js';
 import { type GracileHandler, isRedirect } from '../request.js';
 
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
@@ -53,10 +53,10 @@ export function nodeAdapter(handler: GracileHandler) {
 			// NOTE: We can't do similar thing with Hono with just
 			// a standard Response workflow, it seems
 			result.body.addListener('error', (error) => {
-				if (DEV) logger.error(String(error));
+				if (env.DEV) logger.error(String(error));
 				// NOTE: res.writeHead doesn't seems to take effect, too (too late)
 				// res.statusCode = 500;
-				res.end(DEV ? '__SSR_ERROR__' : undefined);
+				res.end(env.DEV ? '__SSR_ERROR__' : undefined);
 			});
 			return result.body.pipe(res);
 		}

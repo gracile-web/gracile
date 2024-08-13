@@ -4,4 +4,5 @@ export {
 	honoAdapter,
 	printAddressInfos,
 } from '@gracile/engine/server/adapters/hono';
-export { BROWSER, DEV, PREVIEW, TEST } from '@gracile/internal-utils/env';
+export { server } from '@gracile/engine/server/constants';
+export { env } from '@gracile/internal-utils/env';

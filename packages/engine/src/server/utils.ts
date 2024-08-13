@@ -2,11 +2,11 @@
 
 import type { AddressInfo } from 'node:net';
 
-import { DEV, PREVIEW, TEST } from '@gracile/internal-utils/env';
+import { env as currentEnv } from '@gracile/internal-utils/env';
 import { logger } from '@gracile/internal-utils/logger';
 import c from 'picocolors';
 
-import { IP_EXPOSED } from './env.js';
+import { server as serverConstants } from './constants.js';
 
 // setTimeout(() => {
 // 	logger.info('HY');
@@ -29,18 +29,18 @@ export function printAddressInfos(server: string | AddressInfo | null) {
 		TEST: 'testing',
 	};
 	let env: keyof typeof envs = 'PROD';
-	if (DEV) env = 'DEV';
-	if (PREVIEW) env = 'PREVIEW';
-	if (TEST) env = 'TEST';
+	if (currentEnv.DEV) env = 'DEV';
+	if (currentEnv.PREVIEW) env = 'PREVIEW';
+	if (currentEnv.TEST) env = 'TEST';
 
 	logger.info(c.green(`${envs[env]} ${c.yellow('server started')}`), {
 		timestamp: true,
 	});
 
-	if (address.includes(IP_EXPOSED))
+	if (address.includes(serverConstants.IP_EXPOSED))
 		logger.info(
 			`${
-				address.includes(IP_EXPOSED)
+				address.includes(serverConstants.IP_EXPOSED)
 					? `\n${c.dim('┃')} Network  ${c.cyan(address)}\n`
 					: ''
 			}`,
