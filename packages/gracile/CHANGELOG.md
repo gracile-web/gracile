@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.5.1-next.0...@gracile/gracile@0.6.0-next.0) (2024-08-14)
+
+### Features
+
+* migrate `printAddressInfos` to `printUrls` ([81a2681](https://github.com/gracile-web/gracile/commit/81a26811fcc0c87b034788fa43ebb21e81987547))
+
 ## [0.5.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.5.0...@gracile/gracile@0.5.1-next.0) (2024-08-13)
 
 **Note:** Version bump only for package @gracile/gracile
