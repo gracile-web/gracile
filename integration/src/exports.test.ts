@@ -38,14 +38,14 @@ function checkEnv(input: typeof serverEnv) {
 
 describe('gracile package should do its exports correctly', () => {
 	test('node adapter', () => {
-		assert.equal(typeof node.printAddressInfos, 'function');
+		assert.equal(typeof node.printUrls, 'function');
 		assert.equal(typeof node.getClientDistPath, 'function');
 		assert.equal(typeof node.nodeAdapter, 'function');
 		checkEnv(node);
 	});
 
 	test('hono adapter', () => {
-		assert.equal(typeof hono.printAddressInfos, 'function');
+		assert.equal(typeof hono.printUrls, 'function');
 		assert.equal(typeof hono.getClientDistPath, 'function');
 		assert.equal(typeof hono.honoAdapter, 'function');
 

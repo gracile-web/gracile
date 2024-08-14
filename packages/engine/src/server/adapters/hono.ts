@@ -71,4 +71,4 @@ export function getClientDistPath(root: string) {
 	);
 }
 
-export { printAddressInfos } from '../utils.js';
+export { printUrls } from '../utils.js';

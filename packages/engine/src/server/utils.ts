@@ -27,11 +27,11 @@ import { server as serverConstants } from './constants.js';
  *
  * serve(
  * 	{ fetch: app.fetch, port: 3030, hostname: 'localhost' },
- * 	(address) => gracile.printAddressInfos(address),
+ * 	(address) => gracile.printUrls(address),
  * );
  * ```
  */
-export function printAddressInfos(server: string | AddressInfo | null) {
+export function printUrls(server: string | AddressInfo | null) {
 	let address: null | string = null;
 	if (!server) throw new Error('Incorrect address infos');
 	if (typeof server === 'string') {

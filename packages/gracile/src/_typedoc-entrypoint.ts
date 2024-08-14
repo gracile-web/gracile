@@ -10,7 +10,7 @@ export {
 	// getClientDistPath,
 	type GracileNodeHandler,
 	nodeAdapter,
-	printAddressInfos,
+	printUrls,
 } from './node.js';
 
 // export * from './hydration.js';

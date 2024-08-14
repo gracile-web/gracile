@@ -123,4 +123,4 @@ export function getClientDistPath(root: string) {
 	return fileURLToPath(new URL(server.CLIENT_DIST_DIR, root));
 }
 
-export { printAddressInfos } from '../utils.js';
+export { printUrls } from '../utils.js';

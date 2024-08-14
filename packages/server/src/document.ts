@@ -15,7 +15,7 @@ import { html as LitHtml, LitElement } from 'lit';
  * import { pageAssetsCustomLocation } from '@gracile/gracile/document';
  * import { html } from '@gracile/gracile/server-html';
  *
- * export const document = (options: { url: URL; title?: string | null }) => html`
+ * export const document = (_props) => html`
  * 	<!doctype html>
  * 	<html lang="en">
  * 		<head>
