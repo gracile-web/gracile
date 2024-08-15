@@ -7,7 +7,7 @@ import { html as LitHtml, LitElement } from 'lit';
 
 /**
  * Overrides the default location for routes sibling assets, which is normally
- * right before the closing `<head/>` tag.
+ * right before the closing `</head>` tag.
  *
  * @example
  *
@@ -21,7 +21,7 @@ import { html as LitHtml, LitElement } from 'lit';
  * 		<head>
  * 			<!-- ... -->
  *
- * 			<!-- NOTE: Provide your marker for route sibling assets injection.  -->
+ * 			<!-- NOTE: Route sibling assets injection marker.  -->
  * 			${pageAssetsCustomLocation()}
  *
  * 			<!-- ... -->

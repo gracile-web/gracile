@@ -33,7 +33,9 @@ export async function createDevHandler({
 	vite.watcher.on('all', (event, file) => {
 		// console.log({ event });
 		if (
-			file.match(/\/src\/routes\/(.*)\.(ts|js)$/) &&
+			file.match(
+				/\/src\/routes\/(.*)\.(ts|js|css|scss|sass|less|styl|stylus)$/,
+			) &&
 			['add', 'unlink'].includes(event)
 		)
 			collectRoutes(root, gracileConfig.routes?.exclude)

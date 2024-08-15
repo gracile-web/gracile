@@ -116,8 +116,8 @@ return input;
 				// };
 				const version = process.env['__GRACILE_VERSION__'];
 				logger.info(
-					`${c.cyan(c.italic(c.underline('🧚 Gracile ')))}` +
-						` ${c.green(` v${version ?? 'X'}`)}`,
+					`${c.cyan(c.italic(c.underline('🧚 Gracile')))}` +
+						` ${c.dim(`~`)} ${c.green(`v${version ?? 'X'}`)}`,
 				);
 				// ---
 
