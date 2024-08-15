@@ -1,4 +1,4 @@
 export {
+	globalStylesProvider,
 	pageAssetsCustomLocation,
-	RouteTemplateOutlet,
 } from '@gracile/server/document';

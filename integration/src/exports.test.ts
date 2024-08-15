@@ -26,6 +26,7 @@ import * as urlPattern from '@gracile/gracile/url-pattern';
 // import * as mdPlugin from '@gracile/markdown/vite';
 // import * as markdown from '@gracile/markdown';
 import { resolve } from 'import-meta-resolve';
+import { html } from 'lit';
 
 function checkEnv(input: typeof serverEnv) {
 	assert.equal(typeof input.server.CLIENT_DIST_DIR, 'string');
@@ -72,9 +73,24 @@ describe('gracile package should do its exports correctly', () => {
 	});
 
 	test('document', () => {
-		assert.equal(typeof document.RouteTemplateOutlet, 'function');
+		assert.equal(typeof document.globalStylesProvider, 'function');
 
 		assert.equal(typeof document.pageAssetsCustomLocation(), 'object');
+	});
+
+	test('ambient custom elements', () => {
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-unsafe-assignment
+		const globalStyles =
+			null as unknown as HTMLElementTagNameMap['adopt-global-styles'];
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const routeTemplateOutlet =
+			null as unknown as HTMLElementTagNameMap['route-template-outlet'];
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const elems = html`
+			<route-template-outlet></route-template-outlet>
+			<adopt-global-styles></adopt-global-styles>
+		`;
 	});
 
 	test('server utils', () => {
