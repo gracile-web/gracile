@@ -13,6 +13,7 @@ import * as R from '@gracile/engine/routes/route';
 export function defineRoute<
 	GetHandlerData extends R.HandlerDataHtml = undefined,
 	PostHandlerData extends R.HandlerDataHtml = undefined,
+	CatchAllHandlerData extends R.HandlerDataHtml = undefined,
 	StaticPathOptions extends R.StaticPathOptionsGeneric | undefined = undefined,
 	RouteContext extends R.RouteContextGeneric = {
 		url: URL;
@@ -25,7 +26,9 @@ export function defineRoute<
 				// 	}
 
 				GetHandlerData | PostHandlerData extends undefined
-				? never
+				? CatchAllHandlerData extends Response
+					? never
+					: CatchAllHandlerData
 				: {
 						GET: GetHandlerData extends Response ? never : GetHandlerData;
 						POST: PostHandlerData extends Response ? never : PostHandlerData;
@@ -51,7 +54,7 @@ export function defineRoute<
 		handler?: StaticPathOptions extends object
 			? never
 			:
-					| R.Handler<Response>
+					| R.Handler<CatchAllHandlerData>
 					| {
 							GET?: R.Handler<GetHandlerData>;
 							POST?: R.Handler<PostHandlerData>;
@@ -70,7 +73,7 @@ export function defineRoute<
 		 *
 		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_staticpaths)
 		 */
-		staticPaths?: (() => StaticPathOptions[]) | undefined;
+		staticPaths?: () => R.MaybePromise<StaticPathOptions[]> | undefined;
 
 		// TODO: Make it type dependent with handler, typing-wise.
 		/**

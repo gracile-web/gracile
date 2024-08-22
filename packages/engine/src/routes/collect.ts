@@ -68,9 +68,10 @@ function extractRoutePatterns(
 	};
 }
 
-const routes: R.RoutesManifest = new Map<string, R.Route>();
+// const routes: R.RoutesManifest = new Map<string, R.Route>();
 
 export async function collectRoutes(
+	routes: R.RoutesManifest,
 	root: string /* vite: ViteDevServer */,
 	excludePatterns: string[] = [],
 	// single: { file?: string; event: 'add' },

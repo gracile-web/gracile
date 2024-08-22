@@ -9,6 +9,7 @@ import type { ViteDevServer } from 'vite';
 import { renderRouteTemplate } from '../render/route-template.js';
 import { collectRoutes } from '../routes/collect.js';
 import { loadForeignRouteObject } from '../routes/load-module.js';
+import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
 
 export interface RenderedRouteDefinition {
@@ -17,6 +18,11 @@ export interface RenderedRouteDefinition {
 	html: string | null;
 
 	handlerAssets?: string;
+
+	static: {
+		props: unknown;
+		document: string | null;
+	};
 
 	savePrerender: boolean | null;
 }
@@ -35,11 +41,13 @@ async function streamToString(stream: Readable): Promise<string> {
 }
 
 export async function renderRoutes({
+	routes,
 	vite,
 	serverMode,
 	root = process.cwd(),
 	gracileConfig,
 }: {
+	routes: RoutesManifest;
 	vite: ViteDevServer;
 	serverMode: boolean;
 	root?: string;
@@ -48,7 +56,7 @@ export async function renderRoutes({
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 
 	// MARK: Collect
-	const routes = await collectRoutes(root, gracileConfig.routes?.exclude);
+	await collectRoutes(routes, root, gracileConfig.routes?.exclude);
 
 	const renderedRoutes: RenderedRouteDefinition[] = [];
 
@@ -63,19 +71,43 @@ export async function renderRoutes({
 			// NOTE: Skip rendering base document for server
 			if (serverMode && typeof routeModule.document !== 'function') return;
 
-			const routeStaticPaths = routeModule.staticPaths?.();
+			const routeStaticPaths = await Promise.resolve(
+				routeModule.staticPaths?.(),
+			);
 
 			// MARK: Extract data
 			await Promise.all(
+				/* Single route */
 				(routeStaticPaths ?? [patternString]).map(async (staticPathOptions) => {
 					let pathnameWithParams = patternString;
 
 					let params = {};
 					let props: unknown;
 
+					// MARK: Handler data (for single route only, NOT dynamic)
+					if (routeModule.handler) {
+						const url = new URL(pathnameWithParams, 'http://gracile-static');
+						const context = {
+							url,
+							params: {},
+							// NOTE: STUB, maybe it should be better to remove them from typings?
+							// But that will make more mismatches between static and server.
+							request: new Request(url),
+							locals: {},
+							responseInit: {},
+						};
+						if (typeof routeModule.handler === 'function') {
+							props = await Promise.resolve(routeModule.handler(context));
+						} else if ('GET' in routeModule.handler) {
+							props = {
+								GET: await Promise.resolve(routeModule.handler.GET(context)),
+							};
+						}
+					}
+
 					// MARK: Convert pattern
 					// to real route with static parameters + get props. for after
-					if (typeof staticPathOptions === 'object') {
+					else if (typeof staticPathOptions === 'object') {
 						params = staticPathOptions.params;
 
 						props = staticPathOptions.props;
@@ -114,9 +146,10 @@ export async function renderRoutes({
 
 					// MARK: Render
 
-					const { output } = await renderRouteTemplate({
+					const { output, document } = await renderRouteTemplate({
 						//
-						request: { url: url.href },
+						// request: { url: url.href },
+						url: url.href,
 						vite,
 						mode: 'build',
 						routeInfos: {
@@ -150,6 +183,7 @@ export async function renderRoutes({
 						name,
 						html: htmlString,
 						savePrerender,
+						static: { props, document },
 					} satisfies RenderedRouteDefinition;
 					renderedRoutes.push(rendered);
 				}),

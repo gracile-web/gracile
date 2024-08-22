@@ -1,15 +1,17 @@
 import { Readable } from 'node:stream';
 
 import { logger } from '@gracile/internal-utils/logger';
+// import { logger } from '@gracile/internal-utils/logger/vite-logger';
 import c from 'picocolors';
 import type { ErrorPayload, ViteDevServer } from 'vite';
 
 import * as assert from '../assertions.js';
 import { errorPage } from '../errors/templates.js';
 import { renderRouteTemplate } from '../render/route-template.js';
-import { renderSsrTemplate } from '../render/utils.js';
+import { renderLitTemplate } from '../render/utils.js';
 import { getRoute } from '../routes/match.js';
 import type * as R from '../routes/route.js';
+import type { GracileConfig } from '../user-config.js';
 
 // type NextFunction = (error?: unknown) => void | Promise<void>;
 
@@ -46,6 +48,7 @@ export function createGracileHandler({
 	routeAssets,
 	root,
 	serverMode,
+	gracileConfig,
 }: {
 	vite?: ViteDevServer | undefined;
 	routes: R.RoutesManifest;
@@ -53,11 +56,12 @@ export function createGracileHandler({
 	routeAssets?: R.RoutesAssets;
 	root: string;
 	serverMode?: boolean | undefined;
+	gracileConfig: GracileConfig;
 }) {
 	async function createErrorPage(urlPath: string, e: Error) {
 		logger.error(e.message);
 
-		let errorPageHtml = await renderSsrTemplate(errorPage(e));
+		let errorPageHtml = await renderLitTemplate(errorPage(e));
 		if (vite)
 			errorPageHtml = await vite.transformIndexHtml(urlPath, errorPageHtml);
 
@@ -66,10 +70,19 @@ export function createGracileHandler({
 
 	const middleware: GracileHandler = async (request, locals) => {
 		try {
-			// NOTE: Maybe it should be constructed from `req`
-			const { url: fullUrl, method } = request;
+			const { url: requestedUrl, method } = request;
+
+			// MARK: Rewrite hidden route siblings
+			const fullUrl = requestedUrl.replace(/\/__(.*)$/, '/');
 
 			// MARK: Get route infos
+
+			const exposePremises = gracileConfig.pages?.premises?.expose
+				? {
+						propsOnly: /\/__(.*?)\.props\.json$/.test(requestedUrl),
+						docOnly: /\/__(.*?)\.doc\.html$/.test(requestedUrl),
+					}
+				: null;
 
 			const routeOptions = {
 				url: fullUrl,
@@ -79,7 +92,7 @@ export function createGracileHandler({
 			};
 
 			const routeInfos = await getRoute(routeOptions).catch(async (error) => {
-				// MARK: User defined Gracile 404
+				// MARK: User defined Gracile 404 rewriting
 				logger.error(String(error));
 				const url = new URL('/404/', fullUrl).href;
 				const options = { ...routeOptions, url };
@@ -105,14 +118,15 @@ export function createGracileHandler({
 			}
 
 			const routeTemplateOptions = {
-				request,
+				url: fullUrl,
 				vite,
 				mode: 'dev', // vite && vite.config.mode === 'dev' ? 'dev' : 'build',
 				routeAssets,
 				root,
 				serverMode,
 				routeInfos,
-			} as const;
+				docOnly: exposePremises?.docOnly,
+			} satisfies Parameters<typeof renderRouteTemplate>[0];
 
 			logger.info(`[${c.yellow(method)}] ${c.yellow(fullUrl)}`, {
 				timestamp: true,
@@ -128,12 +142,11 @@ export function createGracileHandler({
 			const handler = routeInfos.routeModule.handler;
 
 			const responseInit: ResponseInit = {};
-			// TODO: should move this to `special-file` so we don't recalculate on each request
-			// + we would be able to do some route codegen.
 
 			if (
 				('handler' in routeInfos.routeModule &&
 					typeof handler !== 'undefined') ||
+				// TODO: Explain this condition
 				(handler && 'GET' in handler === false && method !== 'GET')
 			) {
 				const routeContext = Object.freeze({
@@ -167,23 +180,14 @@ export function createGracileHandler({
 				// 	await useHandler();
 				// }
 				//
-				// MARK: Top level handler
+				// MARK: Handler(s)
 
-				if (typeof handler === 'function') {
-					const handlerOutput = (await Promise.resolve(
-						handler(routeContext),
-					)) as unknown;
-					if (assert.isResponseOrPatchedResponse(handlerOutput))
-						output = handlerOutput;
-					else
-						throw new TypeError(
-							'Catch-all handler must return a Response object.',
-						);
+				const hasTopLevelHandler = typeof handler === 'function';
 
-					// MARK: Handler with method
-				} else if (method in handler) {
-					const handlerWithMethod = handler[method as keyof typeof handler];
-
+				if (hasTopLevelHandler || method in handler) {
+					const handlerWithMethod = hasTopLevelHandler
+						? handler
+						: handler[method as keyof typeof handler];
 					if (typeof handlerWithMethod !== 'function')
 						throw TypeError('Handler must be a function.');
 
@@ -194,11 +198,27 @@ export function createGracileHandler({
 					if (assert.isResponseOrPatchedResponse(handlerOutput))
 						output = handlerOutput;
 					else {
-						output = await renderRouteTemplate({
-							...routeTemplateOptions,
-							handlerInfos: { data: handlerOutput, method },
-							routeInfos,
-						}).then((r) => r.output);
+						routeTemplateOptions.routeInfos.props = hasTopLevelHandler
+							? handlerOutput
+							: { [method]: handlerOutput };
+
+						if (exposePremises?.docOnly) {
+							const { document } =
+								await renderRouteTemplate(routeTemplateOptions);
+							return {
+								response: new Response(document, {
+									headers: { ...CONTENT_TYPE_HTML },
+								}),
+							};
+						}
+						if (exposePremises?.propsOnly)
+							return {
+								response: Response.json(routeTemplateOptions.routeInfos.props),
+							};
+
+						output = await renderRouteTemplate(routeTemplateOptions).then(
+							(r) => r.output,
+						);
 					}
 
 					// MARK: No GET, render page
@@ -209,11 +229,24 @@ export function createGracileHandler({
 					};
 				}
 			} else {
-				output = await renderRouteTemplate({
-					...routeTemplateOptions,
-					handlerInfos: { data: null, method: 'GET' },
-					routeInfos,
-				}).then((r) => r.output);
+				if (exposePremises?.docOnly) {
+					const { document } = await renderRouteTemplate(routeTemplateOptions);
+					return {
+						response: new Response(document, {
+							headers: { ...CONTENT_TYPE_HTML },
+						}),
+					};
+				}
+				if (exposePremises?.propsOnly)
+					return {
+						response: Response.json(
+							routeTemplateOptions.routeInfos.props || {},
+						),
+					};
+
+				output = await renderRouteTemplate(routeTemplateOptions).then(
+					(r) => r.output,
+				);
 			}
 
 			// MARK: Return response
@@ -263,10 +296,11 @@ export function createGracileHandler({
 								vite.hot.send(payload);
 								// NOTE: Arbitrary value. Lower seems to be too fast, higher is not guaranteed to work.
 							}, 750);
+						} else {
+							logger.error(errorMessage);
 						}
-
-						logger.error(errorMessage);
 					}),
+
 					init: responseInit,
 				};
 			}

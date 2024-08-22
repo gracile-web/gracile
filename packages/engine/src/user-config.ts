@@ -63,12 +63,56 @@ export interface GracileConfig {
 	};
 
 	/**
+	 * Settings for pages in `/src/routes`.
+	 */
+	pages?: {
+		/**
+		 * Premises are the document and the properties necessary for page template
+		 * rendering.
+		 *
+		 * You can access them via:
+		 *
+		 * - `.../_my-route/__index.props.json`
+		 * - `.../_my-route/__index.doc.html`
+		 *
+		 * They are accessible with the dev/server handler and are outputted as
+		 * static files for the static output or for server pre-rendered pages.
+		 *
+		 * They can be use for implementing client-side routing.
+		 */
+		premises?: {
+			/**
+			 * @defaultValue false
+			 */
+			expose?: boolean;
+
+			// * Base path: `/src/routes/`.
+			/**
+			 * Include routes with a glob filter array.
+			 */
+			include?: string[];
+
+			/**
+			 * Exclude routes with a glob filter array.
+			 */
+			exclude?: string[];
+		};
+	};
+
+	/**
 	 * Future, unstable features flags.
 	 */
 	experimental?: {
 		/**
-		 * Exclude routes with an array of patterns. Useful for debugging.
+		 * Automatically typed route paths.
+		 * @experimental
 		 */
 		generateRoutesTypings?: boolean;
+
+		// /**
+		//  * Routes modules for client, used for SPA navigation.
+		//  * @experimental
+		//  */
+		// generateClientRoutes?: boolean;
 	};
 }

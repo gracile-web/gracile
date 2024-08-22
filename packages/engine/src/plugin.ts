@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { logger } from '@gracile/internal-utils/logger';
 import { rename, rm } from 'fs/promises';
 import c from 'picocolors';
-import { build, createServer, type Plugin } from 'vite';
+import { build, createServer, type PluginOption } from 'vite';
 
 import {
 	type RenderedRouteDefinition /* renderRoutes */,
@@ -13,7 +13,10 @@ import type { RoutesManifest } from './routes/route.js';
 import { nodeAdapter } from './server/adapters/node.js';
 import type { GracileConfig } from './user-config.js';
 import { buildRoutes } from './vite/plugins/build-routes.js';
-import { virtualRoutes } from './vite/plugins/virtual-routes.js';
+import {
+	virtualRoutes,
+	virtualRoutesClient,
+} from './vite/plugins/virtual-routes.js';
 
 export type { GracileConfig };
 
@@ -37,54 +40,67 @@ let isClientBuilt = false;
  * });
  * ```
  */
-// Return as `any` to avoid Plugin type mismatches when there are multiple Vite versions installed
+// NOTE: for Vite versions mismatches with `exactOptionalPropertyTypes`?
+// This `any[]` AND with a plugin -array- makes ESLint and TS shut up.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const gracile = (config?: GracileConfig): any /* Plugin */[] => {
+export const gracile = (config?: GracileConfig): any[] => {
 	const outputMode = config?.output || 'static';
 
 	const clientAssets: Record<string, string> = {};
 
-	let routes: RoutesManifest | null = null;
+	const routes: RoutesManifest = new Map();
+
 	let renderedRoutes: RenderedRouteDefinition[] | null = null;
 
 	let root: string | null = null;
 
-	const gracileConfig = config || {};
+	const gracileConfig = config || ({} as GracileConfig);
 
 	if (isClientBuilt) return [];
 	isClientBuilt = true;
 
+	const virtualRoutesForClient = virtualRoutesClient({
+		mode: outputMode,
+		routes,
+		// NOTE: This will be a dedicated setting when it will not be experimental
+		// anymore.
+		gracileConfig,
+		// enabled: gracileConfig?.pages?.premises?.expose || false,
+	});
+
 	return [
-		{
-			name: 'gracile-routes-codegen',
+		// 		{
+		// 			name: 'gracile-routes-codegen',
 
-			// watchChange(change) {
-			// 	console.log({ change });
-			// },
+		// 			// watchChange(change) {
+		// 			// 	console.log({ change });
+		// 			// },
 
-			resolveId(id) {
-				const virtualModuleId = 'gracile:route';
-				const resolvedVirtualModuleId = `\0${virtualModuleId}`;
+		// 			resolveId(id) {
+		// 				const virtualModuleId = 'gracile:route';
+		// 				const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 
-				if (id === virtualModuleId) {
-					return resolvedVirtualModuleId;
-				}
-				return null;
-			},
+		// 				if (id === virtualModuleId) {
+		// 					return resolvedVirtualModuleId;
+		// 				}
+		// 				return null;
+		// 			},
 
-			load(id) {
-				const virtualModuleId = 'gracile:route';
-				const resolvedVirtualModuleId = `\0${virtualModuleId}`;
+		// 			load(id) {
+		// 				const virtualModuleId = 'gracile:route';
+		// 				const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 
-				if (id === resolvedVirtualModuleId) {
-					return `
-export function route(input){
-return input;
-}`;
-				}
-				return null;
-			},
-		},
+		// 				if (id === resolvedVirtualModuleId) {
+		// 					return `
+		// export function route(input){
+		// return input;
+		// }`;
+		// 				}
+		// 				return null;
+		// 			},
+		// 		},
+
+		virtualRoutesForClient,
 
 		{
 			name: 'vite-plugin-gracile-serve-middleware',
@@ -95,6 +111,10 @@ return input;
 				return {
 					// NOTE: Supresses message: `Could not auto-determine entry point from rollupOptions or html files…`
 					optimizeDeps: { include: [] },
+
+					// resolve: {
+					// 	conditions: ['development'],
+					// },
 				};
 			},
 
@@ -122,6 +142,7 @@ return input;
 				// ---
 
 				const { handler } = await createDevHandler({
+					routes,
 					vite: server,
 					gracileConfig,
 				});
@@ -150,6 +171,8 @@ return input;
 					server: { middlewareMode: true },
 					// NOTE: Stub. KEEP IT!
 					optimizeDeps: { include: [] },
+
+					plugins: [virtualRoutesForClient],
 				});
 
 				const htmlPages = await buildRoutes({
@@ -157,9 +180,9 @@ return input;
 					root: viteConfig.root || process.cwd(),
 					gracileConfig,
 					serverMode: outputMode === 'server',
+					routes,
 				});
 
-				routes = htmlPages.routes;
 				renderedRoutes = htmlPages.renderedRoutes;
 
 				await viteServerForClientHtmlBuild.close();
@@ -231,7 +254,6 @@ return input;
 								// NOTE: Useful for, e.g., link tag with `?url`
 								assetFileNames: (chunkInfo) => {
 									if (chunkInfo.name) {
-										//  (chunkInfo);
 										const fileName = clientAssets[chunkInfo.name];
 										if (fileName) return fileName;
 										// NOTE: When not imported at all from client
@@ -247,10 +269,9 @@ return input;
 					},
 
 					plugins: [
-						virtualRoutes({
-							routes,
-							renderedRoutes,
-						}),
+						virtualRoutesForClient,
+
+						virtualRoutes({ routes, renderedRoutes }),
 
 						{
 							name: 'vite-plugin-gracile-entry',
@@ -274,6 +295,7 @@ export const handler = createGracileHandler({
 	routeImports,
 	routeAssets,
 	serverMode: true,
+	gracileConfig: ${JSON.stringify(gracileConfig, null, 2)}
 });
 `;
 								}
@@ -304,5 +326,5 @@ export const handler = createGracileHandler({
 				});
 			},
 		},
-	] satisfies Plugin[];
+	] satisfies PluginOption;
 };

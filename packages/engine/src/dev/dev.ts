@@ -3,6 +3,7 @@ import c from 'picocolors';
 import { type ViteDevServer } from 'vite';
 
 import { collectRoutes } from '../routes/collect.js';
+import type { RoutesManifest } from '../routes/route.js';
 import {
 	createGracileHandler,
 	type GracileHandler,
@@ -11,19 +12,22 @@ import type { GracileConfig } from '../user-config.js';
 import { generateRoutesTypings } from './route-typings.js';
 
 export async function createDevHandler({
+	routes,
 	vite,
 	gracileConfig,
 }: {
+	routes: RoutesManifest;
 	vite: ViteDevServer;
 	gracileConfig: GracileConfig;
 }): Promise<{
 	handler: GracileHandler;
+	routes: RoutesManifest;
 }> {
 	const root = vite.config.root;
 
 	logger.info(c.dim('\nCreating handler…'), { timestamp: true });
 
-	const routes = await collectRoutes(root, gracileConfig.routes?.exclude);
+	await collectRoutes(routes, root, gracileConfig.routes?.exclude);
 
 	if (gracileConfig.experimental?.generateRoutesTypings)
 		generateRoutesTypings(root, routes).catch((error) =>
@@ -38,7 +42,7 @@ export async function createDevHandler({
 			) &&
 			['add', 'unlink'].includes(event)
 		)
-			collectRoutes(root, gracileConfig.routes?.exclude)
+			collectRoutes(routes, root, gracileConfig.routes?.exclude)
 				.then(() => {
 					vite.hot.send('vite:invalidate');
 
@@ -53,7 +57,13 @@ export async function createDevHandler({
 
 	// NOTE: Wrong place?
 	const serverMode = false;
-	const gracile = createGracileHandler({ vite, root, serverMode, routes });
+	const gracile = createGracileHandler({
+		vite,
+		root,
+		serverMode,
+		routes,
+		gracileConfig,
+	});
 
-	return { handler: gracile };
+	return { handler: gracile, routes };
 }

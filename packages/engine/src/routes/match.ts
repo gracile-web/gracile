@@ -47,12 +47,12 @@ type ExtractedStaticPaths = {
 	staticPaths: R.StaticPathOptionsGeneric[];
 	props: unknown;
 } | null;
-function extractStaticPaths(options: {
+async function extractStaticPaths(options: {
 	routeModule: R.RouteModule;
 	foundRoute: R.Route;
 	params: Params;
 	pathname: string;
-}): ExtractedStaticPaths {
+}): Promise<ExtractedStaticPaths> {
 	if (!options.foundRoute.hasParams) return null;
 	if (!options.routeModule.staticPaths) return null;
 
@@ -60,7 +60,7 @@ function extractStaticPaths(options: {
 
 	let props: unknown;
 
-	const staticPaths = routeStaticPaths();
+	const staticPaths = await Promise.resolve(routeStaticPaths());
 
 	let hasCorrectParams = false;
 
@@ -112,7 +112,7 @@ export async function getRoute(options: {
 		routeImports: options.routeImports,
 	});
 
-	const staticPaths = extractStaticPaths({
+	const staticPaths = await extractStaticPaths({
 		routeModule,
 		foundRoute,
 		pathname,

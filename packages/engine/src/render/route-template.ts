@@ -1,7 +1,8 @@
+import { Readable } from 'node:stream';
+
 import { html } from '@gracile/internal-utils/dummy-literals';
 import { render as renderLitSsr } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
-import { Readable } from 'stream';
 import type { ViteDevServer } from 'vite';
 
 import { isLitServerTemplate, isLitTemplate } from '../assertions.js';
@@ -24,39 +25,32 @@ export const REGEX_TAG_SCRIPT =
 
 export const REGEX_TAG_LINK = /\s?<link\b[^>]*?>\s?/gi;
 
-export type HandlerInfos = { data: unknown; method: string };
-
 export async function renderRouteTemplate({
-	request,
+	url,
 	vite,
 	mode,
 	routeInfos,
-	handlerInfos,
 	routeAssets,
-	// root,
 	serverMode,
+	docOnly,
 }: {
-	request: Request | R.StaticRequest;
+	url: string;
 	vite?: ViteDevServer | undefined;
 	mode: 'dev' | 'build';
 	routeInfos: RouteInfos;
-	handlerInfos?: HandlerInfos | undefined;
 	routeAssets?: R.RoutesAssets | undefined;
 	root: string;
 	serverMode?: boolean | undefined;
-}): Promise<{ output: null | Readable }> {
+	docOnly?: boolean | undefined;
+}): Promise<{ output: null | Readable; document: null | string }> {
 	if (!routeInfos.routeModule.document && !routeInfos.routeModule.template)
-		return { output: null };
+		return { output: null, document: null };
 
 	// MARK: Context
 	const context: R.RouteContextGeneric = {
-		url: new URL(request.url),
+		url: new URL(url),
 		params: routeInfos.params,
-		props: handlerInfos?.data
-			? {
-					[handlerInfos.method]: handlerInfos.data,
-				}
-			: routeInfos.props,
+		props: routeInfos.props,
 	};
 
 	// MARK: Fragment
@@ -71,7 +65,7 @@ export async function renderRouteTemplate({
 		const fragmentRender = renderLitSsr(fragmentOutput);
 		const output = Readable.from(fragmentRender);
 
-		return { output };
+		return { output, document: null };
 	}
 
 	// MARK: Document
@@ -102,32 +96,31 @@ export async function renderRouteTemplate({
 	// If the user doesnt use `pageAssetCustomLocation`, we put this as a fallback
 
 	baseDocRenderedWithAssets = baseDocRenderedWithAssets
-		.replace('</head>', `${PAGE_ASSETS_MARKER}</head>`)
+		.replace('</head>', `\n${PAGE_ASSETS_MARKER}</head>`)
 		.replace(
 			PAGE_ASSETS_MARKER,
 			// eslint-disable-next-line prefer-template
-			html`
-				<!-- PAGE ASSETS -->
-				${routeInfos.foundRoute.pageAssets.map((path) => {
-					//
-					if (/\.(js|ts)$/.test(path)) {
-						return html`
-							<script type="module" src="/${path}"></script>
-							<!--  -->
-						`;
-					}
+			routeInfos.foundRoute.pageAssets.length
+				? // eslint-disable-next-line prefer-template
+					html`<!-- PAGE ASSETS -->` +
+						`${routeInfos.foundRoute.pageAssets
+							.map((path) => {
+								//
+								if (/\.(js|ts)$/.test(path)) {
+									// prettier-ignore
+									return html`		<script type="module" src="/${path}"></script>`;
+								}
 
-					if (/\.(css|scss|sass|less|styl|stylus)$/.test(path)) {
-						return html`
-							<link rel="stylesheet" href="/${path}" />
-							<!--  -->
-						`;
-					}
+								if (/\.(css|scss|sass|less|styl|stylus)$/.test(path)) {
+									// prettier-ignore
+									return html`		<link rel="stylesheet" href="/${path}" />`;
+								}
 
-					throw new Error('Unknown asset.');
-				})}
-				<!-- /PAGE ASSETS -->
-			`,
+								throw new Error('Unknown asset.');
+							})
+							.join('\n')}` +
+						`<!-- /PAGE ASSETS -->\n		`
+				: '',
 		);
 
 	// MARK: Dev. overlay
@@ -181,6 +174,8 @@ export async function renderRouteTemplate({
 				)
 			: baseDocRenderedWithAssets;
 
+	if (docOnly) return { document: baseDocHtml, output: null };
+
 	const index = baseDocHtml.indexOf(SSR_OUTLET_MARKER);
 	const baseDocRenderStreamPre = Readable.from(baseDocHtml.substring(0, index));
 	const baseDocRenderStreamPost = Readable.from(
@@ -189,6 +184,7 @@ export async function renderRouteTemplate({
 
 	// MARK: Page
 	// Skipped with server mode in production build
+
 	if (
 		routeInfos.routeModule.template &&
 		(serverMode === false ||
@@ -205,7 +201,7 @@ export async function renderRouteTemplate({
 		// 	const output = Readable.from(
 		// 		concatStreams(baseDocRenderStreamPre, baseDocRenderStreamPost),
 		// 	);
-		// 	return { output };
+		// 	return { output, document: null };
 		// }
 
 		if (isLitTemplate(routeOutput) === false)
@@ -223,11 +219,11 @@ export async function renderRouteTemplate({
 			),
 		);
 
-		return { output };
+		return { output, document: baseDocHtml };
 	}
 
 	// MARK: Just the document
 	const output = Readable.from(baseDocHtml);
 
-	return { output };
+	return { output, document: baseDocHtml };
 }

@@ -133,7 +133,7 @@ export type HandlerGeneric =
 				Record<MethodNonHtml, Handler<Response>>
 	  >;
 
-export type StaticPathsGeneric = () => StaticPathOptionsGeneric[];
+export type StaticPathsGeneric = () => MaybePromise<StaticPathOptionsGeneric[]>;
 
 export type HandlerData = Response | undefined;
 export type HandlerDataHtml = HandlerData | object;
