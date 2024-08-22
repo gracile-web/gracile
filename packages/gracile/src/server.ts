@@ -1,4 +1,4 @@
-export { server } from '@gracile/engine/server/constants';
+export { constants as server } from '@gracile/engine/server/constants';
 export {
 	createGracileHandler,
 	type GracileHandler,

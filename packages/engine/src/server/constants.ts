@@ -16,7 +16,7 @@
  * );
  * ```
  */
-export const server = Object.freeze({
+export const constants = Object.freeze({
 	LOCALHOST: 'localhost',
 	IP_LOCALHOST: '127.0.0.1',
 	IP_EXPOSED: '0.0.0.0',

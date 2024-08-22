@@ -1,4 +1,1 @@
-export {
-	globalStylesProvider,
-	pageAssetsCustomLocation,
-} from '@gracile/server/document';
+export { pageAssetsCustomLocation } from '@gracile/server/document';

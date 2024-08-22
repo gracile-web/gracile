@@ -3,7 +3,7 @@ import { relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 
-import { server } from '../constants.js';
+import { constants } from '../constants.js';
 import type { GracileHandler } from '../request.js';
 
 export type { GracileHandler };
@@ -37,7 +37,7 @@ export const honoAdapter =
 	async (context) => {
 		const result = await handler(context.req.raw, context.var);
 
-		// TODO: Hhandle stream abortion as gracefully as with Express.
+		// TODO: Handle stream abortion as gracefully as with Express.
 		if (result?.body) {
 			// NOTE: Typings mismatches
 			const body = Readable.toWeb(result.body) as ReadableStream;
@@ -67,7 +67,7 @@ export const honoAdapter =
 export function getClientDistPath(root: string) {
 	return relative(
 		process.cwd(),
-		fileURLToPath(new URL(server.CLIENT_DIST_DIR, root)),
+		fileURLToPath(new URL(constants.CLIENT_DIST_DIR, root)),
 	);
 }
 

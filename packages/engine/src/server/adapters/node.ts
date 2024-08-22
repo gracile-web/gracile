@@ -1,12 +1,12 @@
+import { Writable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 
 import { env } from '@gracile/internal-utils/env';
 import { logger } from '@gracile/internal-utils/logger';
 import { createServerAdapter } from '@whatwg-node/server';
 import type { IncomingMessage, ServerResponse } from 'http';
-import { Writable } from 'stream';
 
-import { server } from '../constants.js';
+import { constants } from '../constants.js';
 import { type GracileHandler, isRedirect } from '../request.js';
 
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
@@ -120,7 +120,7 @@ export function nodeAdapter(handler: GracileHandler): GracileNodeHandler {
  * ```
  */
 export function getClientDistPath(root: string) {
-	return fileURLToPath(new URL(server.CLIENT_DIST_DIR, root));
+	return fileURLToPath(new URL(constants.CLIENT_DIST_DIR, root));
 }
 
 export { printUrls } from '../utils.js';

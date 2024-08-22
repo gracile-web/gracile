@@ -6,7 +6,7 @@ import { env as currentEnv } from '@gracile/internal-utils/env';
 import { logger } from '@gracile/internal-utils/logger';
 import c from 'picocolors';
 
-import { server as serverConstants } from './constants.js';
+import { constants } from './constants.js';
 
 // setTimeout(() => {
 // 	logger.info('HY');
@@ -56,10 +56,10 @@ export function printUrls(server: string | AddressInfo | null) {
 		timestamp: true,
 	});
 
-	if (address.includes(serverConstants.IP_EXPOSED))
+	if (address.includes(constants.IP_EXPOSED))
 		logger.info(
 			`${
-				address.includes(serverConstants.IP_EXPOSED)
+				address.includes(constants.IP_EXPOSED)
 					? `\n${c.dim('┃')} Network  ${c.cyan(address)}\n`
 					: ''
 			}`,

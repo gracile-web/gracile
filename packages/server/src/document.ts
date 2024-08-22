@@ -2,7 +2,7 @@
 
 import { html as LitHtml, LitElement } from 'lit';
 
-export { globalStylesProvider, pageAssetsCustomLocation } from './assets.js';
+export { pageAssetsCustomLocation } from './assets.js';
 
 /**
  * Server-rendered page marker
