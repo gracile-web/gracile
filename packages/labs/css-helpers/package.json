@@ -1,0 +1,62 @@
+{
+  "name": "@gracile-labs/css-helpers",
+  "version": "0.0.0",
+  "description": "A thin, full-stack, web framework",
+  "keywords": [
+    "custom-elements",
+    "full-stack",
+    "lit",
+    "meta-framework",
+    "server",
+    "server-side-rendering",
+    "ssr",
+    "static",
+    "web-components"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/css-helpers"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    "./*": "./dist/*.js",
+    "./ambient": "./ambient.d.ts"
+  },
+  "files": [
+    "./dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@gracile/server": "workspace:^",
+    "@gracile/engine": "workspace:^",
+    "@lit-labs/ssr-client": "^1.1.7"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "tsx": "^4.7.2",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "@lit-labs/ssr": "^3.2.2"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "// disabledDeps": {
+    "@webcomponents/template-shadowroot": "0.x",
+    "typedoc": "^0.25.8"
+  }
+}

@@ -18,6 +18,8 @@ packages:
   # - ./packages/addons/minify
   # - ./packages/addons/minify-html-literals
   - ./integration
+  - ./packages/labs/client-router
+  - ./packages/labs/css-helpers
   # - integration/__fixtures__/server-express
 # catalog:
 #   vite: ^5.3.5
