@@ -55,6 +55,11 @@ export const TEMPLATE_LIST = [
 	'minimal-server-express',
 	'minimal-server-hono',
 
+	'minimal-client-routing',
+	'minimal-minification',
+	'minimal-testing',
+	'minimal-bootstrap-tailwind',
+
 	'basics',
 ] as const;
 export const TEMPLATE_LIST_ANON = [...(TEMPLATE_LIST as unknown as string[])];

@@ -33,9 +33,6 @@ dist-ssr
 
 /docs
 
-packages/labs/*
-packages/addons/markdown-old
-
 integration/**/*.js.map
 
 .tmp

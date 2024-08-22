@@ -50,7 +50,6 @@
     "@gracile/internal-utils": "workspace:^",
     "commander": "^12.0.0",
     "conf": "^13.0.1",
-    "fast-glob": "^3.3.2",
     "latest-version": "^9.0.0",
     "picocolors": "^1.0.0",
     "random-words": "^2.0.1"

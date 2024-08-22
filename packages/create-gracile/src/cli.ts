@@ -15,6 +15,7 @@ import latestVersion from 'latest-version';
 import c from 'picocolors';
 import { generate } from 'random-words';
 
+import { availableTemplates } from './available.js';
 import { type Settings, TEMPLATE_LIST, TEMPLATE_LIST_ANON } from './types.js';
 
 const { DEV } = env;
@@ -213,32 +214,7 @@ const template = templateFound
 	: await clack
 			.select({
 				message: `Choose your ${c.cyan('starter template')}`,
-				options: [
-					{
-						value: 'minimal-static',
-						label: 'Minimal - Static',
-						hint: 'Get started with a statically generated project (SSG)',
-					},
-					{
-						value: 'minimal-server-express',
-						label: 'Minimal - Server Express',
-						hint: 'Get started with a server-side rendered project (SSR)',
-					},
-					{
-						value: 'minimal-server-hono',
-						label: 'Minimal - Server Hono',
-						hint: 'Get started with a server-side rendered project (SSR)',
-					},
-					{
-						value: 'basics',
-						label: 'Basics',
-						hint: 'Get up and running with this all around demo of Gracile features',
-					},
-				] satisfies {
-					value: (typeof TEMPLATE_LIST)[number];
-					label: string;
-					hint?: string;
-				}[],
+				options: availableTemplates,
 			})
 			.then((result) => {
 				handleCancel(result);
