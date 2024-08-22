@@ -12,33 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
-    <title>Gracile - Oh no</title>
+    <title>Gracile About</title>
 
-    <!-- PAGE ASSETS -->
-
-    <!-- /PAGE ASSETS -->
     <script
       type="module"
       crossorigin
       src="/assets/document.client-CMOVr55R.js"
     ></script>
-
     <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
   </head>
 
   <body>
-    <h1>⚠️ Arrrrrhh !!</h1>
+    <!--  -->
+    <h1>the About Page</h1>
 
-    <div>FAILING-1</div>
-    <div>FAILING-2</div>
     <!--  -->
-    <div>FAILING-3</div>
-    <div>FAILING-4</div>
-    <!-- <div></div> -->
-    <div>FAILING-6</div>
-    <div>FAILING-7</div>
-    <!--  -->
-    <div>FAILING-8</div>
-    <div>FAILING-9</div>
   </body>
 </html>

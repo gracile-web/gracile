@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Helpers -->
+
+    <!-- Global assets -->
+
+    <!-- Page assets -->
+
+    <!-- SEO and page metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/favicon.svg" />
+
+    <title>Gracile Home</title>
+
+    <!-- PAGE ASSETS -->
+    <!-- /PAGE ASSETS -->
+    <script type="module" crossorigin src="/assets/index-CKZBGRGy.js"></script>
+
+    <link
+      rel="modulepreload"
+      crossorigin
+      href="/assets/document.client-CMOVr55R.js"
+    />
+
+    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
+
+    <link rel="stylesheet" crossorigin href="/assets/index-C17FHxsp.css" />
+  </head>
+
+  <body>
+    <!--  -->
+    <h1><img src="/favicon.svg" height="25" /> - Hello Gracile (Home)</h1>
+
+    <ul>
+      <li><a href="/api">JSON API</a></li>
+    </ul>
+
+    <div>QUERY: <code>123</code></div>
+    <!--  -->
+
+    <code>__REPLACED_FOR_TESTS__</code>
+    <!--  -->
+  </body>
+</html>

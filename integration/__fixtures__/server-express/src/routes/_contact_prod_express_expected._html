@@ -1,21 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script type="module" src="/@vite/client"></script>
-
-    <script
-      type="module"
-      src="/@id/__x00__/contact/index.html?html-proxy&index=0.js"
-    ></script>
-
     <!-- Helpers -->
 
     <!-- Global assets -->
-    <link rel="stylesheet" href="__REPLACED_FOR_TESTS__/document.css" />
-    <script
-      type="module"
-      src="__REPLACED_FOR_TESTS__/document.client.ts"
-    ></script>
 
     <!-- Page assets -->
 
@@ -26,9 +14,12 @@
 
     <title>Gracile Contact</title>
 
-    <!-- PAGE ASSETS -->
-
-    <!-- /PAGE ASSETS -->
+    <script
+      type="module"
+      crossorigin
+      src="/assets/document.client-CMOVr55R.js"
+    ></script>
+    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
   </head>
 
   <body>

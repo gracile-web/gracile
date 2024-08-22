@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Helpers -->
+
+    <!-- Global assets -->
+
+    <!-- Page assets -->
+
+    <!-- SEO and page metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/favicon.svg" />
+
+    <title>Hello Gracile</title>
+
+    <script
+      type="module"
+      crossorigin
+      src="/assets/document.client-CMOVr55R.js"
+    ></script>
+
+    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
+  </head>
+
+  <body>
+    <!--lit-part 4ozKWRFCRVU=-->
+    <h1><!--lit-part-->Hello Client Router - Zebra<!--/lit-part--></h1>
+    <hr />
+    <code><!--lit-part-->/route-premises/<!--/lit-part--></code>
+    <hr />
+    <ul>
+      <li>
+        Enabled ?<code><!--lit-part-->true<!--/lit-part--></code>
+      </li>
+      <li>
+        Mode<code><!--lit-part-->server<!--/lit-part--></code>
+      </li>
+    </ul>
+
+    <div>
+      <!--  -->
+      DUMP
+      <pre><!--lit-part-->[
+  [
+    &quot;/route-premises/&quot;,
+    null
+  ]
+]<!--/lit-part--></pre>
+    </div>
+    <!--/lit-part-->
+  </body>
+</html>

@@ -1,12 +1,12 @@
 import { URLPattern } from '@gracile/gracile/url-pattern';
-import { createGracileMiddleware } from '@gracile/gracile/_internals/server-runtime';
+import { createGracileHandler } from '@gracile/gracile/_internals/server-runtime';
 
 const routes = new Map([
   [
     "/",
     {
       "filePath": "src/routes/(home).ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": [
         "src/routes/(home).client.ts",
@@ -18,7 +18,7 @@ const routes = new Map([
     "/404/",
     {
       "filePath": "src/routes/404.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -27,7 +27,7 @@ const routes = new Map([
     "/about/",
     {
       "filePath": "src/routes/about.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -36,7 +36,7 @@ const routes = new Map([
     "/api/basic/",
     {
       "filePath": "src/routes/api/basic.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -45,7 +45,7 @@ const routes = new Map([
     "/api/:path*/",
     {
       "filePath": "src/routes/api/[...path].ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": true,
       "pageAssets": []
     }
@@ -54,7 +54,7 @@ const routes = new Map([
     "/assets-methods/",
     {
       "filePath": "src/routes/assets-methods.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -63,7 +63,7 @@ const routes = new Map([
     "/contact/",
     {
       "filePath": "src/routes/contact.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -72,7 +72,7 @@ const routes = new Map([
     "/foo/bar/",
     {
       "filePath": "src/routes/foo/bar.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": [
         "src/routes/foo/bar.client.ts"
@@ -83,7 +83,7 @@ const routes = new Map([
     "/private/",
     {
       "filePath": "src/routes/private/index.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -92,7 +92,7 @@ const routes = new Map([
     "/redirect/",
     {
       "filePath": "src/routes/redirect.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -101,7 +101,16 @@ const routes = new Map([
     "/response-init/",
     {
       "filePath": "src/routes/response-init.ts",
-      "pattern": {},
+      "pattern": null,
+      "hasParams": false,
+      "pageAssets": []
+    }
+  ],
+  [
+    "/route-premises/",
+    {
+      "filePath": "src/routes/route-premises.ts",
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -110,7 +119,7 @@ const routes = new Map([
     "/template-failure/",
     {
       "filePath": "src/routes/template-failure.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -119,7 +128,7 @@ const routes = new Map([
     "/throws/",
     {
       "filePath": "src/routes/throws.ts",
-      "pattern": {},
+      "pattern": null,
       "hasParams": false,
       "pageAssets": []
     }
@@ -131,38 +140,39 @@ routes.forEach((route, pattern) => {
 
 const routeImports = new Map(
 	[
-	  ['/', () => import('./chunk/(home).js')],
-['/404/', () => import('./chunk/404.js')],
-['/about/', () => import('./chunk/about.js')],
-['/api/basic/', () => import('./chunk/basic.js')],
-['/api/:path*/', () => import('./chunk/_...path_.js')],
-['/assets-methods/', () => import('./chunk/assets-methods.js')],
-['/contact/', () => import('./chunk/contact.js')],
-['/foo/bar/', () => import('./chunk/bar.js')],
-['/private/', () => import('./chunk/index.js')],
-['/redirect/', () => import('./chunk/redirect.js')],
-['/response-init/', () => import('./chunk/response-init.js')],
-['/template-failure/', () => import('./chunk/template-failure.js')],
-['/throws/', () => import('./chunk/throws.js')],
+		['/', () => import('./chunk/(home).js')],
+		['/404/', () => import('./chunk/404.js')],
+		['/about/', () => import('./chunk/about.js')],
+		['/api/basic/', () => import('./chunk/basic.js')],
+		['/api/:path*/', () => import('./chunk/_...path_.js')],
+		['/assets-methods/', () => import('./chunk/assets-methods.js')],
+		['/contact/', () => import('./chunk/contact.js')],
+		['/foo/bar/', () => import('./chunk/bar.js')],
+		['/private/', () => import('./chunk/index.js')],
+		['/redirect/', () => import('./chunk/redirect.js')],
+		['/response-init/', () => import('./chunk/response-init.js')],
+		['/route-premises/', () => import('./chunk/route-premises.js')],
+		['/template-failure/', () => import('./chunk/template-failure.js')],
+		['/throws/', () => import('./chunk/throws.js')],
 	]
 );
 
 const routeAssets = new Map([
   [
     "/404/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/about/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/assets-methods/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/contact/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/foo/bar/",
@@ -174,30 +184,44 @@ const routeAssets = new Map([
   ],
   [
     "/private/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/response-init/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+  ],
+  [
+    "/route-premises/",
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/template-failure/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ],
   [
     "/throws/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ]
 ]);
 
-//  ({ routeAssets, routeImports, routes })
-
-const handler = createGracileMiddleware({
+const handler = createGracileHandler({
 	root: process.cwd(),
 	routes,
 	routeImports,
 	routeAssets,
 	serverMode: true,
+	gracileConfig: {
+  "output": "server",
+  "dev": {},
+  "pages": {
+    "premises": {
+      "expose": true,
+      "include": [
+        "**/route-premises.ts"
+      ]
+    }
+  }
+}
 });
 
 export { handler };

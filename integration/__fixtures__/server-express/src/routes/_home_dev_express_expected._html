@@ -1,9 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script type="module" src="/@vite/client"></script>
+
+    <script
+      type="module"
+      src="/@id/__x00__/index.html?html-proxy&index=0.js"
+    ></script>
+
     <!-- Helpers -->
 
     <!-- Global assets -->
+    <link rel="stylesheet" href="__REPLACED_FOR_TESTS__/document.css" />
+    <script
+      type="module"
+      src="__REPLACED_FOR_TESTS__/document.client.ts"
+    ></script>
 
     <!-- Page assets -->
 
@@ -15,23 +27,9 @@
     <title>Gracile Home</title>
 
     <!-- PAGE ASSETS -->
-
-    <!--  -->
-
-    <!--  -->
-
+    <script type="module" src="/src/routes/(home).client.ts"></script>
+    <link rel="stylesheet" href="/src/routes/(home).css" />
     <!-- /PAGE ASSETS -->
-    <script type="module" crossorigin src="/assets/index-CKZBGRGy.js"></script>
-
-    <link
-      rel="modulepreload"
-      crossorigin
-      href="/assets/document.client-CMOVr55R.js"
-    />
-
-    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
-
-    <link rel="stylesheet" crossorigin href="/assets/index-C17FHxsp.css" />
   </head>
 
   <body>

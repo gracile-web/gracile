@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en" data-path="/12-route-premises/02-page-lion/">
+  <head>
+    <script type="module" src="/@vite/client"></script>
+
+    <script
+      type="module"
+      src="/@id/__x00__/12-route-premises/02-page-lion/index.html?html-proxy&index=0.js"
+    ></script>
+
+    <meta charset="UTF-8" />
+    <title>Document - With sibling assets</title>
+  </head>
+
+  <body>
+    <route-template-outlet></route-template-outlet>
+  </body>
+</html>

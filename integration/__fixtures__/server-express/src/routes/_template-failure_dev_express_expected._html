@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module" src="/@vite/client"></script>
+
+    <script
+      type="module"
+      src="/@id/__x00__/template-failure/index.html?html-proxy&index=0.js"
+    ></script>
+
+    <!-- Helpers -->
+
+    <!-- Global assets -->
+    <link rel="stylesheet" href="__REPLACED_FOR_TESTS__/document.css" />
+    <script
+      type="module"
+      src="__REPLACED_FOR_TESTS__/document.client.ts"
+    ></script>
+
+    <!-- Page assets -->
+
+    <!-- SEO and page metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/favicon.svg" />
+
+    <title>Gracile - Oh no</title>
+  </head>
+
+  <body>
+    <h1>⚠️ Arrrrrhh !!</h1>
+
+    <div>FAILING-1</div>
+    <div>FAILING-2</div>
+    <!--  -->
+    <div>FAILING-3</div>
+    <div>FAILING-4</div>
+    <!-- <div></div> -->
+    <div>FAILING-6</div>
+    <div>FAILING-7</div>
+    <!--  -->
+    <div>FAILING-8</div>
+    <div>FAILING-9</div>
+  </body>
+</html>

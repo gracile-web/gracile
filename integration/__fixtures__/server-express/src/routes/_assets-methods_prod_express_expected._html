@@ -1,21 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script type="module" src="/@vite/client"></script>
-
-    <script
-      type="module"
-      src="/@id/__x00__/assets-methods/index.html?html-proxy&index=0.js"
-    ></script>
-
     <!-- Helpers -->
 
     <!-- Global assets -->
-    <link rel="stylesheet" href="__REPLACED_FOR_TESTS__/document.css" />
-    <script
-      type="module"
-      src="__REPLACED_FOR_TESTS__/document.client.ts"
-    ></script>
 
     <!-- Page assets -->
 
@@ -26,15 +14,19 @@
 
     <title>Gracile Assets</title>
 
-    <!-- PAGE ASSETS -->
+    <script
+      type="module"
+      crossorigin
+      src="/assets/document.client-CMOVr55R.js"
+    ></script>
 
-    <!-- /PAGE ASSETS -->
+    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
   </head>
 
   <body>
     <!--  -->
 
-    <my-el extra-styles="/src/routes/_assets-methods-my-el-2.scss"
+    <my-el extra-styles="/assets/_assets-methods-my-el-2-_K7WEQ-5.css"
       ><template shadowroot="open" shadowrootmode="open"
         ><style>
           :host {
@@ -44,13 +36,13 @@
         <!--  -->
         <!--lit-node 1--><link
           rel="stylesheet"
-          href="/src/routes/_assets-methods-my-el.scss"
+          href="/assets/_assets-methods-my-el-BZ8-Dbhw.css"
         />
 
-        <!--lit-part-->/src/routes/_assets-methods-my-el-2.scss<!--/lit-part-->
+        <!--lit-part-->/assets/_assets-methods-my-el-2-_K7WEQ-5.css<!--/lit-part-->
         <!--lit-part--><!--lit-part F3m906AMGI4=--><!--lit-node 0--><link
           rel="stylesheet"
-          href="/src/routes/_assets-methods-my-el-2.scss"
+          href="/assets/_assets-methods-my-el-2-_K7WEQ-5.css"
         /><!--/lit-part--><!--/lit-part-->
 
         <div class="color-me-red">RED</div>

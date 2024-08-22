@@ -5,7 +5,7 @@
 
     <script
       type="module"
-      src="/@id/__x00__/404/index.html?html-proxy&index=0.js"
+      src="/@id/__x00__/about/index.html?html-proxy&index=0.js"
     ></script>
 
     <!-- Helpers -->
@@ -24,16 +24,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg" href="/favicon.svg" />
 
-    <title>Gracile - 404</title>
-
-    <!-- PAGE ASSETS -->
-
-    <!-- /PAGE ASSETS -->
+    <title>Gracile About</title>
   </head>
 
   <body>
-    <h1>⚠️ 404 !!</h1>
+    <!--  -->
+    <h1>the About Page</h1>
 
-    <p><code>http://localhost:9874/404/</code> not found.</p>
+    <!--  -->
   </body>
 </html>

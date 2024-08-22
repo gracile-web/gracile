@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="module" src="/@vite/client"></script>
+
+    <script
+      type="module"
+      src="/@id/__x00__/route-premises/index.html?html-proxy&index=0.js"
+    ></script>
+
+    <!-- Helpers -->
+
+    <!-- Global assets -->
+    <link rel="stylesheet" href="__REPLACED_FOR_TESTS__/document.css" />
+    <script
+      type="module"
+      src="__REPLACED_FOR_TESTS__/document.client.ts"
+    ></script>
+
+    <!-- Page assets -->
+
+    <!-- SEO and page metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg" href="/favicon.svg" />
+
+    <title>Hello Gracile</title>
+  </head>
+
+  <body>
+    <!--lit-part 4ozKWRFCRVU=-->
+    <h1><!--lit-part-->Hello Client Router - Zebra<!--/lit-part--></h1>
+    <hr />
+    <code><!--lit-part-->/route-premises/<!--/lit-part--></code>
+    <hr />
+    <ul>
+      <li>
+        Enabled ?<code><!--lit-part-->true<!--/lit-part--></code>
+      </li>
+      <li>
+        Mode<code><!--lit-part-->server<!--/lit-part--></code>
+      </li>
+    </ul>
+
+    <div>
+      <!--  -->
+      DUMP
+      <pre><!--lit-part-->[
+  [
+    &quot;/route-premises/&quot;,
+    null
+  ]
+]<!--/lit-part--></pre>
+    </div>
+    <!--/lit-part-->
+  </body>
+</html>
