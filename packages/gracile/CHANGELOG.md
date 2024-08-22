@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.6.0...@gracile/gracile@0.7.0-next.0) (2024-08-22)
+
+### Features
+
+* expose render lit template for tests, rename server consts, remove css helpers from core ([195e1c8](https://github.com/gracile-web/gracile/commit/195e1c86f05b182706e2970b6ade021668ec1d17))
+* global styles provider for shadow roots ([ef494df](https://github.com/gracile-web/gracile/commit/ef494df2b9351adebc470de585e8ccc594d8d579))
+
 # [0.6.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.6.0-next.0...@gracile/gracile@0.6.0) (2024-08-14)
 
 **Note:** Version bump only for package @gracile/gracile

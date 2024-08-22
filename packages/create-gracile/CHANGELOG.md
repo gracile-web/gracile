@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2-next.0](https://github.com/gracile-web/gracile/compare/create-gracile@0.3.1...create-gracile@0.3.2-next.0) (2024-08-22)
+
+### Bug Fixes
+
+* remove fast-glob, update marked, lerna, after audit issues ([d5a4ac2](https://github.com/gracile-web/gracile/commit/d5a4ac22fd958b7ecfbda972383bd3e3f9517d9c))
+
 ## [0.3.1](https://github.com/gracile-web/gracile/compare/create-gracile@0.3.1-next.0...create-gracile@0.3.1) (2024-08-14)
 
 **Note:** Version bump only for package create-gracile

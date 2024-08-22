@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2-next.0](https://github.com/gracile-web/gracile/compare/@gracile/sitemap@0.1.1...@gracile/sitemap@0.1.2-next.0) (2024-08-22)
+
+**Note:** Version bump only for package @gracile/sitemap
+
 ## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile/sitemap@0.1.1-next.0...@gracile/sitemap@0.1.1) (2024-08-14)
 
 **Note:** Version bump only for package @gracile/sitemap

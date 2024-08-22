@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.6.0...@gracile/engine@0.7.0-next.0) (2024-08-22)
+
+### Bug Fixes
+
+* collect routes when sibling css-like assets changes ([5784884](https://github.com/gracile-web/gracile/commit/57848841b5992168ae481e4e6e3e7cf244e1a6f5))
+
+### Features
+
+* expose render lit template for tests, rename server consts, remove css helpers from core ([195e1c8](https://github.com/gracile-web/gracile/commit/195e1c86f05b182706e2970b6ade021668ec1d17))
+* pages premises (props, doc), ensure route method full async, handler support for static ([87b9c5c](https://github.com/gracile-web/gracile/commit/87b9c5c962cdc075b4bf849fa26e3031ee22d1ac))
+
 # [0.6.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.6.0-next.1...@gracile/engine@0.6.0) (2024-08-14)
 
 **Note:** Version bump only for package @gracile/engine

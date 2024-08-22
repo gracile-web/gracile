@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.12-next.0](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.11...@gracile/markdown-preset-marked@0.0.12-next.0) (2024-08-22)
+
+### Bug Fixes
+
+* remove fast-glob, update marked, lerna, after audit issues ([d5a4ac2](https://github.com/gracile-web/gracile/commit/d5a4ac22fd958b7ecfbda972383bd3e3f9517d9c))
+
 ## [0.0.11](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.11-next.0...@gracile/markdown-preset-marked@0.0.11) (2024-08-14)
 
 **Note:** Version bump only for package @gracile/markdown-preset-marked
