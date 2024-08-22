@@ -7,6 +7,7 @@ import type { ViteDevServer } from 'vite';
 import { isLitServerTemplate, isLitTemplate } from '../assertions.js';
 import type { RouteInfos } from '../routes/match.js';
 import type * as R from '../routes/route.js';
+import { PAGE_ASSETS_MARKER, SSR_OUTLET_MARKER } from './markers.js';
 
 async function* concatStreams(...readables: Readable[]) {
 	// eslint-disable-next-line no-restricted-syntax
@@ -17,13 +18,6 @@ async function* concatStreams(...readables: Readable[]) {
 		}
 	}
 }
-
-// export const SSR_OUTLET_MARKER = '________SSR_OUTLET________';
-export const SSR_OUTLET_MARKER =
-	'<route-template-outlet></route-template-outlet>';
-// const SSR_OUTLET = unsafeHTML(SSR_OUTLET_MARKER);
-
-export const PAGE_ASSETS_MARKER = '<!--__GRACILE_PAGE_ASSETS__-->';
 
 export const REGEX_TAG_SCRIPT =
 	/\s?<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script\s*>\s?/gi;

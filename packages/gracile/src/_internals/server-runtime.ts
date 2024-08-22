@@ -1,1 +1,1 @@
-export { createGracileHandler as createGracileMiddleware } from '@gracile/engine/server/request';
+export { createGracileHandler } from '@gracile/engine/server/request';

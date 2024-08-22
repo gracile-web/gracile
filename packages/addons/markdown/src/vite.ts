@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { relative } from 'node:path';
 
 import { logger } from '@gracile/internal-utils/logger';
-import type { Plugin } from 'vite';
+import type { PluginOption } from 'vite';
 
 import { MarkdownDocumentRendererEmpty } from './renderer.js';
 
@@ -11,40 +11,42 @@ const fileRegex = /\.md$/;
 
 export function viteMarkdownPlugin(options?: {
 	MarkdownRenderer: typeof MarkdownDocumentRendererEmpty;
-	// NOTE:(for Vite versions mismatches)
+	// NOTE: for Vite versions mismatches with `exactOptionalPropertyTypes`?
+	// This `any[]` AND with a plugin -array- makes ESLint and TS shut up.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-}): any {
+}): any[] {
 	const MarkdownDocumentRenderer =
 		options?.MarkdownRenderer ?? MarkdownDocumentRendererEmpty;
 
 	let root: string | null = null;
-	return {
-		name: VITE_PLUGIN_NAME,
-		enforce: 'pre',
+	return [
+		{
+			name: VITE_PLUGIN_NAME,
+			enforce: 'pre',
 
-		config(config) {
-			root = config.root || process.cwd();
-		},
+			config(config) {
+				root = config.root || process.cwd();
+			},
 
-		async load(id: string) {
-			if (!root) throw new Error('Missing server');
+			async load(id: string) {
+				if (!root) throw new Error('Missing server');
 
-			if (fileRegex.test(id)) {
-				let markdownCode: string | undefined;
-				try {
-					markdownCode = await fs.promises.readFile(id, 'utf8');
-				} catch (exception) {
-					logger.warn(`${id} couldn't be read\n${String(exception)}`);
-					return null;
-				}
+				if (fileRegex.test(id)) {
+					let markdownCode: string | undefined;
+					try {
+						markdownCode = await fs.promises.readFile(id, 'utf8');
+					} catch (exception) {
+						logger.warn(`${id} couldn't be read\n${String(exception)}`);
+						return null;
+					}
 
-				const markdownDocument = new MarkdownDocumentRenderer();
-				await markdownDocument.init({ path: id, source: markdownCode });
+					const markdownDocument = new MarkdownDocumentRenderer();
+					await markdownDocument.init({ path: id, source: markdownCode });
 
-				try {
-					// NOTE: Lit template cannot be stringified
-					// lit: Object.freeze(${JSON.stringify(markdownDocument.lit)}),
-					return `import { html } from 'lit';
+					try {
+						// NOTE: Lit template cannot be stringified
+						// lit: Object.freeze(${JSON.stringify(markdownDocument.lit)}),
+						return `import { html } from 'lit';
 
 export default Object.freeze({
 	path: Object.freeze({
@@ -78,14 +80,15 @@ export default Object.freeze({
 	}),
 });
 `;
-				} catch (exception) {
-					logger.error(
-						`${id} errored during Markdown loadiing:\n${String(exception)}`,
-					);
-					return null;
+					} catch (exception) {
+						logger.error(
+							`${id} errored during Markdown loadiing:\n${String(exception)}`,
+						);
+						return null;
+					}
 				}
-			}
-			return null;
-		},
-	} satisfies Plugin;
+				return null;
+			},
+		} satisfies PluginOption,
+	];
 }

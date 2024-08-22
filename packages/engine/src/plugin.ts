@@ -266,11 +266,9 @@ return input;
 								if (id === 'entrypoint.js' && routes && renderedRoutes) {
 									return `
 import { routeAssets, routeImports, routes } from 'gracile:routes';
-import { createGracileMiddleware } from '@gracile/gracile/_internals/server-runtime';
+import { createGracileHandler } from '@gracile/gracile/_internals/server-runtime';
 
-//  ({ routeAssets, routeImports, routes })
-
-export const handler = createGracileMiddleware({
+export const handler = createGracileHandler({
 	root: process.cwd(),
 	routes,
 	routeImports,

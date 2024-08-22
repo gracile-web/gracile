@@ -28,9 +28,7 @@
   "type": "module",
   "exports": {
     "./*": "./dist/*.js",
-    "./ambient": {
-      "types": "./ambient.d.ts"
-    }
+    "./ambient": "./ambient.d.ts"
   },
   "files": [
     "./ambient.d.ts",
