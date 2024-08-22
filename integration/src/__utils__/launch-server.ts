@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { type ChildProcessWithoutNullStreams, spawn } from 'node:child_process';
 
 export function launch(file: string, callback: () => Promise<unknown>) {

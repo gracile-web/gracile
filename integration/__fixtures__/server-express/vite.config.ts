@@ -16,6 +16,14 @@ export default defineConfig({
 					};
 				},
 			},
+
+			pages: {
+				premises: {
+					expose: true,
+					include: ['**/route-premises.ts'],
+					// exclude: ['**/**'],
+				},
+			},
 		}),
 		// TODO: Test addons with server
 		viteSvgPlugin(),

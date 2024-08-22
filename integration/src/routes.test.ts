@@ -62,6 +62,26 @@ it('return doc only route', async () => {
 	});
 });
 
+it('pass props for top level handler', async () => {
+	const route = '02-top-handler';
+
+	await snapshotAssertEqual({
+		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
+		actualContent: await fetchResource(address, [currentTestRoutes, route]),
+		writeActual,
+	});
+});
+
+it('pass props for GET handler', async () => {
+	const route = '03-get-handler';
+
+	await snapshotAssertEqual({
+		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
+		actualContent: await fetchResource(address, [currentTestRoutes, route]),
+		writeActual,
+	});
+});
+
 it('return 1 param static route', async () => {
 	const route = '01-param';
 

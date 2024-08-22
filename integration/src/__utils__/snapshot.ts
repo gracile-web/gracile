@@ -1,10 +1,16 @@
 import assert from 'node:assert';
-import { cp, readFile, rm, writeFile } from 'node:fs/promises';
+import {
+	cp,
+	// @ts-expect-error not typed yet
+	glob,
+	readFile,
+	rm,
+	writeFile,
+} from 'node:fs/promises';
 import { join } from 'node:path';
 import { styleText } from 'node:util';
 
 import { logger } from '@gracile/internal-utils/logger';
-import fastGlob from 'fast-glob';
 import { format } from 'prettier';
 import { assertEqual } from 'snapshot-fixtures';
 
@@ -47,15 +53,22 @@ export async function snapshotAssertEqual(options: {
 // TODO: delete then exclude source map files from git
 async function getFiles(path: string) {
 	const projectGlob = join('__fixtures__', path, '**/*');
-	const fileList = (await fastGlob([projectGlob, '!**/*.js.map']))
-		.sort()
-		.map(async (filePath) => {
+	const entries = [];
+	// eslint-disable-next-line no-restricted-syntax
+	for await (const entry of glob([projectGlob, '!**/*.js.map'], {
+		withFileTypes: true,
+	}))
+		if (entry.isFile()) entries.push(join(entry.path, entry.name));
+
+	const fileList = await Promise.all(
+		entries.sort().map(async (filePath) => {
 			const fileContent = await readFile(filePath, 'utf8');
 			return {
 				path: filePath,
 				content: fileContent,
 			};
-		});
+		}),
+	);
 	return fileList;
 }
 

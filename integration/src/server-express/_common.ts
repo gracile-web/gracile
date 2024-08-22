@@ -14,10 +14,10 @@ const currentTestRoutes = '';
 const ADDRESS = 'http://localhost:9874';
 
 async function tests(mode: string, item: string, writeActual: boolean) {
-	const expectedPath = (name: string) => [
+	const expectedPath = (name: string, ext = 'html') => [
 		projectRoutes,
 		currentTestRoutes,
-		`_${name}_${mode}_expected._html`,
+		`_${name}_${mode}_${item}_expected._${ext}`,
 	];
 
 	await it(`load a static asset from public directory - ${item}`, async () =>
@@ -75,6 +75,39 @@ async function tests(mode: string, item: string, writeActual: boolean) {
 			),
 			writeActual,
 		}));
+
+	describe('page premises', async () => {
+		await it(`load page premises - ${item}`, async () =>
+			snapshotAssertEqual({
+				expectedPath: expectedPath('route-premises'),
+				actualContent: removeLocalPathsInDevAssets(
+					await fetchResource(ADDRESS, ['route-premises']),
+				),
+				writeActual,
+			}));
+
+		await it(`load page premises - ${item}`, async () =>
+			snapshotAssertEqual({
+				expectedPath: expectedPath('route-premises', 'props._json'),
+				actualContent: removeLocalPathsInDevAssets(
+					await fetchResource(ADDRESS, ['route-premises/__index.props.json'], {
+						trailingSlash: false,
+					}),
+				),
+				writeActual,
+			}));
+		await it(`load page premises - ${item}`, async () =>
+			snapshotAssertEqual({
+				expectedPath: expectedPath('route-premises', 'doc.html'),
+				actualContent: removeLocalPathsInDevAssets(
+					await fetchResource(ADDRESS, ['route-premises/__index.doc.html'], {
+						trailingSlash: false,
+					}),
+				),
+				writeActual,
+			}));
+	});
+
 	await it(`load homepage with a get query param - ${item}`, async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('home'),
@@ -83,6 +116,7 @@ async function tests(mode: string, item: string, writeActual: boolean) {
 			),
 			writeActual,
 		}));
+
 	await it(`load a page with various asset loading methods - ${item}`, async () =>
 		snapshotAssertEqual({
 			expectedPath: expectedPath('assets-methods'),

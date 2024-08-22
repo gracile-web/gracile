@@ -14,6 +14,14 @@ export default defineConfig(({ command }) => {
 					exclude:
 						command === 'build' ? ['**/throws.ts', '**/*-failure.ts'] : [],
 				},
+
+				pages: {
+					premises: {
+						expose: true,
+						include: ['**/12-route-premises/**'],
+						// exclude: ['**/**'],
+					},
+				},
 			}),
 			viteSvgPlugin(),
 			viteMarkdownPlugin({ MarkdownRenderer }),
