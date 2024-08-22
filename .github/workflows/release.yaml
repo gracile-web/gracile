@@ -79,8 +79,13 @@ jobs:
       #   shell: bash
       #   run: node --run syncpack:lint
 
-      - name: 'Verify the integrity of provenance attestations and registry signatures for installed dependencies'
-        run: 'pnpm audit signatures'
+      # NOTE: Audit is for prod only because a lot of root packages (like lerna etc.)
+      # are used old packages with intricate dependency trees, and they are
+      # never shipped to the user. But that's not 100% optimal, as devDeps could
+      # provoke some sec issues, too? A middleground is better than nothing and
+      # regularly blocked releases for obscure root mono-repo tooling deps.
+      - name: 'Verify the integrity of provenance attestations and registry signatures for installed [prod] dependencies'
+        run: 'node --run audit'
 
       # MARK: Lint/Checks pre-build
 

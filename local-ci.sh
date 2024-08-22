@@ -13,7 +13,7 @@ pnpm install --frozen-lockfile
 # TODO: More
 # node --run syncpack:lint
 
-pnpm audit signatures
+node --run audit
 
 node --run lint:commit
 

@@ -35,6 +35,7 @@
     "lint:commit": "commitlint --from=HEAD~1",
     "lint:es": "eslint .",
     "lint:es:fix": "eslint --fix .",
+    "audit": "pnpm audit signatures --prod",
     "list-pkg": "pnpm m ls --json --depth=-1 | node -e \"const path = require('path'); console.log(JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf-8')).map((m) => path.relative(__dirname, m.path)).filter(Boolean))\" # From https://github.com/pnpm/pnpm/issues/1519",
     "nolyfill": "pnpm dlx nolyfill install",
     "postnolyfill": "pnpm install",
