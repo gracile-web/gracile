@@ -59,23 +59,7 @@ export async function createRouter(config?: Config) {
 			title: () => document.title,
 
 			// MARK: Render/Hydrate
-			render: async (...args) => {
-				console.log({ args });
-
-				// if (
-				// 	Boolean(router.url.hash) &&
-				// 	router.url.hash !== prevHash &&
-				// 	router.url.pathname !== prevPathname
-				// ) {
-				// 	document.querySelector(router.url.hash)?.scrollIntoView();
-				// 	prevHash = router.url.hash;
-				// 	prevPathname = router.url.pathname;
-
-				// 	return;
-				// }
-
-				// console.log();
-
+			render: async () => {
 				let loaded = loadedRoutes.get(path);
 
 				// MARK: Import/Cache
@@ -96,6 +80,7 @@ export async function createRouter(config?: Config) {
 					// TODO: More generic/robust approach. Same everywhere we swap
 					// these path parts (for *.doc.html, too).
 					.replace(/\/404\/$/, '/__404.props.json')
+					.replace(/\/500\/$/, '/__500.props.json')
 					.replace(/\/$/, '/__index.props.json');
 
 				// TODO: Separate doc, not needed on first load, same for server mode
@@ -103,12 +88,12 @@ export async function createRouter(config?: Config) {
 					// MARK: Template props
 					fetch(propsUrl).then((r) => r.json() as unknown),
 
-					/* .catch(() => null) */
 					// MARK: Document
 					isInitiallyHydrated
 						? fetch(
 								`${router.url.pathname ?? '/'}`
 									.replace(/404\/$/, '/__404.doc.html')
+									.replace(/500\/$/, '/__500.doc.html')
 									.replace(/\/$/, '/__index.doc.html'),
 							).then((r) => r.text())
 						: null,
@@ -229,10 +214,6 @@ export async function createRouter(config?: Config) {
 					}
 
 					render(renderedTemplate, document.body);
-
-					console.log({ router });
-
-					console.log(router.url.hash);
 
 					if (Boolean(router.url.hash) && router.url.hash !== prevHash) {
 						document.querySelector(router.url.hash)?.scrollIntoView();

@@ -39,6 +39,13 @@ describe('gracile package should do its exports correctly', () => {
 		assert.equal(typeof node.printUrls, 'function');
 		assert.equal(typeof node.getClientDistPath, 'function');
 		assert.equal(typeof node.nodeAdapter, 'function');
+
+		// eslint-disable-next-line @typescript-eslint/require-await
+		const testGracileHandler: node.GracileNodeHandler = async () => null;
+		noop(testGracileHandler);
+		const testOptions: node.NodeAdapterOptions = {};
+		noop(testGracileHandler, testOptions);
+
 		checkServerEnv(node.server);
 	});
 
@@ -46,6 +53,13 @@ describe('gracile package should do its exports correctly', () => {
 		assert.equal(typeof hono.printUrls, 'function');
 		assert.equal(typeof hono.getClientDistPath, 'function');
 		assert.equal(typeof hono.honoAdapter, 'function');
+
+		// eslint-disable-next-line @typescript-eslint/require-await
+		const testGracileHandler: hono.GracileHonoHandler = async () =>
+			new Response();
+		noop(testGracileHandler);
+		const testOptions: hono.HonoAdapterOptions = {};
+		noop(testGracileHandler, testOptions);
 
 		checkServerEnv(hono.server);
 	});

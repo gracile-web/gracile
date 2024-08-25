@@ -7,7 +7,11 @@ import { createServerAdapter } from '@whatwg-node/server';
 import type { IncomingMessage, ServerResponse } from 'http';
 
 import { constants } from '../constants.js';
-import { type GracileHandler, isRedirect } from '../request.js';
+import {
+	type AdapterOptions,
+	type GracileHandler,
+	isRedirect,
+} from '../request.js';
 
 // NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
 // @ts-expect-error Abusing this feature!
@@ -36,6 +40,10 @@ export type GracileNodeHandler = (
 	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 ) => Promise<ServerResponse<IncomingMessage> | null | void>;
 
+export interface NodeAdapterOptions extends AdapterOptions {
+	//
+}
+
 /**
  * @param handler - Takes a pre-built Gracile handler from `./dist/server/entrypoint.js`.
  * @example
@@ -54,7 +62,10 @@ export type GracileNodeHandler = (
  * const server = app.listen();
  * ```
  */
-export function nodeAdapter(handler: GracileHandler): GracileNodeHandler {
+export function nodeAdapter(
+	handler: GracileHandler,
+	options?: NodeAdapterOptions,
+): GracileNodeHandler {
 	return async function nodeHandler(
 		req: IncomingMessage,
 		res: ServerResponse,

@@ -50,7 +50,8 @@ export const buildRoutes = async ({
 			inputList.push(
 				input
 					.replace(/index\.html$/, '__index.doc.html')
-					.replace(/404\.html$/, '__404.doc.html'),
+					.replace(/404\.html$/, '__404.doc.html')
+					.replace(/500\.html$/, '__500.doc.html'),
 
 				// input.replace(/(.*)\.html$/, (_, r) => `__${r}.document.html`),
 				// .replace(/(.*)\.html$/, (_, r) => `__${r}.document.html`),
@@ -79,7 +80,7 @@ export const buildRoutes = async ({
 
 				load(id) {
 					if (extname(id) === '.html') {
-						if (['index.html', '404.html'].includes(basename(id))) {
+						if (['index.html', '404.html', '500.html'].includes(basename(id))) {
 							const content = renderedRoutes.find(
 								(i) => i.absoluteId === id,
 							)?.html;
@@ -93,7 +94,8 @@ export const buildRoutes = async ({
 									return (
 										i.absoluteId
 											.replace(/index\.html$/, '__index.doc.html')
-											.replace(/404\.html$/, '__404.doc.html') === id
+											.replace(/404\.html$/, '__404.doc.html')
+											.replace(/500\.html$/, '__500.doc.html') === id
 									);
 								})?.static.document;
 

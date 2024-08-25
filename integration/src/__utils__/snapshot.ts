@@ -1,14 +1,7 @@
 import './logger.js';
 
 import assert from 'node:assert';
-import {
-	cp,
-	// @ts-expect-error not typed yet
-	glob,
-	readFile,
-	rm,
-	writeFile,
-} from 'node:fs/promises';
+import { cp, glob, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { styleText } from 'node:util';
 

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import { constants } from '../constants.js';
-import type { GracileHandler } from '../request.js';
+import type { AdapterOptions, GracileHandler } from '../request.js';
 
 export type { GracileHandler };
 
@@ -13,8 +13,13 @@ export type GracileHonoHandler = (context: {
 	var: unknown;
 }) => Promise<Response>;
 
+export interface HonoAdapterOptions extends AdapterOptions {
+	//
+}
+
 /**
  * @param handler - Takes a pre-built Gracile handler from `./dist/server/entrypoint.js`.
+ * @param options - If you need more control.
  * @example
  * `/src/server.js`
  * ```js
@@ -33,7 +38,7 @@ export type GracileHonoHandler = (context: {
  * ```
  */
 export const honoAdapter =
-	(handler: GracileHandler): GracileHonoHandler =>
+	(handler: GracileHandler, options?: HonoAdapterOptions): GracileHonoHandler =>
 	async (context) => {
 		createLogger(options?.logger);
 
@@ -48,7 +53,10 @@ export const honoAdapter =
 
 		if (result?.response) return result.response;
 
-		throw new Error('Rendering was impossible in the Hono adapter!');
+		throw new GracileError({
+			...GracileErrorData.InvalidResponseInAdapter,
+			message: GracileErrorData.InvalidResponseInAdapter.message('Hono'),
+		});
 	};
 
 /**

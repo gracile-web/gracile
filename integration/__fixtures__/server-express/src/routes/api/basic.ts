@@ -1,5 +1,5 @@
 import { defineRoute } from '@gracile/gracile/route';
-import * as Route from '@gracile/gracile/_internals/route';
+import { RequestMethod } from '@gracile/gracile/_internals/route';
 
 export default defineRoute({
 	handler: {
@@ -8,7 +8,7 @@ export default defineRoute({
 				{
 					url,
 					param1: url.searchParams.get('foo'),
-					[Route.RequestMethod.GET]: 'ok',
+					[RequestMethod.GET]: 'ok',
 					// TODO: When middleware are implemented, mock this properly
 					locals: { requestIdLength: locals.requestId.length },
 				},
@@ -27,7 +27,7 @@ export default defineRoute({
 				{
 					url,
 					param1: url.searchParams.get('foo'),
-					[Route.RequestMethod.POST]: 'ok',
+					[RequestMethod.POST]: 'ok',
 					body: await request.json(),
 					locals: { requestIdLength: locals.requestId.length },
 				},
@@ -39,7 +39,7 @@ export default defineRoute({
 				{
 					url,
 					param1: url.searchParams.get('foo'),
-					[Route.RequestMethod.PUT]: 'ok',
+					[RequestMethod.PUT]: 'ok',
 					body: await request.json(),
 					locals: { requestIdLength: locals.requestId.length },
 				},
@@ -51,7 +51,7 @@ export default defineRoute({
 				{
 					url,
 					param1: url.searchParams.get('foo'),
-					[Route.RequestMethod.QUERY]: 'ok',
+					[RequestMethod.QUERY]: 'ok',
 					body: await request.json(),
 					locals: { requestIdLength: locals.requestId.length },
 				},
@@ -63,7 +63,7 @@ export default defineRoute({
 				{
 					url,
 					param1: url.searchParams.get('foo'),
-					[Route.RequestMethod.DELETE]: 'ok',
+					[RequestMethod.DELETE]: 'ok',
 					locals: { requestIdLength: locals.requestId.length },
 				},
 				{ status: 200, statusText: 'DONE', headers: { bar: 'baz' } },
@@ -74,7 +74,7 @@ export default defineRoute({
 				{
 					url,
 					param1: url.searchParams.get('foo'),
-					[Route.RequestMethod.PATCH]: 'ok',
+					[RequestMethod.PATCH]: 'ok',
 					body: await request.json(),
 					locals: { requestIdLength: locals.requestId.length },
 				},
@@ -88,5 +88,5 @@ export default defineRoute({
 // },
 // OPTIONS: async ({ url, request }) => {
 // 
-// 	return Response.json({url, [Route.RequestMethod.OPTIONS]: 'ok', body: await request.json() });
+// 	return Response.json({url, [RequestMethod.OPTIONS]: 'ok', body: await request.json() });
 // }, */

@@ -142,6 +142,7 @@ export async function renderRoutes({
 							: 'index.html',
 					);
 					if (name === '404/index.html') name = '404.html';
+					if (name === '500/index.html') name = '500.html';
 
 					const url = new URL(pathnameWithParams, 'http://gracile-static');
 
@@ -169,6 +170,9 @@ export async function renderRoutes({
 					const existing = renderedRoutes.find(
 						(rendered) => rendered?.name === name,
 					);
+
+					// NOTE: IIRC, this happens when two or more routes has the
+					// same priority, that will output the same static path.
 					if (existing)
 						throw new Error(
 							`${c.red(`"${existing.name}" page was defined twice!`)}\n`,

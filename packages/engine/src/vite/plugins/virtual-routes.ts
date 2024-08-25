@@ -1,4 +1,4 @@
-import { windowsToPosix } from '@gracile/internal-utils/paths';
+import { normalizeToPosix } from '@gracile/internal-utils/paths';
 import { createFilter, type Plugin } from 'vite';
 
 import type { RenderedRouteDefinition } from '../../build/static.js';
@@ -60,7 +60,7 @@ const routeImports = new Map(
 		${routesWithoutPrerender
 			.map(
 				([pattern, route]) =>
-					`['${pattern}', () => import('/${windowsToPosix(route.filePath)}')],`,
+					`['${pattern}', () => import('/${normalizeToPosix(route.filePath)}')],`,
 			)
 			.join('\n		')}
 	]
@@ -141,7 +141,7 @@ const routeImports = new Map(
 				? routes
 						.map(
 							([pattern, route]) =>
-								`['${pattern}', () => import('/${windowsToPosix(route.filePath)}')],`,
+								`['${pattern}', () => import('/${normalizeToPosix(route.filePath)}')],`,
 						)
 						.join('\n		')
 				: '/* DISABLED */'

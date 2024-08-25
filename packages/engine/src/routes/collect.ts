@@ -20,11 +20,10 @@ function extractRoutePatterns(
 	const routePathname = routeFilePath.replace(/\.[j|t]s$/, '');
 
 	let pathParts = routePathname.split(
-		process.platform === 'win32' ? '\\' : '/',
+		paths.isWindows() ? paths.WINDOWS_PATH_SEPARATOR : '/',
 	);
 	const last = pathParts.at(-1);
-	if (typeof last === 'undefined')
-		throw new TypeError('Cannot parse file path.');
+	if (last === undefined) throw new ReferenceError('Cannot parse file path.');
 
 	if (
 		// NOTE: /foo/(foo) => /foo
