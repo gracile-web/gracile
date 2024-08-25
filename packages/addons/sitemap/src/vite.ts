@@ -1,6 +1,6 @@
 import { Readable } from 'node:stream';
 
-import { logger } from '@gracile/internal-utils/logger/vite-logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import type { PluginOption } from 'vite';
@@ -22,6 +22,8 @@ export function viteSitemapPlugin(options: {
 	// This `any[]` AND with a plugin -array- makes ESLint and TS shut up.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): any[] {
+	const logger = getLogger();
+
 	let isSsrBuild = false;
 
 	return [

@@ -1,9 +1,11 @@
-import { logger } from '@gracile/internal-utils/logger';
+import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import type { ServerRenderedTemplate } from '@lit-labs/ssr';
 import { html } from '@lit-labs/ssr';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import type { Breadcrumbs, MetadataConfig } from './config-options.js';
+
+const logger = createLogger();
 
 export type { Breadcrumbs, MetadataConfig };
 

@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { createLogger } from '@gracile/internal-utils/logger/helpers';
+import { getVersion } from '@gracile/internal-utils/version';
 import { rename, rm } from 'fs/promises';
 import c from 'picocolors';
 import { build, createServer, type PluginOption } from 'vite';
@@ -44,6 +45,8 @@ let isClientBuilt = false;
 // This `any[]` AND with a plugin -array- makes ESLint and TS shut up.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const gracile = (config?: GracileConfig): any[] => {
+	const logger = createLogger();
+
 	const outputMode = config?.output || 'static';
 
 	const clientAssets: Record<string, string> = {};
@@ -134,7 +137,7 @@ export const gracile = (config?: GracileConfig): any[] => {
 				// ) as {
 				// 	version: number;
 				// };
-				const version = process.env['__GRACILE_VERSION__'];
+				const version = getVersion();
 				logger.info(
 					`${c.cyan(c.italic(c.underline('🧚 Gracile')))}` +
 						` ${c.dim(`~`)} ${c.green(`v${version ?? 'X'}`)}`,
@@ -145,6 +148,10 @@ export const gracile = (config?: GracileConfig): any[] => {
 					routes,
 					vite: server,
 					gracileConfig,
+				});
+
+				logger.info(c.dim('Vite development server is starting…'), {
+					timestamp: true,
 				});
 
 				return () => {

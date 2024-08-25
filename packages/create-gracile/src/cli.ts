@@ -8,8 +8,6 @@ import { promisify } from 'node:util';
 
 import * as clack from '@clack/prompts';
 import { Command } from '@commander-js/extra-typings';
-import { env } from '@gracile/internal-utils/env';
-import { logger } from '@gracile/internal-utils/logger';
 import Conf from 'conf';
 import latestVersion from 'latest-version';
 import c from 'picocolors';
@@ -18,7 +16,7 @@ import { generate } from 'random-words';
 import { availableTemplates } from './available.js';
 import { type Settings, TEMPLATE_LIST, TEMPLATE_LIST_ANON } from './types.js';
 
-const { DEV } = env;
+const { DEV } = process.env;
 
 // MARK: Create CLI
 
@@ -391,8 +389,10 @@ if (settings.initializeGit) {
 
 clack.outro(c.bold(`You're all set ✨! You can now do:`));
 
-logger.info(`${c.green(`cd ${settings.location}`)}`);
-logger.info(
+// eslint-disable-next-line no-console
+console.info(`${c.green(`cd ${settings.location}`)}`);
+// eslint-disable-next-line no-console
+console.info(
 	`${c.green(`${packageManager}${packageManager === 'npm' ? ' run' : ''} dev\n`)}`,
 );
 

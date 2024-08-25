@@ -2,7 +2,7 @@ import { Buffer } from 'node:buffer';
 import path, { join } from 'node:path';
 import type { Readable } from 'node:stream';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 import type { ViteDevServer } from 'vite';
 
@@ -53,6 +53,7 @@ export async function renderRoutes({
 	root?: string;
 	gracileConfig: GracileConfig;
 }) {
+	const logger = getLogger();
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 
 	// MARK: Collect

@@ -3,7 +3,7 @@
 import type { AddressInfo } from 'node:net';
 
 import { env as currentEnv } from '@gracile/internal-utils/env';
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 
 import { constants } from './constants.js';
@@ -32,6 +32,8 @@ import { constants } from './constants.js';
  * ```
  */
 export function printUrls(server: string | AddressInfo | null) {
+	const logger = getLogger();
+
 	let address: null | string = null;
 	if (!server) throw new Error('Incorrect address infos');
 	if (typeof server === 'string') {

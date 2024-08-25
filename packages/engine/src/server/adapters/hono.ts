@@ -1,8 +1,8 @@
-// import { logger } from '@gracile/internal-utils/logger';
 import { relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 
+import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import { constants } from '../constants.js';
 import type { GracileHandler } from '../request.js';
 
@@ -35,6 +35,8 @@ export type GracileHonoHandler = (context: {
 export const honoAdapter =
 	(handler: GracileHandler): GracileHonoHandler =>
 	async (context) => {
+		createLogger(options?.logger);
+
 		const result = await handler(context.req.raw, context.var);
 
 		// TODO: Handle stream abortion as gracefully as with Express.

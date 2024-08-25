@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import * as paths from '@gracile/internal-utils/paths';
 import { fdir as Fdir } from 'fdir';
 import c from 'picocolors';
@@ -11,6 +11,8 @@ import { createFilter } from 'vite';
 import { prepareSortableRoutes, routeComparator } from './comparator.js';
 import { REGEXES } from './load-module.js';
 import type * as R from './route.js';
+
+const logger = getLogger();
 
 function extractRoutePatterns(
 	routeFilePath: string,

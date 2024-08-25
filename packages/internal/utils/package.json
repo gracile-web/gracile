@@ -28,13 +28,6 @@
   "type": "module",
   "exports": {
     "./*": "./dist/*.js",
-    "./logger": {
-      "development": "./dist/logger/logger.dev.js",
-      "production": "./dist/logger/logger.build.js",
-      "test": "./dist/logger/logger.dev.js",
-      "preview": "./dist/logger/logger.dev.js",
-      "default": "./dist/logger/logger.build.js"
-    },
     "./env": {
       "types": "./dist/env/index.d.ts",
       "browser": {

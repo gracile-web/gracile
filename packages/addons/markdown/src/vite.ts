@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { relative } from 'node:path';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import type { PluginOption } from 'vite';
 
 import { MarkdownDocumentRendererEmpty } from './renderer.js';
@@ -15,6 +15,8 @@ export function viteMarkdownPlugin(options?: {
 	// This `any[]` AND with a plugin -array- makes ESLint and TS shut up.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): any[] {
+	const logger = getLogger();
+
 	const MarkdownDocumentRenderer =
 		options?.MarkdownRenderer ?? MarkdownDocumentRendererEmpty;
 
@@ -29,7 +31,7 @@ export function viteMarkdownPlugin(options?: {
 			},
 
 			async load(id: string) {
-				if (!root) throw new Error('Missing server');
+				if (!root) throw new ReferenceError('Config root.');
 
 				if (fileRegex.test(id)) {
 					let markdownCode: string | undefined;

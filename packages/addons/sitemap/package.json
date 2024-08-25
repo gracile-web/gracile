@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
-    "picocolors": "^1.0.0",
+    "picocolors": "^1.0.1",
     "sitemap": "8.0.0"
   },
   "devDependencies": {

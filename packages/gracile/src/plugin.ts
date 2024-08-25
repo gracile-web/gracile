@@ -1,3 +1,6 @@
+import './_internals/vite-logger.js';
+
+import { setVersion } from '@gracile/internal-utils/version';
 import { readFile } from 'fs/promises';
 
 export { gracile } from '@gracile/engine/plugin';
@@ -9,5 +12,4 @@ const { version } = JSON.parse(
 	version: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-process.env['__GRACILE_VERSION__'] = version;
+setVersion(version);

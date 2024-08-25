@@ -1,7 +1,6 @@
 import { Readable } from 'node:stream';
 
-import { logger } from '@gracile/internal-utils/logger';
-// import { logger } from '@gracile/internal-utils/logger/vite-logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 import type { ErrorPayload, ViteDevServer } from 'vite';
 
@@ -21,6 +20,10 @@ type ResponseWithNodeReadable = {
 	body: Readable;
 	init: ResponseInit;
 };
+
+export interface AdapterOptions {
+	logger?: Logger;
+}
 
 /**
  * The underlying handler interface that you can use to build your own adapter.
@@ -58,15 +61,7 @@ export function createGracileHandler({
 	serverMode?: boolean | undefined;
 	gracileConfig: GracileConfig;
 }) {
-	async function createErrorPage(urlPath: string, e: Error) {
-		logger.error(e.message);
-
-		let errorPageHtml = await renderLitTemplate(errorPage(e));
-		if (vite)
-			errorPageHtml = await vite.transformIndexHtml(urlPath, errorPageHtml);
-
-		return { errorPageHtml, headers: { ...CONTENT_TYPE_HTML } };
-	}
+	const logger = getLogger();
 
 	const middleware: GracileHandler = async (request, locals) => {
 		try {

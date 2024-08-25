@@ -2,7 +2,7 @@ import { Writable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 
 import { env } from '@gracile/internal-utils/env';
-import { logger } from '@gracile/internal-utils/logger';
+import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import { createServerAdapter } from '@whatwg-node/server';
 import type { IncomingMessage, ServerResponse } from 'http';
 

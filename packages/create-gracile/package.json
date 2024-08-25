@@ -47,14 +47,14 @@
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "@commander-js/extra-typings": "^12.0.1",
-    "@gracile/internal-utils": "workspace:^",
     "commander": "^12.0.0",
     "conf": "^13.0.1",
     "latest-version": "^9.0.0",
-    "picocolors": "^1.0.0",
+    "picocolors": "^1.0.1",
     "random-words": "^2.0.1"
   },
   "devDependencies": {
+    "@gracile/internal-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/degit": "^2.8.6",
     "@types/node": "^20.14.8",

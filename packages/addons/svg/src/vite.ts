@@ -1,7 +1,7 @@
 // From https://github.com/r3dDoX/vite-plugin-svgo
 import fs from 'node:fs';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import type { Config } from 'svgo';
 import { optimize } from 'svgo';
 import type { PluginOption } from 'vite';
@@ -15,6 +15,8 @@ export function viteSvgPlugin(
 	// This `any[]` AND with a plugin -array- makes ESLint and TS shut up.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any[] {
+	const logger = getLogger();
+
 	return [
 		{
 			name: VITE_PLUGIN_NAME,

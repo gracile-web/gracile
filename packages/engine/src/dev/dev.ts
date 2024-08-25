@@ -1,4 +1,4 @@
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 import { type ViteDevServer } from 'vite';
 
@@ -14,7 +14,7 @@ import { generateRoutesTypings } from './route-typings.js';
 export async function createDevHandler({
 	routes,
 	vite,
-	gracileConfig,
+	gracileConfig,dd
 }: {
 	routes: RoutesManifest;
 	vite: ViteDevServer;
@@ -23,6 +23,8 @@ export async function createDevHandler({
 	handler: GracileHandler;
 	routes: RoutesManifest;
 }> {
+	const logger = getLogger();
+
 	const root = vite.config.root;
 
 	logger.info(c.dim('\nCreating handler…'), { timestamp: true });

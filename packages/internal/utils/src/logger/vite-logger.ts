@@ -1,3 +1,10 @@
 import { createLogger } from 'vite';
 
-export const logger = createLogger(undefined, { prefix: '[gracile]' });
+import { loggerSymbol } from './logger.js';
+
+export function createGracileViteLogger() {
+	const logger = createLogger(undefined, { prefix: '[gracile]' });
+	// @ts-expect-error ...............
+	globalThis[loggerSymbol] = logger;
+	return logger;
+}
