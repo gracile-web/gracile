@@ -20,6 +20,7 @@ packages:
   - ./integration
   - ./packages/labs/client-router
   - ./packages/labs/css-helpers
+  - ./packages/labs/better-errors
   # - integration/__fixtures__/server-express
 # catalog:
 #   vite: ^5.3.5

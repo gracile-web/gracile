@@ -30,7 +30,8 @@
     "./packages/addons/svg",
     "./packages/addons/sitemap",
     "./packages/addons/markdown",
-    "./packages/addons/markdown-preset-marked"
+    "./packages/addons/markdown-preset-marked",
+    "./packages/labs/better-errors"
     // "./packages/addons/minify"
   ]
 }

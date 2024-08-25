@@ -23,6 +23,7 @@ export { type GracileHandler, server } from './server.js';
 export { html } from './server-html.js';
 // export { URLPattern } from './url-pattern.js';
 
+export * as GracileErrorsInfos from '@gracile/engine/errors/errors-data';
 // export type * as Route from '@gracile/engine/routes/route';
 // export type {
 // 	StaticPathOptionsGeneric,

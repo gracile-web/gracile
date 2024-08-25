@@ -1,8 +1,9 @@
 {
-  "name": "@gracile/gracile",
-  "version": "0.7.0-next.0",
+  "name": "@gracile-labs/better-errors",
+  "version": "0.0.0",
   "description": "A thin, full-stack, web framework",
   "keywords": [
+    "vite",
     "custom-elements",
     "full-stack",
     "lit",
@@ -17,7 +18,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/gracile-web/gracile",
-    "directory": "packages/gracile"
+    "directory": "packages/labs/better-errors"
   },
   "license": "ISC",
   "author": {
@@ -27,48 +28,40 @@
   },
   "type": "module",
   "exports": {
+    ".": "./dist/index.js",
     "./*": "./dist/*.js",
-    "./ambient": {
-      "types": "./ambient.d.ts"
-    },
-    "./tsconfigs/*": "./tsconfigs/*.json",
-    "./tsconfigs/*.json": "./tsconfigs/*"
-  },
-  "// bin": {
-    "gracile": "./dist/bin/gracile.js",
-    "gracile-dev": "./dist/bin/gracile-watch.js"
+    "./ambient": "./ambient.d.ts"
   },
   "files": [
     "./ambient.d.ts",
     "./dist/**/*",
-    "./tsconfigs/*",
-    "!/dist/**/*.test.*"
+    "!/dist/**/*.test.*",
+    "!/dist/typedoc-entrypoint.*"
   ],
   "scripts": {
-    "// pretest": "node --run build",
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch",
-    "test": "c8 node --test --enable-source-maps 'dist/**/*.test.js'",
-    "test:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
+    "dev": "tsc --watch"
   },
   "dependencies": {
-    "@gracile/client": "workspace:^",
-    "@gracile/engine": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
-    "@gracile-labs/better-errors": "workspace:^",
-    "@gracile/server": "workspace:^",
     "@lit-labs/ssr": "^3.2.2",
-    "urlpattern-polyfill": "^10.0.0"
+    "@lit-labs/ssr-client": "^1.1.7",
+    "lit": "^3.1.3",
+    "picocolors": "^1.0.1",
+    "vite": "^5.3.5",
+    "launch-editor-middleware": "^2.8.1"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^20.14.8",
+    "@literals/html-css-minifier": "^3.0.0",
+    "@literals/rollup-plugin-html-css-minifier": "^3.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "terser": "^5.31.6",
     "typescript": "5.5.4"
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "// @gracile/add": "workspace:^"
+  }
 }

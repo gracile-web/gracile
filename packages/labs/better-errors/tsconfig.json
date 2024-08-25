@@ -1,0 +1,9 @@
+{
+  "extends": "@gracile/internal-tsconfigs/config-base.json",
+
+  "compilerOptions": {
+    // TypeScript Decorators
+    "useDefineForClassFields": false,
+    "experimentalDecorators": true
+  }
+}

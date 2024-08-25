@@ -52,6 +52,7 @@
   "dependencies": {
     "@gracile/client": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
+    "@gracile-labs/better-errors": "workspace:^",
     "@whatwg-node/server": "^0.9.25",
     "fdir": "^6.2.0",
     "picocolors": "^1.0.1",
