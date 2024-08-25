@@ -3,6 +3,8 @@ import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
+
+import { GracileError, GracileErrorData } from '../../errors/errors.js';
 import { constants } from '../constants.js';
 import type { AdapterOptions, GracileHandler } from '../request.js';
 

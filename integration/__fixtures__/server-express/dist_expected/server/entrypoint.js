@@ -1,5 +1,6 @@
 import { URLPattern } from '@gracile/gracile/url-pattern';
 import { createGracileHandler } from '@gracile/gracile/_internals/server-runtime';
+import { createLogger } from '@gracile/gracile/_internals/logger';
 
 const routes = new Map([
   [
@@ -203,6 +204,8 @@ const routeAssets = new Map([
     " <script type=\"module\" crossorigin src=\"/assets/document.client-CMOVr55R.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-aADsc6DG.css\">\n"
   ]
 ]);
+
+createLogger();
 
 const handler = createGracileHandler({
 	root: process.cwd(),

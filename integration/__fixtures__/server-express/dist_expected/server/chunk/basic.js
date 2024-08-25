@@ -1,5 +1,5 @@
 import { defineRoute } from '@gracile/gracile/route';
-import * as Route from '@gracile/gracile/_internals/route';
+import { RequestMethod } from '@gracile/gracile/_internals/route';
 
 const basic = defineRoute({
   handler: {
@@ -8,7 +8,7 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [Route.RequestMethod.GET]: "ok",
+          [RequestMethod.GET]: "ok",
           // TODO: When middleware are implemented, mock this properly
           locals: { requestIdLength: locals.requestId.length }
         },
@@ -26,7 +26,7 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [Route.RequestMethod.POST]: "ok",
+          [RequestMethod.POST]: "ok",
           body: await request.json(),
           locals: { requestIdLength: locals.requestId.length }
         },
@@ -38,7 +38,7 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [Route.RequestMethod.PUT]: "ok",
+          [RequestMethod.PUT]: "ok",
           body: await request.json(),
           locals: { requestIdLength: locals.requestId.length }
         },
@@ -50,7 +50,7 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [Route.RequestMethod.QUERY]: "ok",
+          [RequestMethod.QUERY]: "ok",
           body: await request.json(),
           locals: { requestIdLength: locals.requestId.length }
         },
@@ -62,7 +62,7 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [Route.RequestMethod.DELETE]: "ok",
+          [RequestMethod.DELETE]: "ok",
           locals: { requestIdLength: locals.requestId.length }
         },
         { status: 200, statusText: "DONE", headers: { bar: "baz" } }
@@ -73,7 +73,7 @@ const basic = defineRoute({
         {
           url,
           param1: url.searchParams.get("foo"),
-          [Route.RequestMethod.PATCH]: "ok",
+          [RequestMethod.PATCH]: "ok",
           body: await request.json(),
           locals: { requestIdLength: locals.requestId.length }
         },

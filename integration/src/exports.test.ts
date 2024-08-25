@@ -9,6 +9,8 @@ import { fileURLToPath } from 'node:url';
 
 import { constants as serverConstants } from '@gracile/engine/server/constants';
 import * as internalLogger from '@gracile/gracile/_internals/logger';
+import * as route from '@gracile/gracile/_internals/route';
+import * as routeModule from '@gracile/gracile/_internals/route-module';
 import * as serverRuntime from '@gracile/gracile/_internals/server-runtime';
 import * as document from '@gracile/gracile/document';
 import { env as envFromNodeConditions } from '@gracile/gracile/env';
@@ -150,5 +152,8 @@ describe('gracile package should do its exports correctly', () => {
 
 	test('internals', () => {
 		assert.equal(typeof internalLogger.createLogger, 'function');
+		assert.equal(typeof route.RequestMethod, 'object');
+		assert.equal(typeof routeModule.RouteModule, 'function');
+		assert.equal(typeof serverRuntime.createGracileHandler, 'function');
 	});
 });

@@ -23,20 +23,6 @@ options) {
         return routeModule;
     };
 }
-// TODO: remove this, use `Response.json instead`? Or keep for old envs?
-// export function jsonResponse(data: any, init?: ResponseInit) {
-//   return new Response(JSON.stringify(data), {
-//     ...init,
-//     headers: { 'Content-Type': 'application/json' },
-//   });
-// }
-// NOTE: Useful?
-// export function notFound(statusText = '404 - Not found') {
-// 	return new Response(null, {
-// 		status: 404,
-// 		statusText,
-// 	});
-// }
 
 const routeImports = new Map(
 	[ 

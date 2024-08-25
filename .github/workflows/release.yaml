@@ -1,6 +1,10 @@
 # https://help.github.com/en/categories/automating-your-workflow-with-github-actions
 # See: https://github.com/JulianCataldo/gh-actions
 
+# For matrix setup:
+# https://github.com/withastro/astro/blob/main/.github/workflows/ci.yml
+# https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/running-variations-of-jobs-in-a-workflow
+
 name: CI / Release
 
 on:
@@ -28,12 +32,30 @@ permissions:
 jobs:
   release:
     name: CI / Release
-    runs-on: ubuntu-latest
+
     permissions:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
       pull-requests: write # to be able to comment on released pull requests
       id-token: write # to enable use of OIDC for npm provenance
+
+    runs-on: ubuntu-latest
+    # TODO:
+    # runs-on: ${{ matrix.os }}
+    # timeout-minutes: 25
+    # # needs: build
+    # strategy:
+    #   matrix:
+    #     OS: [ubuntu-latest]
+    #     NODE_VERSION: [18, 20]
+    #     include:
+    #       - os: macos-14
+    #         NODE_VERSION: 18
+    #       - os: windows-latest
+    #         NODE_VERSION: 18
+    #   fail-fast: false
+    # env:
+    #   NODE_VERSION: ${{ matrix.NODE_VERSION }}
 
     steps:
       # MARK: Setup GH Action

@@ -2,11 +2,16 @@ import { Readable } from 'node:stream';
 
 import * as assert from '@gracile/internal-utils/assertions';
 import { html } from '@gracile/internal-utils/dummy-literals';
+import type { ErrorLocation } from '@gracile-labs/better-errors/errors';
 import { render as renderLitSsr } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import type { ViteDevServer } from 'vite';
 
-import { isLitServerTemplate, isLitTemplate } from '../assertions.js';
+import {
+	GracileError,
+	GracileErrorData,
+	TemplateError,
+} from '../errors/errors.js';
 import type { RouteInfos } from '../routes/match.js';
 import type * as R from '../routes/route.js';
 import { PAGE_ASSETS_MARKER, SSR_OUTLET_MARKER } from './markers.js';
@@ -44,6 +49,10 @@ export async function renderRouteTemplate({
 	serverMode?: boolean | undefined;
 	docOnly?: boolean | undefined;
 }): Promise<{ output: null | Readable; document: null | string }> {
+	const location = {
+		file: routeInfos.foundRoute.filePath,
+	} satisfies ErrorLocation;
+
 	if (!routeInfos.routeModule.document && !routeInfos.routeModule.template)
 		return { output: null, document: null };
 
@@ -59,10 +68,13 @@ export async function renderRouteTemplate({
 		const fragmentOutput = await Promise.resolve(
 			routeInfos.routeModule.template?.(context) as unknown,
 		);
-		if (isLitTemplate(fragmentOutput) === false)
-			throw Error(
-				`Wrong template result for fragment template ${routeInfos.foundRoute.filePath}.`,
-			);
+		if (assert.isLitTemplate(fragmentOutput) === false)
+			throw new GracileError({
+				...GracileErrorData.InvalidRouteDocument,
+				message: GracileErrorData.InvalidRouteDocument.message(location.file),
+				// location,
+			});
+
 		const fragmentRender = renderLitSsr(fragmentOutput);
 		const output = Readable.from(fragmentRender);
 
@@ -74,22 +86,43 @@ export async function renderRouteTemplate({
 		!routeInfos.routeModule.document ||
 		typeof routeInfos.routeModule.document !== 'function'
 	)
-		throw new TypeError(
-			`Route document must be a function ${routeInfos.foundRoute.filePath}.`,
-		);
+		throw new GracileError({
+			...GracileErrorData.InvalidRouteDocument,
+			message: GracileErrorData.InvalidRouteDocument.message(location.file),
+			location,
+		});
 
 	const baseDocTemplateResult = await Promise.resolve(
 		routeInfos.routeModule.document?.(context) as unknown,
 	);
 
-	if (isLitServerTemplate(baseDocTemplateResult) === false)
-		throw new TypeError(
-			`Incorrect document template result for ${routeInfos.foundRoute.filePath}.`,
-		);
+	if (assert.isLitServerTemplate(baseDocTemplateResult) === false)
+		throw new GracileError({
+			...GracileErrorData.InvalidRouteDocumentResult,
+			message: GracileErrorData.InvalidRouteDocumentResult.message(
+				location.file,
+			),
+			location,
+		});
 
-	const baseDocRendered = await collectResult(
-		renderLitSsr(baseDocTemplateResult),
-	);
+	let baseDocRendered: string;
+
+	// console.log({ ddd: baseDocTemplateResult });
+
+	try {
+		baseDocRendered = await collectResult(renderLitSsr(baseDocTemplateResult));
+	} catch (e) {
+		throw new TemplateError(
+			{
+				...GracileErrorData.CouldNotRenderRouteDocument,
+				message: GracileErrorData.CouldNotRenderRouteDocument.message(
+					location.file,
+				),
+				location,
+			},
+			{ cause: String(e as Error) },
+		);
+	}
 
 	// MARK: Sibling assets
 	let baseDocRenderedWithAssets = baseDocRendered;
@@ -117,7 +150,8 @@ export async function renderRouteTemplate({
 									return html`		<link rel="stylesheet" href="/${path}" />`;
 								}
 
-								throw new Error('Unknown asset.');
+								// NOTE: Never called (filtered upstream in `collectRoutes`)
+								return null;
 							})
 							.join('\n')}` +
 						`<!-- /PAGE ASSETS -->\n		`

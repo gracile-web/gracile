@@ -2,11 +2,14 @@ import { Readable } from 'node:stream';
 
 import * as assert from '@gracile/internal-utils/assertions';
 import { getLogger } from '@gracile/internal-utils/logger/helpers';
+// import { createSafeError } from '@gracile-labs/better-errors/dev/utils';
+import type { BetterErrorPayload } from '@gracile-labs/better-errors/dev/vite';
 import c from 'picocolors';
-import type { ErrorPayload, ViteDevServer } from 'vite';
+import type { Logger, ViteDevServer } from 'vite';
 
-import * as assert from '../assertions.js';
-import { errorPage } from '../errors/templates.js';
+import type { emitViteBetterError as emitViteBe } from '../errors/create-vite-better-error.js';
+import { GracileError } from '../errors/errors.js';
+import { builtIn404Page, builtInErrorPage } from '../errors/pages.js';
 import { renderRouteTemplate } from '../render/route-template.js';
 import { renderLitTemplate } from '../render/utils.js';
 import { getRoute } from '../routes/match.js';
@@ -65,9 +68,15 @@ export function createGracileHandler({
 	const logger = getLogger();
 
 	const middleware: GracileHandler = async (request, locals) => {
-		try {
-			const { url: requestedUrl, method } = request;
+		const { url: requestedUrl, method } = request;
 
+		let emitViteBetterError: typeof emitViteBe | null = null;
+		if (vite)
+			emitViteBetterError = await import(
+				'../errors/create-vite-better-error.js'
+			).then(({ emitViteBetterError: e }) => e);
+
+		try {
 			// MARK: Rewrite hidden route siblings
 			const fullUrl = requestedUrl.replace(/\/__(.*)$/, '/');
 
@@ -87,28 +96,25 @@ export function createGracileHandler({
 				routeImports,
 			};
 
-			const routeInfos = await getRoute(routeOptions).catch(async (error) => {
-				// MARK: User defined Gracile 404 rewriting
-				logger.error(String(error));
+			const responseInit: ResponseInit = {};
+
+			let routeInfos = await getRoute(routeOptions);
+
+			// MARK: 404
+			if (routeInfos === null) {
+				responseInit.status = 404;
+
 				const url = new URL('/404/', fullUrl).href;
 				const options = { ...routeOptions, url };
-				const notFound = await getRoute(options).catch((err) => err as Error);
-				return notFound;
-			});
-
-			if (routeInfos instanceof Error) {
-				// MARK: Default, fallback 404
-				// const message = `404 not found!\n\n---\n\nCreate a /src/routes/404.{js,ts} to get a custom page.\n${method} - ${fullUrl}`;
-
-				const { errorPageHtml, headers } = await createErrorPage(
-					fullUrl,
-					routeInfos,
-				);
+				const notFound = await getRoute(options);
+				routeInfos = notFound;
+			}
+			// MARK: fallback 404
+			if (routeInfos === null) {
+				const page = builtIn404Page(new URL(fullUrl).pathname, Boolean(vite));
 				return {
-					response: new Response(errorPageHtml, {
-						headers,
-						status: 404,
-						statusText: '404 not found!',
+					response: new Response(await renderLitTemplate(page), {
+						headers: { ...CONTENT_TYPE_HTML },
 					}),
 				};
 			}
@@ -136,8 +142,6 @@ export function createGracileHandler({
 			// MARK: Server handler
 
 			const handler = routeInfos.routeModule.handler;
-
-			const responseInit: ResponseInit = {};
 
 			if (
 				('handler' in routeInfos.routeModule &&
@@ -269,29 +273,34 @@ export function createGracileHandler({
 				};
 				return {
 					body: output.on('error', (error) => {
-						// NOTE: I think it's not usable here
-						// if (vite) vite.ssrFixStacktrace(error);
-
 						const errorMessage =
 							`[SSR Error] There was an error while rendering a template chunk on server-side.\n` +
 							`It was omitted from the resulting HTML.\n`;
 
 						if (vite) {
 							logger.error(errorMessage + error.stack);
+
+							// emitViteBetterError(new GracileError(GracileErrorData.FailedToGlobalLogger), vite);
 							const payload = {
 								type: 'error',
-								err: {
+								// FIXME: Use the emitViteBetterError instead (but flaky for now with streaming)
+								// @ts-expect-error ...........
+								err: new GracileError({
+									name: 'StreamingError',
+									title: 'An error occured during the page template streaming.',
 									message: errorMessage,
-									stack: error.stack ?? '',
-									plugin: 'gracile',
-
-									// NOTE: Other options seems to be unused by the overlay
-								},
-							} satisfies ErrorPayload;
+									hint: 'This is often caused by a wrong template location dynamic interpolation.',
+									// @ts-expect-error ...........
+									cause: error,
+									// highlightedCode: error.message,
+								}),
+							} satisfies BetterErrorPayload;
+							//
 							setTimeout(() => {
+								// @ts-expect-error ...........
 								vite.hot.send(payload);
 								// NOTE: Arbitrary value. Lower seems to be too fast, higher is not guaranteed to work.
-							}, 750);
+							}, 200);
 						} else {
 							logger.error(errorMessage);
 						}
@@ -304,17 +313,17 @@ export function createGracileHandler({
 			return null;
 
 			// MARK: Errors
-		} catch (e) {
-			const error = e as Error;
-
-			if (vite) vite.ssrFixStacktrace(error);
-
-			const { errorPageHtml: ultimateErrorPage, headers } =
-				await createErrorPage('__gracile_error', error);
+		} catch (error) {
+			// const safeError = createSafeError(error);
+			// TODO: User defined dev/runtime 500 error
+			const ultimateErrorPage =
+				vite && emitViteBetterError
+					? await emitViteBetterError({ vite, error: error as Error })
+					: await renderLitTemplate(builtInErrorPage((error as Error).name));
 
 			return {
-				response: new Response(String(ultimateErrorPage), {
-					headers,
+				response: new Response(ultimateErrorPage, {
+					headers: { ...CONTENT_TYPE_HTML },
 					status: 500,
 					statusText: 'Gracile middleware error',
 				}),

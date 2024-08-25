@@ -151,13 +151,15 @@ async function tests(mode: string, item: string, writeActual: boolean) {
 		));
 	// TODO: Test with "accept: json" when implemented
 
-	await it(`load an error page when a route throws - ${item}`, async () =>
+	await it(`load an error page when a route throws - ${item}`, async () => {
+		const ressource = await fetchResource(ADDRESS, ['throws']);
+
 		assert.equal(
-			(await fetchResource(ADDRESS, ['throws'])).includes(
-				'Error: !!! OH NO !!! I AM A FAKE ERROR !!!',
-			),
+			// <vite-error-overlay> should take over just after (its a client only component) in DEV
+			ressource.includes('500: Error | Internal Server Error'),
 			true,
-		));
+		);
+	});
 
 	await it(`should redirect`, async () =>
 		checkResponse(

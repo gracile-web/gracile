@@ -1,62 +1,20 @@
-<!--  -->
-
 <!doctype html>
 <html lang="en">
   <head>
-    <script type="module" src="/@vite/client"></script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Error</title>
-  </head>
-  <body>
+    <title>500: TypeError | Internal Server Error</title>
     <style>
       html {
-        color-scheme: dark;
+        color-scheme: light dark;
         font-size: 16px;
         line-height: 1.23rem;
         font-family: system-ui;
       }
-      body {
-        padding: 1rem;
-      }
-
-      pre {
-        padding: 1rem;
-
-        overflow-y: auto;
-      }
-      button {
-        font-size: 2rem;
-      }
-
-      h1 {
-        color: tomato;
-      }
     </style>
-
-    <main>
-      <h1>😵 An error has occurred!</h1>
-      <button id="reload">Reload</button>
-      <!--  -->
-      <hr />
-
-      <pre>
-Error: !!! OH NO !!! I AM A FAKE ERROR !!!
-    at RouteModule.template (__REPLACED_FOR_TESTS__)
-    at renderRouteTemplate (__REPLACED_FOR_TESTS__)
-    at async middleware (__REPLACED_FOR_TESTS__)
-    at async nodeHandler (__REPLACED_FOR_TESTS__)</pre
-      >
-      <!-- <pre>$ {e.name}</pre> -->
-      <!-- <pre>$ {e.message}</pre> -->
-      <!-- <pre>$ {e.cause}</pre> -->
-      <hr />
-    </main>
-
-    <script>
-      reload.addEventListener("click", () => document.location.reload());
-    </script>
+    <script type="module" src="/@vite/client"></script>
+  </head>
+  <body>
+    <h1>500: TypeError | Internal Server Error</h1>
   </body>
 </html>

@@ -2,6 +2,7 @@ import { join } from 'node:path';
 
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import { getVersion } from '@gracile/internal-utils/version';
+import { betterErrors } from '@gracile-labs/better-errors/plugin';
 import { rename, rm } from 'fs/promises';
 import c from 'picocolors';
 import { build, createServer, type PluginOption } from 'vite';
@@ -72,6 +73,9 @@ export const gracile = (config?: GracileConfig): any[] => {
 	});
 
 	return [
+		betterErrors({
+			overlayImportPath: '@gracile/gracile/_internals/vite-custom-overlay',
+		}),
 		// 		{
 		// 			name: 'gracile-routes-codegen',
 
@@ -103,17 +107,21 @@ export const gracile = (config?: GracileConfig): any[] => {
 		// 			},
 		// 		},
 
-		virtualRoutesForClient,
-
 		{
 			name: 'vite-plugin-gracile-serve-middleware',
 
 			apply: 'serve',
 
-			config() {
+			config(_, env) {
+				if (env.isPreview) return null;
 				return {
 					// NOTE: Supresses message: `Could not auto-determine entry point from rollupOptions or html files…`
+					// FIXME: It's not working when reloading the Vite config.
+					// Is user config, putting `optimizeDeps: { include: [] }` solve this.
 					optimizeDeps: { include: [] },
+
+					// NOTE: Useful? It breaks preview (expected)
+					appType: 'custom',
 
 					// resolve: {
 					// 	conditions: ['development'],
@@ -154,16 +162,29 @@ export const gracile = (config?: GracileConfig): any[] => {
 					timestamp: true,
 				});
 
+				server.watcher.on('ready', () => {
+					setTimeout(() => {
+						logger.info('');
+						logger.info(c.green('Watching for file changes…'), {
+							timestamp: true,
+						});
+						logger.info('');
+					}, 100);
+					// s
+				});
+
 				return () => {
 					server.middlewares.use((req, res, next) => {
 						const locals = config?.dev?.locals?.({ nodeRequest: req });
-						Promise.resolve(nodeAdapter(handler)(req, res, locals)).catch(
-							(error) => next(error),
-						);
+						Promise.resolve(
+							nodeAdapter(handler, { logger })(req, res, locals),
+						).catch((error) => next(error));
 					});
 				};
 			},
 		},
+
+		virtualRoutesForClient,
 
 		{
 			name: 'vite-plugin-gracile-build',
@@ -295,6 +316,9 @@ export const gracile = (config?: GracileConfig): any[] => {
 									return `
 import { routeAssets, routeImports, routes } from 'gracile:routes';
 import { createGracileHandler } from '@gracile/gracile/_internals/server-runtime';
+import { createLogger } from '@gracile/gracile/_internals/logger';
+
+createLogger();
 
 export const handler = createGracileHandler({
 	root: process.cwd(),

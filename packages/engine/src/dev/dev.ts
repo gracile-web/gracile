@@ -2,7 +2,7 @@ import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 import { type ViteDevServer } from 'vite';
 
-import { collectRoutes } from '../routes/collect.js';
+import { collectRoutes, WATCHED_FILES_REGEX } from '../routes/collect.js';
 import type { RoutesManifest } from '../routes/route.js';
 import {
 	createGracileHandler,
@@ -14,7 +14,7 @@ import { generateRoutesTypings } from './route-typings.js';
 export async function createDevHandler({
 	routes,
 	vite,
-	gracileConfig,dd
+	gracileConfig,
 }: {
 	routes: RoutesManifest;
 	vite: ViteDevServer;
@@ -27,34 +27,36 @@ export async function createDevHandler({
 
 	const root = vite.config.root;
 
-	logger.info(c.dim('\nCreating handler…'), { timestamp: true });
+	logger.info('');
+	logger.info(c.dim('Creating the request handler…'), { timestamp: true });
 
-	await collectRoutes(routes, root, gracileConfig.routes?.exclude);
+	const collect = async () => {
+		await collectRoutes(routes, root, gracileConfig.routes?.exclude);
 
-	if (gracileConfig.experimental?.generateRoutesTypings)
-		generateRoutesTypings(root, routes).catch((error) =>
-			logger.error(String(error)),
-		);
+		if (gracileConfig.experimental?.generateRoutesTypings)
+			await generateRoutesTypings(root, routes).catch((error) =>
+				logger.error(String(error)),
+			);
+	};
 
+	await collect();
+
+	let wait: ReturnType<typeof setTimeout>;
 	vite.watcher.on('all', (event, file) => {
-		// console.log({ event });
 		if (
-			file.match(
-				/\/src\/routes\/(.*)\.(ts|js|css|scss|sass|less|styl|stylus)$/,
-			) &&
+			file.match(WATCHED_FILES_REGEX) &&
 			['add', 'unlink'].includes(event)
-		)
-			collectRoutes(routes, root, gracileConfig.routes?.exclude)
-				.then(() => {
-					vite.hot.send('vite:invalidate');
-
-					if (gracileConfig.experimental?.generateRoutesTypings)
-						generateRoutesTypings(root, routes).catch((error) =>
-							logger.error(String(error)),
-						);
-				})
-				.catch((e) => logger.error(String(e)));
+			//
+		) {
+			clearTimeout(wait);
+			wait = setTimeout(() => {
+				collect()
+					.then(() => vite.hot.send('vite:invalidate'))
+					.catch((error) => logger.error(String(error)));
+			}, 100);
+		}
 	});
+
 	//
 
 	// NOTE: Wrong place?

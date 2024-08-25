@@ -16,7 +16,7 @@ type MatchedRoute = {
 function matchRouteFromUrl(
 	url: string,
 	routes: R.RoutesManifest,
-): MatchedRoute {
+): MatchedRoute | null {
 	let match: URLPatternResult | undefined;
 	let foundRoute: R.Route | undefined;
 
@@ -35,8 +35,7 @@ function matchRouteFromUrl(
 		}
 	}
 
-	if (!match || !foundRoute)
-		throw new Error(`No route matching for ${url}`, { cause: 404 });
+	if (!match || !foundRoute) return null;
 
 	const params: Params = Object.freeze({ ...match.pathname.groups });
 
@@ -79,10 +78,11 @@ async function extractStaticPaths(options: {
 	});
 
 	if (hasCorrectParams === false)
-		throw new Error(
-			`Incorrect route parameters for \`${options.pathname}\`.\n` +
-				`Check \`staticPaths\` for \`${options.foundRoute.filePath}\`.`,
-		);
+		// throw new Error(
+		// 	`Incorrect route parameters for \`${options.pathname}\`.\n` +
+		// 		`Check \`staticPaths\` for \`${options.foundRoute.filePath}\`.`,
+		// );
+		return null;
 
 	return { staticPaths, props };
 }
@@ -99,11 +99,13 @@ export async function getRoute(options: {
 	vite?: ViteDevServer | undefined;
 	routes: R.RoutesManifest;
 	routeImports?: R.RoutesImports | undefined;
-}): Promise<RouteInfos> {
-	const { foundRoute, pathname, params } = matchRouteFromUrl(
-		options.url,
-		options.routes,
-	);
+}): Promise<RouteInfos | null> {
+	// throw new GracileError(new Error(`No route matching for ${url}`), {
+	// 	cause: 404,
+	// });
+	const matchedRoute = matchRouteFromUrl(options.url, options.routes);
+	if (!matchedRoute) return matchedRoute;
+	const { foundRoute, pathname, params } = matchedRoute;
 
 	// TODO: Simplify all the routes things
 	const routeModule = await loadForeignRouteObject({
@@ -112,12 +114,16 @@ export async function getRoute(options: {
 		routeImports: options.routeImports,
 	});
 
-	const staticPaths = await extractStaticPaths({
-		routeModule,
-		foundRoute,
-		pathname,
-		params,
-	});
+	let staticPaths: ExtractedStaticPaths | null = null;
+	if (routeModule.staticPaths) {
+		staticPaths = await extractStaticPaths({
+			routeModule,
+			foundRoute,
+			pathname,
+			params,
+		});
+		if (!staticPaths) return null;
+	}
 
 	return {
 		params,

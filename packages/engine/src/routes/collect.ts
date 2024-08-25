@@ -7,7 +7,7 @@ import c from 'picocolors';
 import { URLPattern } from 'urlpattern-polyfill/urlpattern';
 import { createFilter } from 'vite';
 
-// import type { ViteDevServer } from 'vite';
+import { emptyRoutes } from '../logging/messages.js';
 import { prepareSortableRoutes, routeComparator } from './comparator.js';
 import { REGEXES } from './load-module.js';
 import type * as R from './route.js';
@@ -34,10 +34,6 @@ function extractRoutePatterns(
 		pathParts.pop();
 
 	if (pathParts.length === 1 && pathParts.at(0) === 'index') pathParts = [];
-
-	// NOTE: Disabled for now, but might be useful later
-	// if (pathParts.length === 1 && pathParts.at(0) === '404')
-	// 	pathParts = ['__404'];
 
 	let hasParams = false;
 
@@ -69,6 +65,8 @@ function extractRoutePatterns(
 	};
 }
 
+export const WATCHED_FILES_REGEX =
+	/\/src\/routes\/(.*)\.(ts|js|css|scss|sass|less|styl|stylus)$/;
 // const routes: R.RoutesManifest = new Map<string, R.Route>();
 
 export async function collectRoutes(
@@ -76,7 +74,7 @@ export async function collectRoutes(
 	root: string /* vite: ViteDevServer */,
 	excludePatterns: string[] = [],
 	// single: { file?: string; event: 'add' },
-): Promise<R.RoutesManifest> {
+): Promise<void> {
 	routes.clear();
 
 	const routesFolder = 'src/routes';
@@ -106,6 +104,13 @@ export async function collectRoutes(
 	const serverEntrypoints = allFilesInRoutes.filter((f) =>
 		serverEntrypointsFilter(f),
 	);
+
+	if (serverEntrypoints.length === 0) {
+		logger.warnOnce(emptyRoutes(), {
+			timestamp: true,
+		});
+		return;
+	}
 
 	// MARK: Routes priority order
 	// TODO: `prepareSortableRoutes` and `routeComparator` in same function `sortRoutes`
@@ -169,6 +174,4 @@ export async function collectRoutes(
 				route.pageAssets.push(assetPathWithExt);
 		});
 	});
-
-	return routes;
 }

@@ -6,6 +6,7 @@ import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import { createServerAdapter } from '@whatwg-node/server';
 import type { IncomingMessage, ServerResponse } from 'http';
 
+import { GracileError, GracileErrorData } from '../../errors/errors.js';
 import { constants } from '../constants.js';
 import {
 	type AdapterOptions,
@@ -72,18 +73,34 @@ export function nodeAdapter(
 
 		locals?: unknown,
 	) {
-		const request = (await Promise.resolve(
-			nodeRequestToStandardRequest.handleNodeRequest(
-				// HACK: Incorrect typings
-				req as IncomingMessage & { url: string; method: string },
-			),
-		)) as unknown as Request;
+		const logger = createLogger(options?.logger);
+
+		let webRequest: Request;
+
+		try {
+			webRequest = (await Promise.resolve(
+				nodeRequestToStandardRequest.handleNodeRequest(
+					// HACK: Exact optional properties
+					req as IncomingMessage & { url?: string; method?: string },
+				),
+			)) as unknown as Request;
+		} catch (e) {
+			throw new GracileError(
+				{
+					...GracileErrorData.InvalidRequestInAdapter,
+					message: GracileErrorData.InvalidRequestInAdapter.message('Node'),
+				},
+				{
+					cause: e,
+				},
+			);
+		}
 
 		const mergedLocals = {
 			...(locals ?? {}),
 			...('locals' in res && typeof res.locals === 'object' ? res.locals : {}),
 		};
-		const result = await handler(request, mergedLocals);
+		const result = await handler(webRequest, mergedLocals);
 
 		if (result?.body) {
 			standardResponseInitToNodeResponse(result.init, res);
@@ -110,10 +127,12 @@ export function nodeAdapter(
 					.catch((e) => logger.error(String(e)));
 				return piped;
 			}
-			return null;
 		}
 
-		return null;
+		throw new GracileError({
+			...GracileErrorData.InvalidResponseInAdapter,
+			message: GracileErrorData.InvalidResponseInAdapter.message('Node'),
+		});
 	};
 }
 

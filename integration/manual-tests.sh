@@ -1,4 +1,7 @@
 # pnpm tsx --test -C test src/addons/client-router.test.ts
+
+# set -e
+
 pnpm tsx --test -C test src/routes-premises.test.ts
 
 pnpm tsx --test -C test src/addons/metadata.test.ts

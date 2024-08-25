@@ -75,26 +75,26 @@ export class RouteModule {
 	}
 
 	constructor(options: ModuleOptions) {
-		if (typeof options.staticPaths === 'function')
-			this.#staticPaths = options.staticPaths;
+		// if (typeof options.staticPaths === 'function')
+		this.#staticPaths = options.staticPaths;
 
-		if (
-			(typeof options.handler === 'object' ||
-				typeof options.handler === 'function') &&
-			options.handler
-		)
-			this.#handler = options.handler;
+		// if (
+		// 	(typeof options.handler === 'object' ||
+		// 		typeof options.handler === 'function') &&
+		// 	options.handler
+		// )
+		this.#handler = options.handler;
 
 		this.#locals = {};
 
-		if (typeof options.template === 'function')
-			this.#template = options.template;
+		// if (typeof options.template === 'function')
+		this.#template = options.template;
 
-		if (typeof options.document === 'function')
-			this.#document = options.document;
+		// if (typeof options.document === 'function')
+		this.#document = options.document;
 
-		if (typeof options.prerender === 'boolean')
-			this.#prerender = options.prerender;
+		// if (typeof options.prerender === 'boolean')
+		this.#prerender = options.prerender;
 	}
 }
 

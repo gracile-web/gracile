@@ -1,5 +1,10 @@
-import type { ViteDevServer } from 'vite';
+import { collectErrorMetadata } from '@gracile-labs/better-errors/dev/utils';
+import { enhanceViteSSRError } from '@gracile-labs/better-errors/dev/vite';
+import { join } from 'path';
+import { pathToFileURL } from 'url';
+import { type ViteDevServer } from 'vite';
 
+import { GracileError, GracileErrorData } from '../errors/errors.js';
 import * as R from './route.js';
 
 // const ROUTE_SPREAD = /^\.{3}.+$/;
@@ -14,6 +19,12 @@ export const REGEXES = {
 	index: /\((.*)\)/,
 };
 
+const incorrectRouteModuleError = (p: string) =>
+	new GracileError({
+		...GracileErrorData.InvalidRouteExport,
+		message: GracileErrorData.InvalidRouteExport.message(p),
+	});
+
 export async function loadForeignRouteObject({
 	vite,
 	route,
@@ -27,8 +38,31 @@ export async function loadForeignRouteObject({
 
 	let unknownRouteModule: Record<string, unknown> | null = null;
 
-	if (vite) unknownRouteModule = await vite.ssrLoadModule(route.filePath);
-	else if (routeImports) {
+	if (vite) {
+		try {
+			unknownRouteModule = await vite.ssrLoadModule(
+				route.filePath /* + 's' */,
+				{},
+			);
+		} catch (e) {
+			const err = e;
+
+			const filePath = pathToFileURL(join(vite.config.root, route.filePath));
+			const rootFolder = pathToFileURL(vite.config.root);
+
+			// NOTE: Maybe it's not required here? But just upstream (safeError…)
+			const enhance = enhanceViteSSRError({
+				error: err,
+				filePath,
+				// @ts-expect-error Typings mismatches
+				vite,
+			});
+
+			const errorWithMetadata = collectErrorMetadata(enhance, rootFolder);
+
+			throw errorWithMetadata as Error;
+		}
+	} else if (routeImports) {
 		const ri = routeImports.get(route.pattern.pathname);
 
 		if (ri) unknownRouteModule = await Promise.resolve(ri());
@@ -37,16 +71,12 @@ export async function loadForeignRouteObject({
 	if (unknownRouteModule === null) throw new Error('Cannot find route module.');
 
 	const routeModuleFactory = unknownRouteModule['default'];
-
-	const errorBase = `Incorrect route module ${route.filePath}!`;
-
 	if (typeof routeModuleFactory !== 'function')
-		throw new TypeError(`${errorBase} Not a function.`);
+		throw incorrectRouteModuleError(route.filePath);
 
 	const routeModule = routeModuleFactory(R.RouteModule) as unknown;
-
 	if (routeModule instanceof R.RouteModule === false)
-		throw new TypeError(`${errorBase} Not a RouteModule.`);
+		throw incorrectRouteModuleError(route.filePath);
 
 	return routeModule;
 }
