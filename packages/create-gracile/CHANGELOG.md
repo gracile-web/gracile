@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/create-gracile@0.3.2-next.0...create-gracile@0.4.0-next.0) (2024-08-25)
+
+### Features
+
+* global getter for logger/version ([c76c1ec](https://github.com/gracile-web/gracile/commit/c76c1ec1e5b6104ef5c40695768e84af5167baf9))
+
 ## [0.3.2-next.0](https://github.com/gracile-web/gracile/compare/create-gracile@0.3.1...create-gracile@0.3.2-next.0) (2024-08-22)
 
 ### Bug Fixes

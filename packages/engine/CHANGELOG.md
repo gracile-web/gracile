@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.7.0-next.0...@gracile/engine@0.7.0-next.1) (2024-08-25)
+
+### Bug Fixes
+
+* windows paths to posix conversion for code generated routes [#7](https://github.com/gracile-web/gracile/issues/7) ([f7a62d1](https://github.com/gracile-web/gracile/commit/f7a62d1f965ece24b33a3476dfd8df28aa82b7b1))
+
+### Features
+
+* global getter for logger/version ([c76c1ec](https://github.com/gracile-web/gracile/commit/c76c1ec1e5b6104ef5c40695768e84af5167baf9))
+* implement better errors all over, new errors pages+refined logic, debounce watch ([522df77](https://github.com/gracile-web/gracile/commit/522df77a035ea756f3fc2e97fe2139580b76ba1c))
+* introduce "better errors" package ([09ac5dd](https://github.com/gracile-web/gracile/commit/09ac5dd2d011a84716b2a53a4df996360cad6dee))
+* logger options for adapters, organize windows utils, add 500 page support (incomplete) ([dbd01f4](https://github.com/gracile-web/gracile/commit/dbd01f4512fee435de0e28ecdd7bc3e8eb2628c4))
+
 # [0.7.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.6.0...@gracile/engine@0.7.0-next.0) (2024-08-22)
 
 ### Bug Fixes

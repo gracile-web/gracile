@@ -1,6 +1,6 @@
 {
   "name": "@gracile/gracile",
-  "version": "0.7.0-next.0",
+  "version": "0.7.0-next.1",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -53,10 +53,10 @@
     "test:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
   },
   "dependencies": {
+    "@gracile-labs/better-errors": "workspace:^",
     "@gracile/client": "workspace:^",
     "@gracile/engine": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
-    "@gracile-labs/better-errors": "workspace:^",
     "@gracile/server": "workspace:^",
     "@lit-labs/ssr": "^3.2.2",
     "urlpattern-polyfill": "^10.0.0"

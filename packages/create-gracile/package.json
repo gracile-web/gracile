@@ -1,6 +1,6 @@
 {
   "name": "create-gracile",
-  "version": "0.3.2-next.0",
+  "version": "0.4.0-next.0",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -54,8 +54,8 @@
     "random-words": "^2.0.1"
   },
   "devDependencies": {
-    "@gracile/internal-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
+    "@gracile/internal-utils": "workspace:^",
     "@types/degit": "^2.8.6",
     "@types/node": "^20.14.8",
     "cli-testing-library": "^2.0.2",

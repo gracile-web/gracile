@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/markdown@0.1.4-next.0...@gracile/markdown@0.2.0-next.0) (2024-08-25)
+
+### Features
+
+* global getter for logger/version ([c76c1ec](https://github.com/gracile-web/gracile/commit/c76c1ec1e5b6104ef5c40695768e84af5167baf9))
+
 ## [0.1.4-next.0](https://github.com/gracile-web/gracile/compare/@gracile/markdown@0.1.3...@gracile/markdown@0.1.4-next.0) (2024-08-22)
 
 **Note:** Version bump only for package @gracile/markdown

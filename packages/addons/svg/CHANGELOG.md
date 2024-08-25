@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/svg@0.0.10-next.0...@gracile/svg@0.1.0-next.0) (2024-08-25)
+
+### Features
+
+* global getter for logger/version ([c76c1ec](https://github.com/gracile-web/gracile/commit/c76c1ec1e5b6104ef5c40695768e84af5167baf9))
+
 ## [0.0.10-next.0](https://github.com/gracile-web/gracile/compare/@gracile/svg@0.0.9...@gracile/svg@0.0.10-next.0) (2024-08-22)
 
 **Note:** Version bump only for package @gracile/svg

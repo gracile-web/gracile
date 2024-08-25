@@ -1,6 +1,6 @@
 {
   "name": "@gracile/engine",
-  "version": "0.7.0-next.0",
+  "version": "0.7.0-next.1",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -50,9 +50,9 @@
     "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
   },
   "dependencies": {
+    "@gracile-labs/better-errors": "workspace:^",
     "@gracile/client": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
-    "@gracile-labs/better-errors": "workspace:^",
     "@whatwg-node/server": "^0.9.25",
     "fdir": "^6.2.0",
     "picocolors": "^1.0.1",
