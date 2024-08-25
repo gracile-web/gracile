@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream';
 
+import * as assert from '@gracile/internal-utils/assertions';
 import { html } from '@gracile/internal-utils/dummy-literals';
 import { render as renderLitSsr } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
@@ -204,7 +205,7 @@ export async function renderRouteTemplate({
 		// 	return { output, document: null };
 		// }
 
-		if (isLitTemplate(routeOutput) === false)
+		if (assert.isLitTemplate(routeOutput) === false)
 			throw Error(
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);

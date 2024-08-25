@@ -1,8 +1,12 @@
+import './logger.js';
+
 import { /* cp,  */ rm } from 'node:fs/promises';
 import path from 'node:path';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import { build as viteBuild, createServer /* , type UserConfig */ } from 'vite';
+
+const logger = getLogger();
 
 // NOTE: This method is flaky (creating folders on the fly)
 // import { defineConfig } from 'vite';
@@ -28,8 +32,6 @@ import { build as viteBuild, createServer /* , type UserConfig */ } from 'vite';
 // 		gracile({ mode: 'server' }),
 // 	],
 // } satisfies UserConfig;
-
-// export const ERROR_HEADING = '😵 An error has occurred!';
 
 await rm(path.join(process.cwd(), '.tmp'), { recursive: true }).catch(
 	() => null,

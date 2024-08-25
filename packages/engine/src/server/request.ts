@@ -1,5 +1,6 @@
 import { Readable } from 'node:stream';
 
+import * as assert from '@gracile/internal-utils/assertions';
 import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 import type { ErrorPayload, ViteDevServer } from 'vite';

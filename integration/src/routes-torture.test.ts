@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { after, it } from 'node:test';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import * as cheerio from 'cheerio';
 
 import { fetchResource } from './__utils__/fetch.js';
@@ -10,6 +10,8 @@ import {
 	createStaticDevServer,
 	ERROR_404,
 } from './__utils__/gracile-server.js';
+
+const logger = getLogger();
 
 const { address, close } = await createStaticDevServer({
 	project: 'static-site',

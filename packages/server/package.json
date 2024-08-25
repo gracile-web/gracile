@@ -50,11 +50,11 @@
   "devDependencies": {
     "@gracile/client": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
+    "@gracile/internal-utils": "workspace:^",
     "@types/node": "^20.14.8",
     "c8": "^10.1.2",
     "tsx": "^4.7.2",
-    "typescript": "5.5.4",
-    "vite": "^5.3.5"
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "^3.2.2",

@@ -2,7 +2,8 @@
 
 // // For keeping it long running with manual tests.
 
-// import { logger } from '@gracile/internal-utils/logger';
+// import { getLogger } from '@gracile/internal-utils/logger/helpers';
+// const logger = getLogger();
 
 // import { createStaticDevServer } from './__utils__/gracile-server.js';
 

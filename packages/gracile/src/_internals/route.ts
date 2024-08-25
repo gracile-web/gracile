@@ -1,1 +1,1 @@
-export * from '@gracile/engine/routes/route';
+export { RequestMethod } from '@gracile/engine/routes/route';

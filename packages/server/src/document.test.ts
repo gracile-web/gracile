@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import test, { describe } from 'node:test';
 
-import { isLitServerTemplate } from '@gracile/engine/assertions';
+import { isLitServerTemplate } from '@gracile/internal-utils/assertions';
 import { html } from 'lit';
 
 import * as doc from './document.js';

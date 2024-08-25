@@ -1,3 +1,5 @@
+import './logger.js';
+
 import assert from 'node:assert';
 import {
 	cp,
@@ -10,11 +12,13 @@ import {
 import { join } from 'node:path';
 import { styleText } from 'node:util';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import { format } from 'prettier';
 import { assertEqual } from 'snapshot-fixtures';
 
 import { removeLocalPathsInDevAssets } from './vite.js';
+
+const logger = getLogger();
 
 export async function snapshotAssertEqual(options: {
 	expectedPath: string[];

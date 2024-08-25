@@ -1,6 +1,10 @@
+import './logger.js';
+
 import { join } from 'node:path';
 
-import { logger } from '@gracile/internal-utils/logger';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
+
+const logger = getLogger();
 
 export async function fetchResource(
 	base: string,
