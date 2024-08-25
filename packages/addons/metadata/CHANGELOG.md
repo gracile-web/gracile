@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/metadata@0.1.0-next.0...@gracile/metadata@0.1.0) (2024-08-25)
+
+**Note:** Version bump only for package @gracile/metadata
+
 # [0.1.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/metadata@0.0.9...@gracile/metadata@0.1.0-next.0) (2024-08-25)
 
 ### Features
