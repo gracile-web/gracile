@@ -58,7 +58,6 @@ export function enhanceViteSSRError({
 			safeError.hint = FailedToLoadModuleSSR.hint;
 			const line = lns.findIndex((ln) => ln.includes(importName!));
 
-			console.log({ line });
 			if (line !== -1) {
 				const column = lns[line]?.indexOf(importName);
 
@@ -158,7 +157,7 @@ export async function getViteErrorPayload({
 }): Promise<BetterErrorPayload> {
 	let plugin = err.plugin;
 	if (!plugin && err.hint) {
-		plugin = 'astro';
+		plugin = 'gracile';
 	}
 
 	const message = renderErrorMarkdown(err.message.trim(), 'html');

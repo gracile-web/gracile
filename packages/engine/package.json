@@ -76,18 +76,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "// disabledDeps": {
-    "fast-glob": "^3.3.2",
-    "peerDependenciesMeta": {
-      "fast-glob": {
-        "optional": true
-      }
-    },
-    "typedoc": "^0.25.8",
-    "@whatwg-node/fetch": "^0.9.16",
-    "vite-plugin-web-components-hmr": "^0.1.3",
-    "vite-plugin-standard-css-modules": "^0.0.10",
-    "vite-plugin-web-components-hmr-local": "link:../../../../../__forks/vite-plugin-web-components-hmr/packages/dev-server-hmr"
   }
 }

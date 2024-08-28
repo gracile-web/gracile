@@ -2,7 +2,7 @@ import { join } from 'node:path';
 
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import { getVersion } from '@gracile/internal-utils/version';
-import { betterErrors } from '@gracile-labs/better-errors/plugin';
+// import { betterErrors } from '@gracile-labs/better-errors/plugin';
 import { rename, rm } from 'fs/promises';
 import c from 'picocolors';
 import { build, createServer, type PluginOption } from 'vite';
@@ -73,9 +73,9 @@ export const gracile = (config?: GracileConfig): any[] => {
 	});
 
 	return [
-		betterErrors({
-			overlayImportPath: '@gracile/gracile/_internals/vite-custom-overlay',
-		}),
+		// betterErrors({
+		// 	overlayImportPath: '@gracile/gracile/_internals/vite-custom-overlay',
+		// }),
 		// 		{
 		// 			name: 'gracile-routes-codegen',
 
