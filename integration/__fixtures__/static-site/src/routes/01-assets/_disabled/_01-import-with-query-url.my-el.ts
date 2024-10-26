@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
-import styles from './_00-import-with-query-url.scss?url';
+import styles from './_01-import-with-query-url.scss?url';
 
 @customElement('my-el')
 export class MyEl extends LitElement {

@@ -1,7 +1,7 @@
 import { defineRoute } from '@gracile/server/route';
 import { html } from 'lit';
 
-import { document } from '../../documents/document-with-assets.js';
+import { document } from '../../../documents/document-with-assets.js';
 
 import customStylesheet from './_00-import-with-query-url--server-2.scss?url';
 import './_01-import-with-query-url.my-el.js';
