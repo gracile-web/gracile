@@ -18,7 +18,7 @@ const logger = getLogger();
 function extractRoutePatterns(
 	routeFilePath: string,
 ): Pick<R.Route, 'pattern' | 'hasParams'> & { patternString: string } {
-	const routePathname = routeFilePath.replace(/\.[j|t]s$/, '');
+	const routePathname = routeFilePath.replace(/\.(js|ts|jsx|tsx|html)$/, '');
 
 	let pathParts = routePathname.split(
 		paths.isWindows() ? paths.WINDOWS_PATH_SEPARATOR : '/',
@@ -159,7 +159,7 @@ export async function collectRoutes(
 			pageAssets: [],
 			// NOTE: Not implemented here!
 			// prerender: null,
-	});
+		});
 	}
 
 	for (const routePath of serverPageClientAssets) {

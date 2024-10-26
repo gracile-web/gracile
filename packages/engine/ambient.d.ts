@@ -8,5 +8,21 @@
 // }
 
 declare namespace Gracile {
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	interface Locals {}
+}
+
+declare module 'gracile:client:routes' {
+	export const enabled: boolean;
+
+	export const mode: 'static' | 'server';
+
+	export const routeImports: Map<
+		string,
+		() => Promise<{
+			default: (
+				routeModule: typeof import('@gracile/engine/routes/route').RouteModule,
+			) => import('@gracile/engine/routes/route').RouteModule;
+		}>
+	>;
 }

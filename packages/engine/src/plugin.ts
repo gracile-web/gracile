@@ -1,32 +1,27 @@
 import { join } from 'node:path';
+import { rename, rm } from 'node:fs/promises';
 
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import { getVersion } from '@gracile/internal-utils/version';
 // import { betterErrors } from '@gracile-labs/better-errors/plugin';
-import { rename, rm } from 'fs/promises';
 import c from 'picocolors';
 import { build, createServer, type PluginOption } from 'vite';
 
 import {
 	type RenderedRouteDefinition /* renderRoutes */,
-} from './build/static.js';
-import { createDevHandler } from './dev/dev.js';
+} from './routes/render.js';
+import { createDevelopmentHandler } from './dev/development.js';
 import type { RoutesManifest } from './routes/route.js';
 import { nodeAdapter } from './server/adapters/node.js';
 import type { GracileConfig } from './user-config.js';
-import { buildRoutes } from './vite/plugins/build-routes.js';
-import {
-	virtualRoutes,
-	virtualRoutesClient,
-} from './vite/plugins/virtual-routes.js';
-
-export type { GracileConfig };
+import { buildRoutes } from './vite/build-routes.js';
+import { htmlRoutesLoader } from './vite/html-routes.js';
+import { virtualRoutes, virtualRoutesClient } from './vite/virtual-routes.js';
 
 let isClientBuilt = false;
 
 /**
  * The main Vite plugin for loading the Gracile framework.
- *
  * @param config - Gracile configuration.
  * @returns Vite plugins. `any` is used to prevent Vite typings version mismatches for the plugin API.
  * @example
@@ -187,6 +182,8 @@ export const gracile = (config?: GracileConfig): any[] => {
 
 		virtualRoutesForClient,
 
+		htmlRoutesLoader(),
+
 		{
 			name: 'vite-plugin-gracile-build',
 
@@ -235,10 +232,9 @@ export const gracile = (config?: GracileConfig): any[] => {
 			writeBundle(_, bundle) {
 				if (outputMode === 'static') return;
 
-				Object.entries(bundle).forEach(([, file]) => {
+				for (const file of Object.values(bundle))
 					if (file.type === 'asset' && file.name)
 						clientAssets[file.name] = file.fileName;
-				});
 			},
 		},
 
@@ -289,7 +285,7 @@ export const gracile = (config?: GracileConfig): any[] => {
 										return `assets/${chunkInfo.name.replace(/\.(.*)$/, '')}-[hash].[ext]`;
 									}
 
-									// throw new Error(`Not client asset`);
+									// throw new Error(`Not a client asset`);
 									return 'assets/[name]-[hash].[ext]';
 								},
 								chunkFileNames: 'chunk/[name].js',
@@ -360,3 +356,5 @@ export const handler = createGracileHandler({
 		},
 	] satisfies PluginOption;
 };
+
+export type { GracileConfig } from './user-config.js';

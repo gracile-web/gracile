@@ -20,12 +20,12 @@ export type MarkdownModule = {
 
 	body: {
 		html: string;
-		lit: TemplateResult<1>;
+		lit: TemplateResult;
 	};
 
 	excerpt: {
 		html: string;
-		lit: TemplateResult<1>;
+		lit: TemplateResult;
 		text: string;
 	};
 

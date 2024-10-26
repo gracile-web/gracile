@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 // NOTE: Tested in @gracile/server, but could add more test here
 
 import type { ServerRenderedTemplate } from '@lit-labs/ssr';
@@ -154,9 +152,7 @@ export type RouteContextGeneric = {
 };
 
 export type DocumentResult = MaybePromise<ServerRenderedTemplate>;
-export type RouteTemplateResult = MaybePromise<
-	TemplateResult<1> | ServerRenderedTemplate
->;
+export type RouteTemplateResult = MaybePromise<TemplateResult>;
 
 export type DocumentTemplate<
 	RouteContext extends RouteContextGeneric = RouteContextGeneric,

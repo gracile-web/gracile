@@ -155,8 +155,17 @@ export async function renderRouteTemplate({
 				: '',
 		);
 
-	// MARK: Dev. overlay
-	// TODO: Need more testing and refinement (refreshes kills its usefulness)
+	// MARK: Add doctype if missing.
+	if (
+		baseDocumentRendered
+			.trimStart()
+			.toLocaleLowerCase()
+			.startsWith('<!doctype') === false
+	)
+		baseDocumentRendered = `<!doctype html>\n${baseDocumentRendered}`;
+
+	// MARK: Dev. overlay.
+	// TODO: Need more testing and refinement (refreshes kills its usefulness).
 	const overlay = () => html`
 		<script type="module">
 			if (import.meta.hot) {

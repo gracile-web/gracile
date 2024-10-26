@@ -145,8 +145,8 @@ export function prepareSortableRoutes(routes: string[]) {
 			if (REGEXES.param.test(part)) {
 				segment.dynamic = true;
 			}
-			const params = part
-				.replace(/\.(js|ts)$/, '')
+			const parameters = part
+				.replace(/\.(js|ts|jsx|tsx|html)$/, '')
 				.split(REGEXES.dynamicSplit)
 				.filter((parameter) => parameter !== '');
 

@@ -28,7 +28,7 @@ import type { TemplateResult } from 'lit';
  * ```
  */
 export async function renderLitTemplate(
-	template: ServerRenderedTemplate | TemplateResult<1>,
+	template: ServerRenderedTemplate | TemplateResult,
 ): Promise<string> {
 	return collectResult(renderLitSsr(template));
 }
