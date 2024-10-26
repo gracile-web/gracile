@@ -72,10 +72,10 @@ export const honoAdapter =
  *
  * const app = new Hono();
  *
- * app.get('*', serveStatic({ root: gracile.getClientDistPath(import.meta.url) }));
+ * app.get('*', serveStatic({ root: gracile.getClientBuildPath(import.meta.url) }));
  * ```
  */
-export function getClientDistPath(root: string) {
+export function getClientBuildPath(root: string) {
 	return relative(
 		process.cwd(),
 		fileURLToPath(new URL(constants.CLIENT_DIST_DIR, root)),
@@ -83,3 +83,5 @@ export function getClientDistPath(root: string) {
 }
 
 export { printUrls } from '../utils.js';
+
+export { type GracileHandler } from '../request.js';

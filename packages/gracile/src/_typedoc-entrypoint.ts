@@ -1,13 +1,13 @@
 export { pageAssetsCustomLocation } from './document.js';
 // export {  } from './env.js';
 export {
-	getClientDistPath,
+	getClientBuildPath,
 	type GracileHonoHandler,
 	honoAdapter,
 } from './hono.js';
 export {
 	// FIXME: make more typedoc entrypoint so it's possible to re-export conflicting stuff.
-	// getClientDistPath,
+	// getClientBuildPath,
 	type GracileNodeHandler,
 	nodeAdapter,
 	printUrls,
@@ -16,7 +16,7 @@ export {
 // export * from './hydration.js';
 // export * from './index.js';
 // // export * from './node.js';
-export { env } from './env.js';
+export { nodeCondition } from './node-condition.js';
 export { gracile, type GracileConfig } from './plugin.js';
 export { defineRoute } from './route.js';
 export { type GracileHandler, server } from './server.js';

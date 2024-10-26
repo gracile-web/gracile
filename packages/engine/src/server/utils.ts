@@ -2,7 +2,7 @@
 
 import type { AddressInfo } from 'node:net';
 
-import { env as currentEnv } from '@gracile/internal-utils/env';
+import { nodeCondition } from '@gracile/internal-utils/node-condition/production-ssr';
 import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 
@@ -15,7 +15,6 @@ import { constants } from './constants.js';
 /**
  * Pretty print your server instance address as soon as it is listening.
  * Matches the dev. server CLI output style.
- *
  * @param server - Takes an `node:net` `AddressInfo` like object (address, family, port) or just a provided, pre-constructed string.
  * @example
  *
@@ -36,27 +35,29 @@ export function printUrls(server: string | AddressInfo | null) {
 
 	let address: null | string = null;
 	if (!server) throw new Error('Incorrect address infos');
-	if (typeof server === 'string') {
-		address = server;
-	} else {
-		address = `http://${server.address}${server.port ? `:${String(server.port)}` : ''}`;
-	}
+	address =
+		typeof server === 'string'
+			? server
+			: `http://${server.address}${server.port ? `:${String(server.port)}` : ''}`;
 
 	// NOTE: Might move this to internal util env
-	const envs = {
+	const environments = {
 		PROD: 'production',
 		DEV: 'development',
 		PREVIEW: 'preview',
 		TEST: 'testing',
 	};
-	let env: keyof typeof envs = 'PROD';
-	if (currentEnv.DEV) env = 'DEV';
-	if (currentEnv.PREVIEW) env = 'PREVIEW';
-	if (currentEnv.TEST) env = 'TEST';
+	let environment: keyof typeof environments = 'PROD';
+	if (nodeCondition.DEV) environment = 'DEV';
+	if (nodeCondition.PREVIEW) environment = 'PREVIEW';
+	if (nodeCondition.TEST) environment = 'TEST';
 
-	logger.info(c.green(`${envs[env]} ${c.yellow('server started')}`), {
-		timestamp: true,
-	});
+	logger.info(
+		c.green(`${environments[environment]} ${c.yellow('server started')}`),
+		{
+			timestamp: true,
+		},
+	);
 
 	if (address.includes(constants.IP_EXPOSED))
 		logger.info(

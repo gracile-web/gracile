@@ -13,7 +13,7 @@ import * as route from '@gracile/gracile/_internals/route';
 import * as routeModule from '@gracile/gracile/_internals/route-module';
 import * as serverRuntime from '@gracile/gracile/_internals/server-runtime';
 import * as document from '@gracile/gracile/document';
-import { env as envFromNodeConditions } from '@gracile/gracile/env';
+import { nodeCondition } from '@gracile/gracile/env';
 import * as hono from '@gracile/gracile/hono';
 import * as node from '@gracile/gracile/node';
 import * as plugin from '@gracile/gracile/plugin';
@@ -39,7 +39,7 @@ function checkServerEnv(input: typeof serverConstants) {
 describe('gracile package should do its exports correctly', () => {
 	test('node adapter', () => {
 		assert.equal(typeof node.printUrls, 'function');
-		assert.equal(typeof node.getClientDistPath, 'function');
+		assert.equal(typeof node.getClientBuildPath, 'function');
 		assert.equal(typeof node.nodeAdapter, 'function');
 
 		// eslint-disable-next-line @typescript-eslint/require-await
@@ -53,7 +53,7 @@ describe('gracile package should do its exports correctly', () => {
 
 	test('hono adapter', () => {
 		assert.equal(typeof hono.printUrls, 'function');
-		assert.equal(typeof hono.getClientDistPath, 'function');
+		assert.equal(typeof hono.getClientBuildPath, 'function');
 		assert.equal(typeof hono.honoAdapter, 'function');
 
 		// eslint-disable-next-line @typescript-eslint/require-await
@@ -117,10 +117,10 @@ describe('gracile package should do its exports correctly', () => {
 	});
 
 	test('env', () => {
-		assert.equal(typeof envFromNodeConditions.DEV === 'boolean', true);
-		assert.equal(typeof envFromNodeConditions.TEST === 'boolean', true);
-		assert.equal(typeof envFromNodeConditions.PREVIEW === 'boolean', true);
-		assert.equal(typeof envFromNodeConditions.BROWSER === 'boolean', true);
+		assert.equal(typeof nodeCondition.DEV === 'boolean', true);
+		assert.equal(typeof nodeCondition.TEST === 'boolean', true);
+		assert.equal(typeof nodeCondition.PREVIEW === 'boolean', true);
+		assert.equal(typeof nodeCondition.BROWSER === 'boolean', true);
 	});
 
 	test('tsconfigs', () => {

@@ -2,10 +2,9 @@ import { Writable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
-import { env } from '@gracile/internal-utils/env';
+import { nodeCondition } from '@gracile/internal-utils/node-condition/production-ssr';
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import { createServerAdapter } from '@whatwg-node/server';
-import type { IncomingMessage, ServerResponse } from 'http';
 
 import { GracileError, GracileErrorData } from '../../errors/errors.js';
 import { constants } from '../constants.js';
@@ -109,12 +108,11 @@ export function nodeAdapter(
 			// NOTE: We can't do similar thing with Hono with just
 			// a standard Response workflow, it seems
 			result.body.addListener('error', (error) => {
-				if (env.DEV) logger.error(String(error));
+				if (nodeCondition.DEV) logger.error(String(error));
 				// NOTE: res.writeHead doesn't seems to take effect, too (too late)
 				// res.statusCode = 500;
-				res.end(env.DEV ? '__SSR_ERROR__' : undefined);
+				response.end(nodeCondition.DEV ? '__SSR_ERROR__' : undefined);
 			});
-			return result.body.pipe(res);
 			return result.body.pipe(response);
 		}
 		if (result?.response) {
@@ -151,7 +149,7 @@ export function nodeAdapter(
  * app.use(express.static(gracile.getClientBuildPath(import.meta.url)));
  * ```
  */
-export function getClientDistPath(root: string) {
+export function getClientBuildPath(root: string) {
 	return fileURLToPath(new URL(constants.CLIENT_DIST_DIR, root));
 }
 

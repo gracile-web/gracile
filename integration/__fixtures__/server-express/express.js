@@ -6,7 +6,7 @@ import { handler } from './dist/server/entrypoint.js';
 
 const app = express();
 
-app.use(express.static(gracile.getClientDistPath(import.meta.url)));
+app.use(express.static(gracile.getClientBuildPath(import.meta.url)));
 
 app.use((_req, res, next) => {
 	res.locals.requestId = crypto.randomUUID();

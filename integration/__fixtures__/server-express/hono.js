@@ -9,7 +9,10 @@ import { handler } from './dist/server/entrypoint.js';
 /** @type {Hono<{ Variables: Gracile.Locals }>} */
 const app = new Hono();
 
-app.get('*', serveStatic({ root: gracile.getClientDistPath(import.meta.url) }));
+app.get(
+	'*',
+	serveStatic({ root: gracile.getClientBuildPath(import.meta.url) }),
+);
 
 app.use((c, next) => {
 	c.set('requestId', crypto.randomUUID());
