@@ -20,3 +20,5 @@
 // 	if (state) return state;
 // 	throw new InternalError(new ReferenceError('Fail to get '));
 // }
+
+throw new Error('Nothing to see here.');

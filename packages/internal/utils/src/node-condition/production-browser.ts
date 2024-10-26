@@ -1,4 +1,4 @@
-export const env = Object.freeze({
+export const nodeCondition = Object.freeze({
 	BROWSER: true,
 	DEV: false,
 	PREVIEW: false,

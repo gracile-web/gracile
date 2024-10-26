@@ -13,7 +13,7 @@
  * }
  * ```
  */
-export const env = Object.freeze({
+export const nodeCondition = Object.freeze({
 	BROWSER: false as boolean,
 	DEV: false as boolean,
 	PREVIEW: false as boolean,
