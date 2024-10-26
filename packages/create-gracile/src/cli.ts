@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-/* eslint-disable max-lines */
-import { exec as e } from 'node:child_process';
+
+import { exec as exec_ } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -17,6 +17,8 @@ import { availableTemplates } from './available.js';
 import { type Settings, TEMPLATE_LIST, TEMPLATE_LIST_ANON } from './types.js';
 
 const { DEV } = process.env;
+
+const exec = promisify(exec_);
 
 // MARK: Create CLI
 
@@ -76,8 +78,6 @@ const program = new Command()
 
 // MARK: Intro
 
-const exec = promisify(e);
-
 const packageManager =
 	process.env['npm_config_user_agent']?.split(' ').at(0)?.split('/').at(0) ||
 	'npm';
@@ -128,31 +128,31 @@ const savedSettings =
 function settingsNote(settings: PartialSettings, title: string) {
 	const savedSettingsNote = [];
 
-	if (typeof settings.location !== 'undefined')
+	if (settings.location !== undefined)
 		savedSettingsNote.push(
 			`${c.green('Location')}: ${c.bold(settings.location)}`,
 		);
-	if (typeof settings.template !== 'undefined')
+	if (settings.template !== undefined)
 		savedSettingsNote.push(
 			`${c.green('Template')}: ${c.bold(settings.template)}`,
 		);
-	if (typeof settings.next !== 'undefined')
+	if (settings.next !== undefined)
 		savedSettingsNote.push(
 			`${c.green('Next version')}: ${c.bold(String(settings.next))}`,
 		);
-	if (typeof settings.initializeGit !== 'undefined')
+	if (settings.initializeGit !== undefined)
 		savedSettingsNote.push(
 			`${c.green('Initialize git')}: ${c.bold(String(settings.initializeGit))}`,
 		);
-	if (typeof settings.installDependencies !== 'undefined')
+	if (settings.installDependencies !== undefined)
 		savedSettingsNote.push(
 			`${c.green('Install dependencies')}: ${c.bold(String(settings.installDependencies))}`,
 		);
-	if (typeof settings.usePreviousSettings !== 'undefined')
+	if (settings.usePreviousSettings !== undefined)
 		savedSettingsNote.push(
 			`${c.green('Use previous settings')}: ${c.bold(String(settings.usePreviousSettings))}`,
 		);
-	if (typeof settings.clearPreviousSettings !== 'undefined')
+	if (settings.clearPreviousSettings !== undefined)
 		savedSettingsNote.push(
 			`${c.green('Clear previous settings')}: ${c.bold(String(settings.clearPreviousSettings))}`,
 		);
@@ -191,7 +191,7 @@ if (locationExists || (!cliSettings.location && !savedSettings.location)) {
 
 				location = value;
 			}
-			return undefined;
+			return;
 		},
 	});
 
@@ -266,7 +266,7 @@ const settings: PartialSettings = {
 };
 
 const projectDestination = settings.location;
-if (!projectDestination) throw Error();
+if (!projectDestination) throw new Error('No destination.');
 
 settingsNote(settings, 'Final configuration');
 // eslint-disable-next-line no-console
@@ -285,22 +285,22 @@ cloneSpinner.start(
 // 	: 'https://github.com/gracile-web/starter-projects/tree/main/';
 const REPO_BASE = 'https://github.com/gracile-web/starter-projects';
 
-const projectDestinationTmp = `${projectDestination}__tmp_clone`;
+const projectDestinationTemporary = `${projectDestination}__tmp_clone`;
 
 await exec(
-	`git clone${settings.next ? ' -b next' : ''} -n --depth=1 --filter=tree:0 ${REPO_BASE} ${projectDestinationTmp}`,
+	`git clone${settings.next ? ' -b next' : ''} -n --depth=1 --filter=tree:0 ${REPO_BASE} ${projectDestinationTemporary}`,
 );
 
 await exec(`git sparse-checkout set --no-cone templates/${template}`, {
-	cwd: projectDestinationTmp,
+	cwd: projectDestinationTemporary,
 });
 
 await exec(`git checkout`, {
-	cwd: projectDestinationTmp,
+	cwd: projectDestinationTemporary,
 });
 
 await rename(
-	join(projectDestinationTmp, 'templates', template),
+	join(projectDestinationTemporary, 'templates', template),
 	projectDestination,
 ).catch(() => {
 	clack.log.error(
@@ -308,7 +308,7 @@ await rename(
 	);
 	process.exit(1);
 });
-await rm(projectDestinationTmp, { force: true, recursive: true });
+await rm(projectDestinationTemporary, { force: true, recursive: true });
 
 await rm(join(process.cwd(), projectDestination, '.git'), {
 	recursive: true,
@@ -345,11 +345,11 @@ async function update(
 	pJson[type][packageName] = `^${updatedVersion}`;
 }
 await Promise.all([
-	...Object.entries(pJson.dependencies).map((args) =>
-		update(args, 'dependencies'),
+	...Object.entries(pJson.dependencies).map((arguments_) =>
+		update(arguments_, 'dependencies'),
 	),
-	...Object.entries(pJson.devDependencies).map((args) =>
-		update(args, 'devDependencies'),
+	...Object.entries(pJson.devDependencies).map((arguments_) =>
+		update(arguments_, 'devDependencies'),
 	),
 ]);
 await writeFile(pJsonPath, `${JSON.stringify(pJson, null, 2)}\n`);

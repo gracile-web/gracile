@@ -3,11 +3,9 @@ import type { ServerRenderedTemplate } from '@lit-labs/ssr';
 import { html } from '@lit-labs/ssr';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-import type { Breadcrumbs, MetadataConfig } from './config-options.js';
+import type { MetadataConfig } from './config-options.js';
 
 const logger = createLogger();
-
-export type { Breadcrumbs, MetadataConfig };
 
 /**
  * Ouput all useful tags to put in document head.
@@ -22,9 +20,12 @@ export function createMetadata(
 ): ServerRenderedTemplate[] {
 	const result: ServerRenderedTemplate[] = [];
 
+	// eslint-disable-next-line unicorn/text-encoding-identifier-case
+	const charset = config.charset ?? 'UTF-8';
 	result.push(html`
 		<!--  -->
-		<meta charset=${config.charset ?? 'UTF-8'} />
+
+		<meta charset=${charset} />
 		<meta
 			name="viewport"
 			content=${config.viewport ?? 'width=device-width, initial-scale=1.0'}
@@ -154,15 +155,17 @@ export function createMetadata(
 						{
 							'@context': 'https://schema.org',
 							'@type': 'BreadcrumbList',
-							itemListElement: config.jsonLd.breadcrumbs.map((crumb, i) => ({
-								'@type': 'ListItem',
-								position: i + 1,
-								name: crumb.name,
-								item: crumb.href
-									? // Join by removing possible duplicate slashes
-										`${(config.canonicalUrl ?? '').replace(/\/$/, '')}/${crumb.href.replace(/^\//, '')}`
-									: undefined,
-							})),
+							itemListElement: config.jsonLd.breadcrumbs.map(
+								(crumb, index) => ({
+									'@type': 'ListItem',
+									position: index + 1,
+									name: crumb.name,
+									item: crumb.href
+										? // Join by removing possible duplicate slashes
+											`${(config.canonicalUrl ?? '').replace(/\/$/, '')}/${crumb.href.replace(/^\//, '')}`
+										: undefined,
+								}),
+							),
 						},
 						null,
 						2,
@@ -178,3 +181,5 @@ export function createMetadata(
 
 	return result;
 }
+
+export { type MetadataConfig, type Breadcrumbs } from './config-options.js';

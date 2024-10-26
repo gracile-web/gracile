@@ -55,7 +55,6 @@ describe('should assert responses', () => {
 	test('assert patched standard response', () => {
 		assert.equal(
 			isResponseOrPatchedResponse(
-				// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 				new (class Response {
 					url: null = null;
 

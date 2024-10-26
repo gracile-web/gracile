@@ -37,8 +37,8 @@ export function viteMarkdownPlugin(options?: {
 					let markdownCode: string | undefined;
 					try {
 						markdownCode = await fs.promises.readFile(id, 'utf8');
-					} catch (exception) {
-						logger.warn(`${id} couldn't be read\n${String(exception)}`);
+					} catch (error) {
+						logger.warn(`${id} couldn't be read\n${String(error)}`);
 						return null;
 					}
 
@@ -82,9 +82,9 @@ export default Object.freeze({
 	}),
 });
 `;
-					} catch (exception) {
+					} catch (error) {
 						logger.error(
-							`${id} errored during Markdown loadiing:\n${String(exception)}`,
+							`${id} errored during Markdown loading:\n${String(error)}`,
 						);
 						return null;
 					}

@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import { html as LitHtml, LitElement } from 'lit';
 
 export { pageAssetsCustomLocation } from './assets.js';

@@ -8,15 +8,15 @@
  */
 export function dummyLiteral(
 	templateStrings: TemplateStringsArray,
-	...args: (string | string[])[]
+	...arguments_: (string | string[])[]
 ): string {
 	return templateStrings
 		.map(
 			(templateString, index) =>
 				templateString +
-				// TODO: Fix types
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-				(Array.isArray(args[index]) ? args[index].join('') : args[index] || ''),
+				(Array.isArray(arguments_[index])
+					? arguments_[index].join('')
+					: arguments_[index] || ''),
 		)
 		.join('');
 }

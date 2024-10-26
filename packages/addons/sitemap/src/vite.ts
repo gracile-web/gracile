@@ -31,8 +31,8 @@ export function viteSitemapPlugin(options: {
 			name: VITE_PLUGIN_NAME,
 			enforce: 'post',
 
-			config(_, env) {
-				isSsrBuild = env.isSsrBuild || false;
+			config(_, environment) {
+				isSsrBuild = environment.isSsrBuild || false;
 			},
 
 			async generateBundle(_, bundle) {

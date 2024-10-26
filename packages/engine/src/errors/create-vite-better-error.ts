@@ -7,6 +7,7 @@ import { getViteErrorPayload } from '@gracile-labs/better-errors/dev/vite';
 import type { ErrorPayload, ViteDevServer } from 'vite';
 
 import { renderLitTemplate } from '../render/utils.js';
+
 import { GRACILE_JS_ERRORS_DOCS_BASE, GracileErrorData } from './errors.js';
 import { builtInErrorPage } from './pages.js';
 
@@ -30,9 +31,7 @@ export async function emitViteBetterError({
 			GracileErrorData,
 			GRACILE_JS_ERRORS_DOCS_BASE,
 		),
-		{
-			timestamp: true,
-		},
+		{ timestamp: true },
 	);
 	const payload = await getViteErrorPayload({
 		docsBaseUrl: GRACILE_JS_ERRORS_DOCS_BASE,

@@ -60,6 +60,7 @@ export const gracile = (config?: GracileConfig): any[] => {
 
 	const gracileConfig = config || ({} as GracileConfig);
 
+	// NOTE: Prevent duplicate client build for the SSR build step in server mode.
 	if (isClientBuilt) return [];
 	isClientBuilt = true;
 
@@ -112,8 +113,8 @@ export const gracile = (config?: GracileConfig): any[] => {
 
 			apply: 'serve',
 
-			config(_, env) {
-				if (env.isPreview) return null;
+			config(_, environment) {
+				if (environment.isPreview) return null;
 				return {
 					// NOTE: Supresses message: `Could not auto-determine entry point from rollupOptions or html files…`
 					// FIXME: It's not working when reloading the Vite config.
@@ -152,7 +153,7 @@ export const gracile = (config?: GracileConfig): any[] => {
 				);
 				// ---
 
-				const { handler } = await createDevHandler({
+				const { handler } = await createDevelopmentHandler({
 					routes,
 					vite: server,
 					gracileConfig,
@@ -169,15 +170,15 @@ export const gracile = (config?: GracileConfig): any[] => {
 							timestamp: true,
 						});
 						logger.info('');
+						// NOTE: We want it to show after the Vite intro stuff
 					}, 100);
-					// s
 				});
 
 				return () => {
-					server.middlewares.use((req, res, next) => {
-						const locals = config?.dev?.locals?.({ nodeRequest: req });
+					server.middlewares.use((request, response, next) => {
+						const locals = config?.dev?.locals?.({ nodeRequest: request });
 						Promise.resolve(
-							nodeAdapter(handler, { logger })(req, res, locals),
+							nodeAdapter(handler, { logger })(request, response, locals),
 						).catch((error) => next(error));
 					});
 				};

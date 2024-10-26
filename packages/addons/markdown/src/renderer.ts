@@ -1,6 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable max-classes-per-file */
-
 import { html as litHtml } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 

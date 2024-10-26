@@ -1,7 +1,5 @@
-import { mkdir } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-
-import { writeFile } from 'fs/promises';
 
 import type { RoutesManifest } from '../routes/route.js';
 
@@ -25,13 +23,13 @@ export type Route =
 			([v]) =>
 				`\`${v
 					.replace(
-						/\{:(.*)\}/,
-						// eslint-disable-next-line no-template-curly-in-string
+						/{:(.*)}/,
+
 						'${string}',
 					)
 					.replace(
 						/:(.*?)\*\//,
-						// eslint-disable-next-line no-template-curly-in-string
+
 						'${string}',
 					)}\``,
 		)

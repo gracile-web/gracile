@@ -3,16 +3,15 @@ import type { ViteDevServer } from 'vite';
 import { loadForeignRouteObject } from './load-module.js';
 import type * as R from './route.js';
 
-type Params = Record<string, string | undefined>;
+type Parameters_ = Record<string, string | undefined>;
 
 type MatchedRoute = {
 	match: URLPatternResult | undefined;
 	foundRoute: R.Route;
-	params: Params;
+	params: Parameters_;
 	pathname: string;
 };
 
-// FIXME: proper DI for routes
 function matchRouteFromUrl(
 	url: string,
 	routes: R.RoutesManifest,
@@ -22,7 +21,6 @@ function matchRouteFromUrl(
 
 	const pathname = new URL(url).pathname;
 
-	// eslint-disable-next-line no-restricted-syntax
 	for (const [, route] of routes) {
 		if (match) break;
 
@@ -37,19 +35,26 @@ function matchRouteFromUrl(
 
 	if (!match || !foundRoute) return null;
 
-	const params: Params = Object.freeze({ ...match.pathname.groups });
+	const parameters: Parameters_ = Object.freeze({ ...match.pathname.groups });
 
-	return { match, foundRoute, params, pathname };
+	return { match, foundRoute, params: parameters, pathname };
 }
 
 type ExtractedStaticPaths = {
 	staticPaths: R.StaticPathOptionsGeneric[];
 	props: unknown;
 } | null;
+/**
+ * @param options
+ * @param options.routeModule
+ * @param options.foundRoute
+ * @param options.params
+ * @param options.pathname
+ */
 async function extractStaticPaths(options: {
 	routeModule: R.RouteModule;
 	foundRoute: R.Route;
-	params: Params;
+	params: Parameters_;
 	pathname: string;
 }): Promise<ExtractedStaticPaths> {
 	if (!options.foundRoute.hasParams) return null;
@@ -57,57 +62,49 @@ async function extractStaticPaths(options: {
 
 	const routeStaticPaths = options.routeModule.staticPaths;
 
-	let props: unknown;
+	let properties: unknown;
 
 	const staticPaths = await Promise.resolve(routeStaticPaths());
 
-	let hasCorrectParams = false;
+	let hasCorrectParameters = false;
 
-	staticPaths.forEach((providedRouteOptions) => {
+	for (const providedRouteOptions of staticPaths) {
 		const routeOptions = providedRouteOptions;
 
 		const matchingKeys = Object.entries(routeOptions.params).filter(
-			([key, val]) => options.params[key] === val,
+			([key, value]) => options.params[key] === value,
 		);
 
 		if (matchingKeys.length === Object.keys(options.params).length) {
-			hasCorrectParams = true;
+			hasCorrectParameters = true;
 
-			if (routeOptions.props) props = routeOptions.props;
+			if (routeOptions.props) properties = routeOptions.props;
 		}
-	});
+	}
 
-	if (hasCorrectParams === false)
-		// throw new Error(
-		// 	`Incorrect route parameters for \`${options.pathname}\`.\n` +
-		// 		`Check \`staticPaths\` for \`${options.foundRoute.filePath}\`.`,
-		// );
-		return null;
+	if (hasCorrectParameters === false) return null;
 
-	return { staticPaths, props };
+	return { staticPaths, props: properties };
 }
 
 export type RouteInfos = {
-	params: Params;
+	params: Parameters_;
 	props: unknown;
 	routeModule: Readonly<R.RouteModule>;
 	foundRoute: R.Route;
 	pathname: string;
 };
+
 export async function getRoute(options: {
 	url: string;
 	vite?: ViteDevServer | undefined;
 	routes: R.RoutesManifest;
 	routeImports?: R.RoutesImports | undefined;
 }): Promise<RouteInfos | null> {
-	// throw new GracileError(new Error(`No route matching for ${url}`), {
-	// 	cause: 404,
-	// });
 	const matchedRoute = matchRouteFromUrl(options.url, options.routes);
 	if (!matchedRoute) return matchedRoute;
 	const { foundRoute, pathname, params } = matchedRoute;
 
-	// TODO: Simplify all the routes things
 	const routeModule = await loadForeignRouteObject({
 		vite: options.vite,
 		route: foundRoute,

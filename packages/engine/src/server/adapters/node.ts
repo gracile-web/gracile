@@ -21,6 +21,7 @@ const nodeRequestToStandardRequest = createServerAdapter((request) => request);
 function standardResponseInitToNodeResponse(
 	responseInit: ResponseInit | Response,
 	res: ServerResponse,
+	response: ServerResponse,
 ) {
 	const headers =
 		responseInit instanceof Response
@@ -30,6 +31,10 @@ function standardResponseInitToNodeResponse(
 	headers.forEach((content, header) => res.setHeader(header, content));
 	if (responseInit.status) res.statusCode = responseInit.status;
 	if (responseInit.statusText) res.statusMessage = responseInit.statusText;
+	for (const [header, content] of headers.entries())
+		response.setHeader(header, content);
+	if (responseInit.status) response.statusCode = responseInit.status;
+	if (responseInit.statusText) response.statusMessage = responseInit.statusText;
 }
 
 export type { GracileHandler };
@@ -37,10 +42,13 @@ export type { GracileHandler };
 export type GracileNodeHandler = (
 	req: IncomingMessage,
 	res: ServerResponse,
+	request: IncomingMessage,
+	response: ServerResponse,
 	locals?: unknown,
 	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 ) => Promise<ServerResponse<IncomingMessage> | null | void>;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface NodeAdapterOptions extends AdapterOptions {
 	//
 }
@@ -71,6 +79,8 @@ export function nodeAdapter(
 		req: IncomingMessage,
 		res: ServerResponse,
 
+		request: IncomingMessage,
+		response: ServerResponse,
 		locals?: unknown,
 	) {
 		const logger = createLogger(options?.logger);
@@ -82,9 +92,11 @@ export function nodeAdapter(
 				nodeRequestToStandardRequest.handleNodeRequest(
 					// HACK: Exact optional properties
 					req as IncomingMessage & { url?: string; method?: string },
+					request as IncomingMessage & { url?: string; method?: string },
 				),
 			)) as unknown as Request;
 		} catch (e) {
+		} catch (error) {
 			throw new GracileError(
 				{
 					...GracileErrorData.InvalidRequestInAdapter,
@@ -92,6 +104,7 @@ export function nodeAdapter(
 				},
 				{
 					cause: e,
+					cause: error,
 				},
 			);
 		}
@@ -99,11 +112,17 @@ export function nodeAdapter(
 		const mergedLocals = {
 			...(locals ?? {}),
 			...('locals' in res && typeof res.locals === 'object' ? res.locals : {}),
+		const mergedLocals: unknown = {
+			...(locals || null),
+			...('locals' in response && typeof response.locals === 'object'
+				? response.locals
+				: {}),
 		};
 		const result = await handler(webRequest, mergedLocals);
 
 		if (result?.body) {
 			standardResponseInitToNodeResponse(result.init, res);
+			standardResponseInitToNodeResponse(result.init, response);
 
 			// NOTE: We can't do similar thing with Hono with just
 			// a standard Response workflow, it seems
@@ -114,17 +133,22 @@ export function nodeAdapter(
 				res.end(env.DEV ? '__SSR_ERROR__' : undefined);
 			});
 			return result.body.pipe(res);
+			return result.body.pipe(response);
 		}
 		if (result?.response) {
 			standardResponseInitToNodeResponse(result.response, res);
+			standardResponseInitToNodeResponse(result.response, response);
 
 			const redirect = isRedirect(result.response);
 			if (redirect) return res.end(result.body);
+			if (redirect) return response.end(result.body);
 
 			if (result.response.body) {
 				const piped = await result.response.body
 					.pipeTo(Writable.toWeb(res))
 					.catch((e) => logger.error(String(e)));
+					.pipeTo(Writable.toWeb(response))
+					.catch((error) => logger.error(String(error)));
 				return piped;
 			}
 		}

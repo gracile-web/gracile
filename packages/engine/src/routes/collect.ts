@@ -8,6 +8,7 @@ import { URLPattern } from 'urlpattern-polyfill/urlpattern';
 import { createFilter } from 'vite';
 
 import { emptyRoutes } from '../logging/messages.js';
+
 import { prepareSortableRoutes, routeComparator } from './comparator.js';
 import { REGEXES } from './load-module.js';
 import type * as R from './route.js';
@@ -36,19 +37,30 @@ function extractRoutePatterns(
 	if (pathParts.length === 1 && pathParts.at(0) === 'index') pathParts = [];
 
 	let hasParams = false;
+	let hasParameters = false;
 
 	const pathRelNorm = pathParts.map((pathEntry) => {
+	const pathRelativeNormalized = pathParts.map((pathEntry) => {
 		let entry = pathEntry;
 
 		if (entry.match(REGEXES.rest)) {
 			hasParams = true;
 			return pathEntry.replace(REGEXES.rest, (_s, param) => `:${param}*`);
+		if (REGEXES.rest.test(entry)) {
+			hasParameters = true;
+			return pathEntry.replace(
+				REGEXES.rest,
+				(_s, parameter) => `:${parameter}*`,
+			);
 		}
 
 		while (REGEXES.param.test(entry)) {
 			hasParams = true;
 			entry = entry.replace(REGEXES.param, (_s, param) => {
 				return `{:${param}}`;
+			hasParameters = true;
+			entry = entry.replace(REGEXES.param, (_s, parameter) => {
+				return `{:${parameter}}`;
 			});
 		}
 
@@ -57,21 +69,26 @@ function extractRoutePatterns(
 
 	const trailingSlash = pathRelNorm.length > 0 ? '/' : '';
 	const normalizedUrlPattern = `/${pathRelNorm.join('/')}${trailingSlash}`;
+	const trailingSlash = pathRelativeNormalized.length > 0 ? '/' : '';
+	const normalizedUrlPattern = `/${pathRelativeNormalized.join('/')}${trailingSlash}`;
 
 	return {
 		patternString: normalizedUrlPattern,
 		pattern: new URLPattern(normalizedUrlPattern, 'http://gracile/'),
 		hasParams,
+		hasParams: hasParameters,
 	};
 }
 
 export const WATCHED_FILES_REGEX =
 	/\/src\/routes\/(.*)\.(ts|js|css|scss|sass|less|styl|stylus)$/;
 // const routes: R.RoutesManifest = new Map<string, R.Route>();
+	/\/src\/routes\/(.*)\.(js|ts|jsx|tsx|html|css|scss|sass|less|styl|stylus)$/;
 
 export async function collectRoutes(
 	routes: R.RoutesManifest,
 	root: string /* vite: ViteDevServer */,
+	root: string,
 	excludePatterns: string[] = [],
 	// single: { file?: string; event: 'add' },
 ): Promise<void> {
@@ -137,6 +154,9 @@ export async function collectRoutes(
 							if (part.match(/\[\./)) return c.cyan(c.italic(part));
 							if (part.match(/\[/)) return c.cyan(part);
 							if (part.match(/\(/)) return c.yellow(part);
+							if (/\[\./.test(part)) return c.cyan(c.italic(part));
+							if (/\[/.test(part)) return c.cyan(part);
+							if (/\(/.test(part)) return c.yellow(part);
 							if (index === pathParts.length - 1) return c.green(part);
 							return part;
 						})
@@ -148,6 +168,7 @@ export async function collectRoutes(
 	// MARK: Associate
 
 	serverEntrypointsSorted.forEach((routePath) => {
+	for (const routePath of serverEntrypointsSorted) {
 		const filePath = join(routesFolder, routePath);
 		const routeWithPatterns = extractRoutePatterns(routePath);
 
@@ -161,17 +182,25 @@ export async function collectRoutes(
 			// prerender: null,
 		});
 	});
+	}
 
 	serverPageClientAssets.forEach((routePath) => {
+	for (const routePath of serverPageClientAssets) {
 		// NOTE: Exact extension needed client side by Vite.
 		const assetPathWithExt = join(routesFolder, routePath);
+		const assetPathWithExtension = join(routesFolder, routePath);
 
 		routes.forEach((route) => {
+		for (const route of routes.values())
 			if (
 				paths.removeAllExt(route.filePath) ===
 				paths.removeAllExt(assetPathWithExt)
+				paths.removeAllExtension(route.filePath) ===
+				paths.removeAllExtension(assetPathWithExtension)
 			)
 				route.pageAssets.push(assetPathWithExt);
 		});
 	});
+				route.pageAssets.push(assetPathWithExtension);
+	}
 }

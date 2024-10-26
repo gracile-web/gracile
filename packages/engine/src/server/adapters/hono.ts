@@ -15,6 +15,7 @@ export type GracileHonoHandler = (context: {
 	var: unknown;
 }) => Promise<Response>;
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface HonoAdapterOptions extends AdapterOptions {
 	//
 }

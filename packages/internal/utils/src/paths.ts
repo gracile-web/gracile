@@ -1,11 +1,10 @@
-export function removeAllExt(p: string) {
+export function removeAllExtension(p: string) {
 	return p.replace(/\.(.*)$/, '');
 }
 
 export function isWindows() {
 	if ('process' in globalThis && 'platform' in globalThis.process)
-		if (process.platform === 'win32') return true;
-		else return false;
+		return process.platform === 'win32' ? true : false;
 
 	throw new Error(`Are you in a Node environment?`);
 }
@@ -19,5 +18,5 @@ export function normalizeToPosix(input: string) {
 }
 
 export function removeLeadingForwardSlashWindows(path: string) {
-	return path.startsWith('/') && path[2] === ':' ? path.substring(1) : path;
+	return path.startsWith('/') && path[2] === ':' ? path.slice(1) : path;
 }

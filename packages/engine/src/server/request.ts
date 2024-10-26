@@ -8,7 +8,7 @@ import c from 'picocolors';
 import type { Logger, ViteDevServer } from 'vite';
 
 import type { emitViteBetterError as emitViteBe } from '../errors/create-vite-better-error.js';
-import { GracileError } from '../errors/errors.js';
+// import { GracileError } from '../errors/errors.js';
 import { builtIn404Page, builtInErrorPage } from '../errors/pages.js';
 import { renderRouteTemplate } from '../render/route-template.js';
 import { renderLitTemplate } from '../render/utils.js';
@@ -74,7 +74,7 @@ export function createGracileHandler({
 		if (vite)
 			emitViteBetterError = await import(
 				'../errors/create-vite-better-error.js'
-			).then(({ emitViteBetterError: e }) => e);
+			).then(({ emitViteBetterError: error }) => error);
 
 		try {
 			// MARK: Rewrite hidden route siblings
@@ -144,8 +144,7 @@ export function createGracileHandler({
 			const handler = routeInfos.routeModule.handler;
 
 			if (
-				('handler' in routeInfos.routeModule &&
-					typeof handler !== 'undefined') ||
+				('handler' in routeInfos.routeModule && handler !== undefined) ||
 				// TODO: Explain this condition
 				(handler && 'GET' in handler === false && method !== 'GET')
 			) {
@@ -160,7 +159,7 @@ export function createGracileHandler({
 				// MARK: Run user middleware
 
 				// NOTE: Experimental
-				// eslint-disable-next-line no-inner-declarations
+				/// eslint-disable-next-line no-inner-declarations
 				// async function useHandler() {}
 				// if (vite) {
 				// 	const middleware = await vite
@@ -189,7 +188,7 @@ export function createGracileHandler({
 						? handler
 						: handler[method as keyof typeof handler];
 					if (typeof handlerWithMethod !== 'function')
-						throw TypeError('Handler must be a function.');
+						throw new TypeError('Handler must be a function.');
 
 					const handlerOutput = await Promise.resolve(
 						handlerWithMethod(routeContext) as unknown,
@@ -284,16 +283,15 @@ export function createGracileHandler({
 							const payload = {
 								type: 'error',
 								// FIXME: Use the emitViteBetterError instead (but flaky for now with streaming)
-								// @ts-expect-error ...........
-								err: new GracileError({
+								// err: new GracileError({}),
+								err: {
 									name: 'StreamingError',
-									title: 'An error occured during the page template streaming.',
 									message: errorMessage,
+									stack: error.stack,
 									hint: 'This is often caused by a wrong template location dynamic interpolation.',
-									// @ts-expect-error ...........
 									cause: error,
 									// highlightedCode: error.message,
-								}),
+								},
 							} satisfies BetterErrorPayload;
 							//
 							setTimeout(() => {

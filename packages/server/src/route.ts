@@ -36,7 +36,7 @@ export function defineRoute<
 
 		params: StaticPathOptions extends { params: any }
 			? StaticPathOptions['params']
-			: R.Params;
+			: R.Parameters;
 	},
 >(
 	/**

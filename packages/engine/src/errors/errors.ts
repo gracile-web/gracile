@@ -1,5 +1,5 @@
-/* eslint-disable max-classes-per-file */
-/* eslint-disable @typescript-eslint/lines-between-class-members */
+/* eslint-disable unicorn/custom-error-definition */
+
 // NOTE: Taken and adapted from https://github.com/withGracile/Gracile/blob/cf65476b27053333cf5a36f6f9f46b794c98dfa2/packages/Gracile/src/core/errors/errors.ts
 
 import {
@@ -31,24 +31,24 @@ type ErrorTypes =
 export class GracileError extends BetterError<ErrorTypes> {
 	type: ErrorTypes = 'GracileError';
 
-	static is(err: unknown): err is GracileError {
-		return (err as GracileError).type === 'GracileError';
+	static is(error: unknown): error is GracileError {
+		return (error as GracileError).type === 'GracileError';
 	}
 }
 
 export class TemplateError extends GracileError {
 	type: ErrorTypes = 'TemplateError';
 
-	static is(err: unknown): err is TemplateError {
-		return (err as TemplateError).type === 'TemplateError';
+	static is(error: unknown): error is TemplateError {
+		return (error as TemplateError).type === 'TemplateError';
 	}
 }
 
 export class InternalError extends GracileError {
 	type: ErrorTypes = 'InternalError';
 
-	static is(err: unknown): err is InternalError {
-		return (err as InternalError).type === 'InternalError';
+	static is(error: unknown): error is InternalError {
+		return (error as InternalError).type === 'InternalError';
 	}
 }
 

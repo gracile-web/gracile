@@ -11,7 +11,7 @@ let collectedExcerpt = '';
 
 export class MarkdownRenderer extends MarkdownRendererBase {
 	async parseDocument() {
-		if (this.source === null) throw Error('No source set for document.');
+		if (this.source === null) throw new Error('No source set for document.');
 
 		const { frontmatter, content } = ultramatter.parse(this.source);
 
@@ -45,6 +45,7 @@ function buildHierarchy(flatToc: Heading[]) {
 	const toc: TocLevel[] = [];
 	const parentHeadings = new Map<number, TocLevel>();
 
+	// eslint-disable-next-line unicorn/no-array-for-each
 	flatToc.forEach((h: Heading) => {
 		const heading: TocLevel = { ...h, children: [] };
 		parentHeadings.set(heading.depth, heading);

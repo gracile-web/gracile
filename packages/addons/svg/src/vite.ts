@@ -27,9 +27,9 @@ export function viteSvgPlugin(
 					let svgCode;
 					try {
 						svgCode = await fs.promises.readFile(id, 'utf8');
-					} catch (exception) {
+					} catch (error) {
 						logger.warn(
-							`${id} couldn't be loaded by vite-plugin-svgo: ${String(exception)}`,
+							`${id} couldn't be loaded by vite-plugin-svgo: ${String(error)}`,
 						);
 						return null;
 					}
@@ -41,9 +41,9 @@ export function viteSvgPlugin(
 						return `import { html } from 'lit';
 
 export default html\`${optimizedSvg.data}\`;`;
-					} catch (exception) {
+					} catch (error) {
 						logger.error(
-							`${id} errored during svg optimization:\n${String(exception)}`,
+							`${id} errored during svg optimization:\n${String(error)}`,
 						);
 					}
 				}
