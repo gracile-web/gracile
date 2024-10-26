@@ -46,13 +46,13 @@
     "@gracile/engine": "workspace:^",
     "@lit-labs/ssr-client": "^1.1.7",
     "@thepassle/app-tools": "^0.9.12",
-    "lit": "^3.1.3",
+    "lit": "^3.2.1",
     "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "^4.7.2",
-    "typescript": "5.5.4"
+    "tsx": "^4.19.1",
+    "typescript": "5.6.3"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "^3.2.2"
