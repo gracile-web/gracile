@@ -18,9 +18,7 @@ import type * as R from '../routes/route.js';
 import { PAGE_ASSETS_MARKER, SSR_OUTLET_MARKER } from './markers.js';
 
 async function* concatStreams(...readables: Readable[]) {
-	// eslint-disable-next-line no-restricted-syntax
 	for (const readable of readables) {
-		// eslint-disable-next-line no-restricted-syntax, no-await-in-loop
 		for await (const chunk of readable) {
 			yield chunk;
 		}
@@ -93,12 +91,10 @@ export async function renderRouteTemplate({
 			location,
 		});
 
-	const baseDocTemplateResult = await Promise.resolve(
 	const baseDocumentTemplateResult = await Promise.resolve(
 		routeInfos.routeModule.document?.(context) as unknown,
 	);
 
-	if (assert.isLitServerTemplate(baseDocTemplateResult) === false)
 	if (assert.isLitServerTemplate(baseDocumentTemplateResult) === false)
 		throw new GracileError({
 			...GracileErrorData.InvalidRouteDocumentResult,
@@ -108,14 +104,9 @@ export async function renderRouteTemplate({
 			location,
 		});
 
-	let baseDocRendered: string;
-
-	// console.log({ ddd: baseDocTemplateResult });
 	let baseDocumentRendered: string;
 
 	try {
-		baseDocRendered = await collectResult(renderLitSsr(baseDocTemplateResult));
-	} catch (e) {
 		baseDocumentRendered = await collectResult(
 			renderLitSsr(baseDocumentTemplateResult),
 		);
@@ -128,34 +119,24 @@ export async function renderRouteTemplate({
 				),
 				location,
 			},
-			{ cause: String(e as Error) },
 			{ cause: String(error) },
 		);
 	}
 
 	// MARK: Sibling assets
-	let baseDocRenderedWithAssets = baseDocRendered;
 
-	// If the user doesnt use `pageAssetCustomLocation`, we put this as a fallback
-
-	baseDocRenderedWithAssets = baseDocRenderedWithAssets
 	// NOTE: If the user doesn't use `pageAssetCustomLocation`,
 	// we put this as a fallback.
 	baseDocumentRendered = baseDocumentRendered
 		.replace('</head>', `\n${PAGE_ASSETS_MARKER}</head>`)
 		.replace(
 			PAGE_ASSETS_MARKER,
-			// eslint-disable-next-line prefer-template
-			routeInfos.foundRoute.pageAssets.length
-				? // eslint-disable-next-line prefer-template
-					html`<!-- PAGE ASSETS -->` +
 
 			routeInfos.foundRoute.pageAssets.length > 0
 				? html`<!-- PAGE ASSETS -->` +
 						`${routeInfos.foundRoute.pageAssets
 							.map((path) => {
 								//
-								if (/\.(js|ts)$/.test(path)) {
 								if (/\.(js|ts|jsx|tsx)$/.test(path)) {
 									// prettier-ignore
 									return html`		<script type="module" src="/${path}"></script>`;
@@ -190,26 +171,21 @@ export async function renderRouteTemplate({
 	`;
 
 	if (mode === 'dev')
-		baseDocRenderedWithAssets = baseDocRenderedWithAssets.replace(
 		baseDocumentRendered = baseDocumentRendered.replace(
 			'<head>',
 			`<head>\n${overlay()}`,
 		);
 
-	// // MARK: Inject assets for server output runtime only
 	// MARK: Inject assets for server output runtime only.
 	const routeAssetsString = routeAssets?.get?.(
 		routeInfos.foundRoute.pattern.pathname,
 	);
 	if (routeAssetsString)
-		baseDocRenderedWithAssets = baseDocRenderedWithAssets
-			.replace(REGEX_TAG_SCRIPT, (s) => {
 		baseDocumentRendered = baseDocumentRendered
 			.replaceAll(REGEX_TAG_SCRIPT, (s) => {
 				if (s.includes(`type="module"`)) return '';
 				return s;
 			})
-			.replace(REGEX_TAG_LINK, (s) => {
 			.replaceAll(REGEX_TAG_LINK, (s) => {
 				if (s.includes(`rel="stylesheet"`)) return '';
 				return s;
@@ -217,7 +193,6 @@ export async function renderRouteTemplate({
 			.replace('</head>', `${routeAssetsString}\n</head>`);
 
 	// MARK: Base document
-	const baseDocHtml =
 	const baseDocumentHtml =
 		vite && mode === 'dev'
 			? await vite.transformIndexHtml(
@@ -227,19 +202,12 @@ export async function renderRouteTemplate({
 					// the html proxy module…
 					// `${routeInfos.pathname}?r=${Math.random()}`,
 					routeInfos.pathname,
-					baseDocRenderedWithAssets,
 					baseDocumentRendered,
 				)
-			: baseDocRenderedWithAssets;
 			: baseDocumentRendered;
 
-	if (docOnly) return { document: baseDocHtml, output: null };
 	if (docOnly) return { document: baseDocumentHtml, output: null };
 
-	const index = baseDocHtml.indexOf(SSR_OUTLET_MARKER);
-	const baseDocRenderStreamPre = Readable.from(baseDocHtml.substring(0, index));
-	const baseDocRenderStreamPost = Readable.from(
-		baseDocHtml.substring(index + SSR_OUTLET_MARKER.length + 1),
 	const index = baseDocumentHtml.indexOf(SSR_OUTLET_MARKER);
 	const baseDocumentRenderStreamPre = Readable.from(
 		baseDocumentHtml.slice(0, Math.max(0, index)),
@@ -249,7 +217,6 @@ export async function renderRouteTemplate({
 	);
 
 	// MARK: Page
-	// Skipped with server mode in production build
 	// Skipped with server mode in production build.
 
 	if (
@@ -272,7 +239,6 @@ export async function renderRouteTemplate({
 		// }
 
 		if (assert.isLitTemplate(routeOutput) === false)
-			throw Error(
 			throw new Error(
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);
@@ -281,23 +247,17 @@ export async function renderRouteTemplate({
 
 		const output = Readable.from(
 			concatStreams(
-				baseDocRenderStreamPre,
 				baseDocumentRenderStreamPre,
 				renderStream,
-				baseDocRenderStreamPost,
 				baseDocumentRenderStreamPost,
 			),
 		);
 
-		return { output, document: baseDocHtml };
 		return { output, document: baseDocumentHtml };
 	}
 
-	// MARK: Just the document
-	const output = Readable.from(baseDocHtml);
 	// MARK: Just the document.
 	const output = Readable.from(baseDocumentHtml);
 
-	return { output, document: baseDocHtml };
 	return { output, document: baseDocumentHtml };
 }

@@ -8,8 +8,6 @@ import { GracileError, GracileErrorData } from '../../errors/errors.js';
 import { constants } from '../constants.js';
 import type { AdapterOptions, GracileHandler } from '../request.js';
 
-export type { GracileHandler };
-
 export type GracileHonoHandler = (context: {
 	req: { raw: Request };
 	var: unknown;

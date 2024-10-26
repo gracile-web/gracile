@@ -2,13 +2,17 @@ import { basename, extname, join } from 'node:path';
 
 import { createFilter, type Plugin, type ViteDevServer } from 'vite';
 
-import { renderRoutes } from '../../build/static.js';
-import {
-	REGEX_TAG_LINK,
-	REGEX_TAG_SCRIPT,
-} from '../../render/route-template.js';
-import type { RoutesManifest } from '../../routes/route.js';
-import type { GracileConfig } from '../../user-config.js';
+import { renderRoutes } from '../routes/render.js';
+import { REGEX_TAG_LINK, REGEX_TAG_SCRIPT } from '../render/route-template.js';
+import type { RoutesManifest } from '../routes/route.js';
+import type { GracileConfig } from '../user-config.js';
+
+function stripPremises(input: string) {
+	return input
+		.replace(/index\.html$/, '__index.doc.html')
+		.replace(/404\.html$/, '__404.doc.html')
+		.replace(/500\.html$/, '__500.doc.html');
+}
 
 export const buildRoutes = async ({
 	routes,
@@ -33,7 +37,7 @@ export const buildRoutes = async ({
 	});
 
 	const inputList = renderedRoutes
-		.filter((i) => i.html)
+		.filter((index) => index.html)
 		.map((input) => input.name);
 
 	const premisesFilter = gracileConfig.pages?.premises?.expose
@@ -44,18 +48,11 @@ export const buildRoutes = async ({
 		: null;
 
 	if (gracileConfig.pages?.premises?.expose && premisesFilter) {
+		// eslint-disable-next-line unicorn/no-array-for-each
 		inputList.forEach((input) => {
 			if (premisesFilter(input) === false) return;
 
-			inputList.push(
-				input
-					.replace(/index\.html$/, '__index.doc.html')
-					.replace(/404\.html$/, '__404.doc.html')
-					.replace(/500\.html$/, '__500.doc.html'),
-
-				// input.replace(/(.*)\.html$/, (_, r) => `__${r}.document.html`),
-				// .replace(/(.*)\.html$/, (_, r) => `__${r}.document.html`),
-			);
+			inputList.push(stripPremises(input));
 		});
 	}
 
@@ -71,9 +68,8 @@ export const buildRoutes = async ({
 				enforce: 'pre',
 
 				resolveId(id) {
-					if (extname(id) === '.html') {
-						if (inputList.find((i) => i === id)) return join(root, id);
-					}
+					if (extname(id) === '.html' && inputList.includes(id))
+						return join(root, id);
 
 					return null;
 				},
@@ -82,7 +78,7 @@ export const buildRoutes = async ({
 					if (extname(id) === '.html') {
 						if (['index.html', '404.html', '500.html'].includes(basename(id))) {
 							const content = renderedRoutes.find(
-								(i) => i.absoluteId === id,
+								(index) => index.absoluteId === id,
 							)?.html;
 
 							if (content) return content;
@@ -90,20 +86,15 @@ export const buildRoutes = async ({
 
 						if (gracileConfig.pages?.premises?.expose) {
 							if (basename(id).endsWith('doc.html')) {
-								const content = renderedRoutes.find((i) => {
-									return (
-										i.absoluteId
-											.replace(/index\.html$/, '__index.doc.html')
-											.replace(/404\.html$/, '__404.doc.html')
-											.replace(/500\.html$/, '__500.doc.html') === id
-									);
-								})?.static.document;
+								const content = renderedRoutes.find(
+									(index) => stripPremises(index.absoluteId) === id,
+								)?.static.document;
 
 								if (content) return content;
 							}
 
 							const content = renderedRoutes.find(
-								(i) => i.name === basename(id),
+								(index) => index.name === basename(id),
 							)?.html;
 							if (content) return content;
 							// return '';}
@@ -121,19 +112,19 @@ export const buildRoutes = async ({
 				buildStart() {
 					if (!gracileConfig.pages?.premises?.expose || !premisesFilter) return;
 
-					renderedRoutes.forEach((route) => {
-						if (premisesFilter(route.name) === false) return;
+					for (const route of renderedRoutes) {
+						if (premisesFilter(route.name) === false) continue;
 
-						if (serverMode && route.savePrerender !== true) return;
+						if (serverMode && route.savePrerender !== true) continue;
 
 						const fileNameParts = route.name.split('/');
 						const last = fileNameParts.pop();
-						const newName = last?.replace(
+						const properties = last?.replace(
 							/(.*)\.html$/,
 							(_, r) => `__${r}.props.json`,
 						);
-						if (!newName) throw new Error();
-						fileNameParts.push(newName);
+						if (!properties) throw new Error('No props.');
+						fileNameParts.push(properties);
 						const fileName = fileNameParts.join('/');
 
 						this.emitFile({
@@ -141,13 +132,12 @@ export const buildRoutes = async ({
 							type: 'asset',
 							source: JSON.stringify(route.static.props ?? {}),
 						});
-					});
+					}
 				},
 
 				generateBundle(_, bundle) {
 					if (serverMode === false) return;
 
-					// eslint-disable-next-line no-restricted-syntax, guard-for-in
 					for (const fileKey in bundle) {
 						const file = bundle[fileKey];
 
@@ -183,7 +173,6 @@ export const buildRoutes = async ({
 							if (route) route.handlerAssets = collectedAssets;
 
 							if (route?.savePrerender !== true) {
-								// eslint-disable-next-line no-param-reassign, @typescript-eslint/no-dynamic-delete
 								delete bundle[fileKey];
 								// NOTE: Not sure if it's useful
 								if (route?.html) route.html = null;

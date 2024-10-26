@@ -148,18 +148,16 @@ export function prepareSortableRoutes(routes: string[]) {
 			const params = part
 				.replace(/\.(js|ts)$/, '')
 				.split(REGEXES.dynamicSplit)
-				.filter((e) => e !== '');
+				.filter((parameter) => parameter !== '');
 
-			if (params.length > 1) {
+			if (parameters.length > 1) {
 				segment.allDynamic = false;
-			} else if (params.length === 1) {
+			} else if (parameters.length === 1) {
 				segment.allDynamic = true;
 			}
 
 			return segment;
 		});
-
-		// console.log({ segments });
 
 		return {
 			route,

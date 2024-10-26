@@ -1,10 +1,13 @@
 import { normalizeToPosix } from '@gracile/internal-utils/paths';
 import { createFilter, type Plugin } from 'vite';
 
-import type { RenderedRouteDefinition } from '../../build/static.js';
-import type { RoutesManifest } from '../../routes/route.js';
-import type { GracileConfig } from '../../user-config.js';
+import type { RenderedRouteDefinition } from '../routes/render.js';
+import type { RoutesManifest } from '../routes/route.js';
+import type { GracileConfig } from '../user-config.js';
 
+/**
+ * @todo Client-side testing, docs.
+ */
 export function virtualRoutes({
 	// root,
 	routes,
@@ -67,15 +70,13 @@ const routeImports = new Map(
 );
 
 const routeAssets = new Map(${JSON.stringify(
-						[
-							...renderedRoutesWithoutPrerender.map((r) => [
-								`/${r.name
-									//
-									.replace(/index\.html$/, '')
-									.replace(/* Error pages */ /\.html$/, '/')}`,
-								r.handlerAssets,
-							]),
-						],
+						renderedRoutesWithoutPrerender.map((r) => [
+							`/${r.name
+								//
+								.replace(/index\.html$/, '')
+								.replace(/* Error pages */ /\.html$/, '/')}`,
+							r.handlerAssets,
+						]),
 						null,
 						2,
 					)});
@@ -105,8 +106,6 @@ export function virtualRoutesClient({
 	const virtualModuleId = 'gracile:client:routes';
 	const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 
-	const enabled = gracileConfig.pages?.premises?.expose;
-
 	const premisesFilter = createFilter(
 		gracileConfig.pages?.premises?.include,
 		gracileConfig.pages?.premises?.exclude,
@@ -127,7 +126,7 @@ export function virtualRoutesClient({
 
 			load(id) {
 				if (id === resolvedVirtualModuleId) {
-					if (!routesMap || routesMap.size < 1) return '';
+					if (!routesMap || routesMap.size === 0) return '';
 
 					const routes = [...routesMap].filter((r) =>
 						premisesFilter(r[1].filePath),
@@ -136,20 +135,16 @@ export function virtualRoutesClient({
 					return `
 const routeImports = new Map(
 	[ 
-		${
-			enabled
-				? routes
-						.map(
-							([pattern, route]) =>
-								`['${pattern}', () => import('/${normalizeToPosix(route.filePath)}')],`,
-						)
-						.join('\n		')
-				: '/* DISABLED */'
-		}
+		${routes
+			.map(
+				([pattern, route]) =>
+					`['${pattern}', () => import('/${normalizeToPosix(route.filePath)}')],`,
+			)
+			.join('\n		')}
 	]
 );
 
-export const enabled = ${enabled};
+export const enabled = true;
 
 export const mode = '${mode}';
 

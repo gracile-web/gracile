@@ -1,5 +1,6 @@
 import { Writable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 
 import { env } from '@gracile/internal-utils/env';
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
@@ -20,7 +21,6 @@ const nodeRequestToStandardRequest = createServerAdapter((request) => request);
 
 function standardResponseInitToNodeResponse(
 	responseInit: ResponseInit | Response,
-	res: ServerResponse,
 	response: ServerResponse,
 ) {
 	const headers =
@@ -28,24 +28,16 @@ function standardResponseInitToNodeResponse(
 			? responseInit.headers
 			: new Headers(responseInit.headers);
 
-	headers.forEach((content, header) => res.setHeader(header, content));
-	if (responseInit.status) res.statusCode = responseInit.status;
-	if (responseInit.statusText) res.statusMessage = responseInit.statusText;
 	for (const [header, content] of headers.entries())
 		response.setHeader(header, content);
 	if (responseInit.status) response.statusCode = responseInit.status;
 	if (responseInit.statusText) response.statusMessage = responseInit.statusText;
 }
 
-export type { GracileHandler };
-
 export type GracileNodeHandler = (
-	req: IncomingMessage,
-	res: ServerResponse,
 	request: IncomingMessage,
 	response: ServerResponse,
 	locals?: unknown,
-	// eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 ) => Promise<ServerResponse<IncomingMessage> | null | void>;
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -76,9 +68,6 @@ export function nodeAdapter(
 	options?: NodeAdapterOptions,
 ): GracileNodeHandler {
 	return async function nodeHandler(
-		req: IncomingMessage,
-		res: ServerResponse,
-
 		request: IncomingMessage,
 		response: ServerResponse,
 		locals?: unknown,
@@ -91,11 +80,9 @@ export function nodeAdapter(
 			webRequest = (await Promise.resolve(
 				nodeRequestToStandardRequest.handleNodeRequest(
 					// HACK: Exact optional properties
-					req as IncomingMessage & { url?: string; method?: string },
 					request as IncomingMessage & { url?: string; method?: string },
 				),
 			)) as unknown as Request;
-		} catch (e) {
 		} catch (error) {
 			throw new GracileError(
 				{
@@ -103,15 +90,11 @@ export function nodeAdapter(
 					message: GracileErrorData.InvalidRequestInAdapter.message('Node'),
 				},
 				{
-					cause: e,
 					cause: error,
 				},
 			);
 		}
 
-		const mergedLocals = {
-			...(locals ?? {}),
-			...('locals' in res && typeof res.locals === 'object' ? res.locals : {}),
 		const mergedLocals: unknown = {
 			...(locals || null),
 			...('locals' in response && typeof response.locals === 'object'
@@ -121,7 +104,6 @@ export function nodeAdapter(
 		const result = await handler(webRequest, mergedLocals);
 
 		if (result?.body) {
-			standardResponseInitToNodeResponse(result.init, res);
 			standardResponseInitToNodeResponse(result.init, response);
 
 			// NOTE: We can't do similar thing with Hono with just
@@ -136,17 +118,13 @@ export function nodeAdapter(
 			return result.body.pipe(response);
 		}
 		if (result?.response) {
-			standardResponseInitToNodeResponse(result.response, res);
 			standardResponseInitToNodeResponse(result.response, response);
 
 			const redirect = isRedirect(result.response);
-			if (redirect) return res.end(result.body);
 			if (redirect) return response.end(result.body);
 
 			if (result.response.body) {
 				const piped = await result.response.body
-					.pipeTo(Writable.toWeb(res))
-					.catch((e) => logger.error(String(e)));
 					.pipeTo(Writable.toWeb(response))
 					.catch((error) => logger.error(String(error)));
 				return piped;
@@ -170,7 +148,7 @@ export function nodeAdapter(
  *
  * const app = express();
  *
- * app.use(express.static(gracile.getClientDistPath(import.meta.url)));
+ * app.use(express.static(gracile.getClientBuildPath(import.meta.url)));
  * ```
  */
 export function getClientDistPath(root: string) {
@@ -178,3 +156,5 @@ export function getClientDistPath(root: string) {
 }
 
 export { printUrls } from '../utils.js';
+
+export { type GracileHandler } from '../request.js';

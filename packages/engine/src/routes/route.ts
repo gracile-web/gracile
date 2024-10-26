@@ -98,7 +98,6 @@ export class RouteModule {
 	}
 }
 
-export type Params = Record<string, string | undefined>;
 export type Parameters = Record<string, string | undefined>;
 
 export type Handler<
@@ -112,7 +111,6 @@ export type Handler<
 	 *
 	 * E.g. `src/routes/foo/[bar]/[baz].ts` -\> `{ bar: string; baz: string; }`
 	 */
-	params: Params;
 	params: Parameters;
 
 	request: Request;
@@ -141,7 +139,6 @@ export type HandlerData = Response | undefined;
 export type HandlerDataHtml = HandlerData | object;
 
 export type StaticPathOptionsGeneric = {
-	params: Params;
 	params: Parameters;
 	props: unknown;
 };
@@ -152,7 +149,6 @@ export type StaticRequest = Pick<Request, 'url'>;
 
 export type RouteContextGeneric = {
 	url: URL;
-	params: Params;
 	params: Parameters;
 	props: unknown;
 };

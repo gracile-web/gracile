@@ -7,10 +7,11 @@ import c from 'picocolors';
 import type { ViteDevServer } from 'vite';
 
 import { renderRouteTemplate } from '../render/route-template.js';
-import { collectRoutes } from '../routes/collect.js';
-import { loadForeignRouteObject } from '../routes/load-module.js';
-import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
+
+import { collectRoutes } from './collect.js';
+import { loadForeignRouteObject } from './load-module.js';
+import type { RoutesManifest } from './route.js';
 
 export interface RenderedRouteDefinition {
 	absoluteId: string;
@@ -30,14 +31,13 @@ export interface RenderedRouteDefinition {
 async function streamToString(stream: Readable): Promise<string> {
 	const chunks: Buffer[] = [];
 
-	// eslint-disable-next-line no-restricted-syntax
 	for await (const chunk of stream) {
 		if (typeof chunk === 'string') {
 			chunks.push(Buffer.from(chunk));
 		} else throw new TypeError('Wrong buffer');
 	}
 
-	return Buffer.concat(chunks).toString('utf-8');
+	return Buffer.concat(chunks).toString('utf8');
 }
 
 export async function renderRoutes({
@@ -80,14 +80,17 @@ export async function renderRoutes({
 			await Promise.all(
 				/* Single route */
 				(routeStaticPaths ?? [patternString]).map(async (staticPathOptions) => {
-					let pathnameWithParams = patternString;
+					let pathnameWithParameters = patternString;
 
-					let params = {};
-					let props: unknown;
+					let parameters = {};
+					let properties: unknown;
 
 					// MARK: Handler data (for single route only, NOT dynamic)
 					if (routeModule.handler) {
-						const url = new URL(pathnameWithParams, 'http://gracile-static');
+						const url = new URL(
+							pathnameWithParameters,
+							'http://gracile-static',
+						);
 						const context = {
 							url,
 							params: {},
@@ -98,9 +101,9 @@ export async function renderRoutes({
 							responseInit: {},
 						};
 						if (typeof routeModule.handler === 'function') {
-							props = await Promise.resolve(routeModule.handler(context));
+							properties = await Promise.resolve(routeModule.handler(context));
 						} else if ('GET' in routeModule.handler) {
-							props = {
+							properties = {
 								GET: await Promise.resolve(routeModule.handler.GET(context)),
 							};
 						}
@@ -109,42 +112,42 @@ export async function renderRoutes({
 					// MARK: Convert pattern
 					// to real route with static parameters + get props. for after
 					else if (typeof staticPathOptions === 'object') {
-						params = staticPathOptions.params;
+						parameters = staticPathOptions.params;
 
-						props = staticPathOptions.props;
+						properties = staticPathOptions.props;
 
-						Object.entries(staticPathOptions.params).forEach(
-							([paramName, value]) => {
-								if (typeof value === 'string' || typeof value === 'undefined')
-									pathnameWithParams = pathnameWithParams
-										.replace(`:${paramName}*`, value || '')
-										.replace(`{:${paramName}}`, value || '');
-							},
-						);
+						for (const [parameterName, value] of Object.entries(
+							staticPathOptions.params,
+						)) {
+							if (typeof value === 'string' || value === undefined)
+								pathnameWithParameters = pathnameWithParameters
+									.replace(`:${parameterName}*`, value || '')
+									.replace(`{:${parameterName}}`, value || '');
+						}
 					}
 
 					// MARK: Prepare
 
 					// NOTE: Unused for now
 					const isErrorPage =
-						pathnameWithParams.match(
+						pathnameWithParameters.match(
 							/\/__(.*)$/,
 						); /* Could add more (error, etc) */
 
 					const base = isErrorPage
-						? path.dirname(pathnameWithParams.slice(1))
-						: pathnameWithParams.slice(1);
+						? path.dirname(pathnameWithParameters.slice(1))
+						: pathnameWithParameters.slice(1);
 
 					let name = path.join(
 						base,
 						isErrorPage
-							? `${pathnameWithParams.split('/').at(-2)?.replace('__', '')}.html`
+							? `${pathnameWithParameters.split('/').at(-2)?.replace('__', '')}.html`
 							: 'index.html',
 					);
 					if (name === '404/index.html') name = '404.html';
-					if (name === '500/index.html') name = '500.html';
+					else if (name === '500/index.html') name = '500.html';
 
-					const url = new URL(pathnameWithParams, 'http://gracile-static');
+					const url = new URL(pathnameWithParameters, 'http://gracile-static');
 
 					// MARK: Render
 
@@ -156,16 +159,23 @@ export async function renderRoutes({
 						mode: 'build',
 						routeInfos: {
 							routeModule,
-							params,
+							params: parameters,
 							foundRoute: route,
-							pathname: pathnameWithParams,
-							props,
+							pathname: pathnameWithParameters,
+							props: properties,
 						},
 						root,
 						serverMode,
 					});
 
-					const htmlString = output ? await streamToString(output) : null;
+					const htmlString = output
+						? await streamToString(output).then((s) =>
+								// IMPORTANT: This is a hack for a behavior for which I'm not sure
+								// if Lit is taking advantage of. It looks like a fallback.
+								// TODO: Check if that breaks some hydration mechanism.
+								s.replaceAll('<?>', ''),
+							)
+						: null;
 
 					const existing = renderedRoutes.find(
 						(rendered) => rendered?.name === name,
@@ -188,7 +198,7 @@ export async function renderRoutes({
 						name,
 						html: htmlString,
 						savePrerender,
-						static: { props, document },
+						static: { props: properties, document },
 					} satisfies RenderedRouteDefinition;
 					renderedRoutes.push(rendered);
 				}),

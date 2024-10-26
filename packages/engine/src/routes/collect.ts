@@ -36,16 +36,11 @@ function extractRoutePatterns(
 
 	if (pathParts.length === 1 && pathParts.at(0) === 'index') pathParts = [];
 
-	let hasParams = false;
 	let hasParameters = false;
 
-	const pathRelNorm = pathParts.map((pathEntry) => {
 	const pathRelativeNormalized = pathParts.map((pathEntry) => {
 		let entry = pathEntry;
 
-		if (entry.match(REGEXES.rest)) {
-			hasParams = true;
-			return pathEntry.replace(REGEXES.rest, (_s, param) => `:${param}*`);
 		if (REGEXES.rest.test(entry)) {
 			hasParameters = true;
 			return pathEntry.replace(
@@ -55,9 +50,6 @@ function extractRoutePatterns(
 		}
 
 		while (REGEXES.param.test(entry)) {
-			hasParams = true;
-			entry = entry.replace(REGEXES.param, (_s, param) => {
-				return `{:${param}}`;
 			hasParameters = true;
 			entry = entry.replace(REGEXES.param, (_s, parameter) => {
 				return `{:${parameter}}`;
@@ -67,30 +59,23 @@ function extractRoutePatterns(
 		return entry;
 	});
 
-	const trailingSlash = pathRelNorm.length > 0 ? '/' : '';
-	const normalizedUrlPattern = `/${pathRelNorm.join('/')}${trailingSlash}`;
 	const trailingSlash = pathRelativeNormalized.length > 0 ? '/' : '';
 	const normalizedUrlPattern = `/${pathRelativeNormalized.join('/')}${trailingSlash}`;
 
 	return {
 		patternString: normalizedUrlPattern,
 		pattern: new URLPattern(normalizedUrlPattern, 'http://gracile/'),
-		hasParams,
 		hasParams: hasParameters,
 	};
 }
 
 export const WATCHED_FILES_REGEX =
-	/\/src\/routes\/(.*)\.(ts|js|css|scss|sass|less|styl|stylus)$/;
-// const routes: R.RoutesManifest = new Map<string, R.Route>();
 	/\/src\/routes\/(.*)\.(js|ts|jsx|tsx|html|css|scss|sass|less|styl|stylus)$/;
 
 export async function collectRoutes(
 	routes: R.RoutesManifest,
-	root: string /* vite: ViteDevServer */,
 	root: string,
 	excludePatterns: string[] = [],
-	// single: { file?: string; event: 'add' },
 ): Promise<void> {
 	routes.clear();
 
@@ -104,14 +89,12 @@ export async function collectRoutes(
 		.crawl(routesFolderAbsolute)
 		.withPromise();
 
-	// console.log({ allFilesInRoutes });
-
 	const serverEntrypointsFilter = createFilter(
-		['**/*.{js,ts}'],
+		['**/*.{js,ts,jsx,tsx,html}'],
 		[
 			//
-			'**/*.client.{js,ts}',
-			'**/*.document.{js,ts}',
+			'**/*.client.{js,ts,jsx,tsx}',
+			'**/*.document.{js,ts,jsx,tsx}',
 			'**/_*/**',
 			'**/_*',
 			'**/.*',
@@ -130,13 +113,13 @@ export async function collectRoutes(
 	}
 
 	// MARK: Routes priority order
-	// TODO: `prepareSortableRoutes` and `routeComparator` in same function `sortRoutes`
+	// TODO: `prepareSortableRoutes` and `routeComparator` in same function `sortRoutes`.
 	const serverEntrypointsSorted = prepareSortableRoutes(serverEntrypoints)
 		.sort((a, b) => routeComparator(a, b))
 		.map((r) => r.route);
 
 	const serverPageClientAssetsFilter = createFilter(
-		['**/*.client.{js,ts}', '**/*.{css,scss,sass,less,styl,stylus}'],
+		['**/*.client.{js,ts,jsx,tsx}', '**/*.{css,scss,sass,less,styl,stylus}'],
 		[...excludePatterns],
 	);
 	const serverPageClientAssets = allFilesInRoutes.filter((f) =>
@@ -151,9 +134,6 @@ export async function collectRoutes(
 
 					return pathParts
 						.map((part, index) => {
-							if (part.match(/\[\./)) return c.cyan(c.italic(part));
-							if (part.match(/\[/)) return c.cyan(part);
-							if (part.match(/\(/)) return c.yellow(part);
 							if (/\[\./.test(part)) return c.cyan(c.italic(part));
 							if (/\[/.test(part)) return c.cyan(part);
 							if (/\(/.test(part)) return c.yellow(part);
@@ -167,7 +147,6 @@ export async function collectRoutes(
 
 	// MARK: Associate
 
-	serverEntrypointsSorted.forEach((routePath) => {
 	for (const routePath of serverEntrypointsSorted) {
 		const filePath = join(routesFolder, routePath);
 		const routeWithPatterns = extractRoutePatterns(routePath);
@@ -180,27 +159,18 @@ export async function collectRoutes(
 			pageAssets: [],
 			// NOTE: Not implemented here!
 			// prerender: null,
-		});
 	});
 	}
 
-	serverPageClientAssets.forEach((routePath) => {
 	for (const routePath of serverPageClientAssets) {
 		// NOTE: Exact extension needed client side by Vite.
-		const assetPathWithExt = join(routesFolder, routePath);
 		const assetPathWithExtension = join(routesFolder, routePath);
 
-		routes.forEach((route) => {
 		for (const route of routes.values())
 			if (
-				paths.removeAllExt(route.filePath) ===
-				paths.removeAllExt(assetPathWithExt)
 				paths.removeAllExtension(route.filePath) ===
 				paths.removeAllExtension(assetPathWithExtension)
 			)
-				route.pageAssets.push(assetPathWithExt);
-		});
-	});
 				route.pageAssets.push(assetPathWithExtension);
 	}
 }

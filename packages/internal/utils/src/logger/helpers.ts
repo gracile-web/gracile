@@ -4,7 +4,7 @@ export function getLogger() {
 	// @ts-expect-error ............
 	const logger = globalThis[loggerSymbol] as GracileLogger | undefined;
 
-	if (!logger) throw new ReferenceError();
+	if (!logger) throw new ReferenceError('No logger.');
 	return logger;
 }
 

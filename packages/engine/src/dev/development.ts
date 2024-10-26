@@ -9,9 +9,10 @@ import {
 	type GracileHandler,
 } from '../server/request.js';
 import type { GracileConfig } from '../user-config.js';
+
 import { generateRoutesTypings } from './route-typings.js';
 
-export async function createDevHandler({
+export async function createDevelopmentHandler({
 	routes,
 	vite,
 	gracileConfig,
@@ -30,7 +31,7 @@ export async function createDevHandler({
 	logger.info('');
 	logger.info(c.dim('Creating the request handler…'), { timestamp: true });
 
-	const collect = async () => {
+	const collectAndCodegen = async () => {
 		await collectRoutes(routes, root, gracileConfig.routes?.exclude);
 
 		if (gracileConfig.experimental?.generateRoutesTypings)
@@ -39,25 +40,25 @@ export async function createDevHandler({
 			);
 	};
 
-	await collect();
+	await collectAndCodegen();
 
 	let wait: ReturnType<typeof setTimeout>;
 	vite.watcher.on('all', (event, file) => {
 		if (
-			file.match(WATCHED_FILES_REGEX) &&
+			WATCHED_FILES_REGEX.test(file) &&
 			['add', 'unlink'].includes(event)
 			//
 		) {
 			clearTimeout(wait);
 			wait = setTimeout(() => {
-				collect()
+				collectAndCodegen()
 					.then(() => vite.hot.send('vite:invalidate'))
 					.catch((error) => logger.error(String(error)));
 			}, 100);
 		}
 	});
 
-	//
+	// ---
 
 	// NOTE: Wrong place?
 	const serverMode = false;
