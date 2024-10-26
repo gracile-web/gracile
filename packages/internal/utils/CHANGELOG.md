@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.4.0...@gracile/internal-utils@0.5.0-next.0) (2024-10-26)
+
+### Features
+
+* add doctype automatically if missing, align lit template type, add new file route formats ([1c90262](https://github.com/gracile-web/gracile/commit/1c9026208ca1b58ee0e3777929ea0136e5ef715f))
+
 # [0.4.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.4.0-next.0...@gracile/internal-utils@0.4.0) (2024-08-25)
 
 **Note:** Version bump only for package @gracile/internal-utils

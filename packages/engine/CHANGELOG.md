@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.7.1...@gracile/engine@0.8.0-next.0) (2024-10-26)
+
+### Features
+
+* add doctype automatically if missing, align lit template type, add new file route formats ([1c90262](https://github.com/gracile-web/gracile/commit/1c9026208ca1b58ee0e3777929ea0136e5ef715f))
+
 ## [0.7.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.7.1-next.0...@gracile/engine@0.7.1) (2024-08-28)
 
 **Note:** Version bump only for package @gracile/engine
