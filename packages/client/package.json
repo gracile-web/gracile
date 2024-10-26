@@ -39,15 +39,15 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@lit-labs/ssr-client": " ^1.1.7"
+    "@gracile/engine": "workspace:^",
+    "@lit-labs/ssr": "^3.2.2",
+    "@lit-labs/ssr-client": "^1.1.7",
+    "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "^4.7.2",
-    "typescript": "5.5.4"
-  },
-  "peerDependencies": {
-    "@lit-labs/ssr": "^3.2.2"
+    "tsx": "^4.19.1",
+    "typescript": "5.6.3"
   },
   "publishConfig": {
     "access": "public",

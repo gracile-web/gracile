@@ -21,7 +21,20 @@ export default [
 	{
 		languageOptions: {
 			parserOptions: {
-				project: ['./packages/**/*/tsconfig.json'],
+				project: [
+					'./packages/gracile/tsconfig.json',
+					'./packages/client/tsconfig.json',
+					'./packages/server/tsconfig.json',
+					'./packages/engine/tsconfig.json',
+					// './packages/cli/tsconfig.json',
+					'./packages/create-gracile/tsconfig.json',
+					'./packages/internal/utils/tsconfig.json',
+					'./packages/addons/metadata/tsconfig.json',
+					'./packages/addons/svg/tsconfig.json',
+					'./packages/addons/sitemap/tsconfig.json',
+					'./packages/addons/markdown/tsconfig.json',
+					'./packages/addons/markdown-preset-marked/tsconfig.json',
+				],
 				tsconfigRootDir: import.meta.dirname,
 			},
 		},
@@ -103,7 +116,8 @@ export default [
 
 	{
 		ignores: [
-			'packages/labs',
+			'**/packages/labs',
+			'**/packages/cli',
 			'pnpm-lock.yaml',
 			'**/integration',
 			// '**/integration/**/*_expected*',

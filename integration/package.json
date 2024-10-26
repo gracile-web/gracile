@@ -20,23 +20,23 @@
     "@gracile/metadata": "workspace:^",
     "@gracile/server": "workspace:^",
     "@gracile/svg": "workspace:^",
-    "@hono/node-server": "^1.12.0",
+    "@hono/node-server": "^1.13.2",
     "@lit-labs/ssr": "^3.2.2",
-    "@lit-labs/ssr-client": " ^1.1.7",
+    "@lit-labs/ssr-client": "^1.1.7",
     "cheerio": "1.0.0",
-    "express": "4.x.x",
-    "hono": "^4.5.8",
+    "express": "^5.0.0",
+    "hono": "^4.6.6",
     "import-meta-resolve": "^4.1.0",
-    "lit": "^3.1.3",
-    "prettier": "^3.2.5",
-    "snapshot-fixtures": "^1.1.0",
-    "vite": "^5.3.5"
+    "lit": "^3.2.1",
+    "prettier": "^3.3.3",
+    "snapshot-fixtures": "^1.2.0",
+    "vite": "^5.4.10"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/express": "^4.x.x",
-    "@types/node": "^22.5.0",
-    "tsx": "^4.7.2",
-    "typescript": "5.5.4"
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.8.1",
+    "tsx": "^4.19.1",
+    "typescript": "5.6.3"
   }
 }

@@ -3,7 +3,7 @@
     "module": "ESNext",
     "target": "ES2022",
 
-    "lib": ["ES2022", "DOM"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
 
     "strict": true,
 
@@ -12,7 +12,7 @@
 
     "moduleResolution": "Bundler",
 
-    "incremental": true,
+    "incremental": false,
 
     "noUncheckedIndexedAccess": true,
     "verbatimModuleSyntax": true,
@@ -26,5 +26,7 @@
     "outDir": "${configDir}/dist"
   },
 
-  "include": ["${configDir}/src/**/*", "${configDir}/ambient.d.ts"]
+  "include": ["${configDir}/src/**/*", "${configDir}/ambient.d.ts"],
+
+  "exclude": ["**/dist/**/*", "**/coverage/**/*"]
 }

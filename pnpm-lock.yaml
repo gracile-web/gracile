@@ -327,6 +327,34 @@ importers:
         specifier: 5.6.3
         version: 5.6.3
 
+  packages/cli:
+    dependencies:
+      '@commander-js/extra-typings':
+        specifier: ^12.0.1
+        version: 12.1.0(commander@12.1.0)
+      '@gracile/engine':
+        specifier: workspace:^
+        version: link:../engine
+      '@gracile/internal-utils':
+        specifier: workspace:^
+        version: link:../internal/utils
+      commander:
+        specifier: ^12.0.0
+        version: 12.1.0
+      picocolors:
+        specifier: ^1.0.1
+        version: 1.1.1
+    devDependencies:
+      '@gracile/internal-tsconfigs':
+        specifier: workspace:^
+        version: link:../internal/tsconfigs
+      '@types/node':
+        specifier: ^20.14.8
+        version: 20.17.1
+      typescript:
+        specifier: 5.5.4
+        version: 5.5.4
+
   packages/client:
     dependencies:
       '@gracile/engine':
@@ -526,16 +554,16 @@ importers:
         specifier: ^1.1.7
         version: 1.1.7
       launch-editor-middleware:
-        specifier: ^2.9.1
+        specifier: ^2.8.1
         version: 2.9.1
       lit:
-        specifier: ^3.2.1
+        specifier: ^3.1.3
         version: 3.2.1
       picocolors:
-        specifier: ^1.1.1
+        specifier: ^1.0.1
         version: 1.1.1
       vite:
-        specifier: ^5.4.10
+        specifier: ^5.3.5
         version: 5.4.10(@types/node@22.8.1)(sass@1.80.4)(terser@5.36.0)
     devDependencies:
       '@gracile/internal-tsconfigs':
@@ -551,11 +579,11 @@ importers:
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.24.0)
       terser:
-        specifier: ^5.36.0
+        specifier: ^5.31.6
         version: 5.36.0
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 5.5.4
+        version: 5.5.4
 
   packages/labs/client-router:
     dependencies:
@@ -1778,6 +1806,9 @@ packages:
 
   '@types/node@17.0.45':
     resolution: {integrity: sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==}
+
+  '@types/node@20.17.1':
+    resolution: {integrity: sha512-j2VlPv1NnwPJbaCNv69FO/1z4lId0QmGvpT41YxitRtWlg96g/j8qcv2RKsLKe2F6OJgyXhupN1Xo17b2m139Q==}
 
   '@types/node@22.8.1':
     resolution: {integrity: sha512-k6Gi8Yyo8EtrNtkHXutUu2corfDf9su95VYVP10aGYMMROM6SAItZi0w1XszA6RtWTHSVp5OeFof37w0IEqCQg==}
@@ -4658,6 +4689,11 @@ packages:
       typescript:
         optional: true
 
+  typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   typescript@5.6.3:
     resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
     engines: {node: '>=14.17'}
@@ -6154,6 +6190,10 @@ snapshots:
   '@types/node@16.18.115': {}
 
   '@types/node@17.0.45': {}
+
+  '@types/node@20.17.1':
+    dependencies:
+      undici-types: 6.19.8
 
   '@types/node@22.8.1':
     dependencies:
@@ -9282,6 +9322,8 @@ snapshots:
     transitivePeerDependencies:
       - eslint
       - supports-color
+
+  typescript@5.5.4: {}
 
   typescript@5.6.3: {}
 

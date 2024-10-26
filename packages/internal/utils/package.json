@@ -28,19 +28,19 @@
   "type": "module",
   "exports": {
     "./*": "./dist/*.js",
-    "./env": {
-      "types": "./dist/env/index.d.ts",
+    "./condition": {
+      "types": "./dist/node-condition/index.d.ts",
       "browser": {
-        "development": "./dist/env/dev-browser.js",
-        "preview": "./dist/env/preview-browser.js",
-        "test": "./dist/env/test-browser.js",
-        "default": "./dist/env/prod-browser.js"
+        "development": "./dist/node-condition/development-browser.js",
+        "preview": "./dist/node-condition/preview-browser.js",
+        "test": "./dist/node-condition/test-browser.js",
+        "default": "./dist/node-condition/production-browser.js"
       },
       "default": {
-        "development": "./dist/env/dev-ssr.js",
-        "preview": "./dist/env/preview-ssr.js",
-        "test": "./dist/env/test-ssr.js",
-        "default": "./dist/env/prod-ssr.js"
+        "development": "./dist/node-condition/development-ssr.js",
+        "preview": "./dist/node-condition/preview-ssr.js",
+        "test": "./dist/node-condition/test-ssr.js",
+        "default": "./dist/node-condition/production-ssr.js"
       }
     }
   },
@@ -59,11 +59,11 @@
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "@lit-labs/ssr": "^3.2.2",
-    "@types/node": "^20.14.8",
+    "@types/node": "^22.8.1",
     "c8": "^10.1.2",
-    "lit": "^3.1.3",
-    "typescript": "5.5.4",
-    "vite": "^5.3.5"
+    "lit": "^3.2.1",
+    "typescript": "5.6.3",
+    "vite": "^5.4.10"
   },
   "peerDependencies": {
     "vite": "^5.3.5"

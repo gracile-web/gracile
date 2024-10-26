@@ -13,7 +13,7 @@ import * as route from '@gracile/gracile/_internals/route';
 import * as routeModule from '@gracile/gracile/_internals/route-module';
 import * as serverRuntime from '@gracile/gracile/_internals/server-runtime';
 import * as document from '@gracile/gracile/document';
-import { nodeCondition } from '@gracile/gracile/env';
+import { nodeCondition } from '@gracile/gracile/node-condition';
 import * as hono from '@gracile/gracile/hono';
 import * as node from '@gracile/gracile/node';
 import * as plugin from '@gracile/gracile/plugin';

@@ -45,8 +45,8 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^20.14.8",
-    "typescript": "5.5.4"
+    "@types/node": "^22.8.1",
+    "typescript": "5.6.3"
   },
   "peerDependencies": {
     "lit": "^3.1.3",
