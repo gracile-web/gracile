@@ -4,9 +4,9 @@ import { d as document } from './document.js';
 import { css, LitElement, html } from 'lit';
 import { state, property, customElement } from 'lit/decorators.js';
 
-const customStylesheet = "/assets/_assets-methods-my-el-2-_K7WEQ-5.css";
+const customStylesheet = "/assets/_assets-methods-my-el-2-B-0f4ddQ.css";
 
-const styles = "/assets/_assets-methods-my-el-BZ8-Dbhw.css";
+const styles = "/assets/_assets-methods-my-el-Bq1tmW6L.css";
 
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;

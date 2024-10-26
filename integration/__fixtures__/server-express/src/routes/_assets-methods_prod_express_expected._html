@@ -17,16 +17,16 @@
     <script
       type="module"
       crossorigin
-      src="/assets/document.client-CMOVr55R.js"
+      src="/assets/document.client-hvNMEINk.js"
     ></script>
 
-    <link rel="stylesheet" crossorigin href="/assets/document-aADsc6DG.css" />
+    <link rel="stylesheet" crossorigin href="/assets/document-17MCeMxd.css" />
   </head>
 
   <body>
     <!--  -->
 
-    <my-el extra-styles="/assets/_assets-methods-my-el-2-_K7WEQ-5.css"
+    <my-el extra-styles="/assets/_assets-methods-my-el-2-B-0f4ddQ.css"
       ><template shadowroot="open" shadowrootmode="open"
         ><style>
           :host {
@@ -36,13 +36,13 @@
         <!--  -->
         <!--lit-node 1--><link
           rel="stylesheet"
-          href="/assets/_assets-methods-my-el-BZ8-Dbhw.css"
+          href="/assets/_assets-methods-my-el-Bq1tmW6L.css"
         />
 
-        <!--lit-part-->/assets/_assets-methods-my-el-2-_K7WEQ-5.css<!--/lit-part-->
+        <!--lit-part-->/assets/_assets-methods-my-el-2-B-0f4ddQ.css<!--/lit-part-->
         <!--lit-part--><!--lit-part F3m906AMGI4=--><!--lit-node 0--><link
           rel="stylesheet"
-          href="/assets/_assets-methods-my-el-2-_K7WEQ-5.css"
+          href="/assets/_assets-methods-my-el-2-B-0f4ddQ.css"
         /><!--/lit-part--><!--/lit-part-->
 
         <div class="color-me-red">RED</div>
