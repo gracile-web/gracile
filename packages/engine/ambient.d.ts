@@ -8,8 +8,7 @@
 // }
 
 declare namespace Gracile {
-	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-	interface Locals {}
+	type Locals = unknown;
 }
 
 declare module 'gracile:client:routes' {

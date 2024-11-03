@@ -39,6 +39,11 @@ export type GracileHandler = (
 
 const CONTENT_TYPE_HTML = { 'Content-Type': 'text/html' };
 
+const PREMISE_REGEXES = {
+	properties: /\/__(.*?)\.props\.json$/,
+	document: /\/__(.*?)\.doc\.html$/,
+};
+
 export function isRedirect(response: Response): { location: string } | null {
 	const location = response.headers.get('location');
 	if (response.status >= 300 && response.status <= 303 && location) {
@@ -80,15 +85,19 @@ export function createGracileHandler({
 			// MARK: Rewrite hidden route siblings
 			const fullUrl = requestedUrl.replace(/\/__(.*)$/, '/');
 
+			// MARK: Setup premises
+			const propertiesOnly = PREMISE_REGEXES.properties.test(requestedUrl);
+			const documentOnly = PREMISE_REGEXES.document.test(requestedUrl);
+			const allowPremises = Boolean(gracileConfig.pages?.premises?.expose);
+
+			if (allowPremises === false && (propertiesOnly || documentOnly))
+				throw new Error(
+					'Accessed a page premise but they are not activated. You must enable `pages.premises.expose`.',
+				);
+
+			const premises = allowPremises ? { propertiesOnly, documentOnly } : null;
+
 			// MARK: Get route infos
-
-			const exposePremises = gracileConfig.pages?.premises?.expose
-				? {
-						propsOnly: /\/__(.*?)\.props\.json$/.test(requestedUrl),
-						docOnly: /\/__(.*?)\.doc\.html$/.test(requestedUrl),
-					}
-				: null;
-
 			const routeOptions = {
 				url: fullUrl,
 				vite,
@@ -127,7 +136,7 @@ export function createGracileHandler({
 				root,
 				serverMode,
 				routeInfos,
-				docOnly: exposePremises?.docOnly,
+				docOnly: premises?.documentOnly,
 			} satisfies Parameters<typeof renderRouteTemplate>[0];
 
 			logger.info(`[${c.yellow(method)}] ${c.yellow(fullUrl)}`, {
@@ -201,7 +210,7 @@ export function createGracileHandler({
 							? handlerOutput
 							: { [method]: handlerOutput };
 
-						if (exposePremises?.docOnly) {
+						if (premises?.documentOnly) {
 							const { document } =
 								await renderRouteTemplate(routeTemplateOptions);
 							return {
@@ -210,7 +219,7 @@ export function createGracileHandler({
 								}),
 							};
 						}
-						if (exposePremises?.propsOnly)
+						if (premises?.propertiesOnly)
 							return {
 								response: Response.json(routeTemplateOptions.routeInfos.props),
 							};
@@ -228,7 +237,7 @@ export function createGracileHandler({
 					};
 				}
 			} else {
-				if (exposePremises?.docOnly) {
+				if (premises?.documentOnly) {
 					const { document } = await renderRouteTemplate(routeTemplateOptions);
 					return {
 						response: new Response(document, {
@@ -236,7 +245,7 @@ export function createGracileHandler({
 						}),
 					};
 				}
-				if (exposePremises?.propsOnly)
+				if (premises?.propertiesOnly)
 					return {
 						response: Response.json(
 							routeTemplateOptions.routeInfos.props || {},

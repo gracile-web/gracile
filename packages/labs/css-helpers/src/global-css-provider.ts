@@ -2,7 +2,6 @@ import { pageAssetsCustomLocation } from '@gracile/server/document';
 // TODO: Make test for ordering possible discrepencies between dev/build.
 // * It will collect all declared `<link>` **before** this helper, in the template.
 // * This is useful if you want to exclude
-
 import { html, type ServerRenderedTemplate } from '@lit-labs/ssr';
 
 // From: https://eisenbergeffect.medium.com/using-global-styles-in-shadow-dom-5b80e802e89d

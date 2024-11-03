@@ -20,3 +20,11 @@ export function normalizeToPosix(input: string) {
 export function removeLeadingForwardSlashWindows(path: string) {
 	return path.startsWith('/') && path[2] === ':' ? path.slice(1) : path;
 }
+
+export const premiseUrl = (p: string, suffix: 'props' | 'doc') => {
+	const s = suffix === 'props' ? 'props.json' : 'doc.html';
+	return `${p ?? '/'}`
+		.replace(/\/404\/$/, '/__404.' + s)
+		.replace(/\/500\/$/, '/__500.' + s)
+		.replace(/\/$/, '/__index.' + s);
+};
