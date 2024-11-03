@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
-import '@gracile/gracile/hydration';
+import '@gracile/gracile/hydration-elements';
 
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';

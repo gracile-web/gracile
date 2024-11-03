@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 // NOTE: Work-in-Progress
 
-import '@gracile/gracile/hydration';
+import '@gracile/gracile/hydration-elements';
 import '@gracile/markdown/ambient';
 import '@gracile/svg/ambient';
 import '@gracile-labs/css-helpers/ambient';
