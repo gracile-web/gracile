@@ -27,10 +27,11 @@
   },
   "type": "module",
   "exports": {
-    "./router": {
-      "test": "./dist/route.js",
-      "node": "./dist/router.node.js",
-      "default": "./dist/router.js"
+    "./types": "./dist/types.js",
+    "./create": {
+      "test": "./dist/create.js",
+      "node": "./dist/create.node.js",
+      "default": "./dist/create.js"
     }
   },
   "files": [
@@ -44,8 +45,8 @@
   "dependencies": {
     "@gracile/client": "workspace:^",
     "@gracile/engine": "workspace:^",
+    "@gracile/internal-utils": "workspace:^",
     "@lit-labs/ssr-client": "^1.1.7",
-    "@thepassle/app-tools": "^0.9.12",
     "lit": "^3.2.1",
     "urlpattern-polyfill": "^10.0.0"
   },
@@ -60,9 +61,5 @@
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "// disabledDeps": {
-    "@webcomponents/template-shadowroot": "0.x",
-    "typedoc": "^0.25.8"
   }
 }
