@@ -1,6 +1,6 @@
 {
   "name": "@gracile/client",
-  "version": "0.3.2-next.0",
+  "version": "0.4.0-next.0",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -40,9 +40,9 @@
   },
   "dependencies": {
     "@gracile/engine": "workspace:^",
+    "@gracile/internal-utils": "workspace:^",
     "@lit-labs/ssr": "^3.2.2",
     "@lit-labs/ssr-client": "^1.1.7",
-    "@gracile/internal-utils": "workspace:^",
     "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {

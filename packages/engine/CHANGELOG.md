@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.0-next.0...@gracile/engine@0.8.0-next.1) (2024-11-03)
+
+### Features
+
+* error when premises are accessed but not enabled ([cf48891](https://github.com/gracile-web/gracile/commit/cf48891aa435505a4c19447526b893ca353cdcb8))
+
 # [0.8.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.7.1...@gracile/engine@0.8.0-next.0) (2024-10-26)
 
 ### Features

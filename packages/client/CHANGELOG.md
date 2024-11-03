@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/client@0.3.2-next.0...@gracile/client@0.4.0-next.0) (2024-11-03)
+
+### Features
+
+* new "whole page" hydration strategy ([2a09695](https://github.com/gracile-web/gracile/commit/2a09695bfbc27027695bfb4dde3e53fafe6806bf))
+
 ## [0.3.2-next.0](https://github.com/gracile-web/gracile/compare/@gracile/client@0.3.1...@gracile/client@0.3.2-next.0) (2024-10-26)
 
 **Note:** Version bump only for package @gracile/client
