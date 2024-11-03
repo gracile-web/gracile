@@ -23,10 +23,11 @@
     "declaration": true,
     "declarationMap": true,
 
-    "outDir": "${configDir}/dist"
+    "outDir": "${configDir}/dist",
+    "rootDir": "${configDir}/src"
   },
 
   "include": ["${configDir}/src/**/*", "${configDir}/ambient.d.ts"],
 
-  "exclude": ["**/dist/**/*", "**/coverage/**/*"]
+  "exclude": ["${configDir}/**/dist", "${configDir}/coverage"]
 }

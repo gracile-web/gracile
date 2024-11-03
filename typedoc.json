@@ -3,6 +3,7 @@
     "packages/gracile"
     // , "packages/engine"
   ],
+
   "name": "Gracile",
   "entryPointStrategy": "packages",
   // "includeVersion": false,

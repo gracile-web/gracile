@@ -34,6 +34,9 @@ export default [
 					'./packages/addons/sitemap/tsconfig.json',
 					'./packages/addons/markdown/tsconfig.json',
 					'./packages/addons/markdown-preset-marked/tsconfig.json',
+					'./packages/labs/better-errors/tsconfig.json',
+					'./packages/labs/css-helpers/tsconfig.json',
+					'./packages/labs/client-router/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,
 			},
@@ -116,7 +119,7 @@ export default [
 
 	{
 		ignores: [
-			'**/packages/labs',
+			// '**/packages/labs',
 			'**/packages/cli',
 			'pnpm-lock.yaml',
 			'**/integration',
@@ -124,7 +127,7 @@ export default [
 			// '**/integration/__fixtures__',
 			'CHANGELOG.md',
 			'dist',
-			'labs',
+			// 'labs',
 			'./index.ts',
 			'**/eslint.config*',
 

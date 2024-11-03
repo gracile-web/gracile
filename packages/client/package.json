@@ -42,6 +42,7 @@
     "@gracile/engine": "workspace:^",
     "@lit-labs/ssr": "^3.2.2",
     "@lit-labs/ssr-client": "^1.1.7",
+    "@gracile/internal-utils": "workspace:^",
     "urlpattern-polyfill": "^10.0.0"
   },
   "devDependencies": {
