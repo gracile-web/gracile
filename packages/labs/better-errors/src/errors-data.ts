@@ -5,8 +5,8 @@
 export interface BetterErrorData {
 	name: string;
 	title: string;
-	message?: string | ((...params: any) => string) | undefined;
-	hint?: string | ((...params: any) => string) | undefined;
+	message?: string | ((...parameters: any) => string) | undefined;
+	hint?: string | ((...parameters: any) => string) | undefined;
 }
 
 /**

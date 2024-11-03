@@ -1,19 +1,17 @@
-/* eslint-disable no-restricted-syntax */
-
 import type { ErrorLocation } from '../errors.js';
 
 export function normalizeLF(code: string) {
-	return code.replace(/\r\n|\r(?!\n)|\n/g, '\n');
+	return code.replaceAll(/\r\n|\r(?!\n)|\n/g, '\n');
 }
 
 /** Generate a code frame from string and an error location */
-export function codeFrame(src: string, loc: ErrorLocation): string {
+export function codeFrame(source: string, loc: ErrorLocation): string {
 	if (!loc || loc.line === undefined || loc.column === undefined) {
 		return '';
 	}
-	const lines = normalizeLF(src)
+	const lines = normalizeLF(source)
 		.split('\n')
-		.map((ln) => ln.replace(/\t/g, '  '));
+		.map((ln) => ln.replaceAll('\t', '  '));
 	// grab 2 lines before, and 3 lines after focused line
 	const visibleLines = [];
 	for (let n = -2; n <= 2; n += 1) {

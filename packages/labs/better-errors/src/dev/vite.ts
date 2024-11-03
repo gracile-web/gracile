@@ -1,3 +1,5 @@
+// TODO: Refactor with Gracile code-base style.
+/* eslint-disable unicorn/no-abusive-eslint-disable */
 /* eslint-disable */
 import * as fs from 'node:fs';
 import { fileURLToPath } from 'node:url';

@@ -1,4 +1,5 @@
 import type { ErrorPayload } from 'vite';
+
 import { codeFrame } from './dev/printer.js';
 
 export type BuiltinErrorTypes =
@@ -58,11 +59,12 @@ export class BetterError<
 
 	type: BuiltinErrorTypes | ConsumerErrorTypes = 'BetterError';
 
-	constructor(props: ErrorProperties, options?: ErrorOptions) {
-		const { name, title, message, stack, location, hint, frame } = props;
+	constructor(properties: ErrorProperties, options?: ErrorOptions) {
+		const { name, title, message, stack, location, hint, frame } = properties;
 		super(message, options);
 
 		this.title = title;
+		// eslint-disable-next-line unicorn/custom-error-definition
 		this.name = name;
 
 		if (message) this.message = message;
@@ -93,8 +95,8 @@ export class BetterError<
 		this.frame = codeFrame(source, location);
 	}
 
-	static is(err: unknown): err is BetterError {
-		return (err as BetterError).type === 'BetterError';
+	static is(error: unknown): error is BetterError {
+		return (error as BetterError).type === 'BetterError';
 	}
 }
 
@@ -105,21 +107,22 @@ export class AggregateError extends BetterError {
 	// Despite being a collection of errors, AggregateError still needs to have a main error attached to it
 	// This is because Vite expects every thrown errors handled during HMR to be, well, Error and have a message
 	constructor(
-		props: ErrorProperties & { errors: BetterError[] },
+		properties: ErrorProperties & { errors: BetterError[] },
 		options?: ErrorOptions,
+		// eslint-disable-next-line unicorn/custom-error-definition
 	) {
-		super(props, options);
+		super(properties, options);
 
-		this.errors = props.errors;
+		this.errors = properties.errors;
 	}
 
-	static is(err: unknown): err is AggregateError {
-		return (err as AggregateError).type === 'AggregateError';
+	static is(error: unknown): error is AggregateError {
+		return (error as AggregateError).type === 'AggregateError';
 	}
 }
 
-export function isBetterError(e: unknown): e is BetterError {
-	return e instanceof BetterError;
+export function isBetterError(error: unknown): error is BetterError {
+	return error instanceof BetterError;
 }
 
 export type SSRError = Error & ErrorPayload['err'];

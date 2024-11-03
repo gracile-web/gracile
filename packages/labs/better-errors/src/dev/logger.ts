@@ -1,8 +1,12 @@
-import { getDocsForError, renderErrorMarkdown } from './utils.js';
-
+// TODO: Refactor with Gracile code-base style.
+/* eslint-disable unicorn/no-abusive-eslint-disable */
+/* eslint-disable */
 import picocolors from 'picocolors';
+
 import { BetterError, type ErrorWithMetadata } from '../errors.js';
 import type { BetterErrorData } from '../errors-data.js';
+
+import { getDocsForError, renderErrorMarkdown } from './utils.js';
 const { yellow, bold, cyan, dim, underline, red } = picocolors;
 
 // a regex to match the first line of a stack trace
@@ -10,10 +14,10 @@ const STACK_LINE_REGEXP = /^\s+at /g;
 const IRRELEVANT_STACK_REGEXP = /node_modules|astro[/\\]dist/g;
 
 function formatErrorStackTrace(
-	err: Error | ErrorWithMetadata,
+	error: Error | ErrorWithMetadata,
 	showFullStacktrace: boolean,
 ): string {
-	const stackLines = (err.stack || '')
+	const stackLines = (error.stack || '')
 		.split('\n')
 		.filter((line) => STACK_LINE_REGEXP.test(line));
 	// If full details are required, just return the entire stack trace.
@@ -25,8 +29,8 @@ function formatErrorStackTrace(
 		IRRELEVANT_STACK_REGEXP.test(line),
 	);
 	if (irrelevantStackIndex <= 0) {
-		const errorId = (err as ErrorWithMetadata).id;
-		const errorLoc = (err as ErrorWithMetadata).loc;
+		const errorId = (error as ErrorWithMetadata).id;
+		const errorLoc = (error as ErrorWithMetadata).loc;
 		if (errorId || errorLoc?.file) {
 			const prettyLocation = `    at ${errorId ?? errorLoc?.file}${
 				errorLoc?.line && errorLoc.column
@@ -55,55 +59,50 @@ export function padMultilineString(source: string, n = 2) {
 }
 
 export function formatErrorMessage(
-	err: ErrorWithMetadata,
+	error: ErrorWithMetadata,
 	showFullStacktrace: boolean,
 	errorsData: Record<string, BetterErrorData>,
 	docsBaseUrl?: string,
 ): string {
 	const isOurError =
 		BetterError.is(
-			err,
+			error,
 		); /* || CompilerError.is(err) || AstroUserError.is(err) */
 	let message = '';
-	if (isOurError) {
-		message +=
-			red(`[${err.name}]`) + ' ' + renderErrorMarkdown(err.message, 'cli');
-	} else {
-		message += err.message;
-	}
+	message += isOurError
+		? red(`[${error.name}]`) + ' ' + renderErrorMarkdown(error.message, 'cli')
+		: error.message;
 	const output = [message];
 
-	if (err.hint) {
+	if (error.hint) {
 		output.push(`  ${bold('Hint:')}`);
 		output.push(
-			yellow(padMultilineString(renderErrorMarkdown(err.hint, 'cli'), 4)),
+			yellow(padMultilineString(renderErrorMarkdown(error.hint, 'cli'), 4)),
 		);
 	}
 
 	if (docsBaseUrl) {
-		const docsLink = getDocsForError(err, errorsData, docsBaseUrl);
+		const docsLink = getDocsForError(error, errorsData, docsBaseUrl);
 		if (docsLink) {
 			output.push(`  ${bold('Error reference:')}`);
 			output.push(`    ${cyan(underline(docsLink))}`);
 		}
 	}
 
-	if (err.stack) {
+	if (error.stack) {
 		output.push(`  ${bold('Stack trace:')}`);
-		output.push(dim(formatErrorStackTrace(err, showFullStacktrace)));
+		output.push(dim(formatErrorStackTrace(error, showFullStacktrace)));
 	}
 
-	if (err.cause) {
+	if (error.cause) {
 		output.push(`  ${bold('Caused by:')}`);
 		let causeMessage = '  ';
-		if (err.cause instanceof Error) {
-			causeMessage +=
-				err.cause.message +
-				'\n' +
-				formatErrorStackTrace(err.cause, showFullStacktrace);
-		} else {
-			causeMessage += JSON.stringify(err.cause);
-		}
+		causeMessage +=
+			error.cause instanceof Error
+				? error.cause.message +
+					'\n' +
+					formatErrorStackTrace(error.cause, showFullStacktrace)
+				: JSON.stringify(error.cause);
 		output.push(dim(causeMessage));
 	}
 
