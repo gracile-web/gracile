@@ -4,6 +4,7 @@ import { MarkdownRendererBase } from '@gracile/markdown/renderer';
 import { slug as slugger } from 'github-slugger';
 import { marked, type Token } from 'marked';
 import { gfmHeadingId } from 'marked-gfm-heading-id';
+import markedFootnote from 'marked-footnote';
 import * as ultramatter from 'ultramatter';
 
 let collectedHeadings: Heading[] = [];
@@ -24,7 +25,7 @@ export class MarkdownRenderer extends MarkdownRendererBase {
 
 		collectedHeadings = [];
 		collectedExcerpt = '';
-		const html = await marked.parse(content);
+		const html = await marked.use(markedFootnote()).parse(content);
 
 		this.setTableOfContents(buildHierarchy(collectedHeadings));
 		this.setTableOfContentsFlat(collectedHeadings);
