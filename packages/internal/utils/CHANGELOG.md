@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.5.0-next.1...@gracile/internal-utils@0.5.0-next.2) (2024-12-21)
+
+### Bug Fixes
+
+* update to vite 5 to 6.x, nanoid vulnerability ([bd16c45](https://github.com/gracile-web/gracile/commit/bd16c45c66d09ec491cda84a09d161747ab89e57))
+
 # [0.5.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.5.0-next.0...@gracile/internal-utils@0.5.0-next.1) (2024-11-03)
 
 ### Features

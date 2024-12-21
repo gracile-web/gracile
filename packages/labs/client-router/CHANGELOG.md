@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.1.0-next.0...@gracile-labs/client-router@0.1.0-next.1) (2024-12-21)
+
+### Features
+
+* event methods override for typed events ([8790c39](https://github.com/gracile-web/gracile/commit/8790c390ed91ea0455508082358e37bf815eb7ba))
+* support for light dom signal host, invokable api ([3470044](https://github.com/gracile-web/gracile/commit/34700449a5a6eff8509e03f3b7100121ab7c2a83))
+
 # 0.1.0-next.0 (2024-11-03)
 
 ### Features

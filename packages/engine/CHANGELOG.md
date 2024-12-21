@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.0-next.1...@gracile/engine@0.8.0-next.2) (2024-12-21)
+
+### Bug Fixes
+
+* update to vite 5 to 6.x, nanoid vulnerability ([bd16c45](https://github.com/gracile-web/gracile/commit/bd16c45c66d09ec491cda84a09d161747ab89e57))
+* vite 6 typings somehow requires to return explicit plugin type for factories ([b264075](https://github.com/gracile-web/gracile/commit/b264075384663f9fdaa0af6800d2b5cf4ba91195))
+
 # [0.8.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.0-next.0...@gracile/engine@0.8.0-next.1) (2024-11-03)
 
 ### Features
