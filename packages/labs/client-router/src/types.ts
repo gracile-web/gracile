@@ -4,6 +4,7 @@ export interface Config {
 	fallback?: string | undefined;
 	plugins?: Plugin[] | undefined;
 	routes: RouteDefinition[];
+	signalHost?: boolean | undefined;
 }
 
 export interface Plugin {

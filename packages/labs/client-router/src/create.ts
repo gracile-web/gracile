@@ -6,12 +6,13 @@
 import 'urlpattern-polyfill';
 import '@gracile/client/lit-element-hydrate-support';
 
-import { render, type TemplateResult } from 'lit';
+import { render, type RenderOptions, type TemplateResult } from 'lit';
 import { RouteModule } from '@gracile/engine/routes/route';
 // eslint-disable-next-line import-x/no-unresolved
 import { routeImports, enabled } from 'gracile:client:routes';
 import { hydrate } from '@lit-labs/ssr-client';
 import { premiseUrl } from '@gracile/internal-utils/paths';
+import { SignalHost } from '@gracile/client/signal-host';
 
 import { GracileRouter } from './_internal/gracile-client-router.js';
 import * as prefetching from './_internal/prefetching.js';
@@ -72,11 +73,26 @@ export function prefetchRoutePremises(options: {
 	void prefetching.prefetch(preProperties);
 }
 
-export interface GracileRouterConfig extends Config {
-	morph?: (incoming: Document, target: Document) => void;
-}
+export type GracileRouterConfig = Partial<
+	Pick<Config, 'plugins' | 'routes' | 'signalHost'>
+>;
 
-// TODO: Caching mechanisms optimisations
+/**
+ * Client-side routing that takes over the SSRed markup and browser navigation.
+ * @param config Router instance configuration.
+ * @param config.plugins Router plugins.
+ * @param config.routes Additional routes.
+ * @version experimental
+ * @example
+ * `./src/client-router.ts`
+ * ```js
+ * import { createRouter } from '@gracile-labs/client-router/create';
+ *
+ * export const router = createRouter();
+ * ```
+ * @returns The client router as an observable or controllable event target.
+ */
+
 export function createRouter(config?: GracileRouterConfig) {
 	const serverRoutes: RouteDefinition[] = [];
 
@@ -84,6 +100,9 @@ export function createRouter(config?: GracileRouterConfig) {
 
 	const cachedDocuments = new Map<string, Document>();
 	const cachedTemplates = new Map<string, TemplateResult>();
+
+	const hydrationOptions: RenderOptions = {};
+	if (config?.signalHost) hydrationOptions.host = new SignalHost();
 
 	// MARK: Virtual routes.
 	for (const [path, routeImport] of routeImports.entries()) {
@@ -144,7 +163,6 @@ export function createRouter(config?: GracileRouterConfig) {
 						),
 					);
 				}
-
 				if (!cachedTemplateForRoute) {
 					premiseToFetch.push(
 						fetch(premiseUrl(url.pathname, 'props')).then((r) =>
@@ -271,12 +289,11 @@ export function createRouter(config?: GracileRouterConfig) {
 					if (!renderedTemplate) throw new Error('Cannot render template');
 
 					// MARK: Hydrate or render
-
 					if (!isInitiallyHydrated) {
 						try {
 							// TODO: try
 							requestIdleCallback(() => {});
-							hydrate(renderedTemplate, document.body);
+							hydrate(renderedTemplate, document.body, hydrationOptions);
 							isInitiallyHydrated = true;
 
 							return;
@@ -291,7 +308,7 @@ export function createRouter(config?: GracileRouterConfig) {
 					// We don't want to re-render for hash changes, too.
 					// TODO: early detection
 					if (url.pathname !== previousPathname) {
-						render(renderedTemplate, document.body);
+						render(renderedTemplate, document.body, hydrationOptions);
 
 						// MARK: Extras meta
 						if (parsedDocument) {
@@ -335,7 +352,7 @@ export function createRouter(config?: GracileRouterConfig) {
 				// TODO: offline, generic error page support…
 			],
 
-		routes: config?.routes.length
+		routes: config?.routes?.length
 			? [...serverRoutes, ...config.routes]
 			: serverRoutes,
 	});

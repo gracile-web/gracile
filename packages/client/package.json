@@ -45,6 +45,14 @@
     "@lit-labs/ssr-client": "^1.1.7",
     "urlpattern-polyfill": "^10.0.0"
   },
+  "peerDependencies": {
+    "@lit-labs/signals": "^0.1.1"
+  },
+  "peerDependenciesMeta": {
+    "@lit-labs/signals": {
+      "optional": true
+    }
+  },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "tsx": "^4.19.1",

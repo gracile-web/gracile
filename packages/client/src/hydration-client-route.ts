@@ -7,20 +7,21 @@ import { routeImports } from 'gracile:client:routes';
 import { premiseUrl } from '@gracile/internal-utils/paths';
 import { URLPattern } from 'urlpattern-polyfill/urlpattern';
 
-async function init() {
+async function init(options?: HydrationOptions) {
 	const url = new URL(globalThis.document.location.href);
-	const urlPattern = new URLPattern({
-		baseURL: url.href,
-	});
+	// NOTE: Remove hash and query.
+	const baseURL = `${url.origin}${url.pathname}`;
+	const urlPattern = new URLPattern({ baseURL });
 
 	let route: RouteModule | undefined;
 	let parameters: Parameters = {};
+
 	for (const [pattern, routeImport] of routeImports.entries()) {
-		const match = urlPattern.exec(pattern, url.href);
+		const match = urlPattern.exec(pattern, baseURL);
+
 		if (match) {
-			// eslint-disable-next-line unicorn/no-await-expression-member
-			const loaded = (await routeImport()).default(RouteModule);
-			route = loaded;
+			const loaded = await routeImport();
+			route = loaded.default(RouteModule);
 			parameters = match.pathname.groups;
 			break;
 		}
@@ -30,14 +31,26 @@ async function init() {
 	const propertiesUrl = premiseUrl(url.pathname, 'props');
 	const properties = await fetch(propertiesUrl).then((r) => r.json());
 
-	const template = route.template({
+	const rootValue = route.template({
 		url,
 		params: parameters,
 		props: properties,
 	});
-	hydrate(template, document.body);
+
+	let hydrationOptions;
+	if (options?.signalHost) {
+		const { SignalHost } = await import('./signal-host.js');
+		hydrationOptions = { host: new SignalHost() };
+	}
+	hydrate(rootValue, document.body, hydrationOptions);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-	void init();
-});
+export interface HydrationOptions {
+	signalHost?: boolean | undefined;
+}
+
+export function createHydrationRoot(options?: HydrationOptions) {
+	document.addEventListener('DOMContentLoaded', () => {
+		void init(options);
+	});
+}
