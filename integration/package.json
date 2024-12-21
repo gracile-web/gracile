@@ -30,7 +30,7 @@
     "lit": "^3.2.1",
     "prettier": "^3.3.3",
     "snapshot-fixtures": "^1.2.0",
-    "vite": "^5.4.10"
+    "vite": "^6.0.5"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
