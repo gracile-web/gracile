@@ -6,9 +6,9 @@
  * ```ts twoslash
  * // @filename: /src/lib/my-lib.ts
  *
- * import { env } from '@gracile/gracile/env';
+ * import { nodeCondition } from '@gracile/gracile/node-condition';
  *
- * if (env.BROWSER) {
+ * if (nodeCondition.BROWSER) {
  *   // NOTE: Do stuff…
  * }
  * ```
