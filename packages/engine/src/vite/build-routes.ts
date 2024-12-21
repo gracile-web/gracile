@@ -2,7 +2,10 @@ import { basename, extname, join } from 'node:path';
 
 import { createFilter, type Plugin, type ViteDevServer } from 'vite';
 
-import { renderRoutes } from '../routes/render.js';
+import {
+	renderRoutes,
+	type RenderedRouteDefinition,
+} from '../routes/render.js';
 import { REGEX_TAG_LINK, REGEX_TAG_SCRIPT } from '../render/route-template.js';
 import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
@@ -26,7 +29,12 @@ export const buildRoutes = async ({
 	root: string;
 	gracileConfig: GracileConfig;
 	serverMode?: boolean;
-}) => {
+}): Promise<{
+	routes: RoutesManifest;
+	renderedRoutes: RenderedRouteDefinition[];
+	inputList: string[];
+	plugin: Plugin[];
+}> => {
 	// TODO: extract upstream, return just the plugins
 	const { renderedRoutes } = await renderRoutes({
 		vite: viteServerForBuild,
@@ -103,7 +111,7 @@ export const buildRoutes = async ({
 
 					return null;
 				},
-			} satisfies Plugin,
+			},
 
 			{
 				name: 'gracile-collect-handler-assets',
@@ -180,7 +188,7 @@ export const buildRoutes = async ({
 						}
 					}
 				},
-			} satisfies Plugin,
+			},
 		],
 	};
 };

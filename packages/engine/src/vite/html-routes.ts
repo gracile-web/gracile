@@ -7,7 +7,7 @@ import type { Plugin } from 'vite';
  * but not THAT useful.
  * @todo Make tests and document this simple feature.
  */
-export function htmlRoutesLoader() {
+export function htmlRoutesLoader(): Plugin[] {
 	return [
 		{
 			name: 'gracile-html-route-loader',
@@ -25,6 +25,6 @@ export default defineRoute({
 });
 `;
 			},
-		} satisfies Plugin,
+		},
 	];
 }

@@ -16,7 +16,7 @@ export function virtualRoutes({
 	// root: string;
 	routes: RoutesManifest;
 	renderedRoutes: RenderedRouteDefinition[];
-}) {
+}): Plugin[] {
 	const virtualModuleId = 'gracile:routes';
 	const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 
@@ -102,7 +102,7 @@ export function virtualRoutesClient({
 	routes: RoutesManifest;
 	mode: 'static' | 'server';
 	gracileConfig: GracileConfig;
-}) {
+}): Plugin[] {
 	const virtualModuleId = 'gracile:client:routes';
 	const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 
