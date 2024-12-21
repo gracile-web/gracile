@@ -37,6 +37,22 @@ export class GracileRouter extends EventTarget {
 		ROUTE_RENDERED: 'route-rendered',
 	} satisfies Record<string, EventType>);
 
+	public override removeEventListener(
+		type: EventType,
+		callback: EventListenerOrEventListenerObject | null,
+		options?: EventListenerOptions | boolean,
+	): void {
+		super.removeEventListener(type, callback, options);
+	}
+
+	public override addEventListener(
+		type: EventType,
+		callback: EventListenerOrEventListenerObject | null,
+		options?: AddEventListenerOptions | boolean,
+	): void {
+		super.addEventListener(type, callback, options);
+	}
+
 	public constructor(config: Config) {
 		super();
 		this.config = config;
