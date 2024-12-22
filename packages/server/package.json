@@ -1,6 +1,6 @@
 {
   "name": "@gracile/server",
-  "version": "0.6.2-next.2",
+  "version": "0.6.2",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
