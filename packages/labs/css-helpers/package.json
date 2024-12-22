@@ -11,7 +11,8 @@
     "server-side-rendering",
     "ssr",
     "static",
-    "web-components"
+    "web-components",
+    "css"
   ],
   "homepage": "https://gracile.js.org",
   "repository": {
