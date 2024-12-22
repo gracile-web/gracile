@@ -17,6 +17,7 @@ import type { GracileConfig } from './user-config.js';
 import { buildRoutes } from './vite/build-routes.js';
 import { htmlRoutesLoader } from './vite/html-routes.js';
 import { virtualRoutes, virtualRoutesClient } from './vite/virtual-routes.js';
+import { hmrSsrReload } from './vite/hmr.js';
 
 let isClientBuilt = false;
 
@@ -102,6 +103,8 @@ export const gracile = (config?: GracileConfig): any[] => {
 		// 				return null;
 		// 			},
 		// 		},
+
+		hmrSsrReload(),
 
 		{
 			name: 'vite-plugin-gracile-serve-middleware',

@@ -87,7 +87,7 @@ export { routes, routeImports, routeAssets };
 
 				return null;
 			},
-		} satisfies Plugin,
+		},
 	];
 }
 
@@ -154,6 +154,6 @@ export { routeImports };
 
 				return null;
 			},
-		} satisfies Plugin,
+		},
 	];
 }
