@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.0...@gracile/engine@0.8.1-next.0) (2024-12-22)
+
+### Bug Fixes
+
+* vite 6 breaking change for ssr module hmr, add migration plugin ([b0026e4](https://github.com/gracile-web/gracile/commit/b0026e4db9696b94f7ede31064afb944f825ca84))
+
 # [0.8.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.0-next.2...@gracile/engine@0.8.0) (2024-12-22)
 
 **Note:** Version bump only for package @gracile/engine
