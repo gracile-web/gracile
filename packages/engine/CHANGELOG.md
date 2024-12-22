@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.1-next.0...@gracile/engine@0.8.1-next.1) (2024-12-22)
+
+### Bug Fixes
+
+* cannot find `gracile:client:routes` only when gracile is built ([e656d66](https://github.com/gracile-web/gracile/commit/e656d660d42b5bdcffa56b16afbf21655bacb5f0))
+
 ## [0.8.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.0...@gracile/engine@0.8.1-next.0) (2024-12-22)
 
 ### Bug Fixes
