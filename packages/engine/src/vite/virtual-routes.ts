@@ -114,8 +114,14 @@ export function virtualRoutesClient({
 	return [
 		{
 			name: 'gracile-client-routes',
-
 			// TODO: Proper invalidation!
+
+			config() {
+				return {
+					// NOTE: Prevent a bug that happens only when Gracile is built.
+					optimizeDeps: { exclude: [virtualModuleId] },
+				};
+			},
 
 			resolveId(id) {
 				if (id === virtualModuleId) {
