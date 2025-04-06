@@ -161,47 +161,47 @@ const routeImports = new Map(
 const routeAssets = new Map([
   [
     "/404/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/about/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/assets-methods/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/contact/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/foo/bar/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/index-D-7z00ye.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-hvNMEINk.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    "\t<script type=\"module\" crossorigin src=\"/assets/index-uf3A4kIu.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-CwDL07G2.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/",
-    "\t<script type=\"module\" crossorigin src=\"/assets/index-5K-Wggme.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-hvNMEINk.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/index-BDXCCSBJ.css\">\n"
+    "\t<script type=\"module\" crossorigin src=\"/assets/index--eQYNkRa.js\"></script>\n\n\t<link rel=\"modulepreload\" crossorigin href=\"/assets/document.client-CwDL07G2.js\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n\n\t<link rel=\"stylesheet\" crossorigin href=\"/assets/index-BDXCCSBJ.css\">\n"
   ],
   [
     "/private/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/response-init/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/route-premises/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/template-failure/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ],
   [
     "/throws/",
-    " <script type=\"module\" crossorigin src=\"/assets/document.client-hvNMEINk.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
+    " <script type=\"module\" crossorigin src=\"/assets/document.client-CwDL07G2.js\"></script>\n\n <link rel=\"stylesheet\" crossorigin href=\"/assets/document-17MCeMxd.css\">\n"
   ]
 ]);
 
