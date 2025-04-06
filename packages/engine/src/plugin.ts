@@ -227,7 +227,11 @@ export const gracile = (config?: GracileConfig): any[] => {
 							input: htmlPages.inputList,
 							plugins: [htmlPages.plugin],
 						},
-						outDir: outputMode === 'server' ? 'dist/client' : 'dist',
+
+						outDir: join(
+							viteConfig.build?.outDir || 'dist',
+							outputMode === 'server' ? 'client' : '',
+						),
 					},
 				};
 			},
