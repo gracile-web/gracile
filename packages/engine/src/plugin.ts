@@ -56,7 +56,8 @@ export const gracile = (config?: GracileConfig): any[] => {
 
 	const gracileConfig = config || ({} as GracileConfig);
 
-	// NOTE: Prevent duplicate client build for the SSR build step in server mode.
+	// HACK: Prevent duplicate client build for the SSR build step in server mode.
+	// TODO: Move to the new, clean, environments builders API.
 	if (isClientBuilt) return [];
 	isClientBuilt = true;
 
@@ -129,6 +130,9 @@ export const gracile = (config?: GracileConfig): any[] => {
 			},
 
 			async configureServer(server) {
+				// HACK: We know we are in dev here, this will prevent incorrect
+				// vite.config hot reloading. Will be removed when adopting env. API.
+				isClientBuilt = false;
 				// Infos
 
 				// // NOTE: Beware import.meta.resolve is only compatible
