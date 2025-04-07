@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.1...@gracile/engine@0.8.2-next.0) (2025-04-07)
+
+### Bug Fixes
+
+* reload gracile when vite config is reloaded ([e23a0d0](https://github.com/gracile-web/gracile/commit/e23a0d005b9d6073bcfc5bb59a5282786f884944))
+* use user config build output directory ([8e92e1c](https://github.com/gracile-web/gracile/commit/8e92e1c16da6645331dfda1829568b7d735cc44a))
+
 ## [0.8.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.1-next.1...@gracile/engine@0.8.1) (2024-12-22)
 
 **Note:** Version bump only for package @gracile/engine
