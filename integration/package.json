@@ -30,13 +30,13 @@
     "lit": "^3.2.1",
     "prettier": "^3.3.3",
     "snapshot-fixtures": "^1.2.0",
-    "vite": "^6.0.5"
+    "vite": "^6.2.5"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/express": "^5.0.0",
     "@types/node": "^22.8.1",
-    "tsx": "^4.19.1",
+    "tsx": "^4.19.3",
     "typescript": "5.6.3"
   }
 }

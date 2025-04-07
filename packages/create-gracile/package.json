@@ -58,7 +58,7 @@
     "@gracile/internal-utils": "workspace:^",
     "@types/degit": "^2.8.6",
     "@types/node": "^22.8.1",
-    "cli-testing-library": "^2.0.2",
+    "cli-testing-library": "^3.0.1",
     "typescript": "5.6.3"
   },
   "publishConfig": {
