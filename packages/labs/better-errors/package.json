@@ -45,19 +45,19 @@
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
-    "@lit-labs/ssr": "^3.2.2",
-    "@lit-labs/ssr-client": "^1.1.7",
-    "lit": "^3.2.1",
-    "picocolors": "^1.0.1",
-    "vite": "^7.3.1"
+    "@lit-labs/ssr": "catalog:",
+    "@lit-labs/ssr-client": "catalog:",
+    "lit": "catalog:",
+    "picocolors": "catalog:",
+    "vite": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@literals/html-css-minifier": "^3.0.0",
-    "@literals/rollup-plugin-html-css-minifier": "^3.0.0",
+    "@literals/html-css-minifier": "^3.0.1",
+    "@literals/rollup-plugin-html-css-minifier": "^3.0.1",
     "@rollup/plugin-terser": "^0.4.4",
-    "terser": "^5.31.6",
-    "typescript": "5.5.4"
+    "terser": "^5.46.0",
+    "typescript": "5.9.3"
   },
   "publishConfig": {
     "access": "public",

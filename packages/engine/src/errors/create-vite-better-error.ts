@@ -6,7 +6,7 @@ import { collectErrorMetadata } from '@gracile-labs/better-errors/dev/utils';
 import { getViteErrorPayload } from '@gracile-labs/better-errors/dev/vite';
 import type { ErrorPayload, ViteDevServer } from 'vite';
 
-import { renderLitTemplate } from '../render/utils.js';
+import { renderLitTemplate } from '../render/lit-ssr.js';
 
 import { GRACILE_JS_ERRORS_DOCS_BASE, GracileErrorData } from './errors.js';
 import { builtInErrorPage } from './pages.js';

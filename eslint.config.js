@@ -93,6 +93,9 @@ export default [
 			'@typescript-eslint/no-use-before-define': 'off',
 			'@typescript-eslint/require-await': 'error',
 
+			'unicorn/no-array-sort': 'off',
+			'unicorn/require-module-specifiers': 'off',
+
 			'jsdoc/require-jsdoc': [
 				// 'warn',
 				'off',

@@ -157,6 +157,6 @@ export function getClientBuildPath(root: string) {
 	return fileURLToPath(new URL(constants.CLIENT_DIST_DIR, root));
 }
 
-export { printUrls } from '../utils.js';
+export { printUrls } from '../utilities.js';
 
 export { type GracileHandler } from '../request.js';

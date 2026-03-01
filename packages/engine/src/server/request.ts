@@ -11,7 +11,7 @@ import type { emitViteBetterError as emitViteBe } from '../errors/create-vite-be
 // import { GracileError } from '../errors/errors.js';
 import { builtIn404Page, builtInErrorPage } from '../errors/pages.js';
 import { renderRouteTemplate } from '../render/route-template.js';
-import { renderLitTemplate } from '../render/utils.js';
+import { renderLitTemplate } from '../render/lit-ssr.js';
 import { getRoute } from '../routes/match.js';
 import type * as R from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';

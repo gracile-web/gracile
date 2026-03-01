@@ -82,6 +82,6 @@ export function getClientBuildPath(root: string) {
 	);
 }
 
-export { printUrls } from '../utils.js';
+export { printUrls } from '../utilities.js';
 
 export { type GracileHandler } from '../request.js';

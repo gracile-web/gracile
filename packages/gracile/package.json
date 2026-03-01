@@ -56,13 +56,13 @@
     "@gracile/engine": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@gracile/server": "workspace:^",
-    "@lit-labs/ssr": "^3.2.2",
-    "urlpattern-polyfill": "^10.0.0"
+    "@lit-labs/ssr": "catalog:",
+    "urlpattern-polyfill": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "^25.3.3",
-    "typescript": "5.6.3"
+    "typescript": "5.9.3"
   },
   "publishConfig": {
     "access": "public",

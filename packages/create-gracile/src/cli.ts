@@ -185,6 +185,7 @@ if (locationExists || (!cliSettings.location && !savedSettings.location)) {
 		message: `Enter your new ${c.cyan('project location')}`,
 		placeholder: location,
 		validate(value) {
+			if (!value) return;
 			if (locationExists && value === '') return 'Already exist!';
 			if (value.length > 0) {
 				if (locationExists && location === value) return 'Already exist!';
