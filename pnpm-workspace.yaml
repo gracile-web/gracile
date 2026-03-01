@@ -15,13 +15,12 @@ packages:
   - ./packages/addons/sitemap
   - ./packages/addons/markdown
   - ./packages/addons/markdown-preset-marked
-  # - ./packages/addons/minify
-  # - ./packages/addons/minify-html-literals
   - ./integration
   - ./packages/labs/client-router
   - ./packages/labs/css-helpers
   - ./packages/labs/better-errors
-  # - integration/__fixtures__/server-express
+
+# NOTE: Not supported by Lerna (for now).
 # catalog:
 #   vite: ^5.3.5
 #   lit: ^3.1.3

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 import type { Heading, TocLevel } from '@gracile/markdown/module';
 import { MarkdownRendererBase } from '@gracile/markdown/renderer';
 import { slug as slugger } from 'github-slugger';

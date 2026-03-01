@@ -1,6 +1,7 @@
 {
   "entryPoints": [
-    "packages/gracile"
+    "packages/gracile",
+    "packages/labs/client-router"
     // , "packages/engine"
   ],
 

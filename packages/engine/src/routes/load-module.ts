@@ -42,10 +42,7 @@ export async function loadForeignRouteObject({
 
 	if (vite) {
 		try {
-			unknownRouteModule = await vite.ssrLoadModule(
-				route.filePath /* + 's' */,
-				{},
-			);
+			unknownRouteModule = await vite.ssrLoadModule(route.filePath, {});
 		} catch (error) {
 			const error_ = error;
 

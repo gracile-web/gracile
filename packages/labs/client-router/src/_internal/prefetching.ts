@@ -1,6 +1,5 @@
 // From Astro.
 
-/* eslint-disable @typescript-eslint/no-use-before-define */
 const __PREFETCH_PREFETCH_ALL__ = undefined;
 const __PREFETCH_DEFAULT_STRATEGY__ = 'hover';
 const __EXPERIMENTAL_CLIENT_PRERENDER__ = false;

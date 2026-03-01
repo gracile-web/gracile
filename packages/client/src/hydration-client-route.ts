@@ -39,6 +39,7 @@ async function init(options?: HydrationOptions) {
 
 	let hydrationOptions;
 	if (options?.signalHost) {
+		// FIXME: Not working in prod. for now (wait for an official solution).
 		const { SignalHost } = await import('./signal-host.js');
 		hydrationOptions = { host: new SignalHost() };
 	}

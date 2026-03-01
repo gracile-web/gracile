@@ -10,7 +10,7 @@ import importX from 'eslint-plugin-import-x';
 
 export default [
 	{
-		ignores: ['coverage', 'dist'],
+		ignores: ['coverage', 'dist', 'packages/labs/ts-plugin-esx/playground'],
 	},
 	{
 		files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
@@ -34,6 +34,8 @@ export default [
 					'./packages/addons/sitemap/tsconfig.json',
 					'./packages/addons/markdown/tsconfig.json',
 					'./packages/addons/markdown-preset-marked/tsconfig.json',
+
+					// './packages/labs/babel-plugin-jsx-to-literals/tsconfig.json',
 					'./packages/labs/better-errors/tsconfig.json',
 					'./packages/labs/css-helpers/tsconfig.json',
 					'./packages/labs/client-router/tsconfig.json',
@@ -88,7 +90,7 @@ export default [
 			'@typescript-eslint/no-extraneous-class': 'error',
 			'@typescript-eslint/no-unused-vars': 'error',
 			'@typescript-eslint/no-unsafe-call': 'error',
-			'@typescript-eslint/no-use-before-define': 'error',
+			'@typescript-eslint/no-use-before-define': 'off',
 			'@typescript-eslint/require-await': 'error',
 
 			'jsdoc/require-jsdoc': [

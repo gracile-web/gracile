@@ -62,11 +62,15 @@
     "@types/node": "^25.3.3",
     "c8": "^10.1.2",
     "lit": "^3.2.1",
-    "typescript": "5.6.3",
-    "vite": "^7.3.1"
+    "typescript": "5.6.3"
   },
   "peerDependencies": {
-    "vite": "^6.2.5"
+    "vite": "^7.3.1"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public",

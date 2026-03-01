@@ -123,7 +123,11 @@ export function nodeAdapter(
 
 			if (result.response.body) {
 				const piped = await result.response.body
-					.pipeTo(Writable.toWeb(response) as WritableStream<Uint8Array>)
+					.pipeTo(
+						Writable.toWeb(
+							response,
+						) as WritableStream /* NOTE: Minor typing mismatch (node:stream/web vs. TS global) */,
+					)
 					.catch((error) => logger.error(String(error)));
 				return piped;
 			}

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
 // TODO: Remove this polyfill when FF, Safari etc. support it.
 // Maybe it's a better practice to let the user load it's own polyfill.
 // It's the only place in the Gracile codebase where a polyfill is
