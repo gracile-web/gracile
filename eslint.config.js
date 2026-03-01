@@ -35,7 +35,7 @@ export default [
 					'./packages/addons/markdown/tsconfig.json',
 					'./packages/addons/markdown-preset-marked/tsconfig.json',
 
-					// './packages/labs/babel-plugin-jsx-to-literals/tsconfig.json',
+					'./packages/labs/jsx/tsconfig.json',
 					'./packages/labs/better-errors/tsconfig.json',
 					'./packages/labs/css-helpers/tsconfig.json',
 					'./packages/labs/client-router/tsconfig.json',
