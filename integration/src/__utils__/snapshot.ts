@@ -55,7 +55,8 @@ async function getFiles(path: string) {
 	for await (const entry of glob([projectGlob, '!**/*.js.map'], {
 		withFileTypes: true,
 	}))
-		if (entry.isFile()) entries.push(join(entry.path, entry.name));
+		if (entry.isFile())
+			entries.push(join(entry.parentPath ?? entry.path, entry.name));
 
 	const fileList = await Promise.all(
 		entries.sort().map(async (filePath) => {

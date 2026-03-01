@@ -76,13 +76,20 @@ export async function createStaticDevServer({
 		// ],
 		// configFile: false,
 		// mode,
-		server: { port },
+		server: { port, strictPort: true },
 		root: /* await */ getProjectTempPath(project),
 	});
 
 	await server.listen();
 
-	return { address: `http://localhost:${port}`, close: () => server.close() };
+	const resolvedPort =
+		(server.httpServer?.address() as import('node:net').AddressInfo | null)
+			?.port ?? port;
+
+	return {
+		address: `http://localhost:${resolvedPort}`,
+		close: () => server.close(),
+	};
 }
 
 export async function build(project: string, _mode = 'static') {
