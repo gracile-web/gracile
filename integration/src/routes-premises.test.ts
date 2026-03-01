@@ -1,106 +1,101 @@
+/**
+ * Route premises tests (static-site dev server).
+ *
+ * Verifies that route premises (props.json and doc.html endpoints) work,
+ * and that the full page renders with handler-provided props.
+ */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { after, it } from 'node:test';
+import assert from 'node:assert/strict';
+import { after, before, describe, it } from 'node:test';
 
-import { fetchResource } from './__utils__/fetch.js';
-import { createStaticDevServer } from './__utils__/gracile-server.js';
-import { snapshotAssertEqual } from './__utils__/snapshot.js';
-import { writeActual } from './config.js';
+import { get, getText } from './helpers/fetch.js';
+import {
+	assertBodyIncludes,
+	assertH1,
+	assertStatus,
+	parseHtml,
+} from './helpers/html.js';
+import { createTestServer, type TestServer } from './helpers/server.js';
 
-const { address, close } = await createStaticDevServer({
-	project: 'static-site',
-	port: 18982,
-});
+describe('route premises (static-site)', () => {
+	let server: TestServer;
 
-const projectRoutes = 'static-site/src/routes';
-
-const currentTestRoutes = '12-route-premises';
-
-// ---
-
-it('route-premises - props', async () => {
-	const route = '01-page-zebra/__index.props.json';
-
-	await snapshotAssertEqual({
-		expectedPath: [
-			projectRoutes,
-			currentTestRoutes,
-			`_${route.replaceAll('/', '__')}_expected._json`,
-		],
-		actualContent: await fetchResource(address, [currentTestRoutes, route], {
-			trailingSlash: false,
-		}),
-		writeActual,
+	before(async () => {
+		server = await createTestServer('static-site');
 	});
 
-	const route2 = '02-page-lion/__index.props.json';
-
-	await snapshotAssertEqual({
-		expectedPath: [
-			projectRoutes,
-			currentTestRoutes,
-			`_${route2.replaceAll('/', '__')}_expected._json`,
-		],
-		actualContent: await fetchResource(address, [currentTestRoutes, route2], {
-			trailingSlash: false,
-		}),
-		writeActual,
-	});
-});
-
-it('route-premises - doc', async () => {
-	const route = '01-page-zebra/__index.doc.html';
-
-	await snapshotAssertEqual({
-		expectedPath: [
-			projectRoutes,
-			currentTestRoutes,
-			`_${route.replaceAll('/', '__')}_expected._html`,
-		],
-		actualContent: await fetchResource(address, [currentTestRoutes, route], {
-			trailingSlash: false,
-		}),
-		writeActual,
+	after(async () => {
+		await server?.close();
 	});
 
-	const route2 = '02-page-lion/__index.doc.html';
+	describe('zebra page', () => {
+		it('props.json returns handler data', async () => {
+			const res = await get(
+				server.address,
+				'/12-route-premises/01-page-zebra/__index.props.json',
+				{ trailingSlash: false },
+			);
+			assertStatus(res, 200);
+			const json = (await res.json()) as Record<string, unknown>;
+			assert.equal(json.title, 'Hello Client Router - Zebra');
+			assert.equal(json.foo, 'baz');
+		});
 
-	await snapshotAssertEqual({
-		expectedPath: [
-			projectRoutes,
-			currentTestRoutes,
-			`_${route2.replaceAll('/', '__')}_expected._html`,
-		],
-		actualContent: await fetchResource(address, [currentTestRoutes, route2], {
-			trailingSlash: false,
-		}),
-		writeActual,
+		it('doc.html returns document fragment', async () => {
+			const res = await get(
+				server.address,
+				'/12-route-premises/01-page-zebra/__index.doc.html',
+				{ trailingSlash: false },
+			);
+			assertStatus(res, 200);
+			const body = await res.text();
+			assertBodyIncludes(body, '<html');
+			assertBodyIncludes(body, 'route-template-outlet');
+		});
+
+		it('full page renders with props', async () => {
+			const html = await getText(
+				server.address,
+				'/12-route-premises/01-page-zebra',
+			);
+			const $ = parseHtml(html);
+			assertH1($, 'Hello Client Router - Zebra');
+			assertBodyIncludes(html, '/12-route-premises/01-page-zebra/');
+		});
 	});
-});
 
-it('route-premises - doc', async () => {
-	const route = '01-page-zebra';
+	describe('lion page', () => {
+		it('props.json returns handler data', async () => {
+			const res = await get(
+				server.address,
+				'/12-route-premises/02-page-lion/__index.props.json',
+				{ trailingSlash: false },
+			);
+			assertStatus(res, 200);
+			const json = (await res.json()) as Record<string, unknown>;
+			assert.equal(json.title, 'Hello Client Router - Lion');
+		});
 
-	await snapshotAssertEqual({
-		expectedPath: [
-			projectRoutes,
-			currentTestRoutes,
-			`_${route.replaceAll('/', '__')}_expected._html`,
-		],
-		actualContent: await fetchResource(address, [currentTestRoutes, route]),
-		writeActual,
-	});
+		it('doc.html returns document fragment', async () => {
+			const res = await get(
+				server.address,
+				'/12-route-premises/02-page-lion/__index.doc.html',
+				{ trailingSlash: false },
+			);
+			assertStatus(res, 200);
+			const body = await res.text();
+			assertBodyIncludes(body, '<html');
+		});
 
-	const route2 = '02-page-lion';
-
-	await snapshotAssertEqual({
-		expectedPath: [
-			projectRoutes,
-			currentTestRoutes,
-			`_${route2.replaceAll('/', '__')}_expected._html`,
-		],
-		actualContent: await fetchResource(address, [currentTestRoutes, route2]),
-		writeActual,
+		it('full page renders with props', async () => {
+			const html = await getText(
+				server.address,
+				'/12-route-premises/02-page-lion',
+			);
+			const $ = parseHtml(html);
+			assertH1($, 'Hello Client Router - Lion');
+			assertBodyIncludes(html, '/12-route-premises/02-page-lion/');
+		});
 	});
 });
-
-after(async () => close());

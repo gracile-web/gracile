@@ -51,7 +51,7 @@
     "@gracile/client": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
-    "@types/node": "^22.8.1",
+    "@types/node": "^25.3.3",
     "c8": "^10.1.2",
     "tsx": "^4.19.3",
     "typescript": "5.6.3"

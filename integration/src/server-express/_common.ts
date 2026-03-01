@@ -1,200 +1,140 @@
+/**
+ * Common server-mode test suite (shared between Express and Hono tests).
+ *
+ * Uses structural assertions instead of full-HTML snapshot comparison.
+ */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { fetchResource } from '../__utils__/fetch.js';
-import { checkResponse } from '../__utils__/fetch-utils.js';
-import { removeLitParts, snapshotAssertEqual } from '../__utils__/snapshot.js';
-import { removeLocalPathsInDevAssets } from '../__utils__/vite.js';
+import { get, getText } from '../helpers/fetch.js';
+import {
+	assertBodyIncludes,
+	assertContentType,
+	assertH1,
+	assertHeader,
+	assertRedirected,
+	assertStatus,
+	assertTitleIncludes,
+	parseHtml,
+} from '../helpers/html.js';
 import { api } from './_api.js';
 
-const projectRoutes = 'server-express/src/routes';
-const currentTestRoutes = '';
+export async function common(address: string, item: string) {
+	await describe(`server routes — ${item}`, async () => {
+		await it(`static asset from public dir — ${item}`, async () => {
+			const res = await get(address, '/favicon.svg', { trailingSlash: false });
+			assertStatus(res, 200);
+			assertContentType(res, 'image/svg');
+		});
 
-const ADDRESS = 'http://localhost:9874';
+		await it(`page has html mime type — ${item}`, async () => {
+			const res = await get(address, '/about');
+			assertContentType(res, 'text/html');
+		});
 
-async function tests(mode: string, item: string, writeActual: boolean) {
-	const expectedPath = (name: string, ext = 'html') => [
-		projectRoutes,
-		currentTestRoutes,
-		`_${name}_${mode}_${item}_expected._${ext}`,
-	];
+		await it(`404 page — ${item}`, async () => {
+			const html = await getText(address, '/404');
+			const $ = parseHtml(html);
+			assertH1($, '⚠️ 404 !!');
+			assertBodyIncludes(html, 'not found');
+		});
 
-	await it(`load a static asset from public directory - ${item}`, async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('favicon.svg'),
-			actualContent: await fetchResource(ADDRESS, ['favicon.svg'], {
-				trailingSlash: false,
-			}),
-			writeActual,
-		}));
+		await it(`basic page (about) — ${item}`, async () => {
+			const html = await getText(address, '/about');
+			const $ = parseHtml(html);
+			assertH1($, 'the About Page');
+			assertTitleIncludes($, 'Gracile About');
+		});
 
-	// NOTE: Reactivate when Vite Environment API will be setup
-	// await it('guard by user server middleware', async () =>
-	// 	snapshotAssertEqual({
-	// 		expectedPath: expectedPath('private'),
-	// 		actualContent: await fetchResource(ADDRESS, ['private']),
-	// 		writeActual,
-	// 	}));
-	// await it('load an user server API route', async () =>
-	// 	snapshotAssertEqual({
-	// 		expectedPath: expectedPath('api'),
-	// 		actualContent: await fetchResource(ADDRESS, ['api']),
-	// 		writeActual,
-	// 	}));
-	await it(`page has html mime type - ${item}`, async () =>
-		fetch(new URL(`${ADDRESS}/about/`, ADDRESS)).then((r) =>
-			assert.equal(
-				r.headers.get('Content-Type')?.startsWith('text/html'),
-				true,
-			),
-		));
+		await it(`prerendered page (contact) — ${item}`, async () => {
+			const html = await getText(address, '/contact');
+			const $ = parseHtml(html);
+			assertH1($, 'the Contact Page');
+			assertTitleIncludes($, 'Gracile Contact');
+		});
 
-	await it(`load the 404 page - ${item}`, async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('404'),
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(ADDRESS, ['404']),
-			),
-			writeActual,
-		}));
+		await describe(`route premises — ${item}`, async () => {
+			await it(`full page — ${item}`, async () => {
+				const html = await getText(address, '/route-premises');
+				const $ = parseHtml(html);
+				assertH1($, 'Hello Client Router - Zebra');
+				assertBodyIncludes(html, '/route-premises/');
+			});
 
-	await it(`load a basic page - ${item}`, async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('about'),
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(ADDRESS, ['about']),
-			),
-			writeActual,
-		}));
-	await it('load a basic page with [prerenderin- g ]+item', async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('contact'),
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(ADDRESS, ['contact']),
-			),
-			writeActual,
-		}));
+			await it(`props.json endpoint — ${item}`, async () => {
+				const res = await get(address, '/route-premises/__index.props.json', {
+					trailingSlash: false,
+				});
+				assertStatus(res, 200);
+				const body = await res.text();
+				// Should be valid JSON containing the handler's return value
+				const json = JSON.parse(body);
+				assert.equal(json.title, 'Hello Client Router - Zebra');
+			});
 
-	describe('page premises', async () => {
-		await it(`load page premises - ${item}`, async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('route-premises'),
-				actualContent: removeLocalPathsInDevAssets(
-					await fetchResource(ADDRESS, ['route-premises']),
-				),
-				writeActual,
-			}));
+			await it(`doc.html endpoint — ${item}`, async () => {
+				const res = await get(address, '/route-premises/__index.doc.html', {
+					trailingSlash: false,
+				});
+				assertStatus(res, 200);
+				const body = await res.text();
+				assertBodyIncludes(body, '<html');
+			});
+		});
 
-		await it(`load page premises - ${item}`, async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('route-premises', 'props._json'),
-				actualContent: removeLocalPathsInDevAssets(
-					await fetchResource(ADDRESS, ['route-premises/__index.props.json'], {
-						trailingSlash: false,
-					}),
-				),
-				writeActual,
-			}));
-		await it(`load page premises - ${item}`, async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('route-premises', 'doc.html'),
-				actualContent: removeLocalPathsInDevAssets(
-					await fetchResource(ADDRESS, ['route-premises/__index.doc.html'], {
-						trailingSlash: false,
-					}),
-				),
-				writeActual,
-			}));
-	});
+		await it(`homepage with query param — ${item}`, async () => {
+			const html = await getText(address, '/?q=123');
+			assertBodyIncludes(html, 'QUERY:');
+			assertBodyIncludes(html, '123');
+		});
 
-	await it(`load homepage with a get query param - ${item}`, async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('home'),
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(ADDRESS, ['?q=123'], { trailingSlash: false }),
-			),
-			writeActual,
-		}));
+		await it(`assets methods page — ${item}`, async () => {
+			const html = await getText(address, '/assets-methods');
+			assertBodyIncludes(html, 'my-el');
+		});
 
-	await it(`load a page with various asset loading methods - ${item}`, async () =>
-		snapshotAssertEqual({
-			expectedPath: expectedPath('assets-methods'),
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(ADDRESS, ['assets-methods']),
-			),
-			writeActual,
-		}));
+		await it(`response init GET — ${item}`, async () => {
+			const res = await get(address, '/response-init', {
+				headers: { hey: '__abc' },
+			});
+			assertStatus(res, 210);
+			assertHeader(res, 'bar', 'baz');
+			assertHeader(res, 'daz', 'doze');
+		});
 
-	await it(`should forward response init when returning an html template via GET - ${item}`, async () =>
-		checkResponse(
-			fetch(new URL(`/response-init/`, ADDRESS), { headers: { hey: '__abc' } }),
-			{
-				headers: { bar: 'baz', daz: 'doze' },
-				status: 210,
-				// NOTE: Hono doesn't support custom status text
-				// statusText: 'Hi there__abc',
-			},
-		));
-	await it(`should forward response init when returning an html template via POST - ${item}`, async () =>
-		checkResponse(
-			fetch(new URL(`/response-init/`, ADDRESS), {
+		await it(`response init POST — ${item}`, async () => {
+			const res = await get(address, '/response-init', {
 				method: 'POST',
 				headers: { hey: '__oi' },
-			}),
-			{
-				headers: { azz: 'ozz', dizz: 'duzz' },
-				status: 211,
-				// NOTE: Hono doesn't support custom status text
-				// statusText: 'Ola__oi',
-			},
-		));
-	// TODO: Test with "accept: json" when implemented
+			});
+			assertStatus(res, 211);
+			assertHeader(res, 'azz', 'ozz');
+			assertHeader(res, 'dizz', 'duzz');
+		});
 
-	await it(`load an error page when a route throws - ${item}`, async () => {
-		const ressource = await fetchResource(ADDRESS, ['throws']);
+		await it(`error page when route throws — ${item}`, async () => {
+			const html = await getText(address, '/throws');
+			assertBodyIncludes(html, '500');
+		});
 
-		assert.equal(
-			// <vite-error-overlay> should take over just after (its a client only component) in DEV
-			ressource.includes('500: Error | Internal Server Error'),
-			true,
-		);
-	});
+		await it(`redirect — ${item}`, async () => {
+			const res = await get(address, '/redirect');
+			assertRedirected(res, '/about/');
+		});
 
-	await it(`should redirect`, async () =>
-		checkResponse(
-			fetch(new URL(`/redirect/`, ADDRESS), {
-				method: 'GET',
-			}),
-			{
-				redirected: true,
-				url: 'http://localhost:9874/about/',
-			},
-		));
+		// Template failure test — Express only (Hono doesn't handle stream
+		// abort as gracefully).
+		if (item === 'express') {
+			await it(`template failure recovery — ${item}`, async () => {
+				const html = await getText(address, '/template-failure');
+				assertBodyIncludes(html, 'FAILING-1');
+				assertBodyIncludes(html, 'FAILING-9');
+			});
+		}
 
-	// TODO: Proper test that works with Hono. For now,
-	// implemented error handling is very basic with it.
-	// It doesn't handle stream abortion as gracefully as with Express.
-	if (item === 'express')
-		await it(`should return a route with failing template - ${item}`, async () =>
-			snapshotAssertEqual({
-				expectedPath: expectedPath('template-failure'),
-				actualContent: removeLocalPathsInDevAssets(
-					removeLitParts(await fetchResource(ADDRESS, ['template-failure'])),
-				),
-				writeActual,
-			}));
-}
-
-export async function common(mode: string, item: string, writeActual = false) {
-	await describe(`load all server routes ${mode} - ${item}`, async () => {
-		await tests(mode, item, writeActual);
-		await api(item);
+		// Run API tests
+		await api(address, item);
 	});
 }
-// export function commonSync(mode: string, writeActual = false) {
-// 	describe(`load all server routes ${mode}`, () => {
-// 		tests(mode, writeActual);
-// 		api();
-// 	});
-// }

@@ -57,7 +57,7 @@
     "@lerna-lite/cli": "^3.12.3",
     "@lerna-lite/list": "^3.12.3",
     "@lerna-lite/publish": "^3.12.3",
-    "@types/node": "22.8.1",
+    "@types/node": "25.3.3",
     "c8": "10.1.2",
     "concurrently": "^9.0.1",
     "eslint": "^9.13.0",

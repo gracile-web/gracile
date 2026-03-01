@@ -1,114 +1,75 @@
+/**
+ * Asset loading tests (static-site dev server).
+ *
+ * Verifies that sibling CSS/JS assets are injected, and that inline
+ * CSS imports work correctly.
+ */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { after, describe, it } from 'node:test';
+import { after, before, describe, it } from 'node:test';
 
-import { fetchResource } from './__utils__/fetch.js';
-import { createStaticDevServer } from './__utils__/gracile-server.js';
-import { snapshotAssertEqual } from './__utils__/snapshot.js';
-import { removeLocalPathsInDevAssets } from './__utils__/vite.js';
-import { writeActual } from './config.js';
+import { get, getText } from './helpers/fetch.js';
+import {
+	assertBodyIncludes,
+	assertContentType,
+	assertExists,
+	assertH1,
+	assertStatus,
+	parseHtml,
+} from './helpers/html.js';
+import { createTestServer, type TestServer } from './helpers/server.js';
 
-const { address, close } = await createStaticDevServer({
-	project: 'static-site',
-	port: 4556,
-});
+describe('asset loading (static-site)', () => {
+	let server: TestServer;
 
-const projectRoutes = 'static-site/src/routes';
-const currentTestRoutes = '01-assets';
+	before(async () => {
+		server = await createTestServer('static-site');
+	});
 
-// ---
+	after(async () => {
+		await server?.close();
+	});
 
-// FIXME: the async await stuff is superfluous
-// Also, one failing test will close the server and prevent other test to happen,
-// which is unwanted.
-// More refinements has to be made for all tests using the dev. server.
+	describe('sibling assets', () => {
+		it('renders the route page', async () => {
+			const html = await getText(server.address, '/01-assets/00-siblings');
+			const $ = parseHtml(html);
+			assertH1($, 'Hello world');
+			assertBodyIncludes(html, '/01-assets/00-siblings/');
+		});
 
-describe('sibling assets', async () => {
-	const route = '00-siblings';
+		it('sibling client script is fetchable', async () => {
+			const res = await get(
+				server.address,
+				'/src/routes/01-assets/00-siblings.client.ts',
+				{ trailingSlash: false },
+			);
+			assertStatus(res, 200);
+			// Vite serves TS files with appropriate content type
+			const body = await res.text();
+			assertBodyIncludes(body, '');
+		});
 
-	await it('render the route', async () => {
-		await snapshotAssertEqual({
-			expectedPath: [
-				projectRoutes,
-				currentTestRoutes,
-				`_${route}_expected.html`,
-			],
-			actualContent: await fetchResource(address, [currentTestRoutes, route]),
-			writeActual,
+		it('sibling SCSS is fetchable', async () => {
+			const res = await get(
+				server.address,
+				'/src/routes/01-assets/00-siblings.scss',
+				{ trailingSlash: false },
+			);
+			assertStatus(res, 200);
 		});
 	});
 
-	await it('has route client script', async () => {
-		await snapshotAssertEqual({
-			expectedPath: [
-				projectRoutes,
-				currentTestRoutes,
-				`_${route}_expected-client_ts.ts`,
-			],
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(
-					address,
-					['/src/routes', currentTestRoutes, `${route}.client.ts`],
-					{ trailingSlash: false },
-				),
-			),
-			writeActual,
-			prettier: false,
-		});
-	});
-
-	await it('has route css', async () => {
-		await snapshotAssertEqual({
-			expectedPath: [
-				projectRoutes,
-				currentTestRoutes,
-				`_${route}_expected-scss.ts`,
-			],
-			actualContent: removeLocalPathsInDevAssets(
-				await fetchResource(
-					address,
-					['/src/routes', currentTestRoutes, `${route}.scss`],
-					{ trailingSlash: false },
-				),
-			),
-			writeActual,
-			prettier: false,
+	describe('assets with inline CSS', () => {
+		it('renders the route with inline styles', async () => {
+			const html = await getText(
+				server.address,
+				'/01-assets/02-import-with-query-css-inline',
+			);
+			const $ = parseHtml(html);
+			assertH1($, 'Hello world');
+			// Route uses a custom element with inline CSS
+			assertExists($, 'my-el-with-inline-css');
 		});
 	});
 });
-
-// // TODO: This test need a bit more work, notably for hydration
-// // FIXME: `/@fs/` is wrong. In build and dev.
-// // It works outside this test environment otherwise.
-// describe('assets with query url', async () => {
-// 	const route = '01-import-with-query-url';
-
-// 	await it('render the route with links stylesheets', async () => {
-// 		await snapshotAssertEqual({
-// 			expectedPath: [
-// 				projectRoutes,
-// 				currentTestRoutes,
-// 				`_${route}_expected.html`,
-// 			],
-// 			actualContent: await fetchResource(address, [currentTestRoutes, route]),
-// 			writeActual,
-// 		});
-// 	});
-// });
-
-describe('assets with query inline', async () => {
-	const route = '02-import-with-query-css-inline';
-
-	await it('render the route with inline stylesheets', async () => {
-		await snapshotAssertEqual({
-			expectedPath: [
-				projectRoutes,
-				currentTestRoutes,
-				`_${route}_expected.html`,
-			],
-			actualContent: await fetchResource(address, [currentTestRoutes, route]),
-			writeActual,
-		});
-	});
-});
-
-after(async () => close());

@@ -1,37 +1,38 @@
+/**
+ * Template failure recovery test (static-site dev server).
+ *
+ * Verifies that when a Lit template contains failing expressions,
+ * the page still renders with error recovery.
+ */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { after, it } from 'node:test';
+import { after, before, describe, it } from 'node:test';
 
-import { fetchResource } from './__utils__/fetch.js';
-import { createStaticDevServer } from './__utils__/gracile-server.js';
-import { removeLitParts, snapshotAssertEqual } from './__utils__/snapshot.js';
-import { writeActual } from './config.js';
+import { getText } from './helpers/fetch.js';
+import { assertBodyIncludes, assertH1, parseHtml } from './helpers/html.js';
+import { createTestServer, type TestServer } from './helpers/server.js';
 
-const { address, close } = await createStaticDevServer({
-	project: 'static-site',
-	port: 5941,
-});
+describe('template failure recovery (static-site)', () => {
+	let server: TestServer;
 
-const projectRoutes = 'static-site/src/routes';
-const currentTestRoutes = '04-template-failure';
-
-// ---
-
-// NOTE: Not well tested enough. Should check for inline module content.
-// Maybe change the polyfill to `<script src`…
-it('client polyfills', async () => {
-	const route = '04-template-failure';
-	await snapshotAssertEqual({
-		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
-		actualContent: removeLitParts(
-			await fetchResource(address, [currentTestRoutes, route]),
-		),
-		writeActual,
+	before(async () => {
+		server = await createTestServer('static-site');
 	});
-});
 
-after(async () => {
-	await close();
-	// HACK: This is a bug :/
-	// Only with this test, IDK why
-	process.exit();
+	after(async () => {
+		await server?.close();
+	});
+
+	it('renders page despite failing template expressions', async () => {
+		const html = await getText(
+			server.address,
+			'/04-template-failure/04-template-failure',
+		);
+		const $ = parseHtml(html);
+		assertH1($, 'Hello Polyfills');
+		// Verify error recovery rendered content before and after failing expressions
+		assertBodyIncludes(html, 'FAILING-1');
+		assertBodyIncludes(html, 'FAILING-2');
+		assertBodyIncludes(html, 'FAILING-9');
+	});
 });

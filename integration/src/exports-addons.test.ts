@@ -20,7 +20,7 @@ import * as cssHelpersGlobalCss from '@gracile-labs/css-helpers/global-css-provi
 // import * as csrRouter from '@gracile-labs/client-router/router';
 import { html } from 'lit';
 
-import { noop } from './__utils__/noop.js';
+import { noop } from './helpers/noop.js';
 
 describe('gracile addons should do their exports correctly', () => {
 	test('addon - markown', () => {

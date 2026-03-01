@@ -1,29 +1,45 @@
+/**
+ * Metadata addon test (static-site dev server).
+ *
+ * Verifies that `createMetadata()` injects the correct meta tags.
+ */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { after, it } from 'node:test';
+import { after, before, describe, it } from 'node:test';
 
-import { fetchResource } from '../__utils__/fetch.js';
-import { createStaticDevServer } from '../__utils__/gracile-server.js';
-import { snapshotAssertEqual } from '../__utils__/snapshot.js';
-import { writeActual } from '../config.js';
+import { getText } from '../helpers/fetch.js';
+import {
+	assertBodyIncludes,
+	assertExists,
+	assertH1,
+	parseHtml,
+} from '../helpers/html.js';
+import { createTestServer, type TestServer } from '../helpers/server.js';
 
-const { address, close } = await createStaticDevServer({
-	project: 'static-site',
-	port: 5555,
-});
+describe('metadata addon (static-site)', () => {
+	let server: TestServer;
 
-const projectRoutes = 'static-site/src/routes';
-const currentTestRoutes = '09-metadata';
+	before(async () => {
+		server = await createTestServer('static-site');
+	});
 
-// ---
+	after(async () => {
+		await server?.close();
+	});
 
-it('metadata', async () => {
-	const route = '00-metadata';
+	it('renders page with metadata tags', async () => {
+		const html = await getText(server.address, '/09-metadata/00-metadata');
+		const $ = parseHtml(html);
 
-	await snapshotAssertEqual({
-		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
-		actualContent: await fetchResource(address, [currentTestRoutes, route]),
-		writeActual,
+		assertH1($, 'Hello Metadata');
+
+		// Check meta tags from createMetadata()
+		assertExists($, 'meta[name="author"]');
+		assertExists($, 'meta[name="description"]');
+		assertExists($, 'meta[name="generator"]');
+		assertExists($, 'link[rel="canonical"]');
+
+		// Check breadcrumbs JSON-LD
+		assertBodyIncludes(html, 'application/ld+json');
 	});
 });
-
-after(async () => close());

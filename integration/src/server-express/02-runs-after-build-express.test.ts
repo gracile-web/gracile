@@ -1,20 +1,23 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
+/**
+ * Express server integration test.
+ *
+ * Builds the server-express fixture, launches the Express server,
+ * and runs the common test suite against it.
+ */
 
-import type { ChildProcessWithoutNullStreams } from 'node:child_process';
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { after, it } from 'node:test';
 
-import { launch } from '../__utils__/launch-server.js';
-import { writeActual } from '../config.js';
+import { launchServer, type ServerProcess } from '../helpers/process.js';
 import { common } from './_common.js';
 
-let gracileProcess: ChildProcessWithoutNullStreams | null = null;
+let server: ServerProcess | null = null;
 
 it('runs and execute test suites with EXPRESS', async () => {
-	gracileProcess = await launch('express.js', async () => {
-		await common('prod', 'express', writeActual);
-	});
+	server = await launchServer('server-express', 'express.js', 9874);
+	await common(server.address, 'express');
 });
 
 after(() => {
-	if (gracileProcess) gracileProcess.kill();
+	server?.kill();
 });

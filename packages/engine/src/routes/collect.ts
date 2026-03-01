@@ -4,7 +4,10 @@ import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import * as paths from '@gracile/internal-utils/paths';
 import { fdir as Fdir } from 'fdir';
 import c from 'picocolors';
-import { URLPattern } from 'urlpattern-polyfill/urlpattern';
+import { URLPattern as URLPatternPolyfill } from 'urlpattern-polyfill/urlpattern';
+
+// NOTE: The polyfill type lacks `hasRegExpGroups` from the global URLPattern.
+const URLPattern = URLPatternPolyfill as unknown as typeof globalThis.URLPattern;
 import { createFilter } from 'vite';
 
 import { emptyRoutes } from '../logging/messages.js';

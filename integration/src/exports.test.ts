@@ -25,7 +25,7 @@ import { html as litServerHtml } from '@lit-labs/ssr';
 import { resolve } from 'import-meta-resolve';
 import { html } from 'lit';
 
-import { noop } from './__utils__/noop.js';
+import { noop } from './helpers/noop.js';
 
 function checkServerEnv(input: typeof serverConstants) {
 	assert.equal(typeof input.CLIENT_DIST_DIR, 'string');

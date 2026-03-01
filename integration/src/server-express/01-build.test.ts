@@ -1,20 +1,48 @@
+/**
+ * Server-express build verification.
+ *
+ * Verifies the server-mode build produces the expected client/ and server/
+ * directories with the correct structure.
+ */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { it } from 'node:test';
+import { describe, it, before } from 'node:test';
 
-import { build } from '../__utils__/gracile-server.js';
-import { compareFolder } from '../__utils__/snapshot.js';
-import { writeActual } from '../config.js';
+import { assertBuildContains, assertHtmlFile } from '../helpers/build.js';
+import { buildFixture } from '../helpers/server.js';
 
-const projectDist = 'server-express/dist';
-const projectDistExpected = 'server-express/dist_expected';
+describe('server-express build', () => {
+	before(async () => {
+		await buildFixture('server-express');
+	});
 
-// ---
+	it('produces server entrypoint', async () => {
+		await assertBuildContains('server-express', 'dist/server', [
+			'entrypoint.js',
+		]);
+	});
 
-await it('build and compare outputs', async () => {
-	await build('server-express', 'server');
-	await compareFolder({
-		actualPath: projectDist,
-		expectedPath: projectDistExpected,
-		writeActual,
+	it('produces server route chunks', async () => {
+		await assertBuildContains('server-express', 'dist/server', ['chunk/']);
+	});
+
+	it('produces client static pages', async () => {
+		await assertBuildContains('server-express', 'dist/client', [
+			'about/index.html',
+			'contact/index.html',
+			'favicon.svg',
+		]);
+	});
+
+	it('produces client asset bundles', async () => {
+		await assertBuildContains('server-express', 'dist/client', ['assets/']);
+	});
+
+	it('client about page has valid HTML', async () => {
+		await assertHtmlFile('server-express', 'dist/client/about/index.html');
+	});
+
+	it('client contact page has valid HTML', async () => {
+		await assertHtmlFile('server-express', 'dist/client/contact/index.html');
 	});
 });

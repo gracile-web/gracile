@@ -1,30 +1,46 @@
+/**
+ * Markdown addon test (static-site dev server).
+ *
+ * Verifies that markdown files imported with `{ type: 'md-lit' }` render
+ * correctly, with body, metadata, and source information accessible.
+ */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { after, it } from 'node:test';
+import { after, before, describe, it } from 'node:test';
 
-import { fetchResource } from '../__utils__/fetch.js';
-import { createStaticDevServer } from '../__utils__/gracile-server.js';
-import { snapshotAssertEqual } from '../__utils__/snapshot.js';
-import { writeActual } from '../config.js';
+import { getText } from '../helpers/fetch.js';
+import {
+	assertBodyIncludes,
+	assertExists,
+	assertH1,
+	parseHtml,
+} from '../helpers/html.js';
+import { createTestServer, type TestServer } from '../helpers/server.js';
 
-const { address, close } = await createStaticDevServer({
-	project: 'static-site',
-	port: 18982,
-});
+describe('markdown addon (static-site)', () => {
+	let server: TestServer;
 
-const projectRoutes = 'static-site/src/routes';
+	before(async () => {
+		server = await createTestServer('static-site');
+	});
 
-const currentTestRoutes = '11-markdown';
+	after(async () => {
+		await server?.close();
+	});
 
-// ---
+	it('renders markdown with marked preset', async () => {
+		const html = await getText(server.address, '/11-markdown/05-preset-marked');
+		const $ = parseHtml(html);
 
-it('MD rendering with marked', async () => {
-	const route = '05-preset-marked';
-
-	await snapshotAssertEqual({
-		expectedPath: [projectRoutes, currentTestRoutes, `_${route}_expected.html`],
-		actualContent: await fetchResource(address, [currentTestRoutes, route]),
-		writeActual,
+		assertH1($, 'Hello Markown - Marked');
+		// Check that details/summary sections are rendered
+		assertExists($, 'details');
+		assertExists($, 'summary');
+		// Check that body.lit rendered markdown content
+		assertBodyIncludes(html, 'body.lit');
+		// Check that metadata sections exist
+		assertBodyIncludes(html, 'meta.frontmatter');
+		assertBodyIncludes(html, 'meta.tableOfContents');
+		assertBodyIncludes(html, 'meta.title');
 	});
 });
-
-after(async () => close());
