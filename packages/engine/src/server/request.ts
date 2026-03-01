@@ -77,9 +77,10 @@ export function createGracileHandler({
 
 		let emitViteBetterError: typeof emitViteBe | null = null;
 		if (vite)
-			emitViteBetterError = await import(
-				'../errors/create-vite-better-error.js'
-			).then(({ emitViteBetterError: error }) => error);
+			emitViteBetterError =
+				await import('../errors/create-vite-better-error.js').then(
+					({ emitViteBetterError: error }) => error,
+				);
 
 		try {
 			// MARK: Rewrite hidden route siblings

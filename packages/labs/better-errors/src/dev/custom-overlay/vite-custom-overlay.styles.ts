@@ -55,13 +55,14 @@ export const style = css`
 		z-index: 99999;
 
 		/* Fonts */
-		--font-normal: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-			'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+		--font-normal:
+			system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+			'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
 			'Helvetica Neue', Arial, sans-serif;
-		--font-monospace: ui-monospace, Menlo, Monaco, 'Cascadia Mono',
-			'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace',
-			'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New',
-			monospace;
+		--font-monospace:
+			ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+			'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+			'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 
 		/* Borders */
 		--roundiness: 4px;

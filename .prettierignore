@@ -10,3 +10,4 @@ integration/**/*_expected*
 integration/**/gibberish.ts
 
 .pnpm-store
+__fixtures__

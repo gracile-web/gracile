@@ -13,9 +13,7 @@ const SKIP = true;
 describe(
 	'custom-elements',
 	{
-		skip: SKIP
-			? 'parallel vite dev server conflict — pending fix'
-			: undefined,
+		skip: SKIP ? 'parallel vite dev server conflict — pending fix' : undefined,
 	},
 	() => {
 		let address: string;
