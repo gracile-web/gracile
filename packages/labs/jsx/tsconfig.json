@@ -1,0 +1,12 @@
+{
+  "extends": "@gracile/internal-tsconfigs/config-base.json",
+
+  "compilerOptions": {
+    "jsx": "preserve",
+
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false
+  }
+
+  // "include": ["__jsx-runtime.d.ts"]
+}

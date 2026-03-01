@@ -19,6 +19,7 @@ packages:
   - ./packages/labs/client-router
   - ./packages/labs/css-helpers
   - ./packages/labs/better-errors
+  - ./packages/labs/jsx
 
 catalog:
   vite: ^7.3.1
