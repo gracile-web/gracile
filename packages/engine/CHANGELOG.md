@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.0...@gracile/engine@0.9.0-next.1) (2026-03-01)
+
+### Bug Fixes
+
+* minor cherry picks from local wip branch ([8b06487](https://github.com/gracile-web/gracile/commit/8b06487d0a0810a1aa7708a963cc8186091531bb))
+
 # [0.9.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.8.2...@gracile/engine@0.9.0-next.0) (2026-03-01)
 
 ### Features
