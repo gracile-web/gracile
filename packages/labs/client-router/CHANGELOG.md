@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.1.3-next.1...@gracile-labs/client-router@0.2.0-next.0) (2026-03-01)
+
+### Features
+
+* update all deps + gh actions, fix npm token, use catalog protocol, fix build & tests ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
+
 ## [0.1.3-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.1.3-next.0...@gracile-labs/client-router@0.1.3-next.1) (2026-03-01)
 
 ### Bug Fixes
