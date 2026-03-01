@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/svg@0.1.2...@gracile/svg@0.2.0-next.0) (2026-03-01)
+
+### Features
+
+* rehaul old flaky tests harness, update to Vite (7) + node 25 types ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
+
 ## [0.1.2](https://github.com/gracile-web/gracile/compare/@gracile/svg@0.1.2-next.0...@gracile/svg@0.1.2) (2025-04-07)
 
 **Note:** Version bump only for package @gracile/svg

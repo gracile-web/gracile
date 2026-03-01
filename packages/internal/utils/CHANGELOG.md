@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.5.1...@gracile/internal-utils@0.6.0-next.0) (2026-03-01)
+
+### Features
+
+* rehaul old flaky tests harness, update to Vite (7) + node 25 types ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
+
 ## [0.5.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.5.1-next.0...@gracile/internal-utils@0.5.1) (2025-04-07)
 
 **Note:** Version bump only for package @gracile/internal-utils
