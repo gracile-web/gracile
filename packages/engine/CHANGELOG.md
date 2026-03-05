@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0-next.4](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.3...@gracile/engine@0.9.0-next.4) (2026-03-05)
+
+### Bug Fixes
+
+* types ([12bdf74](https://github.com/gracile-web/gracile/commit/12bdf74d23e9981590ec1bd19bcf47d0f8053430))
+
+### Features
+
+* implement islands add-on, extensible lit ssr element renderer, gracile plugins context ([e495b00](https://github.com/gracile-web/gracile/commit/e495b003d03335bcc43f96ea8fefaa4c68f5503b))
+
 # [0.9.0-next.3](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.2...@gracile/engine@0.9.0-next.3) (2026-03-01)
 
 **Note:** Version bump only for package @gracile/engine

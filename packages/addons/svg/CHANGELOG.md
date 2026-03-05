@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.3](https://github.com/gracile-web/gracile/compare/@gracile/svg@0.2.0-next.2...@gracile/svg@0.2.0-next.3) (2026-03-05)
+
+### Bug Fixes
+
+* update for vulnerabilities ([33692d0](https://github.com/gracile-web/gracile/commit/33692d0bf46e4c93140409b17a8e99fba13996c1))
+
 # [0.2.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile/svg@0.2.0-next.1...@gracile/svg@0.2.0-next.2) (2026-03-01)
 
 ### Features

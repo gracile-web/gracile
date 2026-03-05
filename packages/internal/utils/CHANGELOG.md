@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0-next.3](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.0-next.2...@gracile/internal-utils@0.6.0-next.3) (2026-03-05)
+
+### Features
+
+* implement islands add-on, extensible lit ssr element renderer, gracile plugins context ([e495b00](https://github.com/gracile-web/gracile/commit/e495b003d03335bcc43f96ea8fefaa4c68f5503b))
+
 # [0.6.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.0-next.1...@gracile/internal-utils@0.6.0-next.2) (2026-03-01)
 
 ### Features
