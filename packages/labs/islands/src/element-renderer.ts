@@ -28,7 +28,7 @@ export function makeIslandRenderer(registry: IslandRegistry) {
 			if (name === 'load') this.load = value;
 		}
 
-		override renderAttributes(): Iterable<string> {
+		override renderAttributes() {
 			const raw = JSON.stringify(this.props ?? {});
 			return [
 				this.light ? ' light' : '',
@@ -37,11 +37,13 @@ export function makeIslandRenderer(registry: IslandRegistry) {
 			];
 		}
 
+		// @ts-expect-error - return type is actually `Iterable<string> | void`
 		renderShadow() {
 			if (this.light) return;
 			return this.#render();
 		}
 
+		// @ts-expect-error - return type is actually `Iterable<string> | void`
 		renderLight() {
 			if (this.light) return this.#render();
 		}

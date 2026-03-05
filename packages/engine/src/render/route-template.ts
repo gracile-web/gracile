@@ -17,7 +17,6 @@ import type { RouteInfos } from '../routes/match.js';
 import type * as R from '../routes/route.js';
 
 import { PAGE_ASSETS_MARKER, SSR_OUTLET_MARKER } from './markers.js';
-import { LightDomLitElementRenderer } from './light-dom.js';
 
 async function* concatStreams(...readables: Readable[]) {
 	for (const readable of readables) {
@@ -63,9 +62,8 @@ export async function renderRouteTemplate({
 	const mergedRenderInfo: Partial<RenderInfo> = {
 		...renderInfo,
 		elementRenderers: [
-			// LightDomLitElementRenderer,
-			LitElementRenderer,
 			...(renderInfo?.elementRenderers || []),
+			LitElementRenderer,
 		],
 	};
 
