@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
-    "svgo": "^4.0.0"
+    "svgo": "^4.0.1"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
