@@ -6,6 +6,7 @@
     "./src/env.d.ts",
     "./__fixtures__/**/*.d.ts",
     "./__fixtures__/**/*.ts",
+    "./__fixtures__/**/*.tsx",
     "./__fixtures__/**/*.js"
   ],
   "compilerOptions": {

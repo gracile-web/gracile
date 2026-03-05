@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"module": "ESNext",
+		"target": "ES2022",
+		"lib": ["ES2023", "DOM"],
+		"noEmit": true,
+		"strict": true,
+		"allowJs": true,
+		"skipLibCheck": true,
+		"moduleResolution": "Bundler",
+		"experimentalDecorators": true,
+		"useDefineForClassFields": false,
+		"jsx": "preserve",
+		"jsxImportSource": "react"
+	},
+	"include": ["src/**/*.ts", "src/**/*.tsx", "islands.config.ts"]
+}
