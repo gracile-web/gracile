@@ -1,3 +1,4 @@
+import type { RenderInfo } from '@lit-labs/ssr';
 import type { Connect } from 'vite';
 
 /**
@@ -97,6 +98,40 @@ export interface GracileConfig {
 			 */
 			exclude?: string[];
 		};
+	};
+	litSsr?: {
+		/**
+		 * Lets you extend Gracile's SSR pipeline with
+		 * custom Lit SSR `ElementRenderer` subclasses. This is the foundation for
+		 * features like [Islands](/docs/add-ons/islands/), which register a renderer
+		 * for the `<is-land>` custom element to server-render components from other
+		 * UI frameworks.
+		 *
+		 * In most cases, you do **not** set this option manually — add-on plugins
+		 * (like `gracileIslands()`) register their renderers automatically via the
+		 * plugin context communication channel. However,
+		 * you can use it directly for advanced use cases:
+		 *
+		 * ```ts
+		 * import { gracile } from '@gracile/gracile/plugin';
+		 * import { defineConfig } from 'vite';
+		 *
+		 * export default defineConfig({
+		 *   plugins: [
+		 *     gracile({
+		 *       litSsr: {
+		 *         renderInfo: {
+		 *           elementRenderers: [
+		 *             // Your custom ElementRenderer subclass
+		 *           ],
+		 *         },
+		 *       },
+		 *     }),
+		 *   ],
+		 * });
+		 * ```
+		 */
+		renderInfo?: Partial<RenderInfo>;
 	};
 
 	/**

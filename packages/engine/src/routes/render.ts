@@ -166,6 +166,7 @@ export async function renderRoutes({
 						},
 						root,
 						serverMode,
+						renderInfo: gracileConfig.litSsr?.renderInfo,
 					});
 
 					const htmlString = output

@@ -3,8 +3,9 @@ import { Readable } from 'node:stream';
 import * as assert from '@gracile/internal-utils/assertions';
 import { html } from '@gracile/internal-utils/dummy-literals';
 import type { ErrorLocation } from '@gracile-labs/better-errors/errors';
-import { render as renderLitSsr } from '@lit-labs/ssr';
+import { render as renderLitSsr, type RenderInfo } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
+import { LitElementRenderer } from '@lit-labs/ssr/lib/lit-element-renderer.js';
 import type { ViteDevServer } from 'vite';
 
 import {
@@ -38,6 +39,7 @@ export async function renderRouteTemplate({
 	routeAssets,
 	serverMode,
 	docOnly,
+	renderInfo,
 }: {
 	url: string;
 	vite?: ViteDevServer | undefined;
@@ -47,6 +49,7 @@ export async function renderRouteTemplate({
 	root: string;
 	serverMode?: boolean | undefined;
 	docOnly?: boolean | undefined;
+	renderInfo?: Partial<RenderInfo> | undefined;
 }): Promise<{ output: null | Readable; document: null | string }> {
 	const location = {
 		file: routeInfos.foundRoute.filePath,
@@ -54,6 +57,15 @@ export async function renderRouteTemplate({
 
 	if (!routeInfos.routeModule.document && !routeInfos.routeModule.template)
 		return { output: null, document: null };
+
+	// MARK: Merged render info
+	const mergedRenderInfo: Partial<RenderInfo> = {
+		...renderInfo,
+		elementRenderers: [
+			LitElementRenderer,
+			...(renderInfo?.elementRenderers || []),
+		],
+	};
 
 	// MARK: Context
 	const context: R.RouteContextGeneric = {
@@ -74,7 +86,7 @@ export async function renderRouteTemplate({
 				// location,
 			});
 
-		const fragmentRender = renderLitSsr(fragmentOutput);
+		const fragmentRender = renderLitSsr(fragmentOutput, mergedRenderInfo);
 		const output = Readable.from(fragmentRender);
 
 		return { output, document: null };
@@ -108,7 +120,7 @@ export async function renderRouteTemplate({
 
 	try {
 		baseDocumentRendered = await collectResult(
-			renderLitSsr(baseDocumentTemplateResult),
+			renderLitSsr(baseDocumentTemplateResult, mergedRenderInfo),
 		);
 	} catch (error) {
 		throw new TemplateError(
@@ -252,7 +264,9 @@ export async function renderRouteTemplate({
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);
 
-		const renderStream = Readable.from(renderLitSsr(routeOutput));
+		const renderStream = Readable.from(
+			renderLitSsr(routeOutput, mergedRenderInfo),
+		);
 
 		const output = Readable.from(
 			concatStreams(

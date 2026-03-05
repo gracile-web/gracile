@@ -138,6 +138,7 @@ export function createGracileHandler({
 				serverMode,
 				routeInfos,
 				docOnly: premises?.documentOnly,
+				renderInfo: gracileConfig.litSsr?.renderInfo,
 			} satisfies Parameters<typeof renderRouteTemplate>[0];
 
 			logger.info(`[${c.yellow(method)}] ${c.yellow(fullUrl)}`, {

@@ -2,6 +2,10 @@ import { join } from 'node:path';
 import { rename, rm } from 'node:fs/promises';
 
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
+import {
+	getPluginContext,
+	type PluginContext,
+} from '@gracile/internal-utils/plugin-context';
 import { getVersion } from '@gracile/internal-utils/version';
 // import { betterErrors } from '@gracile-labs/better-errors/plugin';
 import c from 'picocolors';
@@ -70,7 +74,19 @@ export const gracile = (config?: GracileConfig): any[] => {
 		// enabled: gracileConfig?.pages?.premises?.expose || false,
 	});
 
+	let sharedPluginContext: PluginContext | undefined;
+
 	return [
+		{
+			name: 'vite-plugin-gracile-context',
+			config(config) {
+				sharedPluginContext = getPluginContext(config);
+
+				gracileConfig.litSsr ??= { renderInfo: {} };
+				gracileConfig.litSsr.renderInfo = sharedPluginContext.litSsrRenderInfo;
+			},
+		},
+
 		// betterErrors({
 		// 	overlayImportPath: '@gracile/gracile/_internals/vite-custom-overlay',
 		// }),
@@ -207,6 +223,12 @@ export const gracile = (config?: GracileConfig): any[] => {
 
 					plugins: [virtualRoutesForClient],
 				});
+
+				// NOTE: Important. Get the dev. server elements renderers.
+				gracileConfig.litSsr ??= {};
+				gracileConfig.litSsr.renderInfo = getPluginContext(
+					viteServerForClientHtmlBuild.config,
+				)?.litSsrRenderInfo;
 
 				const htmlPages = await buildRoutes({
 					viteServerForBuild: viteServerForClientHtmlBuild,

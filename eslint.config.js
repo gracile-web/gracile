@@ -39,6 +39,7 @@ export default [
 					'./packages/labs/better-errors/tsconfig.json',
 					'./packages/labs/css-helpers/tsconfig.json',
 					'./packages/labs/client-router/tsconfig.json',
+					'./packages/labs/islands/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,
 			},
