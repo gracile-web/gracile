@@ -170,6 +170,35 @@ describe('extractRoutePatterns — rest [...param] routes', () => {
 	});
 });
 
+// ── trailingSlash: 'never' ───────────────────────────────────────────
+
+describe("extractRoutePatterns — trailingSlash: 'never'", () => {
+	test('static route has no trailing slash', () => {
+		const result = extractRoutePatterns('about.ts', 'never');
+		assert.equal(result.patternString, '/about');
+	});
+
+	test('dynamic route has no trailing slash', () => {
+		const result = extractRoutePatterns('[slug].ts', 'never');
+		assert.equal(result.patternString, '/{:slug}');
+	});
+
+	test('rest route has no trailing slash', () => {
+		const result = extractRoutePatterns('[...path].ts', 'never');
+		assert.equal(result.patternString, '/:path*');
+	});
+
+	test('root index stays as /', () => {
+		const result = extractRoutePatterns('index.ts', 'never');
+		assert.equal(result.patternString, '/');
+	});
+
+	test('nested route has no trailing slash', () => {
+		const result = extractRoutePatterns('blog/post.ts', 'never');
+		assert.equal(result.patternString, '/blog/post');
+	});
+});
+
 // ── URLPattern validity ──────────────────────────────────────────────
 
 describe('extractRoutePatterns — generated URLPattern is valid', () => {

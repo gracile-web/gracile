@@ -76,18 +76,37 @@ export function createGracileHandler({
 				vite,
 				routes,
 				routeImports,
+				trailingSlash: gracileConfig.trailingSlash ?? 'ignore',
 			};
 
 			const responseInit: ResponseInit = {};
 
-			let routeInfos = await getRoute(routeOptions);
+			const routeResult = await getRoute(routeOptions);
+
+			// Trailing slash redirect (301 for GET, 308 for other methods)
+			if (routeResult && 'redirect' in routeResult) {
+				const redirectUrl = new URL(routeResult.redirect, fullUrl).href;
+				const status = method === 'GET' ? 301 : 308;
+				return { response: Response.redirect(redirectUrl, status) };
+			}
+
+			let routeInfos = routeResult;
 
 			if (routeInfos === null) {
 				responseInit.status = 404;
 
+				// Use 'ignore' for the internal 404 lookup to avoid redirect loops.
 				const url = new URL('/404/', fullUrl).href;
-				const options = { ...routeOptions, url };
-				routeInfos = await getRoute(options);
+				const options = {
+					...routeOptions,
+					url,
+					trailingSlash: 'ignore' as const,
+				};
+				const notFoundResult = await getRoute(options);
+				routeInfos =
+					notFoundResult && !('redirect' in notFoundResult)
+						? notFoundResult
+						: null;
 			}
 
 			if (routeInfos === null) {

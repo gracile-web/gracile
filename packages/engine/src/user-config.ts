@@ -41,6 +41,20 @@ export interface GracileConfig {
 	output?: 'static' | 'server';
 
 	/**
+	 * Controls how trailing slashes are matched on incoming URLs.
+	 *
+	 * - `'ignore'` — Match regardless of whether a trailing `/` is present.
+	 *   `/about` and `/about/` both resolve to the same route. *(default)*
+	 * - `'always'` — Only match URLs that include a trailing slash (e.g. `/about/`).
+	 *   Requests without one are redirected: `301` for GET, `308` for other methods.
+	 * - `'never'` — Only match URLs that do not include a trailing slash (e.g. `/about`).
+	 *   Requests with one are redirected: `301` for GET, `308` for other methods.
+	 *
+	 * @defaultValue 'ignore'
+	 */
+	trailingSlash?: 'always' | 'never' | 'ignore';
+
+	/**
 	 * Settings for the development mode.
 	 */
 	dev?: {

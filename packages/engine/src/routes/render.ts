@@ -57,7 +57,12 @@ export async function renderRoutes({
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 
 	// MARK: Collect
-	await collectRoutes(routes, root, gracileConfig.routes?.exclude);
+	await collectRoutes(
+		routes,
+		root,
+		gracileConfig.routes?.exclude,
+		gracileConfig.trailingSlash,
+	);
 
 	const renderedRoutes: RenderedRouteDefinition[] = [];
 

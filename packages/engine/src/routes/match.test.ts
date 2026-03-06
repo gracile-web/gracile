@@ -39,6 +39,7 @@ describe('matchRouteFromUrl — basic matching', () => {
 	test('matches root /', () => {
 		const result = matchRouteFromUrl('http://gracile/', routes);
 		assert.ok(result);
+		assert.ok(!('redirect' in result));
 		assert.equal(result.pathname, '/');
 		assert.deepEqual(result.params, {});
 	});
@@ -46,18 +47,21 @@ describe('matchRouteFromUrl — basic matching', () => {
 	test('matches static /about/', () => {
 		const result = matchRouteFromUrl('http://gracile/about/', routes);
 		assert.ok(result);
+		assert.ok(!('redirect' in result));
 		assert.equal(result.pathname, '/about/');
 	});
 
 	test('matches dynamic /blog/42/', () => {
 		const result = matchRouteFromUrl('http://gracile/blog/42/', routes);
 		assert.ok(result);
+		assert.ok(!('redirect' in result));
 		assert.equal(result.params['id'], '42');
 	});
 
 	test('matches rest /docs/a/b/c/', () => {
 		const result = matchRouteFromUrl('http://gracile/docs/a/b/c/', routes);
 		assert.ok(result);
+		assert.ok(!('redirect' in result));
 		assert.equal(result.params['path'], 'a/b/c');
 	});
 
@@ -69,6 +73,7 @@ describe('matchRouteFromUrl — basic matching', () => {
 	test('params object is frozen', () => {
 		const result = matchRouteFromUrl('http://gracile/blog/42/', routes);
 		assert.ok(result);
+		assert.ok(!('redirect' in result));
 		assert.ok(Object.isFrozen(result.params));
 	});
 });
@@ -82,6 +87,7 @@ describe('matchRouteFromUrl — route priority (first match wins)', () => {
 
 		const result = matchRouteFromUrl('http://gracile/blog/featured/', routes);
 		assert.ok(result);
+		assert.ok(!('redirect' in result));
 		// The matched route should be the static one (first in map)
 		assert.equal(
 			result.foundRoute.filePath,
@@ -101,7 +107,124 @@ describe('matchRouteFromUrl — edge cases', () => {
 		const routes = buildManifest([['/search/', makeRoute('/search/')]]);
 		const result = matchRouteFromUrl('http://gracile/search/?q=hello', routes);
 		assert.ok(result);
+		assert.ok(!('redirect' in result));
 		assert.equal(result.pathname, '/search/');
+	});
+});
+
+// ── matchRouteFromUrl — trailingSlash ────────────────────────────────
+
+describe("matchRouteFromUrl — trailingSlash: 'always'", () => {
+	const routes = buildManifest([
+		['/', makeRoute('/')],
+		['/about/', makeRoute('/about/')],
+		['/blog/{:id}/', makeRoute('/blog/{:id}/', { hasParams: true })],
+	]);
+
+	test('redirects /about to /about/ (GET)', () => {
+		const result = matchRouteFromUrl('http://gracile/about', routes, 'always');
+		assert.ok(result && 'redirect' in result);
+		assert.equal(result.redirect, '/about/');
+	});
+
+	test('redirects /blog/42 to /blog/42/', () => {
+		const result = matchRouteFromUrl(
+			'http://gracile/blog/42',
+			routes,
+			'always',
+		);
+		assert.ok(result && 'redirect' in result);
+		assert.equal(result.redirect, '/blog/42/');
+	});
+
+	test('root / is exempt — matches without redirect', () => {
+		const result = matchRouteFromUrl('http://gracile/', routes, 'always');
+		assert.ok(result && !('redirect' in result));
+		assert.equal(result.pathname, '/');
+	});
+
+	test('/about/ matches normally', () => {
+		const result = matchRouteFromUrl('http://gracile/about/', routes, 'always');
+		assert.ok(result && !('redirect' in result));
+		assert.equal(result.pathname, '/about/');
+	});
+});
+
+describe("matchRouteFromUrl — trailingSlash: 'never'", () => {
+	// Patterns have no trailing slash (as collectRoutes produces in 'never' mode)
+	const neverRoutes = buildManifest([
+		['/', makeRoute('/')],
+		[
+			'/about',
+			{
+				filePath: 'src/routes/about.ts',
+				pattern: new URLPattern('/about', 'http://gracile/'),
+				hasParams: false,
+				pageAssets: [],
+			},
+		],
+	]);
+
+	test('redirects /about/ to /about', () => {
+		const result = matchRouteFromUrl(
+			'http://gracile/about/',
+			neverRoutes,
+			'never',
+		);
+		assert.ok(result && 'redirect' in result);
+		assert.equal(result.redirect, '/about');
+	});
+
+	test('root / is exempt — no redirect', () => {
+		const result = matchRouteFromUrl('http://gracile/', neverRoutes, 'never');
+		assert.ok(result && !('redirect' in result));
+		assert.equal(result.pathname, '/');
+	});
+
+	test('/about matches normally (no trailing slash)', () => {
+		const result = matchRouteFromUrl(
+			'http://gracile/about',
+			neverRoutes,
+			'never',
+		);
+		assert.ok(result && !('redirect' in result));
+		assert.equal(result.pathname, '/about');
+	});
+});
+
+describe("matchRouteFromUrl — trailingSlash: 'ignore' (default)", () => {
+	const routes = buildManifest([
+		['/', makeRoute('/')],
+		['/about/', makeRoute('/about/')],
+		['/blog/{:id}/', makeRoute('/blog/{:id}/', { hasParams: true })],
+	]);
+
+	test('/about matches /about/ pattern without redirect', () => {
+		const result = matchRouteFromUrl('http://gracile/about', routes, 'ignore');
+		assert.ok(result && !('redirect' in result));
+		assert.equal(result.pathname, '/about/');
+	});
+
+	test('/about/ also matches normally', () => {
+		const result = matchRouteFromUrl('http://gracile/about/', routes, 'ignore');
+		assert.ok(result && !('redirect' in result));
+		assert.equal(result.pathname, '/about/');
+	});
+
+	test('/blog/42 matches dynamic route', () => {
+		const result = matchRouteFromUrl(
+			'http://gracile/blog/42',
+			routes,
+			'ignore',
+		);
+		assert.ok(result && !('redirect' in result));
+		assert.equal(result.params['id'], '42');
+	});
+
+	test('root / matches without redirect', () => {
+		const result = matchRouteFromUrl('http://gracile/', routes, 'ignore');
+		assert.ok(result && !('redirect' in result));
+		assert.equal(result.pathname, '/');
 	});
 });
 
