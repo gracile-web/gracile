@@ -1,27 +1,21 @@
-import { join } from 'node:path';
-import { rename, rm } from 'node:fs/promises';
-
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
 import {
 	getPluginContext,
 	type PluginContext,
 } from '@gracile/internal-utils/plugin-context';
-import { getVersion } from '@gracile/internal-utils/version';
-// import { betterErrors } from '@gracile-labs/better-errors/plugin';
-import c from 'picocolors';
-import { build, createServer, type PluginOption } from 'vite';
+import type { PluginOption } from 'vite';
 
-import {
-	type RenderedRouteDefinition /* renderRoutes */,
-} from './routes/render.js';
-import { createDevelopmentHandler } from './dev/development.js';
-import type { RoutesManifest } from './routes/route.js';
-import { nodeAdapter } from './server/adapters/node.js';
 import type { GracileConfig } from './user-config.js';
-import { buildRoutes } from './vite/build-routes.js';
 import { htmlRoutesLoader } from './vite/html-routes.js';
-import { virtualRoutes, virtualRoutesClient } from './vite/virtual-routes.js';
 import { hmrSsrReload } from './vite/hmr.js';
+import { virtualRoutesClient } from './vite/virtual-routes.js';
+import { createPluginSharedState } from './vite/plugin-shared-state.js';
+import { gracileServePlugin } from './vite/plugin-serve.js';
+import { gracileClientBuildPlugin } from './vite/plugin-client-build.js';
+import {
+	gracileCollectClientAssetsPlugin,
+	gracileServerBuildPlugin,
+} from './vite/plugin-server-build.js';
 
 let isClientBuilt = false;
 
@@ -48,17 +42,7 @@ let isClientBuilt = false;
 export const gracile = (config?: GracileConfig): any[] => {
 	const logger = createLogger();
 
-	const outputMode = config?.output || 'static';
-
-	const clientAssets: Record<string, string> = {};
-
-	const routes: RoutesManifest = new Map();
-
-	let renderedRoutes: RenderedRouteDefinition[] | null = null;
-
-	let root: string | null = null;
-
-	const gracileConfig = config || ({} as GracileConfig);
+	const state = createPluginSharedState(config);
 
 	// HACK: Prevent duplicate client build for the SSR build step in server mode.
 	// TODO: Move to the new, clean, environments builders API.
@@ -66,327 +50,59 @@ export const gracile = (config?: GracileConfig): any[] => {
 	isClientBuilt = true;
 
 	const virtualRoutesForClient = virtualRoutesClient({
-		mode: outputMode,
-		routes,
-		// NOTE: This will be a dedicated setting when it will not be experimental
-		// anymore.
-		gracileConfig,
-		// enabled: gracileConfig?.pages?.premises?.expose || false,
+		mode: state.outputMode,
+		routes: state.routes,
+		gracileConfig: state.gracileConfig,
 	});
 
 	let sharedPluginContext: PluginContext | undefined;
 
 	return [
+		// MARK: 1. Plugin context setup
 		{
 			name: 'vite-plugin-gracile-context',
-			config(config) {
-				sharedPluginContext = getPluginContext(config);
+			config(viteConfig) {
+				sharedPluginContext = getPluginContext(viteConfig);
 
-				gracileConfig.litSsr ??= { renderInfo: {} };
-				gracileConfig.litSsr.renderInfo = sharedPluginContext.litSsrRenderInfo;
+				state.gracileConfig.litSsr ??= { renderInfo: {} };
+				state.gracileConfig.litSsr.renderInfo =
+					sharedPluginContext.litSsrRenderInfo;
 			},
 		},
 
-		// betterErrors({
-		// 	overlayImportPath: '@gracile/gracile/_internals/vite-custom-overlay',
-		// }),
-		// 		{
-		// 			name: 'gracile-routes-codegen',
-
-		// 			// watchChange(change) {
-		// 			// 	console.log({ change });
-		// 			// },
-
-		// 			resolveId(id) {
-		// 				const virtualModuleId = 'gracile:route';
-		// 				const resolvedVirtualModuleId = `\0${virtualModuleId}`;
-
-		// 				if (id === virtualModuleId) {
-		// 					return resolvedVirtualModuleId;
-		// 				}
-		// 				return null;
-		// 			},
-
-		// 			load(id) {
-		// 				const virtualModuleId = 'gracile:route';
-		// 				const resolvedVirtualModuleId = `\0${virtualModuleId}`;
-
-		// 				if (id === resolvedVirtualModuleId) {
-		// 					return `
-		// export function route(input){
-		// return input;
-		// }`;
-		// 				}
-		// 				return null;
-		// 			},
-		// 		},
-
+		// MARK: 2. HMR SSR reload
 		hmrSsrReload(),
 
-		{
-			name: 'vite-plugin-gracile-serve-middleware',
-
-			apply: 'serve',
-
-			config(_, environment) {
-				if (environment.isPreview) return null;
-				return {
-					// NOTE: Supresses message: `Could not auto-determine entry point from rollupOptions or html files…`
-					// FIXME: It's not working when reloading the Vite config.
-					// Is user config, putting `optimizeDeps: { include: [] }` solve this.
-					optimizeDeps: { include: [] },
-
-					// NOTE: Useful? It breaks preview (expected)
-					appType: 'custom',
-
-					// resolve: {
-					// 	conditions: ['development'],
-					// },
-				};
-			},
-
-			async configureServer(server) {
-				// HACK: We know we are in dev here, this will prevent incorrect
-				// vite.config hot reloading. Will be removed when adopting env. API.
+		// MARK: 3. Dev serve middleware
+		gracileServePlugin({
+			state,
+			config,
+			logger,
+			resetClientBuiltFlag: () => {
 				isClientBuilt = false;
-				// Infos
-
-				// // NOTE: Beware import.meta.resolve is only compatible
-				// // with v20.6.0 (without cli flag)and upward
-				// // Not working with StackBlitz ATM?
-				// const mainPjson = import.meta
-				// 	.resolve('@gracile/gracile')
-				// 	// NOTE: Weirdly, it will assume that it's `dist/**.js`,
-				// 	// even after fiddling with pjson exports.
-				// 	.replace('/dist/index.js', '/package.json');
-				// const { version } = JSON.parse(
-				// 	await readFile(new URL(mainPjson), 'utf-8'),
-				// ) as {
-				// 	version: number;
-				// };
-				const version = getVersion();
-				logger.info(
-					`${c.cyan(c.italic(c.underline('🧚 Gracile')))}` +
-						` ${c.dim(`~`)} ${c.green(`v${version ?? 'X'}`)}`,
-				);
-				// ---
-
-				const { handler } = await createDevelopmentHandler({
-					routes,
-					vite: server,
-					gracileConfig,
-				});
-
-				logger.info(c.dim('Vite development server is starting…'), {
-					timestamp: true,
-				});
-
-				server.watcher.on('ready', () => {
-					setTimeout(() => {
-						logger.info('');
-						logger.info(c.green('Watching for file changes…'), {
-							timestamp: true,
-						});
-						logger.info('');
-						// NOTE: We want it to show after the Vite intro stuff
-					}, 100);
-				});
-
-				return () => {
-					server.middlewares.use((request, response, next) => {
-						const locals = config?.dev?.locals?.({ nodeRequest: request });
-						Promise.resolve(
-							nodeAdapter(handler, { logger })(request, response, locals),
-						).catch((error) => next(error));
-					});
-				};
 			},
-		},
+		}),
 
+		// MARK: 4. Client virtual routes
 		virtualRoutesForClient,
 
+		// MARK: 5. HTML routes loader
 		htmlRoutesLoader(),
 
-		{
-			name: 'vite-plugin-gracile-build',
+		// MARK: 6. Client build
+		gracileClientBuildPlugin({
+			state,
+			virtualRoutesForClient,
+		}),
 
-			apply: 'build',
+		// MARK: 7. Collect client assets for server
+		gracileCollectClientAssetsPlugin({ state }),
 
-			async config(viteConfig) {
-				const viteServerForClientHtmlBuild = await createServer({
-					// configFile: false,
-					root: viteConfig.root || process.cwd(),
-
-					server: { middlewareMode: true },
-					// NOTE: Stub. KEEP IT!
-					optimizeDeps: { include: [] },
-
-					plugins: [virtualRoutesForClient],
-				});
-
-				// NOTE: Important. Get the dev. server elements renderers.
-				gracileConfig.litSsr ??= {};
-				gracileConfig.litSsr.renderInfo = getPluginContext(
-					viteServerForClientHtmlBuild.config,
-				)?.litSsrRenderInfo;
-
-				const htmlPages = await buildRoutes({
-					viteServerForBuild: viteServerForClientHtmlBuild,
-					root: viteConfig.root || process.cwd(),
-					gracileConfig,
-					serverMode: outputMode === 'server',
-					routes,
-				});
-
-				renderedRoutes = htmlPages.renderedRoutes;
-
-				await viteServerForClientHtmlBuild.close();
-
-				return {
-					build: {
-						// ssrManifest: true,
-						rollupOptions: {
-							input: htmlPages.inputList,
-							plugins: [htmlPages.plugin],
-						},
-
-						outDir: join(
-							viteConfig.build?.outDir || 'dist',
-							outputMode === 'server' ? 'client' : '',
-						),
-					},
-				};
-			},
-		},
-
-		{
-			name: 'vite-plugin-gracile-collect-client-assets-for-server',
-
-			writeBundle(_, bundle) {
-				if (outputMode === 'static') return;
-
-				for (const file of Object.values(bundle))
-					if (file.type === 'asset' && file.name)
-						clientAssets[file.name] = file.fileName;
-			},
-		},
-
-		{
-			name: 'vite-plugin-gracile-server-build',
-			apply: 'build',
-
-			config(viteConfig) {
-				root = viteConfig.root || null;
-			},
-
-			async closeBundle() {
-				if (outputMode === 'static' || !routes || !renderedRoutes) return;
-
-				await build({
-					root: root || process.cwd(),
-
-					ssr: { external: ['@gracile/gracile'] },
-
-					build: {
-						target: 'esnext',
-
-						ssr: true,
-						// ssrManifest: true,
-
-						copyPublicDir: false,
-						outDir: 'dist/server',
-						ssrEmitAssets: true,
-						cssMinify: true,
-						cssCodeSplit: true,
-
-						rollupOptions: {
-							input: 'entrypoint.js',
-
-							// external: ['@gracile/gracile'],
-
-							// FIXME: ~~MUST import css from client somewhere.~~
-							// ~~Hack could be using dynamic imports on client, so asset is picked up~~
-							output: {
-								entryFileNames: '[name].js',
-								// assetFileNames: 'assets/[name].[ext]',
-								// NOTE: Useful for, e.g., link tag with `?url`
-								assetFileNames: (chunkInfo) => {
-									if (chunkInfo.name) {
-										const fileName = clientAssets[chunkInfo.name];
-										if (fileName) return fileName;
-										// NOTE: When not imported at all from client
-										return `assets/${chunkInfo.name.replace(/\.(.*)$/, '')}-[hash].[ext]`;
-									}
-
-									// throw new Error(`Not a client asset`);
-									return 'assets/[name]-[hash].[ext]';
-								},
-								chunkFileNames: 'chunk/[name].js',
-							},
-						},
-					},
-
-					plugins: [
-						virtualRoutesForClient,
-
-						virtualRoutes({ routes, renderedRoutes }),
-
-						{
-							name: 'vite-plugin-gracile-entry',
-
-							resolveId(id) {
-								if (id === 'entrypoint.js') {
-									return id;
-								}
-								return null;
-							},
-
-							load(id) {
-								if (id === 'entrypoint.js' && routes && renderedRoutes) {
-									return `
-import { routeAssets, routeImports, routes } from 'gracile:routes';
-import { createGracileHandler } from '@gracile/gracile/_internals/server-runtime';
-import { createLogger } from '@gracile/gracile/_internals/logger';
-
-createLogger();
-
-export const handler = createGracileHandler({
-	root: process.cwd(),
-	routes,
-	routeImports,
-	routeAssets,
-	serverMode: true,
-	gracileConfig: ${JSON.stringify(gracileConfig, null, 2)}
-});
-`;
-								}
-								return null;
-							},
-						},
-						{
-							name: 'gracile-move-server-assets',
-							async writeBundle(_, bundle) {
-								const cwd = root || process.cwd();
-
-								await Promise.all(
-									Object.entries(bundle).map(async ([file]) => {
-										if (file.startsWith('assets/') === false) return;
-										await rename(
-											join(cwd, `/dist/server/${file}`),
-											join(cwd, `/dist/client/${file}`),
-										);
-									}),
-								);
-								// NOTE: Disabled for now, because it conflict with test's folder comparer
-								await rm(join(cwd, `/dist/server/assets`), {
-									recursive: true,
-								}).catch(() => null);
-							},
-						},
-					],
-				});
-			},
-		},
+		// MARK: 8. Server build (nested)
+		gracileServerBuildPlugin({
+			state,
+			virtualRoutesForClient,
+		}),
 	] satisfies PluginOption;
 };
 

@@ -126,7 +126,7 @@ export function ensureDoctype(documentHtml: string): string {
  * The HMR error overlay script injected in dev mode.
  * Returns the raw HTML string for the `<script>` tag.
  */
-export function devOverlaySnippet(): string {
+export function developmentOverlaySnippet(): string {
 	return html`
 		<script type="module">
 			if (import.meta.hot) {
@@ -148,8 +148,11 @@ export function devOverlaySnippet(): string {
  * @param documentHtml  The rendered document string.
  * @returns The document with the overlay injected.
  */
-export function injectDevOverlay(documentHtml: string): string {
-	return documentHtml.replace('<head>', `<head>\n${devOverlaySnippet()}`);
+export function injectDevelopmentOverlay(documentHtml: string): string {
+	return documentHtml.replace(
+		'<head>',
+		`<head>\n${developmentOverlaySnippet()}`,
+	);
 }
 
 // ── 5. Inject server runtime assets ─────────────────────────────────

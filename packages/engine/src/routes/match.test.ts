@@ -173,6 +173,7 @@ describe('extractStaticPaths — basic behavior', () => {
 
 	test('works with async staticPaths', async () => {
 		const routeModule = new RouteModule({
+			// eslint-disable-next-line @typescript-eslint/require-await
 			staticPaths: async () => [
 				{ params: { slug: 'hello' }, props: { greeting: 'world' } },
 			],

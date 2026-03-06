@@ -20,7 +20,7 @@ import {
 	mergeRenderInfo,
 	injectSiblingAssets,
 	ensureDoctype,
-	injectDevOverlay as injectDevelopmentOverlay,
+	injectDevelopmentOverlay,
 	injectServerAssets,
 } from './route-template-pipeline.js';
 

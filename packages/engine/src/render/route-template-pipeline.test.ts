@@ -5,8 +5,8 @@ import * as nodeAssert from 'node:assert/strict';
 import {
 	injectSiblingAssets,
 	ensureDoctype,
-	injectDevOverlay as injectDevelopmentOverlay,
-	devOverlaySnippet as developmentOverlaySnippet,
+	injectDevelopmentOverlay,
+	developmentOverlaySnippet,
 	injectServerAssets,
 	mergeRenderInfo,
 	REGEX_TAG_SCRIPT,
