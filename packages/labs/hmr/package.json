@@ -1,0 +1,61 @@
+{
+  "name": "@gracile-labs/hmr",
+  "version": "0.0.0",
+  "description": "Web Components HMR (Hot Module Replacement) Vite plugin for Gracile",
+  "keywords": [
+    "custom-elements",
+    "gracile",
+    "hmr",
+    "hot-module-replacement",
+    "lit",
+    "vite",
+    "web-components"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/hmr"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "./dist/**/*",
+    "!/dist/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/plugin-syntax-class-properties": "^7.12.13",
+    "@babel/plugin-syntax-import-attributes": "^7.26.0",
+    "@babel/plugin-syntax-top-level-await": "^7.14.5",
+    "picomatch": "^4.0.2"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.29.0",
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@types/babel__core": "^7.20.5",
+    "@types/picomatch": "^3.0.1",
+    "typescript": "5.9.3",
+    "vite": "catalog:"
+  },
+  "peerDependencies": {
+    "vite": ">=5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

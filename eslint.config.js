@@ -40,6 +40,7 @@ export default [
 					'./packages/labs/css-helpers/tsconfig.json',
 					'./packages/labs/client-router/tsconfig.json',
 					'./packages/labs/islands/tsconfig.json',
+					// './packages/labs/hmr/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,
 			},
@@ -125,7 +126,7 @@ export default [
 
 	{
 		ignores: [
-			// '**/packages/labs',
+			'**/packages/labs/hmr',
 			'**/packages/cli',
 			'pnpm-lock.yaml',
 			'**/integration',

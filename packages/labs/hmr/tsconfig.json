@@ -1,0 +1,7 @@
+{
+  "extends": "@gracile/internal-tsconfigs/config-base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true
+  }
+}

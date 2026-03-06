@@ -21,6 +21,7 @@ packages:
   - ./packages/labs/better-errors
   - ./packages/labs/islands
   - ./packages/labs/jsx
+  - ./packages/labs/hmr
 
 catalog:
   vite: ^7.3.1
