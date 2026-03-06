@@ -20,7 +20,8 @@ import type * as R from './route.js';
 
 const logger = getLogger();
 
-function extractRoutePatterns(
+/** @internal Exported for unit testing. */
+export function extractRoutePatterns(
 	routeFilePath: string,
 ): Pick<R.Route, 'pattern' | 'hasParams'> & { patternString: string } {
 	const routePathname = routeFilePath.replace(/\.(js|ts|jsx|tsx|html)$/, '');

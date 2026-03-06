@@ -12,7 +12,8 @@ type MatchedRoute = {
 	pathname: string;
 };
 
-function matchRouteFromUrl(
+/** @internal Exported for unit testing. */
+export function matchRouteFromUrl(
 	url: string,
 	routes: R.RoutesManifest,
 ): MatchedRoute | null {
@@ -51,7 +52,8 @@ type ExtractedStaticPaths = {
  * @param options.params
  * @param options.pathname
  */
-async function extractStaticPaths(options: {
+/** @internal Exported for unit testing. */
+export async function extractStaticPaths(options: {
 	routeModule: R.RouteModule;
 	foundRoute: R.Route;
 	params: Parameters_;
