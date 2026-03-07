@@ -1,0 +1,66 @@
+{
+  "name": "@literals/rollup-plugin-html-css-minifier",
+  "version": "2.0.2",
+  "description": "Rollup plugin to minify HTML template literal strings",
+  "keywords": [
+    "rollup-plugin",
+    "minify",
+    "html",
+    "literal",
+    "literals",
+    "template",
+    "tagged",
+    "lit-html"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/literals/rollup-plugin-html-css-minifier"
+  },
+  "license": "MIT",
+  "author": "Liz Mitchell <asyncliz@gmail.com>",
+  "maintainers": [
+    "Julian Cataldo <jcprofree@gmail.com>"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/test"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "check:types": "tsc --noEmit",
+    "clean": "rm -rf ./dist ./coverage",
+    "dev": "tsc --watch",
+    "test": "pnpm test:unit",
+    "test:unit": "c8 node --enable-source-maps --test dist/test/*.js",
+    "test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.js"
+  },
+  "dependencies": {
+    "@literals/html-css-minifier": "workspace:^",
+    "@rollup/pluginutils": "^5.1.0",
+    "rollup-pluginutils": "^2.8.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.16",
+    "@types/node": "25.3.3",
+    "@types/sinon": "^5.0.1",
+    "c8": "11.0.0",
+    "chai": "^5.1.1",
+    "rollup": "^4.19.1",
+    "sinon": "^6.3.5",
+    "typescript": "5.9.3"
+  },
+  "peerDependencies": {
+    "rollup": "^0.65.2 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

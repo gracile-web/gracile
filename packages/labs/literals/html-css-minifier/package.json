@@ -1,0 +1,64 @@
+{
+  "name": "@literals/html-css-minifier",
+  "version": "2.0.2",
+  "description": "Minify HTML template literal strings",
+  "keywords": [
+    "minify",
+    "html",
+    "literal",
+    "literals",
+    "template",
+    "tagged",
+    "lit-html"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/literals/html-css-minifier"
+  },
+  "license": "MIT",
+  "author": "Liz Mitchell <asyncliz@gmail.com>",
+  "maintainers": [
+    "Julian Cataldo <jcprofree@gmail.com>"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/test"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "check:types": "tsc --noEmit",
+    "clean": "rm -rf ./dist ./coverage",
+    "dev": "tsc --watch",
+    "test": "pnpm test:unit",
+    "test:unit": "c8 node --enable-source-maps --test dist/test/*.js",
+    "test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.js"
+  },
+  "dependencies": {
+    "@literals/parser": "workspace:^",
+    "@types/html-minifier-terser": "^7.0.2",
+    "clean-css": "4.2.1",
+    "html-minifier-terser": "^7.2.0",
+    "magic-string": "0.25.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.16",
+    "@types/clean-css": "4.2.0",
+    "@types/node": "25.3.3",
+    "@types/sinon": "^5.0.1",
+    "c8": "11.0.0",
+    "chai": "^5.1.1",
+    "sinon": "^6.3.5",
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

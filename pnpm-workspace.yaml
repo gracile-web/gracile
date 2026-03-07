@@ -26,6 +26,11 @@ packages:
   - ./packages/labs/vite-plugin-babel-jsx-to-literals
   - ./packages/labs/jsx-forge
   - ./packages/labs/vite-plugin-jsx-forge
+  - ./packages/labs/og-images-generator
+  - ./packages/labs/literals
+  - ./packages/labs/literals/parser
+  - ./packages/labs/literals/html-css-minifier
+  - ./packages/labs/literals/rollup-plugin-html-css-minifier
 
 catalog:
   vite: ^7.3.1

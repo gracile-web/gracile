@@ -57,9 +57,6 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@lit-labs/compiler": "^1.1.1",
-    "sinon": "19.0.2",
-    "snapshot-fixtures": "^1.2.0",
     "ts-patch": "^3.3.0",
     "typescript": "5.8.3"
   },

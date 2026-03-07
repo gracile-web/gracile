@@ -14,11 +14,9 @@
       // "persistent": true
     },
     "test": {
+      "dependsOn": ["build"],
       "cache": false,
       "persistent": true
-    },
-    "test:dev2": {
-      "cache": false
     },
     "test:unit": {
       "cache": false,
@@ -28,13 +26,12 @@
       "cache": false
     },
     "build": {
+      "dependsOn": ["^build"],
       "cache": false,
-      "dependsOn": [
-        //
-        "^clean",
-        "^build"
-      ],
       "outputs": ["dist/**"]
+    },
+    "check:types": {
+      "dependsOn": ["^build"]
     }
   }
 }

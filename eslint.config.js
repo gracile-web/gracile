@@ -149,6 +149,10 @@ export default [
 
 			'**/coverage',
 			'**/dist',
+
+			// Transition: ignore newly integrated labs packages until they are fully linted
+			'packages/labs/og-images-generator/**',
+			'packages/labs/literals/**',
 		],
 	},
 ];

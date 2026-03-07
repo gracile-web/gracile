@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2022",
+    "outDir": "dist",
+
+    "declarationMap": true,
+
+    "rootDir": "src"
+  },
+
+  "include": ["src/**/*.ts", "declarations.d.ts"]
+}
