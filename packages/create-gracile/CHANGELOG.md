@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1-next.1](https://github.com/gracile-web/gracile/compare/create-gracile@0.5.1-next.0...create-gracile@0.5.1-next.1) (2026-03-07)
+
+### Bug Fixes
+
+* types and lint ([4815c11](https://github.com/gracile-web/gracile/commit/4815c1153a4d8120d376be8e7d14828265a5e479))
+* update repository base URL and adjust sparse checkout paths ([5ca7284](https://github.com/gracile-web/gracile/commit/5ca7284fd1da8bae163088339d91bce9c4eeac9d))
+
 ## [0.5.1-next.0](https://github.com/gracile-web/gracile/compare/create-gracile@0.5.0-next.3...create-gracile@0.5.1-next.0) (2026-03-07)
 
 **Note:** Version bump only for package create-gracile

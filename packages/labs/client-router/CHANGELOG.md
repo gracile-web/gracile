@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.4...@gracile-labs/client-router@0.2.0-next.5) (2026-03-07)
+
+### Bug Fixes
+
+* types and lint ([4815c11](https://github.com/gracile-web/gracile/commit/4815c1153a4d8120d376be8e7d14828265a5e479))
+
 # [0.2.0-next.4](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.3...@gracile-labs/client-router@0.2.0-next.4) (2026-03-07)
 
 **Note:** Version bump only for package @gracile-labs/client-router
