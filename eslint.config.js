@@ -145,6 +145,8 @@ export default [
 			'**/.dev*',
 			'**/.old*',
 
+			'**/starter-projects',
+
 			'**/coverage',
 			'**/dist',
 		],

@@ -110,7 +110,8 @@
       "@types/node": "25.3.3",
       "immutable": ">=4.3.8",
       "serialize-javascript": ">=7.0.3",
-      "tar": ">=7.5.10"
+      "tar": ">=7.5.10",
+      "object-keys": "npm:@nolyfill/object-keys@^1"
     }
   }
 }
