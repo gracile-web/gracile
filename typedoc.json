@@ -4,6 +4,7 @@
     "packages/labs/client-router"
     // , "packages/engine"
   ],
+  "out": "./typedocs",
 
   "name": "Gracile",
   "entryPointStrategy": "packages",

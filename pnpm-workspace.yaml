@@ -20,7 +20,8 @@ packages:
   - ./packages/labs/css-helpers
   - ./packages/labs/better-errors
   - ./packages/labs/islands
-  - ./packages/labs/jsx
+  - ./packages/labs/jsx-babel
+  - ./packages/labs/jsx-ts
   - ./packages/labs/hmr
 
 catalog:

@@ -1,0 +1,65 @@
+{
+  "name": "@gracile-labs/jsx-babel",
+  "version": "0.0.0",
+  "description": "A thin, full-stack, web framework",
+  "keywords": [
+    "custom-elements",
+    "full-stack",
+    "lit",
+    "meta-framework",
+    "server",
+    "server-side-rendering",
+    "ssr",
+    "static",
+    "web-components"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/jsx-babel"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js",
+    "./ambient": "./ambient.d.ts"
+  },
+  "files": [
+    "./jsx-runtime.d.ts",
+    "./ambient.d.ts",
+    "./dist/**/*",
+    "!/dist/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@babel/plugin-syntax-typescript": "^7.25.9",
+    "@gracile-labs/babel-plugin-jsx-to-literals": "0.0.0",
+    "@rollup/plugin-babel": "^6.0.4"
+  },
+  "peerDependencies": {
+    "@lit-labs/ssr": "^3.2.2",
+    "lit": "^3.3.0",
+    "clsx": "^2.1.1",
+    "vite": "^6.2.5"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "picocolors": "^1.0.1",
+    "typescript": "5.6.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

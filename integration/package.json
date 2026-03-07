@@ -13,6 +13,8 @@
     "@gracile-labs/client-router": "workspace:^",
     "@gracile-labs/css-helpers": "workspace:^",
     "@gracile-labs/islands": "workspace:^",
+    "@gracile-labs/jsx-babel": "workspace:^",
+    "@gracile-labs/jsx-ts": "workspace:^",
     "@gracile/client": "workspace:^",
     "@gracile/engine": "workspace:^",
     "@gracile/gracile": "workspace:^",

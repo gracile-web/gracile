@@ -31,7 +31,7 @@ dist-ssr
 .old*
 .dev*
 
-/docs
+/typedocs
 
 integration/**/*.js.map
 
