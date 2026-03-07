@@ -1,0 +1,3 @@
+exports[`suite of snapshot tests for nested templates > snapshot test - myTemplate1 in myServerTemplate1 1`] = `
+"\\n\\t<!--  -->\\n\\t<div>Hello</div>\\n\\n\\t<main><!--lit-part B09pxQP8WOw=-->\\n\\t<!--  -->\\n\\t<div>Hello</div>\\n\\t<!--  -->\\n<!--/lit-part--></main>\\n\\t<!--  -->\\n"
+`;

@@ -1,0 +1,29 @@
+{
+  "name": "@gracile/template--basics",
+  "type": "module",
+  "version": "0.0.3",
+  "scripts": {
+    "dev": "vite",
+    "check": "tsc",
+    "build": "vite build",
+    "preview": "node -C preview --watch server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@gracile/gracile": "link:../../../packages/gracile",
+    "@gracile/markdown": "link:../../../packages/addons/markdown",
+    "@gracile/markdown-preset-marked": "link:../../../packages/addons/markdown-preset-marked",
+    "@gracile/metadata": "link:../../../packages/addons/metadata",
+    "@gracile/sitemap": "link:../../../packages/addons/sitemap",
+    "@gracile/svg": "link:../../../packages/addons/svg",
+    "lit": "^3.1.3",
+    "vite": "^6.2.5",
+    "hono": "^4.5.4",
+    "@hono/node-server": "^1.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "typescript": "^5.5.4",
+    "sass": "^1.76.0"
+  }
+}

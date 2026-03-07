@@ -1,0 +1,26 @@
+{
+  "name": "@gracile/template--minimal-server-hono",
+  "type": "module",
+  "version": "0.0.2",
+  "scripts": {
+    "dev": "vite",
+    "check": "tsc",
+    "build": "vite build",
+    "build:static": "DEMO_MODE=static vite build",
+    "preview": "node -C preview --watch server.js",
+    "preview:static": "vite preview",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@gracile/gracile": "link:../../../packages/gracile",
+    "@hono/node-server": "^1.12.0",
+    "hono": "^4.5.3",
+    "lit": "^3.2.1",
+    "vite": "^6.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "typescript": "^5.5.4",
+    "@literals/rollup-plugin-html-css-minifier": "^3.0.0"
+  }
+}

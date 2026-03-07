@@ -1,0 +1,96 @@
+.gracile-welcome {
+	width: min(90rem, 95dvw);
+	margin: auto;
+
+	.greetings {
+		display: flex;
+		flex-direction: column;
+		gap: 4.5rem;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		margin: 2rem 0;
+
+		span {
+			font-size: xx-large;
+			font-weight: 100;
+		}
+	}
+
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(29ch, 1fr));
+		gap: 4rem;
+		padding: 0;
+		margin: 8rem 3vw;
+
+		& > li {
+			display: block;
+			align-self: self-start;
+
+			&:first-of-type {
+				grid-column: span 2;
+			}
+		}
+
+		.card {
+			display: block;
+			height: 100%;
+			padding: 0 2rem 0.75rem;
+			text-decoration: none;
+			background-color: color-mix(
+				in srgb,
+				var(--color-gray-0),
+				transparent 30%
+			);
+			border: 2px solid var(--color-gray-500);
+			border-radius: 2rem 0.15rem;
+
+			h2 {
+				font-weight: 200;
+			}
+		}
+
+		a.card {
+			color: inherit;
+			border-color: var(--color-emerald-400);
+
+			h2 {
+				color: var(--color-emerald-700);
+			}
+
+			&:hover {
+				border-color: var(--color-emerald-600);
+
+				&,
+				h2 {
+					color: var(--color-emerald-800);
+				}
+			}
+		}
+	}
+
+	.logo {
+		svg {
+			width: 16rem;
+			fill: var(--color-emerald-900);
+		}
+	}
+
+	cool-canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		pointer-events: none;
+		user-select: none;
+
+		@media (prefers-color-scheme: dark) {
+			--cool-canvas-opacity: 0.125;
+		}
+
+		@media (prefers-color-scheme: light) {
+			--cool-canvas-opacity: 0.3;
+		}
+	}
+}

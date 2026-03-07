@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/@lerna-lite/cli/schemas/lerna-schema.json",
+  "version": "independent",
+  "npmClient": "pnpm",
+
+  "conventionalCommits": true,
+  "exact": true,
+
+  "command": {
+    "publish": {
+      "cleanupTempFiles": true,
+      "removePackageFields": ["devDependencies", "scripts"]
+    }
+  },
+
+  "packages": [
+    "templates-src/basics",
+    "templates-src/minimal-server-express",
+    "templates-src/minimal-server-hono",
+    "templates-src/minimal-static"
+  ]
+}

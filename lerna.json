@@ -34,12 +34,12 @@
     "./packages/labs/better-errors",
     "./packages/labs/client-router",
     "./packages/labs/css-helpers",
-    "./packages/labs/hmr"
-    // "./packages/labs/babel-plugin-jsx-to-literals"
+    "./packages/labs/hmr",
+    "./packages/labs/babel-plugin-jsx-to-literals",
+    "./packages/labs/functional",
+    "./packages/labs/vite-plugin-babel-jsx-to-literals"
     // "./packages/labs/islands"
-    // "./packages/labs/functional"
     // "./packages/labs/jsx-forge"
-    // "./packages/labs/vite-plugin-babel-jsx-to-literals"
     // "./packages/labs/vite-plugin-jsx-forge"
   ]
 }
