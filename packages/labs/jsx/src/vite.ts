@@ -6,9 +6,6 @@ import babelPluginJsxToLiterals, {
 // import babelPluginSyntaxJsx from '@babel/plugin-syntax-jsx';
 // @ts-expect-error No typings…
 import babelPluginSyntaxTypescript from '@babel/plugin-syntax-typescript';
-import VitePluginCustomElementsManifest from 'vite-plugin-cem';
-
-import { customElementLitPlugin } from './cem/index.js';
 
 const VITE_PLUGIN_NAME = 'vite-plugin-jsx-to-literals';
 
@@ -73,7 +70,6 @@ const additionalImports = [
 
 interface VitePluginOptions {
 	babelPlugin?: JsxPluginOptions;
-	cemPlugin?: Parameters<typeof VitePluginCustomElementsManifest>[0] | false;
 }
 
 export const cemPluginDefaultOptions = {
@@ -92,25 +88,7 @@ export function gracileJsx(
 	options?: VitePluginOptions | undefined,
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any[] {
-	console.log({ options });
 	return [
-		options?.cemPlugin === false
-			? null
-			: VitePluginCustomElementsManifest({
-					lit: true,
-					files: ['./src/**/*.{js,ts,jsx,tsx}'],
-					endpoint: '/__custom-elements.json',
-
-					...options?.cemPlugin,
-
-					plugins: [
-						...(options?.cemPlugin?.plugins || []),
-
-						// eslint-disable-next-line @typescript-eslint/no-explicit-any
-						customElementLitPlugin(cemPluginDefaultOptions) as any,
-					],
-				}),
-
 		{
 			name: VITE_PLUGIN_NAME,
 

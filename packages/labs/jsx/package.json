@@ -45,15 +45,12 @@
   "dependencies": {
     "@babel/plugin-syntax-typescript": "^7.25.9",
     "@gracile-labs/babel-plugin-jsx-to-literals": "0.0.0",
-    "@lit-labs/ssr": "^3.2.2",
-    "@rollup/plugin-babel": "^6.0.4",
-    "clsx": "^2.1.1",
-    "custom-element-solidjs-integration": "^1.8.2",
-    "custom-elements-manifest": "^2.1.0",
-    "lit": "^3.3.0",
-    "vite-plugin-cem": "^0.8.1"
+    "@rollup/plugin-babel": "^6.0.4"
   },
   "peerDependencies": {
+    "@lit-labs/ssr": "^3.2.2",
+    "lit": "^3.3.0",
+    "clsx": "^2.1.1",
     "vite": "^6.2.5"
   },
   "devDependencies": {
