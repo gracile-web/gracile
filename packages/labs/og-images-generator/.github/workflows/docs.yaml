@@ -1,0 +1,59 @@
+# https://github.com/JulianCataldo/gh-actions/blob/main/workflows-examples/docs-gh-pages.yaml
+
+name: Documentation website — GH Pages
+
+on:
+  push:
+    branches: ['main']
+    # paths:
+    #   - 'docs/**'
+    #   - '!.github/**'
+
+  workflow_dispatch:
+
+env:
+  CI: true
+  FORCE_COLOR: true
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  deploy-docs:
+    name: Deploy docs
+
+    runs-on: ubuntu-20.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # ————————————————————————————————————————————————————————————————————————
+
+      - name: Setup Node
+        uses: ./.github/actions/node-pnpm
+
+      # ————————————————————————————————————————————————————————————————————————
+
+      - name: Emit TypeScript declarations
+        run: 'pnpm run types'
+
+      - name: Build documentation website
+        run: 'pnpm run build:docs'
+
+      - name: Upload artifact — Docs
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./docs
+
+      - name: Deploy to GitHub Pages — Docs
+        id: deployment
+        uses: actions/deploy-pages@v1

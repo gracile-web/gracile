@@ -1,0 +1,19 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "web-dev-server --node-resolve --open --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express-to-koa": "^2.0.0",
+    "og-images-generator": "link:../.."
+  },
+  "devDependencies": {
+    "@types/express-to-koa": "^1.0.3",
+    "@web/dev-server": "^0.4.2"
+  }
+}

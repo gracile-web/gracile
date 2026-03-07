@@ -1,0 +1,116 @@
+{
+  "name": "og-images-generator",
+  "version": "0.3.0",
+  "description": "Generate OG images from a static folder and / or a middleware. Extract metadata from HTML pages. No headless browser involved. Comes as a CLI, API or plugins.",
+  "keywords": [
+    "og-images",
+    "social-networks",
+    "open-graph",
+    "svg-png",
+    "static",
+    "seo",
+    "ssg",
+    "cli",
+    "vite-plugin",
+    "withastro",
+    "api"
+  ],
+  "bin": {
+    "generate-og": "./src/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/og-images-generator"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./api": {
+      "types": "./types/api.d.ts",
+      "default": "./src/api.js"
+    },
+    "./connect": {
+      "types": "./types/plugins/connect-middleware.d.ts",
+      "default": "./src/plugins/connect-middleware.js"
+    },
+    "./rollup": {
+      "types": "./types/plugins/rollup-plugin.d.ts",
+      "default": "./src/plugins/rollup-plugin.js"
+    },
+    "./vite": {
+      "types": "./types/plugins/vite-plugin.d.ts",
+      "default": "./src/plugins/vite-plugin.js"
+    },
+    "./astro": {
+      "types": "./types/plugins/astro-integration.d.ts",
+      "default": "./src/plugins/astro-integration.js"
+    }
+  },
+  "files": [
+    "./src/*.js",
+    "./src/plugins/*.js",
+    "./types/**/*.d.ts"
+  ],
+  "scripts": {
+    "build": "pnpm clean && tsc --project tsconfig.build.json",
+    "check:types": "tsc --noEmit --project tsconfig.json",
+    "clean": "rm -rf ./types",
+    "dev": "tsc --project tsconfig.build.json --watch",
+    "test": "pnpm test:unit",
+    "test:unit": "node --test ./test/*.test.js",
+    "test:unit:dev": "node --test --watch ./test/*.test.js"
+  },
+  "dependencies": {
+    "@lit-labs/ssr": "catalog:",
+    "@resvg/resvg-js": "^2.6.2",
+    "commander": "catalog:",
+    "entities": "^5.0.0",
+    "fast-glob": "^3.3.2",
+    "parse5": "^7.2.1",
+    "picocolors": "catalog:",
+    "satori": "^0.10.14",
+    "satori-html": "^0.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "25.3.3",
+    "@types/react": "^19.0.2",
+    "typescript": "5.9.3"
+  },
+  "peerDependencies": {
+    "@types/connect": "^3.4.38",
+    "astro": "^5.1.1",
+    "rollup": "^4.29.1",
+    "vite": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "@types/connect": {
+      "optional": true
+    },
+    "astro": {
+      "optional": true
+    },
+    "rollup": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

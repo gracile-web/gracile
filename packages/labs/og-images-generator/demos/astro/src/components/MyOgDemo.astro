@@ -1,0 +1,45 @@
+---
+// NOTE: very naive implementation of a visualizer.
+// You are not supposed to use this inside your website
+// (but you could, with a polished up component).
+
+const host =
+	// NOTE: Quick and dirty for demo. Don't do that IRL please.
+	Astro.url.protocol + "//" + Astro.url.hostname + ":" + Astro.url.port;
+let url =
+	"og" +
+	Astro.url.pathname
+		//
+		.replace(/\/$/, "") +
+	".png";
+
+if (url === "og.png") url = "og/index.png";
+
+console.log({ host, url });
+const ogUrl = new URL(url, host).href;
+
+console.log({ ogUrl });
+---
+
+<div>
+	{ogUrl}
+	<hr />
+
+	<img src={ogUrl} />
+	<hr />
+
+	<a href="/og-endpoint-demo">Dynamic API Route Demo</a>
+</div>
+
+<style>
+	div {
+		padding: 3rem 0;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+	}
+	img {
+		max-width: 40rem;
+	}
+</style>

@@ -1,0 +1,25 @@
+{
+	"name": "astro",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro check && astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/check": "^0.4.1",
+		"@astrojs/mdx": "^2.1.1",
+		"@astrojs/rss": "^4.0.5",
+		"@astrojs/sitemap": "^3.0.5",
+		"astro": "^4.3.5",
+		"og-images-generator": "link:../..",
+		"typescript": "^5.3.3",
+		"vite": "^5.0.12"
+	},
+	"devDependencies": {
+		"prettier-plugin-astro": "^0.13.0"
+	}
+}

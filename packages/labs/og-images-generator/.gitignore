@@ -1,0 +1,24 @@
+.old*
+.dev*
+
+node_modules
+
+.DS_Store
+
+/*.d.ts
+/*.d.ts.map
+
+/types
+
+docs
+
+**/dist/og
+
+*.tgz
+
+# demos/*
+# !demos/vanilla
+
+test/__fixtures__/.test-outputs
+
+dist
