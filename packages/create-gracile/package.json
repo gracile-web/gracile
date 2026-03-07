@@ -37,8 +37,9 @@
     "!*.test.*"
   ],
   "scripts": {
-    "// test": "node --test dist/**/*.ts",
-    "// test:dev": "npm run test -- --watch",
+    "test:unit": "c8 node --test 'dist/test/**/*.test.js' --test-name-pattern '!E2E'",
+    "test:e2e": "node --test 'dist/test/e2e/**/*.e2e.test.js'",
+    "test": "pnpm test:unit && pnpm test:e2e",
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",

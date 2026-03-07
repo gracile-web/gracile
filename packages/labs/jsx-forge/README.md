@@ -18,7 +18,6 @@ transformer.
     - [Fragments](#fragments)
     - [Nested elements](#nested-elements)
     - [Void elements](#void-elements)
-    - [Custom elements](#custom-elements)
     - [Expression children](#expression-children)
     - [HTML comments](#html-comments)
   - [Attributes \& Bindings](#attributes--bindings)
@@ -47,6 +46,7 @@ transformer.
     - [Signals](#signals)
   - [Auto-Imports](#auto-imports)
   - [Mix \& Match](#mix--match)
+- [License](#license)
 
 ---
 
