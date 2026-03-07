@@ -1,17 +1,17 @@
 {
-	"name": "@gracile-labs/hmr-integration-browser",
-	"version": "0.0.0",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"test": "playwright test",
-		"test:ui": "playwright test --ui"
-	},
-	"devDependencies": {
-		"@gracile-labs/hmr": "workspace:^",
-		"@playwright/test": "^1.52.0",
-		"lit": "catalog:",
-		"typescript": "5.9.3",
-		"vite": "catalog:"
-	}
+  "name": "@gracile-labs/hmr-integration-browser",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@gracile-labs/hmr": "workspace:^",
+    "@playwright/test": "^1.52.0",
+    "lit": "catalog:",
+    "typescript": "5.9.3",
+    "vite": "catalog:"
+  }
 }

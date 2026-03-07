@@ -3,7 +3,6 @@ import { describe, it } from 'node:test';
 import * as nodeAssert from 'node:assert/strict';
 
 import type { GracileConfig } from '../../user-config.js';
-
 import {
 	rewriteHiddenRoutes,
 	resolvePremises,

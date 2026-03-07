@@ -6,6 +6,7 @@
   "scripts": {
     "dev:server": "tsx --watch 'src/test-server.ts'",
     "test": "tsx --test-concurrency=1 --test -C test 'src/**/*.test.ts'",
+    "test:browser": "playwright test",
     "test:dev": "tsx --watch --test-concurrency=1 --test -C test 'src/**/*.test.ts'"
   },
   "dependencies": {
@@ -39,7 +40,9 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@gracile-labs/hmr": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
+    "@playwright/test": "^1.52.0",
     "@preact/preset-vite": "^2.10.1",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@types/express": "^5.0.6",

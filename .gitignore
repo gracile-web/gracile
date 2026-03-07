@@ -38,3 +38,6 @@ integration/**/*.js.map
 .tmp
 
 coverage
+
+# Playwright
+test-results 

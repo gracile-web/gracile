@@ -25,6 +25,8 @@ node --run lint:es
 
 node --run test:unit
 
+pnpm --prefix integration exec playwright install chromium
+
 node --run test:integration
 
 # Lerna…

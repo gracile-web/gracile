@@ -35,6 +35,8 @@ jobs:
   release:
     name: CI / Release
 
+    timeout-minutes: 30
+
     permissions:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
@@ -142,6 +144,17 @@ jobs:
       - name: Tests — Units
         shell: bash
         run: node --run test:unit
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('integration/package.json') }}
+
+      - name: Install Playwright browsers
+        shell: bash
+        run: npx playwright install --with-deps chromium
+        working-directory: integration
 
       - name: Tests — Integration
         shell: bash

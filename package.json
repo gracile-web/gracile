@@ -42,7 +42,8 @@
     "prepare": "husky",
     "sort-pjson": "pnpm sort-package-json '**/package.json'",
     "syncpack:lint": "syncpack lint",
-    "test:integration": "pnpm --prefix integration test",
+    "test:integration": "pnpm --prefix integration test && pnpm --prefix integration test:browser",
+    "test:integration:browser": "pnpm --prefix integration test:browser",
     "test:integration:dev": "pnpm --prefix integration test:dev",
     "test:unit": "turbo test:unit",
     "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel test:unit:dev"
