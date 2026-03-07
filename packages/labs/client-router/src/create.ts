@@ -297,6 +297,7 @@ export function createRouter(config?: GracileRouterConfig) {
 
 							return;
 						} catch (error) {
+							// eslint-disable-next-line no-console
 							console.error('Could not hydrate');
 							throw error;
 						}

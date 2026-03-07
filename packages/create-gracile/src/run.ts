@@ -1,7 +1,7 @@
 import type { CliDeps, PartialSettings } from './types.js';
 import { cloneTemplate } from './phases/clone-template.js';
 import { displayIntro, displayOutro } from './phases/display.js';
-import { parseArgs as parseArguments } from './phases/parse-args.js';
+import { parseArguments as parseArguments } from './phases/parse-arguments.js';
 import { postSetup } from './phases/post-setup.js';
 import { refreshDeps } from './phases/refresh-deps.js';
 import { resolveSettings, settingsNote } from './phases/resolve-settings.js';

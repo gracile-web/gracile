@@ -7,7 +7,6 @@ import type {
 	CliFsDeps,
 	CliPromptsDeps,
 	PartialSettings,
-	Settings,
 } from '../types.js';
 import { TEMPLATE_LIST_ANON } from '../types.js';
 

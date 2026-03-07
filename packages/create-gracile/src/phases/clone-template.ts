@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import c from 'picocolors';
 
 import type {
-	CliExecFn as CliExecFunction,
+	CliExecFunction as CliExecFunction,
 	CliFsDeps,
 	CliPromptsDeps,
 	PartialSettings,
@@ -25,7 +25,7 @@ export async function cloneTemplate(
 	settings: PartialSettings,
 	deps: CloneTemplateDeps,
 ): Promise<CloneTemplateResult> {
-	const { template, location: projectDestination } = settings;
+	const { template, location: projectDestination, dryRun, next } = settings;
 	if (!projectDestination) throw new Error('No destination.');
 	if (!template) throw new Error('No template.');
 
@@ -40,13 +40,13 @@ export async function cloneTemplate(
 			` template to ${c.green(`\`${projectDestination}\``)}`,
 	);
 
-	const cloneCmd = `git clone${settings.next ? ' -b next' : ''} -n --depth=1 --filter=tree:0 ${REPO_BASE} ${projectDestinationTemporary}`;
+	const cloneCmd = `git clone${next ? ' -b next' : ''} -n --depth=1 --filter=tree:0 ${REPO_BASE} ${projectDestinationTemporary}`;
 	const sparseCmd = `git sparse-checkout set --no-cone starter-projects/templates/${template}`;
 	const checkoutCmd = `git checkout`;
 
 	commands.push(cloneCmd, sparseCmd, checkoutCmd);
 
-	if (settings.dryRun) {
+	if (dryRun) {
 		deps.logger.info('[dry-run] Would execute:', cloneCmd);
 		deps.logger.info('[dry-run] Would execute:', sparseCmd);
 		deps.logger.info('[dry-run] Would execute:', checkoutCmd);
@@ -107,7 +107,7 @@ export async function cloneTemplate(
 
 	cloneSpinner.stop(
 		`${c.cyan('Copying')} of the ${c.green(`"${template}"`)} template to ` +
-			`the ${c.green(`\`${settings.location}\``)} folder has finished`,
+			`the ${c.green(`\`${projectDestination}\``)} folder has finished`,
 	);
 
 	return { commands };

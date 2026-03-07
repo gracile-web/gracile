@@ -24,10 +24,10 @@
   "type": "module",
   "scripts": {
     "// postsyncpack": "pnpm i",
-    "build": "turbo build --concurrency 25",
+    "build": "turbo build --concurrency 20",
     "check-all": "pnpm build && (pnpm test & pnpm lint:es & pnpm format)",
-    "clean": "turbo clean --concurrency 25",
-    "dev": "turbo dev --concurrency 25",
+    "clean": "turbo clean --concurrency 20",
+    "dev": "turbo dev --concurrency 20",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "preinstall": "npx only-allow pnpm",
@@ -45,7 +45,7 @@
     "test:integration": "pnpm --prefix integration test && pnpm --prefix integration test:browser",
     "test:integration:browser": "pnpm --prefix integration test:browser",
     "test:integration:dev": "pnpm --prefix integration test:dev",
-    "test:unit": "turbo test:unit",
+    "test:unit": "turbo test:unit --concurrency 20",
     "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel test:unit:dev"
   },
   "resolutions": {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -65,7 +66,7 @@ describe('resolveSettings', () => {
 			confirmAnswers: [false, true],
 		});
 
-		const result = await resolveSettings(
+		await resolveSettings(
 			{ location: 'existing-dir' },
 			{
 				prompts: mockDeps.prompts,

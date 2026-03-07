@@ -58,7 +58,7 @@ export type FilesMap = Map<string, string>;
 export interface CliFsDeps {
 	readFile: (path: string | URL, encoding: BufferEncoding) => Promise<string>;
 	writeFile: (path: string, data: string) => Promise<void>;
-	rename: (oldPath: string, newPath: string) => Promise<void>;
+	rename: (oldPath: string, updatedPath: string) => Promise<void>;
 	rm: (
 		path: string,
 		options?: { force?: boolean; recursive?: boolean },
@@ -71,7 +71,7 @@ export interface CliExecResult {
 	stderr: string;
 }
 
-export type CliExecFn = (
+export type CliExecFunction = (
 	command: string,
 	options?: { cwd?: string },
 ) => Promise<CliExecResult>;
@@ -129,7 +129,7 @@ export interface CliEnvironment {
 
 export interface CliDeps {
 	fs: CliFsDeps;
-	exec: CliExecFn;
+	exec: CliExecFunction;
 	prompts: CliPromptsDeps;
 	config: CliConfigDeps<PartialSettings>;
 	fetchLatestVersion: CliFetchLatestVersion;

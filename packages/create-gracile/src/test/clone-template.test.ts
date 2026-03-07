@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -111,7 +112,7 @@ describe('cloneTemplate', () => {
 			recorder.renameCalls[0]!.oldPath.includes('test-project__tmp_clone'),
 		);
 		assert.ok(recorder.renameCalls[0]!.oldPath.includes('templates/basics'));
-		assert.equal(recorder.renameCalls[0]!.newPath, 'test-project');
+		assert.equal(recorder.renameCalls[0]!.updatedPath, 'test-project');
 
 		// rm: cleanup tmp dir + .git
 		assert.equal(recorder.rmCalls.length, 2);
@@ -198,6 +199,7 @@ describe('cloneTemplate', () => {
 		const mockDeps = createMockDeps(recorder);
 
 		// Override rename to reject
+		// eslint-disable-next-line @typescript-eslint/require-await
 		mockDeps.fs.rename = async () => {
 			throw new Error('rename failed');
 		};

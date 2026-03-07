@@ -7,7 +7,7 @@ export interface ParseArgumentsOptions {
 	cliVersion: string;
 }
 
-export function parseArgs(
+export function parseArguments(
 	argv: string[],
 	options: ParseArgumentsOptions,
 ): PartialSettings {

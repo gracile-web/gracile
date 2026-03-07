@@ -21,10 +21,10 @@ export async function refreshDeps(
 	settings: PartialSettings,
 	deps: RefreshDepsDeps,
 ): Promise<void> {
-	const { location: projectDestination, next } = settings;
+	const { location: projectDestination, next, dryRun } = settings;
 	if (!projectDestination) throw new Error('No destination.');
 
-	if (settings.dryRun) {
+	if (dryRun) {
 		deps.logger.info(
 			'[dry-run] Would refresh dependencies in',
 			join(projectDestination, 'package.json'),

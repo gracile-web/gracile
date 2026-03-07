@@ -1,7 +1,7 @@
 import c from 'picocolors';
 
 import type {
-	CliExecFn as CliExecFunction,
+	CliExecFunction as CliExecFunction,
 	CliPromptsDeps,
 	PartialSettings,
 } from '../types.js';
@@ -17,11 +17,17 @@ export async function postSetup(
 	packageManager: string,
 	deps: PostSetupDeps,
 ): Promise<void> {
-	const { location: projectDestination, template } = settings;
+	const {
+		location: projectDestination,
+		template,
+		dryRun,
+		installDependencies,
+		initializeGit,
+	} = settings;
 	if (!projectDestination) throw new Error('No destination.');
 
 	// MARK: Install deps
-	if (settings.installDependencies) {
+	if (installDependencies) {
 		const installDepsSpinner = deps.prompts.spinner();
 		const installCmd = `${packageManager} install`;
 
@@ -29,7 +35,7 @@ export async function postSetup(
 			`Installing ${c.cyan('project dependencies')} via ${c.green(packageManager)}`,
 		);
 
-		if (settings.dryRun) {
+		if (dryRun) {
 			deps.logger.info(
 				`[dry-run] Would execute: ${installCmd} (cwd: ${projectDestination})`,
 			);
@@ -41,13 +47,13 @@ export async function postSetup(
 	}
 
 	// MARK: Init repository
-	if (settings.initializeGit) {
+	if (initializeGit) {
 		const initGitSpinner = deps.prompts.spinner();
 		initGitSpinner.start(
 			`Initializing the ${c.green(`"${template}"`)} git repository…`,
 		);
 
-		if (settings.dryRun) {
+		if (dryRun) {
 			deps.logger.info(
 				`[dry-run] Would execute: git init (cwd: ${projectDestination})`,
 			);

@@ -11,6 +11,7 @@ export function astroOgImagesGenerator(options) {
 
 		hooks: {
 			'astro:server:setup': ({ server }) =>
+				// @ts-expect-error - Astro's typings dev server drift.
 				applyViteDevServerMiddleware(server),
 
 			'astro:build:done': () => generateOgImages(options),

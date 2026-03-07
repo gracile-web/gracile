@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { parseArgs as parseArguments } from '../phases/parse-args.js';
+import { parseArguments as parseArguments } from '../phases/parse-arguments.js';
 
 const BASE_OPTS = { cliVersion: 'v0.1.0' };
 

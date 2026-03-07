@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 import type {
 	CliConfigDeps,
 	CliDeps,
@@ -13,7 +14,7 @@ export interface MockCallRecorder {
 	execCalls: { command: string; options?: { cwd?: string } | undefined }[];
 	readFileCalls: { path: string | URL; encoding: string }[];
 	writeFileCalls: { path: string; data: string }[];
-	renameCalls: { oldPath: string; newPath: string }[];
+	renameCalls: { oldPath: string; updatedPath: string }[];
 	rmCalls: {
 		path: string;
 		options?: { force?: boolean; recursive?: boolean } | undefined;
@@ -100,8 +101,8 @@ export function createMockDeps(
 			writeFile: async (path, data) => {
 				recorder.writeFileCalls.push({ path, data });
 			},
-			rename: async (oldPath, newPath) => {
-				recorder.renameCalls.push({ oldPath, newPath });
+			rename: async (oldPath, updatedPath) => {
+				recorder.renameCalls.push({ oldPath, updatedPath });
 			},
 			rm: async (path, rmOptions) => {
 				recorder.rmCalls.push({

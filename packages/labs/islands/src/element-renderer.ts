@@ -20,6 +20,7 @@ export function makeIslandRenderer(registry: IslandRegistry) {
 				try {
 					this.props = JSON.parse(value);
 				} catch (error) {
+					// eslint-disable-next-line no-console
 					console.error(`Invalid JSON in props for island`, error);
 				}
 			}

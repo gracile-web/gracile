@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/require-await */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -15,6 +17,7 @@ describe('run (integration)', () => {
 	test('full non-interactive flow with all flags', async () => {
 		const recorder = createMockRecorder();
 		const mockDeps = createMockDeps(recorder, {
+			// eslint-disable-next-line unicorn/no-useless-collection-argument
 			readFileResults: new Map([
 				// Will match the URL pattern for ../package.json
 			]),
