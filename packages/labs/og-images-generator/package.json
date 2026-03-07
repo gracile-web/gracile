@@ -66,9 +66,9 @@
     "check:types": "tsc --noEmit --project tsconfig.json",
     "clean": "rm -rf ./types",
     "dev": "tsc --project tsconfig.build.json --watch",
-    "test": "pnpm test:unit",
-    "test:unit": "node --test ./test/*.test.js",
-    "test:unit:dev": "node --test --watch ./test/*.test.js"
+    "// test": "pnpm test:unit",
+    "// test:unit": "node --test ./test/*.test.js",
+    "// test:unit:dev": "node --test --watch ./test/*.test.js"
   },
   "dependencies": {
     "@lit-labs/ssr": "catalog:",

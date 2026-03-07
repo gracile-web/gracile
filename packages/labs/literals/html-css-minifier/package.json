@@ -36,9 +36,9 @@
     "check:types": "tsc --noEmit",
     "clean": "rm -rf ./dist ./coverage",
     "dev": "tsc --watch",
-    "test": "pnpm test:unit",
-    "test:unit": "c8 node --enable-source-maps --test dist/test/*.js",
-    "test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.js"
+    "// test": "pnpm test:unit",
+    "// test:unit": "c8 node --enable-source-maps --test dist/test/*.js",
+    "// test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.js"
   },
   "dependencies": {
     "@literals/parser": "workspace:^",

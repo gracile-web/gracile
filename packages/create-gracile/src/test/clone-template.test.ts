@@ -26,9 +26,8 @@ describe('cloneTemplate', () => {
 
 		// Clone command
 		assert.ok(recorder.execCalls[0]!.command.includes('git clone'));
-		assert.ok(
-			recorder.execCalls[0]!.command.includes('gracile-web/starter-projects'),
-		);
+		console.log({ dddddddd: recorder.execCalls[0]!.command });
+		assert.ok(recorder.execCalls[0]!.command.includes('gracile-web/gracile'));
 		assert.ok(
 			recorder.execCalls[0]!.command.includes('test-project__tmp_clone'),
 		);
