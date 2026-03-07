@@ -29,7 +29,7 @@ export async function cloneTemplate(
 	if (!projectDestination) throw new Error('No destination.');
 	if (!template) throw new Error('No template.');
 
-	const REPO_BASE = 'https://github.com/gracile-web/starter-projects';
+	const REPO_BASE = 'https://github.com/gracile-web/gracile';
 	const projectDestinationTemporary = `${projectDestination}__tmp_clone`;
 
 	const commands: string[] = [];
@@ -41,7 +41,7 @@ export async function cloneTemplate(
 	);
 
 	const cloneCmd = `git clone${settings.next ? ' -b next' : ''} -n --depth=1 --filter=tree:0 ${REPO_BASE} ${projectDestinationTemporary}`;
-	const sparseCmd = `git sparse-checkout set --no-cone templates/${template}`;
+	const sparseCmd = `git sparse-checkout set --no-cone starter-projects/templates/${template}`;
 	const checkoutCmd = `git checkout`;
 
 	commands.push(cloneCmd, sparseCmd, checkoutCmd);
@@ -52,7 +52,12 @@ export async function cloneTemplate(
 		deps.logger.info('[dry-run] Would execute:', checkoutCmd);
 		deps.logger.info(
 			'[dry-run] Would rename:',
-			join(projectDestinationTemporary, 'templates', template),
+			join(
+				projectDestinationTemporary,
+				'starter-projects',
+				'templates',
+				template,
+			),
 			'→',
 			projectDestination,
 		);
@@ -74,7 +79,12 @@ export async function cloneTemplate(
 
 		await deps.fs
 			.rename(
-				join(projectDestinationTemporary, 'templates', template),
+				join(
+					projectDestinationTemporary,
+					'starter-projects',
+					'templates',
+					template,
+				),
 				projectDestination,
 			)
 			.catch(() => {
