@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import { REGEXES } from './load-module.js';
+import { REGEXES } from '../../routes/load-module.js';
 
 describe('REGEXES.param — [name] dynamic segments', () => {
 	test('matches [foo]', () => {

@@ -2,7 +2,7 @@
 import { describe, it } from 'node:test';
 import * as nodeAssert from 'node:assert/strict';
 
-import type { GracileConfig } from '../user-config.js';
+import type { GracileConfig } from '../../user-config.js';
 
 import {
 	rewriteHiddenRoutes,
@@ -10,7 +10,7 @@ import {
 	isRedirect,
 	CONTENT_TYPE_HTML,
 	PREMISE_REGEXES,
-} from './request-pipeline.js';
+} from '../../server/request-pipeline.js';
 
 // ── helpers ──────────────────────────────────────────────────────────
 

@@ -7,8 +7,8 @@ import { URLPattern as URLPatternPolyfill } from 'urlpattern-polyfill/urlpattern
 const URLPattern =
 	URLPatternPolyfill as unknown as typeof globalThis.URLPattern;
 
-import { RouteModule, type Route, type RoutesManifest } from './route.js';
-import { matchRouteFromUrl, extractStaticPaths } from './match.js';
+import { RouteModule, type Route, type RoutesManifest } from '../../routes/route.js';
+import { matchRouteFromUrl, extractStaticPaths } from '../../routes/match.js';
 
 // ── Helpers ──────────────────────────────────────────────────────────
 

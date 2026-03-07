@@ -2,9 +2,9 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import '../test/init.js';
+import '../init.js';
 
-import { extractRoutePatterns } from './collect.js';
+import { extractRoutePatterns } from '../../routes/collect.js';
 
 // ── Basic static routes ──────────────────────────────────────────────
 

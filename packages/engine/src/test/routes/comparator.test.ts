@@ -6,7 +6,7 @@ import {
 	prepareSortableRoutes,
 	routeComparator,
 	type RouteCompareObject,
-} from './comparator.js';
+} from '../../routes/comparator.js';
 
 // ── Helper ───────────────────────────────────────────────────────────
 

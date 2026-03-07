@@ -11,7 +11,7 @@ import {
 	mergeRenderInfo,
 	REGEX_TAG_SCRIPT,
 	REGEX_TAG_LINK,
-} from './route-template-pipeline.js';
+} from '../../render/route-template-pipeline.js';
 
 // ── mergeRenderInfo ──────────────────────────────────────────────────
 
