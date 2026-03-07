@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.0-next.3...@gracile/internal-utils@0.6.1-next.0) (2026-03-07)
+
+**Note:** Version bump only for package @gracile/internal-utils
+
 # [0.6.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.0-next.3...@gracile/internal-utils@0.6.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile/internal-utils

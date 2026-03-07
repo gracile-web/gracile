@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-tsconfigs@0.1.0-next.0...@gracile/internal-tsconfigs@0.1.1-next.0) (2026-03-07)
+
+**Note:** Version bump only for package @gracile/internal-tsconfigs
+
 # [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-tsconfigs@0.1.0-next.0...@gracile/internal-tsconfigs@0.1.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile/internal-tsconfigs

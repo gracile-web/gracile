@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0-next.6](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.5...@gracile/engine@0.9.0-next.6) (2026-03-07)
+
+### Features
+
+* router support for trailing slash with user preference ([b214298](https://github.com/gracile-web/gracile/commit/b2142988f85d2cb6a2c6920a2953ad02636aba54))
+* use lit's own `RenderResultReadable` for improved output handling in route template render ([15e4ee8](https://github.com/gracile-web/gracile/commit/15e4ee851b5d4ecce383dab60a5c9555680b5313))
+
+### Reverts
+
+* reuse older technique for rendering streams to string ([339cc19](https://github.com/gracile-web/gracile/commit/339cc19e0215a5c7709d8e6a5e990397a84a8138))
+
 # [0.9.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.4...@gracile/engine@0.9.0-next.5) (2026-03-06)
 # [0.9.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.4...@gracile/engine@0.9.0) (2026-03-06)
 
