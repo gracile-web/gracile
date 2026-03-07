@@ -1,9 +1,9 @@
 import MagicString, { SourceMapOptions } from 'magic-string';
 import {
-  Template,
-  TemplatePart,
-  ParseLiteralsOptions,
-  parseLiterals,
+	Template,
+	TemplatePart,
+	ParseLiteralsOptions,
+	parseLiterals,
 } from '@literals/parser';
 import { Strategy, defaultMinifyOptions, defaultStrategy } from './strategy.js';
 
@@ -17,90 +17,90 @@ export type Options = DefaultOptions | CustomOptions<any>;
  * strategy.
  */
 export interface DefaultOptions extends BaseOptions {
-  /**
-   * <code>html-minifier</code> options to use. Defaults to
-   * <code>defaultMinifyOptions</code>, for production-ready minification.
-   */
-  minifyOptions?: Partial<typeof defaultMinifyOptions>;
+	/**
+	 * <code>html-minifier</code> options to use. Defaults to
+	 * <code>defaultMinifyOptions</code>, for production-ready minification.
+	 */
+	minifyOptions?: Partial<typeof defaultMinifyOptions>;
 }
 
 /**
  * Options for <code>minifyHTMLLiterals()</code>, using a custom strategy.
  */
 export interface CustomOptions<S extends Strategy> extends BaseOptions {
-  /**
-   * HTML minification options.
-   */
-  minifyOptions?: S extends Strategy<infer O> ? Partial<O> : never;
-  /**
-   * Override the default strategy for how to minify HTML. The default is to
-   * use <code>html-minifier</code>.
-   */
-  strategy: S;
+	/**
+	 * HTML minification options.
+	 */
+	minifyOptions?: S extends Strategy<infer O> ? Partial<O> : never;
+	/**
+	 * Override the default strategy for how to minify HTML. The default is to
+	 * use <code>html-minifier</code>.
+	 */
+	strategy: S;
 }
 
 /**
  * Options for <code>minifyHTMLLiterals()</code>.
  */
 export interface BaseOptions {
-  /**
-   * The name of the file. This is used to determine how to parse the source
-   * code and for source map filenames. It may be a base name, relative, or
-   * absolute path.
-   */
-  fileName?: string;
-  /**
-   * Override how source maps are generated. Set to false to disable source map
-   * generation.
-   *
-   * @param ms the MagicString instance with code modifications
-   * @param fileName the name or path of the file
-   * @returns a v3 SourceMap or undefined
-   */
-  generateSourceMap?:
-    | ((ms: MagicStringLike, fileName: string) => SourceMap | undefined)
-    | false;
-  /**
-   * The MagicString-like constructor to use. MagicString is used to replace
-   * strings and generate source maps.
-   *
-   * Override if you want to set your own version of MagicString or change how
-   * strings are overridden. Use <code>generateSourceMap</code> if you want to
-   * change how source maps are created.
-   */
-  MagicString?: { new (source: string): MagicStringLike };
-  /**
-   * Override how template literals are parsed from a source string.
-   */
-  parseLiterals?: typeof parseLiterals;
-  /**
-   * Options for <code>parseLiterals()</code>.
-   */
-  parseLiteralsOptions?: Partial<ParseLiteralsOptions>;
-  /**
-   * Determines whether or not a template should be minified. The default is to
-   * minify all tagged template whose tag name contains "html" (case
-   * insensitive).
-   *
-   * @param template the template to check
-   * @returns true if the template should be minified
-   */
-  shouldMinify?(template: Template): boolean;
-  /**
-   * Determines whether or not a CSS template should be minified. The default is
-   * to minify all tagged template whose tag name contains "css" (case
-   * insensitive).
-   *
-   * @param template the template to check
-   * @returns true if the template should be minified
-   */
-  shouldMinifyCSS?(template: Template): boolean;
-  /**
-   * Override custom validation or set to false to disable validation. This is
-   * only useful when implementing your own strategy that may return
-   * unexpected results.
-   */
-  validate?: Validation | false;
+	/**
+	 * The name of the file. This is used to determine how to parse the source
+	 * code and for source map filenames. It may be a base name, relative, or
+	 * absolute path.
+	 */
+	fileName?: string;
+	/**
+	 * Override how source maps are generated. Set to false to disable source map
+	 * generation.
+	 *
+	 * @param ms the MagicString instance with code modifications
+	 * @param fileName the name or path of the file
+	 * @returns a v3 SourceMap or undefined
+	 */
+	generateSourceMap?:
+		| ((ms: MagicStringLike, fileName: string) => SourceMap | undefined)
+		| false;
+	/**
+	 * The MagicString-like constructor to use. MagicString is used to replace
+	 * strings and generate source maps.
+	 *
+	 * Override if you want to set your own version of MagicString or change how
+	 * strings are overridden. Use <code>generateSourceMap</code> if you want to
+	 * change how source maps are created.
+	 */
+	MagicString?: { new (source: string): MagicStringLike };
+	/**
+	 * Override how template literals are parsed from a source string.
+	 */
+	parseLiterals?: typeof parseLiterals;
+	/**
+	 * Options for <code>parseLiterals()</code>.
+	 */
+	parseLiteralsOptions?: Partial<ParseLiteralsOptions>;
+	/**
+	 * Determines whether or not a template should be minified. The default is to
+	 * minify all tagged template whose tag name contains "html" (case
+	 * insensitive).
+	 *
+	 * @param template the template to check
+	 * @returns true if the template should be minified
+	 */
+	shouldMinify?(template: Template): boolean;
+	/**
+	 * Determines whether or not a CSS template should be minified. The default is
+	 * to minify all tagged template whose tag name contains "css" (case
+	 * insensitive).
+	 *
+	 * @param template the template to check
+	 * @returns true if the template should be minified
+	 */
+	shouldMinifyCSS?(template: Template): boolean;
+	/**
+	 * Override custom validation or set to false to disable validation. This is
+	 * only useful when implementing your own strategy that may return
+	 * unexpected results.
+	 */
+	validate?: Validation | false;
 }
 
 /**
@@ -109,9 +109,9 @@ export interface BaseOptions {
  * source maps.
  */
 export interface MagicStringLike {
-  generateMap(options?: Partial<SourceMapOptions>): SourceMap;
-  overwrite(start: number, end: number, content: string): any;
-  toString(): string;
+	generateMap(options?: Partial<SourceMapOptions>): SourceMap;
+	overwrite(start: number, end: number, content: string): any;
+	toString(): string;
 }
 
 /**
@@ -122,14 +122,14 @@ export interface MagicStringLike {
  * its own type.
  */
 export interface SourceMap {
-  version: number | string;
-  file: string | null;
-  sources: Array<string | null>;
-  sourcesContent: Array<string | null>;
-  names: string[];
-  mappings: string;
-  toString(): string;
-  toUrl(): string;
+	version: number | string;
+	file: string | null;
+	sources: Array<string | null>;
+	sourcesContent: Array<string | null>;
+	names: string[];
+	mappings: string;
+	toString(): string;
+	toUrl(): string;
 }
 
 /**
@@ -138,35 +138,35 @@ export interface SourceMap {
  * undefined errors.
  */
 export interface Validation {
-  /**
-   * Throws an error if <code>strategy.getPlaceholder()</code> does not return
-   * a valid placeholder string.
-   *
-   * @param placeholder the placeholder to check
-   */
-  ensurePlaceholderValid(placeholder: any): void;
-  /**
-   * Throws an error if <code>strategy.splitHTMLByPlaceholder()</code> does not
-   * return an HTML part string for each template part.
-   *
-   * @param parts the template parts that generated the strings
-   * @param htmlParts the split HTML strings
-   */
-  ensureHTMLPartsValid(parts: TemplatePart[], htmlParts: string[]): void;
+	/**
+	 * Throws an error if <code>strategy.getPlaceholder()</code> does not return
+	 * a valid placeholder string.
+	 *
+	 * @param placeholder the placeholder to check
+	 */
+	ensurePlaceholderValid(placeholder: any): void;
+	/**
+	 * Throws an error if <code>strategy.splitHTMLByPlaceholder()</code> does not
+	 * return an HTML part string for each template part.
+	 *
+	 * @param parts the template parts that generated the strings
+	 * @param htmlParts the split HTML strings
+	 */
+	ensureHTMLPartsValid(parts: TemplatePart[], htmlParts: string[]): void;
 }
 
 /**
  * The result of a call to <code>minifyHTMLLiterals()</code>.
  */
 export interface Result {
-  /**
-   * The minified code.
-   */
-  code: string;
-  /**
-   * Optional v3 SourceMap for the code.
-   */
-  map: SourceMap | undefined;
+	/**
+	 * The minified code.
+	 */
+	code: string;
+	/**
+	 * Optional v3 SourceMap for the code.
+	 */
+	map: SourceMap | undefined;
 }
 
 /**
@@ -179,14 +179,14 @@ export interface Result {
  * @returns a v3 SourceMap
  */
 export function defaultGenerateSourceMap(
-  ms: MagicStringLike,
-  fileName: string,
+	ms: MagicStringLike,
+	fileName: string,
 ) {
-  return ms.generateMap({
-    file: `${fileName}.map`,
-    source: fileName,
-    hires: true,
-  });
+	return ms.generateMap({
+		file: `${fileName}.map`,
+		source: fileName,
+		hires: true,
+	});
 }
 
 /**
@@ -198,8 +198,8 @@ export function defaultGenerateSourceMap(
  * @returns true if the template should be minified
  */
 export function defaultShouldMinify(template: Template) {
-  const tag = template.tag && template.tag.toLowerCase();
-  return !!tag && (tag.includes('html') || tag.includes('svg'));
+	const tag = template.tag && template.tag.toLowerCase();
+	return !!tag && (tag.includes('html') || tag.includes('svg'));
 }
 
 /**
@@ -211,25 +211,25 @@ export function defaultShouldMinify(template: Template) {
  * @returns true if the template should be minified
  */
 export function defaultShouldMinifyCSS(template: Template) {
-  return !!template.tag && template.tag.toLowerCase().includes('css');
+	return !!template.tag && template.tag.toLowerCase().includes('css');
 }
 
 /**
  * The default validation.
  */
 export const defaultValidation: Validation = {
-  ensurePlaceholderValid(placeholder) {
-    if (typeof placeholder !== 'string' || !placeholder.length) {
-      throw new Error('getPlaceholder() must return a non-empty string');
-    }
-  },
-  ensureHTMLPartsValid(parts, htmlParts) {
-    if (parts.length !== htmlParts.length) {
-      throw new Error(
-        'splitHTMLByPlaceholder() must return same number of strings as template parts',
-      );
-    }
-  },
+	ensurePlaceholderValid(placeholder) {
+		if (typeof placeholder !== 'string' || !placeholder.length) {
+			throw new Error('getPlaceholder() must return a non-empty string');
+		}
+	},
+	ensureHTMLPartsValid(parts, htmlParts) {
+		if (parts.length !== htmlParts.length) {
+			throw new Error(
+				'splitHTMLByPlaceholder() must return same number of strings as template parts',
+			);
+		}
+	},
 };
 
 /**
@@ -240,8 +240,8 @@ export const defaultValidation: Validation = {
  * @returns the minified code, or null if no minification occurred.
  */
 export async function minifyHTMLLiterals(
-  source: string,
-  options?: DefaultOptions,
+	source: string,
+	options?: DefaultOptions,
 ): Promise<Result | null>;
 /**
  * Minifies all HTML template literals in the provided source string.
@@ -251,116 +251,116 @@ export async function minifyHTMLLiterals(
  * @returns the minified code, or null if no minification occurred.
  */
 export async function minifyHTMLLiterals<S extends Strategy>(
-  source: string,
-  options?: CustomOptions<S>,
+	source: string,
+	options?: CustomOptions<S>,
 ): Promise<Result | null>;
 export async function minifyHTMLLiterals(
-  source: string,
-  options: Options = {},
+	source: string,
+	options: Options = {},
 ): Promise<Result | null> {
-  options.minifyOptions = {
-    ...defaultMinifyOptions,
-    ...(options.minifyOptions || {}),
-  };
+	options.minifyOptions = {
+		...defaultMinifyOptions,
+		...(options.minifyOptions || {}),
+	};
 
-  if (!options.MagicString) {
-    // FIXME:
-    // @ts-expect-error
-    options.MagicString = MagicString;
-  }
+	if (!options.MagicString) {
+		// FIXME:
+		// @ts-expect-error
+		options.MagicString = MagicString;
+	}
 
-  if (!options.parseLiterals) {
-    options.parseLiterals = parseLiterals;
-  }
+	if (!options.parseLiterals) {
+		options.parseLiterals = parseLiterals;
+	}
 
-  if (!options.shouldMinify) {
-    options.shouldMinify = defaultShouldMinify;
-  }
+	if (!options.shouldMinify) {
+		options.shouldMinify = defaultShouldMinify;
+	}
 
-  if (!options.shouldMinifyCSS) {
-    options.shouldMinifyCSS = defaultShouldMinifyCSS;
-  }
+	if (!options.shouldMinifyCSS) {
+		options.shouldMinifyCSS = defaultShouldMinifyCSS;
+	}
 
-  options.parseLiteralsOptions = {
-    ...{ fileName: options.fileName },
-    ...(options.parseLiteralsOptions || {}),
-  };
+	options.parseLiteralsOptions = {
+		...{ fileName: options.fileName },
+		...(options.parseLiteralsOptions || {}),
+	};
 
-  const templates = options.parseLiterals(source, options.parseLiteralsOptions);
-  const strategy =
-    <Strategy>(<CustomOptions<any>>options).strategy || defaultStrategy;
-  const { shouldMinify, shouldMinifyCSS } = options;
-  let validate: Validation | undefined;
-  if (options.validate !== false) {
-    validate = options.validate || defaultValidation;
-  }
+	const templates = options.parseLiterals(source, options.parseLiteralsOptions);
+	const strategy =
+		<Strategy>(<CustomOptions<any>>options).strategy || defaultStrategy;
+	const { shouldMinify, shouldMinifyCSS } = options;
+	let validate: Validation | undefined;
+	if (options.validate !== false) {
+		validate = options.validate || defaultValidation;
+	}
 
-  // FIXME:
-  // @ts-expect-error
-  const ms = new options.MagicString(source);
-  await Promise.all(
-    templates.map(async (template) => {
-      const minifyHTML = shouldMinify(template);
-      const minifyCSS = !!strategy.minifyCSS && shouldMinifyCSS(template);
-      if (minifyHTML || minifyCSS) {
-        const placeholder = strategy.getPlaceholder(template.parts);
-        if (validate) {
-          validate.ensurePlaceholderValid(placeholder);
-        }
+	// FIXME:
+	// @ts-expect-error
+	const ms = new options.MagicString(source);
+	await Promise.all(
+		templates.map(async (template) => {
+			const minifyHTML = shouldMinify(template);
+			const minifyCSS = !!strategy.minifyCSS && shouldMinifyCSS(template);
+			if (minifyHTML || minifyCSS) {
+				const placeholder = strategy.getPlaceholder(template.parts);
+				if (validate) {
+					validate.ensurePlaceholderValid(placeholder);
+				}
 
-        const combined = strategy.combineHTMLStrings(
-          template.parts,
-          placeholder,
-        );
-        let min: string;
-        if (minifyCSS) {
-          const minifyCSSOptions = (
-            (options as DefaultOptions).minifyOptions || {}
-          ).minifyCSS;
-          if (typeof minifyCSSOptions === 'function') {
-            min = minifyCSSOptions(combined);
-          } else if (minifyCSSOptions === false) {
-            min = combined;
-          } else {
-            const cssOptions =
-              typeof minifyCSSOptions === 'object'
-                ? minifyCSSOptions
-                : undefined;
-            min = strategy.minifyCSS!(combined, cssOptions);
-          }
-        } else {
-          min = await strategy.minifyHTML(combined, options.minifyOptions);
-        }
+				const combined = strategy.combineHTMLStrings(
+					template.parts,
+					placeholder,
+				);
+				let min: string;
+				if (minifyCSS) {
+					const minifyCSSOptions = (
+						(options as DefaultOptions).minifyOptions || {}
+					).minifyCSS;
+					if (typeof minifyCSSOptions === 'function') {
+						min = minifyCSSOptions(combined);
+					} else if (minifyCSSOptions === false) {
+						min = combined;
+					} else {
+						const cssOptions =
+							typeof minifyCSSOptions === 'object'
+								? minifyCSSOptions
+								: undefined;
+						min = strategy.minifyCSS!(combined, cssOptions);
+					}
+				} else {
+					min = await strategy.minifyHTML(combined, options.minifyOptions);
+				}
 
-        const minParts = strategy.splitHTMLByPlaceholder(min, placeholder);
-        if (validate) {
-          validate.ensureHTMLPartsValid(template.parts, minParts);
-        }
+				const minParts = strategy.splitHTMLByPlaceholder(min, placeholder);
+				if (validate) {
+					validate.ensureHTMLPartsValid(template.parts, minParts);
+				}
 
-        template.parts.forEach((part, index) => {
-          if (part.start < part.end) {
-            // Only overwrite if the literal part has text content
-            ms.overwrite(part.start, part.end, minParts[index]);
-          }
-        });
-      }
-    }),
-  );
+				template.parts.forEach((part, index) => {
+					if (part.start < part.end) {
+						// Only overwrite if the literal part has text content
+						ms.overwrite(part.start, part.end, minParts[index]);
+					}
+				});
+			}
+		}),
+	);
 
-  const sourceMin = ms.toString();
-  if (source === sourceMin) {
-    return null;
-  } else {
-    let map: SourceMap | undefined;
-    if (options.generateSourceMap !== false) {
-      const generateSourceMap =
-        options.generateSourceMap || defaultGenerateSourceMap;
-      map = generateSourceMap(ms, options.fileName || '');
-    }
+	const sourceMin = ms.toString();
+	if (source === sourceMin) {
+		return null;
+	} else {
+		let map: SourceMap | undefined;
+		if (options.generateSourceMap !== false) {
+			const generateSourceMap =
+				options.generateSourceMap || defaultGenerateSourceMap;
+			map = generateSourceMap(ms, options.fileName || '');
+		}
 
-    return {
-      map,
-      code: sourceMin,
-    };
-  }
+		return {
+			map,
+			code: sourceMin,
+		};
+	}
 }

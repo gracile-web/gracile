@@ -925,6 +925,9 @@ importers:
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
+      '@lit-labs/compiler':
+        specifier: ^1.1.2
+        version: 1.1.2
       ts-patch:
         specifier: ^3.3.0
         version: 3.3.0
@@ -2134,6 +2137,13 @@ packages:
     resolution: {integrity: sha512-kPUBDiwofM9eX+27mUPo3343A6ZNzhNUdKlRzmZU0mgpb4GgyaPBfnuvAwCYJlZFFC2NREX0jDMSgYGZ4ThlTQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
+  '@lit-labs/analyzer@0.14.0':
+    resolution: {integrity: sha512-6/tjKDvA5pOea5t1OUYQ5dwPSQrTt7baSnDkT3q3j+/al/rHQPJmP+EWb/sSKc8e9dnJ1BAlMEN/9V4HVYAY6g==}
+
+  '@lit-labs/compiler@1.1.2':
+    resolution: {integrity: sha512-wVC7UB6cuyiQYJ+LznrJl12+4kSXe36um0Nx5gZIWJ8Vose7fZCcfP4+eSN/gGMSkZ/IXBVp/hDqfqp0r8v+Qg==}
+    engines: {node: '>=14.17'}
+
   '@lit-labs/signals@0.1.3':
     resolution: {integrity: sha512-P0yWgH5blwVyEwBg+WFspLzeu1i0ypJP1QB0l1Omr9qZLIPsUu0p4Fy2jshOg7oQyha5n163K3GJGeUhQQ682Q==}
 
@@ -2570,6 +2580,11 @@ packages:
 
   '@parse5/tools@0.3.0':
     resolution: {integrity: sha512-zxRyTHkqb7WQMV8kTNBKWb1BeOFUKXBXTBWuxg9H9hfvQB3IwP6Iw2U75Ia5eyRxPNltmY7E8YAlz6zWwUnjKg==}
+
+  '@parse5/tools@0.7.0':
+    resolution: {integrity: sha512-JDvrGhc8kYBq7/SM4obJkpgwWo6pRjF/fo9CCaiJyVOkDf203Ciq2UF6TjzCFXKs7Q/zS2sS4deyBx0XzRvh9Q==}
+    peerDependencies:
+      parse5: 7.x || 8.x
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -5565,6 +5580,9 @@ packages:
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
+  package-json-type@1.1.2:
+    resolution: {integrity: sha512-QMy9vgEVIkHp/6LI0H7v6P+7ZFp0zQyPZfv8rGV/JoDhu63WMgzoQS34Pm+T0S5j/b9Zbkrx4SE8YOv2huou6Q==}
+
   package-json@10.0.1:
     resolution: {integrity: sha512-ua1L4OgXSBdsu1FPb7F3tYH0F48a6kxvod4pLUlGY9COeJAJQNX/sNH2IiEmsxw7lqYiAwrdHMjz1FctOsyDQg==}
     engines: {node: '>=18'}
@@ -8031,6 +8049,22 @@ snapshots:
       - conventional-commits-filter
       - supports-color
 
+  '@lit-labs/analyzer@0.14.0':
+    dependencies:
+      '@parse5/tools': 0.7.0(parse5@7.3.0)
+      lit-html: 3.3.2
+      package-json-type: 1.1.2
+      parse5: 7.3.0
+      typescript: 5.9.3
+
+  '@lit-labs/compiler@1.1.2':
+    dependencies:
+      '@lit-labs/analyzer': 0.14.0
+      '@parse5/tools': 0.3.0
+      lit-html: 3.3.2
+      parse5: 7.3.0
+      typescript: 5.9.3
+
   '@lit-labs/signals@0.1.3':
     dependencies:
       lit: 3.3.2
@@ -8506,6 +8540,10 @@ snapshots:
     optional: true
 
   '@parse5/tools@0.3.0':
+    dependencies:
+      parse5: 7.3.0
+
+  '@parse5/tools@0.7.0(parse5@7.3.0)':
     dependencies:
       parse5: 7.3.0
 
@@ -11958,6 +11996,8 @@ snapshots:
   p-try@2.2.0: {}
 
   package-json-from-dist@1.0.1: {}
+
+  package-json-type@1.1.2: {}
 
   package-json@10.0.1:
     dependencies:

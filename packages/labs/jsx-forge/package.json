@@ -58,10 +58,17 @@
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "ts-patch": "^3.3.0",
-    "typescript": "5.8.3"
+    "typescript": "5.8.3",
+    "@lit-labs/compiler": "^1.1.2"
   },
   "peerDependencies": {
-    "typescript": ">=5"
+    "typescript": ">=5",
+    "@lit-labs/compiler": "^1.1.2"
+  },
+  "peerDependenciesMeta": {
+    "@lit-labs/compiler": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"

@@ -114,7 +114,8 @@ const styles = {
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		background-image: radial-gradient(
+		background-image:
+			radial-gradient(
 				at 15% 100%,
 				${tokens.slColorSky_50} 0px,
 				${tokens.slColorSky_100} 100%

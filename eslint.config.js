@@ -126,12 +126,6 @@ export default [
 
 	{
 		ignores: [
-			'**/packages/labs/vite-plugin-jsx-forge',
-			'**/packages/labs/hmr',
-			'**/packages/labs/jsx-forge',
-			'**/packages/labs/functional',
-			'**/packages/labs/babel-plugin-jsx-to-literals',
-			'**/packages/cli',
 			'pnpm-lock.yaml',
 			'**/integration',
 			// '**/integration/**/*_expected*',
@@ -151,6 +145,12 @@ export default [
 			'**/dist',
 
 			// Transition: ignore newly integrated labs packages until they are fully linted
+			'**/packages/labs/vite-plugin-jsx-forge',
+			'**/packages/labs/hmr',
+			'**/packages/labs/jsx-forge',
+			'**/packages/labs/functional',
+			'**/packages/labs/babel-plugin-jsx-to-literals',
+			'**/packages/cli',
 			'packages/labs/og-images-generator/**',
 			'packages/labs/literals/**',
 		],

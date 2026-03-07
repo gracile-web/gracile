@@ -68,33 +68,33 @@ import { html, styled, OG_SIZE, FONTS } from 'og-images-generator';
 
 /** @type {import('og-images-generator').PathsOptions} (Optional) */
 export const paths = {
-	// DEFAULTS:
-	base: './dist',
-	out: './dist/og',
-	json: './dist/og/index.json',
+  // DEFAULTS:
+  base: './dist',
+  out: './dist/og',
+  json: './dist/og/index.json',
 };
 
 const myInlineStyle1 = styled.div`
-	display: flex;
+  display: flex;
 `;
 
 const nestedTemplate1 = html`<span>My Website</span>`;
 
 /** @type {import('og-images-generator').Template} */
 export const template = ({ page }) =>
-	html` <!-- Contrived example -->
-		<div style=${myInlineStyle1}>
-			${page.meta?.tags?.['og:title'] ?? 'Untitled'} <br />
-			${page.meta?.tags?.['og:description'] ?? 'No description'}
-			<!-- -->
-			${nestedTemplate1}
-			<em>Nice</em>
-			<strong>Weather</strong>
-		</div>`;
+  html` <!-- Contrived example -->
+    <div style=${myInlineStyle1}>
+      ${page.meta?.tags?.['og:title'] ?? 'Untitled'} <br />
+      ${page.meta?.tags?.['og:description'] ?? 'No description'}
+      <!-- -->
+      ${nestedTemplate1}
+      <em>Nice</em>
+      <strong>Weather</strong>
+    </div>`;
 
 /** @type {import('og-images-generator').RenderOptions} */
 export const renderOptions = {
-	satori: { fonts: [await FONTS.sourceSans()], ...OG_SIZE },
+  satori: { fonts: [await FONTS.sourceSans()], ...OG_SIZE },
 };
 ```
 
@@ -219,7 +219,7 @@ const app = express();
 app.use(await connectOgImagesGenerator());
 
 app.get('/', (_, res) => {
-	res.send(`
+  res.send(`
 		<html>
 			<head>
 				<meta property="og:title" content="Express / Connect demo" />
@@ -251,7 +251,7 @@ import { connectOgImagesGenerator } from 'og-images-generator/connect';
 
 /** @type {import('@web/dev-server').DevServerConfig} */
 export default {
-	middleware: [expressToKoa(await connectOgImagesGenerator())],
+  middleware: [expressToKoa(await connectOgImagesGenerator())],
 };
 ```
 
@@ -264,10 +264,10 @@ import { rollupOgImagesGenerator } from 'og-images-generator/rollup';
 
 /** @type {import('rollup').RollupOptions} */
 export default {
-	plugins: [
-		//
-		rollupOgImagesGenerator(),
-	],
+  plugins: [
+    //
+    rollupOgImagesGenerator(),
+  ],
 };
 ```
 
@@ -280,18 +280,18 @@ import { defineConfig } from 'vite';
 import { viteOgImagesGenerator } from 'og-images-generator/vite';
 
 export default defineConfig({
-	plugins: [
-		//
-		viteOgImagesGenerator(),
-	],
-	build: {
-		rollupOptions: {
-			input: {
-				foo: 'pages/foo.html',
-				bar: 'pages/bar.html',
-			},
-		},
-	},
+  plugins: [
+    //
+    viteOgImagesGenerator(),
+  ],
+  build: {
+    rollupOptions: {
+      input: {
+        foo: 'pages/foo.html',
+        bar: 'pages/bar.html',
+      },
+    },
+  },
 });
 ```
 
@@ -305,10 +305,10 @@ import { defineConfig } from 'astro/config';
 import { astroOgImagesGenerator } from 'og-images-generator/astro';
 
 export default defineConfig({
-	integrations: [
-		//
-		astroOgImagesGenerator(),
-	],
+  integrations: [
+    //
+    astroOgImagesGenerator(),
+  ],
 });
 ```
 
