@@ -35,6 +35,7 @@
     "./packages/labs/client-router",
     "./packages/labs/css-helpers",
     "./packages/labs/hmr"
+    // "./packages/labs/islands"
     // "./packages/labs/jsx"
   ]
 }
