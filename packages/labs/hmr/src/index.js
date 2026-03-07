@@ -1,4 +1,4 @@
-export { hmrPlugin } from './hmr-plugin.js';
+export { gracileHmr } from './hmr-plugin.js';
 export { WC_HMR_MODULE_RUNTIME } from './constants.js';
 
 import { litElement } from './presets/lit-element.js';

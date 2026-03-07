@@ -33,7 +33,8 @@
     "./packages/addons/markdown-preset-marked",
     "./packages/labs/better-errors",
     "./packages/labs/client-router",
-    "./packages/labs/css-helpers"
-    // "./packages/addons/minify"
+    "./packages/labs/css-helpers",
+    "./packages/labs/hmr"
+    // "./packages/labs/jsx"
   ]
 }

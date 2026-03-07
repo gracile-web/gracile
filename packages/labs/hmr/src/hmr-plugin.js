@@ -67,7 +67,7 @@ const wcHmrRuntime = fs.readFileSync(
  * @param {WcHmrPluginConfig} pluginConfig
  * @returns {VitePlugin}
  */
-export function hmrPlugin(pluginConfig) {
+export function gracileHmr(pluginConfig) {
 	let shouldSkipHmr = false;
 
 	/** @type {string} */
