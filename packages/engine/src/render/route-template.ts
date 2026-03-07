@@ -8,7 +8,7 @@ import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 // iterables, thunks, and Promises from sub-templates with proper back-pressure,
 // whereas generic `Readable.from()` only sees the top-level iterable.
 // Inherits from the same Node `Readable` we already depend on.
-import { RenderResultReadable } from '@lit-labs/ssr/lib/render-result-readable.js';
+// import { RenderResultReadable } from '@lit-labs/ssr/lib/render-result-readable.js';
 import type { ViteDevServer } from 'vite';
 
 import {
@@ -81,9 +81,11 @@ export async function renderRouteTemplate({
 				// location,
 			});
 
-		const output = new RenderResultReadable(
-			renderLitSsr(fragmentOutput, mergedRenderInfo),
-		);
+		const fragmentRender = renderLitSsr(fragmentOutput, mergedRenderInfo);
+		const output = Readable.from(fragmentRender);
+		// TODO: Disabled for now. Causes issue in static renders.
+		// Needs investigations.
+		// const output = new RenderResultReadable(fragmentRender);
 
 		return { output, document: null };
 	}
@@ -185,9 +187,10 @@ export async function renderRouteTemplate({
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);
 
-		const renderStream = new RenderResultReadable(
-			renderLitSsr(routeOutput, mergedRenderInfo),
-		);
+		const renderStream =
+			/* TODO: Use `new RenderResultReadable` */ Readable.from(
+				renderLitSsr(routeOutput, mergedRenderInfo),
+			);
 
 		const output = Readable.from(
 			concatStreams(
