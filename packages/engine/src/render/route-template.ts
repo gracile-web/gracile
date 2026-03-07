@@ -4,6 +4,11 @@ import * as assert from '@gracile/internal-utils/assertions';
 import type { ErrorLocation } from '@gracile-labs/better-errors/errors';
 import { render as renderLitSsr, type RenderInfo } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
+// Lit's purpose-built Readable subclass for RenderResult. Handles nested
+// iterables, thunks, and Promises from sub-templates with proper back-pressure,
+// whereas generic `Readable.from()` only sees the top-level iterable.
+// Inherits from the same Node `Readable` we already depend on.
+import { RenderResultReadable } from '@lit-labs/ssr/lib/render-result-readable.js';
 import type { ViteDevServer } from 'vite';
 
 import {
@@ -76,8 +81,9 @@ export async function renderRouteTemplate({
 				// location,
 			});
 
-		const fragmentRender = renderLitSsr(fragmentOutput, mergedRenderInfo);
-		const output = Readable.from(fragmentRender);
+		const output = new RenderResultReadable(
+			renderLitSsr(fragmentOutput, mergedRenderInfo),
+		);
 
 		return { output, document: null };
 	}
@@ -179,7 +185,7 @@ export async function renderRouteTemplate({
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);
 
-		const renderStream = Readable.from(
+		const renderStream = new RenderResultReadable(
 			renderLitSsr(routeOutput, mergedRenderInfo),
 		);
 
