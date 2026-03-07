@@ -1,0 +1,13 @@
+{
+  "singleQuote": true,
+  "useTabs": true,
+  "proseWrap": "always",
+  "overrides": [
+    {
+      "files": ["*.md", "*.yaml", "*.json", ".*rc*"],
+      "options": {
+        "useTabs": false
+      }
+    }
+  ]
+}

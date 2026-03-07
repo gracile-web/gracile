@@ -19,6 +19,8 @@ node --run lint:commit
 
 node --run format
 
+node --run clean
+
 node --run build
 
 node --run lint:es

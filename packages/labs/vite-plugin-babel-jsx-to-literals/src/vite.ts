@@ -39,7 +39,8 @@ const additionalImports = [
 		local: 'classList',
 		imported: 'clsx',
 		// TODO: Refactor imports.
-		value: '@gracile-labs/jsx-babel/_internal/class-list',
+		value:
+			'@gracile-labs/vite-plugin-babel-jsx-to-literals/_internal/class-list',
 	},
 	{
 		local: 'unsafeHTML',

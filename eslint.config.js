@@ -35,11 +35,11 @@ export default [
 					'./packages/addons/markdown/tsconfig.json',
 					'./packages/addons/markdown-preset-marked/tsconfig.json',
 
-					'./packages/labs/jsx/tsconfig.json',
 					'./packages/labs/better-errors/tsconfig.json',
 					'./packages/labs/css-helpers/tsconfig.json',
 					'./packages/labs/client-router/tsconfig.json',
 					'./packages/labs/islands/tsconfig.json',
+					'./packages/labs/vite-plugin-babel-jsx-to-literals/tsconfig.json',
 					// './packages/labs/hmr/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,
@@ -126,7 +126,11 @@ export default [
 
 	{
 		ignores: [
+			'**/packages/labs/vite-plugin-jsx-forge',
 			'**/packages/labs/hmr',
+			'**/packages/labs/jsx-forge',
+			'**/packages/labs/functional',
+			'**/packages/labs/babel-plugin-jsx-to-literals',
 			'**/packages/cli',
 			'pnpm-lock.yaml',
 			'**/integration',

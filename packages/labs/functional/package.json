@@ -1,0 +1,52 @@
+{
+  "name": "@gracile-labs/functional",
+  "version": "0.0.0",
+  "description": "Lightweight hooks and context primitives for signal-based render trees. Works anywhere a render function can be scoped, with Lit or similar templating libraries. Uses the TC39 Signal Proposal for its backend.",
+  "keywords": [
+    "custom-elements",
+    "lit",
+    "ssr",
+    "web-components",
+    "fc",
+    "functional-component",
+    "lit-fc",
+    "hooks",
+    "signals",
+    "render-tree"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/functional"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/functional.js",
+    "./context": "./dist/context.js",
+    "./hooks": "./dist/hooks.js"
+  },
+  "files": [
+    "./dist/**/*",
+    "!/dist/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch",
+    "test:unit": "c8 node --test --enable-source-maps 'dist/**/*.test.js'",
+    "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.0",
+    "signal-polyfill": "^0.2.2",
+    "tsx": "^4.19.1",
+    "typescript": "5.6.3"
+  }
+}

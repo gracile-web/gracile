@@ -1,0 +1,203 @@
+exports[`<For> component > ssr 1`] = `
+"<!--lit-part AEmR7W+R0Ak=--><div><!--lit-part--><!--lit-part 94tjhjhkEYE=--><span><!--lit-part-->foo<!--/lit-part--></span><!--/lit-part--><!--lit-part 94tjhjhkEYE=--><span><!--lit-part-->bar<!--/lit-part--></span><!--/lit-part--><!--/lit-part--></div><!--/lit-part-->"
+`;
+
+exports[`ABC > client 1`] = `
+"testResult = html\`<todo-footer\\nclass=\${classMap({\\n  hidden: true\\n})}\\n.todoList=\${[]}></todo-footer>\`;"
+`;
+
+exports[`ABC > ssr 1`] = `
+"<!--lit-part Jhs2Wdvjr8c=--><!--lit-node 0--><todo-footer\\nclass=\\" hidden \\"\\n></todo-footer><!--/lit-part-->"
+`;
+
+exports[`Attr. Helpers > Attribute serializer > client 1`] = `
+"testResult = html\`<div\\nsome-obj=\${JSON.stringify({\\n  title: \\"my title\\"\\n})}>Ant</div>\`;"
+`;
+
+exports[`Attr. Helpers > Attribute serializer > ssr 1`] = `
+"<!--lit-part CwH7PvZFPu8=--><!--lit-node 0--><div\\nsome-obj=\\"{&quot;title&quot;:&quot;my title&quot;}\\">Ant</div><!--/lit-part-->"
+`;
+
+exports[`Attr. Helpers > Class map > client 1`] = `
+"testResult = html\`<div\\nclass=\${classMap({\\n  someClass: true\\n})}>Ant</div>\`;"
+`;
+
+exports[`Attr. Helpers > Class map > ssr 1`] = `
+"<!--lit-part Zmfw4UuUuIk=--><!--lit-node 0--><div\\nclass=\\" someClass \\">Ant</div><!--/lit-part-->"
+`;
+
+exports[`Attr. Helpers > Style map > client 1`] = `
+"testResult = html\`<div\\nstyle=\${styleMap({\\n  borderColor: \\"red\\"\\n})}>Ant</div>\`;"
+`;
+
+exports[`Attr. Helpers > Style map > ssr 1`] = `
+"<!--lit-part IfxsrBXSSgs=--><!--lit-node 0--><div\\nstyle=\\"border-color:red;\\">Ant</div><!--/lit-part-->"
+`;
+
+exports[`Basics > Attribute expression 1`] = `
+"<!--lit-part ew16EaFbd4Y=--><!--lit-node 0--><div\\ntitle=\\"Bonjour\\">Hello</div><!--/lit-part-->"
+`;
+
+exports[`Basics > Backtick characters in text escaping 1`] = `
+"<!--lit-part uYg1HqDRIpI=--><!--lit-node 0--><main\\ntitle=\\"my title\\"> \` Lion escaped </main><!--/lit-part-->"
+`;
+
+exports[`Basics > Block comments in attributes 1`] = `
+"<!--lit-part aWPoFd/Za8s=--><!--lit-node 0--><main\\ntitle=\\"my title\\">Turtle</main><!--/lit-part-->"
+`;
+
+exports[`Basics > Body expression 1`] = `
+"<!--lit-part AEmR7W+R0Ak=--><div><!--lit-part-->Hello<!--/lit-part--></div><!--/lit-part-->"
+`;
+
+exports[`Basics > Component in top level parent fragment and children 1`] = `
+"<!--lit-part BRUAAAUVAAA=--><!--lit-part BRUAAAUVAAA=--><!--lit-part ZnNZACJvWQA=-->Lion<!--/lit-part--><?><!--/lit-part--><?><!--/lit-part-->"
+`;
+
+exports[`Basics > Component with nested children 1`] = `
+"<!--lit-part BRUAAAUVAAA=--><!--lit-part BRUAAAUVAAA=--><!--lit-part CJryYy1wVII=--><main><span>Seagull</span></main><!--/lit-part--><?><!--/lit-part--><?><!--/lit-part-->"
+`;
+
+exports[`Basics > Component with object property access 1`] = `
+"<!--lit-part BRUAAAUVAAA=--><!--lit-part ZJAYeCSzXh4=--><main><span><!--lit-part KsCHC/hbhws=-->Donkey<!--/lit-part--></span></main><!--/lit-part--><?><!--/lit-part-->"
+`;
+
+exports[`Basics > Deeply nested with body expression 1`] = `
+"<!--lit-part lq6jXXkeIsc=--><div><main><article><!--lit-part-->Hello<!--/lit-part--></article></main></div><!--/lit-part-->"
+`;
+
+exports[`Basics > Empty expression are skipped > client 1`] = `
+"testResult = html\`<main\\ntitle=\${\\"my title\\"}>Lion</main>\`;"
+`;
+
+exports[`Basics > Empty expression are skipped > ssr 1`] = `
+"<!--lit-part KqP1qRYtG3I=--><!--lit-node 0--><main\\ntitle=\\"my title\\">Lion</main><!--/lit-part-->"
+`;
+
+exports[`Basics > Expand self-closing XML tag to HTML compliant tag 1`] = `
+"<!--lit-part 2ivd8Larrsw=--><label\\nfor=\\"stuff\\"></label><hr><br><img\\nsrc=\\"#\\"><!--lit-part XuUIB5PRqwo=--><i>ola</i><!--/lit-part--><?><!--/lit-part-->"
+`;
+
+exports[`Basics > Fragment parent element 1`] = `
+"<!--lit-part 9HNZAMC1AgA=-->Hey<!--/lit-part-->"
+`;
+
+exports[`Basics > HTML parent element 1`] = `
+"<!--lit-part iWkvm2TT0pU=--><div>Hello</div><!--/lit-part-->"
+`;
+
+exports[`Basics > Line comments in attributes 1`] = `
+"<!--lit-part okHbqeR4ZIU=--><!--lit-node 0--><main\\ntitle=\\"my title\\">Pig</main><!--/lit-part-->"
+`;
+
+exports[`Basics > Lowercase (native) event handler are untouched 1`] = `
+"<!--lit-part tPbVSNTAjjA=--><span\\nonclick=\\"alert();\\"\\nonmouseenter=\\"console.log()\\"></span><!--/lit-part-->"
+`;
+
+exports[`Basics > Simple attributes 1`] = `
+"<!--lit-part jVGbBD33Tyo=--><!--lit-node 0--><div\\nstyle=\\"color: red;\\"\\ndata-my=\\"Attr.\\"\\nwidth=\\"2\\"\\nhidden>Hello</div><!--/lit-part-->"
+`;
+
+exports[`Basics > Top level Component with parent element and attributes 1`] = `
+"<!--lit-part BRUAAAUVAAA=--><!--lit-part 8oB6S0qzZP4=--><!--lit-node 0--><div\\ntitle=\\"my title\\"><!--lit-part gJmKfO4ihws=-->Penguin<!--/lit-part--></div><!--/lit-part--><?><!--/lit-part-->"
+`;
+
+exports[`Complex children > client 1`] = `
+"const MyComp = ({\\n  children\\n}) => html\`<a>\${children}</a>\`;\\nconst MyComp2 = ({\\n  children\\n}) => html\`<article>\${children?.()}</article>\`;\\ntestResult = html\`\${MyComp({\\n  children: [html\`\\nZebra\`, () => null]\\n})} \${MyComp2({\\n  children: () => \\"abc\\"\\n})}\`;"
+`;
+
+exports[`Complex children > ssr 1`] = `
+"<!--lit-part hbUCAAUVAAA=--><!--lit-part 2qRVfPU7hws=--><a><!--lit-part--><!--lit-part WOmGCzwtiAs=-->\\nZebra<!--/lit-part--><!--lit-part-->() =&gt; null<!--/lit-part--><!--/lit-part--></a><!--/lit-part--> <!--lit-part f2h7pbAMRnI=--><article><!--lit-part-->abc<!--/lit-part--></article><!--/lit-part--><?><!--/lit-part-->"
+`;
+
+exports[`Component Helpers > For (loop) > client 1`] = `
+"testResult = html\`<div>\${repeat([\\"foo\\", \\"bar\\"], id => id, id => html\`<span>\${id}</span>\`)}</div>\`;"
+`;
+
+exports[`Component Helpers > For (loop) > ssr 1`] = `
+"<!--lit-part AEmR7W+R0Ak=--><div><!--lit-part--><!--lit-part 94tjhjhkEYE=--><span><!--lit-part-->foo<!--/lit-part--></span><!--/lit-part--><!--lit-part 94tjhjhkEYE=--><span><!--lit-part-->bar<!--/lit-part--></span><!--/lit-part--><!--/lit-part--></div><!--/lit-part-->"
+`;
+
+exports[`DEF > client 1`] = `
+"testResult = html\`<input\\n@change=\${() => null}\\nid=\\"toggle-all\\"\\ntype=\\"checkbox\\"\\nclass=\\"toggle-all\\"\\n.checked=\${true ?? false}>\`;"
+`;
+
+exports[`DEF > ssr 1`] = `
+"<!--lit-part bvy5hgpfDCg=--><!--lit-node 0--><input\\n\\nid=\\"toggle-all\\"\\ntype=\\"checkbox\\"\\nclass=\\"toggle-all\\"\\nchecked=\\"true\\"><!--/lit-part-->"
+`;
+
+exports[`GHI > client 1`] = `
+"let todo = {\\n  title: \\"my title\\"\\n};\\ntestResult = html\`<input\\nclass=\\"edit\\"\\nvalue=\${todo.title}>\`;"
+`;
+
+exports[`GHI > ssr 1`] = `
+"<!--lit-part pVGXrEjBIyo=--><!--lit-node 0--><input\\nclass=\\"edit\\"\\nvalue=\\"my title\\"><!--/lit-part-->"
+`;
+
+exports[`Imports - JS directives, Lit flavors (normal, server, signal) > client 1`] = `
+"import { html } from \\"lit\\";\\nconst testResult = html\`<div>Abc</div>\`;"
+`;
+
+exports[`Imports - JS directives, Lit flavors (normal, server, signal) > client 2`] = `
+"\\"\\";\\n\\nimport { html } from \\"@lit-labs/ssr\\";\\nconst testResult = html\`<div>Abc</div>\`;"
+`;
+
+exports[`Imports - JS directives, Lit flavors (normal, server, signal) > client 3`] = `
+"\\"\\";\\n\\nimport { html } from \\"@lit-labs/signals\\";\\nconst testResult = html\`<div>Abc</div>\`;"
+`;
+
+exports[`Imports - ref, classList, classMap, styleMap, unsafeHTML, ifDefined > client 1`] = `
+"import { ifDefined } from \\"lit/directives/if-defined.js\\";\\nimport { unsafeHTML } from \\"lit/directives/unsafe-html.js\\";\\nimport { clsx as classList } from \\"clsx\\";\\nimport { styleMap } from \\"lit/directives/style-map.js\\";\\nimport { classMap } from \\"lit/directives/class-map.js\\";\\nimport { ref } from \\"lit/directives/ref.js\\";\\nimport { html } from \\"lit\\";\\nconst testResult = html\`<div\\n\${ref(() => {})}\\nclass=\${classList({})}\\nclass=\${classMap({})}\\nstyle=\${styleMap({})}\\nsomething=\${ifDefined(\\"something\\")}>\${unsafeHTML(\\"abc\\")}</div>\`;"
+`;
+
+exports[`Mix and match > JSX Component in Literal in TS vanilla 1`] = `
+"<!--lit-part UNbWrd8S5FY=--><main><!--lit-part 8oB6S0qzZP4=--><!--lit-node 0--><div\\ntitle=\\"my title\\"><!--lit-part 2w+IC0JvWQA=-->Snail<!--/lit-part--></div><!--/lit-part--></main><!--/lit-part-->"
+`;
+
+exports[`Mix and match > JSX Component in Literal in TSX 1`] = `
+"<!--lit-part UNbWrd8S5FY=--><main><!--lit-part BRUAAAUVAAA=--><!--lit-part 8oB6S0qzZP4=--><!--lit-node 0--><div\\ntitle=\\"my title\\"><!--lit-part q8eHC2pchws=-->Bonobo<!--/lit-part--></div><!--/lit-part--><?><!--/lit-part--></main><!--/lit-part-->"
+`;
+
+exports[`Mix and match > JSX Snippet in Literal in JSX 1`] = `
+"<!--lit-part UNbWrd8S5FY=--><main><!--lit-part /Enrn5RU6ig=--><!--lit-node 0--><div\\ntitle=\\"my title\\"><span>Orca</span></div><!--/lit-part--></main><!--/lit-part-->"
+`;
+
+exports[`Mix and match > Literal Component in JSX 1`] = `
+"<!--lit-part BRUAAAUVAAA=--><!--lit-part mMzHGUqzZP4=--><!--lit-node 0--><div title=\\"my title\\"><!--lit-part lIKuDD67mAo=-->Chimpanzee<!--/lit-part--></div><!--/lit-part--><?><!--/lit-part-->"
+`;
+
+exports[`Mix and match > Literal Snippet in JSX 1`] = `
+"<!--lit-part q3iTHLO3GCA=--><!--lit-node 0--><main\\ntitle=\\"my title\\"><!--lit-part pWlwSt1RcwE=--><span>Whale</span><!--/lit-part--></main><!--/lit-part-->"
+`;
+
+exports[`Server/Client bindings > Event. binding - Custom element (\`on:\` prefix) > client 1`] = `
+"testResult = html\`<my-custom\\n@some-event=\${e => event.target}>Hello</my-custom>\`;"
+`;
+
+exports[`Server/Client bindings > Event. binding - Custom element (\`on:\` prefix) > ssr 1`] = `
+"<!--lit-part ZHhd9ssHgj4=--><!--lit-node 0--><my-custom\\n>Hello</my-custom><!--/lit-part-->"
+`;
+
+exports[`Server/Client bindings > Event. binding > client 1`] = `
+"testResult = html\`<div\\n@click=\${console.log}>Hello</div>\`;"
+`;
+
+exports[`Server/Client bindings > Event. binding > ssr 1`] = `
+"<!--lit-part QvWPofa/sK8=--><!--lit-node 0--><div\\n>Hello</div><!--/lit-part-->"
+`;
+
+exports[`Server/Client bindings > Prop. binding > client 1`] = `
+"testResult = html\`<div\\n.heyaa=\${2}>Hello</div>\`;"
+`;
+
+exports[`Server/Client bindings > Prop. binding > ssr 1`] = `
+"<!--lit-part E7xQBJOb/Wg=--><!--lit-node 0--><div\\n>Hello</div><!--/lit-part-->"
+`;
+
+exports[`Server/Client bindings > Ref. binding > client 1`] = `
+"testResult = html\`<main\\nfoo=\\"bar\\"\\n\${ref(createRef())}\\nbaz=\\"doz\\">Referenced</main>\`;"
+`;
+
+exports[`Server/Client bindings > Ref. binding > ssr 1`] = `
+"<!--lit-part 6nqPJJ9X3dg=--><!--lit-node 0--><main\\nfoo=\\"bar\\"\\n\\nbaz=\\"doz\\">Referenced</main><!--/lit-part-->"
+`;

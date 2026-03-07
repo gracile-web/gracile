@@ -1,0 +1,69 @@
+{
+  "compilerOptions": {
+    // "module": "CommonJS",
+    "module": "es2022",
+    "target": "es2023",
+    "outDir": "./dist",
+    "esModuleInterop": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "downlevelIteration": true,
+    // "incremental": true,
+    // "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": false,
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "moduleResolution": "bundler",
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    "inlineSources": true,
+    "inlineSourceMap": false,
+    "preserveWatchOutput": true,
+
+    "rootDir": "./src",
+
+    "preserveConstEnums": true,
+    "allowUnusedLabels": false,
+    "checkJs": false,
+    "noEmitOnError": false,
+    "noEmitHelpers": true,
+    "useDefineForClassFields": false,
+    "importsNotUsedAsValues": "remove",
+
+    "verbatimModuleSyntax": false,
+    "allowImportingTsExtensions": false,
+
+    "stripInternal": true
+  },
+
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.cts",
+    "src/tests/*.test.mts",
+    "jsx-namespace.d.ts"
+  ],
+  "exclude": [
+    "jsx-bootstrap.ts",
+    "node_modules",
+    "./dist/**",
+    "**/fixtures",
+    "playground",
+    "./src/adapters/static"
+  ]
+}

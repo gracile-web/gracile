@@ -19,10 +19,13 @@ packages:
   - ./packages/labs/client-router
   - ./packages/labs/css-helpers
   - ./packages/labs/better-errors
-  - ./packages/labs/islands
-  - ./packages/labs/jsx-babel
-  - ./packages/labs/jsx-ts
   - ./packages/labs/hmr
+  - ./packages/labs/islands
+  - ./packages/labs/functional
+  - ./packages/labs/babel-plugin-jsx-to-literals
+  - ./packages/labs/vite-plugin-babel-jsx-to-literals
+  - ./packages/labs/jsx-forge
+  - ./packages/labs/vite-plugin-jsx-forge
 
 catalog:
   vite: ^7.3.1

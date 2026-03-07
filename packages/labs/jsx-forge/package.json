@@ -1,0 +1,72 @@
+{
+  "name": "jsx-forge",
+  "webElements": {
+    "format": "jsx",
+    "jsxBootstrapPath": "./jsx-bootstrap.ts",
+    "conventions": {
+      "bareBindingKind": "attribute",
+      "attributes": {
+        "namespaces": [
+          null,
+          "bool",
+          "if"
+        ]
+      },
+      "events": {
+        "namespaces": [
+          "on"
+        ]
+      },
+      "properties": {
+        "namespaces": [
+          "_"
+        ]
+      }
+    }
+  },
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./transform": "./dist/ts-patch-transformer-plugin.js",
+    "./package.json": "./package.json",
+    "./jsx-runtime": "./dist/jsx-namespace.d.ts",
+    "./lit-compiler": "./dist/lit-compiler-ts-patch-plugin.js"
+  },
+  "files": [
+    "./dist/**/*",
+    "!/dist/**/*.test.*",
+    "!/dist/tests",
+    "!dist/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "csstype": "^3.1.3"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@lit-labs/compiler": "^1.1.1",
+    "sinon": "19.0.2",
+    "snapshot-fixtures": "^1.2.0",
+    "ts-patch": "^3.3.0",
+    "typescript": "5.8.3"
+  },
+  "peerDependencies": {
+    "typescript": ">=5"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
