@@ -153,6 +153,7 @@ export default [
 			'**/packages/cli',
 			'packages/labs/og-images-generator/**',
 			'packages/labs/literals/**',
+			'packages/labs/devtools',
 			'docs/website/**',
 		],
 	},

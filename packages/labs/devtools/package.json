@@ -1,0 +1,53 @@
+{
+  "name": "@gracile-labs/devtools",
+  "version": "0.0.0",
+  "description": "In-browser DevTools panel for Gracile — inspect routes, components, and framework state",
+  "keywords": [
+    "custom-elements",
+    "full-stack",
+    "lit",
+    "meta-framework",
+    "devtools",
+    "developer-tools",
+    "web-components"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/devtools"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/plugin.js",
+    "./client": "./dist/client/devtools-panel.js"
+  },
+  "files": [
+    "./dist/**/*",
+    "!/dist/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@gracile/internal-utils": "workspace:^",
+    "picocolors": "catalog:"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "typescript": "5.9.3",
+    "vite": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
