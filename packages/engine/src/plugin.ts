@@ -16,6 +16,7 @@ import {
 	gracileCollectClientAssetsPlugin,
 	gracileServerBuildPlugin,
 } from './vite/plugin-server-build.js';
+import { gracileCETrackerPlugin } from './vite/plugin-ce-tracker.js';
 
 let isClientBuilt = false;
 
@@ -69,6 +70,9 @@ export const gracile = (config?: GracileConfig): any[] => {
 					sharedPluginContext.litSsrRenderInfo;
 			},
 		},
+
+		// MARK: 1.5. CE registry tracker (dev HMR cleanup)
+		gracileCETrackerPlugin(),
 
 		// MARK: 2. HMR SSR reload
 		hmrSsrReload(),
