@@ -11,7 +11,7 @@ import { GRACILE_LOGO_SVG } from '../icons.js';
 interface GeneralState {
 	gracileVersion: string;
 	viteVersion: string;
-	routes: { pattern: string }[];
+	routes: { patternString: string }[];
 	isLoading: boolean;
 }
 

@@ -812,6 +812,25 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  packages/labs/devtools:
+    dependencies:
+      '@gracile/internal-utils':
+        specifier: workspace:^
+        version: link:../../internal/utils
+      picocolors:
+        specifier: 'catalog:'
+        version: 1.1.1
+    devDependencies:
+      '@gracile/internal-tsconfigs':
+        specifier: workspace:^
+        version: link:../../internal/tsconfigs
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.80.4)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+
   packages/labs/functional:
     devDependencies:
       '@types/node':

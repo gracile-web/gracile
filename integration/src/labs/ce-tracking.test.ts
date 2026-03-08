@@ -195,9 +195,7 @@ describe('mightDefineCE heuristic', () => {
 	});
 
 	it('matches compiled decorator output', () => {
-		assert.ok(
-			mightDefineCE('__decorate([customElement("my-btn")], MyBtn)'),
-		);
+		assert.ok(mightDefineCE('__decorate([customElement("my-btn")], MyBtn)'));
 	});
 
 	it('matches customElement with whitespace before paren', () => {
@@ -214,9 +212,7 @@ describe('mightDefineCE heuristic', () => {
 
 	it('does not match unrelated lit/decorators imports', () => {
 		assert.ok(
-			!mightDefineCE(
-				"import { property, state } from 'lit/decorators.js';",
-			),
+			!mightDefineCE("import { property, state } from 'lit/decorators.js';"),
 		);
 	});
 });
@@ -319,19 +315,14 @@ describe('CE tracker smoke (dev server)', () => {
 			(h) => !h.includes('widget-ssr-content'),
 		);
 
-		assert.ok(
-			html.includes('<my-widget'),
-			'Tag should still be in template',
-		);
+		assert.ok(html.includes('<my-widget'), 'Tag should still be in template');
 	});
 
 	it('re-renders CE shadow DOM when import is restored', async () => {
 		fs.writeFileSync(routeFile, ROUTE_WITH_CE, 'utf8');
 
-		const html = await waitForHtml(
-			server.address,
-			'/',
-			(h) => h.includes('widget-ssr-content'),
+		const html = await waitForHtml(server.address, '/', (h) =>
+			h.includes('widget-ssr-content'),
 		);
 
 		assert.ok(html.includes('widget-ssr-content'));
