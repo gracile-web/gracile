@@ -55,6 +55,19 @@ export function gracileClientBuildPlugin({
 
 			state.renderedRoutes = htmlPages.renderedRoutes;
 
+			// NOTE: Vite's dev server does not invoke Rollup's `closeWatcher`
+			// hook when shutting down. Plugins like @rollup/plugin-typescript
+			// use `ts.createWatchProgram()` which sets up hundreds of FS
+			// watchers; without an explicit `closeWatcher` call they are
+			// leaked and the Node process hangs after build.
+			for (const plugin of viteServerForClientHtmlBuild.config.plugins) {
+				if (typeof plugin.closeWatcher === 'function') {
+					await (
+						plugin as { closeWatcher: () => void | Promise<void> }
+					).closeWatcher();
+				}
+			}
+
 			await viteServerForClientHtmlBuild.close();
 
 			return {
