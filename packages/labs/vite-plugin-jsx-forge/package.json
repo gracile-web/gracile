@@ -48,6 +48,7 @@
   },
   "peerDependencies": {
     "@lit-labs/ssr": "^3.2.2",
+    "jsx-forge": "workspace:^",
     "lit": "^3.3.0",
     "clsx": "^2.1.1",
     "vite": "^6.2.5"

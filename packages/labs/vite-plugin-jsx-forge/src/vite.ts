@@ -4,7 +4,7 @@ import typescript, {
 } from '@rollup/plugin-typescript';
 import type { PluginOption } from 'vite';
 // @ts-expect-error - No types available for ts-patch
-import tspCompiler from 'ts-patch/compiler';
+import tspCompiler from 'ts-patch/compiler/typescript.js';
 
 const VITE_PLUGIN_NAME = 'vite-plugin-jsx-ts';
 
