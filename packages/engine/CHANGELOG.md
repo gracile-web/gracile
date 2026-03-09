@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.6...@gracile/engine@0.9.0-next.7) (2026-03-09)
+
+### Bug Fixes
+
+* full rollupTypescript options and address leaking rollup tsc watcher ([c6e7203](https://github.com/gracile-web/gracile/commit/c6e7203b135436b8e210907bb402fc3a75c3e8f7))
+
+### Features
+
+* plugin for tracking server side CEs, clean orphaned during dev + tests ([e2bbf87](https://github.com/gracile-web/gracile/commit/e2bbf87cf6be2675f2f5d7bd251112d5bf20aafb))
+
 # [0.9.0-next.6](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.5...@gracile/engine@0.9.0-next.6) (2026-03-07)
 
 ### Features

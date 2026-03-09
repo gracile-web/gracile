@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile/client@0.5.0-next.4...@gracile/client@0.5.0-next.5) (2026-03-09)
+
+**Note:** Version bump only for package @gracile/client
+
 # [0.5.0-next.4](https://github.com/gracile-web/gracile/compare/@gracile/client@0.5.0-next.3...@gracile/client@0.5.0-next.4) (2026-03-07)
 
 **Note:** Version bump only for package @gracile/client
