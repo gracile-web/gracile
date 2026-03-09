@@ -321,8 +321,14 @@ describe('CE tracker smoke (dev server)', () => {
 	it('re-renders CE shadow DOM when import is restored', async () => {
 		fs.writeFileSync(routeFile, ROUTE_WITH_CE, 'utf8');
 
-		const html = await waitForHtml(server.address, '/', (h) =>
-			h.includes('widget-ssr-content'),
+		// Restoring the import triggers a longer HMR chain (file watch →
+		// module invalidation → CE module re-eval → tracker unblock → SSR).
+		// CI environments can be significantly slower, so use a generous timeout.
+		const html = await waitForHtml(
+			server.address,
+			'/',
+			(h) => h.includes('widget-ssr-content'),
+			30_000,
 		);
 
 		assert.ok(html.includes('widget-ssr-content'));
