@@ -1,0 +1,6 @@
+{
+  "$schema": "https://typedoc-plugin-markdown.org/schema.json",
+  "entryPoints": ["./node_modules/@gracile/gracile/dist/server-html.js"],
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"]
+}

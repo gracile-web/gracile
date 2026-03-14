@@ -1,0 +1,40 @@
+@use '../lib/breakpoints/use-breakpoints' as *;
+@use '../lib/color-mode/use-color-mode' as *;
+@use '../styles/vars' as *;
+@use '../lib/shoelace/vars' as *;
+
+.m-bread-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1ch;
+  align-items: center;
+  padding: $spacing-large $spacing-4x-large 0 $spacing-4x-large;
+  font-size: $font-size-small;
+  opacity: 0.9;
+
+  @include breakpoint(xl) {
+    padding: $spacing-x-large $spacing-x-large 0 0;
+    margin-bottom: -2ex;
+    font-size: $font-size-x-small;
+  }
+
+  .part {
+    display: flex;
+    gap: 1ch;
+    align-items: center;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+
+    i-c {
+      margin-right: 1ch;
+    }
+  }
+
+  svg {
+    width: 2ex;
+    height: 2ex;
+  }
+}

@@ -1,0 +1,64 @@
+@use '../lib/breakpoints/use-breakpoints' as *;
+@use '../lib/color-mode/use-color-mode' as *;
+@use '../styles/vars' as *;
+@use '../lib/shoelace/vars' as *;
+
+.c-menu-toggle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: alpha($color-neutral-700, 0.9);
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  border-radius: 0 0 1rem;
+  box-shadow: 0.1rem 0.1rem 0.3rem alpha($color-neutral-0, 0.2);
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @include color-mode(light) {
+    background-color: alpha($color-neutral-200, 1);
+
+    &:hover {
+      text-decoration: underline;
+      background-color: alpha($color-neutral-300, 1);
+    }
+  }
+
+  @include color-mode(dark) {
+    background-color: alpha($color-neutral-0, 1);
+
+    &:hover {
+      background-color: alpha($color-neutral-300, 1);
+    }
+  }
+
+  &.right {
+    right: 0;
+    left: initial;
+    border-radius: 0 0 0 1rem;
+  }
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .layout-bare &,
+  /* .layout-blog & */ {
+    display: none;
+  }
+
+  @include breakpoint(xl) {
+    display: none;
+  }
+}
+
+html[data-menu-panel='active'] {
+  overflow: hidden;
+}

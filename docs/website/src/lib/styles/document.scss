@@ -1,0 +1,29 @@
+@mixin font-smoothing {
+  /* stylelint-disable-next-line property-no-unknown */
+  font-smooth: always;
+  -webkit-font-smoothing: auto;
+  -moz-font-smoothing: auto;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+}
+
+@mixin hide-touch-tap {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+// CSS Mistakes
+// https://wiki.csswg.org/ideas/mistakes
+
+/// Should be applied inside `html {}`
+@mixin fix-border-box {
+  & {
+    box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}

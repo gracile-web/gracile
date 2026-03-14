@@ -1,0 +1,23 @@
+@use '../../lib/breakpoints/use-breakpoints' as *;
+@use '../../lib/color-mode/use-color-mode' as *;
+@use '../vars' as *;
+@use '../../lib/shoelace/vars' as *;
+
+a {
+  text-decoration: none;
+
+  &:not(.unstyled) {
+    font-weight: 500;
+
+    &,
+    &:hover,
+    &:active,
+    &:visited {
+      color: $color-primary-700;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

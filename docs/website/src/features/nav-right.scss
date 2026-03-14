@@ -1,0 +1,140 @@
+@use '../lib/breakpoints/use-breakpoints' as *;
+@use '../lib/color-mode/use-color-mode' as *;
+@use '../styles/vars' as *;
+@use '../lib/shoelace/vars' as *;
+@import '../features/site-search';
+@import '../features/color-mode-toggle';
+@import '../features/nav-outline';
+
+.m-nav-right {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding-right: calc(0rem + 0.5dvw);
+  padding-left: calc(0.3rem + 0.5dvw);
+  color: $color-neutral-800;
+  text-align: right;
+  background: linear-gradient(to right, $color-neutral-50, $color-neutral-0);
+  border-left: 1px solid alpha($color-neutral-800, 0.1);
+  box-shadow: -0.5rem 1rem 1rem alpha($color-neutral-0, 0.25);
+  opacity: 0;
+  transition:
+    opacity $transition-medium,
+    transform $transition-medium;
+  transform: translateX(100%);
+
+  @include breakpoint(md) {
+    width: 47vw;
+  }
+
+  @include breakpoint(lg) {
+    width: 40vw;
+  }
+
+  @include breakpoint(xl) {
+    top: 0;
+    display: initial;
+    width: $main-nav-width;
+    isolation: initial;
+    opacity: 1;
+    transform: initial;
+  }
+
+  [menu-right='opened'] & {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .layout-bare &,
+  .page-blog & {
+    @include breakpoint(xl) {
+      position: absolute;
+    }
+
+    height: initial;
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  & > nav {
+    height: calc(100vh - 10rem);
+    overflow-y: hidden;
+    direction: rtl;
+
+    & > * {
+      direction: initial;
+    }
+
+    &:hover {
+      overflow-y: auto;
+    }
+  }
+
+  .app-links {
+    a {
+      i-c {
+        margin: 0 0.5em;
+      }
+
+      display: flex;
+      align-items: center;
+      color: inherit;
+
+      &:hover {
+        color: $color-primary-600;
+      }
+    }
+
+    display: flex;
+    gap: 1dvw;
+
+    align-items: baseline;
+    justify-content: space-evenly;
+
+    @include breakpoint(xl) {
+      padding: $spacing-small;
+    }
+
+    font-size: $font-size-x-small;
+  }
+
+  .toc {
+    .page-blog & {
+      display: none;
+    }
+  }
+
+  .current-page-header {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1.25rem 0;
+    margin-top: 2.5rem;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    opacity: 0.8;
+
+    svg {
+      width: 2ex;
+      height: 2ex;
+      margin-left: 1rem;
+    }
+  }
+
+  &:hover {
+    .current-page-header {
+      opacity: 1;
+    }
+
+    .c-nav-outline {
+      a {
+        opacity: 1;
+      }
+    }
+  }
+}

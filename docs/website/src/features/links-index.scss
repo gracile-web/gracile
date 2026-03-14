@@ -1,0 +1,47 @@
+@use '../lib/breakpoints/use-breakpoints' as *;
+@use '../lib/color-mode/use-color-mode' as *;
+@use '../styles/vars' as *;
+@use '../lib/shoelace/vars' as *;
+
+.m-links-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3dvw 2dvw;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 4rem 0 0;
+  margin-top: 4rem;
+  font-size: calc(0.6rem + 0.3dvw);
+  line-height: 1.5;
+
+  p {
+    white-space: pre-wrap;
+  }
+
+  .title {
+    padding: $spacing-x-small 0 $spacing-x-small 0;
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-normal;
+    gap: 0.5em;
+    display: flex;
+  }
+
+  a {
+    display: block;
+    flex-basis: 44%;
+    min-width: 17rem;
+    max-width: 28rem;
+    padding: 0.6rem calc(0.5em + 1.15dvw);
+    color: $color-neutral-800;
+    border: 1px solid alpha($color-primary-400, 0.75);
+    border-radius: 0.25rem;
+    box-shadow: 0.5rem 0.5rem 0.5rem alpha($color-neutral-0, 0.3);
+
+    &:hover {
+      color: $color-primary-700;
+      border-color: alpha($color-primary-400, 1);
+      box-shadow: 0.5rem 0.5rem 0.5rem alpha($color-neutral-0, 0.15);
+    }
+  }
+}

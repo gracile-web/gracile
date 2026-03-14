@@ -1,0 +1,11 @@
+@use '../lib/shoelace/vars' as *;
+
+$main-nav-width: var(--main-nav-width);
+$font-main: /* 'Inter',  */ system-ui, sans-serif;
+$font-code: /* 'Fira Code',  */ monospace;
+
+// $font-special: 'Dancing Script';
+
+:root {
+  --main-nav-width: calc(10rem + 10vw);
+}

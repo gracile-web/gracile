@@ -29,6 +29,7 @@ packages:
   - ./packages/labs/literals/parser
   - ./packages/labs/literals/html-css-minifier
   - ./packages/labs/literals/rollup-plugin-html-css-minifier
+  - ./docs/website
 
 catalog:
   vite: ^7.3.1

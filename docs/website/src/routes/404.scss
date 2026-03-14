@@ -1,0 +1,15 @@
+@use '../lib/breakpoints/use-breakpoints' as *;
+@use '../lib/color-mode/use-color-mode' as *;
+@use '../styles/vars' as *;
+@use '../lib/shoelace/vars' as *;
+
+.page-404 {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 90vh;
+  }
+}
