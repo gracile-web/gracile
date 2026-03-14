@@ -4,7 +4,6 @@ import picomatch from 'picomatch';
 
 import { NavMain } from '../../features/nav-main.jsx';
 import { FooterMain } from '../../features/footer-main.jsx';
-
 import {
 	BreadCrumbs,
 	type BreadCrumbsList,
@@ -74,17 +73,17 @@ export default defineRoute({
 							? pathParams
 									.split('/')
 									.slice(0, -1)
-									.map((_d, i) => {
+									.map((_d, index_) => {
 										const m = docsMetaImports.find((m) => {
 											return (
 												m.pathParams ===
 												pathParams
 													?.split('/')
-													.slice(0, i + 1)
+													.slice(0, index_ + 1)
 													.join('/')
 											);
 										});
-										if (!m) throw Error('Missing breadcrumb item!');
+										if (!m) throw new Error('Missing breadcrumb item!');
 
 										return { url: m.href, title: m.module.title };
 									})

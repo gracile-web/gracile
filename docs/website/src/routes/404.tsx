@@ -1,6 +1,6 @@
 import { defineRoute } from '@gracile/server/route';
-import { document } from '../document/document.jsx';
 
+import { document } from '../document/document.jsx';
 import { FooterMain } from '../features/footer-main.jsx';
 import { NavMain } from '../features/nav-main.jsx';
 

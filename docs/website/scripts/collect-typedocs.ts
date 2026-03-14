@@ -1,7 +1,8 @@
-import { readFile, writeFile } from 'fs/promises';
-import { join } from 'path';
-import { exec as e } from 'child_process';
-import { promisify } from 'util';
+import { readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { exec as e } from 'node:child_process';
+import { promisify } from 'node:util';
+
 import { slug } from 'github-slugger';
 
 const exec = promisify(e);
@@ -64,7 +65,7 @@ Examples, functions, classes, constants, type declarations…
 
 		await Promise.all(
 			[...f].map(async (s) => {
-				const c = await readFile(join('../gracile/docs/', s), 'utf8');
+				const c = await readFile(join('../../docs/typedocs/', s), 'utf8');
 				result +=
 					c
 						.replaceAll(/###? Properties/g, '**Properties**')
@@ -79,7 +80,7 @@ Examples, functions, classes, constants, type declarations…
 						.replaceAll('<table>', '<div class="typedoc-table"><table>')
 						.replaceAll('</table>', '</table></div>')
 						.replaceAll(
-							/\[`(.*)`\]\((.*)\.md\)/g,
+							/\[`(.*)`]\((.*)\.md\)/g,
 							(_, b, b2) =>
 								`[\`${b}\`](#doc_${slug(
 									b2
@@ -99,10 +100,10 @@ Examples, functions, classes, constants, type declarations…
 
 const base = './src/content/docs/25-references/01-api/';
 await Promise.all(
-	[...sections].map(async ([k, f], i) => {
-		const dest = `${base}${i}-${k === 'README' ? k : slug(k)}.md`;
-		await writeFile(dest, f);
-		console.log(dest);
+	[...sections].map(async ([k, f], index) => {
+		const destination = `${base}${index}-${k === 'README' ? k : slug(k)}.md`;
+		await writeFile(destination, f);
+		console.log(destination);
 	}),
 );
 

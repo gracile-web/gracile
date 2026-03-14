@@ -1,8 +1,10 @@
 import type { MarkdownModule } from '@gracile/markdown/md-module';
+
+import { DISCORD_INVITE_PATH, REPO_URL } from '../content/global.js';
+
 import { NavOutline } from './nav-outline.jsx';
 import { ColorModeToggle } from './color-mode-toggle.jsx';
 import { SiteSearch } from './site-search.jsx';
-import { DISCORD_INVITE_PATH, REPO_URL } from '../content/global.js';
 import { MenuToggle } from './menu-toggle.jsx';
 // import { asideMenuState } from '../lib/app-state.js';
 

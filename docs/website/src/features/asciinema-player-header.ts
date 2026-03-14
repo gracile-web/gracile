@@ -1,6 +1,7 @@
 // import '../lib/asciinema-player/asciinema-player.js';
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+
 import terminal from '../assets/icons/terminal.svg';
 
 @customElement('asciinema-player-header')

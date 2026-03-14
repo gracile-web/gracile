@@ -1,3 +1,5 @@
+import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
+
 import graphPaper from '../assets/icons/graph-paper.svg' with {
 	type: 'svg',
 	format: 'lit',
@@ -6,12 +8,11 @@ import gracileLogo from '../assets/gracile-logo.svg' with {
 	type: 'svg',
 	format: 'lit',
 };
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
 
 export const SplashScreen = () => (
 	<header class="m-splash-screen">
 		<For each={Array.from({ length: 8 }).fill(null)}>
-			{(_, i) => <div for:key={i} class={`bg bg-${i}`}></div>}
+			{(_, index) => <div for:key={index} class={`bg bg-${index}`}></div>}
 		</For>
 
 		<svg width="100%" height="100%" class="bg bg-noise">

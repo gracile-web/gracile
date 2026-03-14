@@ -1,20 +1,17 @@
 import { defineRoute } from '@gracile/server/route';
-import { document } from '../document/document.jsx';
+import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
+import { isServer } from 'lit';
 
+import { document } from '../document/document.jsx';
 import wcLogo from '../assets/webcomponents-logo.svg?url';
 import viteLogo from '../assets/vite-logo.svg?url';
 import litLogo from '../assets/lit.svg?url';
 import nodeJsLogo from '../assets/nodejs-logo.svg?url';
-
 import { SplashScreen } from '../features/splash-screen.jsx';
 import { FooterMain } from '../features/footer-main.jsx';
 import { NavMain } from '../features/nav-main.jsx';
 import { NavRight } from '../features/nav-right.jsx';
-
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
-
 import { featureList } from '../content/feature-list.js';
-import { isServer } from 'lit';
 import { router } from '../lib/router.js';
 import { blogMetaImports } from '../content/content.js';
 
@@ -175,13 +172,13 @@ export default defineRoute({
 function initCardsHover() {
 	const wrappers = globalThis.document.querySelectorAll('.cards');
 
-	wrappers.forEach((w) => {
+	for (const w of wrappers) {
 		const cards = w.querySelectorAll('.card');
-		cards.forEach((c) => {
+		for (const c of cards) {
 			c.addEventListener('mousemove', (event) => {
 				if (event instanceof MouseEvent === false) return;
-				cards.forEach((card) => {
-					if (card instanceof HTMLElement === false) return;
+				for (const card of cards) {
+					if (card instanceof HTMLElement === false) continue;
 
 					const rect = card.getBoundingClientRect();
 					const x = event.clientX - rect.left;
@@ -189,10 +186,10 @@ function initCardsHover() {
 
 					card.style.setProperty('--x-pos', `${x}px`);
 					card.style.setProperty('--y-pos', `${y}px`);
-				});
+				}
 			});
-		});
-	});
+		}
+	}
 }
 
 if (!isServer) {

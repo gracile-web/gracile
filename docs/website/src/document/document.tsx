@@ -5,8 +5,10 @@ import '../lib/unpic-element.js';
 import '../lib/copy-button.js';
 
 import { createMetadata, type Breadcrumbs } from '@gracile/metadata';
+
 import { SITE_TITLE, SITE_URL } from '../content/global.js';
 import { colorModeCritical } from '../lib/color-mode/color-mode-critical.js';
+import { keepScrollingPositionCritical } from '../lib/keep-scroll-position/ksp-critical.js';
 
 import {
 	favicon,
@@ -14,7 +16,6 @@ import {
 	pagePathToOgPath,
 	requestIdleCallbackPolyfill,
 } from './document-helpers.js';
-import { keepScrollingPositionCritical } from '../lib/keep-scroll-position/ksp-critical.js';
 
 export const document = (options: {
 	url: URL;

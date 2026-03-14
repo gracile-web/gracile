@@ -98,7 +98,7 @@ export const lit = {
 				at_rule_fontface: {
 					patterns: [
 						{
-							begin: '^\\s*((@)font-face\\b)',
+							begin: String.raw`^\s*((@)font-face\b)`,
 							beginCaptures: {
 								1: {
 									name: 'keyword.control.at-rule.fontface.scss',
@@ -107,7 +107,7 @@ export const lit = {
 									name: 'punctuation.definition.keyword.scss',
 								},
 							},
-							end: '\\s*(?={)',
+							end: String.raw`\s*(?={)`,
 							name: 'meta.at-rule.fontface.scss',
 							patterns: [
 								{
@@ -118,7 +118,7 @@ export const lit = {
 					],
 				},
 				at_rule_import: {
-					begin: '\\s*((@)import\\b)\\s*',
+					begin: String.raw`\s*((@)import\b)\s*`,
 					captures: {
 						1: {
 							name: 'keyword.control.at-rule.import.scss',
@@ -127,7 +127,7 @@ export const lit = {
 							name: 'punctuation.definition.keyword.scss',
 						},
 					},
-					end: '\\s*((?=;)|(?=}))',
+					end: String.raw`\s*((?=;)|(?=}))`,
 					name: 'meta.at-rule.import.scss',
 					patterns: [
 						{
@@ -145,7 +145,7 @@ export const lit = {
 					],
 				},
 				at_rule_keyframes: {
-					begin: '(?<=^|\\s)(@)(?:-(?:webkit|moz)-)?keyframes\\b',
+					begin: String.raw`(?<=^|\s)(@)(?:-(?:webkit|moz)-)?keyframes\b`,
 					beginCaptures: {
 						0: {
 							name: 'keyword.control.at-rule.keyframes.scss',
@@ -158,8 +158,7 @@ export const lit = {
 					name: 'meta.at-rule.keyframes.scss',
 					patterns: [
 						{
-							match:
-								'(?<=@keyframes)\\s+((?:[_A-Za-z][-\\w]|-[_A-Za-z])[-\\w]*)',
+							match: String.raw`(?<=@keyframes)\s+((?:[_A-Za-z][-\w]|-[_A-Za-z])[-\w]*)`,
 							captures: {
 								1: {
 									name: 'entity.name.function.scss',
@@ -167,7 +166,7 @@ export const lit = {
 							},
 						},
 						{
-							begin: '(?<=@keyframes)\\s+(")',
+							begin: String.raw`(?<=@keyframes)\s+(")`,
 							beginCaptures: {
 								1: {
 									name: 'punctuation.definition.string.begin.scss',
@@ -183,7 +182,7 @@ export const lit = {
 							contentName: 'entity.name.function.scss',
 							patterns: [
 								{
-									match: '\\\\(\\h{1,6}|.)',
+									match: String.raw`\\(\h{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
@@ -192,7 +191,7 @@ export const lit = {
 							],
 						},
 						{
-							begin: "(?<=@keyframes)\\s+(')",
+							begin: String.raw`(?<=@keyframes)\s+(')`,
 							beginCaptures: {
 								1: {
 									name: 'punctuation.definition.string.begin.scss',
@@ -208,7 +207,7 @@ export const lit = {
 							contentName: 'entity.name.function.scss',
 							patterns: [
 								{
-									match: '\\\\(\\h{1,6}|.)',
+									match: String.raw`\\(\h{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
@@ -231,7 +230,7 @@ export const lit = {
 							},
 							patterns: [
 								{
-									match: '\\b(?:(?:100|[1-9]\\d|\\d)%|from|to)(?=\\s*{)',
+									match: String.raw`\b(?:(?:100|[1-9]\d|\d)%|from|to)(?=\s*{)`,
 									name: 'entity.other.attribute-name.scss',
 								},
 								{
@@ -250,7 +249,7 @@ export const lit = {
 				at_rule_media: {
 					patterns: [
 						{
-							begin: '^\\s*((@)media)\\b',
+							begin: String.raw`^\s*((@)media)\b`,
 							beginCaptures: {
 								1: {
 									name: 'keyword.control.at-rule.media.scss',
@@ -259,7 +258,7 @@ export const lit = {
 									name: 'punctuation.definition.keyword.scss',
 								},
 							},
-							end: '\\s*(?={)',
+							end: String.raw`\s*(?={)`,
 							name: 'meta.at-rule.media.scss',
 							patterns: [
 								{
@@ -269,17 +268,17 @@ export const lit = {
 									include: '#comment_line',
 								},
 								{
-									match: '\\b(only)\\b',
+									match: String.raw`\b(only)\b`,
 									name: 'keyword.control.operator.css.scss',
 								},
 								{
-									begin: '\\(',
+									begin: String.raw`\(`,
 									beginCaptures: {
 										0: {
 											name: 'punctuation.definition.media-query.begin.bracket.round.scss',
 										},
 									},
-									end: '\\)',
+									end: String.raw`\)`,
 									endCaptures: {
 										0: {
 											name: 'punctuation.definition.media-query.end.bracket.round.scss',
@@ -301,13 +300,13 @@ export const lit = {
 											],
 										},
 										{
-											begin: '(:)\\s*(?!(\\s*{))',
+											begin: String.raw`(:)\s*(?!(\s*{))`,
 											beginCaptures: {
 												1: {
 													name: 'punctuation.separator.key-value.scss',
 												},
 											},
-											end: '\\s*(;|(?=}|\\)))',
+											end: String.raw`\s*(;|(?=}|\)))`,
 											endCaptures: {
 												1: {
 													name: 'punctuation.terminator.rule.scss',
@@ -341,7 +340,7 @@ export const lit = {
 				at_rule_page: {
 					patterns: [
 						{
-							begin: '^\\s*((@)page)(?=:|\\s)\\s*([-:\\w]*)',
+							begin: String.raw`^\s*((@)page)(?=:|\s)\s*([-:\w]*)`,
 							captures: {
 								1: {
 									name: 'keyword.control.at-rule.page.scss',
@@ -353,13 +352,13 @@ export const lit = {
 									name: 'entity.name.function.scss',
 								},
 							},
-							end: '\\s*(?={)',
+							end: String.raw`\s*(?={)`,
 							name: 'meta.at-rule.page.scss',
 						},
 					],
 				},
 				at_rule_supports: {
-					begin: '(?<=^|\\s)(@)supports\\b',
+					begin: String.raw`(?<=^|\s)(@)supports\b`,
 					captures: {
 						0: {
 							name: 'keyword.control.at-rule.supports.scss',
@@ -378,21 +377,21 @@ export const lit = {
 							include: '#properties',
 						},
 						{
-							match: '\\(',
+							match: String.raw`\(`,
 							name: 'punctuation.definition.condition.begin.bracket.round.scss',
 						},
 						{
-							match: '\\)',
+							match: String.raw`\)`,
 							name: 'punctuation.definition.condition.end.bracket.round.scss',
 						},
 					],
 				},
 				at_rule_custom_single: {
-					begin: '(?i)(?=@[\\w-]+[^;]+;s*$)',
-					end: '(?<=;)(?!\\G)',
+					begin: String.raw`(?i)(?=@[\w-]+[^;]+;s*$)`,
+					end: String.raw`(?<=;)(?!\G)`,
 					patterns: [
 						{
-							begin: '(?i)\\G(@)[\\w-]+',
+							begin: String.raw`(?i)\G(@)[\w-]+`,
 							beginCaptures: {
 								0: {
 									name: 'keyword.control.at-rule.css',
@@ -412,11 +411,11 @@ export const lit = {
 					],
 				},
 				at_rule_custom: {
-					begin: '(?i)(?=@[\\w-]+(\\s|\\(|{|/\\*|$))',
-					end: '(?<=})(?!\\G)',
+					begin: String.raw`(?i)(?=@[\w-]+(\s|\(|{|/\*|$))`,
+					end: String.raw`(?<=})(?!\G)`,
 					patterns: [
 						{
-							begin: '(?i)\\G(@)[\\w-]+',
+							begin: String.raw`(?i)\G(@)[\w-]+`,
 							beginCaptures: {
 								0: {
 									name: 'keyword.control.at-rule.css',
@@ -425,7 +424,7 @@ export const lit = {
 									name: 'punctuation.definition.keyword.css',
 								},
 							},
-							end: '(?=\\s*[{;])',
+							end: String.raw`(?=\s*[{;])`,
 							name: 'meta.at-rule.header.css',
 						},
 						{
@@ -451,13 +450,13 @@ export const lit = {
 					],
 				},
 				comment_block: {
-					begin: '/\\*',
+					begin: String.raw`/\*`,
 					beginCaptures: {
 						0: {
 							name: 'punctuation.definition.comment.scss',
 						},
 					},
-					end: '\\*/',
+					end: String.raw`\*/`,
 					endCaptures: {
 						0: {
 							name: 'punctuation.definition.comment.scss',
@@ -472,7 +471,7 @@ export const lit = {
 							name: 'punctuation.definition.comment.scss',
 						},
 					},
-					end: '\\n',
+					end: String.raw`\n`,
 					name: 'comment.line.scss',
 				},
 				constant_important: {
@@ -480,13 +479,13 @@ export const lit = {
 					name: 'keyword.other.important.scss',
 				},
 				constant_mathematical_symbols: {
-					match: '\\b(\\+|-|\\*|/)\\b',
+					match: String.raw`\b(\+|-|\*|/)\b`,
 					name: 'support.constant.mathematical-symbols.scss',
 				},
 				functions: {
 					patterns: [
 						{
-							begin: '(?i)(?<![\\w-])(calc)(\\()',
+							begin: String.raw`(?i)(?<![\w-])(calc)(\()`,
 							beginCaptures: {
 								1: {
 									name: 'support.function.calc.css',
@@ -495,7 +494,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -504,7 +503,7 @@ export const lit = {
 							name: 'meta.function.calc.css',
 							patterns: [
 								{
-									match: '[*/]|(?<=\\s|^)[-+](?=\\s|$)',
+									match: String.raw`[*/]|(?<=\s|^)[-+](?=\s|$)`,
 									name: 'keyword.operator.arithmetic.css',
 								},
 								{
@@ -513,7 +512,7 @@ export const lit = {
 							],
 						},
 						{
-							begin: '(?i)(?<![\\w-])(rgba?|hsla?)(\\()',
+							begin: String.raw`(?i)(?<![\w-])(rgba?|hsla?)(\()`,
 							beginCaptures: {
 								1: {
 									name: 'support.function.misc.css',
@@ -522,7 +521,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -546,7 +545,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -555,7 +554,7 @@ export const lit = {
 							name: 'meta.function.gradient.css',
 							patterns: [
 								{
-									match: '(?i)(?<![\\w-])(from|to|at)(?![\\w-])',
+									match: String.raw`(?i)(?<![\w-])(from|to|at)(?![\w-])`,
 									name: 'keyword.operator.gradient.css',
 								},
 								{
@@ -564,7 +563,7 @@ export const lit = {
 							],
 						},
 						{
-							begin: '(?i)(?<![\\w-])(-webkit-gradient)(\\()',
+							begin: String.raw`(?i)(?<![\w-])(-webkit-gradient)(\()`,
 							beginCaptures: {
 								1: {
 									name: 'invalid.deprecated.gradient.function.css',
@@ -573,7 +572,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -582,7 +581,7 @@ export const lit = {
 							name: 'meta.function.gradient.invalid.deprecated.gradient.css',
 							patterns: [
 								{
-									begin: '(?i)(?<![\\w-])(from|to|color-stop)(\\()',
+									begin: String.raw`(?i)(?<![\w-])(from|to|color-stop)(\()`,
 									beginCaptures: {
 										1: {
 											name: 'invalid.deprecated.function.css',
@@ -591,7 +590,7 @@ export const lit = {
 											name: 'punctuation.section.function.begin.bracket.round.css',
 										},
 									},
-									end: '\\)',
+									end: String.raw`\)`,
 									endCaptures: {
 										0: {
 											name: 'punctuation.section.function.end.bracket.round.css',
@@ -619,7 +618,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -628,20 +627,20 @@ export const lit = {
 							name: 'meta.function.misc.css',
 							patterns: [
 								{
-									match: '(?i)(?<=[,\\s"]|\\*/|^)\\d+x(?=[\\s,"\')]|/\\*|$)',
+									match: String.raw`(?i)(?<=[,\s"]|\*/|^)\d+x(?=[\s,"')]|/\*|$)`,
 									name: 'constant.numeric.other.density.css',
 								},
 								{
 									include: '#property_values',
 								},
 								{
-									match: '[^\'"),\\s]+',
+									match: String.raw`[^'"),\s]+`,
 									name: 'variable.parameter.misc.css',
 								},
 							],
 						},
 						{
-							begin: '(?i)(?<![\\w-])(circle|ellipse|inset|polygon|rect)(\\()',
+							begin: String.raw`(?i)(?<![\w-])(circle|ellipse|inset|polygon|rect)(\()`,
 							beginCaptures: {
 								1: {
 									name: 'support.function.shape.css',
@@ -650,7 +649,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -659,7 +658,7 @@ export const lit = {
 							name: 'meta.function.shape.css',
 							patterns: [
 								{
-									match: '(?i)(?<=\\s|^|\\*/)(at|round)(?=\\s|/\\*|$)',
+									match: String.raw`(?i)(?<=\s|^|\*/)(at|round)(?=\s|/\*|$)`,
 									name: 'keyword.operator.shape.css',
 								},
 								{
@@ -668,7 +667,7 @@ export const lit = {
 							],
 						},
 						{
-							begin: '(?i)(?<![\\w-])(cubic-bezier|steps)(\\()',
+							begin: String.raw`(?i)(?<![\w-])(cubic-bezier|steps)(\()`,
 							beginCaptures: {
 								1: {
 									name: 'support.function.timing-function.css',
@@ -677,7 +676,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -686,7 +685,7 @@ export const lit = {
 							name: 'meta.function.timing-function.css',
 							patterns: [
 								{
-									match: '(?i)(?<![\\w-])(start|end)(?=\\s*\\)|$)',
+									match: String.raw`(?i)(?<![\w-])(start|end)(?=\s*\)|$)`,
 									name: 'support.constant.step-direction.css',
 								},
 								{
@@ -705,7 +704,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -721,7 +720,7 @@ export const lit = {
 							include: '#url',
 						},
 						{
-							begin: '(?i)(?<![\\w-])(var)(\\()',
+							begin: String.raw`(?i)(?<![\w-])(var)(\()`,
 							beginCaptures: {
 								1: {
 									name: 'support.function.misc.css',
@@ -730,7 +729,7 @@ export const lit = {
 									name: 'punctuation.section.function.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.section.function.end.bracket.round.css',
@@ -766,7 +765,7 @@ export const lit = {
 							include: '#property_values',
 						},
 						{
-							match: '[={}\\?;@]',
+							match: String.raw`[={}\?;@]`,
 							name: 'invalid.illegal.scss',
 						},
 					],
@@ -820,11 +819,11 @@ export const lit = {
 					name: 'keyword.operator.comparison.scss',
 				},
 				logical_operators: {
-					match: '\\b(not|or|and)\\b',
+					match: String.raw`\b(not|or|and)\b`,
 					name: 'keyword.operator.logical.scss',
 				},
 				operators: {
-					match: '[-+*/](?!\\s*[-+*/])',
+					match: String.raw`[-+*/](?!\s*[-+*/])`,
 					name: 'keyword.operator.css',
 				},
 				properties: {
@@ -846,13 +845,13 @@ export const lit = {
 							include: '#interpolation',
 						},
 						{
-							begin: '(:)\\s*(?!(\\s*{))',
+							begin: String.raw`(:)\s*(?!(\s*{))`,
 							beginCaptures: {
 								1: {
 									name: 'punctuation.separator.key-value.scss',
 								},
 							},
-							end: '\\s*(;|(?=}|\\)))',
+							end: String.raw`\s*(;|(?=}|\)))`,
 							endCaptures: {
 								1: {
 									name: 'punctuation.terminator.rule.scss',
@@ -926,13 +925,13 @@ export const lit = {
 							include: '#constant_mathematical_symbols',
 						},
 						{
-							begin: '\\(',
+							begin: String.raw`\(`,
 							beginCaptures: {
 								0: {
 									name: 'punctuation.definition.begin.bracket.round.scss',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.definition.end.bracket.round.scss',
@@ -977,11 +976,11 @@ export const lit = {
 									include: '#interpolation',
 								},
 								{
-									match: '\\\\([0-9a-fA-F]{1,6}|.)',
+									match: String.raw`\\([0-9a-fA-F]{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
-									match: '\\$|}',
+									match: String.raw`\$|}`,
 									name: 'invalid.illegal.scss',
 								},
 							],
@@ -996,11 +995,11 @@ export const lit = {
 									include: '#interpolation',
 								},
 								{
-									match: '\\\\([0-9a-fA-F]{1,6}|.)',
+									match: String.raw`\\([0-9a-fA-F]{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
-									match: '\\$|}',
+									match: String.raw`\$|}`,
 									name: 'invalid.illegal.scss',
 								},
 							],
@@ -1017,11 +1016,11 @@ export const lit = {
 									include: '#interpolation',
 								},
 								{
-									match: '\\\\([0-9a-fA-F]{1,6}|.)',
+									match: String.raw`\\([0-9a-fA-F]{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
-									match: '\\$|}',
+									match: String.raw`\$|}`,
 									name: 'invalid.illegal.scss',
 								},
 							],
@@ -1041,11 +1040,11 @@ export const lit = {
 									include: '#interpolation',
 								},
 								{
-									match: '\\\\([0-9a-fA-F]{1,6}|.)',
+									match: String.raw`\\([0-9a-fA-F]{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
-									match: '\\$|}',
+									match: String.raw`\$|}`,
 									name: 'invalid.illegal.scss',
 								},
 							],
@@ -1072,11 +1071,11 @@ export const lit = {
 									include: '#interpolation',
 								},
 								{
-									match: '\\\\([0-9a-fA-F]{1,6}|.)',
+									match: String.raw`\\([0-9a-fA-F]{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
-									match: '\\$|}',
+									match: String.raw`\$|}`,
 									name: 'invalid.illegal.scss',
 								},
 							],
@@ -1084,8 +1083,7 @@ export const lit = {
 					},
 				},
 				selector_custom: {
-					match:
-						'\\b([a-zA-Z0-9]+(-[a-zA-Z0-9]+)+)(?=\\.|\\s++[^:]|\\s*[,\\[{]|:(link|visited|hover|active|focus|focus-visible|target|lang|disabled|enabled|checked|indeterminate|root|nth-(child|last-child|of-type|last-of-type)|first-child|last-child|first-of-type|last-of-type|only-child|only-of-type|empty|not|valid|invalid|user-invalid)(\\([0-9A-Za-z]*\\))?)',
+					match: String.raw`\b([a-zA-Z0-9]+(-[a-zA-Z0-9]+)+)(?=\.|\s++[^:]|\s*[,\[{]|:(link|visited|hover|active|focus|focus-visible|target|lang|disabled|enabled|checked|indeterminate|root|nth-(child|last-child|of-type|last-of-type)|first-child|last-child|first-of-type|last-of-type|only-child|only-of-type|empty|not|valid|invalid|user-invalid)(\([0-9A-Za-z]*\))?)`,
 					name: 'entity.name.tag.custom.scss',
 				},
 				selector_id: {
@@ -1102,11 +1100,11 @@ export const lit = {
 									include: '#interpolation',
 								},
 								{
-									match: '\\\\([0-9a-fA-F]{1,6}|.)',
+									match: String.raw`\\([0-9a-fA-F]{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
-									match: '\\$|}',
+									match: String.raw`\$|}`,
 									name: 'invalid.illegal.identifier.scss',
 								},
 							],
@@ -1127,11 +1125,11 @@ export const lit = {
 									include: '#interpolation',
 								},
 								{
-									match: '\\\\([0-9a-fA-F]{1,6}|.)',
+									match: String.raw`\\([0-9a-fA-F]{1,6}|.)`,
 									name: 'constant.character.escape.scss',
 								},
 								{
-									match: '\\$|}',
+									match: String.raw`\$|}`,
 									name: 'invalid.illegal.identifier.scss',
 								},
 							],
@@ -1141,8 +1139,7 @@ export const lit = {
 				selector_pseudo_class: {
 					patterns: [
 						{
-							begin:
-								'((:)\\bnth-(?:child|last-child|of-type|last-of-type))(\\()',
+							begin: String.raw`((:)\bnth-(?:child|last-child|of-type|last-of-type))(\()`,
 							beginCaptures: {
 								1: {
 									name: 'entity.other.attribute-name.pseudo-class.css',
@@ -1154,7 +1151,7 @@ export const lit = {
 									name: 'punctuation.definition.pseudo-class.begin.bracket.round.css',
 								},
 							},
-							end: '\\)',
+							end: String.raw`\)`,
 							endCaptures: {
 								0: {
 									name: 'punctuation.definition.pseudo-class.end.bracket.round.css',
@@ -1165,7 +1162,7 @@ export const lit = {
 									include: '#interpolation',
 								},
 								{
-									match: '(?i)[+-]?(\\d+n?|n)(\\s*[+-]\\s*\\d+)?',
+									match: String.raw`(?i)[+-]?(\d+n?|n)(\s*[+-]\s*\d+)?`,
 									name: 'constant.numeric.css',
 								},
 								{
@@ -1173,11 +1170,11 @@ export const lit = {
 									name: 'support.constant.parity.css',
 								},
 								{
-									match: '(?<=\\d)n\\b|\\b(n|even|odd)\\b',
+									match: String.raw`(?<=\d)n\b|\b(n|even|odd)\b`,
 									name: 'constant.other.scss',
 								},
 								{
-									match: '\\w+',
+									match: String.raw`\w+`,
 									name: 'invalid.illegal.scss',
 								},
 							],
@@ -1246,7 +1243,7 @@ export const lit = {
 					name: 'string.quoted.double.scss',
 					patterns: [
 						{
-							match: '\\\\(\\h{1,6}|.)',
+							match: String.raw`\\(\h{1,6}|.)`,
 							name: 'constant.character.escape.scss',
 						},
 						{
@@ -1270,7 +1267,7 @@ export const lit = {
 					name: 'string.quoted.single.scss',
 					patterns: [
 						{
-							match: '\\\\(\\h{1,6}|.)',
+							match: String.raw`\\(\h{1,6}|.)`,
 							name: 'constant.character.escape.scss',
 						},
 						{
@@ -1283,7 +1280,7 @@ export const lit = {
 					name: 'entity.name.tag.reference.scss',
 				},
 				tag_wildcard: {
-					match: '\\*',
+					match: String.raw`\*`,
 					name: 'entity.name.tag.wildcard.scss',
 				},
 			},
@@ -1504,8 +1501,7 @@ export const lit = {
 					],
 				},
 				{
-					begin:
-						'(?:([\\s\\S][sS][tT][yY][lL][eE][dD](?:<[_$[:alpha:]][_$[:alnum:]]+>)?(?:\\.[_$[:alpha:]][_$[:alnum:]]*|\\([\'"][_$[:alpha:]][_$[:alnum:]]*[\'"]\\)|\\([_$[:alpha:]][_$\\.[:alnum:]]*(?:\\s+as\\s+.*?)?\\)))|(\\.)(extend))(?=\\.(attrs|withConfig)\\s*(?:<.+>)?\\s*\\()',
+					begin: String.raw`(?:([\s\S][sS][tT][yY][lL][eE][dD](?:<[_$[:alpha:]][_$[:alnum:]]+>)?(?:\.[_$[:alpha:]][_$[:alnum:]]*|\(['"][_$[:alpha:]][_$[:alnum:]]*['"]\)|\([_$[:alpha:]][_$\.[:alnum:]]*(?:\s+as\s+.*?)?\)))|(\.)(extend))(?=\.(attrs|withConfig)\s*(?:<.+>)?\s*\()`,
 					beginCaptures: {
 						1: {
 							patterns: [

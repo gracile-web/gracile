@@ -42,7 +42,7 @@ export class CopyButton extends LitElement {
 		super.connectedCallback();
 		this.addEventListener('click', async () => {
 			const textToCopy = this.text || this.parentElement!.innerText;
-			if (!textToCopy) throw Error('No text to copy');
+			if (!textToCopy) throw new Error('No text to copy');
 
 			await navigator.clipboard.writeText(textToCopy);
 

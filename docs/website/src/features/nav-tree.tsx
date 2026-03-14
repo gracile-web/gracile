@@ -1,14 +1,12 @@
 import type { TemplateResult } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import { type FileTree } from '../lib/content/file-tree-builder.js';
-
 import chevronRight from '../assets/icons/chevron-right.svg' with {
 	type: 'svg',
 	format: 'lit',
 };
-
-import { ifDefined } from 'lit/directives/if-defined.js';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 const recurse = (
 	pathname: string,
@@ -26,7 +24,7 @@ const recurse = (
 				? value.directory['README.md']?.metadata.titleHtml
 				: value.metadata?.titleHtml;
 
-		return name !== 'README.md' ? (
+		return name === 'README.md' ? null : (
 			<div
 				class:map={{
 					[`depth-${depth}`]: true,
@@ -54,7 +52,7 @@ const recurse = (
 						: null}
 				</div>
 			</div>
-		) : null;
+		);
 	});
 
 export const NavTree = ({

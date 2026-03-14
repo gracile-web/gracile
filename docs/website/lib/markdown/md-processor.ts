@@ -11,7 +11,6 @@ import remarkAdmonitions from 'remark-github-beta-blockquote-admonitions';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
-
 import rehypeRaw from 'rehype-raw';
 import * as shiki from 'shiki';
 import rehypeShiki from '@shikijs/rehype';
@@ -21,16 +20,14 @@ import {
 	transformerNotationHighlight,
 	transformerNotationWordHighlight,
 } from '@shikijs/transformers';
-
 import { toHast } from 'mdast-util-to-hast';
-
 import { h } from 'hastscript';
-
 import { unified } from 'unified';
+
 import { sqlLang, sqlPjson } from './tm-grammars/sql.js';
 import { litShikiLanguages } from './tm-grammars/lit.js';
 
-const shikiCssVarsTheme = shiki.createCssVariablesTheme({
+const shikiCssVariablesTheme = shiki.createCssVariablesTheme({
 	name: 'css-variables',
 	variablePrefix: '--shiki-',
 	variableDefaults: {},
@@ -78,7 +75,7 @@ export const mdProcessor = unified()
 			let displayTitle = title.slice(2, -1);
 			// Capitalize
 			displayTitle = `${displayTitle.at(0)}${displayTitle
-				.substring(1)
+				.slice(1)
 				.toLowerCase()}`;
 			return {
 				displayTitle,
@@ -91,7 +88,7 @@ export const mdProcessor = unified()
 
 	.use(remarkRehype, { allowDangerousHtml: true })
 	.use(rehypeShiki, {
-		theme: shikiCssVarsTheme,
+		theme: shikiCssVariablesTheme,
 
 		langs: [
 			'html',

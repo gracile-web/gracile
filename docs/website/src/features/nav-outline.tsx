@@ -1,7 +1,8 @@
 import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
-import type { MarkdownModule, TocLevel } from '../../lib/markdown/md-module.js';
 import type { TemplateResult } from 'lit';
 import { nothing } from 'lit';
+
+import type { MarkdownModule, TocLevel } from '../../lib/markdown/md-module.js';
 
 const recurse = (toc: TocLevel[]): TemplateResult<1> => (
 	<For each={toc}>

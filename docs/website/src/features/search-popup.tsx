@@ -16,9 +16,10 @@ await import(
 
 // FIXME: focus trap for searchbox (pagefind svelte's component issue ?)
 
-import styles from './search-popup.scss?inline';
 import links from '../styles/typography/links.scss?inline';
 import { router } from '../lib/router.js';
+
+import styles from './search-popup.scss?inline';
 
 @customElement('search-popup')
 export class SearchPopup extends LitElement {

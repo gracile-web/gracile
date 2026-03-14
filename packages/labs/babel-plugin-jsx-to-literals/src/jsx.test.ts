@@ -1,5 +1,3 @@
- 
-
 /* import { pluginTester } from 'babel-plugin-tester';
 import babelPluginJsx from './babel-plugin-jsx.js';
 import { describe, it } from 'node:test';

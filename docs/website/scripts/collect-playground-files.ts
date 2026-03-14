@@ -1,6 +1,7 @@
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
+import { join, relative } from 'node:path';
+
 import glob from 'fast-glob';
-import { join, relative } from 'path';
 import type { FileSystemTree } from '@webcontainer/api';
 import set from 'lodash.set';
 
@@ -123,15 +124,15 @@ export default defineRoute({
 };
 
 const gracileFiles = await glob(
-	join(process.cwd(), '../gracile/packages/**/*.{js,json}'),
-	{ ignore: [join(process.cwd(), '../gracile/**/node_modules/**')] },
+	join(process.cwd(), '../../packages/**/*.{js,json}'),
+	{ ignore: [join(process.cwd(), '../../packages/**/node_modules/**')] },
 );
 
 await Promise.all(
 	gracileFiles.map(async (filePath) => {
 		set(
 			files,
-			join('lib', relative(join(process.cwd(), '..'), filePath))
+			join('lib', relative(join(process.cwd(), '../..'), filePath))
 				.replaceAll('/', '/directory/')
 				.split('/'),
 			{ file: { contents: await readFile(filePath, 'utf8') } },

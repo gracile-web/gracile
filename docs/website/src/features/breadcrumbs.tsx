@@ -1,3 +1,5 @@
+import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
+
 import chevronDoubleRight from '../assets/icons/chevron-double-right.svg' with {
 	type: 'svg',
 	format: 'lit',
@@ -6,7 +8,6 @@ import chevronRight from '../assets/icons/chevron-right.svg' with {
 	type: 'svg',
 	format: 'lit',
 };
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
 
 export type BreadCrumbsList = { title: string; url: string }[];
 

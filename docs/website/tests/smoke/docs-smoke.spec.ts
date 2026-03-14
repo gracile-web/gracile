@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prevent-abbreviations */
 import { expect, test } from '@playwright/test';
 
 test.describe('docs website smoke', () => {
@@ -10,7 +11,7 @@ test.describe('docs website smoke', () => {
 		await expect(
 			page.getByRole('heading', { name: 'Main Features' }),
 		).toBeVisible();
-		await expect(page.getByRole('link', { name: /See more/i })).toBeVisible();
+		await expect(page.getByRole('link', { name: /see more/i })).toBeVisible();
 	});
 
 	test('docs index loads with rendered markdown content', async ({ page }) => {
@@ -42,6 +43,6 @@ test.describe('docs website smoke', () => {
 		await expect(
 			page.getByRole('heading', { name: '404 - Page not found' }),
 		).toBeVisible();
-		await expect(page).toHaveTitle(/404: Not found/i);
+		await expect(page).toHaveTitle(/404: not found/i);
 	});
 });

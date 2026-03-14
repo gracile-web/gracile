@@ -9,19 +9,17 @@ import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import remarkAdmonitions from 'remark-github-beta-blockquote-admonitions';
 import remarkStringify from 'remark-stringify';
-
 import remarkFrontmatter from 'remark-frontmatter';
 import { stripHtml as stringStripHtml } from 'string-strip-html';
-
 import remarkStripMd from 'strip-markdown';
 import { unified } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
-import { mdProcessor } from './md-processor.ts';
 import remarkSmartypants from 'remark-smartypants';
-import withExtractedTableOfContents from './rehype-extract-toc.ts';
 import rehypeSlug from 'rehype-slug';
-
 import yaml from 'yaml';
+
+import withExtractedTableOfContents from './rehype-extract-toc.ts';
+import { mdProcessor } from './md-processor.ts';
 
 /**
  * @param {string} input

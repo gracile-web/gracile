@@ -38,15 +38,12 @@ export interface FileNode {
 export function buildTree(mdModules: TreeNodeData[]): FileTree {
 	const tree: FileTree = {};
 
-	const dirs = [];
+	const directories = [];
 
-	for (let i = 0; i < mdModules.length; i++) {
-		const mdModule = mdModules[i];
-
-		const path = [
-			...mdModule.originalPath.replaceAll('/', '/directory/').split('/'),
-		];
-
+	for (const mdModule of mdModules) {
+		const path = mdModule.originalPath
+			.replaceAll('/', '/directory/')
+			.split('/');
 		set(tree, path, { metadata: mdModule, file: {} });
 
 		const enclosingDir = get(tree, [...path.slice(0, -1)]);

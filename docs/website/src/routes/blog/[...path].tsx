@@ -1,18 +1,16 @@
 import { defineRoute } from '@gracile/server/route';
+import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import { NavMain } from '../../features/nav-main.jsx';
-
 import {
 	BreadCrumbs,
 	type BreadCrumbsList,
 } from '../../features/breadcrumbs.jsx';
 import { NavRight } from '../../features/nav-right.jsx';
 import { document } from '../../document/document.jsx';
-
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
 import { FooterMain } from '../../features/footer-main.jsx';
 import { LinksPagination } from '../../features/links-pagination.jsx';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 const tree = {
 	docs: {

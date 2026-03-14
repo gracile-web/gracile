@@ -1,18 +1,17 @@
 import { defineConfig, type PluginOption } from 'vite';
-import { vitePluginMarkdownLit } from './lib/markdown/vite-plugin-markdown-lit.ts';
 import { viteSvgPlugin } from '@gracile/svg/vite';
 import { viteSitemapPlugin } from '@gracile/sitemap/vite';
 import { gracile } from '@gracile/gracile/plugin';
 import { gracileJsx } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/vite';
 import { viteOgImagesGenerator } from 'og-images-generator/vite';
-import { SITE_URL } from './src/content/global.js';
 import strip from '@rollup/plugin-strip';
 import { literalsHtmlCssMinifier } from '@literals/rollup-plugin-html-css-minifier';
-
 import { getIcons } from '@iconify/utils';
 import { loadCollection } from '@iconify/json';
-
 import Inspect from 'vite-plugin-inspect';
+
+import { SITE_URL } from './src/content/global.js';
+import { vitePluginMarkdownLit } from './lib/markdown/vite-plugin-markdown-lit.ts';
 
 async function iconifyLoader({ iconSet, data }) {
 	const virtualModuleId = 'iconify:loader';

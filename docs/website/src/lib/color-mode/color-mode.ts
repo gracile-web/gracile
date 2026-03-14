@@ -21,8 +21,7 @@ document.addEventListener('click', (event) => {
 
 router.addEventListener('route-rendered', () => {
 	const currentMode = root.getAttribute('data-color-mode');
-	root.classList.remove('sl-theme-dark');
-	root.classList.remove('sl-theme-light');
+	root.classList.remove('sl-theme-dark', 'sl-theme-light');
 
 	root.classList.add('sl-theme-' + currentMode);
 });

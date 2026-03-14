@@ -41,21 +41,21 @@ function attacher() {
 			const parents = [];
 			let previous = root;
 
-			headings.forEach((heading) => {
+			for (const heading of headings) {
 				if (heading.depth > previous.depth) {
 					if (previous.children === undefined) {
 						previous.children = [];
 					}
 					parents.push(previous);
 				} else if (heading.depth < previous.depth) {
-					while (parents[parents.length - 1].depth >= heading.depth) {
+					while (parents.at(-1).depth >= heading.depth) {
 						parents.pop();
 					}
 				}
 
-				parents[parents.length - 1].children.push(heading);
+				parents.at(-1).children.push(heading);
 				previous = heading;
-			});
+			}
 
 			return root.children;
 		}

@@ -24,7 +24,7 @@ export class Prefetcher {
 			link.rel = 'prefetch';
 			link.as = 'document';
 			link.setAttribute(Prefetcher.DATA_LINK_ATTRIBUTE_NAME, '');
-			document.head.appendChild(link);
+			document.head.append(link);
 		}
 
 		link.href = href;
@@ -43,7 +43,7 @@ export class Prefetcher {
 			`a[${Prefetcher.DATA_ANCHOR_ATTRIBUTE_NAME}]`,
 		);
 
-		links.forEach((link) => {
+		for (const link of links) {
 			link.addEventListener(
 				'mouseenter',
 				(event) => this.prefetch((event.target as HTMLAnchorElement).href),
@@ -54,6 +54,6 @@ export class Prefetcher {
 				(event) => this.prefetch((event.target as HTMLAnchorElement).href),
 				{ signal: this.#aborter.signal },
 			);
-		});
+		}
 	}
 }

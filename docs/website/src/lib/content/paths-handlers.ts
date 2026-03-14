@@ -1,4 +1,5 @@
 import type { MarkdownModule } from '@gracile/markdown/md-module';
+
 import type { TreeNodeData } from './file-tree-builder.js';
 
 export class PathsHandlers {
@@ -25,7 +26,7 @@ export class PathsHandlers {
 	public pathToHref(p: string): string {
 		return (
 			this.stripContentPath(p)
-				.replaceAll(/\/[0-9]+-/g, '/')
+				.replaceAll(/\/\d+-/g, '/')
 				.replace(/\.md$/, '')
 				.replace(/\/README$/, '') + '/'
 		);

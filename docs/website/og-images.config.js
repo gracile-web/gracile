@@ -1,8 +1,10 @@
+import { readFile } from 'node:fs/promises';
+
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { html, styled, OG_SIZE, FONTS, fetchFont } from 'og-images-generator';
 import stripEmojiBase from 'emoji-strip';
+
 import { SITE_SUBTITLE, SITE_TITLE } from './src/content/global.js';
-import { readFile } from 'fs/promises';
 
 /**
  * Add unsupported emojis
@@ -44,7 +46,7 @@ export const renderOptions = {
 
 /** @type {import('og-images-generator').Template} */
 export const template = ({ page }) => {
-	console.info('OG Template for: ', page.path);
+	console.info('OG Template for:', page.path);
 
 	// console.log(page.path.split('/').at(-1));
 	// TODO:
@@ -66,7 +68,7 @@ export const template = ({ page }) => {
 	const description = page.meta.tags['og:description'] ?? '-';
 
 	const breadcrumbs = page.meta?.jsonLds?.find(
-		(j) => j?.['@type'] === 'BreadcrumbList',
+		(index) => index?.['@type'] === 'BreadcrumbList',
 	)?.itemListElement;
 
 	// <!-- <span style=${styles.subTitle}>Docs</span> -->
@@ -85,8 +87,8 @@ export const template = ({ page }) => {
 				<header style=${styles.header}>
 					<span style=${styles.breadcrumbs}>
 						${breadcrumbs?.map(
-							(j) => html`
-								${stripEmoji(j.name)}
+							(index) => html`
+								${stripEmoji(index.name)}
 								<span style="margin: 0 2rem 0 1rem"> / </span>
 							`,
 						)}

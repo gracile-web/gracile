@@ -1,7 +1,8 @@
+import { type } from 'arktype';
+
 import type { MarkdownModule } from '../../lib/markdown/md-module.js';
 import { PathsHandlers } from '../lib/content/paths-handlers.js';
 import { buildTree } from '../lib/content/file-tree-builder.js';
-import { type } from 'arktype';
 
 export const pathsHandlers = new PathsHandlers();
 

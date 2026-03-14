@@ -1,4 +1,5 @@
 import throttle from 'lodash.throttle';
+
 import { router } from './router.js';
 
 const TOP_OFFSET = 50;
@@ -16,24 +17,24 @@ router.addEventListener('route-rendered', collect);
 
 document.addEventListener(
 	'scroll',
-	throttle(
-		() =>
-			tocHeadings?.forEach((tocHeading) => {
+	throttle(() => {
+		if (tocHeadings)
+			for (const tocHeading of tocHeadings) {
 				const top = tocHeading.getBoundingClientRect().top;
-				if (top >= TOP_OFFSET) return;
+				if (top >= TOP_OFFSET) continue;
 
 				const id =
 					tocHeading.getAttribute('id') ||
 					tocHeading.getAttribute('href')?.slice(1);
 
-				tocSelector?.forEach((toc) => {
-					const foundId = toc.getAttribute('href')?.replace(/^#/, '');
+				if (tocSelector)
+					for (const toc of tocSelector) {
+						const foundId = toc.getAttribute('href')?.replace(/^#/, '');
 
-					if (toc instanceof HTMLAnchorElement && foundId === id)
-						toc.setAttribute('data-toc-active', '');
-					else toc.removeAttribute('data-toc-active');
-				});
-			}),
-		50,
-	),
+						if (toc instanceof HTMLAnchorElement && foundId === id)
+							toc.setAttribute('data-toc-active', '');
+						else toc.removeAttribute('data-toc-active');
+					}
+			}
+	}, 50),
 );

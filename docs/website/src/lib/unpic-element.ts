@@ -43,7 +43,7 @@ export class UnpicImg
 	@property({ type: String }) cdn?: ImageCdn;
 
 	override render() {
-		const inputProps = {
+		const inputProperties = {
 			src: this.src,
 			width: this.width,
 			height: this.height,
@@ -61,25 +61,25 @@ export class UnpicImg
 			cdn: this.cdn,
 		} as UnpicImageProps<CoreImageAttributes<StyleInfo>>;
 
-		const transformedProps = transformProps<
+		const transformedProperties = transformProps<
 			CoreImageAttributes<StyleInfo>,
 			StyleInfo
-		>(inputProps);
+		>(inputProperties);
 
 		return html`
       <img
         part="image"
-        src=${transformedProps.src}"
-        alt=${transformedProps.alt}"
-        width=${transformedProps.width}"
-        height=${transformedProps.height}"
-        style=${styleMap(transformedProps.style ?? {})}"
-        srcset=${transformedProps.srcset}"
-        role=${ifDefined(transformedProps.role)}"
-        sizes=${transformedProps.sizes}"
-        loading=${transformedProps.loading}"
-        fetchpriority=${ifDefined(transformedProps.fetchpriority)}"
-        decoding=${ifDefined(transformedProps.decoding)}"
+        src=${transformedProperties.src}"
+        alt=${transformedProperties.alt}"
+        width=${transformedProperties.width}"
+        height=${transformedProperties.height}"
+        style=${styleMap(transformedProperties.style ?? {})}"
+        srcset=${transformedProperties.srcset}"
+        role=${ifDefined(transformedProperties.role)}"
+        sizes=${transformedProperties.sizes}"
+        loading=${transformedProperties.loading}"
+        fetchpriority=${ifDefined(transformedProperties.fetchpriority)}"
+        decoding=${ifDefined(transformedProperties.decoding)}"
         crossorigin=${ifDefined(this.crossOrigin)}"
         ismap=${ifDefined(this.isMap)}"
         name=${ifDefined(this.name)}"
