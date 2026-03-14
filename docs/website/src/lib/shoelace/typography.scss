@@ -3,177 +3,177 @@
 @use './vars' as *;
 
 :host {
-  line-height: $line-height-normal;
+	line-height: $line-height-normal;
 }
 
 p {
-  margin: $spacing-large 0;
+	margin: $spacing-large 0;
 }
 
 p + :is(h1, h2, h3, h4, h5, h6) {
-  margin-top: 2em;
+	margin-top: 2em;
 }
 
 /* Headings */
 
 .icon-link {
-  opacity: 0.15;
-  transition: opacity $transition-fast;
+	opacity: 0.15;
+	transition: opacity $transition-fast;
 }
 
 :is(h1, h2, h3, h4, h5, h6) {
-  margin: 1.5em 0;
+	margin: 1.5em 0;
 
-  // Safari only?
-  hyphens: auto;
-  line-height: $line-height-dense;
-  word-wrap: break-word;
+	// Safari only?
+	hyphens: auto;
+	line-height: $line-height-dense;
+	word-wrap: break-word;
 
-  &:hover {
-    [href^='#'] .icon-link {
-      opacity: 0.85;
-    }
-  }
+	&:hover {
+		[href^='#'] .icon-link {
+			opacity: 0.85;
+		}
+	}
 
-  [href^='#'] {
-    display: inline-block;
-    width: 0.75em;
-    height: 0.75em;
-    margin: 0 0.25ch;
-    vertical-align: baseline;
+	[href^='#'] {
+		display: inline-block;
+		width: 0.75em;
+		height: 0.75em;
+		margin: 0 0.25ch;
+		vertical-align: baseline;
 
-    &:hover {
-      .icon-link {
-        opacity: 1;
-      }
-    }
-  }
+		&:hover {
+			.icon-link {
+				opacity: 1;
+			}
+		}
+	}
 }
 
 h1 {
-  font-size: $font-size-2x-large;
+	font-size: $font-size-2x-large;
 }
 
 h2 {
-  font-size: $font-size-x-large;
+	font-size: $font-size-x-large;
 }
 
 h3 {
-  font-size: $font-size-large;
+	font-size: $font-size-large;
 }
 
 h4 {
-  font-size: $font-size-medium;
-  font-weight: $font-weight-bold;
+	font-size: $font-size-medium;
+	font-weight: $font-weight-bold;
 }
 
 h5 {
-  font-size: $font-size-small;
-  font-weight: $font-weight-bold;
+	font-size: $font-size-small;
+	font-weight: $font-weight-bold;
 }
 
 h6 {
-  font-size: $font-size-small;
+	font-size: $font-size-small;
 }
 
 /* Lists */
 
 :is(ul, ol) {
-  padding: 0 $spacing-x-large;
-  margin: $spacing-x-large 0;
+	padding: 0 $spacing-x-large;
+	margin: $spacing-x-large 0;
 
-  & :is(ul, ol) {
-    margin: 0 0 $spacing-x-large;
-  }
+	& :is(ul, ol) {
+		margin: 0 0 $spacing-x-large;
+	}
 }
 
 li {
-  padding-left: $spacing-small;
-  margin: $spacing-small 0;
+	padding-left: $spacing-small;
+	margin: $spacing-small 0;
 }
 
 dt {
-  margin: $spacing-medium 0;
-  font-weight: $font-weight-bold;
+	margin: $spacing-medium 0;
+	font-weight: $font-weight-bold;
 }
 
 dl {
-  margin: $spacing-2x-large 0;
+	margin: $spacing-2x-large 0;
 }
 
 dd {
-  margin: 0 0 $spacing-2x-large $spacing-2x-large;
+	margin: 0 0 $spacing-2x-large $spacing-2x-large;
 }
 
 /* Tables */
 
 table {
-  width: 100%;
-  margin: $spacing-2x-large 0;
-  border-collapse: collapse;
+	width: 100%;
+	margin: $spacing-2x-large 0;
+	border-collapse: collapse;
 }
 
 tr {
-  border-bottom: 1px solid $color-neutral-100;
+	border-bottom: 1px solid $color-neutral-100;
 }
 
 th {
-  padding: $spacing-small $spacing-medium;
-  text-align: left;
+	padding: $spacing-small $spacing-medium;
+	text-align: left;
 }
 
 td {
-  padding: $spacing-x-small $spacing-medium;
+	padding: $spacing-x-small $spacing-medium;
 }
 
 /* Misc. */
 
 figure {
-  margin: $spacing-2x-large 0;
+	margin: $spacing-2x-large 0;
 }
 
 figcaption {
-  font-size: $toggle-size-small;
-  color: $color-neutral-600;
+	font-size: $toggle-size-small;
+	color: $color-neutral-600;
 }
 
 img {
-  max-width: 100%;
+	max-width: 100%;
 }
 
 hr {
-  border: 1.5px solid $color-neutral-400;
+	border: 1.5px solid $color-neutral-400;
 }
 
 hr,
 sl-divider {
-  margin: $spacing-3x-large 0;
+	margin: $spacing-3x-large 0;
 }
 
 /* Code */
 
 blockquote {
-  padding: $spacing-medium $spacing-large;
-  margin: $spacing-2x-large;
-  background: $color-neutral-100;
-  border: 1px solid $color-neutral-300;
-  border-radius: $border-radius-large;
+	padding: $spacing-medium $spacing-large;
+	margin: $spacing-2x-large;
+	background: $color-neutral-100;
+	border: 1px solid $color-neutral-300;
+	border-radius: $border-radius-large;
 
-  & > *:first-child {
-    margin-top: 0;
-  }
+	& > *:first-child {
+		margin-top: 0;
+	}
 
-  & > *:last-child {
-    margin-bottom: 0;
-  }
+	& > *:last-child {
+		margin-bottom: 0;
+	}
 }
 
 /* Custom elements */
 
 sl-details {
-  margin: $spacing-2x-large 0;
+	margin: $spacing-2x-large 0;
 
-  pre {
-    margin: 0;
-  }
+	pre {
+		margin: 0;
+	}
 }

@@ -6,148 +6,148 @@
 @use '../lib/shoelace/vars' as *;
 
 :host {
-  display: contents;
+	display: contents;
 
-  @include fix-border-box;
+	@include fix-border-box;
 }
 
 sl-dialog {
-  &::part(panel) {
-    max-width: 1200px;
-    height: 100%;
-    max-height: 85dvh;
-    margin: 0 2vw;
+	&::part(panel) {
+		max-width: 1200px;
+		height: 100%;
+		max-height: 85dvh;
+		margin: 0 2vw;
 
-    --width: 80dvw;
-  }
+		--width: 80dvw;
+	}
 
-  &::part(header) {
-    text-align: center;
-  }
+	&::part(header) {
+		text-align: center;
+	}
 
-  &::part(body) {
-    padding-top: 0;
-  }
+	&::part(body) {
+		padding-top: 0;
+	}
 
-  &::part(title) {
-    font-size: $font-size-small;
-    text-align: center;
-  }
+	&::part(title) {
+		font-size: $font-size-small;
+		text-align: center;
+	}
 }
 
 .pagefind-ui__result-thumb {
-  display: none;
+	display: none;
 }
 
 .pagefind-ui__result {
-  // padding: $spacing-x-small;
-  margin: $spacing-x-small 0;
-  border-bottom: 1px solid $color-neutral-100;
+	// padding: $spacing-x-small;
+	margin: $spacing-x-small 0;
+	border-bottom: 1px solid $color-neutral-100;
 }
 
 ol {
-  margin: 0;
+	margin: 0;
 }
 
 mark {
-  color: $color-neutral-1000;
+	color: $color-neutral-1000;
 
-  @include color-mode(light) {
-    background: $color-primary-500;
-  }
+	@include color-mode(light) {
+		background: $color-primary-500;
+	}
 
-  @include color-mode(dark) {
-    background: $color-primary-100;
-  }
+	@include color-mode(dark) {
+		background: $color-primary-100;
+	}
 }
 
 // NOTE: disabled for now
 .pagefind-ui__search-clear {
-  display: none;
+	display: none;
 }
 
 .pagefind-ui__results {
-  padding: 0 calc(1rem + 1vw);
+	padding: 0 calc(1rem + 1vw);
 }
 
 .pagefind-ui__drawer {
-  width: 100%;
-  height: calc(85dvh - 11rem);
+	width: 100%;
+	height: calc(85dvh - 11rem);
 
-  // min-height: 15rem;
-  padding: $spacing-large;
-  padding-top: 0;
-  margin-top: $spacing-medium;
-  overflow-y: auto;
-  text-align: initial;
-  scrollbar-gutter: stable;
-  border: 1px solid $color-neutral-200;
-  border-radius: $border-radius-large;
+	// min-height: 15rem;
+	padding: $spacing-large;
+	padding-top: 0;
+	margin-top: $spacing-medium;
+	overflow-y: auto;
+	text-align: initial;
+	scrollbar-gutter: stable;
+	border: 1px solid $color-neutral-200;
+	border-radius: $border-radius-large;
 }
 
 [slot='label'] {
-  display: flex;
-  gap: $spacing-2x-large;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	gap: $spacing-2x-large;
+	align-items: center;
+	justify-content: center;
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  padding-top: $spacing-small;
+	display: flex;
+	align-items: center;
+	padding-top: $spacing-small;
 
-  svg {
-    width: 17rem;
-    height: 2rem;
-    fill: $color-neutral-1000;
-  }
+	svg {
+		width: 17rem;
+		height: 2rem;
+		fill: $color-neutral-1000;
+	}
 }
 
 button {
-  all: unset;
-  display: inline-flex;
-  gap: $spacing-medium;
-  align-items: center;
-  padding: $spacing-x-small $spacing-small;
-  margin: $spacing-x-small;
-  color: $color-neutral-800;
-  cursor: pointer;
-  background: $color-gray-100;
-  border: 1px solid $color-neutral-300;
-  border-radius: $border-radius-small;
+	all: unset;
+	display: inline-flex;
+	gap: $spacing-medium;
+	align-items: center;
+	padding: $spacing-x-small $spacing-small;
+	margin: $spacing-x-small;
+	color: $color-neutral-800;
+	cursor: pointer;
+	background: $color-gray-100;
+	border: 1px solid $color-neutral-300;
+	border-radius: $border-radius-small;
 
-  &:hover {
-    background: $color-gray-200;
-    border: 1px solid $color-neutral-400;
-  }
+	&:hover {
+		background: $color-gray-200;
+		border: 1px solid $color-neutral-400;
+	}
 }
 
 .pagefind-ui__form {
-  display: flex;
-  flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .pagefind-ui__search-input {
-  flex-grow: 1;
-  padding: 1em;
-  margin-top: 3px;
-  font-size: 16px;
-  background-color: $input-background-color;
-  border: 1px solid $input-border-color;
-  border-radius: $input-border-radius-large;
+	flex-grow: 1;
+	padding: 1em;
+	margin-top: 3px;
+	font-size: 16px;
+	background-color: $input-background-color;
+	border: 1px solid $input-border-color;
+	border-radius: $input-border-radius-large;
 
-  &:focus {
-    outline: 2px solid $input-focus-ring-color;
-  }
+	&:focus {
+		outline: 2px solid $input-focus-ring-color;
+	}
 }
 
 .pagefind-ui__results-area {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 
-  & .pagefind-ui__results {
-    width: 100%;
-  }
+	& .pagefind-ui__results {
+		width: 100%;
+	}
 }

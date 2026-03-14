@@ -1,24 +1,24 @@
 @use './vars' as *;
 
 .shiki {
-  --shiki-color-text: #{$color-neutral-900};
-  --shiki-foreground: #{$color-neutral-950};
-  --shiki-color-background: #{$color-neutral-50};
-  --shiki-token-constant: #{$color-emerald-700};
-  --shiki-token-string: #{$color-violet-700};
-  --shiki-token-comment: #{$color-neutral-700};
-  --shiki-token-keyword: #{$color-red-700};
-  --shiki-token-parameter: #{$color-purple-700};
-  --shiki-token-function: #{$color-blue-700};
-  --shiki-token-string-expression: #{$color-orange-700};
-  --shiki-token-punctuation: #{$color-neutral-700};
-  --shiki-token-link: #{$color-violet-700};
+	--shiki-color-text: #{$color-neutral-900};
+	--shiki-foreground: #{$color-neutral-950};
+	--shiki-color-background: #{$color-neutral-50};
+	--shiki-token-constant: #{$color-emerald-700};
+	--shiki-token-string: #{$color-violet-700};
+	--shiki-token-comment: #{$color-neutral-700};
+	--shiki-token-keyword: #{$color-red-700};
+	--shiki-token-parameter: #{$color-purple-700};
+	--shiki-token-function: #{$color-blue-700};
+	--shiki-token-string-expression: #{$color-orange-700};
+	--shiki-token-punctuation: #{$color-neutral-700};
+	--shiki-token-link: #{$color-violet-700};
 
-  tab-size: 2ch;
-  counter-reset: line;
+	tab-size: 2ch;
+	counter-reset: line;
 
-  & .highlighted-line {
-    background-color: $color-gray-200;
-    outline: 2px solid $color-gray-300;
-  }
+	& .highlighted-line {
+		background-color: $color-gray-200;
+		outline: 2px solid $color-gray-300;
+	}
 }

@@ -3,98 +3,98 @@
 @import '../../lib/shoelace/typography';
 
 .git-only {
-  display: none;
+	display: none;
 }
 
 .link-external {
-  // From: https://stackoverflow.com/a/66093928
-  &::after {
-    padding: 0 0.5em;
-    margin: 0 0.125rem;
-    clip-path: padding-box inset(0.125rem 0);
-    content: '';
-    background-color: currentcolor;
-    mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2048 2048'%3E%3Cpath d='M1792 256v640h-128V475l-851 850-90-90 850-851h-421V256h640zm-512 1007h128v529H256V640h529v128H384v896h896v-401z'/%3E%3C/svg%3E");
-    mask-repeat: no-repeat;
-    mask-position: center;
-  }
+	// From: https://stackoverflow.com/a/66093928
+	&::after {
+		padding: 0 0.5em;
+		margin: 0 0.125rem;
+		clip-path: padding-box inset(0.125rem 0);
+		content: '';
+		background-color: currentcolor;
+		mask-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2048 2048'%3E%3Cpath d='M1792 256v640h-128V475l-851 850-90-90 850-851h-421V256h640zm-512 1007h128v529H256V640h529v128H384v896h896v-401z'/%3E%3C/svg%3E");
+		mask-repeat: no-repeat;
+		mask-position: center;
+	}
 }
 
 // CREDITS: https://codepen.io/sazzad/pen/gEEKQb (adapted)
 .file-tree {
-  padding: $spacing-large;
-  overflow: auto;
-  font-size: $font-size-large;
-  font-weight: 400;
-  line-height: $line-height-normal;
-  white-space: nowrap;
+	padding: $spacing-large;
+	overflow: auto;
+	font-size: $font-size-large;
+	font-weight: 400;
+	line-height: $line-height-normal;
+	white-space: nowrap;
 
-  ul,
-  li {
-    all: unset;
-  }
+	ul,
+	li {
+		all: unset;
+	}
 
-  li {
-    display: block;
-  }
+	li {
+		display: block;
+	}
 
-  em {
-    font-size: $font-size-medium;
-    color: $color-neutral-600;
-  }
+	em {
+		font-size: $font-size-medium;
+		color: $color-neutral-600;
+	}
 
-  ul {
-    padding-left: 5px;
-    list-style: none;
+	ul {
+		padding-left: 5px;
+		list-style: none;
 
-    li {
-      position: relative;
-      box-sizing: border-box;
-      width: 100%;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      padding-left: 24px;
+		li {
+			position: relative;
+			box-sizing: border-box;
+			width: 100%;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			padding-left: 24px;
 
-      &::before {
-        position: absolute;
-        top: 24px;
-        left: 0;
-        width: 18px;
-        height: 1px;
-        margin: auto;
-        content: '';
-        background-color: $color-neutral-500;
-      }
+			&::before {
+				position: absolute;
+				top: 24px;
+				left: 0;
+				width: 18px;
+				height: 1px;
+				margin: auto;
+				content: '';
+				background-color: $color-neutral-500;
+			}
 
-      &::after {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 1px;
-        height: 100%;
-        content: '';
-        background-color: $color-neutral-500;
-      }
+			&::after {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				width: 1px;
+				height: 100%;
+				content: '';
+				background-color: $color-neutral-500;
+			}
 
-      &:last-child::after {
-        height: 24px;
-      }
-    }
+			&:last-child::after {
+				height: 24px;
+			}
+		}
 
-    a {
-      cursor: pointer;
+		a {
+			cursor: pointer;
 
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
 }
 
 .prose {
-  :is(h1, h2, h3, h4, h5, h6) {
-    display: flex;
-    gap: 0.3334em;
-  }
+	:is(h1, h2, h3, h4, h5, h6) {
+		display: flex;
+		gap: 0.3334em;
+	}
 }

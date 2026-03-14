@@ -8,37 +8,37 @@
 
 .layout-default,
 .layout-blog {
-  .content {
-    position: relative;
-    left: 0;
-    max-width: calc(22rem + 20dvw);
-    min-height: 84vh;
-    padding: 0 5dvw;
-    margin-bottom: 5vh;
+	.content {
+		position: relative;
+		left: 0;
+		max-width: calc(22rem + 20dvw);
+		min-height: 84vh;
+		padding: 0 5dvw;
+		margin-bottom: 5vh;
 
-    @include breakpoint(md) {
-      max-width: calc(100dvw);
-    }
+		@include breakpoint(md) {
+			max-width: calc(100dvw);
+		}
 
-    @include breakpoint(md) {
-      left: calc($main-nav-width - 24.4rem + 18dvw);
-      max-width: calc(41rem + 20dvw);
-    }
+		@include breakpoint(md) {
+			left: calc($main-nav-width - 24.4rem + 18dvw);
+			max-width: calc(41rem + 20dvw);
+		}
 
-    @include breakpoint(xl) {
-      left: calc($main-nav-width - 7.8rem + 11.2dvw);
-      max-width: calc(6rem + 43dvw);
-      padding: 0;
-    }
+		@include breakpoint(xl) {
+			left: calc($main-nav-width - 7.8rem + 11.2dvw);
+			max-width: calc(6rem + 43dvw);
+			padding: 0;
+		}
 
-    @include breakpoint(xxl) {
-      left: calc($main-nav-width - 8rem + 14dvw);
-      max-width: calc(28rem + 22dvw);
-      padding: 0;
-    }
-  }
+		@include breakpoint(xxl) {
+			left: calc($main-nav-width - 8rem + 14dvw);
+			max-width: calc(28rem + 22dvw);
+			padding: 0;
+		}
+	}
 
-  main {
-    min-height: 35vh;
-  }
+	main {
+		min-height: 35vh;
+	}
 }

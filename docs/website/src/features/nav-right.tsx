@@ -9,54 +9,54 @@ import { MenuToggle } from './menu-toggle.jsx';
 const githubLabel = 'Source code (GitHub)';
 
 export function NavRight(options: { markdownModule: MarkdownModule | null }) {
-  return (
-    <>
-      <MenuToggle position="right" label="go to" />
+	return (
+		<>
+			<MenuToggle position="right" label="go to" />
 
-      <aside
-        class="m-nav-right"
-        /* data-state={asideMenuState} */
-      >
-        <div class="app-links">
-          <a
-            title={githubLabel}
-            class="unstyled sources"
-            href={REPO_URL}
-            target="_blank"
-            aria-label={githubLabel}
-            rel="noopener noreferrer nofollow"
-          >
-            <i-c o="github-logo-duotone" s="1.5rem"></i-c>
+			<aside
+				class="m-nav-right"
+				/* data-state={asideMenuState} */
+			>
+				<div class="app-links">
+					<a
+						title={githubLabel}
+						class="unstyled sources"
+						href={REPO_URL}
+						target="_blank"
+						aria-label={githubLabel}
+						rel="noopener noreferrer nofollow"
+					>
+						<i-c o="github-logo-duotone" s="1.5rem"></i-c>
 
-            <span>Sources</span>
-          </a>
+						<span>Sources</span>
+					</a>
 
-          <a
-            class="unstyled"
-            href={'/' + DISCORD_INVITE_PATH}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <i-c o="discord-logo-duotone" s="1.5rem"></i-c>
-            <span>Chat</span>
-          </a>
+					<a
+						class="unstyled"
+						href={'/' + DISCORD_INVITE_PATH}
+						target="_blank"
+						rel="noopener noreferrer nofollow"
+					>
+						<i-c o="discord-logo-duotone" s="1.5rem"></i-c>
+						<span>Chat</span>
+					</a>
 
-          <ColorModeToggle />
-        </div>
+					<ColorModeToggle />
+				</div>
 
-        <SiteSearch />
+				<SiteSearch />
 
-        {options.markdownModule?.toc ? (
-          <div class="toc">
-            <span class="current-page-header">
-              <i-c o="queue-duotone" s="1.2rem"></i-c>
-              On this page
-            </span>
+				{options.markdownModule?.toc ? (
+					<div class="toc">
+						<span class="current-page-header">
+							<i-c o="queue-duotone" s="1.2rem"></i-c>
+							On this page
+						</span>
 
-            <NavOutline toc={options.markdownModule.toc} />
-          </div>
-        ) : null}
-      </aside>
-    </>
-  );
+						<NavOutline toc={options.markdownModule.toc} />
+					</div>
+				) : null}
+			</aside>
+		</>
+	);
 }

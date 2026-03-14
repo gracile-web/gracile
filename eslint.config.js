@@ -26,7 +26,7 @@ export default [
 					'./packages/client/tsconfig.json',
 					'./packages/server/tsconfig.json',
 					'./packages/engine/tsconfig.json',
-					// './packages/cli/tsconfig.json',
+
 					'./packages/create-gracile/tsconfig.json',
 					'./packages/internal/utils/tsconfig.json',
 					'./packages/addons/metadata/tsconfig.json',
@@ -40,7 +40,17 @@ export default [
 					'./packages/labs/client-router/tsconfig.json',
 					'./packages/labs/islands/tsconfig.json',
 					'./packages/labs/vite-plugin-babel-jsx-to-literals/tsconfig.json',
-					// './packages/labs/hmr/tsconfig.json',
+				'./packages/labs/hmr/tsconfig.json',
+				'./packages/labs/babel-plugin-jsx-to-literals/tsconfig.json',
+				'./packages/labs/jsx-forge/tsconfig.json',
+				'./packages/labs/vite-plugin-jsx-forge/tsconfig.json',
+				'./packages/labs/functional/tsconfig.json',
+				'./packages/labs/devtools/tsconfig.json',
+				'./packages/labs/og-images-generator/tsconfig.json',
+				'./packages/labs/literals/parser/tsconfig.json',
+				'./packages/labs/literals/html-css-minifier/tsconfig.json',
+				'./packages/labs/literals/rollup-plugin-html-css-minifier/tsconfig.json',
+				'./docs/website/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,
 			},
@@ -141,20 +151,17 @@ export default [
 
 			'**/starter-projects',
 
+			// CLI package has no source files yet
+			'packages/cli/**',
+
+			// Generated / vendor assets in docs
+			'docs/website/public/**',
+			'docs/website/slightly-wrote-born__tmp_clone/**',
+
 			'**/coverage',
 			'**/dist',
 
-			// Transition: ignore newly integrated labs packages until they are fully linted
-			'**/packages/labs/vite-plugin-jsx-forge',
-			'**/packages/labs/hmr',
-			'**/packages/labs/jsx-forge',
-			'**/packages/labs/functional',
-			'**/packages/labs/babel-plugin-jsx-to-literals',
-			'**/packages/cli',
-			'packages/labs/og-images-generator/**',
-			'packages/labs/literals/**',
-			'packages/labs/devtools',
-			'docs/website/**',
+
 		],
 	},
 ];

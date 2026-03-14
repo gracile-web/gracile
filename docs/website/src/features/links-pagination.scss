@@ -4,86 +4,86 @@
 @use '../lib/shoelace/vars' as *;
 
 .m-pagination-links {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: calc(6vh + 0rem) 0 1rem;
-  margin-top: 8rem;
+	display: flex;
+	gap: 1rem;
+	align-items: flex-end;
+	justify-content: space-between;
+	padding: calc(6vh + 0rem) 0 1rem;
+	margin-top: 8rem;
 
-  // border-top: 2px solid hsl($foreground, 0.1);
+	// border-top: 2px solid hsl($foreground, 0.1);
 
-  svg {
-    width: 3ex;
-    height: 3ex;
-  }
+	svg {
+		width: 3ex;
+		height: 3ex;
+	}
 
-  .title {
-    i-c {
-      margin: 0 0.3334em;
-    }
+	.title {
+		i-c {
+			margin: 0 0.3334em;
+		}
 
-    font-size: $font-size-large;
-    font-weight: $font-weight-bold;
-    line-height: $line-height-normal;
-  }
+		font-size: $font-size-large;
+		font-weight: $font-weight-bold;
+		line-height: $line-height-normal;
+	}
 
-  a {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    justify-content: space-between;
-    width: 50%;
-    padding: calc(0.25rem + 0.75vw);
-    margin: 1rem 0;
-    color: $color-neutral-800;
-    border: 1px solid alpha($color-primary-400, 0.75);
-    border-radius: 0.25em;
-    box-shadow: 0.5rem 0.5rem 0.5rem alpha($color-neutral-0, 0.3);
+	a {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		align-items: center;
+		justify-content: space-between;
+		width: 50%;
+		padding: calc(0.25rem + 0.75vw);
+		margin: 1rem 0;
+		color: $color-neutral-800;
+		border: 1px solid alpha($color-primary-400, 0.75);
+		border-radius: 0.25em;
+		box-shadow: 0.5rem 0.5rem 0.5rem alpha($color-neutral-0, 0.3);
 
-    & > * {
-      margin: 0.5em 0.75em;
-    }
+		& > * {
+			margin: 0.5em 0.75em;
+		}
 
-    header {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      font-size: 0.85em;
-      opacity: 0.75;
+		header {
+			display: flex;
+			gap: 1rem;
+			align-items: center;
+			font-size: 0.85em;
+			opacity: 0.75;
 
-      @include breakpoint(lg) {
-        font-size: 1.05em;
-      }
+			@include breakpoint(lg) {
+				font-size: 1.05em;
+			}
 
-      & + * {
-        font-size: 0.95em;
+			& + * {
+				font-size: 0.95em;
 
-        @include breakpoint(lg) {
-          font-size: 1.25em;
-        }
-      }
-    }
+				@include breakpoint(lg) {
+					font-size: 1.25em;
+				}
+			}
+		}
 
-    &:hover {
-      color: $color-primary-700;
-      border-color: alpha($color-primary-400, 1);
-      box-shadow: 0.5rem 0.5rem 0.5rem alpha($color-neutral-0, 0.15);
+		&:hover {
+			color: $color-primary-700;
+			border-color: alpha($color-primary-400, 1);
+			box-shadow: 0.5rem 0.5rem 0.5rem alpha($color-neutral-0, 0.15);
 
-      header {
-        opacity: 1;
-      }
-    }
+			header {
+				opacity: 1;
+			}
+		}
 
-    &.prev {
-      align-items: flex-start;
-      text-align: left;
-    }
+		&.prev {
+			align-items: flex-start;
+			text-align: left;
+		}
 
-    &.next {
-      align-items: flex-end;
-      text-align: right;
-    }
-  }
+		&.next {
+			align-items: flex-end;
+			text-align: right;
+		}
+	}
 }

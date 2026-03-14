@@ -4,44 +4,44 @@
 @use '../lib/shoelace/vars' as *;
 
 .c-color-mode-toggle {
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
-  padding: 0.5rem 0.667rem;
-  color: $color-neutral-800;
-  cursor: pointer;
-  background: transparent;
-  isolation: isolate;
-  border: 1px solid transparent;
-  border-radius: 99em;
+	display: flex;
+	gap: 0.8rem;
+	align-items: center;
+	padding: 0.5rem 0.667rem;
+	color: $color-neutral-800;
+	cursor: pointer;
+	background: transparent;
+	isolation: isolate;
+	border: 1px solid transparent;
+	border-radius: 99em;
 
-  &:hover {
-    color: $color-primary-500;
-    border: 1px solid $color-neutral-500;
-  }
+	&:hover {
+		color: $color-primary-500;
+		border: 1px solid $color-neutral-500;
+	}
 
-  .moon,
-  .sun {
-    pointer-events: none;
-  }
+	.moon,
+	.sun {
+		pointer-events: none;
+	}
 
-  @include color-mode(dark) {
-    .moon {
-      opacity: 0.3;
-    }
+	@include color-mode(dark) {
+		.moon {
+			opacity: 0.3;
+		}
 
-    .sun {
-      opacity: 0.9;
-    }
-  }
+		.sun {
+			opacity: 0.9;
+		}
+	}
 
-  @include color-mode(light) {
-    .moon {
-      opacity: 0.9;
-    }
+	@include color-mode(light) {
+		.moon {
+			opacity: 0.9;
+		}
 
-    .sun {
-      opacity: 0.3;
-    }
-  }
+		.sun {
+			opacity: 0.3;
+		}
+	}
 }

@@ -27,12 +27,12 @@ import yaml from 'yaml';
  * @param {string} input
  */
 export async function processMd(input) {
-  const result = await mdProcessor.process(input);
+	const result = await mdProcessor.process(input);
 
-  return {
-    markdown: result.value.toString(),
-    data: result.data,
-  };
+	return {
+		markdown: result.value.toString(),
+		data: result.data,
+	};
 }
 
 /**
@@ -41,13 +41,13 @@ export async function processMd(input) {
  * @returns {Promise<string>}
  */
 export async function stripMd(input) {
-  const result = await unified()
-    .use(remarkParse)
-    .use(remarkStripMd)
-    .use(remarkStringify)
-    .process(input);
+	const result = await unified()
+		.use(remarkParse)
+		.use(remarkStripMd)
+		.use(remarkStringify)
+		.process(input);
 
-  return result.value.toString();
+	return result.value.toString();
 }
 
 /**
@@ -55,18 +55,18 @@ export async function stripMd(input) {
  * @returns {Promise<string>}
  */
 export async function stripHtml(input) {
-  const result = stringStripHtml(input, { skipHtmlDecoding: true }).result;
+	const result = stringStripHtml(input, { skipHtmlDecoding: true }).result;
 
-  return result;
+	return result;
 }
 
 export function remarkRemoveHeadings() {
-  return (tree) => {
-    visit(tree, 'heading', (node, index, parent) => {
-      parent.children.splice(index, 1);
-      return [SKIP, index];
-    });
-  };
+	return (tree) => {
+		visit(tree, 'heading', (node, index, parent) => {
+			parent.children.splice(index, 1);
+			return [SKIP, index];
+		});
+	};
 }
 
 /**
@@ -74,46 +74,46 @@ export function remarkRemoveHeadings() {
  * @returns {Promise<string>}
  */
 export async function extractExcerptMd(input) {
-  const result = await unified()
-    .use(remarkParse)
-    .use(remarkFrontmatter)
-    .use(remarkRemoveHeadings)
-    .use(remarkExcerpt, { maxLength: 160, ellipsis: '…' })
+	const result = await unified()
+		.use(remarkParse)
+		.use(remarkFrontmatter)
+		.use(remarkRemoveHeadings)
+		.use(remarkExcerpt, { maxLength: 160, ellipsis: '…' })
 
-    .use(remarkStringify)
-    .process(input);
+		.use(remarkStringify)
+		.process(input);
 
-  return result.value.toString();
+	return result.value.toString();
 }
 
 /**
  * @param {string} input
  */
 export async function extractExcerptHtml(input) {
-  const result = await unified()
-    .use(remarkFrontmatter)
-    .use(() => {
-      return function (tree, vfile) {
-        if ('children' in tree) {
-          const yamlRaw = tree.children.find((node) => node.type === 'yaml');
-          if (yamlRaw) {
-            vfile.data['frontmatter'] = yaml.parse(yamlRaw.value);
-          }
-        }
-      };
-    })
-    .use(remarkParse)
-    .use(remarkSmartypants)
+	const result = await unified()
+		.use(remarkFrontmatter)
+		.use(() => {
+			return function (tree, vfile) {
+				if ('children' in tree) {
+					const yamlRaw = tree.children.find((node) => node.type === 'yaml');
+					if (yamlRaw) {
+						vfile.data['frontmatter'] = yaml.parse(yamlRaw.value);
+					}
+				}
+			};
+		})
+		.use(remarkParse)
+		.use(remarkSmartypants)
 
-    .use(remarkRehype, { allowDangerousHtml: true })
+		.use(remarkRehype, { allowDangerousHtml: true })
 
-    .use(rehypeSlug)
+		.use(rehypeSlug)
 
-    .use(withExtractedTableOfContents)
-    .use(rehypeExtractExcerpt, { maxLength: 160, ellipsis: '…' })
+		.use(withExtractedTableOfContents)
+		.use(rehypeExtractExcerpt, { maxLength: 160, ellipsis: '…' })
 
-    .use(rehypeStringify, { allowDangerousHtml: true })
-    .process(input);
+		.use(rehypeStringify, { allowDangerousHtml: true })
+		.process(input);
 
-  return result;
+	return result;
 }

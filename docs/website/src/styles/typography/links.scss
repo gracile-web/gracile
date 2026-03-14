@@ -4,20 +4,20 @@
 @use '../../lib/shoelace/vars' as *;
 
 a {
-  text-decoration: none;
+	text-decoration: none;
 
-  &:not(.unstyled) {
-    font-weight: 500;
+	&:not(.unstyled) {
+		font-weight: 500;
 
-    &,
-    &:hover,
-    &:active,
-    &:visited {
-      color: $color-primary-700;
-    }
+		&,
+		&:hover,
+		&:active,
+		&:visited {
+			color: $color-primary-700;
+		}
 
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }

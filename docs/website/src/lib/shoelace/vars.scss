@@ -346,7 +346,7 @@ $focus-ring-color: var(--sl-focus-ring-color);
 $focus-ring-style: var(--sl-focus-ring-style);
 $focus-ring-width: var(--sl-focus-ring-width);
 $focus-ring: var(--sl-focus-ring-style) var(--sl-focus-ring-width)
-  var(--sl-focus-ring-color);
+	var(--sl-focus-ring-color);
 $focus-ring-offset: var(--sl-focus-ring-offset);
 
 $button-font-size-small: var(--sl-button-font-size-small);
@@ -399,13 +399,13 @@ $input-focus-ring-offset: var(--sl-input-focus-ring-offset);
 
 $input-filled-background-color: var(--sl-input-filled-background-color);
 $input-filled-background-color-hover: var(
-  --sl-input-filled-background-color-hover
+	--sl-input-filled-background-color-hover
 );
 $input-filled-background-color-focus: var(
-  --sl-input-filled-background-color-focus
+	--sl-input-filled-background-color-focus
 );
 $input-filled-background-color-disabled: var(
-  --sl-input-filled-background-color-disabled
+	--sl-input-filled-background-color-disabled
 );
 $input-filled-color: var(--sl-input-filled-color);
 $input-filled-color-hover: var(--sl-input-filled-color-hover);
@@ -451,11 +451,11 @@ $z-index-tooltip: var(--sl-z-index-tooltip);
 // -
 
 @function alpha($color, $opacity) {
-  @return color-mix(
-    in oklab,
-    $color,
-    transparent #{(($opacity * -1 + 1) * 100) + '%'}
-  );
+	@return color-mix(
+		in oklab,
+		$color,
+		transparent #{(($opacity * -1 + 1) * 100) + '%'}
+	);
 }
 
 // $s: #119ee2;

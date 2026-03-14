@@ -5,93 +5,93 @@
 @import './nav-tree';
 
 .m-nav-main {
-  position: fixed;
-  z-index: 1;
-  width: calc(100% - 1vw - 1.5rem);
-  height: 100%;
-  background: linear-gradient(to right, $color-neutral-0, $color-neutral-50);
-  isolation: isolate;
-  border-right: 1px solid alpha($color-neutral-50, 0.1);
-  box-shadow: 1rem 1rem 1rem alpha($color-neutral-0, 0.1);
-  opacity: 0;
-  transition:
-    opacity $transition-medium,
-    transform $transition-medium;
-  transform: translateX(-100%);
+	position: fixed;
+	z-index: 1;
+	width: calc(100% - 1vw - 1.5rem);
+	height: 100%;
+	background: linear-gradient(to right, $color-neutral-0, $color-neutral-50);
+	isolation: isolate;
+	border-right: 1px solid alpha($color-neutral-50, 0.1);
+	box-shadow: 1rem 1rem 1rem alpha($color-neutral-0, 0.1);
+	opacity: 0;
+	transition:
+		opacity $transition-medium,
+		transform $transition-medium;
+	transform: translateX(-100%);
 
-  [menu-left='opened'] & {
-    opacity: 1;
-    transform: translateX(0);
-  }
+	[menu-left='opened'] & {
+		opacity: 1;
+		transform: translateX(0);
+	}
 
-  @include breakpoint(md) {
-    width: 47vw;
-  }
+	@include breakpoint(md) {
+		width: 47vw;
+	}
 
-  @include breakpoint(lg) {
-    width: 40vw;
-  }
+	@include breakpoint(lg) {
+		width: 40vw;
+	}
 
-  @include breakpoint(xl) {
-    top: 0;
-    display: initial;
-    width: $main-nav-width;
-    isolation: initial;
-    opacity: 1;
-    transform: initial;
-  }
+	@include breakpoint(xl) {
+		top: 0;
+		display: initial;
+		width: $main-nav-width;
+		isolation: initial;
+		opacity: 1;
+		transform: initial;
+	}
 
-  .toggle {
-    padding: 1rem;
-  }
+	.toggle {
+		padding: 1rem;
+	}
 
-  .layout-bare & {
-    position: absolute;
-    height: initial;
-    background: none;
-    border: none;
-    box-shadow: none;
-  }
+	.layout-bare & {
+		position: absolute;
+		height: initial;
+		background: none;
+		border: none;
+		box-shadow: none;
+	}
 
-  .home {
-    & > div {
-      display: flex;
-      align-items: flex-end;
-    }
+	.home {
+		& > div {
+			display: flex;
+			align-items: flex-end;
+		}
 
-    .logo {
-      display: inline-block;
-      height: 2.2rem;
-      overflow: hidden;
+		.logo {
+			display: inline-block;
+			height: 2.2rem;
+			overflow: hidden;
 
-      svg {
-        width: 6rem;
-        height: 3.3rem;
-        fill: currentcolor;
-      }
-    }
+			svg {
+				width: 6rem;
+				height: 3.3rem;
+				fill: currentcolor;
+			}
+		}
 
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-    @include breakpoint(xl) {
-      left: 2rem;
-      justify-content: flex-start;
-    }
+		@include breakpoint(xl) {
+			left: 2rem;
+			justify-content: flex-start;
+		}
 
-    padding: 0.25rem;
-    margin: 0.75rem 1rem;
-    color: $color-neutral-900;
-    isolation: isolate;
+		padding: 0.25rem;
+		margin: 0.75rem 1rem;
+		color: $color-neutral-900;
+		isolation: isolate;
 
-    @include breakpoint(xl) {
-      left: initial;
-    }
+		@include breakpoint(xl) {
+			left: initial;
+		}
 
-    &:hover {
-      color: $color-primary-700;
-    }
-  }
+		&:hover {
+			color: $color-primary-700;
+		}
+	}
 }

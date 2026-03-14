@@ -32,7 +32,7 @@
     "@lit-labs/ssr-client": "catalog:",
     "cheerio": "1.2.0",
     "express": "^5.2.1",
-    "hono": "^4.12.4",
+    "hono": "^4.12.7",
     "import-meta-resolve": "^4.2.0",
     "lit": "catalog:",
     "preact": "^10.26.5",

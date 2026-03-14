@@ -5,35 +5,35 @@ import { FooterMain } from '../features/footer-main.jsx';
 import { NavMain } from '../features/nav-main.jsx';
 
 export default defineRoute({
-  document: (context) =>
-    document({
-      ...context,
-      title: '404: Not found',
-      layout: 'bare',
-      page: '404',
-    }),
+	document: (context) =>
+		document({
+			...context,
+			title: '404: Not found',
+			layout: 'bare',
+			page: '404',
+		}),
 
-  template: ({ url }) => (
-    <>
-      <NavMain name={null} />
+	template: ({ url }) => (
+		<>
+			<NavMain name={null} />
 
-      <main>
-        <h1>404 - Page not found</h1>
+			<main>
+				<h1>404 - Page not found</h1>
 
-        <div>
-          <p>Path:</p>
-          <p>{url.pathname}</p>
+				<div>
+					<p>Path:</p>
+					<p>{url.pathname}</p>
 
-          <hr />
-          <p>
-            <a href="/">
-              <i-c o="house-duotone"></i-c> Back to Home
-            </a>
-          </p>
-        </div>
-      </main>
+					<hr />
+					<p>
+						<a href="/">
+							<i-c o="house-duotone"></i-c> Back to Home
+						</a>
+					</p>
+				</div>
+			</main>
 
-      <FooterMain url={url} />
-    </>
-  ),
+			<FooterMain url={url} />
+		</>
+	),
 });

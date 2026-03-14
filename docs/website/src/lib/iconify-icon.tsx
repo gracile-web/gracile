@@ -17,47 +17,47 @@ import { iconSet } from 'iconify:loader';
 
 @customElement('i-c')
 export class IconifyIcon extends LitElement {
-  static override styles = [
-    css`
-      :host {
-        display: inline-block;
-      }
-      svg {
-        vertical-align: text-bottom;
+	static override styles = [
+		css`
+			:host {
+				display: inline-block;
+			}
+			svg {
+				vertical-align: text-bottom;
 
-        /* border: 1px solid red; */
-      }
-    `,
-  ];
+				/* border: 1px solid red; */
+			}
+		`,
+	];
 
-  /**
-   * Name
-   */
-  @property({ attribute: 'o' }) name?: string;
+	/**
+	 * Name
+	 */
+	@property({ attribute: 'o' }) name?: string;
 
-  /**
-   * Size
-   */
-  @property({ attribute: 's' }) size = '1.125em';
+	/**
+	 * Size
+	 */
+	@property({ attribute: 's' }) size = '1.125em';
 
-  override render() {
-    const icon = iconSet.icons?.[this.name?.replace?.('ph:', '') ?? '']?.body;
+	override render() {
+		const icon = iconSet.icons?.[this.name?.replace?.('ph:', '') ?? '']?.body;
 
-    if (!icon) throw new Error('Missing ' + this.name);
+		if (!icon) throw new Error('Missing ' + this.name);
 
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 256 256"
-        style={`height: ${this.size}; width: ${this.size}`}
-        unsafe:svg={icon}
-      />
-    );
-  }
+		return (
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 256 256"
+				style={`height: ${this.size}; width: ${this.size}`}
+				unsafe:svg={icon}
+			/>
+		);
+	}
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'i-c': IconifyIcon & { o: string; s?: string };
-  }
+	interface HTMLElementTagNameMap {
+		'i-c': IconifyIcon & { o: string; s?: string };
+	}
 }

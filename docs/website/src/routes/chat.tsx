@@ -8,42 +8,42 @@ import { googleAnalytics } from '../document/document-helpers.js';
 const waitTime = 1;
 
 export default defineRoute({
-  document: () => (
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	document: () => (
+		<html lang="en">
+			<head>
+				<meta charset="UTF-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        {googleAnalytics}
+				{googleAnalytics}
 
-        {html`<style>
-          & {
-            margin: calc(10dvh + 10dvw);
-            font-family: system-ui;
-            font-size: 2rem;
-            text-align: center;
-            color-scheme: dark light;
-          }
+				{html`<style>
+					& {
+						margin: calc(10dvh + 10dvw);
+						font-family: system-ui;
+						font-size: 2rem;
+						text-align: center;
+						color-scheme: dark light;
+					}
 
-          svg {
-            height: 3rem;
-            width: 3rem;
-          }
-        </style>`}
+					svg {
+						height: 3rem;
+						width: 3rem;
+					}
+				</style>`}
 
-        <title>Gracile - Discord Server (redirecting…)</title>
+				<title>Gracile - Discord Server (redirecting…)</title>
 
-        <meta
-          http-equiv="refresh"
-          content={`${waitTime};URL=${DISCORD_INVITE_URL}`}
-        />
-      </head>
+				<meta
+					http-equiv="refresh"
+					content={`${waitTime};URL=${DISCORD_INVITE_URL}`}
+				/>
+			</head>
 
-      <body>
-        {discordLogo}
+			<body>
+				{discordLogo}
 
-        <p>Redirecting to the Discord invitation link…</p>
-      </body>
-    </html>
-  ),
+				<p>Redirecting to the Discord invitation link…</p>
+			</body>
+		</html>
+	),
 });

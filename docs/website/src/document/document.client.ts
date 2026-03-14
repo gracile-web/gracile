@@ -16,7 +16,7 @@ prefetcher.collectLinks();
 // import '../lib/iconify-icon.js';
 
 requestIdleCallback(() => {
-  import('../lib/color-mode/color-mode.js');
-  import('@shoelace-style/shoelace/dist/components/tooltip/tooltip.js');
-  import('../features/search-popup.js');
+	import('../lib/color-mode/color-mode.js');
+	import('@shoelace-style/shoelace/dist/components/tooltip/tooltip.js');
+	import('../features/search-popup.js');
 });
