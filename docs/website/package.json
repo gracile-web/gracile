@@ -18,6 +18,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "docs:generate": "tsx scripts/collect-readmes.ts && tsx scripts/collect-typedocs.ts && tsx scripts/collect-playground-files.ts",
     "// dev": "node --experimental-vm-modules --watch-path server server/server.js",
     "// build": "node ./node_modules/@gracile/gracile/dist/cli.js build",
     "pagefind": "npx pagefind -s dist --output-path dist/pagefind --exclude-selectors '[hidden]' && cp -r dist/pagefind public",

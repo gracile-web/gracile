@@ -1,10 +1,17 @@
 # Handle forms (JS augmented)
 
-This is a full example of how to handle forms in Gracile, with client-side JavaScript augmentation.  
-In this recipe, both approaches will work, so the user can start submitting the form even if the JS has yet to be parsed! And if it is, that will avoid a full-page reload by using the JSON API with `fetch`.
+This is a full example of how to handle forms in Gracile, with client-side
+JavaScript augmentation.  
+In this recipe, both approaches will work, so the user can start submitting the
+form even if the JS has yet to be parsed! And if it is, that will avoid a
+full-page reload by using the JSON API with `fetch`.
 
-If you haven't done it yet, you should read the [form recipe without JS](/docs/recipes/working-with-forms/) before diving into the progressive enhancement below.  
-Some principles hold; because if the user interacts with your form before JS is loaded or if it's broken, you still have to handle the submission gracefully, with the PRG pattern etc.
+If you haven't done it yet, you should read the
+[form recipe without JS](/docs/recipes/working-with-forms/) before diving into
+the progressive enhancement below.  
+Some principles hold; because if the user interacts with your form before JS is
+loaded or if it's broken, you still have to handle the submission gracefully,
+with the PRG pattern etc.
 
 ```ts twoslash
 // @filename: /src/document.ts

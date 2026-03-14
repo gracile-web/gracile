@@ -1,14 +1,16 @@
 # Server-Sent Events manipulation
 
-SSE are a powerful way to retrieve real-time data streams from the server to your
-client.
+SSE are a powerful way to retrieve real-time data streams from the server to
+your client.
 
 As Gracile relies on standard the `Response` API, you can use a `ReadableStream`
 for the `body` to use.  
-Implement your underlying source for your custom streamer, set the correct `content-type`
-to `text/event-stream`, and you're good to use [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)!
+Implement your underlying source for your custom streamer, set the correct
+`content-type` to `text/event-stream`, and you're good to use
+[Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)!
 
-Here is how to achieve that within Gracile, in only 3 steps, with this full-stack implementation.
+Here is how to achieve that within Gracile, in only 3 steps, with this
+full-stack implementation.
 
 ---
 
@@ -30,11 +32,11 @@ Basic project layout for this demo:
 ## 1. Define a route and a client view
 
 Nothing outstanding here.  
-As usual, we define a route, here `/streams/`, with
-a very basic HTML `template`.
+As usual, we define a route, here `/streams/`, with a very basic HTML
+`template`.
 
-In this template, we'll embed a `<simple-event-sourcer>`, client-only custom element,
-that we will define later.
+In this template, we'll embed a `<simple-event-sourcer>`, client-only custom
+element, that we will define later.
 
 ```ts twoslash
 // @filename: /src/document.ts
@@ -71,9 +73,11 @@ Dump…
 
 ## 2. Create a stream reader custom element
 
-In the sibling `streams.client.ts` file, we'll' define our vanilla custom element.
+In the sibling `streams.client.ts` file, we'll' define our vanilla custom
+element.
 
-The [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+The
+[`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 browser API is the key part here.
 
 ```ts twoslash
@@ -115,12 +119,14 @@ customElements.define(
 
 ## 3. Create a server-sent events endpoint
 
-Finally, here is the real meat, the server endpoint that will output our event stream.
+Finally, here is the real meat, the server endpoint that will output our event
+stream.
 
-It's a very trivial implementation with a cyclic timer that outputs a ping message.
+It's a very trivial implementation with a cyclic timer that outputs a ping
+message.
 
-We are defining the "underlying source" for the `ReadableStream`, so we can control
-what data it will provide for our HTTP response body.
+We are defining the "underlying source" for the `ReadableStream`, so we can
+control what data it will provide for our HTTP response body.
 
 ```ts twoslash
 // @filename: /src/routes/server-events.ts
@@ -166,14 +172,17 @@ export default defineRoute({
 });
 ```
 
-Event source needs to receive chunks with the `data: (.*)\n\n` format to be understood.
-That's why we can wrap this in a tiny helper to not mess this up, with proper validation etc.,
-especially if it's getting used in multiple places.
+Event source needs to receive chunks with the `data: (.*)\n\n` format to be
+understood. That's why we can wrap this in a tiny helper to not mess this up,
+with proper validation etc., especially if it's getting used in multiple places.
 
 ---
 
-To go further, you could replace this dumb, intervalled stream with something that
-reacts to internal server events, to forward them.  
-`EventTarget` is a good fit for this. It's available in Node, Deno, etc., and browsers of course!
+To go further, you could replace this dumb, intervalled stream with something
+that reacts to internal server events, to forward them.  
+`EventTarget` is a good fit for this. It's available in Node, Deno, etc., and
+browsers of course!
 
-See also [Fetch Event Source](https://github.com/Azure/fetch-event-source), a library that brings "A better API for making Event Source requests, with all the features of `fetch()`".
+See also [Fetch Event Source](https://github.com/Azure/fetch-event-source), a
+library that brings "A better API for making Event Source requests, with all the
+features of `fetch()`".

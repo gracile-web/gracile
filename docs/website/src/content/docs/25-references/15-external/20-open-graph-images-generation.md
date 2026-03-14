@@ -1,7 +1,10 @@
 # Open graph images generation
 
-See the [og-images-generator](https://github.com/JulianCataldo/og-images-generator) package.  
-This is the tool used by the very documentation website you are visiting right now.
+See the
+[og-images-generator](https://github.com/JulianCataldo/og-images-generator)
+package.  
+This is the tool used by the very documentation website you are visiting right
+now.
 
 ---
 

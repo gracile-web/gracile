@@ -15,7 +15,7 @@ const sections = new Map<string, Set<string> | string>([
 		new Set([
 			//
 			'@gracile.gracile.Interface.GracileConfig.md',
-			'@gracile.gracile.Function.gracile.md',
+			// '@gracile.gracile.Function.gracile.md',
 		]),
 	],
 	[
@@ -23,7 +23,7 @@ const sections = new Map<string, Set<string> | string>([
 		new Set([
 			'@gracile.gracile.Function.defineRoute.md',
 			'@gracile.gracile.Function.html.md',
-			'@gracile.gracile.Function.pageAssetsCustomLocation.md',
+			// '@gracile.gracile.Function.pageAssetsCustomLocation.md',
 		]),
 	],
 
@@ -31,7 +31,7 @@ const sections = new Map<string, Set<string> | string>([
 		'Server runtime',
 		new Set([
 			'@gracile.gracile.Function.nodeAdapter.md',
-			'@gracile.gracile.Function.honoAdapter.md',
+			// '@gracile.gracile.Function.honoAdapter.md',
 
 			'@gracile.gracile.Function.getClientBuildPath.md',
 			'@gracile.gracile.Function.printUrls.md',
@@ -45,14 +45,14 @@ const sections = new Map<string, Set<string> | string>([
 		]),
 	],
 
-	[
-		'Client router',
-		new Set([
-			//
-			'@gracile-labs.client-router.Function.createRouter.md',
-			// '@gracile-labs.client-router.TypeAlias.GracileRouterConfig.md',
-		]),
-	],
+	// [
+	// 	'Client router',
+	// 	new Set([
+	// 		//
+	// 		'@gracile-labs.client-router.Function.createRouter.md',
+	// 		// '@gracile-labs.client-router.TypeAlias.GracileRouterConfig.md',
+	// 	]),
+	// ],
 ]);
 
 await Promise.all(

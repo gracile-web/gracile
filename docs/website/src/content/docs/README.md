@@ -6,14 +6,18 @@ Gracile is a thin, full-stack, **web** framework with:
 
 - Portable **HTML**, **CSS** and **JS**, thanks to **Lit (SSR)**.
 - High responsivity during dev. and build, thanks to **Vite**.
-- A **minimal dependency footprint** for its **runtime** and your **distributable**.
-- Web standards friendliness, like **Custom Elements** (aka Web Components) or the **WhatWG Fetch** API.
-- A streamlined **D**eveloper e**X**perience for building, instead of fiddling around.
+- A **minimal dependency footprint** for its **runtime** and your
+  **distributable**.
+- Web standards friendliness, like **Custom Elements** (aka Web Components) or
+  the **WhatWG Fetch** API.
+- A streamlined **D**eveloper e**X**perience for building, instead of fiddling
+  around.
 
 ## Main features
 
 Gracile is powered by **Vite** and **Lit SSR**.  
-It's pretty low-scope, agnostic and can adapt easily to a variety of tech stacks.
+It's pretty low-scope, agnostic and can adapt easily to a variety of tech
+stacks.
 
 With it, you can achieve:
 
@@ -27,12 +31,15 @@ With it, you can achieve:
 - Progressive enhancements (no JS fallbacks, smart hydration…)
 - And more, via **Add-ons** (Markdown, Metadata, SVG…)
 
-All that, with a **few conventions**, a **standard-oriented** approach and a very **contained footprint** 🤏.
+All that, with a **few conventions**, a **standard-oriented** approach and a
+very **contained footprint** 🤏.
 
-Web Components, TypeScript, SASS, Lit, and other DX perks are all at your fingertips; while remaining optional.
+Web Components, TypeScript, SASS, Lit, and other DX perks are all at your
+fingertips; while remaining optional.
 
-Thanks to the Vite modular architecture, and Node.js versatility, **developer experience** is smoothed up
-across the board: in **development** and for **production**.
+Thanks to the Vite modular architecture, and Node.js versatility, **developer
+experience** is smoothed up across the board: in **development** and for
+**production**.
 
 <!-- > [!CAUTION]
 > This project in is an **alpha** state.
@@ -55,10 +62,12 @@ across the board: in **development** and for **production**.
 
 ---
 
-> “Perfection is achieved, not when there is nothing more to add,
-> but when there is nothing left to take away.”
+> “Perfection is achieved, not when there is nothing more to add, but when there
+> is nothing left to take away.”
 >
-> ― [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry), _Airman's Odyssey_
+> ―
+> [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry),
+> _Airman's Odyssey_
 
 <!-- --- -->
 

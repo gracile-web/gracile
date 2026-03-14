@@ -1,20 +1,29 @@
 # Passing data from server to client
 
-When you output Web Components from the server, with or without the declarative shadow DOM pre-render, it's often desirable to initialize them with server-generated, complex data.
+When you output Web Components from the server, with or without the declarative
+shadow DOM pre-render, it's often desirable to initialize them with
+server-generated, complex data.
 
-Instead of reinventing the wheel, Gracile is just providing you the guidelines on how to achieve that, well… gracefully 😌.
+Instead of reinventing the wheel, Gracile is just providing you the guidelines
+on how to achieve that, well… gracefully 😌.
 
-Note that this isn't even a JS framework thing. The patterns described below are transposable for any HTML-outputting backends.
+Note that this isn't even a JS framework thing. The patterns described below are
+transposable for any HTML-outputting backends.
 
 Typically you'll find two philosophies:
 
-1. Put the hydrating data in a `<script type="application/json">{...}</script>`, and from there the client-side framework will pick that up to hydrate the component tree by reconciling it with data.  
+1. Put the hydrating data in a `<script type="application/json">{...}</script>`,
+   and from there the client-side framework will pick that up to hydrate the
+   component tree by reconciling it with data.  
    **Examples**: Nuxt, Next, Gatsby…
-2. Put the hydrating data in a child element attribute, typically called an "Island".  
+2. Put the hydrating data in a child element attribute, typically called an
+   "Island".  
    **Examples**: Astro, Fresh,…
 
-With Lit SSR you can use both methods, though. The first one is [described here](https://github.com/lit/lit/tree/main/packages/labs/ssr#server-only-templates).  
-In this mini-guide, we'll focus on the "Island-ey" pattern, for now.
+With Lit SSR you can use both methods, though. The first one is
+[described here](https://github.com/lit/lit/tree/main/packages/labs/ssr#server-only-templates).  
+In
+this mini-guide, we'll focus on the "Island-ey" pattern, for now.
 
 ## Custom Element examples
 
@@ -103,10 +112,14 @@ Please note that these examples could be improved, notably for:
 initialData: InitialData | string = {};
 ```
 
-`string` is just for the [`ts-lit-plugin`](/docs/developer-experience/#doc_lit-analyzer) to be appeased inside the `html` template.  
-Also, `initialData` and `initialdata` are equivalent, but hyphenated properties are rejected by the linter.
+`string` is just for the
+[`ts-lit-plugin`](/docs/developer-experience/#doc_lit-analyzer) to be appeased
+inside the `html` template.  
+Also, `initialData` and `initialdata` are equivalent, but hyphenated properties
+are rejected by the linter.
 
-Maybe a bit more elegant solutions could be achieved, but those a more convention/typing issues, not runtime ones.
+Maybe a bit more elegant solutions could be achieved, but those a more
+convention/typing issues, not runtime ones.
 
 <!-- > [!NOTE]
 > It's possible to achieve the same thing with bare web components, too.
@@ -114,10 +127,14 @@ Maybe a bit more elegant solutions could be achieved, but those a more conventio
 
 ## Advanced serialization / deserialization
 
-If you want to pass more complex data like object with self referencing children,
-dates, and more, you can use a dedicated library for that, there are plenty.
+If you want to pass more complex data like object with self referencing
+children, dates, and more, you can use a dedicated library for that, there are
+plenty.
 
-For example the excellent [Seroval](https://github.com/lxsmnsyc/seroval) library can be used in conjunction with a Lit [`@property` custom converter](https://lit.dev/docs/components/properties/#conversion-converter) to properly "revive" the serialized data.
+For example the excellent [Seroval](https://github.com/lxsmnsyc/seroval) library
+can be used in conjunction with a Lit
+[`@property` custom converter](https://lit.dev/docs/components/properties/#conversion-converter)
+to properly "revive" the serialized data.
 
 This is a fully working example:
 
@@ -224,6 +241,8 @@ export class SerializationExample extends LitElement {
 
 ## Refreshing data without a full page reload
 
-For that, just set up a [JSON handler](/docs/learn/usage/defining-routes/#doc_handler-experimental) in your route.
-Then, connect this pipe to your Web Components properties and interactions.  
+For that, just set up a
+[JSON handler](/docs/learn/usage/defining-routes/#doc_handler-experimental) in
+your route. Then, connect this pipe to your Web Components properties and
+interactions.  
 Could be bidirectional, too (`GET`/`POST` → `Response`).

@@ -1,7 +1,8 @@
 # <i-c o='ph:files-duotone'></i-c>Defining the base documents
 
 Document are wrapping your routes and are streamed eagerly.  
-They are housing critical assets, page metadata, hydration helpers, asset entry points…
+They are housing critical assets, page metadata, hydration helpers, asset entry
+points…
 
 ## Example
 
@@ -82,14 +83,14 @@ export default defineRoute({
 });
 ```
 
-> [!IMPORTANT]
-> You CAN nest **server** OR **regular** templates in **server** templates.  
+> [!IMPORTANT] You CAN nest **server** OR **regular** templates in **server**
+> templates.  
 > You CANNOT nest **server** templates in **regular** templates.
 
 ## Hydration
 
-If you need client-side interactivity with Lit Custom Elements,
-don't forget to import the hydration helper in the document script entry point:
+If you need client-side interactivity with Lit Custom Elements, don't forget to
+import the hydration helper in the document script entry point:
 
 ```ts
 // @filename: /src/document.client.ts
@@ -104,14 +105,17 @@ import './my-ubiquitous-lit-element.ts';
 
 ## Page outlet
 
-`<route-template-outlet></route-template-outlet>` is a special tag, a placeholder that will be replaced with your page rendering.  
+`<route-template-outlet></route-template-outlet>` is a special tag, a
+placeholder that will be replaced with your page rendering.  
 It's one of the very few "unholy" things Gracile is doing.  
-However it is not meant as just an esthetic thing, compared to a more traditional comment marker (e.g., `<!--SSR_OUTLET-->`).  
-Defined as a Custom Element, it might serve as a smart fallback or an ultimate error boundary in the future.
-E.g., if the rendering fail, it could be used to show your own error overlay. It
-can be an interesting pattern to explore.
+However it is not meant as just an esthetic thing, compared to a more
+traditional comment marker (e.g., `<!--SSR_OUTLET-->`).  
+Defined as a Custom Element, it might serve as a smart fallback or an ultimate
+error boundary in the future. E.g., if the rendering fail, it could be used to
+show your own error overlay. It can be an interesting pattern to explore.
 
-`<slot></slot>` could have been used to, but it's a bit of a stretch of what a _real_ slot is, and can clash with legitimate slots.
+`<slot></slot>` could have been used to, but it's a bit of a stretch of what a
+_real_ slot is, and can clash with legitimate slots.
 
 ## Declarative shadow DOM support
 
@@ -125,7 +129,8 @@ can be an interesting pattern to explore.
 
 It's pretty good!
 
-But if you have to support older browsers, you can use a [ponyfill](https://github.com/webcomponents/template-shadowroot).
+But if you have to support older browsers, you can use a
+[ponyfill](https://github.com/webcomponents/template-shadowroot).
 
 ## Notes
 
@@ -140,8 +145,8 @@ markup, which can take longer to process streamed chunks.
 Note that you'll benefit from looser error boundaries, too. When a sub-template
 fails to render, you still get the valid markup, instead of a giant crash.
 
-Also, base document holds critical assets and Vite's magic sauce for dev.
-Hence an additional reason to process it alone, in the pre-pass.
+Also, base document holds critical assets and Vite's magic sauce for dev. Hence
+an additional reason to process it alone, in the pre-pass.
 
 Finally, we are using `@lit-labs/ssr` own `html` tagged template literal, which
 is different from the `lit`'s one.  
@@ -149,16 +154,20 @@ In short: it can handle all the "special" HTML tags (`<script>`, `<title>`,…)
 while being faster to process, due to its non-interactive nature.  
 It's also 1:1 HTML!  
 Lit "regular" templates can also be used without the "DSL-y" bits (`@event`,
-`.property`…) if you want to go your way, like no JS, vanilla JS, Alpine.js, etc.
+`.property`…) if you want to go your way, like no JS, vanilla JS, Alpine.js,
+etc.
 
 You'll find that the "Lit HTML" abstraction, overall, is tiny, and opt-in for
-the "special" stuff, like `@event`, property `.binding`, so you might just use it whenever you can.
+the "special" stuff, like `@event`, property `.binding`, so you might just use
+it whenever you can.
 
 ---
 
-It's better to separate the document from your route; because each of the Lit and Lit SSR, server-only `html` tags will clash otherwise.  
-It's possible to rename it through import though, like `server.html`,
-but you will probably lose formatting, syntax highlighting, TypeScript Lit Plugin hover info, etc.
+It's better to separate the document from your route; because each of the Lit
+and Lit SSR, server-only `html` tags will clash otherwise.  
+It's possible to rename it through import though, like `server.html`, but you
+will probably lose formatting, syntax highlighting, TypeScript Lit Plugin hover
+info, etc.
 
 Keep in mind you can use conditional logic inside your base document, so you can
 alter metadata, assets loading etc. to cater to each route.
@@ -167,4 +176,6 @@ Most projects won't need to define multiple documents, but if you find yourself
 having too many divergences, or for other reasons like security, you have the
 flexibility to do that.
 
-Gracile isn't aware of anything other than you route files and their sibling assets, you can locate and name documents, components, etc. with your conventions.
+Gracile isn't aware of anything other than you route files and their sibling
+assets, you can locate and name documents, components, etc. with your
+conventions.

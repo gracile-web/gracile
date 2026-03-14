@@ -1,12 +1,16 @@
 # <i-c o='ph:signpost-duotone'></i-c>Defining routes
 
-Like every full-stack meta-framework, routes are the central concept of Gracile.  
-This is where everything got tied together, and besides that, and add-ons, there aren't many opinions left.
+Like every full-stack meta-framework, routes are the central concept of
+Gracile.  
+This is where everything got tied together, and besides that, and add-ons, there
+aren't many opinions left.
 
-Gracile comes with a dedicated function that will take care of
-typings as with JS or TS, and nothing more.
+Gracile comes with a dedicated function that will take care of typings as with
+JS or TS, and nothing more.
 
-Under the hood, it uses the [`URLPattern` API](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern) which uses converted patterns like this:
+Under the hood, it uses the
+[`URLPattern` API](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern)
+which uses converted patterns like this:
 
 - `/src/routes/foo/[param]/foo.ts` → `/foo/:param/foo`
 - `/src/routes/bar/[...path]` → `/bar/:path*`
@@ -25,8 +29,11 @@ Respectively:
 1. `/src/routes/foo/index.ts` → `/foo/`
 2. `/src/routes/foo/(foo).ts` → `/foo/`
 
-The parentheses pattern is especially useful for quick file switching with your IDE, where a lot of `index`es can be confusing, same when debugging an error trace.  
-Note that when indexes are noted that way, the first one will be chosen (alphabetically).
+The parentheses pattern is especially useful for quick file switching with your
+IDE, where a lot of `index`es can be confusing, same when debugging an error
+trace.  
+Note that when indexes are noted that way, the first one will be chosen
+(alphabetically).
 
 ## Ignored files and directories
 
@@ -39,16 +46,19 @@ Note that when indexes are noted that way, the first one will be chosen (alphabe
 
 <!-- is a "dummy" function in the sense that it doesn't do anything to your configuration at runtime, but it -->
 
-The `defineRoute`
-provides a type-safe API that can be used with JavaScript or TypeScript.  
-It's analog to how numerous OSS projects are providing their configuration API (like Vite's `defineConfig`).
+The `defineRoute` provides a type-safe API that can be used with JavaScript or
+TypeScript.  
+It's analog to how numerous OSS projects are providing their configuration API
+(like Vite's `defineConfig`).
 
 <!-- You could export like `export default { document: ..., page: ... }` and it would work, but you'll lose type-safety. -->
 
 ### `document`
 
-Provides the [base document](/docs/learn/usage/defining-base-document/) for the route's page template.  
-Given a pre-existing document, you'll import it like this in your route configuration:
+Provides the [base document](/docs/learn/usage/defining-base-document/) for the
+route's page template.  
+Given a pre-existing document, you'll import it like this in your route
+configuration:
 
 ```ts twoslash
 // @filename: /src/document.ts
@@ -105,11 +115,13 @@ export default defineRoute({
 
 ### `staticPaths`
 
-Used with [**static** mode](/docs/learn/usage/output-modes/#doc_static-ssg) only.
+Used with [**static** mode](/docs/learn/usage/output-modes/#doc_static-ssg)
+only.
 
 You can provide `props` and `params` for populating page data.
 
-**`template`** and **`document`** contexts will be properly typed thanks to the `staticPaths` function return signature.  
+**`template`** and **`document`** contexts will be properly typed thanks to the
+`staticPaths` function return signature.  
 Hover `context.props` and `context.params` to see!
 
 ```ts twoslash
@@ -154,8 +166,10 @@ export default defineRoute({
 ### `prerender`
 
 For `server` output only.  
-Will generate a **full HTML file** as if it was generated from the `static` output mode.  
-Useful for pages that don't need to be dynamic on the server side (e.g., contact, docs, about…).
+Will generate a **full HTML file** as if it was generated from the `static`
+output mode.  
+Useful for pages that don't need to be dynamic on the server side (e.g.,
+contact, docs, about…).
 
 ```ts twoslash
 // @filename: /src/document.ts
@@ -182,16 +196,20 @@ export default defineRoute({
 
 ### `handler`
 
-Used with [**server** mode](/docs/learn/usage/output-modes/#doc_server-mode) only.  
-Like `staticPaths`, `handler` is a provider for `props` and can receive the current — matched route — `params`.
+Used with [**server** mode](/docs/learn/usage/output-modes/#doc_server-mode)
+only.  
+Like `staticPaths`, `handler` is a provider for `props` and can receive the
+current — matched route — `params`.
 
 There are **two behaviors** for the handlers:
 
-1. **Returning an instance of `Response`** will **terminate** the pipeline, without going through
-   the `template` rendering that happens afterward otherwise.  
+1. **Returning an instance of `Response`** will **terminate** the pipeline,
+   without going through the `template` rendering that happens afterward
+   otherwise.  
    Useful for redirects, pure JSON API routes…
 
-2. **Returning anything else** will provide the typed `props` for the `template` to consume.
+2. **Returning anything else** will provide the typed `props` for the `template`
+   to consume.
 
 Minimal example:
 
@@ -241,13 +259,19 @@ export default defineRoute({
 
 ---
 
-See also the ["Forms" recipe](/docs/recipes/working-with-forms/) for a full, contextualized example.
+See also the ["Forms" recipe](/docs/recipes/working-with-forms/) for a full,
+contextualized example.
 
 ### HTTP methods
 
-Note that, per the HTML specs, only `GET` and `POST` can be used with an HTML `<form>` element.  
-Other methods like `DELETE`, `PUT`, etc. can be used, but Gracile won't pursue the route template rendering with them.  
-A new method, "[`QUERY`](https://httpwg.org/http-extensions/draft-ietf-httpbis-safe-method-w-body.html)", is also inside the radar, and will possibly be implemented in `node:http` and other server environments.
+Note that, per the HTML specs, only `GET` and `POST` can be used with an HTML
+`<form>` element.  
+Other methods like `DELETE`, `PUT`, etc. can be used, but Gracile won't pursue
+the route template rendering with them.  
+A new method,
+"[`QUERY`](https://httpwg.org/http-extensions/draft-ietf-httpbis-safe-method-w-body.html)",
+is also inside the radar, and will possibly be implemented in `node:http` and
+other server environments.
 
 ### Minimal example
 
@@ -281,9 +305,11 @@ export default defineRoute({
 
 ## Bare pages (for redirects, etc.)
 
-Sometimes, you don't want to bring a page template in a route, just a bare HTML document, maybe with some `<meta>`; perfect use-case: page redirects.
+Sometimes, you don't want to bring a page template in a route, just a bare HTML
+document, maybe with some `<meta>`; perfect use-case: page redirects.
 
-It's totally possible to skip the `template` altogether and just use a single, server-only `document`.
+It's totally possible to skip the `template` altogether and just use a single,
+server-only `document`.
 
 Here, we will redirect the user to another URL, while collecting some analytics,
 all that with a nice and simple transitive screen:
@@ -342,15 +368,23 @@ export default defineRoute({
 
 Routes are the most basic unit of interaction with your user.
 
-This is where you should do data fetching, and dispatch them to "components", "templates", "modules", "features" or whatever conventions you choose to represent this data.
+This is where you should do data fetching, and dispatch them to "components",
+"templates", "modules", "features" or whatever conventions you choose to
+represent this data.
 
-It's generally better to use routes as entry points and not put too much UI or logic in there, besides what's strictly needed to bootstrap the page and forward the context to components.  
-Routes are kind of "magic", in the sense that you're not calling them yourself in your
-code, but the framework will use them predictably.
-Thankfully, Gracile isn't crowding top level module exports, but just the default one, with the `defineRoute` helper.  
-While it adds a level of indentation (versus a top level export), it avoids clashes with your module-scoped functions.  
+It's generally better to use routes as entry points and not put too much UI or
+logic in there, besides what's strictly needed to bootstrap the page and forward
+the context to components.  
+Routes are kind of "magic", in the sense that you're not calling them yourself
+in your code, but the framework will use them predictably. Thankfully, Gracile
+isn't crowding top level module exports, but just the default one, with the
+`defineRoute` helper.  
+While it adds a level of indentation (versus a top level export), it avoids
+clashes with your module-scoped functions.  
 This is a perfectly reasonable use of ESM default exports.  
-No static analysis or extraction either, meaning your functions are not in silos and won't behave in unexpected ways due to custom pre-processing, which is very common in other frameworks.
+No static analysis or extraction either, meaning your functions are not in silos
+and won't behave in unexpected ways due to custom pre-processing, which is very
+common in other frameworks.
 
 ## Client-side routing
 
@@ -360,18 +394,20 @@ No static analysis or extraction either, meaning your functions are not in silos
 point, if it adds value (like client/server symbiosis) an add-on could be
 created. -->
 
-Note that the [Metadata add-on](/docs/add-ons/metadata/)
-provides a `viewTransition` option that will make this browser native
-feature quickly available to you (it is just a meta tag), but it's not supported outside Blink-based
-browsers. It can be a nice progressive enhancement though, but not quite
-the SPA feel you could get with user-land solutions.
+Note that the [Metadata add-on](/docs/add-ons/metadata/) provides a
+`viewTransition` option that will make this browser native feature quickly
+available to you (it is just a meta tag), but it's not supported outside
+Blink-based browsers. It can be a nice progressive enhancement though, but not
+quite the SPA feel you could get with user-land solutions.
 
 Fortunately, there are plenty of options regarding CSR in the Lit ecosystem:
 
 - [Lit's router](https://www.npmjs.com/package/@lit-labs/router)
-- [Nano Stores Router](https://github.com/nanostores/router) with [Nano Store Lit](https://github.com/nanostores/lit)
+- [Nano Stores Router](https://github.com/nanostores/router) with
+  [Nano Store Lit](https://github.com/nanostores/lit)
 - [Navigo](https://github.com/krasimir/navigo)
-- [thepassle's app-tools](https://github.com/thepassle/app-tools/tree/master/router) router
+- [thepassle's app-tools](https://github.com/thepassle/app-tools/tree/master/router)
+  router
 - [Vaadin router](https://github.com/vaadin/router)
 - [micromorph](https://github.com/natemoo-re/micromorph)
 
@@ -381,16 +417,19 @@ You might want to try DOM-diffing libraries, too.
 
 ### Trailing slashes
 
-For simplicity and predictability, Gracile is only supporting routes that end with a slash.  
+For simplicity and predictability, Gracile is only supporting routes that end
+with a slash.  
 This is for **pages** and **server endpoints**, not assets with file extensions.
 
-Flexibility for the user will be added at one point, but this requires significant implementation work and testing,
-so this is not in the scope yet.
+Flexibility for the user will be added at one point, but this requires
+significant implementation work and testing, so this is not in the scope yet.
 
-> [!NOTE]
-> The explanation below is extracted from the [Rocket web framework documentation](https://rocket.modern-web.dev/docs/basics/routing/#static-routes).
+> [!NOTE] The explanation below is extracted from the
+> [Rocket web framework documentation](https://rocket.modern-web.dev/docs/basics/routing/#static-routes).
 
-Below is a summary of investigations by [Zach Leatherman](https://www.zachleat.com/web/trailing-slash/) and [Sebastien Lorber](https://github.com/slorber/trailing-slash-guide)
+Below is a summary of investigations by
+[Zach Leatherman](https://www.zachleat.com/web/trailing-slash/) and
+[Sebastien Lorber](https://github.com/slorber/trailing-slash-guide)
 
 **Legend**:
 
@@ -461,4 +500,5 @@ Below is a summary of investigations by [Zach Leatherman](https://www.zachleat.c
   </tbody>
 </table>
 
-If you wanna know more be sure to checkout [Trailing Slashes on URLs: Contentious or Settled?](https://www.zachleat.com/web/trailing-slash/).
+If you wanna know more be sure to checkout
+[Trailing Slashes on URLs: Contentious or Settled?](https://www.zachleat.com/web/trailing-slash/).

@@ -1,6 +1,8 @@
 # <i-c o='ph:seal-question-duotone'></i-c>FAQ
 
-You might wonder yourself what Gracile has to offer which makes it apart from existing solutions. This section addresses general and specific issues about this full-stack web framework.
+You might wonder yourself what Gracile has to offer which makes it apart from
+existing solutions. This section addresses general and specific issues about
+this full-stack web framework.
 
 ## Why?
 
@@ -28,7 +30,8 @@ Fewer tools generally mean fewer maintenance issues.
 However, we didn't reach those yet, that's why we still need to use some tooling
 to fill the gaps.  
 Also, it is perfectly reasonable to use TypeScript or CSS preprocessors, because
-for many, the gains largely outweigh the cost, and source-maps are here to help.  
+for many, the gains largely outweigh the cost, and source-maps are here to
+help.  
 In fact, this website is made with TS and SCSS. You don't have to throw away
 your favorite language superset to enjoy the benefits of being closer to the web
 platform!

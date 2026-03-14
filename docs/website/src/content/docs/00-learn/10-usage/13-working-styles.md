@@ -1,25 +1,30 @@
 # <i-c o='ph:palette-duotone'></i-c>Working with styles
 
-CSS is an indispensable piece of tech. for making your website pleasurable, and accessible. Working with stylesheets should be made easy, too.
+CSS is an indispensable piece of tech. for making your website pleasurable, and
+accessible. Working with stylesheets should be made easy, too.
 
-Hopefully, Gracile is leveraging Vite features in this area: pre or post-processors, bundling, etc.
+Hopefully, Gracile is leveraging Vite features in this area: pre or
+post-processors, bundling, etc.
 
-Styles, overall, are still a contentious topic in the front-end development space, with
-many different (and often incompatible ways) to consume, scope and distribute them. All that with SSR compatibility in mind.  
-Hopefully, things will get better with CSS `@scope`, "Open-Stylables" or standard
-CSS modules, just to name a few possible paths of resolution.
+Styles, overall, are still a contentious topic in the front-end development
+space, with many different (and often incompatible ways) to consume, scope and
+distribute them. All that with SSR compatibility in mind.  
+Hopefully, things will get better with CSS `@scope`, "Open-Stylables" or
+standard CSS modules, just to name a few possible paths of resolution.
 
-In the meantime, we will see how to achieve that with web platform standards
-in mind with what we have at hand.
+In the meantime, we will see how to achieve that with web platform standards in
+mind with what we have at hand.
 
 ---
 
-Be sure to take a read at [Working with assets](/docs/learn/usage/working-with-assets/) before taking the plunge here.
+Be sure to take a read at
+[Working with assets](/docs/learn/usage/working-with-assets/) before taking the
+plunge here.
 
 ## Client or Server import in JS module
 
-While Vite-based frameworks often allow importing CSS from a route or
-client code like this:
+While Vite-based frameworks often allow importing CSS from a route or client
+code like this:
 
 ```ts twoslash
 // @filename: /src/document.ts
@@ -51,30 +56,40 @@ import './my-styles-bar.css';
 
 **This is not standard**!
 
-Behind the scenes, **a lot of stuff** has to happen at the bundler level to achieve this kind of UX. Sadly, that can produce unexpected CSS ordering, which
+Behind the scenes, **a lot of stuff** has to happen at the bundler level to
+achieve this kind of UX. Sadly, that can produce unexpected CSS ordering, which
 is a widely known issue, even with Webpack.
 
-While this adds a bit of comfort, you should just **import CSS in CSS** (with the `@import` standard at-rule), and have a total, predictable control.
+While this adds a bit of comfort, you should just **import CSS in CSS** (with
+the `@import` standard at-rule), and have a total, predictable control.
 
-Ultimately, establish your CSS entry points at the **document** or **page template** level, in the **HTML** itself.  
-You do that using the good old and [reliable `<link>` tag](/docs/learn/usage/working-with-assets/#doc_1-globally-at-the-document-level).
+Ultimately, establish your CSS entry points at the **document** or **page
+template** level, in the **HTML** itself.  
+You do that using the good old and
+[reliable `<link>` tag](/docs/learn/usage/working-with-assets/#doc_1-globally-at-the-document-level).
 
 ## Pre/post-processors
 
-Gracile supports every [Vite's features regarding CSS](https://vitejs.dev/guide/features#css).
+Gracile supports every
+[Vite's features regarding CSS](https://vitejs.dev/guide/features#css).
 
 ## Adopted Stylesheets
 
-`CSSStyleSheet`, "**Standard CSS Modules**" and "**Adopted Stylesheets**" are new standards working together allowing to import CSS like JavaScript modules, meaning they're dynamic, take part of the module graph…
+`CSSStyleSheet`, "**Standard CSS Modules**" and "**Adopted Stylesheets**" are
+new standards working together allowing to import CSS like JavaScript modules,
+meaning they're dynamic, take part of the module graph…
 
-It's particularly useful for building Custom Elements with a Shadow Root, from which you can adopt them.  
-It's not reserved to Custom Elements, it also works for the global `document` object (meaning global Light-DOM styling), and any kind of detached `<template>` Shadow Root, too.
+It's particularly useful for building Custom Elements with a Shadow Root, from
+which you can adopt them.  
+It's not reserved to Custom Elements, it also works for the global `document`
+object (meaning global Light-DOM styling), and any kind of detached `<template>`
+Shadow Root, too.
 
 We will use the `?inline` import query parameter for our examples.
 
 > [!CAUTION]  
-> `?inline` etc. are **non-standard**, and as soon as Vite support
-> **Import Attributes** (`with { type: 'css' }`) this stop-gap will be superseeded.
+> `?inline` etc. are **non-standard**, and as soon as Vite support **Import
+> Attributes** (`with { type: 'css' }`) this stop-gap will be superseeded.
 
 ### Adopt from a Custom Element
 
@@ -125,7 +140,8 @@ export class MyLitElement extends LitElement {
 }
 ```
 
-For **SSR + Client** usage, we still have to use Lit's own `CSSResult` like this:
+For **SSR + Client** usage, we still have to use Lit's own `CSSResult` like
+this:
 
 ```ts twoslash
 // @filename: /src/my-lit-element-ssr.ts
@@ -145,7 +161,9 @@ export class MyLitElementSsr extends LitElement {
 }
 ```
 
-Of course, you can just use, for example, a `my-styles.css.ts` (or `my-styles.styles.ts`) exporting a Lit `css`, instead of using pure CSS + `?inline` + `unsafeCSS`. E.g:
+Of course, you can just use, for example, a `my-styles.css.ts` (or
+`my-styles.styles.ts`) exporting a Lit `css`, instead of using pure CSS +
+`?inline` + `unsafeCSS`. E.g:
 
 ```ts twoslash
 // @filename: /src/my-lit-element.styles.ts
@@ -176,14 +194,17 @@ export class MyLitElement extends LitElement {
 }
 ```
 
-But please note that, in nearly all cases, tooling works better within their original environment (editor hints, linters, processors…), in this case, a `.css` file.
+But please note that, in nearly all cases, tooling works better within their
+original environment (editor hints, linters, processors…), in this case, a
+`.css` file.
 
 Composite files make tooling exponentially buggy.
 
 ### Adopt in the global document
 
 We will use `replaceSync` this time, to show off.  
-`replace` needs an await (not always possible at the top level), but has the benefit of returning the instance (chainable).
+`replace` needs an await (not always possible at the top level), but has the
+benefit of returning the instance (chainable).
 
 ```ts twoslash
 // @filename: /src/document.client.ts

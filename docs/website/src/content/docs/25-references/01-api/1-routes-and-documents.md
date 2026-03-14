@@ -3,6 +3,79 @@
 API references extracted from the Gracile code base.  
 Examples, functions, classes, constants, type declarations…
 
+## Function: html()
+
+```ts
+function html(strings, ...values): ServerRenderedTemplate;
+```
+
+Defined in:
+node_modules/.pnpm/@lit-labs+ssr@4.0.0_@types+node@25.3.3/node_modules/@lit-labs/ssr/lib/server-template.d.ts:35
+
+A lit-html template that can only be rendered on the server, and cannot be
+hydrated.
+
+These templates can be used for rendering full documents, including the doctype,
+and rendering into elements that Lit normally cannot, like `<title>`,
+`<textarea>`, `<template>`, and non-executing `<script>` tags like
+`<script type="text/json">`. They are also slightly more efficient than normal
+Lit templates, because the generated HTML doesn't need to include markers for
+updating.
+
+Server-only `html` templates can be composed, and combined, and they support
+almost all features that normal Lit templates do, with the exception of features
+that don't have a pure HTML representation, like event handlers or property
+bindings.
+
+Server-only `html` templates can only be rendered on the server, they will throw
+an Error if created in the browser. However if you render a normal Lit template
+inside a server-only template, then it can be hydrated and updated. Likewise, if
+you place a custom element inside a server-only template, it can be hydrated and
+update like normal.
+
+A server-only template can't be rendered inside a normal Lit template.
+
+**Parameters**
+
+<div class="typedoc-table"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`strings`
+
+</td>
+<td>
+
+`TemplateStringsArray`
+
+</td>
+</tr>
+<tr>
+<td>
+
+...`values`
+
+</td>
+<td>
+
+`unknown`[]
+
+</td>
+</tr>
+</tbody>
+</table></div>
+
+**Returns**
+
+`ServerRenderedTemplate`
+
 ## Function: defineRoute()
 
 ```ts
@@ -12,8 +85,10 @@ function defineRoute<
   CatchAllHandlerData,
   StaticPathOptions,
   RouteContext,
->(options): (RouteModule) => R.RouteModule;
+>(options): (RouteModule) => RouteModule;
 ```
+
+Defined in: packages/server/dist/route.d.ts:7
 
 **Defines a file-based route** for Gracile to consume.
 
@@ -66,7 +141,7 @@ function defineRoute<
 <tr>
 <td>
 
-`StaticPathOptions` _extends_ `undefined` \| `StaticPathOptionsGeneric`
+`StaticPathOptions` _extends_ `StaticPathOptionsGeneric` \| `undefined`
 
 </td>
 <td>
@@ -109,7 +184,15 @@ function defineRoute<
 </td>
 <td>
 
-`object`
+\{ `document?`: `DocumentTemplate`\<`RouteContext`\>; `handler?`:
+`StaticPathOptions` _extends_ `object` ? `never` : \|
+`Handler`\<`CatchAllHandlerData`\> \| \{ `DELETE?`: `Handler`\<`Response`\>;
+`GET?`: `Handler`\<`GetHandlerData`\>; `HEAD?`: `Handler`\<`Response`\>;
+`OPTIONS?`: `Handler`\<`Response`\>; `PATCH?`: `Handler`\<`Response`\>; `POST?`:
+`Handler`\<`PostHandlerData`\>; `PUT?`: `Handler`\<`Response`\>; `QUERY?`:
+`Handler`\<`Response`\>; \} \| `undefined`; `prerender?`: `boolean`;
+`staticPaths?`: () => `MaybePromise`\<`StaticPathOptions`[]\> \| `undefined`;
+`template?`: `BodyTemplate`\<`RouteContext`\>; \}
 
 </td>
 <td>
@@ -121,7 +204,7 @@ Options to populate the current route module.
 <tr>
 <td>
 
-`options.document`?
+`options.document?`
 
 </td>
 <td>
@@ -131,8 +214,8 @@ Options to populate the current route module.
 </td>
 <td>
 
-A function that returns a server only template.
-Route context is provided at runtime during the build.
+A function that returns a server only template. Route context is provided at
+runtime during the build.
 
 **See** [documentation](/docs/learn/usage/defining-routes/#doc_document)
 
@@ -141,20 +224,25 @@ Route context is provided at runtime during the build.
 <tr>
 <td>
 
-`options.handler`?
+`options.handler?`
 
 </td>
 <td>
 
-`StaticPathOptions` _extends_ `object` ? `never` : `undefined` \| `Handler`\<`CatchAllHandlerData`\> \| `object`
+`StaticPathOptions` _extends_ `object` ? `never` : \|
+`Handler`\<`CatchAllHandlerData`\> \| \{ `DELETE?`: `Handler`\<`Response`\>;
+`GET?`: `Handler`\<`GetHandlerData`\>; `HEAD?`: `Handler`\<`Response`\>;
+`OPTIONS?`: `Handler`\<`Response`\>; `PATCH?`: `Handler`\<`Response`\>; `POST?`:
+`Handler`\<`PostHandlerData`\>; `PUT?`: `Handler`\<`Response`\>; `QUERY?`:
+`Handler`\<`Response`\>; \} \| `undefined`
 
 </td>
 <td>
 
-A function or an object containing functions named after HTTP methods.
-A handler can return either a standard `Response` that will terminate the
-request pipeline, or any object to populate the current route template
-and document contexts.
+A function or an object containing functions named after HTTP methods. A handler
+can return either a standard `Response` that will terminate the request
+pipeline, or any object to populate the current route template and document
+contexts.
 
 **See** [documentation](/docs/learn/usage/defining-routes/#doc_handler)
 
@@ -163,7 +251,7 @@ and document contexts.
 <tr>
 <td>
 
-`options.prerender`?
+`options.prerender?`
 
 </td>
 <td>
@@ -173,8 +261,8 @@ and document contexts.
 </td>
 <td>
 
-A switch to produce an HTML file as it was built with the `static` mode,
-in the `dist/client` build directory.
+A switch to produce an HTML file as it was built with the `static` mode, in the
+`dist/client` build directory.
 
 Only available in `static` output mode.
 
@@ -185,18 +273,18 @@ Only available in `static` output mode.
 <tr>
 <td>
 
-`options.staticPaths`?
+`options.staticPaths?`
 
 </td>
 <td>
 
-() => `undefined` \| `MaybePromise`\<`StaticPathOptions`[]\>
+() => `MaybePromise`\<`StaticPathOptions`[]\> \| `undefined`
 
 </td>
 <td>
 
-A function that returns an array of route definition object.
-Only available in `static` output mode.
+A function that returns an array of route definition object. Only available in
+`static` output mode.
 
 **See** [documentation](/docs/learn/usage/defining-routes/#doc_staticpaths)
 
@@ -205,7 +293,7 @@ Only available in `static` output mode.
 <tr>
 <td>
 
-`options.template`?
+`options.template?`
 
 </td>
 <td>
@@ -215,8 +303,8 @@ Only available in `static` output mode.
 </td>
 <td>
 
-A function that returns a server only or a Lit client hydratable template.
-Route context is provided at runtime during the build.
+A function that returns a server only or a Lit client hydratable template. Route
+context is provided at runtime during the build.
 
 **See** [documentation](/docs/learn/usage/defining-routes/#doc_template)
 
@@ -227,7 +315,9 @@ Route context is provided at runtime during the build.
 
 **Returns**
 
-`Function`
+```ts
+(RouteModule): RouteModule;
+```
 
 **Parameters**
 
@@ -247,7 +337,7 @@ Route context is provided at runtime during the build.
 </td>
 <td>
 
-_typeof_ `R.RouteModule`
+_typeof_ `RouteModule`
 
 </td>
 </tr>
@@ -256,126 +346,6 @@ _typeof_ `R.RouteModule`
 
 **Returns**
 
-`R.RouteModule`
+`RouteModule`
 
 **See** full guide in the [documentation](/docs/learn/usage/defining-routes/).
-
-**Defined in**
-
-packages/server/dist/route.d.ts:7
-
-## Function: pageAssetsCustomLocation()
-
-```ts
-function pageAssetsCustomLocation(): ServerRenderedTemplate;
-```
-
-Overrides the default location for routes sibling assets, which is normally
-right before the closing `</head>` tag.
-
-**Returns**
-
-`ServerRenderedTemplate`
-
-**Example**
-
-```ts twoslash
-import { pageAssetsCustomLocation } from '@gracile/gracile/document';
-import { html } from '@gracile/gracile/server-html';
-
-export const document = (_props) => html`
-  <!doctype html>
-  <html lang="en">
-    <head>
-      <!-- ... -->
-
-      <!-- NOTE: Route sibling assets injection marker.  -->
-      ${pageAssetsCustomLocation()}
-
-      <!-- ... -->
-    </head>
-
-    <body>
-      <route-template-outlet></route-template-outlet>
-    </body>
-  </html>
-`;
-```
-
-**Defined in**
-
-packages/server/dist/assets.d.ts:32
-
-## Function: html()
-
-```ts
-function html(strings, ...values): ServerRenderedTemplate;
-```
-
-A lit-html template that can only be rendered on the server, and cannot be
-hydrated.
-
-These templates can be used for rendering full documents, including the
-doctype, and rendering into elements that Lit normally cannot, like
-`<title>`, `<textarea>`, `<template>`, and non-executing `<script>` tags
-like `<script type="text/json">`. They are also slightly more efficient than
-normal Lit templates, because the generated HTML doesn't need to include
-markers for updating.
-
-Server-only `html` templates can be composed, and combined, and they support
-almost all features that normal Lit templates do, with the exception of
-features that don't have a pure HTML representation, like event handlers or
-property bindings.
-
-Server-only `html` templates can only be rendered on the server, they will
-throw an Error if created in the browser. However if you render a normal Lit
-template inside a server-only template, then it can be hydrated and updated.
-Likewise, if you place a custom element inside a server-only template, it can
-be hydrated and update like normal.
-
-A server-only template can't be rendered inside a normal Lit template.
-
-**Parameters**
-
-<div class="typedoc-table"><table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`strings`
-
-</td>
-<td>
-
-`TemplateStringsArray`
-
-</td>
-</tr>
-<tr>
-<td>
-
-...`values`
-
-</td>
-<td>
-
-`unknown`[]
-
-</td>
-</tr>
-</tbody>
-</table></div>
-
-**Returns**
-
-`ServerRenderedTemplate`
-
-**Defined in**
-
-node_modules/.pnpm/@lit-labs+ssr@3.2.2/node_modules/@lit-labs/ssr/lib/server-template.d.ts:35

@@ -185,8 +185,8 @@ Use tRPC, OpenAPI and alike.
 
 ### Nested routes
 
-Use conditionals in your templates and colocate related portions with,
-e.g. `_my-route--{foo,bar}-part.ts` alongside the related route.
+Use conditionals in your templates and colocate related portions with, e.g.
+`_my-route--{foo,bar}-part.ts` alongside the related route.
 
 ### Middlewares
 

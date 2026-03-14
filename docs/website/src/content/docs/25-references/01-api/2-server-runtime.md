@@ -3,11 +3,73 @@
 API references extracted from the Gracile code base.  
 Examples, functions, classes, constants, type declarations…
 
+## Function: printUrls()
+
+```ts
+function printUrls(server): void;
+```
+
+Defined in: packages/engine/dist/server/utilities.d.ts:20
+
+Pretty print your server instance address as soon as it is listening. Matches
+the dev. server CLI output style.
+
+**Parameters**
+
+<div class="typedoc-table"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`server`
+
+</td>
+<td>
+
+`string` \| `AddressInfo` \| `null`
+
+</td>
+<td>
+
+Takes an `node:net` `AddressInfo` like object (address, family, port) or just a
+provided, pre-constructed string.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+
+**Returns**
+
+`void`
+
+**Example**
+
+```js
+import * as gracile from '@gracile/gracile/hono';
+import { serve } from '@hono/node-server';
+
+// ...
+
+serve({ fetch: app.fetch, port: 3030, hostname: 'localhost' }, (address) =>
+  gracile.printUrls(address),
+);
+```
+
 ## Function: nodeAdapter()
 
 ```ts
 function nodeAdapter(handler, options?): GracileNodeHandler;
 ```
+
+Defined in: packages/engine/dist/server/adapters/node.d.ts:24
 
 **Parameters**
 
@@ -40,7 +102,7 @@ Takes a pre-built Gracile handler from `./dist/server/entrypoint.js`.
 <tr>
 <td>
 
-`options`?
+`options?`
 
 </td>
 <td>
@@ -79,96 +141,43 @@ app.use(gracile.nodeAdapter(handler));
 const server = app.listen();
 ```
 
-**Defined in**
-
-packages/engine/dist/server/adapters/node.d.ts:24
-
-## Function: honoAdapter()
+## Variable: server
 
 ```ts
-function honoAdapter(handler, options?): GracileHonoHandler;
+const server: Readonly<{
+  CLIENT_DIST_DIR: './dist/client';
+  IP_EXPOSED: '0.0.0.0';
+  IP_LOCALHOST: '127.0.0.1';
+  LOCALHOST: 'localhost';
+  PUBLIC_DIR: 'public';
+  RANDOM_PORT: 0;
+}>;
 ```
 
-**Parameters**
+Defined in: packages/engine/dist/server/constants.d.ts:19
 
-<div class="typedoc-table"><table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`handler`
-
-</td>
-<td>
-
-[`GracileHandler`](#doc_gracilegraciletype-alias-gracilehandler)
-
-</td>
-<td>
-
-Takes a pre-built Gracile handler from `./dist/server/entrypoint.js`.
-
-</td>
-</tr>
-<tr>
-<td>
-
-`options`?
-
-</td>
-<td>
-
-`HonoAdapterOptions`
-
-</td>
-<td>
-
-If you need more control.
-
-</td>
-</tr>
-</tbody>
-</table></div>
-
-**Returns**
-
-[`GracileHonoHandler`](#doc_gracilegraciletype-alias-gracilehonohandler)
+Server **constants**. Useful for setting up your HTTP framework options.
 
 **Example**
 
 `/src/server.js`
 
 ```js
-import { Hono } from 'hono';
+import * as gracile from '@gracile/gracile/hono';
 import { serve } from '@hono/node-server';
 
-import * as gracile from '@gracile/gracile/hono';
+// ...
 
-import { handler } from './dist/server/entrypoint.js';
-
-const app = new Hono();
-
-app.use(gracile.honoAdapter(handler));
-
-serve(app);
+serve({ fetch: app.fetch, port: 3030, hostname: gracile.server.LOCALHOST });
 ```
-
-**Defined in**
-
-packages/engine/dist/server/adapters/hono.d.ts:30
 
 ## Function: getClientBuildPath()
 
 ```ts
 function getClientBuildPath(root): string;
 ```
+
+Defined in: packages/engine/dist/server/adapters/hono.d.ts:46
 
 **Parameters**
 
@@ -222,302 +231,20 @@ app.get(
 );
 ```
 
-**Defined in**
-
-packages/engine/dist/server/adapters/hono.d.ts:46
-
-## Function: printUrls()
-
-```ts
-function printUrls(server): void;
-```
-
-Pretty print your server instance address as soon as it is listening.
-Matches the dev. server CLI output style.
-
-**Parameters**
-
-<div class="typedoc-table"><table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`server`
-
-</td>
-<td>
-
-`null` \| `string` \| `AddressInfo`
-
-</td>
-<td>
-
-Takes an `node:net` `AddressInfo` like object (address, family, port) or just a provided, pre-constructed string.
-
-</td>
-</tr>
-</tbody>
-</table></div>
-
-**Returns**
-
-`void`
-
-**Example**
-
-```js
-import * as gracile from '@gracile/gracile/hono';
-import { serve } from '@hono/node-server';
-
-// ...
-
-serve({ fetch: app.fetch, port: 3030, hostname: 'localhost' }, (address) =>
-  gracile.printUrls(address),
-);
-```
-
-**Defined in**
-
-packages/engine/dist/server/utils.d.ts:20
-
-## Variable: server
-
-```ts
-const server: Readonly<object>;
-```
-
-Server **constants**.
-Useful for setting up your HTTP framework options.
-
-**Type declaration**
-
-<div class="typedoc-table"><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Defined in</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`CLIENT_DIST_DIR`
-
-</td>
-<td>
-
-`"./dist/client"`
-
-</td>
-<td>
-
-packages/engine/dist/server/constants.d.ts:25
-
-</td>
-</tr>
-<tr>
-<td>
-
-`IP_EXPOSED`
-
-</td>
-<td>
-
-`"0.0.0.0"`
-
-</td>
-<td>
-
-packages/engine/dist/server/constants.d.ts:22
-
-</td>
-</tr>
-<tr>
-<td>
-
-`IP_LOCALHOST`
-
-</td>
-<td>
-
-`"127.0.0.1"`
-
-</td>
-<td>
-
-packages/engine/dist/server/constants.d.ts:21
-
-</td>
-</tr>
-<tr>
-<td>
-
-`LOCALHOST`
-
-</td>
-<td>
-
-`"localhost"`
-
-</td>
-<td>
-
-packages/engine/dist/server/constants.d.ts:20
-
-</td>
-</tr>
-<tr>
-<td>
-
-`PUBLIC_DIR`
-
-</td>
-<td>
-
-`"public"`
-
-</td>
-<td>
-
-packages/engine/dist/server/constants.d.ts:24
-
-</td>
-</tr>
-<tr>
-<td>
-
-`RANDOM_PORT`
-
-</td>
-<td>
-
-`0`
-
-</td>
-<td>
-
-packages/engine/dist/server/constants.d.ts:23
-
-</td>
-</tr>
-</tbody>
-</table></div>
-
-**Example**
-
-`/src/server.js`
-
-```js
-import * as gracile from '@gracile/gracile/hono';
-import { serve } from '@hono/node-server';
-
-// ...
-
-serve({ fetch: app.fetch, port: 3030, hostname: gracile.server.LOCALHOST });
-```
-
-**Defined in**
-
-packages/engine/dist/server/constants.d.ts:19
-
 ## Variable: nodeCondition
 
 ```ts
-const nodeCondition: Readonly<object>;
+const nodeCondition: Readonly<{
+  BROWSER: boolean;
+  DEV: boolean;
+  PREVIEW: boolean;
+  TEST: boolean;
+}>;
 ```
 
+Defined in: packages/internal/utils/dist/node-condition/production-ssr.d.ts:16
+
 Resolve environment from Node export conditions.
-
-**Type declaration**
-
-<div class="typedoc-table"><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Defined in</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`BROWSER`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-packages/internal/utils/dist/node-condition/production-ssr.d.ts:17
-
-</td>
-</tr>
-<tr>
-<td>
-
-`DEV`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-packages/internal/utils/dist/node-condition/production-ssr.d.ts:18
-
-</td>
-</tr>
-<tr>
-<td>
-
-`PREVIEW`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-packages/internal/utils/dist/node-condition/production-ssr.d.ts:19
-
-</td>
-</tr>
-<tr>
-<td>
-
-`TEST`
-
-</td>
-<td>
-
-`boolean`
-
-</td>
-<td>
-
-packages/internal/utils/dist/node-condition/production-ssr.d.ts:20
-
-</td>
-</tr>
-</tbody>
-</table></div>
 
 **Example**
 
@@ -531,15 +258,13 @@ if (nodeCondition.BROWSER) {
 }
 ```
 
-**Defined in**
-
-packages/internal/utils/dist/node-condition/production-ssr.d.ts:16
-
 ## Type Alias: GracileHandler()
 
 ```ts
-type GracileHandler: (request, locals?) => Promise<StandardResponse | ResponseWithNodeReadable | null>;
+type GracileHandler = (request, locals?) => Promise<HandlerResult>;
 ```
+
+Defined in: packages/engine/dist/server/request.d.ts:11
 
 The underlying handler interface that you can use to build your own adapter.
 
@@ -568,7 +293,7 @@ The underlying handler interface that you can use to build your own adapter.
 <tr>
 <td>
 
-`locals`?
+`locals?`
 
 </td>
 <td>
@@ -582,17 +307,19 @@ The underlying handler interface that you can use to build your own adapter.
 
 **Returns**
 
-`Promise`\<`StandardResponse` \| `ResponseWithNodeReadable` \| `null`\>
-
-**Defined in**
-
-packages/engine/dist/server/request.d.ts:21
+`Promise`\<`HandlerResult`\>
 
 ## Type Alias: GracileNodeHandler()
 
 ```ts
-type GracileNodeHandler: (request, response, locals?) => Promise<ServerResponse<IncomingMessage> | null | void>;
+type GracileNodeHandler = (
+  request,
+  response,
+  locals?,
+) => Promise<ServerResponse<IncomingMessage> | null | void>;
 ```
+
+Defined in: packages/engine/dist/server/adapters/node.d.ts:3
 
 **Parameters**
 
@@ -631,7 +358,7 @@ type GracileNodeHandler: (request, response, locals?) => Promise<ServerResponse<
 <tr>
 <td>
 
-`locals`?
+`locals?`
 
 </td>
 <td>
@@ -647,15 +374,13 @@ type GracileNodeHandler: (request, response, locals?) => Promise<ServerResponse<
 
 `Promise`\<`ServerResponse`\<`IncomingMessage`\> \| `null` \| `void`\>
 
-**Defined in**
-
-packages/engine/dist/server/adapters/node.d.ts:3
-
 ## Type Alias: GracileHonoHandler()
 
 ```ts
-type GracileHonoHandler: (context) => Promise<Response>;
+type GracileHonoHandler = (context) => Promise<Response>;
 ```
+
+Defined in: packages/engine/dist/server/adapters/hono.d.ts:2
 
 **Parameters**
 
@@ -675,7 +400,7 @@ type GracileHonoHandler: (context) => Promise<Response>;
 </td>
 <td>
 
-`object`
+\{ `req`: \{ `raw`: `Request`; \}; `var`: `unknown`; \}
 
 </td>
 </tr>
@@ -687,7 +412,7 @@ type GracileHonoHandler: (context) => Promise<Response>;
 </td>
 <td>
 
-`object`
+\{ `raw`: `Request`; \}
 
 </td>
 </tr>
@@ -721,7 +446,3 @@ type GracileHonoHandler: (context) => Promise<Response>;
 **Returns**
 
 `Promise`\<`Response`\>
-
-**Defined in**
-
-packages/engine/dist/server/adapters/hono.d.ts:2

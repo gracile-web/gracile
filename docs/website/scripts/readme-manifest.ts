@@ -38,4 +38,8 @@ export const README_MAP: { src: string; dest: string }[] = [
 		src: 'packages/labs/islands',
 		dest: 'src/content/docs/15-add-ons/35-islands/README.md',
 	},
+	{
+		src: 'starter-projects',
+		dest: 'src/content/docs/04-starter-projects/README.md',
+	},
 ];

@@ -17,11 +17,14 @@ node --run preview
 vite preview
 ```
 
-You can alias these in `package.json` scripts, see the [manual installation guide](/docs/learn/getting-started/installation/#doc_install-manually).
+You can alias these in `package.json` scripts, see the
+[manual installation guide](/docs/learn/getting-started/installation/#doc_install-manually).
 
 ---
 
-See also the ["Create" command](/docs/learn/getting-started/installation/#doc_the-create-command) (`npm create gracile`) for bootstrapping a project in under a minute.
+See also the
+["Create" command](/docs/learn/getting-started/installation/#doc_the-create-command)
+(`npm create gracile`) for bootstrapping a project in under a minute.
 
 ## Options
 
@@ -53,7 +56,8 @@ See the Vite [CLI](https://vitejs.dev/guide/cli) options.
 
 ---
 
-`npm create gracile@next` can be used to try the pre-release version of the `create-gracile`, CLI, too.
+`npm create gracile@next` can be used to try the pre-release version of the
+`create-gracile`, CLI, too.
 
 <!-- ```text
   -p, --port <number>  Assign a local port (overrides config. file)

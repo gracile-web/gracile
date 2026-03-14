@@ -5,6 +5,8 @@ Examples, functions, classes, constants, type declarations…
 
 ## Interface: GracileConfig
 
+Defined in: packages/engine/dist/user-config.d.ts:32
+
 **Example**
 
 `/vite.config.js`
@@ -37,79 +39,480 @@ export default defineConfig({
 
 **Properties**
 
-| Property                              | Type                               | Default value | Description                                                                                                                                                                                                                                                                                                                                                                          | Defined in                                |
-| ------------------------------------- | ---------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------- |
-| `dev?`                                | `object`                           | `undefined`   | Settings for the development mode.                                                                                                                                                                                                                                                                                                                                                   | packages/engine/dist/user-config.d.ts:43  |
-| `dev.locals?`                         | (`context`: `object`) => `unknown` | `undefined`   | Get incoming request context and apply locals for the Gracile request handler. Useful for mocking the production server. For `server` mode only.                                                                                                                                                                                                                                     | packages/engine/dist/user-config.d.ts:50  |
-| `experimental?`                       | `object`                           | `undefined`   | Future, unstable features flags.                                                                                                                                                                                                                                                                                                                                                     | packages/engine/dist/user-config.d.ts:99  |
-| `experimental.generateRoutesTypings?` | `boolean`                          | `undefined`   | **`Experimental`** Automatically typed route paths.                                                                                                                                                                                                                                                                                                                                  | packages/engine/dist/user-config.d.ts:104 |
-| `output?`                             | `"static"` \| `"server"`           | `'static'`    | The target output for the build phase. See the [documentation](/docs/learn/usage/output-modes/).                                                                                                                                                                                                                                                                                     | packages/engine/dist/user-config.d.ts:39  |
-| `pages?`                              | `object`                           | `undefined`   | Settings for pages in `/src/routes`.                                                                                                                                                                                                                                                                                                                                                 | packages/engine/dist/user-config.d.ts:66  |
-| `pages.premises?`                     | `object`                           | `undefined`   | Premises are the document and the properties necessary for page template rendering. You can access them via: - `.../_my-route/__index.props.json` - `.../_my-route/__index.doc.html` They are accessible with the dev/server handler and are outputted as static files for the static output or for server pre-rendered pages. They can be use for implementing client-side routing. | packages/engine/dist/user-config.d.ts:81  |
-| `pages.premises.exclude?`             | `string`[]                         | `undefined`   | Exclude routes with a glob filter array.                                                                                                                                                                                                                                                                                                                                             | packages/engine/dist/user-config.d.ts:93  |
-| `pages.premises.expose?`              | `boolean`                          | `false`       |                                                                                                                                                                                                                                                                                                                                                                                      | packages/engine/dist/user-config.d.ts:85  |
-| `pages.premises.include?`             | `string`[]                         | `undefined`   | Include routes with a glob filter array.                                                                                                                                                                                                                                                                                                                                             | packages/engine/dist/user-config.d.ts:89  |
-| `routes?`                             | `object`                           | `undefined`   | Settings for routes in `/src/routes`.                                                                                                                                                                                                                                                                                                                                                | packages/engine/dist/user-config.d.ts:57  |
-| `routes.exclude?`                     | `string`[]                         | `undefined`   | Exclude routes with an array of patterns. Useful for debugging.                                                                                                                                                                                                                                                                                                                      | packages/engine/dist/user-config.d.ts:61  |
-
-## Function: gracile()
-
-```ts
-function gracile(config?): any[];
-```
-
-The main Vite plugin for loading the Gracile framework.
-
-**Parameters**
-
 <div class="typedoc-table"><table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Property</th>
 <th>Type</th>
+<th>Default value</th>
 <th>Description</th>
+<th>Defined in</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>
 
-`config`?
+<a id="property-dev"></a> `dev?`
 
 </td>
 <td>
 
-[`GracileConfig`](#doc_gracilegracileinterface-gracileconfig)
+`object`
 
 </td>
 <td>
 
-Gracile configuration.
+`undefined`
+
+</td>
+<td>
+
+Settings for the development mode.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:57
+
+</td>
+</tr>
+<tr>
+<td>
+
+`dev.locals?`
+
+</td>
+<td>
+
+(`context`) => `unknown`
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Get incoming request context and apply locals for the Gracile request handler.
+Useful for mocking the production server.
+
+For `server` mode only.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:64
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="property-experimental"></a> `experimental?`
+
+</td>
+<td>
+
+`object`
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Future, unstable features flags.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:147
+
+</td>
+</tr>
+<tr>
+<td>
+
+`experimental.generateRoutesTypings?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+**`Experimental`**
+
+Automatically typed route paths.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:152
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="property-litssr"></a> `litSsr?`
+
+</td>
+<td>
+
+`object`
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+&hyphen;
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:110
+
+</td>
+</tr>
+<tr>
+<td>
+
+`litSsr.renderInfo?`
+
+</td>
+<td>
+
+`Partial`\<`RenderInfo`\>
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Lets you extend Gracile's SSR pipeline with custom Lit SSR `ElementRenderer`
+subclasses. This is the foundation for features like
+[Islands](/docs/add-ons/islands/), which register a renderer for the `<is-land>`
+custom element to server-render components from other UI frameworks.
+
+In most cases, you do **not** set this option manually — add-on plugins (like
+`gracileIslands()`) register their renderers automatically via the plugin
+context communication channel. However, you can use it directly for advanced use
+cases:
+
+```ts
+import { gracile } from '@gracile/gracile/plugin';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [
+    gracile({
+      litSsr: {
+        renderInfo: {
+          elementRenderers: [
+            // Your custom ElementRenderer subclass
+          ],
+        },
+      },
+    }),
+  ],
+});
+```
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:142
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="property-output"></a> `output?`
+
+</td>
+<td>
+
+`"static"` \| `"server"`
+
+</td>
+<td>
+
+```ts
+'static';
+```
+
+</td>
+<td>
+
+The target output for the build phase.
+
+See the [documentation](/docs/learn/usage/output-modes/).
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:40
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="property-pages"></a> `pages?`
+
+</td>
+<td>
+
+`object`
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Settings for pages in `/src/routes`.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:80
+
+</td>
+</tr>
+<tr>
+<td>
+
+`pages.premises?`
+
+</td>
+<td>
+
+`object`
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Premises are the document and the properties necessary for page template
+rendering.
+
+You can access them via:
+
+- `.../_my-route/__index.props.json`
+- `.../_my-route/__index.doc.html`
+
+They are accessible with the dev/server handler and are outputted as static
+files for the static output or for server pre-rendered pages.
+
+They can be use for implementing client-side routing.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:95
+
+</td>
+</tr>
+<tr>
+<td>
+
+`pages.premises.exclude?`
+
+</td>
+<td>
+
+`string`[]
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Exclude routes with a glob filter array.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:107
+
+</td>
+</tr>
+<tr>
+<td>
+
+`pages.premises.expose?`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td>
+
+```ts
+false;
+```
+
+</td>
+<td>
+
+&hyphen;
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:99
+
+</td>
+</tr>
+<tr>
+<td>
+
+`pages.premises.include?`
+
+</td>
+<td>
+
+`string`[]
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Include routes with a glob filter array.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:103
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="property-routes"></a> `routes?`
+
+</td>
+<td>
+
+`object`
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Settings for routes in `/src/routes`.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:71
+
+</td>
+</tr>
+<tr>
+<td>
+
+`routes.exclude?`
+
+</td>
+<td>
+
+`string`[]
+
+</td>
+<td>
+
+`undefined`
+
+</td>
+<td>
+
+Exclude routes with an array of patterns. Useful for debugging.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:75
+
+</td>
+</tr>
+<tr>
+<td>
+
+<a id="property-trailingslash"></a> `trailingSlash?`
+
+</td>
+<td>
+
+`"always"` \| `"never"` \| `"ignore"`
+
+</td>
+<td>
+
+```ts
+'ignore';
+```
+
+</td>
+<td>
+
+Controls how trailing slashes are matched on incoming URLs.
+
+- `'ignore'` — Match regardless of whether a trailing `/` is present. `/about`
+  and `/about/` both resolve to the same route. _(default)_
+- `'always'` — Only match URLs that include a trailing slash (e.g. `/about/`).
+  Requests without one are redirected: `301` for GET, `308` for other methods.
+- `'never'` — Only match URLs that do not include a trailing slash (e.g.
+  `/about`). Requests with one are redirected: `301` for GET, `308` for other
+  methods.
+
+</td>
+<td>
+
+packages/engine/dist/user-config.d.ts:53
 
 </td>
 </tr>
 </tbody>
 </table></div>
-
-**Returns**
-
-`any`[]
-
-Vite plugins. `any` is used to prevent Vite typings version mismatches for the plugin API.
-
-**Example**
-
-`/vite.config.js`
-
-```js
-import { gracile } from '@gracile/gracile/plugin';
-import { defineConfig } from 'vite';
-
-export default defineConfig({
-  plugins: [gracile({ output: 'server' })],
-});
-```
-
-**Defined in**
-
-packages/engine/dist/plugin.d.ts:19

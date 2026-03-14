@@ -1,24 +1,36 @@
 # Routing within a single endpoint
 
-Gracile doesn't aim to replace full-fledged HTTP frameworks like Express, Hono, Elysia, Fastify, etc.  
-However, you might want to colocate JSON endpoints with your front-end, to achieve what is often called the "Back-For-Front" pattern.  
-It's when you want to put a thin bridge whose role is to authenticate with and curate your "real" backends.
+Gracile doesn't aim to replace full-fledged HTTP frameworks like Express, Hono,
+Elysia, Fastify, etc.  
+However, you might want to colocate JSON endpoints with your front-end, to
+achieve what is often called the "Back-For-Front" pattern.  
+It's when you want to put a thin bridge whose role is to authenticate with and
+curate your "real" backends.
 
-That being said, Gracile is full-stack but is leaning more on the front-end side.
-This is perfect for the typical scenario where "serverless" is chosen (aka more or less custom JS runtime running near the user).  
-But it is also a good practice to not put too much processing weight on the _rendering_ side of your app/site, whether it is server-rendered upfront, or not.
+That being said, Gracile is full-stack but is leaning more on the front-end
+side. This is perfect for the typical scenario where "serverless" is chosen (aka
+more or less custom JS runtime running near the user).  
+But it is also a good practice to not put too much processing weight on the
+_rendering_ side of your app/site, whether it is server-rendered upfront, or
+not.
 
-Single entry point API routes can also be used to set up OpenAPI driven handlers, GraphQL, tRPC…  
+Single entry point API routes can also be used to set up OpenAPI driven
+handlers, GraphQL, tRPC…  
 But we will stick with pure JSON here.
 
-Note that when possible, it's clearer to keep a file-based routing, like `/api/pet/[id].ts`, but sometimes it's more maintainable to use programmatic routing in a single file.  
-For that, we can use a `[...rest].ts` "catch-all" route and process the URL forward ourselves.
+Note that when possible, it's clearer to keep a file-based routing, like
+`/api/pet/[id].ts`, but sometimes it's more maintainable to use programmatic
+routing in a single file.  
+For that, we can use a `[...rest].ts` "catch-all" route and process the URL
+forward ourselves.
 
 ## Pre-requisites
 
-In this recipe, we will explore the `URLPattern` API to help us with **routing**.  
-At the time this guide
-is written, [isn't supported widely](https://caniuse.com/mdn-api_urlpattern), whether on server runtimes or browsers.
+In this recipe, we will explore the `URLPattern` API to help us with
+**routing**.  
+At the time this guide is written,
+[isn't supported widely](https://caniuse.com/mdn-api_urlpattern), whether on
+server runtimes or browsers.
 
 <!-- NOTE: Feature not found -->
 <!-- <caniuse-embed feature="mdn-api_urlpattern" periods="future_1,current,past_1,past_2"></caniuse-embed>
@@ -38,11 +50,13 @@ npm i urlpattern-polyfill
 
 ## Files
 
-Here is a very contrived example, from where you can elaborate with `POST`, more `URLPattern`,
-hand-shakes and data sourcing from/to your back-ends…
+Here is a very contrived example, from where you can elaborate with `POST`, more
+`URLPattern`, hand-shakes and data sourcing from/to your back-ends…
 
-Defining more route patterns for your single-file API entry point will start to make sense over just using the file-based routing.
-(Like already said above, `/api/pet/:id/` could already be defined in the Gracile file router with `/api/pet/[id].ts`).
+Defining more route patterns for your single-file API entry point will start to
+make sense over just using the file-based routing. (Like already said above,
+`/api/pet/:id/` could already be defined in the Gracile file router with
+`/api/pet/[id].ts`).
 
 But we just want to demonstrate the basic primitives for now:
 

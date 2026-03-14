@@ -209,7 +209,8 @@ client side.
 The ones that you already know and use everywhere else: **HTML**, **CSS** and
 **JavaScript**.
 
-Simplicity doesn't mean obfuscation. You're still in charge without abandoning flexibility to your framework.
+Simplicity doesn't mean obfuscation. You're still in charge without abandoning
+flexibility to your framework.
 
 </div></div><div class="card"><div class="card-content">
 
@@ -247,9 +248,14 @@ home.
 
 ## <i-c o="ph:feather-duotone"></i-c>Light and unobtrusive
 
-All in all, the Gracile framework is just Vite, Lit SSR and a very **restricted set of helpers and third parties**.  
-Check its [dependency tree on npmgraph](https://npmgraph.js.org/?q=@gracile/gracile), you'll see by yourself.  
-Also, everything is done to **keep your Vite configuration as pristine as possible**. Augmenting an existing project can be done in a pinch, with no interference.
+All in all, the Gracile framework is just Vite, Lit SSR and a very **restricted
+set of helpers and third parties**.  
+Check its
+[dependency tree on npmgraph](https://npmgraph.js.org/?q=@gracile/gracile),
+you'll see by yourself.  
+Also, everything is done to **keep your Vite configuration as pristine as
+possible**. Augmenting an existing project can be done in a pinch, with no
+interference.
 
 </div></div><div class="card"><div class="card-content">
 

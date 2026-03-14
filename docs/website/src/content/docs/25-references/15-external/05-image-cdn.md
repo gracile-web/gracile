@@ -1,17 +1,23 @@
 # Image embeds from a CDN
 
-Generally, the simplest way to add images for your static/server project is to use
-a media CDN, and a tailored component for make it optimized in your templates.
+Generally, the simplest way to add images for your static/server project is to
+use a media CDN, and a tailored component for make it optimized in your
+templates.
 
-Those optimizations can avoid flash of unstyled content, download the right set of responsive images, crop them depending on the viewport dimensions and other transformations…
+Those optimizations can avoid flash of unstyled content, download the right set
+of responsive images, crop them depending on the viewport dimensions and other
+transformations…
 
 ---
 
-[Unpic](https://unpic.pics/) is a universal adapter that offers a **Lit element `<img>`** wrapper in its toolkit.
+[Unpic](https://unpic.pics/) is a universal adapter that offers a **Lit element
+`<img>`** wrapper in its toolkit.
 
-**It works very well with Lit SSR**, that makes it perfect to use with the Gracile framework.
+**It works very well with Lit SSR**, that makes it perfect to use with the
+Gracile framework.
 
-> **Unpic** is the ultimate open source toolkit for displaying images on the web.
+> **Unpic** is the ultimate open source toolkit for displaying images on the
+> web.
 
 ```sh
 npm install @unpic/lit
@@ -42,4 +48,5 @@ Yields:
 
 ---
 
-Inspect the HTML static sources above, you'll see the DOM is already there, on the first HTML rendering pass.
+Inspect the HTML static sources above, you'll see the DOM is already there, on
+the first HTML rendering pass.

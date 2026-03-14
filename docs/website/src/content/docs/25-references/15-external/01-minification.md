@@ -1,12 +1,18 @@
 # Minification
 
-Besides your JS and CSS bundles, you still have the HTML output and its embedded CSS/JS to take care of.
+Besides your JS and CSS bundles, you still have the HTML output and its embedded
+CSS/JS to take care of.
 
-HTML template literals are leaved as-is with Gracile, this is because HTML minification is a tedious process that requires awareness about potential issues.
+HTML template literals are leaved as-is with Gracile, this is because HTML
+minification is a tedious process that requires awareness about potential
+issues.
 
-It's not always worth the trouble to do it, but if you want to squeeze as many bits as possible, you have multiple options.
+It's not always worth the trouble to do it, but if you want to squeeze as many
+bits as possible, you have multiple options.
 
-For example, you can use the [@literals/rollup-plugin-html-css-minifier](https://github.com/JulianCataldo/literals) Rollup plugin.
+For example, you can use the
+[@literals/rollup-plugin-html-css-minifier](https://github.com/JulianCataldo/literals)
+Rollup plugin.
 
 ```sh
 npm i @literals/rollup-plugin-html-css-minifier
@@ -33,5 +39,7 @@ export default defineConfig({
 });
 ```
 
-The static HTML pre-renders and `html` templates in JS will then be properly minified.  
-It works during **development and build**, for the **client and the server bundles**.
+The static HTML pre-renders and `html` templates in JS will then be properly
+minified.  
+It works during **development and build**, for the **client and the server
+bundles**.

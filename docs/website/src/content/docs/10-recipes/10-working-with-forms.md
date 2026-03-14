@@ -1,7 +1,7 @@
 # Handle forms (no-JS)
 
-This is a full example of how to handle forms in Gracile.
-Server-only handling, no JS needed.
+This is a full example of how to handle forms in Gracile. Server-only handling,
+no JS needed.
 
 ```ts twoslash
 // @filename: /src/document.ts
