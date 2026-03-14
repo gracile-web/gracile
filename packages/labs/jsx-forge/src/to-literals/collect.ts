@@ -1,6 +1,6 @@
 import type { Ts } from '../types.js';
-import type { Context, RecurseFlags } from './types.js';
 
+import type { Context, RecurseFlags } from './types.js';
 import { handlePascalCasedComponent } from './component.js';
 import { handleTag } from './html-tag.js';
 
@@ -86,7 +86,7 @@ function handleHtmlComment(
 	childNode: Ts.JsxExpression,
 ): void {
 	const { appendStaticToCurrentLiteral } = context;
-	const match = /^\{\s*\/\*\s*<!--([\s\S]*?)-->\s*\*\/\s*\}$/.exec(
+	const match = /^{\s*\/\*\s*<!--([\S\s]*?)-->\s*\*\/\s*}$/.exec(
 		childNode.getText(),
 	);
 	const htmlComment = match?.[1];

@@ -9,9 +9,12 @@ A thin, full-stack, **web** framework.
 
 - Portable **HTML**, **CSS** and **JS**, thanks to **Lit (SSR)**.
 - Highly responsive during dev. and build, thanks to **Vite**.
-- **Minimal dependency footprint** for its **runtime** and your **distributable**.
-- Embrace web standards like **Custom Elements** (aka Web Components) or the **WhatWG Fetch** API.
-- A streamlined **D**eveloper e**X**perience for building, instead of fiddling around.
+- **Minimal dependency footprint** for its **runtime** and your
+  **distributable**.
+- Embrace web standards like **Custom Elements** (aka Web Components) or the
+  **WhatWG Fetch** API.
+- A streamlined **D**eveloper e**X**perience for building, instead of fiddling
+  around.
 
 ---
 
@@ -65,7 +68,8 @@ npm create gracile@latest -t basics
 npx degit gracile-web/starter-projects/templates/basics my-project
 ```
 
-📑 **Sources**: [basics](https://github.com/gracile-web/starter-projects/tree/main/templates/basics)
+📑 **Sources**:
+[basics](https://github.com/gracile-web/starter-projects/tree/main/templates/basics)
 
 </div></div>
 
@@ -95,7 +99,8 @@ npm create gracile@latest -t minimal-static
 npx degit gracile-web/starter-projects/templates/minimal-static my-project
 ```
 
-📑 **Sources**: [minimal-static](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-static)
+📑 **Sources**:
+[minimal-static](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-static)
 
 </div></div>
 
@@ -125,7 +130,8 @@ npm create gracile@latest -t minimal-bootstrap-tailwind
 npx degit gracile-web/starter-projects/templates/minimal-bootstrap-tailwind my-project
 ```
 
-📑 **Sources**: [minimal-bootstrap-tailwind](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-bootstrap-tailwind)
+📑 **Sources**:
+[minimal-bootstrap-tailwind](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-bootstrap-tailwind)
 
 </div></div>
 
@@ -175,7 +181,8 @@ npm create gracile@latest -t minimal-testing
 npx degit gracile-web/starter-projects/templates/minimal-testing my-project
 ```
 
-📑 **Sources**: [minimal-testing](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-testing)
+📑 **Sources**:
+[minimal-testing](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-testing)
 
 </div></div>
 
@@ -205,7 +212,8 @@ npm create gracile@latest -t minimal-minification
 npx degit gracile-web/starter-projects/templates/minimal-minification my-project
 ```
 
-📑 **Sources**: [minimal-minification](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-minification)
+📑 **Sources**:
+[minimal-minification](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-minification)
 
 </div></div>
 
@@ -235,7 +243,8 @@ npm create gracile@latest -t minimal-client-routing
 npx degit gracile-web/starter-projects/templates/minimal-client-routing my-project
 ```
 
-📑 **Sources**: [minimal-client-routing](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-client-routing)
+📑 **Sources**:
+[minimal-client-routing](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-client-routing)
 
 </div></div>
 
@@ -265,7 +274,8 @@ npm create gracile@latest -t minimal-server-express
 npx degit gracile-web/starter-projects/templates/minimal-server-express my-project
 ```
 
-📑 **Sources**: [minimal-server-express](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-server-express)
+📑 **Sources**:
+[minimal-server-express](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-server-express)
 
 </div></div>
 
@@ -295,7 +305,8 @@ npm create gracile@latest -t minimal-server-hono
 npx degit gracile-web/starter-projects/templates/minimal-server-hono my-project
 ```
 
-📑 **Sources**: [minimal-server-hono](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-server-hono)
+📑 **Sources**:
+[minimal-server-hono](https://github.com/gracile-web/starter-projects/tree/main/templates/minimal-server-hono)
 
 </div></div>
 
@@ -310,9 +321,11 @@ npx degit gracile-web/starter-projects/templates/minimal-server-hono my-project
 
 ---
 
-> “Perfection is achieved, not when there is nothing more to add,
-> but when there is nothing left to take away.”
+> “Perfection is achieved, not when there is nothing more to add, but when there
+> is nothing left to take away.”
 >
-> ― [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry), _Airman's Odyssey_
+> ―
+> [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry),
+> _Airman's Odyssey_
 
 </div>

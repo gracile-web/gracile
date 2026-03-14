@@ -88,12 +88,12 @@ describe('Attributes', () => {
 	test('expression attribute', () => {
 		const result = body(`const el = <div title={"Bonjour"}>Hello</div>;`);
 		// Expression should be interpolated
-		assert.match(result, /title=\$\{"Bonjour"\}/);
+		assert.match(result, /title=\${"Bonjour"}/);
 	});
 
 	test('numeric attribute', () => {
 		const result = body(`const el = <div width={2}>Hello</div>;`);
-		assert.match(result, /width=\$\{2\}/);
+		assert.match(result, /width=\${2\}/);
 	});
 
 	test('boolean attribute (bare)', () => {
@@ -109,12 +109,12 @@ describe('Attributes', () => {
 describe('Children expressions', () => {
 	test('string expression child', () => {
 		const result = body(`const el = <div>{"Hello"}</div>;`);
-		assert.match(result, /\$\{"Hello"\}/);
+		assert.match(result, /\${"Hello"}/);
 	});
 
 	test('variable expression child', () => {
 		const result = body(`const name = "World"; const el = <div>{name}</div>;`);
-		assert.match(result, /\$\{name\}/);
+		assert.match(result, /\${name}/);
 	});
 
 	test('empty expression (JSX comment) is omitted', () => {
@@ -163,7 +163,7 @@ describe('Namespaced attributes — Lit bindings', () => {
 	test('boolean binding (bool:)', () => {
 		const result = body(`const el = <div bool:disabled={true}>Hello</div>;`);
 		// Boolean is a global builtin — no $_  prefix
-		assert.match(result, /\?disabled=\$\{Boolean\(true\)\}/);
+		assert.match(result, /\?disabled=\${Boolean\(true\)}/);
 	});
 
 	test('attr: serialised with JSON.stringify', () => {
@@ -171,14 +171,14 @@ describe('Namespaced attributes — Lit bindings', () => {
 			`const el = <div attr:some-obj={{ title: "my title" }}>Ant</div>;`,
 		);
 		// JSON.stringify is a global builtin — no $_ prefix
-		assert.match(result, /some-obj=\$\{JSON\.stringify\(/);
+		assert.match(result, /some-obj=\${JSON\.stringify\(/);
 	});
 
 	test('if: wrapped with ifDefined()', () => {
 		const result = body(
 			`const el = <div if:something={"something"}>Hello</div>;`,
 		);
-		assert.match(result, /something=\$\{.*ifDefined\(/);
+		assert.match(result, /something=\${.*ifDefined\(/);
 	});
 
 	test('use:ref wrapped with ref()', () => {
@@ -192,21 +192,21 @@ describe('Namespaced attributes — Lit bindings', () => {
 		const result = body(
 			`const el = <div style:map={{ borderColor: "red" }}>Ant</div>;`,
 		);
-		assert.match(result, /style=\$\{.*styleMap\(/);
+		assert.match(result, /style=\${.*styleMap\(/);
 	});
 
 	test('class:map attribute', () => {
 		const result = body(
 			`const el = <div class:map={{ someClass: true }}>Ant</div>;`,
 		);
-		assert.match(result, /class=\$\{.*classMap\(/);
+		assert.match(result, /class=\${.*classMap\(/);
 	});
 
 	test('class:list attribute', () => {
 		const result = body(
 			`const el = <div class:list={{ active: true }}>Ant</div>;`,
 		);
-		assert.match(result, /class=\$\{.*clsx\(/);
+		assert.match(result, /class=\${.*clsx\(/);
 	});
 });
 
@@ -233,7 +233,7 @@ describe('PascalCase components', () => {
 			`const MyComp = ({ children }: any) => <>{children}</>; const el = <MyComp>Lion</MyComp>;`,
 		);
 		// PascalCase → function call MyComp({ "$:children": html`...` })
-		assert.match(result, /MyComp\(\{/);
+		assert.match(result, /MyComp\({/);
 		assert.match(result, /"\$:children"/);
 	});
 
@@ -242,7 +242,7 @@ describe('PascalCase components', () => {
 			`const MyComp = ({ title, children }: any) => <div title={title}>{children}</div>;` +
 				`const el = <MyComp title={"my title"}>Penguin</MyComp>;`,
 		);
-		assert.match(result, /MyComp\(\{/);
+		assert.match(result, /MyComp\({/);
 		// The title prop may be inlined or go through type-based transform
 		assert.match(result, /"\$:children"/);
 		assert.match(result, /Penguin/);
@@ -253,7 +253,7 @@ describe('PascalCase components', () => {
 			`const top = { MyComp: ({ children }: any) => <main>{children}</main> };` +
 				`const el = <top.MyComp>Donkey</top.MyComp>;`,
 		);
-		assert.match(result, /top\.MyComp\(\{/);
+		assert.match(result, /top\.MyComp\({/);
 	});
 });
 
@@ -277,7 +277,7 @@ describe('For-each directive', () => {
 		// keyFn should come before the html tagged template
 		assert.match(
 			result,
-			/\$_repeat\(\["a", "b"\], \(id\) => \(id\), \(id\) => \(html/,
+			/\$_repeat\(\["a", "b"], \(id\) => \(id\), \(id\) => \(html/,
 		);
 	});
 });
@@ -290,7 +290,7 @@ describe('Use literal directives', () => {
 	test('default — imports html from lit', () => {
 		const result = raw(`const el = <div>Abc</div>;`);
 		assert.match(result.imports, /from "lit"/);
-		assert.match(result.imports, /\{ html \}/);
+		assert.match(result.imports, /{ html }/);
 	});
 
 	test('"use html-server" — imports from @lit-labs/ssr', () => {
@@ -481,11 +481,11 @@ describe('Tagged template structure', () => {
 		const result = body(`const el = <div>Hello</div>;`);
 		// No ${} interpolation — just html`<div>Hello</div>`
 		assert.match(result, /html `<div>Hello<\/div>`/);
-		assert.doesNotMatch(result, /\$\{/);
+		assert.doesNotMatch(result, /\${/);
 	});
 
 	test('expression produces TemplateExpression with spans', () => {
 		const result = body(`const name = "W"; const el = <div>{name}</div>;`);
-		assert.match(result, /\$\{name\}/);
+		assert.match(result, /\${name}/);
 	});
 });

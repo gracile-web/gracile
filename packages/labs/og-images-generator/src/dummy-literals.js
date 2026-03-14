@@ -19,13 +19,15 @@ export function dummyLiteral(
 	/** @type {TemplateStringsArray} */
 	templateStrings,
 	/** @type {(string | string[])[]} */
-	...args
+	...arguments_
 ) {
 	return templateStrings
 		.map(
 			(templateString, index) =>
 				templateString +
-				(Array.isArray(args[index]) ? args[index].join('') : args[index] || ''),
+				(Array.isArray(arguments_[index])
+					? arguments_[index].join('')
+					: arguments_[index] || ''),
 		)
 		.join('');
 }

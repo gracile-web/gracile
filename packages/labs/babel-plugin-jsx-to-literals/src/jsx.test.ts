@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 
 /* import { pluginTester } from 'babel-plugin-tester';
 import babelPluginJsx from './babel-plugin-jsx.js';

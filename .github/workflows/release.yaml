@@ -107,7 +107,9 @@ jobs:
       # never shipped to the user. But that's not 100% optimal, as devDeps could
       # provoke some sec issues, too? A middleground is better than nothing and
       # regularly blocked releases for obscure root mono-repo tooling deps.
-      - name: 'Verify the integrity of provenance attestations and registry signatures for installed [prod] dependencies'
+      - name:
+          'Verify the integrity of provenance attestations and registry
+          signatures for installed [prod] dependencies'
         run: 'node --run audit'
 
       # MARK: Lint/Checks pre-build
@@ -134,6 +136,12 @@ jobs:
         run: node --run build
 
       # MARK: Lint/Checks post-build
+
+      - name: Cache ESLint results
+        uses: actions/cache@v4
+        with:
+          path: .eslintcache
+          key: eslint-${{ hashFiles('pnpm-lock.yaml', 'eslint.config.js') }}
 
       - name: Lint JS/TS — ESLint
         shell: bash
@@ -257,4 +265,5 @@ jobs:
           NETLIFY_AUTH_TOKEN: '${{ secrets.NETLIFY_AUTH_TOKEN }}'
           NETLIFY_SITE_ID: '${{ secrets.NETLIFY_SITE_ID }}'
         shell: bash
-        run: pnpm --prefix docs/website exec netlify deploy -d ./dist --alias next
+        run:
+          pnpm --prefix docs/website exec netlify deploy -d ./dist --alias next

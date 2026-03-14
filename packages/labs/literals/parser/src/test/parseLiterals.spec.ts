@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { describe, it } from 'node:test';
+
 import { expect } from 'chai';
 import sinon from 'sinon';
+
 import { parseLiterals } from '../parseLiterals.js';
+
 import createParseTests from './parse-tests.js';
-import { describe, it } from 'node:test';
 
 describe('parseLiterals()', () => {
 	it('should allow overriding strategy', () => {

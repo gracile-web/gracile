@@ -1,4 +1,5 @@
 import type { Ts } from '../types.js';
+
 import type { Context } from './types.js';
 
 export function handlePascalCasedComponent(

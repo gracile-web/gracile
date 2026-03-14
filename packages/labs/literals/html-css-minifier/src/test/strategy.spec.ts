@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { describe, it } from 'node:test';
+
 import { expect } from 'chai';
 import { minify } from 'html-minifier-terser';
-import { defaultMinifyOptions, defaultStrategy } from '../strategy.js';
 import { TemplatePart } from '@literals/parser';
-import { describe, it } from 'node:test';
+
+import { defaultMinifyOptions, defaultStrategy } from '../strategy.js';
 
 describe('strategy', () => {
 	describe('default', () => {

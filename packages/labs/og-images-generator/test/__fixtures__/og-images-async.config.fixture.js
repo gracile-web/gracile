@@ -14,7 +14,7 @@ const myInlineStyle1 = styled.div`
 
 const nestedTemplate1 = html`<span>My Website</span>`;
 
-async function iAmABlocker() {
+async function someBlocker() {
 	const stuff = await new Promise((resolve) =>
 		setTimeout(() => resolve('ok then'), 10),
 	);
@@ -31,7 +31,7 @@ export const template = async ({ page }) =>
 			<!-- -->
 			${nestedTemplate1}
 			<em>Nice</em>
-			<strong>Weather, ${await iAmABlocker()}</strong>
+			<strong>Weather, ${await someBlocker()}</strong>
 		</div>`;
 
 /** @type {import('og-images-generator').RenderOptions} */

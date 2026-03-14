@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="./types/clean-css/index.d.ts" />
 // Reference needed for d.ts distribution files in rollup-plugin-minify-html-literals
 import CleanCSS from 'clean-css';
@@ -5,11 +6,10 @@ import {
 	OptimizationLevel,
 	optimizationLevelFrom,
 	// FIXME:
-	// @ts-expect-error
+	// @ts-expect-error No typings.
 } from 'clean-css/lib/options/optimization-level.js';
 import { Options as HTMLOptions, minify } from 'html-minifier-terser';
 import { TemplatePart } from '@literals/parser';
-
 import * as ts from 'typescript';
 
 /**
@@ -119,14 +119,10 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 	async minifyHTML(html, options = {}) {
 		let minifyCSSOptions: HTMLOptions['minifyCSS'];
 		if (options.minifyCSS) {
-			if (
-				options.minifyCSS !== true &&
-				typeof options.minifyCSS !== 'function'
-			) {
-				minifyCSSOptions = { ...options.minifyCSS };
-			} else {
-				minifyCSSOptions = {};
-			}
+			minifyCSSOptions =
+				options.minifyCSS !== true && typeof options.minifyCSS !== 'function'
+					? { ...options.minifyCSS }
+					: {};
 		} else {
 			minifyCSSOptions = false;
 		}
@@ -138,16 +134,16 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 			adjustedMinifyCSSOptions = adjustMinifyCSSOptions(minifyCSSOptions);
 		}
 
-		let result = html.replace(
-			/<script[\s\S]lang=('|")?ts('|"| )[\s\S]*?>([\s\S]*?)<\/script>/gi,
-			(...args) => {
-				console.log(args);
+		let result = html.replaceAll(
+			/<script[\S\s]lang=('|")?ts('|"| )[\S\s]*?>([\S\s]*?)<\/script>/gi,
+			(...arguments_) => {
+				console.log(arguments_);
 
 				// const stripped = args[3];
 				// const stripped = '__';
-				const stripped = ts.transpile(args[3]);
+				const stripped = ts.transpile(arguments_[3]);
 				console.log({ stripped });
-				return `${args[0].replace(args[3], stripped)}`;
+				return `${arguments_[0].replace(arguments_[3], stripped)}`;
 			},
 		);
 
@@ -162,19 +158,19 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 			// html-minifier does not support removing newlines inside <svg>
 			// attributes. Support this, but be careful not to remove newlines from
 			// supported areas (such as within <pre> and <textarea> tags).
-			const matches = Array.from(result.matchAll(/<svg/g)).reverse();
+			const matches = [...result.matchAll(/<svg/g)].reverse();
 			for (const match of matches) {
 				const startTagIndex = match.index!;
 				const closeTagIndex = result.indexOf('</svg', startTagIndex);
-				if (closeTagIndex < 0) {
+				if (closeTagIndex === -1) {
 					// Malformed SVG without a closing tag
 					continue;
 				}
 
-				const start = result.substring(0, startTagIndex);
+				const start = result.slice(0, Math.max(0, startTagIndex));
 				let svg = result.substring(startTagIndex, closeTagIndex);
-				const end = result.substring(closeTagIndex);
-				svg = svg.replace(/\r?\n/g, '');
+				const end = result.slice(Math.max(0, closeTagIndex));
+				svg = svg.replaceAll(/\r?\n/g, '');
 				result = start + svg + end;
 			}
 		}
@@ -193,7 +189,7 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 	minifyCSS(css, options = {}) {
 		const adjustedOptions = adjustMinifyCSSOptions(options);
 		const output = new CleanCSS(adjustedOptions).minify(css);
-		if (output.errors && output.errors.length) {
+		if (output.errors && output.errors.length > 0) {
 			throw new Error(output.errors.join('\n\n'));
 		}
 
@@ -208,9 +204,12 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 		const parts = html.split(placeholder);
 		// Make the last character (a semicolon) optional. See above.
 		if (placeholder.endsWith(';')) {
-			const withoutSemicolon = placeholder.substring(0, placeholder.length - 1);
-			for (let i = parts.length - 1; i >= 0; i--) {
-				parts.splice(i, 1, ...parts[i].split(withoutSemicolon));
+			const withoutSemicolon = placeholder.slice(
+				0,
+				Math.max(0, placeholder.length - 1),
+			);
+			for (let index = parts.length - 1; index >= 0; index--) {
+				parts.splice(index, 1, ...parts[index].split(withoutSemicolon));
 			}
 		}
 
@@ -243,31 +242,31 @@ export function adjustMinifyCSSOptions(options: CleanCSS.Options = {}) {
 }
 
 function fixCleanCssTidySelectors(original: string, result: string) {
-	const regex = /(::?.+\((.*)\))[\s\r\n]*{/gm;
+	const regex = /(::?.+\((.*)\))\s*{/gm;
 	let match: RegExpMatchArray | null;
 	while ((match = regex.exec(original)) != null) {
 		const pseudoClass = match[1];
 		const parameters = match[2];
-		if (!parameters.match(/\s/)) {
+		if (!/\s/.test(parameters)) {
 			continue;
 		}
 
-		const parametersWithoutSpaces = parameters.replace(/\s/g, '');
+		const parametersWithoutSpaces = parameters.replaceAll(/\s/g, '');
 		const resultPseudoClass = pseudoClass.replace(
 			parameters,
 			parametersWithoutSpaces,
 		);
 		const resultStartIndex = result.indexOf(resultPseudoClass);
-		if (resultStartIndex < 0) {
+		if (resultStartIndex === -1) {
 			continue;
 		}
 
 		const resultEndIndex = resultStartIndex + resultPseudoClass.length;
 		// Restore the original pseudo class with spaces
 		result =
-			result.substring(0, resultStartIndex) +
+			result.slice(0, Math.max(0, resultStartIndex)) +
 			pseudoClass +
-			result.substring(resultEndIndex);
+			result.slice(Math.max(0, resultEndIndex));
 	}
 
 	return result;

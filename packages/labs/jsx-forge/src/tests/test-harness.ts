@@ -9,7 +9,6 @@
 import * as ts from 'typescript';
 
 import type { TsWithInternals } from '../types.js';
-
 import { PRESETS } from '../presets/lit.js';
 import { createJsxToLiteralsTransformer } from '../to-literals/to-literals.js';
 
@@ -153,7 +152,7 @@ function createVirtualCompilerHost(
 				const text = ts.sys.readFile(fileName)!;
 				return ts.createSourceFile(fileName, text, languageVersion, true);
 			}
-			return undefined;
+			return;
 		},
 		readFile: (fileName) => {
 			const sf = files[fileName];

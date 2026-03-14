@@ -1,6 +1,6 @@
 import type { Ts } from '../types.js';
-import type { Context, Preset, PresetAttribute } from './types.js';
 
+import type { Context, Preset, PresetAttribute } from './types.js';
 import { getBuiltinType } from './to-literals.helpers.js';
 
 export function appendAttribute(
@@ -144,6 +144,7 @@ export function handleCustomAttribute(
 			` ${prefix}${customAttribute.do.renameTo ?? attributeName}=`,
 		);
 	} else if (customAttribute.do.insertExpression.inBody) {
+		/* nothing */
 	} else {
 		appendStaticToCurrentLiteral(` `);
 	}

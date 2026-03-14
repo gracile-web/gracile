@@ -160,16 +160,21 @@ class GracileDevtools extends HTMLElement {
 
 	#renderActiveView(): string {
 		switch (this.#state.activeTab) {
-			case 'general':
+			case 'general': {
 				return renderGeneralView(this.#state);
-			case 'routes':
+			}
+			case 'routes': {
 				return renderRoutesView(this.#state);
-			case 'components':
+			}
+			case 'components': {
 				return renderComponentTreeView();
-			case 'custom-elements':
+			}
+			case 'custom-elements': {
 				return renderRegisteredCEsView();
-			default:
+			}
+			default: {
 				return '<p>Unknown view</p>';
+			}
 		}
 	}
 
@@ -204,13 +209,13 @@ class GracileDevtools extends HTMLElement {
 		}
 
 		// Refresh button
-		const refreshBtn =
+		const refreshButton =
 			this.#shadow.querySelector<HTMLButtonElement>('.action-refresh');
-		if (refreshBtn) {
-			refreshBtn.addEventListener('click', () => {
+		if (refreshButton) {
+			refreshButton.addEventListener('click', () => {
 				this.#state.isLoading = true;
 				this.#render();
-				this.#fetchData();
+				void this.#fetchData();
 			});
 		}
 	}

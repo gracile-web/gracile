@@ -1,5 +1,6 @@
+import { applyViteDevServerMiddleware as applyViteDevelopmentServerMiddleware } from './vite-plugin.js';
+
 import { generateOgImages } from 'og-images-generator/api';
-import { applyViteDevServerMiddleware } from './vite-plugin.js';
 
 /**
  * @param {import("../collect").PathsOptions} [options]
@@ -12,7 +13,7 @@ export function astroOgImagesGenerator(options) {
 		hooks: {
 			'astro:server:setup': ({ server }) =>
 				// @ts-expect-error - Astro's typings dev server drift.
-				applyViteDevServerMiddleware(server),
+				applyViteDevelopmentServerMiddleware(server),
 
 			'astro:build:done': () => generateOgImages(options),
 		},

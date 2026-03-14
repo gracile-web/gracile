@@ -40,17 +40,17 @@ export default [
 					'./packages/labs/client-router/tsconfig.json',
 					'./packages/labs/islands/tsconfig.json',
 					'./packages/labs/vite-plugin-babel-jsx-to-literals/tsconfig.json',
-				'./packages/labs/hmr/tsconfig.json',
-				'./packages/labs/babel-plugin-jsx-to-literals/tsconfig.json',
-				'./packages/labs/jsx-forge/tsconfig.json',
-				'./packages/labs/vite-plugin-jsx-forge/tsconfig.json',
-				'./packages/labs/functional/tsconfig.json',
-				'./packages/labs/devtools/tsconfig.json',
-				'./packages/labs/og-images-generator/tsconfig.json',
-				'./packages/labs/literals/parser/tsconfig.json',
-				'./packages/labs/literals/html-css-minifier/tsconfig.json',
-				'./packages/labs/literals/rollup-plugin-html-css-minifier/tsconfig.json',
-				'./docs/website/tsconfig.json',
+					'./packages/labs/hmr/tsconfig.json',
+					'./packages/labs/babel-plugin-jsx-to-literals/tsconfig.json',
+					'./packages/labs/jsx-forge/tsconfig.json',
+					'./packages/labs/vite-plugin-jsx-forge/tsconfig.json',
+					'./packages/labs/functional/tsconfig.json',
+					'./packages/labs/devtools/tsconfig.json',
+					'./packages/labs/og-images-generator/tsconfig.json',
+					'./packages/labs/literals/parser/tsconfig.json',
+					'./packages/labs/literals/html-css-minifier/tsconfig.json',
+					'./packages/labs/literals/rollup-plugin-html-css-minifier/tsconfig.json',
+					'./docs/website/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,
 			},
@@ -108,6 +108,10 @@ export default [
 			'unicorn/no-array-sort': 'off',
 			'unicorn/require-module-specifiers': 'off',
 
+			// dataset is a browser-only API — using it (or Object.hasOwn on it)
+			// breaks Lit SSR where element.dataset is undefined on the server.
+			'unicorn/prefer-dom-node-dataset': 'off',
+
 			'jsdoc/require-jsdoc': [
 				// 'warn',
 				'off',
@@ -158,10 +162,14 @@ export default [
 			'docs/website/public/**',
 			'docs/website/slightly-wrote-born__tmp_clone/**',
 
-			'**/coverage',
-			'**/dist',
+			// Generated/vendor content in labs packages
+			'packages/labs/og-images-generator/docs/**',
+			'packages/labs/og-images-generator/types/**',
+			'packages/labs/og-images-generator/demos/**',
+			'packages/labs/jsx-forge/src/_vendor/**',
 
-
+			'**/coverage/**',
+			'**/dist/**',
 		],
 	},
 ];

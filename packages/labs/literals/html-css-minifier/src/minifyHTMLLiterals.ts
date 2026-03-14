@@ -5,6 +5,7 @@ import {
 	ParseLiteralsOptions,
 	parseLiterals,
 } from '@literals/parser';
+
 import { Strategy, defaultMinifyOptions, defaultStrategy } from './strategy.js';
 
 /**
@@ -219,7 +220,7 @@ export function defaultShouldMinifyCSS(template: Template) {
  */
 export const defaultValidation: Validation = {
 	ensurePlaceholderValid(placeholder) {
-		if (typeof placeholder !== 'string' || !placeholder.length) {
+		if (typeof placeholder !== 'string' || placeholder.length === 0) {
 			throw new Error('getPlaceholder() must return a non-empty string');
 		}
 	},
@@ -260,12 +261,12 @@ export async function minifyHTMLLiterals(
 ): Promise<Result | null> {
 	options.minifyOptions = {
 		...defaultMinifyOptions,
-		...(options.minifyOptions || {}),
+		...options.minifyOptions,
 	};
 
 	if (!options.MagicString) {
 		// FIXME:
-		// @ts-expect-error
+		// @ts-expect-error Typing mismatch
 		options.MagicString = MagicString;
 	}
 
@@ -282,21 +283,28 @@ export async function minifyHTMLLiterals(
 	}
 
 	options.parseLiteralsOptions = {
-		...{ fileName: options.fileName },
-		...(options.parseLiteralsOptions || {}),
+		fileName: options.fileName,
+		...options.parseLiteralsOptions,
 	};
 
 	const templates = options.parseLiterals(source, options.parseLiteralsOptions);
 	const strategy =
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		<Strategy>(<CustomOptions<any>>options).strategy || defaultStrategy;
-	const { shouldMinify, shouldMinifyCSS } = options;
+	const {
+		shouldMinify,
+		shouldMinifyCSS,
+		fileName,
+		minifyOptions,
+		generateSourceMap,
+	} = options;
 	let validate: Validation | undefined;
 	if (options.validate !== false) {
 		validate = options.validate || defaultValidation;
 	}
 
 	// FIXME:
-	// @ts-expect-error
+	// @ts-expect-error Typing mismatch
 	const ms = new options.MagicString(source);
 	await Promise.all(
 		templates.map(async (template) => {
@@ -329,7 +337,7 @@ export async function minifyHTMLLiterals(
 						min = strategy.minifyCSS!(combined, cssOptions);
 					}
 				} else {
-					min = await strategy.minifyHTML(combined, options.minifyOptions);
+					min = await strategy.minifyHTML(combined, minifyOptions);
 				}
 
 				const minParts = strategy.splitHTMLByPlaceholder(min, placeholder);
@@ -337,12 +345,12 @@ export async function minifyHTMLLiterals(
 					validate.ensureHTMLPartsValid(template.parts, minParts);
 				}
 
-				template.parts.forEach((part, index) => {
+				for (const [index, part] of template.parts.entries()) {
 					if (part.start < part.end) {
 						// Only overwrite if the literal part has text content
 						ms.overwrite(part.start, part.end, minParts[index]);
 					}
-				});
+				}
 			}
 		}),
 	);
@@ -352,10 +360,10 @@ export async function minifyHTMLLiterals(
 		return null;
 	} else {
 		let map: SourceMap | undefined;
-		if (options.generateSourceMap !== false) {
-			const generateSourceMap =
-				options.generateSourceMap || defaultGenerateSourceMap;
-			map = generateSourceMap(ms, options.fileName || '');
+
+		if (generateSourceMap !== false) {
+			const _generateSourceMap = generateSourceMap || defaultGenerateSourceMap;
+			map = _generateSourceMap(ms, fileName || '');
 		}
 
 		return {

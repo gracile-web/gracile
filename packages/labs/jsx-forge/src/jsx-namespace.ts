@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-namespace */
 // Hard-copied from web-elements-analyzer (not yet published). Source: dist/core/models/intrinsics/intrinsics.gen.d.ts
-import type * as Intrinsics from './_vendor/wea-intrinsics.gen.js';
-
 import * as csstype from 'csstype';
+
+import type * as Intrinsics from './_vendor/wea-intrinsics.gen.js';
 
 export namespace JSX {
 	export type AddPrefixToKeys<
@@ -103,7 +104,6 @@ export namespace JSX {
 		| ((element: T | undefined) => void)
 		| Reference<T>;
 
-	// eslint-disable-next-line sonarjs/redundant-type-aliases
 	export type TemplateElement = unknown;
 
 	interface CssCustomProperty {

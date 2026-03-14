@@ -27,7 +27,7 @@ export function provideContext<T>(key: ContextKey<T>, value: Signal.State<T>) {
 	);
 
 	const previousFrame = stack.at(-1);
-	const freshFrame = new Map(previousFrame ?? undefined);
+	const freshFrame = new Map(previousFrame);
 	freshFrame.set(key.id, value);
 	stack.push(freshFrame);
 }
@@ -43,7 +43,7 @@ function useContext<T>(key: ContextKey<T>): Signal.State<T> {
 	);
 
 	const stack = functionalState.contextStackMap.get(host);
-	const top = stack?.[stack.length - 1];
+	const top = stack?.at(-1);
 
 	if (top?.has(key.id)) return top.get(key.id) as Signal.State<T>;
 

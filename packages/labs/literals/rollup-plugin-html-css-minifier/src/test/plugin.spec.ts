@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { describe, beforeEach, it } from 'node:test';
+import * as path from 'node:path';
+
 import { expect } from 'chai';
 import * as minify from '@literals/html-css-minifier';
-import * as path from 'path';
 import { TransformPluginContext } from 'rollup';
 import sinon, { type SinonSpy } from 'sinon';
+
 import { literalsHtmlCssMinifier, Options } from '../index.js';
 
 // HACK: Before upgrading to modern ESM version

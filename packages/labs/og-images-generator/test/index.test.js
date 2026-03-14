@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import test from 'node:test';
 import assert from 'node:assert';
 
 import * as api from '../src/api.js';
-import { hash } from './_utils.js';
+
+import { hash } from './_utilities.js';
 // import { writeFile } from 'node:fs/promises';
 
 /** @type {import('../src/collect.js').CollectOptions} */
@@ -14,19 +16,19 @@ const options = {
 	globber: {},
 };
 
-test('Collect HTML pages metadata', async (t) => {
+test('Collect HTML pages metadata', async () => {
 	const pages = await api.collectHtmlPages(options);
 
 	assert.equal(hash(pages), 'c0a4d63001e47bd28ee3b2e84f11345a');
 });
 
-test('Fetch Source Sans', async (t) => {
+test('Fetch Source Sans', async () => {
 	const font = await api.fetchFont(api.SOURCE_SANS_FONT_URL);
 
 	assert.equal(hash(font), '060e4e9e30bcb9ae675a80328a87a687');
 });
 
-test('Load user config', async (t) => {
+test('Load user config', async () => {
 	const config = await api.loadUserConfig(
 		process.cwd() + '/test/__fixtures__/og-images.config.fixture.js',
 	);
@@ -36,7 +38,7 @@ test('Load user config', async (t) => {
 	assert.ok('satori' in config.renderOptions);
 });
 
-test('Generate single image', async (t) => {
+test('Generate single image', async () => {
 	const config = await api.loadUserConfig(
 		process.cwd() + '/test/__fixtures__/og-images.config.fixture.js',
 	);
@@ -52,7 +54,7 @@ test('Generate single image', async (t) => {
 	assert.equal(hash(image), '951fcd6c24e7c6527f2caa3d8cbf32e6');
 });
 
-test('Generate single image with async. template', async (t) => {
+test('Generate single image with async. template', async () => {
 	const config = await api.loadUserConfig(
 		process.cwd() + '/test/__fixtures__/og-images-async.config.fixture.js',
 	);

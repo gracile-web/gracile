@@ -6,9 +6,12 @@ Features:
 
 - Portable **HTML**, **CSS** and **JS**, thanks to **Lit (SSR)**.
 - Highly responsive during dev. and build, thanks to **Vite**.
-- **Minimal dependency footprint** for its **runtime** and your **distributable**.
-- Embrace web standards like **Custom Elements** (aka Web Components) or the **WhatWG Fetch** API.
-- A streamlined **D**eveloper e**X**perience for building, instead of fiddling around.
+- **Minimal dependency footprint** for its **runtime** and your
+  **distributable**.
+- Embrace web standards like **Custom Elements** (aka Web Components) or the
+  **WhatWG Fetch** API.
+- A streamlined **D**eveloper e**X**perience for building, instead of fiddling
+  around.
 
 # 🏁 Get Started
 
@@ -21,7 +24,8 @@ bun create gracile@latest
 yarn create gracile@latest
 ```
 
-For more information, head over to the [documentation website (gracile.js.org)](https://gracile.js.org/).
+For more information, head over to the
+[documentation website (gracile.js.org)](https://gracile.js.org/).
 
 ## 🌐 A platform-minded meta-framework
 
@@ -39,12 +43,15 @@ With it, you can achieve:
 - Progressive enhancements (no JS fallbacks, smart hydration…)
 - And more, via **Add-ons** (Markdown, Metadata, SVG…)
 
-All that, with a **few conventions**, a **standard-oriented** approach and a very **contained footprint** 🤏.
+All that, with a **few conventions**, a **standard-oriented** approach and a
+very **contained footprint** 🤏.
 
-Web Components, TypeScript, SASS, Lit, and other DX perks are all at your fingertips; while remaining optional.
+Web Components, TypeScript, SASS, Lit, and other DX perks are all at your
+fingertips; while remaining optional.
 
-Thanks to the Vite modular architecture, and Node.js versatility, **developer experience** is smoothed up
-across the board, while in **development** and when building for **production**.
+Thanks to the Vite modular architecture, and Node.js versatility, **developer
+experience** is smoothed up across the board, while in **development** and when
+building for **production**.
 
 ## Ease of use
 
@@ -53,7 +60,8 @@ client side.
 The ones that you already know and use everywhere else: **HTML**, **CSS** and
 **JavaScript**.
 
-Simplicity doesn't mean obfuscation. You're still in charge without abandoning flexibility to your framework.
+Simplicity doesn't mean obfuscation. You're still in charge without abandoning
+flexibility to your framework.
 
 ## Standards oriented
 
@@ -83,9 +91,14 @@ home.
 
 ## Light and unobtrusive
 
-All in all, the Gracile framework is just Vite, Lit SSR and a very **restricted set of helpers and third parties**.  
-Check its [dependency tree on npmgraph](https://npmgraph.js.org/?q=@gracile/gracile), you'll see by yourself.  
-Also, everything is done to **keep your Vite configuration as pristine as possible**. Augmenting an existing project can be done in a pinch, with no interference.
+All in all, the Gracile framework is just Vite, Lit SSR and a very **restricted
+set of helpers and third parties**.  
+Check its
+[dependency tree on npmgraph](https://npmgraph.js.org/?q=@gracile/gracile),
+you'll see by yourself.  
+Also, everything is done to **keep your Vite configuration as pristine as
+possible**. Augmenting an existing project can be done in a pinch, with no
+interference.
 
 ## Performances
 
@@ -106,7 +119,9 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ---
 
-> “Perfection is achieved, not when there is nothing more to add,
-> but when there is nothing left to take away.”
+> “Perfection is achieved, not when there is nothing more to add, but when there
+> is nothing left to take away.”
 >
-> ― [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry), _Airman's Odyssey_
+> ―
+> [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry),
+> _Airman's Odyssey_

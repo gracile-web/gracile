@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { describe, it } from 'node:test';
+
 import { expect } from 'chai';
+
 import * as min from '../index.js';
 import {
 	defaultGenerateSourceMap,
@@ -13,7 +17,6 @@ import {
 	defaultMinifyOptions,
 	defaultStrategy,
 } from '../strategy.js';
-import { describe, it } from 'node:test';
 
 describe('exports', () => {
 	it('should export minifyHTMLLiterals() function and defaults', () => {

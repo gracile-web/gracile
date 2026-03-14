@@ -5,11 +5,14 @@ import crypto from 'node:crypto';
  * @param {string} dest
  * @param {'json' | 'buffer'} type
  */
-export function save(data, dest, type) {
+export function save(data, destination, type) {
 	let toWrite = data;
 	if (type === 'json') data = JSON.stringify(data, null, 2);
 
-	fs.writeFileSync(process.cwd() + '/test/__artefacts__/' + dest, toWrite);
+	fs.writeFileSync(
+		process.cwd() + '/test/__artefacts__/' + destination,
+		toWrite,
+	);
 }
 /**
  * @param {any} data

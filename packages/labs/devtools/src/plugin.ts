@@ -65,12 +65,12 @@ function collectRouteData(
 	// The Gracile engine stores its PluginContext on the Vite resolvedConfig
 	// via a Symbol-keyed property.  Try the well-known symbol first.
 	const sym = Symbol.for('gracile-plugin-context');
-	const ctx = (server.config as Record<symbol, unknown>)[sym] as
+	const context = (server.config as Record<symbol, unknown>)[sym] as
 		| Record<string, unknown>
 		| undefined;
 
-	if (ctx && 'routes' in ctx && ctx['routes'] instanceof Map) {
-		const routes = ctx['routes'] as Map<
+	if (context && 'routes' in context && context['routes'] instanceof Map) {
+		const routes = context['routes'] as Map<
 			string,
 			{
 				filePath: string;
@@ -124,11 +124,11 @@ function scanRoutesFromFs(root: string): SerializedRoute[] {
 							.replace(/\.(ts|js|tsx|jsx|html)$/, '')
 							.replace(/\/index$/, '')
 							.replace(/^index$/, '');
-					const hasParams = /\[/.test(rel);
+					const hasParameters = /\[/.test(rel);
 					results.push({
 						patternString: patternString || '/',
 						filePath: `src/routes/${rel}`,
-						hasParams,
+						hasParams: hasParameters,
 						pageAssets: [],
 					});
 				}
@@ -171,29 +171,32 @@ export function gracileDevtools(options?: DevtoolsOptions): any[] {
 
 				// ── API endpoint ──────────────────────────────────────
 				// Serves live route data + version info as JSON.
-				viteServer.middlewares.use('/__gracile_devtools__/api', (_req, res) => {
-					const routes = collectRouteData(viteServer);
+				viteServer.middlewares.use(
+					'/__gracile_devtools__/api',
+					(_request, response) => {
+						const routes = collectRouteData(viteServer);
 
-					let gracileVersion = '?';
-					try {
-						gracileVersion = getVersion();
-					} catch {
-						/* not set yet */
-					}
+						let gracileVersion = '?';
+						try {
+							gracileVersion = getVersion();
+						} catch {
+							/* not set yet */
+						}
 
-					const viteVersion = viteServer.config.env?.['VITE_VERSION'] ?? '?';
+						const viteVersion = viteServer.config.env?.['VITE_VERSION'] ?? '?';
 
-					res.setHeader('Content-Type', 'application/json');
-					res.setHeader('Cache-Control', 'no-store');
-					res.end(
-						JSON.stringify({
-							routes,
-							gracileVersion,
-							viteVersion,
-							timestamp: Date.now(),
-						}),
-					);
-				});
+						response.setHeader('Content-Type', 'application/json');
+						response.setHeader('Cache-Control', 'no-store');
+						response.end(
+							JSON.stringify({
+								routes,
+								gracileVersion,
+								viteVersion,
+								timestamp: Date.now(),
+							}),
+						);
+					},
+				);
 			},
 
 			resolveId(id: string) {

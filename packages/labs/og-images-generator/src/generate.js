@@ -1,8 +1,10 @@
-import c from 'picocolors';
-import { collectHtmlPages } from './collect.js';
-import { renderOgImage, renderAllPagesOg } from './render.js';
 import fs from 'node:fs';
 import path from 'node:path';
+
+import c from 'picocolors';
+
+import { collectHtmlPages } from './collect.js';
+import { renderOgImage, renderAllPagesOg } from './render.js';
 
 export const CONFIG_FILE_NAME = 'og-images.config.js';
 
@@ -21,23 +23,23 @@ export const CONFIG_FILE_PATH = path.join(process.cwd(), CONFIG_FILE_NAME);
 export async function loadUserConfig(path) {
 	/** @type {unknown} */
 	console.log(CONFIG_FILE_PATH);
-	const config = await import(path || CONFIG_FILE_PATH).catch((e) => {
-		console.error(e);
-		throw Error('Configuration not found.');
+	const config = await import(path || CONFIG_FILE_PATH).catch((error) => {
+		console.error(error);
+		throw new Error('Configuration not found.');
 	});
 	if (typeof config !== 'object' || !config)
-		throw Error('Configuration is invalid.');
+		throw new Error('Configuration is invalid.');
 	if ('template' in config === false)
-		throw Error('No template found in configuration.');
+		throw new Error('No template found in configuration.');
 	if (typeof config.template !== 'function')
-		throw Error('Template should be a returning function.');
+		throw new Error('Template should be a returning function.');
 
 	if ('renderOptions' in config === false || !config.renderOptions)
-		throw Error('No render options found in configuration.');
+		throw new Error('No render options found in configuration.');
 	if (typeof config.renderOptions !== 'object')
-		throw Error('Return options should be an object.');
+		throw new Error('Return options should be an object.');
 	if ('satori' in config.renderOptions === false)
-		throw Error('Satori options are mandatory.');
+		throw new Error('Satori options are mandatory.');
 
 	// We assume the user has their config. properly typed from there,
 	// further libs will throw in case of an invalid config.
@@ -64,17 +66,17 @@ export async function loadUserConfig(path) {
 export async function save(renderedImages, out) {
 	await Promise.all(
 		renderedImages.map(async (rendered) => {
-			const fileDest =
+			const fileDestination =
 				rendered.path.replace(/\/index\.html$/, '').replace(/\.html$/, '') +
 				'.png';
 
-			const dest = path.join(process.cwd(), out, fileDest);
+			const destination = path.join(process.cwd(), out, fileDestination);
 
 			await fs.promises
-				.mkdir(path.dirname(dest), { recursive: true })
+				.mkdir(path.dirname(destination), { recursive: true })
 				.catch(() => null);
 
-			await fs.promises.writeFile(dest, rendered.data);
+			await fs.promises.writeFile(destination, rendered.data);
 		}),
 	);
 

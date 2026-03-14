@@ -1,11 +1,8 @@
-/* eslint-disable sonarjs/cognitive-complexity */
-
-import type { Ts } from '../types.js';
-import type { TsWithInternals } from '../types.js';
-import type { Context, Import, Preset } from './types.js';
-
+import type { Ts, TsWithInternals } from '../types.js';
 import { USE_HTML_FLAVOR_DIRECTIVE_PREFIX } from '../constants.js';
 import { PRESETS } from '../presets/lit.js';
+
+import type { Context, Import, Preset } from './types.js';
 import { collectLiteralEntitiesInJsx } from './collect.js';
 import { handleForEachTagDirective } from './special.js';
 
@@ -22,7 +19,7 @@ export function createJsxToLiteralsTransformer(
 
 		const { factory } = ts;
 
-		let defaultHtml = preset.useLiteral.default.at(0)?.as ?? 'html';
+		const defaultHtml = preset.useLiteral.default.at(0)?.as ?? 'html';
 		const globalFlags = { literalFlavor: defaultHtml };
 		let useGlobalLiteralDirective = false;
 

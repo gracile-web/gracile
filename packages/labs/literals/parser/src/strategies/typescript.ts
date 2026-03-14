@@ -1,4 +1,5 @@
 import * as ts from 'typescript';
+
 import { Strategy, TemplatePart } from '../models.js';
 
 export interface TypescriptStrategy extends Strategy<ts.Node> {
@@ -36,6 +37,7 @@ export default <TypescriptStrategy>{
 	},
 	isTemplate: ts.isTemplateLiteral,
 	getTemplateParts(node: ts.TemplateLiteral): TemplatePart[] {
+		// eslint-disable-next-line unicorn/prefer-ternary
 		if (ts.isNoSubstitutionTemplateLiteral(node)) {
 			// "`string`"
 			return [this.getHeadTemplatePart(node)];
@@ -50,7 +52,7 @@ export default <TypescriptStrategy>{
 		}
 	},
 	getHeadTemplatePart(node: ts.TemplateLiteral | ts.TemplateHead) {
-		let fullText = node.getFullText(currentRoot);
+		const fullText = node.getFullText(currentRoot);
 		// ignore prefix spaces and comments
 		const startOffset = fullText.indexOf('`') + 1;
 		const endOffset = ts.isTemplateHead(node) ? -2 : -1;

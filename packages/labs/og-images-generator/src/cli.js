@@ -8,6 +8,7 @@
 
 import { program } from 'commander';
 import c from 'picocolors';
+
 import { generateOgImages } from './api.js';
 
 console.log(c.bold(c.magenta('OG Image Generator')) + c.green(' - CLI'));
@@ -21,7 +22,7 @@ program.parse();
 /** @type {import('./collect.js').PathsOptions=} */
 const options = program.opts();
 
-if (Object.keys(options).length) {
+if (Object.keys(options).length > 0) {
 	console.log(c.bold(c.magenta('Options:')) + c.green(' - CLI'));
 	console.table(options);
 }

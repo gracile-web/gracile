@@ -1,7 +1,7 @@
 import type { Ts } from '../types.js';
-import type { Context } from './types.js';
-
 import { HTML_VOID_ELEMENTS } from '../constants.js';
+
+import type { Context } from './types.js';
 import {
 	appendAttribute,
 	getCustomAttribute,

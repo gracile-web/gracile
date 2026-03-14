@@ -1,3 +1,9 @@
+/* eslint-disable unicorn/filename-case */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import { afterEach, beforeEach, describe, it } from 'node:test';
+
 import { expect } from 'chai';
 import MagicString, { SourceMapOptions } from 'magic-string';
 import {
@@ -7,6 +13,7 @@ import {
 	parseLiterals,
 } from '@literals/parser';
 import sinon, { type SinonSpy } from 'sinon';
+
 import {
 	SourceMap,
 	defaultGenerateSourceMap,
@@ -16,7 +23,6 @@ import {
 	minifyHTMLLiterals,
 } from '../minifyHTMLLiterals.js';
 import { defaultMinifyOptions, defaultStrategy } from '../strategy.js';
-import { afterEach, beforeEach, describe, it } from 'node:test';
 
 const { spy } = sinon;
 
@@ -336,9 +342,10 @@ describe('minifyHTMLLiterals()', () => {
 			let msUsed;
 			await minifyHTMLLiterals(SOURCE, {
 				fileName: 'test.js',
+				// @ts-expect-error testing custom MagicString constructor
 				generateSourceMap(ms) {
 					msUsed = ms;
-					return undefined;
+					return;
 				},
 			});
 
@@ -350,9 +357,10 @@ describe('minifyHTMLLiterals()', () => {
 			await minifyHTMLLiterals(SOURCE, {
 				fileName: 'test.js',
 				MagicString: MagicStringLike,
+				// @ts-expect-error testing custom MagicString constructor
 				generateSourceMap(ms) {
 					msUsed = ms;
-					return undefined;
+					return;
 				},
 			});
 
@@ -564,7 +572,8 @@ describe('minifyHTMLLiterals()', () => {
 		describe('ensurePlaceholderValid()', () => {
 			it('should throw an error if the placeholder is not a string', () => {
 				expect(() => {
-					defaultValidation.ensurePlaceholderValid(undefined);
+					// @ts-expect-error testing invalid input
+					defaultValidation.ensurePlaceholderValid();
 				}).to.throw;
 				expect(() => {
 					defaultValidation.ensurePlaceholderValid(true);

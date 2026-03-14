@@ -2,7 +2,6 @@ import type { TransformerExtras } from 'ts-patch';
 import type * as Ts from 'typescript';
 
 import type { TransformerPluginConfig, TsWithInternals } from './types.js';
-
 import { createMetaJsxTransformer } from './to-jsx/to-jsx.js';
 import { createJsxToLiteralsTransformer } from './to-literals/to-literals.js';
 
@@ -12,7 +11,7 @@ export default function transformTest(
 	{ ts: tsInstance }: TransformerExtras,
 ): Ts.TransformerFactory<Ts.SourceFile> {
 	if (
-		!Boolean(pluginConfig.transformOptions?.target) ||
+		!pluginConfig.transformOptions?.target ||
 		pluginConfig.transformOptions?.target === 'lit'
 	) {
 		return createJsxToLiteralsTransformer(

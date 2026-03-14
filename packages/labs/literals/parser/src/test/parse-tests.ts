@@ -1,6 +1,9 @@
-import { expect } from 'chai';
-import { parseLiterals } from '../parseLiterals.js';
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { it } from 'node:test';
+
+import { expect } from 'chai';
+
+import { parseLiterals } from '../parseLiterals.js';
 
 export interface ParseTestsOptions {
 	codePrefix?: string;
@@ -189,7 +192,7 @@ export default function createParseTests(options: ParseTestsOptions = {}) {
 			{
 				parts: [
 					{
-						text: 'content: "\\2003"',
+						text: String.raw`content: "\2003"`,
 						start: 1 + offset,
 						end: 17 + offset,
 					},
@@ -207,17 +210,17 @@ export default function createParseTests(options: ParseTestsOptions = {}) {
 			{
 				parts: [
 					{
-						text: 'content: "\\2003"',
+						text: String.raw`content: "\2003"`,
 						start: 1 + offset,
 						end: 17 + offset,
 					},
 					{
-						text: 'content: "\\2003"',
+						text: String.raw`content: "\2003"`,
 						start: 24 + offset,
 						end: 40 + offset,
 					},
 					{
-						text: 'content: "\\2003"',
+						text: String.raw`content: "\2003"`,
 						start: 48 + offset,
 						end: 64 + offset,
 					},

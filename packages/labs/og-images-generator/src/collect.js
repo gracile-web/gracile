@@ -1,7 +1,8 @@
-import fastGlob from 'fast-glob';
-import { parse } from 'parse5';
 import path from 'node:path';
 import fs from 'node:fs';
+
+import fastGlob from 'fast-glob';
+import { parse } from 'parse5';
 import c from 'picocolors';
 
 /**
@@ -26,17 +27,20 @@ import c from 'picocolors';
 export function extractMetadataFromHtml(fileContent) {
 	const ast = parse(fileContent);
 
-	const doc = ast.childNodes.find((node) => node.nodeName === 'html');
-	if (doc === undefined) throw Error('Invalid base HTML document.');
-	if ('childNodes' in doc === false) throw Error('Invalid base HTML document.');
+	const document_ = ast.childNodes.find((node) => node.nodeName === 'html');
+	if (document_ === undefined) throw new Error('Invalid base HTML document.');
+	if ('childNodes' in document_ === false)
+		throw new Error('Invalid base HTML document.');
 
-	const head = doc.childNodes.find((node) => node.nodeName === 'head');
-	if (head === undefined) throw Error('Invalid HTML head element.');
-	if ('childNodes' in head === false) throw Error('Invalid HTML head element.');
+	const head = document_.childNodes.find((node) => node.nodeName === 'head');
+	if (head === undefined) throw new Error('Invalid HTML head element.');
+	if ('childNodes' in head === false)
+		throw new Error('Invalid HTML head element.');
 
-	const body = doc.childNodes.find((node) => node.nodeName === 'body');
-	if (body === undefined) throw Error('Invalid HTML body element.');
-	if ('childNodes' in body === false) throw Error('Invalid HTML body element.');
+	const body = document_.childNodes.find((node) => node.nodeName === 'body');
+	if (body === undefined) throw new Error('Invalid HTML body element.');
+	if ('childNodes' in body === false)
+		throw new Error('Invalid HTML body element.');
 
 	const metaTagsNode = head.childNodes.filter((node) =>
 		['meta'].includes(node.nodeName),
@@ -45,35 +49,35 @@ export function extractMetadataFromHtml(fileContent) {
 	/** @type {JsonLds} */
 	const jsonLds = [];
 
-	[...head.childNodes, ...body.childNodes].forEach((node) => {
+	for (const node of [...head.childNodes, ...body.childNodes]) {
 		if (
 			['script'].includes(node.nodeName) &&
 			'attrs' in node &&
-			node.attrs.find((attr) => (attr.name = 'type'))?.value ===
+			node.attrs.find((attribute) => (attribute.name = 'type'))?.value ===
 				'application/ld+json'
 		) {
 			const content = node.childNodes.at(0);
 			if (content && 'value' in content)
 				jsonLds.push(JSON.parse(content.value));
 		}
-	});
+	}
 
 	/** @type {MetaTags} */
 	const metaTags = {};
-	metaTagsNode.forEach((node) => {
-		if ('attrs' in node === false) return;
+	for (const node of metaTagsNode) {
+		if ('attrs' in node === false) continue;
 
-		node.attrs.map((attr) => {
-			if (attr.name === 'property' || attr.name === 'name') {
-				const metaName = attr.value;
+		node.attrs.map((attribute) => {
+			if (attribute.name === 'property' || attribute.name === 'name') {
+				const metaName = attribute.value;
 				const metaValue = node.attrs.find(
-					(attr) => attr.name === 'content',
+					(attribute) => attribute.name === 'content',
 				)?.value;
 
 				if (metaValue) metaTags[metaName] = metaValue;
 			}
 		});
-	});
+	}
 
 	return { tags: metaTags, jsonLds };
 }
@@ -106,7 +110,7 @@ export async function collectHtmlPages(options) {
 
 	await Promise.all(
 		files.map(async (filePath) => {
-			const fileContent = await fs.promises.readFile(filePath, 'utf-8');
+			const fileContent = await fs.promises.readFile(filePath, 'utf8');
 
 			const pageMetas = extractMetadataFromHtml(fileContent);
 

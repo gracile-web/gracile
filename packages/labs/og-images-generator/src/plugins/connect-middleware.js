@@ -19,16 +19,17 @@ export async function connectOgImagesGenerator(options) {
 
 	const prefix = options?.pathPrefix ?? DEFAULT_OG_PATH_PREFIX;
 
-	return async (req, res, next) => {
+	return async (request, res, next) => {
 		if (options?.configReloader) config = await options.configReloader();
 
 		if (!config) return next();
-		if (!req.url) return next();
-		if (req.url.startsWith(prefix) === false) return next();
+		if (!request.url) return next();
+		if (request.url.startsWith(prefix) === false) return next();
 
-		const base = 'http://' + req.rawHeaders[req.rawHeaders.indexOf('Host') + 1];
+		const base =
+			'http://' + request.rawHeaders[request.rawHeaders.indexOf('Host') + 1];
 		const path = ogPathToPagePath(
-			req.url,
+			request.url,
 			options?.pathPrefix,
 			options?.trailingSlash,
 		);

@@ -12,7 +12,7 @@ export function parseLiterals(
 ): Template[] {
 	const strategy = {
 		...(<Strategy<any>>typescript),
-		...(options.strategy || {}),
+		...options.strategy,
 	};
 
 	const literals: Template[] = [];
