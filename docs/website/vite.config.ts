@@ -119,6 +119,7 @@ export default defineConfig({
 
 		viteSitemapPlugin({ siteUrl: SITE_URL }),
 
+		// FIXME: When saving vite config, this plugin hangs. Need upstream fix.
 		// TODO: Dedup
 		viteOgImagesGenerator({
 			additionalPatterns: ['!**/__*'],

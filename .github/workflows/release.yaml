@@ -257,7 +257,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: '${{ secrets.NETLIFY_AUTH_TOKEN }}'
           NETLIFY_SITE_ID: '${{ secrets.NETLIFY_SITE_ID }}'
         shell: bash
-        run: pnpm --prefix ./docs/website deploy:prod
+        run: pnpm --prefix ./docs/website deploy:main
 
       - name: 'Deploy docs website [next → preview]'
         if: github.ref == 'refs/heads/next'
@@ -265,5 +265,4 @@ jobs:
           NETLIFY_AUTH_TOKEN: '${{ secrets.NETLIFY_AUTH_TOKEN }}'
           NETLIFY_SITE_ID: '${{ secrets.NETLIFY_SITE_ID }}'
         shell: bash
-        run:
-          pnpm --prefix docs/website exec netlify deploy -d ./dist --alias next
+        run: pnpm --prefix ./docs/website deploy:next

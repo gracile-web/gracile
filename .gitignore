@@ -44,3 +44,6 @@ test-results
 
 # ESLint
 .eslintcache
+
+# Local Netlify folder
+.netlify
