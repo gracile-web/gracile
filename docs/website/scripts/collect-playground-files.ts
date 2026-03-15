@@ -1,7 +1,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
-import * as glob from 'fast-glob';
+// eslint-disable-next-line import-x/no-named-as-default
+import glob from 'fast-glob';
 import type { FileSystemTree } from '@webcontainer/api';
 import set from 'lodash.set';
 

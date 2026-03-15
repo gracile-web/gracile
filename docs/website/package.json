@@ -17,10 +17,11 @@
   },
   "scripts": {
     "dev": "vite dev",
+    "prebuild": "node --run docs:generate",
     "build": "vite build",
     "postbuild": "node --run pagefind",
     "clean": "rm -rf ./dist",
-    "docs:generate": "tsx scripts/collect-readmes.ts && tsx scripts/collect-typedocs.ts && tsx scripts/collect-playground-files.ts",
+    "docs:generate": "tsx scripts/collect-readmes.ts && tsx scripts/collect-typedocs.ts",
     "// dev": "node --experimental-vm-modules --watch-path server server/server.js",
     "// build": "node ./node_modules/@gracile/gracile/dist/cli.js build",
     "pagefind": "npx pagefind -s dist --output-path dist/pagefind --exclude-selectors '[hidden]' && cp -r dist/pagefind public",

@@ -135,6 +135,10 @@ jobs:
         shell: bash
         run: node --run build
 
+      - name: Generate Typedoc
+        shell: bash
+        run: node --run docs:generate
+
       # MARK: Lint/Checks post-build
 
       - name: Cache ESLint results
