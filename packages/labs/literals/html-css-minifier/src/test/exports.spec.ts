@@ -10,7 +10,7 @@ import {
 	defaultShouldMinifyCSS,
 	defaultValidation,
 	minifyHTMLLiterals,
-} from '../minifyHTMLLiterals.js';
+} from '../minify-html-literals.js';
 import {
 	adjustMinifyCSSOptions,
 	defaultMinifyCSSOptions,

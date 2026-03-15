@@ -1,0 +1,13 @@
+{
+  "name": "@gracile/fixture-ce-tracker",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@gracile/server": "workspace:^",
+    "@lit-labs/ssr": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  }
+}

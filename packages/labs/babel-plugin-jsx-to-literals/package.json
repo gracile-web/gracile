@@ -32,16 +32,17 @@
     "!/dist/test-*"
   ],
   "scripts": {
+    "dev": "tsc --watch",
     "build": "tsc -p ./tsconfig.build.json",
     "clean": "rm -rf ./dist",
     "test:unit": "c8 tsx --test src/jsx.test.ts",
     "test:unit:dev": "tsx --watch --test src/jsx.test.ts",
     "test:unit:dev:update": "tsx --watch --test --test-update-snapshots src/jsx.test.ts",
-    "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'",
     "playground": "pnpm tsx playground/convert.ts"
   },
   "dependencies": {
-    "@babel/types": "^7.28.5",
+    "@babel/types": "^7.29.0",
     "@types/babel__core": "^7.20.5"
   },
   "devDependencies": {
@@ -52,6 +53,7 @@
     "@babel/plugin-syntax-jsx": "^7.27.1",
     "@babel/plugin-syntax-typescript": "^7.27.1",
     "@babel/traverse": "^7.28.5",
+    "@gracile/internal-test-utils": "workspace:^",
     "@lit-labs/ssr": "catalog:",
     "@types/babel__generator": "^7.27.0",
     "@types/babel__traverse": "^7.28.0",

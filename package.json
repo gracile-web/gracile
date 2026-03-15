@@ -43,9 +43,7 @@
     "postnolyfill": "pnpm install",
     "prepare": "husky",
     "sort-pjson": "pnpm sort-package-json '**/package.json'",
-    "test:integration": "pnpm --prefix integration test && pnpm --prefix integration test:browser",
-    "test:integration:browser": "pnpm --prefix integration test:browser",
-    "test:integration:dev": "pnpm --prefix integration test:dev",
+    "test:integration": "turbo test:integration --continue --concurrency 1",
     "test:unit": "turbo test:unit --concurrency 30",
     "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel test:unit:dev"
   },
@@ -73,12 +71,12 @@
     "husky": "^9.1.7",
     "knip": "^5.85.0",
     "prettier": "^3.8.1",
+    "sort-package-json": "^3.6.1",
     "stylelint": "^16.10.0",
     "stylelint-config-recess-order": "^5.1.1",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-order": "^6.0.4",
-    "sort-package-json": "^3.6.1",
     "tsx": "^4.21.0",
     "turbo": "^2.8.12",
     "typedoc": "^0.28.17",
@@ -119,7 +117,9 @@
       "serialize-javascript": ">=7.0.3",
       "tar": ">=7.5.11",
       "flatted": ">=3.4.0",
-      "object-keys": "npm:@nolyfill/object-keys@^1"
+      "object-keys": "npm:@nolyfill/object-keys@^1",
+      "isarray": "npm:@nolyfill/isarray@^1",
+      "string.prototype.codepointat": "npm:@nolyfill/string.prototype.codepointat@^1"
     },
     "auditConfig": {
       "ignoreCves": [

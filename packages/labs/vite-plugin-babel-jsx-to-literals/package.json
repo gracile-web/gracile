@@ -40,20 +40,22 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "dependencies": {
-    "@babel/plugin-syntax-typescript": "^7.25.9",
+    "@babel/plugin-syntax-typescript": "^7.27.1",
     "@gracile-labs/babel-plugin-jsx-to-literals": "workspace:^",
     "@rollup/plugin-babel": "^6.0.4"
   },
   "peerDependencies": {
-    "@lit-labs/ssr": "^3.2.2",
-    "lit": "^3.3.0",
+    "@lit-labs/ssr": "catalog:",
     "clsx": "^2.1.1",
+    "lit": "catalog:",
     "vite": "^6.2.5"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "picocolors": "catalog:",
     "tsx": "catalog:",

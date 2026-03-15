@@ -9,12 +9,54 @@ catalogs:
     '@commander-js/extra-typings':
       specifier: ^14.0.0
       version: 14.0.0
+    '@hono/node-server':
+      specifier: ^1.19.10
+      version: 1.19.11
     '@lit-labs/ssr':
       specifier: ^4.0.0
       version: 4.0.0
     '@lit-labs/ssr-client':
       specifier: ^1.1.8
       version: 1.1.8
+    '@playwright/test':
+      specifier: ^1.58.2
+      version: 1.58.2
+    '@preact/preset-vite':
+      specifier: ^2.10.1
+      version: 2.10.3
+    '@sveltejs/vite-plugin-svelte':
+      specifier: ^5.0.3
+      version: 5.1.1
+    '@types/chai':
+      specifier: ^4.3.16
+      version: 4.3.20
+    '@types/express':
+      specifier: ^5.0.6
+      version: 5.0.6
+    '@types/react':
+      specifier: ^19.1.2
+      version: 19.2.14
+    '@types/react-dom':
+      specifier: ^19.1.3
+      version: 19.2.3
+    '@types/sinon':
+      specifier: ^5.0.1
+      version: 5.0.7
+    '@vitejs/plugin-react':
+      specifier: ^4.3.3
+      version: 4.7.0
+    '@vitejs/plugin-vue':
+      specifier: ^5.2.3
+      version: 5.2.4
+    c8:
+      specifier: ^11.0.0
+      version: 11.0.0
+    chai:
+      specifier: ^5.1.1
+      version: 5.3.3
+    clsx:
+      specifier: ^2.1.1
+      version: 2.1.1
     commander:
       specifier: ^14.0.3
       version: 14.0.3
@@ -24,12 +66,39 @@ catalogs:
     picocolors:
       specifier: ^1.1.1
       version: 1.1.1
+    preact:
+      specifier: ^10.26.6
+      version: 10.28.4
+    react:
+      specifier: ^19.1.0
+      version: 19.2.4
+    react-dom:
+      specifier: ^19.1.0
+      version: 19.2.4
+    solid-js:
+      specifier: ^1.9.6
+      version: 1.9.11
+    svelte:
+      specifier: ^5.28.2
+      version: 5.53.7
+    tsx:
+      specifier: ^4.21.0
+      version: 4.21.0
+    typescript:
+      specifier: 5.9.3
+      version: 5.9.3
     urlpattern-polyfill:
       specifier: ^10.1.0
       version: 10.1.0
     vite:
       specifier: ^7.3.1
       version: 7.3.1
+    vite-plugin-solid:
+      specifier: ^2.11.6
+      version: 2.11.10
+    vue:
+      specifier: ^3.5.13
+      version: 3.5.29
 
 overrides:
   braces: 3.0.3
@@ -61,8 +130,11 @@ overrides:
   '@types/node': 25.3.3
   immutable: '>=4.3.8'
   serialize-javascript: '>=7.0.3'
-  tar: '>=7.5.10'
+  tar: '>=7.5.11'
+  flatted: '>=3.4.0'
   object-keys: npm:@nolyfill/object-keys@^1
+  isarray: npm:@nolyfill/isarray@^1
+  string.prototype.codepointat: npm:@nolyfill/string.prototype.codepointat@^1
 
 importers:
 
@@ -146,9 +218,6 @@ importers:
       stylelint-order:
         specifier: ^6.0.4
         version: 6.0.4(stylelint@16.26.1(typescript@5.9.3))
-      syncpack:
-        specifier: ^14.0.0
-        version: 14.0.0
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -216,7 +285,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/addons/svg
       '@hono/node-server':
-        specifier: ^1.13.4
+        specifier: 'catalog:'
         version: 1.19.11(hono@4.12.8)
       '@iconify/json':
         specifier: ^2.2.267
@@ -228,10 +297,10 @@ importers:
         specifier: ^0.1.2
         version: 0.1.3
       '@lit-labs/ssr':
-        specifier: ^3.2.2
-        version: 3.3.1
+        specifier: 'catalog:'
+        version: 4.0.0(@types/node@25.3.3)
       '@lit-labs/ssr-client':
-        specifier: ^1.1.7
+        specifier: 'catalog:'
         version: 1.1.8
       '@ngsctt/remark-smartypants':
         specifier: ^0.2.0
@@ -249,7 +318,7 @@ importers:
         specifier: ^2.18.0
         version: 2.20.1(@floating-ui/utils@0.2.11)(types-react@19.0.0-rc.1)
       '@types/express':
-        specifier: ^5.0.0
+        specifier: 'catalog:'
         version: 5.0.6
       '@unpic/core':
         specifier: ^0.0.51
@@ -267,7 +336,7 @@ importers:
         specifier: ^1.1.2
         version: 1.1.2
       clsx:
-        specifier: ^2.1.1
+        specifier: 'catalog:'
         version: 2.1.1
       emoji-strip:
         specifier: ^1.0.1
@@ -303,7 +372,7 @@ importers:
         specifier: ^2.1.0
         version: 2.3.0
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       lit-html:
         specifier: ^3.3.0
@@ -327,7 +396,7 @@ importers:
         specifier: ^1.1.1
         version: 1.4.0
       picocolors:
-        specifier: ^1.1.1
+        specifier: 'catalog:'
         version: 1.1.1
       picomatch:
         specifier: ^4.0.2
@@ -380,11 +449,8 @@ importers:
       shiki:
         specifier: ^1.1.6
         version: 1.29.2
-      sitemap:
-        specifier: ^8.0.0
-        version: 8.0.3
       solid-js:
-        specifier: ^1.9.3
+        specifier: 'catalog:'
         version: 1.9.11
       string-strip-html:
         specifier: ^13.4.6
@@ -402,17 +468,17 @@ importers:
         specifier: ^3.19.0
         version: 3.22.0
       urlpattern-polyfill:
-        specifier: ^10.0.0
+        specifier: 'catalog:'
         version: 10.1.0
     devDependencies:
       '@importable/yaml':
         specifier: ^0.1.1
         version: 0.1.1
       '@literals/rollup-plugin-html-css-minifier':
-        specifier: ^3.0.0
+        specifier: ^3.0.1
         version: 3.0.1(rollup@4.59.0)
       '@playwright/test':
-        specifier: ^1.58.2
+        specifier: 'catalog:'
         version: 1.58.2
       '@rollup/plugin-strip':
         specifier: ^3.0.4
@@ -438,6 +504,9 @@ importers:
       '@types/react':
         specifier: npm:types-react@rc
         version: types-react@19.0.0-rc.1
+      '@webcontainer/api':
+        specifier: ^1.6.1
+        version: 1.6.1
       importable:
         specifier: ^0.1.0
         version: 0.1.0(typescript@5.9.3)
@@ -451,180 +520,35 @@ importers:
         specifier: ^2.0.2
         version: 2.0.2
       tsx:
-        specifier: ^4.19.2
+        specifier: 'catalog:'
         version: 4.21.0
       typedoc:
-        specifier: ^0.26.11
-        version: 0.26.11(typescript@5.9.3)
+        specifier: ^0.28.17
+        version: 0.28.17(typescript@5.9.3)
       typedoc-plugin-markdown:
-        specifier: ^4.2.10
-        version: 4.10.0(typedoc@0.26.11(typescript@5.9.3))
+        specifier: ^4.10.0
+        version: 4.10.0(typedoc@0.28.17(typescript@5.9.3))
       typescript:
-        specifier: ^5.6.3
+        specifier: 'catalog:'
         version: 5.9.3
       vite:
-        specifier: ^6.2.5
-        version: 6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        specifier: 'catalog:'
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
       vite-plugin-cross-origin-isolation:
         specifier: ^0.1.6
         version: 0.1.6
       vite-plugin-inspect:
         specifier: ^0.10.6
-        version: 0.10.6(rollup@4.59.0)(vite@6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 0.10.6(rollup@4.59.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       vite-plugin-solid:
-        specifier: ^2.10.2
-        version: 2.11.10(solid-js@1.9.11)(vite@6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: 'catalog:'
+        version: 2.11.10(solid-js@1.9.11)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       vite-plugin-static-copy:
         specifier: ^2.0.0
-        version: 2.3.2(vite@6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        version: 2.3.2(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       yaml:
         specifier: ^2.6.0
         version: 2.8.2
-
-  integration:
-    dependencies:
-      '@gracile-labs/babel-plugin-jsx-to-literals':
-        specifier: workspace:^
-        version: link:../packages/labs/babel-plugin-jsx-to-literals
-      '@gracile-labs/client-router':
-        specifier: workspace:^
-        version: link:../packages/labs/client-router
-      '@gracile-labs/css-helpers':
-        specifier: workspace:^
-        version: link:../packages/labs/css-helpers
-      '@gracile-labs/functional':
-        specifier: workspace:^
-        version: link:../packages/labs/functional
-      '@gracile-labs/islands':
-        specifier: workspace:^
-        version: link:../packages/labs/islands
-      '@gracile-labs/vite-plugin-babel-jsx-to-literals':
-        specifier: workspace:^
-        version: link:../packages/labs/vite-plugin-babel-jsx-to-literals
-      '@gracile-labs/vite-plugin-jsx-forge':
-        specifier: workspace:^
-        version: link:../packages/labs/vite-plugin-jsx-forge
-      '@gracile/client':
-        specifier: workspace:^
-        version: link:../packages/client
-      '@gracile/engine':
-        specifier: workspace:^
-        version: link:../packages/engine
-      '@gracile/gracile':
-        specifier: workspace:^
-        version: link:../packages/gracile
-      '@gracile/internal-utils':
-        specifier: workspace:^
-        version: link:../packages/internal/utils
-      '@gracile/markdown':
-        specifier: workspace:^
-        version: link:../packages/addons/markdown
-      '@gracile/markdown-preset-marked':
-        specifier: workspace:^
-        version: link:../packages/addons/markdown-preset-marked
-      '@gracile/metadata':
-        specifier: workspace:^
-        version: link:../packages/addons/metadata
-      '@gracile/server':
-        specifier: workspace:^
-        version: link:../packages/server
-      '@gracile/svg':
-        specifier: workspace:^
-        version: link:../packages/addons/svg
-      '@hono/node-server':
-        specifier: ^1.19.10
-        version: 1.19.11(hono@4.12.8)
-      '@lit-labs/ssr':
-        specifier: 'catalog:'
-        version: 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client':
-        specifier: 'catalog:'
-        version: 1.1.8
-      cheerio:
-        specifier: 1.2.0
-        version: 1.2.0
-      express:
-        specifier: ^5.2.1
-        version: 5.2.1
-      hono:
-        specifier: '>=4.12.7'
-        version: 4.12.8
-      import-meta-resolve:
-        specifier: ^4.2.0
-        version: 4.2.0
-      jsx-forge:
-        specifier: workspace:^
-        version: link:../packages/labs/jsx-forge
-      lit:
-        specifier: 'catalog:'
-        version: 3.3.2
-      preact:
-        specifier: ^10.26.5
-        version: 10.28.4
-      preact-render-to-string:
-        specifier: ^6.5.13
-        version: 6.6.6(preact@10.28.4)
-      react:
-        specifier: ^19.1.0
-        version: 19.2.4
-      react-dom:
-        specifier: ^19.1.0
-        version: 19.2.4(react@19.2.4)
-      solid-js:
-        specifier: ^1.9.6
-        version: 1.9.11
-      svelte:
-        specifier: ^5.28.2
-        version: 5.53.7
-      vite:
-        specifier: 'catalog:'
-        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      vue:
-        specifier: ^3.5.13
-        version: 3.5.29(typescript@5.9.3)
-    devDependencies:
-      '@gracile-labs/hmr':
-        specifier: workspace:^
-        version: link:../packages/labs/hmr
-      '@gracile/internal-tsconfigs':
-        specifier: workspace:^
-        version: link:../packages/internal/tsconfigs
-      '@playwright/test':
-        specifier: ^1.52.0
-        version: 1.58.2
-      '@preact/preset-vite':
-        specifier: ^2.10.1
-        version: 2.10.3(@babel/core@7.29.0)(preact@10.28.4)(rollup@4.59.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@sveltejs/vite-plugin-svelte':
-        specifier: ^5.0.3
-        version: 5.1.1(svelte@5.53.7)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@types/express':
-        specifier: ^5.0.6
-        version: 5.0.6
-      '@types/node':
-        specifier: 25.3.3
-        version: 25.3.3
-      '@types/react':
-        specifier: ^19.1.2
-        version: 19.2.14
-      '@types/react-dom':
-        specifier: ^19.1.3
-        version: 19.2.3(@types/react@19.2.14)
-      '@vitejs/plugin-react':
-        specifier: ^4.3.3
-        version: 4.7.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@vitejs/plugin-vue':
-        specifier: ^5.2.3
-        version: 5.2.4(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
-      tsx:
-        specifier: ^4.21.0
-        version: 4.21.0
-      typescript:
-        specifier: 5.9.3
-        version: 5.9.3
-      vite-plugin-solid:
-        specifier: ^2.11.6
-        version: 2.11.10(solid-js@1.9.11)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
 
   packages/addons/markdown:
     dependencies:
@@ -638,14 +562,20 @@ importers:
         specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/addons/markdown-preset-marked:
@@ -672,14 +602,20 @@ importers:
         specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/addons/metadata:
@@ -694,14 +630,20 @@ importers:
         specifier: 'catalog:'
         version: 3.3.2
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/addons/sitemap:
@@ -726,7 +668,7 @@ importers:
         specifier: 25.3.3
         version: 25.3.3
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/addons/svg:
@@ -744,14 +686,20 @@ importers:
         specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/cli:
@@ -779,7 +727,7 @@ importers:
         specifier: 25.3.3
         version: 25.3.3
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/client:
@@ -807,10 +755,10 @@ importers:
         specifier: workspace:^
         version: link:../internal/tsconfigs
       tsx:
-        specifier: ^4.21.0
+        specifier: 'catalog:'
         version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/create-gracile:
@@ -853,7 +801,7 @@ importers:
         specifier: ^3.0.1
         version: 3.0.1
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/engine:
@@ -889,27 +837,115 @@ importers:
         specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../internal/tsconfigs
       '@types/express':
-        specifier: 5.0.6
+        specifier: 'catalog:'
         version: 5.0.6
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       c8:
-        specifier: ^11.0.0
+        specifier: 'catalog:'
         version: 11.0.0
       sinon:
         specifier: 21.0.1
         version: 21.0.1
       tsx:
-        specifier: ^4.21.0
+        specifier: 'catalog:'
         version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
+
+  packages/engine/__fixtures__/ce-tracker:
+    dependencies:
+      '@gracile/gracile':
+        specifier: workspace:^
+        version: link:../../../gracile
+      '@gracile/server':
+        specifier: workspace:^
+        version: link:../../../server
+      '@lit-labs/ssr':
+        specifier: 'catalog:'
+        version: 4.0.0(@types/node@25.3.3)
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+
+  packages/engine/__fixtures__/server-express:
+    dependencies:
+      '@gracile/gracile':
+        specifier: workspace:^
+        version: link:../../../gracile
+      '@gracile/markdown':
+        specifier: workspace:^
+        version: link:../../../addons/markdown
+      '@gracile/markdown-preset-marked':
+        specifier: workspace:^
+        version: link:../../../addons/markdown-preset-marked
+      '@gracile/server':
+        specifier: workspace:^
+        version: link:../../../server
+      '@gracile/svg':
+        specifier: workspace:^
+        version: link:../../../addons/svg
+      '@hono/node-server':
+        specifier: 'catalog:'
+        version: 1.19.11(hono@4.12.8)
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
+      hono:
+        specifier: '>=4.12.7'
+        version: 4.12.8
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+    devDependencies:
+      '@types/express':
+        specifier: 'catalog:'
+        version: 5.0.6
+
+  packages/engine/__fixtures__/static-site:
+    dependencies:
+      '@gracile/gracile':
+        specifier: workspace:^
+        version: link:../../../gracile
+      '@gracile/markdown':
+        specifier: workspace:^
+        version: link:../../../addons/markdown
+      '@gracile/markdown-preset-marked':
+        specifier: workspace:^
+        version: link:../../../addons/markdown-preset-marked
+      '@gracile/metadata':
+        specifier: workspace:^
+        version: link:../../../addons/metadata
+      '@gracile/server':
+        specifier: workspace:^
+        version: link:../../../server
+      '@gracile/svg':
+        specifier: workspace:^
+        version: link:../../../addons/svg
+      '@lit-labs/ssr':
+        specifier: 'catalog:'
+        version: 4.0.0(@types/node@25.3.3)
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   packages/gracile:
     dependencies:
@@ -935,20 +971,54 @@ importers:
         specifier: 'catalog:'
         version: 10.1.0
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../internal/tsconfigs
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
+      import-meta-resolve:
+        specifier: ^4.2.0
+        version: 4.2.0
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
+        version: 5.9.3
+
+  packages/internal/test-utils:
+    dependencies:
+      '@gracile/internal-utils':
+        specifier: workspace:^
+        version: link:../utils
+      cheerio:
+        specifier: 1.2.0
+        version: 1.2.0
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+    devDependencies:
+      '@gracile/internal-tsconfigs':
+        specifier: workspace:^
+        version: link:../tsconfigs
+      '@types/node':
+        specifier: 25.3.3
+        version: 25.3.3
+      typescript:
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/internal/tsconfigs:
     devDependencies:
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/internal/utils:
@@ -961,25 +1031,25 @@ importers:
         specifier: workspace:^
         version: link:../tsconfigs
       '@lit-labs/ssr':
-        specifier: ^4.0.0
+        specifier: 'catalog:'
         version: 4.0.0(@types/node@25.3.3)
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       c8:
-        specifier: ^11.0.0
+        specifier: 'catalog:'
         version: 11.0.0
       lit:
-        specifier: ^3.3.2
+        specifier: 'catalog:'
         version: 3.3.2
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/babel-plugin-jsx-to-literals:
     dependencies:
       '@babel/types':
-        specifier: ^7.28.5
+        specifier: ^7.29.0
         version: 7.29.0
       '@types/babel__core':
         specifier: ^7.20.5
@@ -1006,9 +1076,12 @@ importers:
       '@babel/traverse':
         specifier: ^7.28.5
         version: 7.29.0
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@lit-labs/ssr':
-        specifier: ^3.3.1
-        version: 3.3.1
+        specifier: 'catalog:'
+        version: 4.0.0(@types/node@25.3.3)
       '@types/babel__generator':
         specifier: ^7.27.0
         version: 7.27.0
@@ -1019,25 +1092,25 @@ importers:
         specifier: 25.3.3
         version: 25.3.3
       c8:
-        specifier: ^10.1.3
-        version: 10.1.3
+        specifier: 'catalog:'
+        version: 11.0.0
       clsx:
-        specifier: ^2.1.1
+        specifier: 'catalog:'
         version: 2.1.1
       csstype:
         specifier: ^3.1.3
         version: 3.2.3
       lit:
-        specifier: ^3.3.1
+        specifier: 'catalog:'
         version: 3.3.2
       recast:
         specifier: ^0.23.11
         version: 0.23.11
       tsx:
-        specifier: ^4.20.6
+        specifier: 'catalog:'
         version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/better-errors:
@@ -1077,7 +1150,7 @@ importers:
         specifier: ^5.46.0
         version: 5.46.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/client-router:
@@ -1108,10 +1181,10 @@ importers:
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       tsx:
-        specifier: ^4.21.0
+        specifier: 'catalog:'
         version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/css-helpers:
@@ -1129,14 +1202,20 @@ importers:
         specifier: 'catalog:'
         version: 1.1.8
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
       tsx:
-        specifier: ^4.21.0
+        specifier: 'catalog:'
         version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/devtools:
@@ -1152,7 +1231,7 @@ importers:
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       vite:
         specifier: 'catalog:'
@@ -1160,6 +1239,9 @@ importers:
 
   packages/labs/functional:
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
@@ -1167,16 +1249,16 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2
       tsx:
-        specifier: ^4.19.1
+        specifier: 'catalog:'
         version: 4.21.0
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 'catalog:'
+        version: 5.9.3
 
   packages/labs/hmr:
     dependencies:
       '@babel/core':
-        specifier: ^7.26.10
+        specifier: ^7.28.5
         version: 7.29.0
       '@babel/plugin-syntax-class-properties':
         specifier: ^7.12.13
@@ -1194,9 +1276,15 @@ importers:
       '@babel/types':
         specifier: ^7.29.0
         version: 7.29.0
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
+      '@playwright/test':
+        specifier: 'catalog:'
+        version: 1.58.2
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
@@ -1204,8 +1292,20 @@ importers:
         specifier: ^3.0.1
         version: 3.0.2
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+
+  packages/labs/hmr/__fixtures__/hmr-basic-lit:
+    dependencies:
+      '@gracile-labs/hmr':
+        specifier: workspace:^
+        version: link:../..
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
       vite:
         specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
@@ -1246,21 +1346,88 @@ importers:
         specifier: ^3.5.13
         version: 3.5.29(typescript@5.9.3)
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       '@types/react':
-        specifier: ^19.1.2
+        specifier: 'catalog:'
         version: 19.2.14
       '@types/react-dom':
-        specifier: ^19.1.3
+        specifier: 'catalog:'
         version: 19.2.3(@types/react@19.2.14)
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
       vite:
         specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+
+  packages/labs/islands/__fixtures__/static-site-islands:
+    dependencies:
+      '@gracile-labs/islands':
+        specifier: workspace:^
+        version: link:../..
+      '@gracile/gracile':
+        specifier: workspace:^
+        version: link:../../../../gracile
+      '@gracile/server':
+        specifier: workspace:^
+        version: link:../../../../server
+      '@lit-labs/ssr':
+        specifier: 'catalog:'
+        version: 4.0.0(@types/node@25.3.3)
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
+      preact:
+        specifier: 'catalog:'
+        version: 10.28.4
+      react:
+        specifier: 'catalog:'
+        version: 19.2.4
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.4(react@19.2.4)
+      solid-js:
+        specifier: 'catalog:'
+        version: 1.9.11
+      svelte:
+        specifier: 'catalog:'
+        version: 5.53.7
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.29(typescript@5.9.3)
+    devDependencies:
+      '@preact/preset-vite':
+        specifier: 'catalog:'
+        version: 2.10.3(@babel/core@7.29.0)(preact@10.28.4)(rollup@4.59.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+      '@sveltejs/vite-plugin-svelte':
+        specifier: 'catalog:'
+        version: 5.1.1(svelte@5.53.7)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
+      '@vitejs/plugin-react':
+        specifier: 'catalog:'
+        version: 4.7.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+      '@vitejs/plugin-vue':
+        specifier: 'catalog:'
+        version: 5.2.4(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
+      vite-plugin-solid:
+        specifier: 'catalog:'
+        version: 2.11.10(solid-js@1.9.11)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
 
   packages/labs/jsx-forge:
     dependencies:
@@ -1268,6 +1435,9 @@ importers:
         specifier: ^3.1.3
         version: 3.2.3
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
@@ -1277,9 +1447,12 @@ importers:
       ts-patch:
         specifier: ^3.3.0
         version: 3.3.0
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.8.3
-        version: 5.8.3
+        specifier: 'catalog:'
+        version: 5.9.3
 
   packages/labs/literals: {}
 
@@ -1302,7 +1475,7 @@ importers:
         version: 0.25.0
     devDependencies:
       '@types/chai':
-        specifier: ^4.3.16
+        specifier: 'catalog:'
         version: 4.3.20
       '@types/clean-css':
         specifier: 4.2.0
@@ -1311,43 +1484,43 @@ importers:
         specifier: 25.3.3
         version: 25.3.3
       '@types/sinon':
-        specifier: ^5.0.1
+        specifier: 'catalog:'
         version: 5.0.7
       c8:
-        specifier: 11.0.0
+        specifier: 'catalog:'
         version: 11.0.0
       chai:
-        specifier: ^5.1.1
+        specifier: 'catalog:'
         version: 5.3.3
       sinon:
         specifier: ^6.3.5
         version: 6.3.5
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/literals/parser:
     devDependencies:
       '@types/chai':
-        specifier: ^4.3.16
+        specifier: 'catalog:'
         version: 4.3.20
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       '@types/sinon':
-        specifier: ^5.0.1
+        specifier: 'catalog:'
         version: 5.0.7
       c8:
-        specifier: 11.0.0
+        specifier: 'catalog:'
         version: 11.0.0
       chai:
-        specifier: ^5.1.1
+        specifier: 'catalog:'
         version: 5.3.3
       sinon:
         specifier: ^6.3.5
         version: 6.3.5
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/literals/rollup-plugin-html-css-minifier:
@@ -1363,19 +1536,19 @@ importers:
         version: 2.8.2
     devDependencies:
       '@types/chai':
-        specifier: ^4.3.16
+        specifier: 'catalog:'
         version: 4.3.20
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       '@types/sinon':
-        specifier: ^5.0.1
+        specifier: 'catalog:'
         version: 5.0.7
       c8:
-        specifier: 11.0.0
+        specifier: 'catalog:'
         version: 11.0.0
       chai:
-        specifier: ^5.1.1
+        specifier: 'catalog:'
         version: 5.3.3
       rollup:
         specifier: ^4.19.1
@@ -1384,7 +1557,7 @@ importers:
         specifier: ^6.3.5
         version: 6.3.5
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/og-images-generator:
@@ -1433,23 +1606,23 @@ importers:
         specifier: 25.3.3
         version: 25.3.3
       '@types/react':
-        specifier: ^19.0.2
+        specifier: 'catalog:'
         version: 19.2.14
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   packages/labs/vite-plugin-babel-jsx-to-literals:
     dependencies:
       '@babel/plugin-syntax-typescript':
-        specifier: ^7.25.9
+        specifier: ^7.27.1
         version: 7.28.6(@babel/core@7.29.0)
       '@gracile-labs/babel-plugin-jsx-to-literals':
         specifier: workspace:^
         version: link:../babel-plugin-jsx-to-literals
       '@lit-labs/ssr':
-        specifier: ^3.2.2
-        version: 3.3.1
+        specifier: 'catalog:'
+        version: 4.0.0(@types/node@25.3.3)
       '@rollup/plugin-babel':
         specifier: ^6.0.4
         version: 6.1.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)(rollup@4.59.0)
@@ -1457,21 +1630,27 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       lit:
-        specifier: ^3.3.0
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
         specifier: ^6.2.5
         version: 6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       picocolors:
-        specifier: ^1.0.1
+        specifier: 'catalog:'
         version: 1.1.1
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 'catalog:'
+        version: 5.9.3
 
   packages/labs/vite-plugin-jsx-forge:
     dependencies:
@@ -1480,7 +1659,7 @@ importers:
         version: 3.3.1
       '@rollup/plugin-typescript':
         specifier: ^12.3.0
-        version: 12.3.0(rollup@4.59.0)(tslib@2.8.1)(typescript@5.6.3)
+        version: 12.3.0(rollup@4.59.0)(tslib@2.8.1)(typescript@5.9.3)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1497,12 +1676,18 @@ importers:
         specifier: ^6.2.5
         version: 6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
+      '@gracile/internal-test-utils':
+        specifier: workspace:^
+        version: link:../../internal/test-utils
       '@gracile/internal-tsconfigs':
         specifier: workspace:^
         version: link:../../internal/tsconfigs
+      tsx:
+        specifier: 'catalog:'
+        version: 4.21.0
       typescript:
-        specifier: 5.6.3
-        version: 5.6.3
+        specifier: 'catalog:'
+        version: 5.9.3
 
   packages/server:
     dependencies:
@@ -1529,13 +1714,13 @@ importers:
         specifier: 25.3.3
         version: 25.3.3
       c8:
-        specifier: ^11.0.0
+        specifier: 'catalog:'
         version: 11.0.0
       tsx:
-        specifier: ^4.21.0
+        specifier: 'catalog:'
         version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
 packages:
@@ -2681,6 +2866,10 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
+  '@nolyfill/isarray@1.0.44':
+    resolution: {integrity: sha512-NTSBKMkzaaVG3lVR5/lMTnW2y26XRQAgkdHMNaBviexwHgmtPsONFJ/HhQDak16BOrpYLasGMKGsgk3oKez57g==}
+    engines: {node: '>=12.4.0'}
+
   '@nolyfill/object-keys@1.0.44':
     resolution: {integrity: sha512-k59MxUv8AFPd+GzZlGBhBaW6zu6t7f2euhctz7vdT3WsE3LVPANgE7uAN71IIpxaIn+bBEX1Xesf/rTwWqVO0Q==}
     engines: {node: '>=12.4.0'}
@@ -2717,6 +2906,10 @@ packages:
 
   '@nolyfill/side-channel@1.0.44':
     resolution: {integrity: sha512-y3SvzjuY1ygnzWA4Krwx/WaJAsTMP11DN+e21A8Fa8PW1oDtVB5NSRW7LWurAiS2oKRkuCgcjTYMkBuBkcPCRg==}
+    engines: {node: '>=12.4.0'}
+
+  '@nolyfill/string.prototype.codepointat@1.0.44':
+    resolution: {integrity: sha512-Qhcdf9ECG/gThva8+Kyzk2y34h4UZVDkyHngHcRiq1t4TbSmf6FYYuGsMXwxMidxFkDOB54VsuhT9ExutBlRfw==}
     engines: {node: '>=12.4.0'}
 
   '@nolyfill/string.prototype.matchall@1.0.44':
@@ -3906,6 +4099,9 @@ packages:
   '@vue/shared@3.5.29':
     resolution: {integrity: sha512-w7SR0A5zyRByL9XUkCfdLs7t9XOHUyJ67qPGQjOou3p6GvBeBW+AVjUUmlxtZ4PIYaRvE+1LmK44O4uajlZwcg==}
 
+  '@webcontainer/api@1.6.1':
+    resolution: {integrity: sha512-2RS2KiIw32BY1Icf6M1DvqSmcon9XICZCDgS29QJb2NmF12ZY2V5Ia+949hMKB3Wno+P/Y8W+sPP59PZeXSELg==}
+
   '@whatwg-node/disposablestack@0.0.6':
     resolution: {integrity: sha512-LOtTn+JgJvX8WfBVJtF08TGrdjuFzGJc4mkP8EdDI8ADbvO7kiexYep1o8dwnt0okb0jYclCDXF13xU7Ge4zSw==}
     engines: {node: '>=18.0.0'}
@@ -4167,16 +4363,6 @@ packages:
   bytes@3.1.2:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
-
-  c8@10.1.3:
-    resolution: {integrity: sha512-LvcyrOAaOnrrlMpW22n690PUvxiq4Uf9WMhQwNJ9vgagkL/ph1+D4uvjvDA5XCbykrc0sx+ay6pVi9YZ1GnhyA==}
-    engines: {node: '>=18'}
-    hasBin: true
-    peerDependencies:
-      monocart-coverage-reports: ^2
-    peerDependenciesMeta:
-      monocart-coverage-reports:
-        optional: true
 
   c8@11.0.0:
     resolution: {integrity: sha512-e/uRViGHSVIJv7zsaDKM7VRn2390TgHXqUSvYwPHBQaU6L7E9L0n9JbdkwdYPvshDT0KymBmmlwSpms3yBaMNg==}
@@ -5129,8 +5315,8 @@ packages:
   flat-cache@6.1.20:
     resolution: {integrity: sha512-AhHYqwvN62NVLp4lObVXGVluiABTHapoB57EyegZVmazN+hhGhLTn3uZbOofoTw4DSDvVCadzzyChXhOAvy8uQ==}
 
-  flatted@3.3.3:
-    resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
+  flatted@3.4.1:
+    resolution: {integrity: sha512-IxfVbRFVlV8V/yRaGzk0UVIcsKKHMSfYw66T/u4nTwlWteQePsxe//LjudR1AMX4tZW3WFCh3Zqa/sjlqpbURQ==}
 
   flattie@1.1.1:
     resolution: {integrity: sha512-9UbaD6XdAL97+k/n+N7JwX46K/M6Zc6KcFYskrYL8wbBV/Uyk0CTAMY0VT+qiK5PM7AIc9aTWYtq65U7T+aCNQ==}
@@ -5634,9 +5820,6 @@ packages:
   is-wsl@3.1.1:
     resolution: {integrity: sha512-e6rvdUCiQCAuumZslxRJWR/Doq4VpPR82kqclvcS0efgt430SlGIk05vdCN58+VrzgtIcfNODjozVielycD4Sw==}
     engines: {node: '>=16'}
-
-  isarray@0.0.1:
-    resolution: {integrity: sha512-D2S+3GLxWH+uhrNEcoh/fnmYeP8E8/zHl644d/jdA0g2uyXvy3sb0qxotE+ne0LtccHknQzWwZEzhak7oJ0COQ==}
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
@@ -7035,10 +7218,6 @@ packages:
     resolution: {integrity: sha512-abovcqmwl97WKioxpkfuMeZmndB1TuDFY/R+FymrZyiGP+pMYomvgSzVPnbNMWHHESOPosVHGL352oFbdAnJcA==}
     engines: {node: '>=16'}
 
-  sax@1.4.4:
-    resolution: {integrity: sha512-1n3r/tGXO6b6VXMdFT54SHzT9ytu9yr7TaELowdYpMqY/Ao7EnlQGmAQ1+RatX7Tkkdm6hONI2owqNx2aZj5Sw==}
-    engines: {node: '>=11.0.0'}
-
   sax@1.5.0:
     resolution: {integrity: sha512-21IYA3Q5cQf089Z6tgaUTr7lDAyzoTPx5HRtbhsME8Udispad8dC/+sziTNugOEx54ilvatQ9YCzl4KQLPcRHA==}
     engines: {node: '>=11.0.0'}
@@ -7142,11 +7321,6 @@ packages:
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
-
-  sitemap@8.0.3:
-    resolution: {integrity: sha512-9Ew1tR2WYw8RGE2XLy7GjkusvYXy8Rg6y8TYuBuQMfIEdGcWoJpY2Wr5DzsEiL/TKCw56+YKTCCUHglorEYK+A==}
-    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
-    hasBin: true
 
   sitemap@9.0.1:
     resolution: {integrity: sha512-S6hzjGJSG3d6if0YoF5kTyeRJvia6FSTBroE5fQ0bu1QNxyJqhhinfUsXi9fH3MgtXODWvwo2BDyQSnhPQ88uQ==}
@@ -7308,9 +7482,6 @@ packages:
     resolution: {integrity: sha512-tsaTIkKW9b4N+AEj+SVA+WhJzV7/zMhcSu78mLKWSk7cXMOSHsBKFWUs0fWwq8QyK3MgJBQRX6Gbi4kYbdvGkQ==}
     engines: {node: '>=18'}
 
-  string.prototype.codepointat@0.2.1:
-    resolution: {integrity: sha512-2cBVCj6I4IOvEnjgO/hWqXjqBGsY+zwPmHl12Srk9IXSZ56Jwwmy+66XO5Iut/oQVR7t5ihYdLB0GMa4alEUcg==}
-
   string.prototype.trimend@1.0.9:
     resolution: {integrity: sha512-G7Ok5C6E/j4SGfyLCloXTrngQIQU3PWtXGst3yM7Bea9FRURf1S42ZHlZZtsNque2FN2PoUhfZXYLNWwEr4dLQ==}
     engines: {node: '>= 0.4'}
@@ -7444,51 +7615,6 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  syncpack-darwin-arm64@14.0.0:
-    resolution: {integrity: sha512-mEcku9YkOHfM6JOxhq9McgeLvd4djsJvRwNONZXHeoJ6+yqC96DdxZwFjkw3e8Vn95wsxsrwY5ZjMExs5Gbacw==}
-    cpu: [arm64]
-    os: [darwin]
-
-  syncpack-darwin-x64@14.0.0:
-    resolution: {integrity: sha512-qSj3bT3SIZA5NLM5PNVeExapyOrdmptlGSMu0SLVHj9hata/Vqh3xWgwq7wB9uajmlrHljeJ84R/NKAHyzFewA==}
-    cpu: [x64]
-    os: [darwin]
-
-  syncpack-linux-arm64-musl@14.0.0:
-    resolution: {integrity: sha512-i57Chz0tHP7ybKElPLhoygl6Cab1fxyUKS9xRgezX5NDrNxKUgrvqBfYd7288/QKB4C8+IcYHugFPjZjoFlAIA==}
-    cpu: [arm64]
-    os: [linux]
-
-  syncpack-linux-arm64@14.0.0:
-    resolution: {integrity: sha512-votlkb4P/0Bxd9yhBWCSUOjZwaii+LfFn1tZZVN5dfs8qcjcLeqfdG5zbnlJSzZhS3T+BfzejFW+Z95OxZag0A==}
-    cpu: [arm64]
-    os: [linux]
-
-  syncpack-linux-x64-musl@14.0.0:
-    resolution: {integrity: sha512-RKyp+29UlLGE8oYkd3UfwgjWUHN4dLHDyarv0dS6gWVpWM6qHtHS339KBc9JcIS7FD1vNGnQ3GmSaAodxDlkMA==}
-    cpu: [x64]
-    os: [linux]
-
-  syncpack-linux-x64@14.0.0:
-    resolution: {integrity: sha512-sZGy4+uL+P/+nI0yc9jwW/R22u9lw0+NXDYC/9ts9eYiWFyO4+luOeosvVKbED1OavUp/GQJqNV+9KHjMwq0Fw==}
-    cpu: [x64]
-    os: [linux]
-
-  syncpack-windows-arm64@14.0.0:
-    resolution: {integrity: sha512-aNtr0F6HkA7M0azDuDkt//DlPWlplFa4kmvHXirwDmJQ9u3SAvN3ZItW4ZYS96ZbiV1DgO15jIKBI7rDkzcwrQ==}
-    cpu: [arm64]
-    os: [win32]
-
-  syncpack-windows-x64@14.0.0:
-    resolution: {integrity: sha512-usMH61wlonssfh2Q8SJDiiAcsXVzuPzRl8XdHqdavR3XeCSGBIW9ieJpPfiKvDPWslekufWD+GhLNoH+8vV0Cg==}
-    cpu: [x64]
-    os: [win32]
-
-  syncpack@14.0.0:
-    resolution: {integrity: sha512-OfAa3Oip5YC9Ad1jEs92Hw08Wy4JfdpdeequIwaJGsQG0tJtb8gpQfCdLuBefsk6n8WiUdt/5qmzcW+BDXtzbQ==}
-    engines: {node: '>=14.17.0'}
-    hasBin: true
-
   table@6.9.0:
     resolution: {integrity: sha512-9kY+CygyYM6j02t5YFHbNz2FN5QmYGv9zAjVp4lCDjlCw7amdckXlEt/bjMhUIfj4ThGRE4gCUH5+yGnNuPo5A==}
     engines: {node: '>=10.0.0'}
@@ -7501,18 +7627,14 @@ packages:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
 
-  tar@7.5.10:
-    resolution: {integrity: sha512-8mOPs1//5q/rlkNSPcCegA6hiHJYDmSLEI8aMH/CdSQJNWztHC9WHNam5zdQlfpTwB9Xp7IBEsHfV5LKMJGVAw==}
+  tar@7.5.11:
+    resolution: {integrity: sha512-ChjMH33/KetonMTAtpYdgUFr0tbz69Fp2v7zWxQfYZX4g5ZN2nOBXm1R2xyA+lMIKrLKIoKAwFj93jE/avX9cQ==}
     engines: {node: '>=18'}
 
   terser@5.46.0:
     resolution: {integrity: sha512-jTwoImyr/QbOWFFso3YoU3ik0jBBDJ6JTOQiy/J2YxVJdZCc+5u7skhNwiOR3FQIygFqVUPHl7qbbxtjW2K3Qg==}
     engines: {node: '>=10'}
     hasBin: true
-
-  test-exclude@7.0.2:
-    resolution: {integrity: sha512-u9E6A+ZDYdp7a4WnarkXPZOx8Ilz46+kby6p1yZ8zsGTz9gYa6FIS7lj2oezzNKmtdyyJNNmmXDppga5GB7kSw==}
-    engines: {node: '>=18'}
 
   test-exclude@8.0.0:
     resolution: {integrity: sha512-ZOffsNrXYggvU1mDGHk54I96r26P8SyMjO5slMKSc7+IWmtB/MQKnEC2fP51imB3/pT6YK5cT5E8f+Dd9KdyOQ==}
@@ -7689,13 +7811,6 @@ packages:
     peerDependencies:
       typedoc: 0.28.x
 
-  typedoc@0.26.11:
-    resolution: {integrity: sha512-sFEgRRtrcDl2FxVP58Ze++ZK2UQAEvtvvH8rRlig1Ja3o7dDaMHmaBfvJmdGnNEFaLTpQsN8dpvZaTqJSu/Ugw==}
-    engines: {node: '>= 18'}
-    hasBin: true
-    peerDependencies:
-      typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x
-
   typedoc@0.28.17:
     resolution: {integrity: sha512-ZkJ2G7mZrbxrKxinTQMjFqsCoYY6a5Luwv2GKbTnBCEgV2ihYm5CflA9JnJAwH0pZWavqfYxmDkFHPt4yx2oDQ==}
     engines: {node: '>= 18', pnpm: '>= 10'}
@@ -7715,16 +7830,6 @@ packages:
 
   typescript@5.2.2:
     resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
-  typescript@5.6.3:
-    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
-  typescript@5.8.3:
-    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -9398,7 +9503,7 @@ snapshots:
       pacote: 21.4.0
       semver: 7.7.4
       ssri: 13.0.1
-      tar: 7.5.10
+      tar: 7.5.11
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
     transitivePeerDependencies:
@@ -9604,6 +9709,8 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
+  '@nolyfill/isarray@1.0.44': {}
+
   '@nolyfill/object-keys@1.0.44':
     dependencies:
       '@nolyfill/shared': 1.0.44
@@ -9636,6 +9743,10 @@ snapshots:
   '@nolyfill/shared@1.0.44': {}
 
   '@nolyfill/side-channel@1.0.44': {}
+
+  '@nolyfill/string.prototype.codepointat@1.0.44':
+    dependencies:
+      '@nolyfill/shared': 1.0.44
 
   '@nolyfill/string.prototype.matchall@1.0.44':
     dependencies:
@@ -10118,11 +10229,11 @@ snapshots:
     optionalDependencies:
       rollup: 4.59.0
 
-  '@rollup/plugin-typescript@12.3.0(rollup@4.59.0)(tslib@2.8.1)(typescript@5.6.3)':
+  '@rollup/plugin-typescript@12.3.0(rollup@4.59.0)(tslib@2.8.1)(typescript@5.9.3)':
     dependencies:
       '@rollup/pluginutils': 5.3.0(rollup@4.59.0)
       resolve: 1.22.11
-      typescript: 5.6.3
+      typescript: 5.9.3
     optionalDependencies:
       rollup: 4.59.0
       tslib: 2.8.1
@@ -10330,7 +10441,7 @@ snapshots:
   '@shuding/opentype.js@1.4.0-beta.0':
     dependencies:
       fflate: 0.7.4
-      string.prototype.codepointat: 0.2.1
+      string.prototype.codepointat: '@nolyfill/string.prototype.codepointat@1.0.44'
 
   '@sigstore/bundle@4.0.0':
     dependencies:
@@ -10856,6 +10967,8 @@ snapshots:
 
   '@vue/shared@3.5.29': {}
 
+  '@webcontainer/api@1.6.1': {}
+
   '@whatwg-node/disposablestack@0.0.6':
     dependencies:
       '@whatwg-node/promise-helpers': 1.3.2
@@ -11202,20 +11315,6 @@ snapshots:
   byte-size@9.0.1: {}
 
   bytes@3.1.2: {}
-
-  c8@10.1.3:
-    dependencies:
-      '@bcoe/v8-coverage': 1.0.2
-      '@istanbuljs/schema': 0.1.3
-      find-up: 5.0.0
-      foreground-child: 3.3.1
-      istanbul-lib-coverage: 3.2.2
-      istanbul-lib-report: 3.0.1
-      istanbul-reports: 3.2.0
-      test-exclude: 7.0.2
-      v8-to-istanbul: 9.3.0
-      yargs: 17.7.2
-      yargs-parser: 21.1.1
 
   c8@11.0.0:
     dependencies:
@@ -12300,16 +12399,16 @@ snapshots:
 
   flat-cache@4.0.1:
     dependencies:
-      flatted: 3.3.3
+      flatted: 3.4.1
       keyv: 4.5.4
 
   flat-cache@6.1.20:
     dependencies:
       cacheable: 2.3.3
-      flatted: 3.3.3
+      flatted: 3.4.1
       hookified: 1.15.1
 
-  flatted@3.3.3: {}
+  flatted@3.4.1: {}
 
   flattie@1.1.1: {}
 
@@ -12835,8 +12934,6 @@ snapshots:
   is-wsl@3.1.1:
     dependencies:
       is-inside-container: 1.0.0
-
-  isarray@0.0.1: {}
 
   isexe@2.0.0: {}
 
@@ -13678,7 +13775,7 @@ snapshots:
       nopt: 9.0.0
       proc-log: 6.1.0
       semver: 7.7.4
-      tar: 7.5.10
+      tar: 7.5.11
       tinyglobby: 0.2.15
       which: 6.0.1
     transitivePeerDependencies:
@@ -13912,7 +14009,7 @@ snapshots:
       proc-log: 6.1.0
       sigstore: 4.1.0
       ssri: 13.0.1
-      tar: 7.5.10
+      tar: 7.5.11
     transitivePeerDependencies:
       - supports-color
 
@@ -14040,7 +14137,7 @@ snapshots:
 
   path-to-regexp@1.9.0:
     dependencies:
-      isarray: 0.0.1
+      isarray: '@nolyfill/isarray@1.0.44'
 
   path-to-regexp@8.3.0: {}
 
@@ -14615,8 +14712,6 @@ snapshots:
       postcss-value-parser: 4.2.0
       yoga-wasm-web: 0.3.3
 
-  sax@1.4.4: {}
-
   sax@1.5.0: {}
 
   scheduler@0.27.0: {}
@@ -14785,19 +14880,12 @@ snapshots:
 
   sisteransi@1.0.5: {}
 
-  sitemap@8.0.3:
-    dependencies:
-      '@types/node': 25.3.3
-      '@types/sax': 1.2.7
-      arg: 5.0.2
-      sax: 1.5.0
-
   sitemap@9.0.1:
     dependencies:
       '@types/node': 25.3.3
       '@types/sax': 1.2.7
       arg: 5.0.2
-      sax: 1.4.4
+      sax: 1.5.0
 
   slash@3.0.0: {}
 
@@ -14958,8 +15046,6 @@ snapshots:
       emoji-regex: 10.6.0
       get-east-asian-width: 1.5.0
       strip-ansi: 7.2.0
-
-  string.prototype.codepointat@0.2.1: {}
 
   string.prototype.trimend@1.0.9:
     dependencies:
@@ -15149,41 +15235,6 @@ snapshots:
       picocolors: 1.1.1
       sax: 1.5.0
 
-  syncpack-darwin-arm64@14.0.0:
-    optional: true
-
-  syncpack-darwin-x64@14.0.0:
-    optional: true
-
-  syncpack-linux-arm64-musl@14.0.0:
-    optional: true
-
-  syncpack-linux-arm64@14.0.0:
-    optional: true
-
-  syncpack-linux-x64-musl@14.0.0:
-    optional: true
-
-  syncpack-linux-x64@14.0.0:
-    optional: true
-
-  syncpack-windows-arm64@14.0.0:
-    optional: true
-
-  syncpack-windows-x64@14.0.0:
-    optional: true
-
-  syncpack@14.0.0:
-    optionalDependencies:
-      syncpack-darwin-arm64: 14.0.0
-      syncpack-darwin-x64: 14.0.0
-      syncpack-linux-arm64: 14.0.0
-      syncpack-linux-arm64-musl: 14.0.0
-      syncpack-linux-x64: 14.0.0
-      syncpack-linux-x64-musl: 14.0.0
-      syncpack-windows-arm64: 14.0.0
-      syncpack-windows-x64: 14.0.0
-
   table@6.9.0:
     dependencies:
       ajv: 8.18.0
@@ -15196,7 +15247,7 @@ snapshots:
 
   tapable@2.3.0: {}
 
-  tar@7.5.10:
+  tar@7.5.11:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
@@ -15210,12 +15261,6 @@ snapshots:
       acorn: 8.16.0
       commander: 2.20.3
       source-map-support: 0.5.21
-
-  test-exclude@7.0.2:
-    dependencies:
-      '@istanbuljs/schema': 0.1.3
-      glob: 10.5.0
-      minimatch: 10.2.4
 
   test-exclude@8.0.0:
     dependencies:
@@ -15369,22 +15414,9 @@ snapshots:
       media-typer: 1.1.0
       mime-types: 3.0.2
 
-  typedoc-plugin-markdown@4.10.0(typedoc@0.26.11(typescript@5.9.3)):
-    dependencies:
-      typedoc: 0.26.11(typescript@5.9.3)
-
   typedoc-plugin-markdown@4.10.0(typedoc@0.28.17(typescript@5.9.3)):
     dependencies:
       typedoc: 0.28.17(typescript@5.9.3)
-
-  typedoc@0.26.11(typescript@5.9.3):
-    dependencies:
-      lunr: 2.3.9
-      markdown-it: 14.1.1
-      minimatch: 9.0.9
-      shiki: 1.29.2
-      typescript: 5.9.3
-      yaml: 2.8.2
 
   typedoc@0.28.17(typescript@5.9.3):
     dependencies:
@@ -15411,10 +15443,6 @@ snapshots:
       - supports-color
 
   typescript@5.2.2: {}
-
-  typescript@5.6.3: {}
-
-  typescript@5.8.3: {}
 
   typescript@5.9.3: {}
 
@@ -15720,7 +15748,7 @@ snapshots:
 
   vite-plugin-cross-origin-isolation@0.1.6: {}
 
-  vite-plugin-inspect@0.10.6(rollup@4.59.0)(vite@6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
+  vite-plugin-inspect@0.10.6(rollup@4.59.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.3.0(rollup@4.59.0)
@@ -15731,22 +15759,9 @@ snapshots:
       perfect-debounce: 1.0.0
       picocolors: 1.1.1
       sirv: 3.0.2
-      vite: 6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     transitivePeerDependencies:
       - rollup
-      - supports-color
-
-  vite-plugin-solid@2.11.10(solid-js@1.9.11)(vite@6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
-    dependencies:
-      '@babel/core': 7.29.0
-      '@types/babel__core': 7.20.5
-      babel-preset-solid: 1.9.10(@babel/core@7.29.0)(solid-js@1.9.11)
-      merge-anything: 5.1.7
-      solid-js: 1.9.11
-      solid-refresh: 0.6.3(solid-js@1.9.11)
-      vite: 6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      vitefu: 1.1.2(vite@6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-    transitivePeerDependencies:
       - supports-color
 
   vite-plugin-solid@2.11.10(solid-js@1.9.11)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
@@ -15762,14 +15777,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-static-copy@2.3.2(vite@6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
+  vite-plugin-static-copy@2.3.2(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
     dependencies:
       chokidar: 3.6.0
       fast-glob: 3.3.3
       fs-extra: 11.3.3
       p-map: 7.0.4
       picocolors: 1.1.1
-      vite: 6.4.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
 
   vite-prerender-plugin@0.5.12(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
     dependencies:

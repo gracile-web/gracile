@@ -39,7 +39,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "dependencies": {
     "@rollup/plugin-typescript": "^12.3.0",
@@ -48,12 +49,13 @@
   },
   "peerDependencies": {
     "@lit-labs/ssr": "^3.2.2",
+    "clsx": "^2.1.1",
     "jsx-forge": "workspace:^",
     "lit": "^3.3.0",
-    "clsx": "^2.1.1",
     "vite": "^6.2.5"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "tsx": "catalog:",
     "typescript": "catalog:"

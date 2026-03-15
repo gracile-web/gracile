@@ -225,16 +225,6 @@ jobs:
 
       # MARK: Docs Website
 
-      - name: Build docs website
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        shell: bash
-        run: pnpm --prefix docs/website run build
-
-      - name: Index docs with Pagefind
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        shell: bash
-        run: pnpm --prefix docs/website run pagefind
-
       - name: Cache Playwright browsers (docs)
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
         uses: actions/cache@v4

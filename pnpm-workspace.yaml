@@ -7,12 +7,17 @@ packages:
   - ./packages/create-gracile
   - ./packages/internal/tsconfigs
   - ./packages/internal/utils
+  - ./packages/internal/test-utils
   - ./packages/addons/metadata
   - ./packages/addons/svg
   - ./packages/addons/sitemap
   - ./packages/addons/markdown
   - ./packages/addons/markdown-preset-marked
-  - ./integration
+  - ./packages/engine/__fixtures__/static-site
+  - ./packages/engine/__fixtures__/server-express
+  - ./packages/engine/__fixtures__/ce-tracker
+  - ./packages/labs/hmr/__fixtures__/hmr-basic-lit
+  - ./packages/labs/islands/__fixtures__/static-site-islands
   - ./packages/labs/client-router
   - ./packages/labs/css-helpers
   - ./packages/labs/better-errors
@@ -69,5 +74,6 @@ catalog:
   '@sveltejs/vite-plugin-svelte': ^5.0.3
   '@vitejs/plugin-react': ^4.3.3
   '@vitejs/plugin-vue': ^5.2.3
+  '@playwright/test': '^1.58.2'
   # reminder: some deps are intentionally not auto-cataloged yet (mixed/special ranges); align versions first
   # sinon, @lit-labs/signals, sitemap, Babel packages, rollup peer ranges, etc.

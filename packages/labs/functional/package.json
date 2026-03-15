@@ -41,10 +41,11 @@
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
     "test:unit": "c8 node --test --enable-source-maps 'dist/**/*.test.js'",
-    "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
+    "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "devDependencies": {
-    "@types/node": "^24.2.0",
+    "@gracile/internal-test-utils": "workspace:^",
     "@types/node": "catalog:",
     "signal-polyfill": "^0.2.2",
     "tsx": "catalog:",

@@ -1,0 +1,11 @@
+{
+  "name": "@gracile/fixture-hmr-basic-lit",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@gracile-labs/hmr": "workspace:^",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  }
+}

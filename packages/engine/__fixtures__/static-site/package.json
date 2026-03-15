@@ -1,0 +1,17 @@
+{
+  "name": "@gracile/fixture-static-site",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@gracile/markdown": "workspace:^",
+    "@gracile/markdown-preset-marked": "workspace:^",
+    "@gracile/metadata": "workspace:^",
+    "@gracile/server": "workspace:^",
+    "@gracile/svg": "workspace:^",
+    "@lit-labs/ssr": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  }
+}

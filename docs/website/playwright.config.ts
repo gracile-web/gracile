@@ -21,7 +21,7 @@ export default defineConfig({
 		},
 	],
 	webServer: {
-		command: `pnpm run preview -- --host ${HOST} --port ${PORT} --strictPort`,
+		command: `npx vite preview --host ${HOST} --port ${PORT} --strictPort`,
 		url: baseURL,
 		timeout: 60_000,
 		reuseExistingServer: !process.env.CI,

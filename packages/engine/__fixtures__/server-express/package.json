@@ -1,0 +1,21 @@
+{
+  "name": "@gracile/fixture-server-express",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@gracile/markdown": "workspace:^",
+    "@gracile/markdown-preset-marked": "workspace:^",
+    "@gracile/server": "workspace:^",
+    "@gracile/svg": "workspace:^",
+    "@hono/node-server": "catalog:",
+    "express": "^5.2.1",
+    "hono": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@types/express": "catalog:"
+  }
+}

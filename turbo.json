@@ -25,6 +25,10 @@
     "test:unit:dev": {
       "cache": false
     },
+    "test:integration": {
+      // "dependsOn": ["build"],
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build"],
       "cache": false,

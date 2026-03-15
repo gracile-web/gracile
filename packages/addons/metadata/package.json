@@ -33,7 +33,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
@@ -41,6 +42,7 @@
     "lit": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "catalog:",
     "tsx": "catalog:",

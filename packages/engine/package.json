@@ -47,7 +47,8 @@
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
     "test:unit": "c8 node --test --enable-source-maps 'dist/**/*.test.js'",
-    "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
+    "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "dependencies": {
     "@gracile-labs/better-errors": "workspace:^",
@@ -59,6 +60,7 @@
     "vite": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/express": "catalog:",
     "@types/node": "catalog:",

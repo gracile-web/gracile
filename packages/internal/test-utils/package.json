@@ -1,0 +1,28 @@
+{
+  "name": "@gracile/internal-test-utils",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared integration-test helpers for the Gracile monorepo",
+  "type": "module",
+  "exports": {
+    "./*": "./dist/*.js"
+  },
+  "files": [
+    "./dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@gracile/internal-utils": "workspace:^",
+    "cheerio": "1.2.0",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

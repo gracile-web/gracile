@@ -4,7 +4,7 @@ import { describe, it } from 'node:test';
 import { expect } from 'chai';
 
 import * as pl from '../index.js';
-import { parseLiterals } from '../parseLiterals.js';
+import { parseLiterals } from '../parse-literals.js';
 import typescript from '../strategies/typescript.js';
 
 describe('exports', () => {
