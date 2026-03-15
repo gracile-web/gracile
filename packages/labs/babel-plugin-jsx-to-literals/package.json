@@ -65,5 +65,9 @@
     "recast": "^0.23.11",
     "tsx": "catalog:",
     "typescript": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

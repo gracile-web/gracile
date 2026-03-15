@@ -24,7 +24,7 @@
   "type": "module",
   "scripts": {
     "build": "node --run build:libs",
-    "build:libs": "NODE_OPTIONS=--max-old-space-size=8192 turbo build --filter=!@gracile/doc --concurrency 30",
+    "build:libs": "NODE_OPTIONS=--max-old-space-size=8192 turbo build --filter=!@gracile/doc --filter=!@gracile/starter-projects --concurrency 30",
     "build:docs": "pnpm --filter @gracile/doc build",
     "check-all": "pnpm build && (pnpm test:unit & pnpm test:integration & pnpm lint:es & pnpm format)",
     "docs:generate": "typedoc",

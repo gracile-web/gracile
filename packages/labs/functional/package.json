@@ -50,5 +50,9 @@
     "signal-polyfill": "^0.2.2",
     "tsx": "catalog:",
     "typescript": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }
