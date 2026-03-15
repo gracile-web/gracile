@@ -128,7 +128,8 @@ export default defineConfig({
 
 		gracileJsx(),
 
-		Inspect(),
+		// FIXME: Breaks HMR
+		// Inspect(),
 	],
 
 	esbuild: {

@@ -142,7 +142,7 @@ export default defineRoute({
 						</For>
 					</section>
 
-					<h1>
+					{/* <h1>
 						<i-c o="ph:newspaper" />
 						Blog
 					</h1>
@@ -158,7 +158,7 @@ export default defineRoute({
 								</div>
 							)}
 						</For>
-					</section>
+					</section> */}
 				</article>
 			</main>
 

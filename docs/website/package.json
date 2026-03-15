@@ -27,7 +27,7 @@
     "pagefind": "npx pagefind -s dist --output-path dist/pagefind --exclude-selectors '[hidden]' && cp -r dist/pagefind public",
     "check:links": "linkinator --config linkinator.config.json . > linkinator-result.json",
     "deploy": "netlify deploy -d ./dist",
-    "deploy:prod": "netlify deploy -d ./dist --prod --open",
+    "deploy:prod": "netlify deploy -d ./dist --prod --no-build",
     "release": "npm run build && npm run pagefind && npm run deploy",
     "preview": "vite preview",
     "// build:client": "vite build --outDir dist/client",

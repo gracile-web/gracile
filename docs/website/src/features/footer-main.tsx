@@ -39,11 +39,11 @@ export const FooterMain = (options: { url: URL; filename?: string }) => (
 				<i-c o="heartbeat-duotone"></i-c>
 				Support this project
 			</a>
-			<div class="sep">—</div>
+			{/* <div class="sep">—</div>
 			<a href={`/blog/`}>
 				<i-c o="article-duotone"></i-c>
 				Blog
-			</a>
+			</a> */}
 			<div class="sep">—</div>
 			<a href={SITE_URL}>
 				<i-c o="house-duotone"></i-c>
