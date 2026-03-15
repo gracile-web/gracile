@@ -4,8 +4,8 @@ import { html } from '@gracile/gracile/server-html';
 import { document } from '../document.js';
 
 export default defineRoute({
-  prerender: true,
-  
+	prerender: true,
+
 	document: (context) => document({ ...context, title: 'Gracile - About' }),
 
 	template: () => html`

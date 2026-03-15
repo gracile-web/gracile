@@ -72,13 +72,14 @@ The VS Code extension:
 code --install-extension runem.lit-plugin
 ```
 
-Or the [TypeScript Language Server plugin](https://github.com/runem/lit-analyzer/tree/master/packages/ts-lit-plugin#-installation)
+Or the
+[TypeScript Language Server plugin](https://github.com/runem/lit-analyzer/tree/master/packages/ts-lit-plugin#-installation)
 for NeoVim, Zed, etc.
 
 ---
 
-For general **formatting**,
-with support for HTML and CSS **template tag literals** in JavaScript:
+For general **formatting**, with support for HTML and CSS **template tag
+literals** in JavaScript:
 
 ```sh
 npm i prettier
@@ -86,5 +87,5 @@ npm i prettier
 
 ## 🧠 Want to learn more?
 
-Check out the [Gracile documentation](https://gracile.js.org) or
-jump into the [Discord server](https://gracile.js.org/chat/).
+Check out the [Gracile documentation](https://gracile.js.org) or jump into the
+[Discord server](https://gracile.js.org/chat/).

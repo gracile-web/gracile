@@ -1,9 +1,9 @@
 'use html-server';
 
-import { setSignalConstructor } from "@gracile-labs/functional";
-import { Signal } from "@lit-labs/signals";
+import { setSignalConstructor } from '@gracile-labs/functional';
+import { Signal } from '@lit-labs/signals';
 
-setSignalConstructor(Signal)
+setSignalConstructor(Signal);
 
 export const document = (props: { title?: string | null }) => (
 	<html lang="en">

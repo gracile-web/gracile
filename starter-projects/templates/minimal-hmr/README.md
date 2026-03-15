@@ -1,8 +1,10 @@
 # Gracile Starter — Minimal HMR
 
-A minimal Gracile static project with Web Components HMR (Hot Module Replacement) enabled.
+A minimal Gracile static project with Web Components HMR (Hot Module
+Replacement) enabled.
 
-Edit Lit element templates and styles and see changes reflected instantly without page reload.
+Edit Lit element templates and styles and see changes reflected instantly
+without page reload.
 
 ## Getting started
 
@@ -11,7 +13,8 @@ pnpm install
 pnpm dev
 ```
 
-Then edit `src/features/my-greetings.ts` — changes to the template and styles will hot-replace in the browser.
+Then edit `src/features/my-greetings.ts` — changes to the template and styles
+will hot-replace in the browser.
 
 ## Configuration
 
