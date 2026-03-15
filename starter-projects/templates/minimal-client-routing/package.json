@@ -1,0 +1,21 @@
+{
+  "name": "@gracile/template--minimal-client-routing",
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "check": "tsc",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@gracile/gracile": "0.8.2-next.0",
+    "@gracile-labs/client-router": "link:../../../gracile/packages/labs/client-router",
+    "lit": "^3.2.1",
+    "vite": "^6.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "typescript": "^5.5.4"
+  }
+}

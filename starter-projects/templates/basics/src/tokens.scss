@@ -1,0 +1,59 @@
+:root {
+	// MARK: Gray (dark)
+	--color-gray-50: hsl(0deg 0% 97.5%);
+	--color-gray-100: hsl(240deg 4.8% 95.9%);
+	--color-gray-200: hsl(240deg 5.9% 90%);
+	--color-gray-300: hsl(240deg 4.9% 83.9%);
+	--color-gray-400: hsl(240deg 5% 64.9%);
+	--color-gray-500: hsl(240deg 3.8% 46.1%);
+	--color-gray-600: hsl(240deg 5.2% 33.9%);
+	--color-gray-700: hsl(240deg 5.3% 26.1%);
+	--color-gray-800: hsl(240deg 3.7% 15.9%);
+	--color-gray-900: hsl(240deg 5.9% 10%);
+	--color-gray-950: hsl(240deg 7.3% 8%);
+	--color-gray-0: hsl(0deg 0% 100%);
+	--color-gray-1000: hsl(0deg 0% 0%);
+
+	// MARK: Emerald (light)
+	--color-emerald-50: hsl(151.8deg 81% 95.9%);
+	--color-emerald-100: hsl(149.3deg 80.4% 90%);
+	--color-emerald-200: hsl(152.4deg 76% 80.4%);
+	--color-emerald-300: hsl(156.2deg 71.6% 66.9%);
+	--color-emerald-400: hsl(158.1deg 64.4% 51.6%);
+	--color-emerald-500: hsl(160.1deg 84.1% 39.4%);
+	--color-emerald-600: hsl(161.4deg 93.5% 30.4%);
+	--color-emerald-700: hsl(162.9deg 93.5% 24.3%);
+	--color-emerald-800: hsl(163.1deg 88.1% 19.8%);
+	--color-emerald-900: hsl(164.2deg 85.7% 16.5%);
+	--color-emerald-950: hsl(164.3deg 87.5% 9.4%);
+
+	@media (prefers-color-scheme: dark) {
+		// MARK: Gray (dark)
+		--color-gray-50: hsl(240deg 5.1% 15%);
+		--color-gray-100: hsl(240deg 5.7% 18.2%);
+		--color-gray-200: hsl(240deg 4.6% 22%);
+		--color-gray-300: hsl(240deg 5% 27.6%);
+		--color-gray-400: hsl(240deg 5% 35.5%);
+		--color-gray-500: hsl(240deg 3.7% 44%);
+		--color-gray-600: hsl(240deg 5.3% 58%);
+		--color-gray-700: hsl(240deg 5.6% 73%);
+		--color-gray-800: hsl(240deg 7.3% 84%);
+		--color-gray-900: hsl(240deg 9.1% 91.8%);
+		--color-gray-950: hsl(0deg 0% 95%);
+		--color-gray-0: hsl(240deg 5.9% 11%);
+		--color-gray-1000: hsl(0deg 0% 100%);
+
+		// MARK: Emerald (dark)
+		--color-emerald-50: hsl(164.3deg 75% 13.5%);
+		--color-emerald-100: hsl(163.5deg 72.6% 20.1%);
+		--color-emerald-200: hsl(162.1deg 73.7% 22.4%);
+		--color-emerald-300: hsl(161.3deg 77.3% 27.6%);
+		--color-emerald-400: hsl(159.6deg 77.1% 34.3%);
+		--color-emerald-500: hsl(159.1deg 73.5% 37.9%);
+		--color-emerald-600: hsl(157.8deg 66.8% 48.9%);
+		--color-emerald-700: hsl(156.2deg 76.1% 63.8%);
+		--color-emerald-800: hsl(152.4deg 84.4% 77.4%);
+		--color-emerald-900: hsl(149.3deg 100% 87%);
+		--color-emerald-950: hsl(158.6deg 100% 94.8%);
+	}
+}

@@ -1,0 +1,7 @@
+@import '../../tailwind.css';
+
+section {
+	padding: 2rem 0;
+	margin: 2rem 0;
+	border-bottom: 1px solid darkcyan;
+}

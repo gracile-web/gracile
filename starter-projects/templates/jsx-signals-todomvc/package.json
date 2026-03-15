@@ -1,0 +1,34 @@
+{
+  "name": "@gracile/template--minimal-static",
+  "type": "module",
+  "version": "0.0.4",
+  "imports": {
+    "#jsx-lit": "./src/lib/inject.ts"
+  },
+  "scripts": {
+    "dev": "vite",
+    "check": "tsc",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@gracile-labs/functional": "link:../../../gracile/packages/labs/functional",
+    "@gracile-labs/jsx": "link:../../../gracile/packages/labs/jsx",
+    "@gracile/gracile": "link:../../../gracile/packages/gracile",
+    "@lit-labs/signals": "^0.1.2",
+    "@lit-labs/ssr": "^3.3.1",
+    "@lit-labs/ssr-client": "^1.1.7",
+    "lit": "^3.3.0",
+    "lit-html": "^3.3.0",
+    "signal-polyfill": "^0.2.2",
+    "todomvc-app-css": "^2.4.3",
+    "vite": "^6.2.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.1.0",
+    "typescript": "^5.5.4"
+  },
+  "overrides": {
+    "signal-polyfill": "^0.2.2"
+  }
+}
