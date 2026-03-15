@@ -22,7 +22,11 @@ node --run format
 
 node --run clean
 
-node --run build
+node --run build:libs
+
+node --run docs:generate
+
+node --run build:docs
 
 node --run lint:es
 
