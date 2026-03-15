@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1-next.2](https://github.com/gracile-web/gracile/compare/create-gracile@0.5.1-next.1...create-gracile@0.5.1-next.2) (2026-03-15)
+
+### Bug Fixes
+
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+
 ## [0.5.1-next.1](https://github.com/gracile-web/gracile/compare/create-gracile@0.5.1-next.0...create-gracile@0.5.1-next.1) (2026-03-07)
 
 ### Bug Fixes

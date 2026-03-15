@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/sitemap@0.3.1-next.0...@gracile/sitemap@0.4.0-next.0) (2026-03-15)
+
+### Bug Fixes
+
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+
+### Features
+
+* readmes from package collection, format content ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))
+
 ## [0.3.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/sitemap@0.3.0-next.3...@gracile/sitemap@0.3.1-next.0) (2026-03-07)
 
 **Note:** Version bump only for package @gracile/sitemap

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0-next.8](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.7...@gracile/engine@0.9.0-next.8) (2026-03-15)
+
+### Bug Fixes
+
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+
 # [0.9.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.6...@gracile/engine@0.9.0-next.7) (2026-03-09)
 
 ### Bug Fixes
