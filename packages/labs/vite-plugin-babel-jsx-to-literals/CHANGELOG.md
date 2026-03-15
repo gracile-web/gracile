@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-babel-jsx-to-literals@0.1.0-next.0...@gracile-labs/vite-plugin-babel-jsx-to-literals@0.1.0-next.1) (2026-03-15)
+
+**Note:** Version bump only for package @gracile-labs/vite-plugin-babel-jsx-to-literals
+
 # 0.1.0-next.0 (2026-03-15)
 
 ### Bug Fixes
