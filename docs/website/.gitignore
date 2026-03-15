@@ -38,8 +38,8 @@ public/pagefind
 src/content/docs/15-add-ons/*/README.md
 
 src/content/docs/04-starter-projects/README.md
-docs/website/src/content/docs/25-references
-!docs/website/src/content/docs/25-references/README.md
+src/content/docs/25-references
+!src/content/docs/25-references/README.md
 
 .old*
 .dev*

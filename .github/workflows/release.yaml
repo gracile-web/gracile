@@ -131,13 +131,13 @@ jobs:
       - name: Setup Turbo cache
         uses: dtinth/setup-github-actions-caching-for-turbo@cc723b4600e40a6b8815b65701d8614b91e2669e # v1.3.0
 
-      - name: Build all packages
-        shell: bash
-        run: node --run build
-
       - name: Generate Typedoc
         shell: bash
         run: node --run docs:generate
+
+      - name: Build all packages
+        shell: bash
+        run: node --run build
 
       # MARK: Lint/Checks post-build
 
