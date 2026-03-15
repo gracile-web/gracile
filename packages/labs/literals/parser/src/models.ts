@@ -9,6 +9,7 @@ export interface TemplatePart {
 	end: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface Strategy<N = any> {
 	getRootNode(source: string, fileName?: string): N;
 	walkNodes(parent: N, visit: (child: N) => void): void;

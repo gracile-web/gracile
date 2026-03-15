@@ -11,3 +11,4 @@ integration/**/gibberish.ts
 
 .pnpm-store
 __fixtures__
+docs/website/public/pagefind

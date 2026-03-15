@@ -41,13 +41,13 @@
     "// test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.js"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.16",
-    "@types/node": "25.3.3",
-    "@types/sinon": "^5.0.1",
-    "c8": "11.0.0",
-    "chai": "^5.1.1",
+    "@types/chai": "catalog:",
+    "@types/node": "catalog:",
+    "@types/sinon": "catalog:",
+    "c8": "catalog:",
+    "chai": "catalog:",
     "sinon": "^6.3.5",
-    "typescript": "5.9.3"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

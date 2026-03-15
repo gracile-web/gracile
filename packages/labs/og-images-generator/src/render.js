@@ -64,7 +64,11 @@ export async function renderOgImage(userConfig, page) {
 		satoriHtml(litSsred)
 	);
 
-	const svg = await satori(satoried, userConfig.renderOptions.satori);
+	const svg = await satori(
+		// @ts-expect-error - FIXME: Mismatch
+		satoried,
+		userConfig.renderOptions.satori,
+	);
 
 	const resvg = new Resvg(svg, userConfig.renderOptions.resvg);
 

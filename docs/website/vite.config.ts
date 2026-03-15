@@ -13,7 +13,7 @@ import Inspect from 'vite-plugin-inspect';
 import { SITE_URL } from './src/content/global.js';
 import { vitePluginMarkdownLit } from './lib/markdown/vite-plugin-markdown-lit.ts';
 
-async function iconifyLoader({ iconSet, data }) {
+function iconifyLoader({ iconSet, data }) {
 	const virtualModuleId = 'iconify:loader';
 	const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 	return {

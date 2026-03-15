@@ -60,12 +60,12 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/express": "5.0.6",
-    "@types/node": "^25.3.3",
-    "c8": "^11.0.0",
+    "@types/express": "catalog:",
+    "@types/node": "catalog:",
+    "c8": "catalog:",
     "sinon": "21.0.1",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.3"
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "catalog:",

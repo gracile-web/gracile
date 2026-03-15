@@ -4,7 +4,7 @@ import path from 'node:path';
 import c from 'picocolors';
 
 import { collectHtmlPages } from './collect.js';
-import { renderOgImage, renderAllPagesOg } from './render.js';
+import { renderAllPagesOg } from './render.js';
 
 export const CONFIG_FILE_NAME = 'og-images.config.js';
 

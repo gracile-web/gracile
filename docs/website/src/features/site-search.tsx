@@ -6,7 +6,7 @@ export function SiteSearch() {
 					<button>
 						<i-c o="ph:magnifying-glass-duotone"></i-c> Search… <kbd>⌘ + K</kbd>
 						{/*  */}
-						<some-foo contentEditable></some-foo>
+						{/* <some-foo contentEditable></some-foo> */}
 						{/*  */}
 					</button>
 				</search-popup>
@@ -20,10 +20,4 @@ export function SiteSearch() {
 			</div>
 		</>
 	);
-}
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'some-foo': {};
-	}
 }

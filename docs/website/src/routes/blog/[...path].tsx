@@ -78,7 +78,7 @@ export default defineRoute({
 			})),
 		}),
 
-	template: async ({ url, props, params }) => (
+	template: ({ url, props, params }) => (
 		<>
 			<NavMain name={'blog'} pathname={url.pathname} tree={tree} />
 

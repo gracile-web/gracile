@@ -52,8 +52,8 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.3"
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "catalog:"

@@ -1,6 +1,7 @@
-/* eslint-disable unicorn/filename-case */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
+
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { afterEach, beforeEach, describe, it } from 'node:test';
 
@@ -21,7 +22,7 @@ import {
 	defaultShouldMinifyCSS,
 	defaultValidation,
 	minifyHTMLLiterals,
-} from '../minifyHTMLLiterals.js';
+} from '../minify-html-literals.js';
 import { defaultMinifyOptions, defaultStrategy } from '../strategy.js';
 
 const { spy } = sinon;

@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prevent-abbreviations */
 import { expect, test } from '@playwright/test';
 
 test.describe('docs website smoke', () => {

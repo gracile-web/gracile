@@ -3,7 +3,7 @@ import { it } from 'node:test';
 
 import { expect } from 'chai';
 
-import { parseLiterals } from '../parseLiterals.js';
+import { parseLiterals } from '../parse-literals.js';
 
 export interface ParseTestsOptions {
 	codePrefix?: string;

@@ -58,9 +58,9 @@
     "@gracile/internal-tsconfigs": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@types/degit": "^2.8.6",
-    "@types/node": "^25.3.3",
+    "@types/node": "catalog:",
     "cli-testing-library": "^3.0.1",
-    "typescript": "5.9.3"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

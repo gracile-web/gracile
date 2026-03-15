@@ -1,10 +1,9 @@
 import { readFile } from 'node:fs/promises';
 
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { html, styled, OG_SIZE, FONTS, fetchFont } from 'og-images-generator';
+import { html, styled, OG_SIZE } from 'og-images-generator';
 import stripEmojiBase from 'emoji-strip';
 
-import { SITE_SUBTITLE, SITE_TITLE } from './src/content/global.js';
+import { SITE_TITLE } from './src/content/global.js';
 
 /**
  * Add unsupported emojis
@@ -23,7 +22,8 @@ export const paths = {
 	// json: './dist/og/index.json',
 };
 
-const require = (await import('node:module')).createRequire(import.meta.url);
+const module_ = await import('node:module');
+const require = module_.createRequire(import.meta.url);
 const inter400Path =
 	require.resolve('@fontsource/inter/files/inter-latin-400-normal.woff');
 
@@ -59,13 +59,14 @@ export const template = ({ page }) => {
 	// if ('og:description' in page.meta.tags === false)
 	//   throw Error('Missing description!');
 
-	const title = page.meta.tags['og:title']
-		? page.path === '/'
-			? page.meta.tags['og:title']
-			: page.meta.tags['og:title'].replace(SITE_TITLE + ' | ', '')
-		: 'untitled';
+	const ogTitle = page.meta?.tags?.['og:title'];
+	let title = 'untitled';
 
-	const description = page.meta.tags['og:description'] ?? '-';
+	if (ogTitle)
+		title =
+			page.path === '/' ? ogTitle : ogTitle.replace(SITE_TITLE + ' | ', '');
+
+	const description = page.meta?.tags?.['og:description'] ?? '-';
 
 	const breadcrumbs = page.meta?.jsonLds?.find(
 		(index) => index?.['@type'] === 'BreadcrumbList',
@@ -87,6 +88,7 @@ export const template = ({ page }) => {
 				<header style=${styles.header}>
 					<span style=${styles.breadcrumbs}>
 						${breadcrumbs?.map(
+							// @ts-expect-error FIXME
 							(index) => html`
 								${stripEmoji(index.name)}
 								<span style="margin: 0 2rem 0 1rem"> / </span>

@@ -1,4 +1,4 @@
-# 🎇 Starter projects
+# <i-c o='ph:fire-duotone'>🎇 </i-c>Starter projects
 
 <div class="git-only">
 
@@ -20,14 +20,15 @@ A thin, full-stack, **web** framework.
 
 **Starters**:
 
-- [Basics](#basics)
-- [Minimal setup (static)](#minimal-setup-static)
-- [Minimal setup (Bootstrap/Tailwind)](#minimal-setup-bootstraptailwind)
-- [Minimal setup with various kinds of test suites.](#minimal-setup-with-various-kinds-of-test-suites)
-- [Minimal setup (HTML/CSS minification)](#minimal-setup-htmlcss-minification)
-- [Minimal setup for client routing (SPA)](#minimal-setup-for-client-routing-spa)
-- [Minimal server (Express)](#minimal-server-express)
-- [Minimal server (Hono)](#minimal-server-hono)
+- [🎇 Starter projects](#-starter-projects)
+  - [Basics](#basics)
+  - [Minimal setup (static)](#minimal-setup-static)
+  - [Minimal setup (Bootstrap/Tailwind)](#minimal-setup-bootstraptailwind)
+  - [Minimal setup with various kinds of test suites.](#minimal-setup-with-various-kinds-of-test-suites)
+  - [Minimal setup (HTML/CSS minification)](#minimal-setup-htmlcss-minification)
+  - [Minimal setup for client routing (SPA)](#minimal-setup-for-client-routing-spa)
+  - [Minimal server (Express)](#minimal-server-express)
+  - [Minimal server (Hono)](#minimal-server-hono)
 
 </div>
 

@@ -20,13 +20,13 @@ function body(source: string): string {
 	return normalize(transformToLiterals(source).body);
 }
 
-/**
- * Transform and return the full normalized code (with auto-imports).
- * @param source
- */
-function full(source: string): string {
-	return normalize(transformToLiterals(source).code);
-}
+// /**
+//  * Transform and return the full normalized code (with auto-imports).
+//  * @param source
+//  */
+// function full(source: string): string {
+// 	return normalize(transformToLiterals(source).code);
+// }
 
 /**
  * Transform and return the raw (non-normalized) result for exact checks.

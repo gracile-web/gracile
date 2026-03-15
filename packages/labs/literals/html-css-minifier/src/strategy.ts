@@ -158,7 +158,7 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 			// html-minifier does not support removing newlines inside <svg>
 			// attributes. Support this, but be careful not to remove newlines from
 			// supported areas (such as within <pre> and <textarea> tags).
-			const matches = [...result.matchAll(/<svg/g)].reverse();
+			const matches = [...result.matchAll(/<svg/g)].toReversed();
 			for (const match of matches) {
 				const startTagIndex = match.index!;
 				const closeTagIndex = result.indexOf('</svg', startTagIndex);
@@ -168,7 +168,7 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 				}
 
 				const start = result.slice(0, Math.max(0, startTagIndex));
-				let svg = result.substring(startTagIndex, closeTagIndex);
+				let svg = result.slice(startTagIndex, closeTagIndex);
 				const end = result.slice(Math.max(0, closeTagIndex));
 				svg = svg.replaceAll(/\r?\n/g, '');
 				result = start + svg + end;
@@ -218,14 +218,16 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 };
 
 export function adjustMinifyCSSOptions(options: CleanCSS.Options = {}) {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	const level = optimizationLevelFrom(options.level);
 	const originalTransform =
 		typeof options.level === 'object' &&
 		options.level[1] &&
 		options.level[1].transform;
 	// FIXME:
-	// @ts-expect-error
+	// @ts-expect-error No typings
 	level[OptimizationLevel.One].transform = (property, value) => {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 		if (value.startsWith('@TEMPLATE_EXPRESSION') && !value.endsWith(';')) {
 			// The CSS minifier has removed the semicolon from the placeholder
 			// and we need to add it back.

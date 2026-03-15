@@ -120,7 +120,8 @@ export function transformToLiterals(
 
 function createVirtualCompilerHost(
 	sourceCode: string,
-	options: ts.CompilerOptions,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	_options: ts.CompilerOptions,
 ): ts.CompilerHost {
 	const files: Record<string, ts.SourceFile> = {
 		[LIB_FILENAME]: ts.createSourceFile(

@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-/* eslint-disable no-console */
 
 // override global define to allow double registrations
 const originalDefine = globalThis.customElements.define;
@@ -172,7 +173,7 @@ export function register(importMeta, name, clazz) {
 	existing.currentClass = clazz;
 	existing.currentProxy = currentProxy;
 
-	Promise.resolve().then(() => {
+	void Promise.resolve().then(() => {
 		// call optional HMR on the class if they exist, after next microtask to ensure
 		// module bodies have executed fully
 		if (clazz.hotReplacedCallback) {

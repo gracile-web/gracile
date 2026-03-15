@@ -1,11 +1,6 @@
-import { LitElement, html, css, unsafeCSS, type PropertyValueMap } from 'lit';
-import {
-	customElement,
-	query,
-	queryAssignedElements,
-	state,
-} from 'lit/decorators.js';
-import { createRef, ref } from 'lit/directives/ref.js';
+import { LitElement, unsafeCSS } from 'lit';
+import { customElement, queryAssignedElements, state } from 'lit/decorators.js';
+import { createRef } from 'lit/directives/ref.js';
 
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 
@@ -35,7 +30,7 @@ export class SearchPopup extends LitElement {
 
 	@state() isSearchBoxVisible = false;
 
-	protected override async firstUpdated() {
+	protected override firstUpdated() {
 		this.button[0]?.addEventListener('click', () => {
 			this.isSearchBoxVisible = !this.isSearchBoxVisible;
 
@@ -46,7 +41,7 @@ export class SearchPopup extends LitElement {
 			this.isSearchBoxVisible = false;
 		});
 
-		// @ts-expect-error doesn't exposes typings for now, see https://github.com/CloudCannon/pagefind/issues/334
+		// \@ts-expect-error doesn't exposes typings for now, see https://github.com/CloudCannon/pagefind/issues/334
 		// if (import.meta.env.PROD) await import('/pagefind/pagefind-ui.js?url');
 		// @ts-expect-error ...
 		new PagefindUI({

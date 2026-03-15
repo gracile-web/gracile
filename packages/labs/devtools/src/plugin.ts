@@ -159,7 +159,7 @@ const RESOLVED_VIRTUAL_ID = `\0${VIRTUAL_ID}`;
 export function gracileDevtools(options?: DevtoolsOptions): any[] {
 	const position = options?.position ?? 'bottom-center';
 
-	let server: ViteDevServer | undefined;
+	// let server: ViteDevServer | undefined;
 
 	return [
 		{
@@ -167,7 +167,7 @@ export function gracileDevtools(options?: DevtoolsOptions): any[] {
 			apply: 'serve',
 
 			configureServer(viteServer) {
-				server = viteServer;
+				// server = viteServer;
 
 				// ── API endpoint ──────────────────────────────────────
 				// Serves live route data + version info as JSON.

@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import assert from 'node:assert/strict';
 import test from 'node:test';
 

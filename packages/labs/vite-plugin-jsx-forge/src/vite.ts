@@ -30,10 +30,11 @@ export function gracileJsxTs(
 			},
 		} satisfies PluginOption,
 
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any
 		(typescript as any)(
 			/* NOTE: Rollup typings mismatch */ {
 				typescript: tspCompiler,
-				...(options?.rollupTypescript ? options.rollupTypescript : {}),
+				...options?.rollupTypescript,
 			} satisfies RollupTypescriptPluginOptions,
 		),
 	];

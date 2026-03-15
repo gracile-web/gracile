@@ -153,16 +153,17 @@ jobs:
         shell: bash
         run: node --run test:unit
 
+      # IDEA: Can we avoid duplicating Playwright browser installation for each package? Maybe a single root-level install with a shared cache is enough? For now, just cache per-package to speed up subsequent runs.
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ hashFiles('integration/package.json') }}
+          key: playwright-${{ hashFiles('packages/labs/hmr/package.json') }}
 
       - name: Install Playwright browsers
         shell: bash
         run: npx playwright install --with-deps chromium
-        working-directory: integration
+        working-directory: packages/labs/hmr
 
       - name: Tests — Integration
         shell: bash
@@ -202,13 +203,14 @@ jobs:
           git stash
           pnpm lerna publish --message 'chore: publish [main] release [skip ci]' --create-release=github --yes
 
-      - name: Merge (rebase) back main into next
+      - name: Merge back main into next
         if: github.ref == 'refs/heads/main'
+        continue-on-error: true
         env:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         run: |
           git checkout next
-          git rebase main
+          git merge main --no-ff -m 'chore: auto-merge main into next [skip ci]'
           git push
 
       # MARK: [NEXT]

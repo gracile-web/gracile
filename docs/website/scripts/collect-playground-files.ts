@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
-import glob from 'fast-glob';
+import * as glob from 'fast-glob';
 import type { FileSystemTree } from '@webcontainer/api';
 import set from 'lodash.set';
 

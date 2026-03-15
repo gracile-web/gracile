@@ -69,7 +69,7 @@ class GracileDevtools extends HTMLElement {
 
 	connectedCallback() {
 		this.#render();
-		this.#fetchData();
+		void this.#fetchData();
 	}
 
 	// ── Data fetching ──────────────────────────────────────────────

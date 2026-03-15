@@ -41,14 +41,14 @@ export class CopyButton extends LitElement {
 	override connectedCallback(): void {
 		super.connectedCallback();
 		this.addEventListener('click', async () => {
-			const textToCopy = this.text || this.parentElement!.innerText;
+			const textToCopy = this.text || this.parentElement!.textContent;
 			if (!textToCopy) throw new Error('No text to copy');
 
 			await navigator.clipboard.writeText(textToCopy);
 
 			this.currentLabel = this.labelClicked;
 		});
-		this.addEventListener('mouseleave', async () => {
+		this.addEventListener('mouseleave', () => {
 			setTimeout(() => {
 				this.currentLabel = this.label;
 			}, 100);

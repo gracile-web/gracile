@@ -61,8 +61,12 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^25.3.3",
-    "typescript": "5.9.3"
+    "@lit-labs/ssr": "catalog:",
+    "@types/node": "catalog:",
+    "import-meta-resolve": "^4.2.0",
+    "lit": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

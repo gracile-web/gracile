@@ -1,9 +1,11 @@
 import { LitElement, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+// FIXME: ESLint doesn't resolve the virtual module in ambient
+// eslint-disable-next-line import-x/no-unresolved
+import { iconSet } from 'iconify:loader';
 
 // import { isServer } from 'lit';
 // import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { iconSet } from 'iconify:loader';
 
 // import {getIcons} from '@iconify/utils';
 

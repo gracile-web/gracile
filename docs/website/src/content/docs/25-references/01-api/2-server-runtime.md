@@ -3,66 +3,6 @@
 API references extracted from the Gracile code base.  
 Examples, functions, classes, constants, type declarations…
 
-## Function: printUrls()
-
-```ts
-function printUrls(server): void;
-```
-
-Defined in: packages/engine/dist/server/utilities.d.ts:20
-
-Pretty print your server instance address as soon as it is listening. Matches
-the dev. server CLI output style.
-
-**Parameters**
-
-<div class="typedoc-table"><table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-
-`server`
-
-</td>
-<td>
-
-`string` \| `AddressInfo` \| `null`
-
-</td>
-<td>
-
-Takes an `node:net` `AddressInfo` like object (address, family, port) or just a
-provided, pre-constructed string.
-
-</td>
-</tr>
-</tbody>
-</table></div>
-
-**Returns**
-
-`void`
-
-**Example**
-
-```js
-import * as gracile from '@gracile/gracile/hono';
-import { serve } from '@hono/node-server';
-
-// ...
-
-serve({ fetch: app.fetch, port: 3030, hostname: 'localhost' }, (address) =>
-  gracile.printUrls(address),
-);
-```
-
 ## Function: nodeAdapter()
 
 ```ts
@@ -141,36 +81,6 @@ app.use(gracile.nodeAdapter(handler));
 const server = app.listen();
 ```
 
-## Variable: server
-
-```ts
-const server: Readonly<{
-  CLIENT_DIST_DIR: './dist/client';
-  IP_EXPOSED: '0.0.0.0';
-  IP_LOCALHOST: '127.0.0.1';
-  LOCALHOST: 'localhost';
-  PUBLIC_DIR: 'public';
-  RANDOM_PORT: 0;
-}>;
-```
-
-Defined in: packages/engine/dist/server/constants.d.ts:19
-
-Server **constants**. Useful for setting up your HTTP framework options.
-
-**Example**
-
-`/src/server.js`
-
-```js
-import * as gracile from '@gracile/gracile/hono';
-import { serve } from '@hono/node-server';
-
-// ...
-
-serve({ fetch: app.fetch, port: 3030, hostname: gracile.server.LOCALHOST });
-```
-
 ## Function: getClientBuildPath()
 
 ```ts
@@ -229,6 +139,96 @@ app.get(
   '*',
   serveStatic({ root: gracile.getClientBuildPath(import.meta.url) }),
 );
+```
+
+## Function: printUrls()
+
+```ts
+function printUrls(server): void;
+```
+
+Defined in: packages/engine/dist/server/utilities.d.ts:20
+
+Pretty print your server instance address as soon as it is listening. Matches
+the dev. server CLI output style.
+
+**Parameters**
+
+<div class="typedoc-table"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+
+`server`
+
+</td>
+<td>
+
+`string` \| `AddressInfo` \| `null`
+
+</td>
+<td>
+
+Takes an `node:net` `AddressInfo` like object (address, family, port) or just a
+provided, pre-constructed string.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+
+**Returns**
+
+`void`
+
+**Example**
+
+```js
+import * as gracile from '@gracile/gracile/hono';
+import { serve } from '@hono/node-server';
+
+// ...
+
+serve({ fetch: app.fetch, port: 3030, hostname: 'localhost' }, (address) =>
+  gracile.printUrls(address),
+);
+```
+
+## Variable: server
+
+```ts
+const server: Readonly<{
+  CLIENT_DIST_DIR: './dist/client';
+  IP_EXPOSED: '0.0.0.0';
+  IP_LOCALHOST: '127.0.0.1';
+  LOCALHOST: 'localhost';
+  PUBLIC_DIR: 'public';
+  RANDOM_PORT: 0;
+}>;
+```
+
+Defined in: packages/engine/dist/server/constants.d.ts:19
+
+Server **constants**. Useful for setting up your HTTP framework options.
+
+**Example**
+
+`/src/server.js`
+
+```js
+import * as gracile from '@gracile/gracile/hono';
+import { serve } from '@hono/node-server';
+
+// ...
+
+serve({ fetch: app.fetch, port: 3030, hostname: gracile.server.LOCALHOST });
 ```
 
 ## Variable: nodeCondition

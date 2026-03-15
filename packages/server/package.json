@@ -51,10 +51,10 @@
     "@gracile/client": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
-    "@types/node": "^25.3.3",
-    "c8": "^11.0.0",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.3"
+    "@types/node": "catalog:",
+    "c8": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "catalog:",

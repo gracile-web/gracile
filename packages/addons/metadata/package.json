@@ -42,8 +42,9 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^25.3.3",
-    "typescript": "5.9.3"
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

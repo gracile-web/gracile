@@ -1,5 +1,5 @@
 /* eslint-disable import-x/order */
-/* eslint-disable unicorn/no-keyword-prefix */
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import babelGenerator from '@babel/generator';
 import * as parser from '@babel/parser';

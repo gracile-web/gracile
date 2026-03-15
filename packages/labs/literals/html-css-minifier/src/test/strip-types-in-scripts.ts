@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-empty-file */
 // NOTE: Work in progress
 
 // import { expect } from 'chai';

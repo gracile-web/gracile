@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Template, Strategy } from './models.js';
 import typescript from './strategies/typescript.js';
 

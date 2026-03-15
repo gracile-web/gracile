@@ -1,4 +1,4 @@
-import type { PluginConfig } from 'ts-patch';
+// import type { PluginConfig } from 'ts-patch';
 
 import type { Ts, TsWithInternals } from '../types.js';
 

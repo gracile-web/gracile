@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import MagicString, { SourceMapOptions } from 'magic-string';
 import {
 	Template,
@@ -289,7 +290,6 @@ export async function minifyHTMLLiterals(
 
 	const templates = options.parseLiterals(source, options.parseLiteralsOptions);
 	const strategy =
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		<Strategy>(<CustomOptions<any>>options).strategy || defaultStrategy;
 	const {
 		shouldMinify,

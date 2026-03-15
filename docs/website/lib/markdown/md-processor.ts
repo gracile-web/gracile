@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 // NOTE: Work-in-progress. Need a bit of clean-up + splitting into plugins
 //
@@ -16,7 +17,7 @@ import * as shiki from 'shiki';
 import rehypeShiki from '@shikijs/rehype';
 import { transformerTwoslash } from '@shikijs/twoslash';
 import {
-	transformerNotationDiff,
+	// transformerNotationDiff,
 	transformerNotationHighlight,
 	transformerNotationWordHighlight,
 } from '@shikijs/transformers';
@@ -120,7 +121,7 @@ export const mdProcessor = unified()
 
 		transformers: [
 			{
-				line(node, line) {
+				line(node /* _line */) {
 					if (
 						node.children
 							.at(0)
@@ -142,7 +143,7 @@ export const mdProcessor = unified()
 			},
 
 			{
-				line(node, line) {
+				line(node /* _line */) {
 					const re = /\/\/ (WARNING|NOTE|IMPORTANT|TIP|CAUTION):/;
 					const reHtml = /<!-- (WARNING|NOTE|IMPORTANT|TIP|CAUTION):/;
 					const reJSX = /{\/\* (WARNING|NOTE|IMPORTANT|TIP|CAUTION):/;

@@ -1,4 +1,4 @@
-/// <reference path="../declarations.d.ts" />
+import '../declarations.d.ts';
 import * as minify from '@literals/html-css-minifier';
 import { SourceDescription, PluginContext } from 'rollup';
 import { createFilter } from '@rollup/pluginutils';
@@ -37,6 +37,7 @@ export interface Options {
 
 export function literalsHtmlCssMinifier(
 	options: Options = {},
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): /* HACK: Rollup/Vite version mismatches */ any /* Plugin & { transform: TransformHook } */ {
 	if (!options.minifyHTMLLiterals) {
 		options.minifyHTMLLiterals = minify.minifyHTMLLiterals;

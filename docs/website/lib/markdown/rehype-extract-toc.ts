@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 // Vendored from https://github.com/stefanprobst/rehype-extract-toc
 // Original license: MIT
@@ -7,59 +8,59 @@ import { toString } from 'hast-util-to-string';
 import { visit } from 'unist-util-visit';
 import { toHtml } from 'hast-util-to-html';
 
-function attacher() {
-	return transformer;
+function createTree(headings) {
+	const root = { depth: 0, children: [] };
+	const parents = [];
+	let previous = root;
 
-	function transformer(tree, vfile) {
-		const headings = [];
-
-		visit(tree, 'element', onHeading);
-
-		vfile.data.toc = createTree(headings) || [];
-
-		function onHeading(node) {
-			const level = rank(node);
-
-			if (level != null) {
-				const heading = {
-					depth: level,
-					value: toString(node),
-					html: toHtml(node.children, {
-						allowDangerousHtml: true,
-						allowDangerousCharacters: false,
-					}),
-				};
-				if (node.properties !== undefined && node.properties.id != null) {
-					heading.id = node.properties.id;
-				}
-				headings.push(heading);
+	for (const heading of headings) {
+		if (heading.depth > previous.depth) {
+			if (previous.children === undefined) {
+				previous.children = [];
+			}
+			parents.push(previous);
+		} else if (heading.depth < previous.depth) {
+			while (parents.at(-1).depth >= heading.depth) {
+				parents.pop();
 			}
 		}
 
-		function createTree(headings) {
-			const root = { depth: 0, children: [] };
-			const parents = [];
-			let previous = root;
+		parents.at(-1).children.push(heading);
+		previous = heading;
+	}
 
-			for (const heading of headings) {
-				if (heading.depth > previous.depth) {
-					if (previous.children === undefined) {
-						previous.children = [];
-					}
-					parents.push(previous);
-				} else if (heading.depth < previous.depth) {
-					while (parents.at(-1).depth >= heading.depth) {
-						parents.pop();
-					}
-				}
+	return root.children;
+}
 
-				parents.at(-1).children.push(heading);
-				previous = heading;
+function transformer(tree, vfile) {
+	const headings = [];
+
+	visit(tree, 'element', onHeading);
+
+	vfile.data.toc = createTree(headings) || [];
+
+	function onHeading(node) {
+		const level = rank(node);
+
+		if (level != null) {
+			const heading = {
+				depth: level,
+				value: toString(node),
+				html: toHtml(node.children, {
+					allowDangerousHtml: true,
+					allowDangerousCharacters: false,
+				}),
+			};
+			if (node.properties !== undefined && node.properties.id != null) {
+				heading.id = node.properties.id;
 			}
-
-			return root.children;
+			headings.push(heading);
 		}
 	}
+}
+
+function attacher() {
+	return transformer;
 }
 
 export default attacher;

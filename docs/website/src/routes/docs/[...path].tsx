@@ -105,7 +105,7 @@ export default defineRoute({
 			})),
 		}),
 
-	template: async ({ url, props }) => {
+	template: ({ url, props }) => {
 		// console.log({ markdownTree });
 		return (
 			<>
@@ -152,9 +152,9 @@ async function loadAsciinema() {
 
 if (!isServer) {
 	requestIdleCallback(() => {
-		import('../../lib/toc-links-follower.js');
+		void import('../../lib/toc-links-follower.js');
 		// @ts-expect-error no typings
-		import('caniuse-embed-element/dist/caniuse-embed-element.js');
+		void import('caniuse-embed-element/dist/caniuse-embed-element.js');
 	});
 
 	await loadAsciinema();

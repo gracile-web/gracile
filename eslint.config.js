@@ -8,7 +8,8 @@ import importX from 'eslint-plugin-import-x';
 // import importX from 'eslint-plugin-import-x';
 // import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
-export default [
+/** @type {import('eslint').Linter.Config[]} */
+const config = [
 	{
 		ignores: ['coverage', 'dist', 'packages/labs/ts-plugin-esx/playground'],
 	},
@@ -108,6 +109,18 @@ export default [
 			'unicorn/no-array-sort': 'off',
 			'unicorn/require-module-specifiers': 'off',
 
+			'unicorn/prevent-abbreviations': [
+				'error',
+				{
+					ignore: ['e2e'],
+				},
+			],
+			// 'unicorn/consistent-function-scoping': 'off',
+			// 'unicorn/no-await-expression-member': 'off',
+			// 'unicorn/filename-case': 'off',
+			// 'unicorn/prefer-import-meta-properties': 'off',
+			// 'unicorn/no-empty-file': 'off',
+
 			// dataset is a browser-only API — using it (or Object.hasOwn on it)
 			// breaks Lit SSR where element.dataset is undefined on the server.
 			'unicorn/prefer-dom-node-dataset': 'off',
@@ -143,7 +156,7 @@ export default [
 			'pnpm-lock.yaml',
 			'**/integration',
 			// '**/integration/**/*_expected*',
-			// '**/integration/__fixtures__',
+			'**/__fixtures__',
 			'CHANGELOG.md',
 			'dist',
 			// 'labs',
@@ -172,4 +185,63 @@ export default [
 			'**/dist/**',
 		],
 	},
+
+	// TODO: Make stricter progressively
+	// Relax rules for docs website
+	{
+		files: ['docs/website/**'],
+		rules: {
+			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/no-unused-vars': 'warn',
+			'unicorn/prevent-abbreviations': 'off',
+			'unicorn/no-unused-properties': 'off',
+			'unicorn/no-keyword-prefix': 'off',
+			'unicorn/consistent-destructuring': 'off',
+			'@typescript-eslint/no-unused-expressions': 'off',
+			'no-console': 'off',
+		},
+	},
+
+	// Relax rules for labs (experimental)
+	{
+		files: ['packages/labs/**'],
+		rules: {
+			'@typescript-eslint/no-unused-vars': 'warn',
+			'@typescript-eslint/no-unsafe-call': 'warn',
+			'@typescript-eslint/no-explicit-any': 'warn',
+			'unicorn/prevent-abbreviations': 'off',
+			'unicorn/no-unused-properties': 'off',
+			'unicorn/no-keyword-prefix': 'off',
+			'unicorn/consistent-destructuring': 'off',
+			'@typescript-eslint/no-unused-expressions': 'off',
+			'no-console': 'off',
+		},
+	},
+
+	// Files without tsconfig project
+	{
+		files: [
+			'packages/internal/test-utils/**',
+			'packages/labs/hmr/playwright.config.ts',
+			'packages/labs/jsx-forge/jsx-bootstrap.ts',
+			'packages/labs/css-helpers/ambient.d.ts',
+		],
+		languageOptions: {
+			parserOptions: {
+				project: false,
+			},
+		},
+		rules: {
+			'@typescript-eslint/no-floating-promises': 'off',
+			'@typescript-eslint/require-await': 'off',
+			'@typescript-eslint/no-unsafe-call': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/no-unused-vars': 'off',
+			'@typescript-eslint/no-unused-expressions': 'off',
+			'@typescript-eslint/ban-ts-comment': 'off',
+		},
+	},
 ];
+
+export default config;

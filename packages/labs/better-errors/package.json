@@ -58,7 +58,7 @@
     "@literals/rollup-plugin-html-css-minifier": "^3.0.1",
     "@rollup/plugin-terser": "^0.4.4",
     "terser": "^5.46.0",
-    "typescript": "5.9.3"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

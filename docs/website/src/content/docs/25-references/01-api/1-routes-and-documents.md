@@ -10,7 +10,7 @@ function html(strings, ...values): ServerRenderedTemplate;
 ```
 
 Defined in:
-node_modules/.pnpm/@lit-labs+ssr@4.0.0_@types+node@25.3.3/node_modules/@lit-labs/ssr/lib/server-template.d.ts:35
+node*modules/.pnpm/@lit-labs+ssr@4.0.0*@types+node@25.3.3/node_modules/@lit-labs/ssr/lib/server-template.d.ts:35
 
 A lit-html template that can only be rendered on the server, and cannot be
 hydrated.

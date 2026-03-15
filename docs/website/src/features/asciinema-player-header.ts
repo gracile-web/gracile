@@ -1,12 +1,12 @@
 // import '../lib/asciinema-player/asciinema-player.js';
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 
 import terminal from '../assets/icons/terminal.svg';
 
 @customElement('asciinema-player-header')
 export class AsciinemaPlayerHeader extends LitElement {
-	static styles = [
+	static override styles = [
 		css`
 			:host {
 				display: flex;
@@ -53,7 +53,8 @@ export class AsciinemaPlayerHeader extends LitElement {
 		`,
 	];
 
-	render() {
+	// eslint-disable-next-line class-methods-use-this
+	override render() {
 		return html`
 			<div class="pill pill-1"></div>
 			<div class="pill pill-2"></div>

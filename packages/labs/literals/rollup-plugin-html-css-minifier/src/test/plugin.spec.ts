@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { describe, beforeEach, it } from 'node:test';
 import * as path from 'node:path';

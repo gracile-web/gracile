@@ -55,8 +55,9 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "picocolors": "^1.0.1",
-    "typescript": "5.6.3"
+    "picocolors": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

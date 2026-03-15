@@ -7,11 +7,10 @@
 
 import { copyFile, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { README_MAP } from './readme-manifest.js';
 
-const SCRIPTS_DIR = dirname(fileURLToPath(import.meta.url));
+const SCRIPTS_DIR = import.meta.dirname;
 const DOCS_WEBSITE_DIR = join(SCRIPTS_DIR, '..');
 const ROOT_DIR = join(SCRIPTS_DIR, '../../..');
 

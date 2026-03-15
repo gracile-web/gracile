@@ -6,7 +6,6 @@ const __EXPERIMENTAL_CLIENT_PRERENDER__ = false;
 
 // NOTE: Do not add any dependencies or imports in this file so that it can load quickly in dev.
 
-// eslint-disable-next-line no-console
 const debug = import.meta.env.DEV ? console.debug : undefined;
 // const debug = console.debug;
 const inBrowser = import.meta.env.SSR === false;

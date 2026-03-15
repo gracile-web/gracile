@@ -58,11 +58,11 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@lit-labs/ssr": "^4.0.0",
-    "@types/node": "^25.3.3",
-    "c8": "^11.0.0",
-    "lit": "^3.3.2",
-    "typescript": "5.9.3"
+    "@lit-labs/ssr": "catalog:",
+    "@types/node": "catalog:",
+    "c8": "catalog:",
+    "lit": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "vite": "catalog:"

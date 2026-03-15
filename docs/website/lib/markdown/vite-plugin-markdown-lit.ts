@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck TODO: type this plugin
 import path from 'node:path';
 
 import {
@@ -23,11 +25,13 @@ export function vitePluginMarkdownLit() {
 			// TODO: custom processors
 
 			const vfile = await extractMetadata(code);
-			const excerpt = (await stripHtml(vfile.data.excerpt ?? '')).trim();
+			const text = await stripHtml(vfile.data.excerpt ?? '');
+			const excerpt = text.trim();
 
 			const { markdown } = {
 				markdown: allData
-					? (await processMd(code)).markdown
+					? // eslint-disable-next-line unicorn/no-await-expression-member
+						(await processMd(code)).markdown
 					: '<!-- Content not rendered -->',
 			};
 

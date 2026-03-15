@@ -16,7 +16,6 @@ export function defineIslandsFactory(
 					try {
 						return renderOrHydrateFactory(Component, properties, host);
 					} catch (error) {
-						// eslint-disable-next-line no-console
 						console.error('Failed to handle island', error);
 					}
 				},

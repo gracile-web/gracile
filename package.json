@@ -24,7 +24,8 @@
   "type": "module",
   "scripts": {
     "build": "NODE_OPTIONS=--max-old-space-size=8192 turbo build --concurrency 30",
-    "check-all": "pnpm build && (pnpm test & pnpm lint:es & pnpm format)",
+    "check-all": "pnpm build && (pnpm test:unit & pnpm test:integration & pnpm lint:es & pnpm format)",
+    "docs:generate": "typedoc",
     "clean": "turbo clean --concurrency 30",
     "dev": "turbo dev --concurrency 30",
     "format": "prettier --check .",
@@ -116,7 +117,8 @@
       "@types/node": "25.3.3",
       "immutable": ">=4.3.8",
       "serialize-javascript": ">=7.0.3",
-      "tar": ">=7.5.10",
+      "tar": ">=7.5.11",
+      "flatted": ">=3.4.0",
       "object-keys": "npm:@nolyfill/object-keys@^1"
     },
     "auditConfig": {

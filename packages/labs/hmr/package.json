@@ -46,9 +46,10 @@
   "devDependencies": {
     "@babel/types": "^7.29.0",
     "@gracile/internal-tsconfigs": "workspace:^",
+    "@playwright/test": "^1.52.0",
     "@types/babel__core": "^7.20.5",
     "@types/picomatch": "^3.0.1",
-    "typescript": "5.9.3",
+    "typescript": "catalog:",
     "vite": "catalog:"
   },
   "peerDependencies": {

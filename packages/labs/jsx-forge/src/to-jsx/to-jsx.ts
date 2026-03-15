@@ -5,9 +5,9 @@
 
 import type { TransformerPluginConfig, Ts } from '../types.js';
 
-interface TransformerOptions {
-	framework: 'preact' | 'react' | 'vue';
-}
+// interface TransformerOptions {
+// 	framework: 'preact' | 'react' | 'vue';
+// }
 
 export function createMetaJsxTransformer(
 	ts: typeof Ts,
@@ -15,7 +15,7 @@ export function createMetaJsxTransformer(
 	pluginConfig: TransformerPluginConfig,
 	// opts: TransformerOptions,
 ): Ts.TransformerFactory<Ts.SourceFile> {
-	const typeChecker = program.getTypeChecker();
+	// const typeChecker = program.getTypeChecker();
 	const { framework = 'react' } = pluginConfig;
 
 	const factory = ts.factory;

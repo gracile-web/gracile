@@ -36,7 +36,8 @@ export async function connectOgImagesGenerator(options) {
 
 		const pageUrl = new URL(path, base).href;
 
-		const associatedPageHtml = await (await fetch(pageUrl)).text();
+		const fetched = await fetch(pageUrl);
+		const associatedPageHtml = await fetched.text();
 
 		const meta = extractMetadataFromHtml(associatedPageHtml);
 

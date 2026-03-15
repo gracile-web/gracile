@@ -45,23 +45,26 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { babelTransform } from './babel/babel-transform.js';
-import { parseConfig, createMatchers, createError } from './utils.js';
+import { parseConfig, createMatchers } from './utils.js';
 import {
 	WC_HMR_MODULE_PREFIX,
 	WC_HMR_MODULE_RUNTIME,
 	WC_HMR_MODULE_PATCH,
 } from './constants.js';
 
-const __filename = import.meta.filename;
 const __dirname = import.meta.dirname;
 
 const wcHmrRuntime = fs.readFileSync(
 	path.resolve(__dirname, 'wc-hmr-runtime.js'),
 	'utf8',
 );
+
+/** @type {Matcher} */
+let matchInclude = () => true;
+/** @type {Matcher} */
+let matchExclude = () => false;
 
 /**
  * @param {WcHmrPluginConfig} pluginConfig
@@ -72,10 +75,6 @@ export function gracileHmr(pluginConfig) {
 
 	/** @type {string} */
 	let rootDir;
-	/** @type {Matcher} */
-	let matchInclude = () => true;
-	/** @type {Matcher} */
-	let matchExclude = () => false;
 
 	const parsedPluginConfig = parseConfig(pluginConfig);
 
@@ -87,7 +86,7 @@ export function gracileHmr(pluginConfig) {
 			shouldSkipHmr = config.command === 'build' || config.isProduction;
 			rootDir = config.root;
 		},
-		configureServer(_server) {
+		configureServer() {
 			if (parsedPluginConfig.include) {
 				matchInclude = createMatchers(rootDir, parsedPluginConfig.include);
 			}
@@ -157,6 +156,7 @@ export function gracileHmr(pluginConfig) {
 				} catch (/** @type {any} */ error) {
 					if (error.name === 'SyntaxError') {
 						// forward babel error to dev server
+						// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 						const strippedMessage = error.message.replaceAll(
 							new RegExp(`${filePath} ?:? ?`, 'g'),
 							'',

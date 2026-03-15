@@ -5,7 +5,16 @@ import test, { describe } from 'node:test';
 import { isLitServerTemplate } from '@gracile/internal-utils/assertions';
 import { html } from 'lit';
 
+import type { RouteTemplateOutlet } from './document.js';
 import * as document from './document.js';
+
+// Mirror the global augmentation from ambient.d.ts (which imports from dist/
+// and cannot be included in the build without causing TS5055).
+declare global {
+	interface HTMLElementTagNameMap {
+		'route-template-outlet': RouteTemplateOutlet;
+	}
+}
 
 describe('should exports helpers', () => {
 	test('pageAssets', () => {

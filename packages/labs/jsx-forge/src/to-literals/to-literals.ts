@@ -9,6 +9,7 @@ import { handleForEachTagDirective } from './special.js';
 export function createJsxToLiteralsTransformer(
 	ts: TsWithInternals,
 	program: Ts.Program | undefined,
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	_pluginConfig = {},
 	preset: Preset = PRESETS.Default,
 ): Ts.TransformerFactory<Ts.SourceFile> {

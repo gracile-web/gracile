@@ -82,9 +82,9 @@
     "satori-html": "^0.3.2"
   },
   "devDependencies": {
-    "@types/node": "25.3.3",
-    "@types/react": "^19.0.2",
-    "typescript": "5.9.3"
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@types/connect": "^3.4.38",

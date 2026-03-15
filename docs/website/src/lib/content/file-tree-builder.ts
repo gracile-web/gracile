@@ -1,9 +1,9 @@
 // Based on: https://github.com/pthm/node-path-list-to-tree
 
-import get from 'lodash.get';
+// import get from 'lodash.get';
 import set from 'lodash.set';
 
-import { PathsHandlers } from './paths-handlers.js';
+// import { PathsHandlers } from './paths-handlers.js';
 
 // FIXME: Not hoisting top level README
 
@@ -38,7 +38,7 @@ export interface FileNode {
 export function buildTree(mdModules: TreeNodeData[]): FileTree {
 	const tree: FileTree = {};
 
-	const directories = [];
+	// const directories = [];
 
 	for (const mdModule of mdModules) {
 		const path = mdModule.originalPath
@@ -46,15 +46,15 @@ export function buildTree(mdModules: TreeNodeData[]): FileTree {
 			.split('/');
 		set(tree, path, { metadata: mdModule, file: {} });
 
-		const enclosingDir = get(tree, [...path.slice(0, -1)]);
+		// const enclosingDir = get(tree, path.slice(0, -1));
 
-		let singleton = false;
-		if (
-			enclosingDir?.['README.md'] &&
-			Object.values(enclosingDir).length === 1
-		) {
-			singleton = true;
-		}
+		// let singleton = false;
+		// if (
+		// 	enclosingDir?.['README.md'] &&
+		// 	Object.values(enclosingDir).length === 1
+		// ) {
+		// 	singleton = true;
+		// }
 	}
 
 	return tree;

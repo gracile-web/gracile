@@ -14,7 +14,7 @@ class RouteEvent extends Event {
 }
 
 // TODO: Injectable/configurable logger.
-// eslint-disable-next-line no-console
+
 const log = console.log;
 
 /**

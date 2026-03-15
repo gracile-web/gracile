@@ -10,7 +10,7 @@ declare module 'clean-css/lib/options/optimization-level' {
 	export const OptimizationLevel: OptimizationLevel;
 
 	export interface OptimizationLevelOptions {
-		[OptimizationLevel.Zero]: {};
+		[OptimizationLevel.Zero]: object;
 		[OptimizationLevel.One]: Required<
 			Omit<Exclude<OptimizationsOptions['1'], undefined>, 'all'>
 		>;

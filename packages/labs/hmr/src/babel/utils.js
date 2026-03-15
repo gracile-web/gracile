@@ -26,6 +26,7 @@ export function parseOptions(options) {
  */
 export function resolvePath(nodePath) {
 	const pathCast = /** @type {any} */ (nodePath);
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
 	return /** @type {NodePath<unknown>} */ (pathCast.resolve());
 }
 
