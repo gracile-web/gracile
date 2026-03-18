@@ -3,7 +3,6 @@ import '../lib/router.js';
 
 import '../lib/iconify-icon.js';
 import '../lib/copy-button.js';
-// import { isServer } from 'lit';
 
 import '../lib/keep-scroll-position/keep-scroll-position.js';
 

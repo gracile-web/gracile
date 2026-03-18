@@ -8,7 +8,7 @@ import strip from '@rollup/plugin-strip';
 import { literalsHtmlCssMinifier } from '@literals/rollup-plugin-html-css-minifier';
 import { getIcons } from '@iconify/utils';
 import { loadCollection } from '@iconify/json';
-import Inspect from 'vite-plugin-inspect';
+// import Inspect from 'vite-plugin-inspect';
 
 import { SITE_URL } from './src/content/global.js';
 import { vitePluginMarkdownLit } from './lib/markdown/vite-plugin-markdown-lit.ts';

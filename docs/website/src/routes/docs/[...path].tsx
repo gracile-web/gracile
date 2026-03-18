@@ -1,4 +1,3 @@
-import { isServer } from 'lit';
 import { defineRoute } from '@gracile/server/route';
 import picomatch from 'picomatch';
 
@@ -12,7 +11,6 @@ import { NavRight } from '../../features/nav-right.jsx';
 import { document } from '../../document/document.jsx';
 import { LinksPagination } from '../../features/links-pagination.jsx';
 import { LinksIndex } from '../../features/links-index.jsx';
-import { router } from '../../lib/router.js';
 
 export default defineRoute({
 	staticPaths: async () => {
@@ -106,7 +104,6 @@ export default defineRoute({
 		}),
 
 	template: ({ url, props }) => {
-		// console.log({ markdownTree });
 		return (
 			<>
 				<NavMain
@@ -137,26 +134,3 @@ export default defineRoute({
 		);
 	},
 });
-
-// NOTE: Disabled, randomly broke and too much maintenance/bundle size cost.
-// Maybe use the embeddable iframe instead?
-async function loadAsciinema() {
-	// if (
-	//   globalThis.document.location.pathname ===
-	//   '/docs/learn/getting-started/installation/'
-	// ) {
-	//   await import('../../lib/asciinema-player/asciinema-player.js');
-	//   await import('../../components/asciinema-player-header.js');
-	// }
-}
-
-if (!isServer) {
-	requestIdleCallback(() => {
-		void import('../../lib/toc-links-follower.js');
-		// @ts-expect-error no typings
-		void import('caniuse-embed-element/dist/caniuse-embed-element.js');
-	});
-
-	await loadAsciinema();
-	router.addEventListener('route-rendered', loadAsciinema);
-}

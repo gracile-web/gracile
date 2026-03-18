@@ -4,7 +4,6 @@ import { customElement, property } from 'lit/decorators.js';
 // eslint-disable-next-line import-x/no-unresolved
 import { iconSet } from 'iconify:loader';
 
-// import { isServer } from 'lit';
 // import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 // import {getIcons} from '@iconify/utils';
@@ -55,11 +54,5 @@ export class IconifyIcon extends LitElement {
 				unsafe:svg={icon}
 			/>
 		);
-	}
-}
-
-declare global {
-	interface HTMLElementTagNameMap {
-		'i-c': IconifyIcon & { o: string; s?: string };
 	}
 }
