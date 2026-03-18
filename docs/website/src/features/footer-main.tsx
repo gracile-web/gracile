@@ -3,6 +3,7 @@ import {
 	DOCS_REPO_URL,
 	ISSUES_URL,
 	PKG_LICENSE,
+	PKG_VERSION,
 	PLAYGROUND_URL,
 	REPO_URL,
 	SITE_TITLE,
@@ -69,6 +70,23 @@ export const FooterMain = (options: { url: URL; filename?: string }) => (
 				Discord
 			</a>
 			<div class="sep">—</div>
+			{import.meta.env.VITE_DOCS_IS_NEXT === 'true' ? (
+				<>
+					<small>
+						Next docs v{PKG_VERSION} •
+						<a href="https://gracile.js.org/">Go to Main</a>
+					</small>
+				</>
+			) : (
+				<>
+					<small>
+						Main docs v{PKG_VERSION} •
+						<a href="https://next--gracile.js.org/">Go to Next</a>
+					</small>
+				</>
+			)}
+			<div class="sep">—</div>
+			{/*  */}
 			<small class="copyright">
 				© {new Date().getFullYear()} • License {PKG_LICENSE}
 			</small>

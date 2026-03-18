@@ -16,4 +16,5 @@ export const SITE_DESCRIPTION = `A thin, full-stack, web framework`;
 export const PLAYGROUND_URL = '/playground/';
 
 export const PKG_LICENSE = packageJson.license;
+export const PKG_VERSION = packageJson.version;
 export const PROJECT_AUTHORS = packageJson.author.name;
