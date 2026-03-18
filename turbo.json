@@ -39,7 +39,7 @@
     }
 
     // // Base docs:generate task — each package that defines the script runs it.
-    // // Root workspace runs `typedoc`; @gracile/doc runs the collect scripts.
+    // // Root workspace runs `typedoc`; @gracile/docs runs the collect scripts.
     // "docs:generate": {
     //   "dependsOn": ["^build"],
     //   "outputs": [
@@ -55,15 +55,15 @@
     //   "outputs": ["docs/typedocs/**"]
     // },
 
-    // // @gracile/doc's collect scripts must run after the root typedoc step.
-    // "@gracile/doc#docs:generate": {
+    // // @gracile/docs's collect scripts must run after the root typedoc step.
+    // "@gracile/docs#docs:generate": {
     //   "dependsOn": ["//#docs:generate"],
     //   "outputs": ["src/content/docs/25-references/01-api/**"]
     // },
 
     // // Doc site build depends on freshly generated content.
-    // "@gracile/doc#build": {
-    //   "dependsOn": ["@gracile/doc#docs:generate", "^build"],
+    // "@gracile/docs#build": {
+    //   "dependsOn": ["@gracile/docs#docs:generate", "^build"],
     //   "cache": false,
     //   "outputs": ["dist/**"]
     // }

@@ -16,6 +16,7 @@ packages:
   - ./packages/engine/__fixtures__/static-site
   - ./packages/engine/__fixtures__/server-express
   - ./packages/engine/__fixtures__/ce-tracker
+  - ./packages/labs/client-router/__fixtures__/client-routing-basic
   - ./packages/labs/hmr/__fixtures__/hmr-basic-lit
   - ./packages/labs/islands/__fixtures__/static-site-islands
   - ./packages/labs/client-router

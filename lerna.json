@@ -16,7 +16,6 @@
   "packages": [
     "./packages/gracile",
 
-    // "./packages/cli",
     "./packages/client",
     "./packages/server",
     "./packages/engine",
@@ -37,9 +36,11 @@
     "./packages/labs/hmr",
     "./packages/labs/babel-plugin-jsx-to-literals",
     "./packages/labs/functional",
-    "./packages/labs/vite-plugin-babel-jsx-to-literals"
-    // "./packages/labs/islands"
-    // "./packages/labs/jsx-forge"
-    // "./packages/labs/vite-plugin-jsx-forge"
+    "./packages/labs/vite-plugin-babel-jsx-to-literals",
+    "./packages/labs/islands",
+    "./packages/labs/jsx-forge",
+    "./packages/labs/vite-plugin-jsx-forge",
+
+    "./docs/website"
   ]
 }
