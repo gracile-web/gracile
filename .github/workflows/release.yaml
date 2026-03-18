@@ -166,12 +166,19 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ hashFiles('packages/labs/hmr/package.json') }}
+          key:
+            playwright-${{ hashFiles('packages/labs/hmr/package.json',
+            'packages/labs/client-router/package.json') }}
 
-      - name: Install Playwright browsers
+      - name: Install Playwright browsers (hmr)
         shell: bash
         run: npx playwright install --with-deps chromium
         working-directory: packages/labs/hmr
+
+      - name: Install Playwright browsers (client-router)
+        shell: bash
+        run: npx playwright install --with-deps chromium
+        working-directory: packages/labs/client-router
 
       - name: Tests — Integration
         shell: bash

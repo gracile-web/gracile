@@ -1,0 +1,12 @@
+{
+  "name": "@gracile/fixture-client-routing-basic",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@gracile-labs/client-router": "workspace:^",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  }
+}

@@ -40,7 +40,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test:integration": "playwright test"
   },
   "dependencies": {
     "@gracile/client": "workspace:^",
@@ -51,9 +52,12 @@
     "urlpattern-polyfill": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
+    "@playwright/test": "catalog:",
     "tsx": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "catalog:"

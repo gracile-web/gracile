@@ -4,8 +4,8 @@ Quickly add a description, title, open graph, etc. in your page's document
 head.  
 This add-on will take care of the nitty-gritty.
 
-> [!CAUTION] Experimental. This is not well tested, nor it is customizable
-> enough.
+> [!CAUTION]  
+> Experimental. This is not well tested, nor it is customizable enough.
 
 ## Installation
 
