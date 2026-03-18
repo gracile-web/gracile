@@ -13,3 +13,4 @@ integration/**/gibberish.ts
 __fixtures__
 docs/website/public/pagefind
 packages/labs/og-images-generator/types
+docs/website/src/content/docs/*-references

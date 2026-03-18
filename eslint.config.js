@@ -223,7 +223,7 @@ const config = [
 	{
 		files: [
 			'packages/internal/test-utils/**',
-			'packages/labs/hmr/playwright.config.ts',
+			'packages/labs/*/playwright.config.ts',
 			'packages/labs/jsx-forge/jsx-bootstrap.ts',
 			'packages/labs/css-helpers/ambient.d.ts',
 		],

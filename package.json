@@ -119,6 +119,7 @@
       "@types/node": "25.3.3",
       "immutable": ">=4.3.8",
       "serialize-javascript": ">=7.0.3",
+      "h3": ">=1.15.6",
       "tar": ">=7.5.11",
       "flatted": ">=3.4.0",
       "object-keys": "npm:@nolyfill/object-keys@^1",
