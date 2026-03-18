@@ -4,11 +4,13 @@ Quickly add a description, title, open graph, etc. in your page's document
 head.  
 This add-on will take care of the nitty-gritty.
 
-> [!WARNING] This section is under construction.
+> [!WARNING]  
+> This section is under construction.
 
 ## Installation
 
-> [!TIP] You can use this extension with any Vite+Lit SSR setup!  
+> [!TIP]  
+> You can use this extension with any Vite+Lit SSR setup!  
 > It's totally decoupled from the framework.
 
 ```sh

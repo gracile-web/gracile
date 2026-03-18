@@ -1,4 +1,4 @@
-# @gracile-labs/functional
+# Functional component hooks
 
 Lightweight hooks and context primitives for signal-based render trees.  
 Works anywhere a render function can be scoped, with Lit or similar templating
@@ -205,7 +205,7 @@ const result = withFunctional(host, () => {
 ## 📦 Install
 
 ```bash
-pnpm add @gracile-labs/functional
+pnpm i @gracile-labs/functional
 ```
 
 ---
@@ -230,13 +230,3 @@ It looks like React but behave closer to Solid in places.
 
 - [TC39 Signals](https://github.com/tc39/proposal-signals)
 - [@lit-labs/signals](https://github.com/lit/lit/tree/main/packages/labs/signals)
-
-## 👀 Other Projects
-
-- [Web Elements Analyzer](https://github.com/JulianCataldo/web-elements-analyzer)
-  — A cross-framework template analyzer, for deep insights on standard HTML, SVG
-  and Custom Elements.
-- [Gracile](https://github.com/gracile-web/gracile) — A thin, full-stack, web
-  framework, with standards in mind.
-- [JSON Schema Form Element](https://github.com/json-schema-form-element/jsfe) —
-  A Custom Element that auto-generates forms, declaratively.

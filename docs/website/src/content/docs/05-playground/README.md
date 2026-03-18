@@ -40,8 +40,9 @@ relationships, and API features… that will get you on board with Gracile.
 - **Live preview** for the webserver
 - **Terminal output** for the webserver (Xterm)
 
-> [!WARNING] It does not work with **Safari** yet, due to a **Web Container**
-> runtime issue.
+> [!WARNING]  
+> It does not work with **Safari** yet, due to a **Web Container** runtime
+> issue.
 
 ## Why?
 

@@ -53,6 +53,12 @@ export const featureList = [
 		href: '/docs/learn/usage/defining-base-document/#doc_example',
 		tags: [],
 	},
+	{
+		title: 'JSX Templates',
+		desc: 'Transform templates to optimized HTML literals; benefit from handy helpers.',
+		href: '/docs/add-ons/jsx-forge/',
+		tags: [],
+	},
 	// TODO:
 	// {
 	//   title: 'JSX Templates',

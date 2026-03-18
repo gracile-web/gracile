@@ -4,7 +4,8 @@ Import markdown files directly in HTML templates with your custom processing
 pipeline or presets.  
 Extracts the table of contents, frontmatter, excerpt and title.
 
-> [!WARNING] This API is subject to changes
+> [!WARNING]  
+> This API is subject to changes
 
 ## Installation
 

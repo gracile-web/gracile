@@ -1,4 +1,4 @@
-# @gracile-labs/hmr
+# <span class=git-only>Gracile — </span>Hot Module Replacement
 
 Web Components HMR (Hot Module Replacement) Vite plugin, to be used with
 [Gracile](https://gracile.js.org) or any Vite project that use Custom Elements.

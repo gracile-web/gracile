@@ -39,6 +39,38 @@ export const README_MAP: { src: string; dest: string }[] = [
 		dest: 'src/content/docs/15-add-ons/35-islands/README.md',
 	},
 	{
+		src: 'packages/labs/og-images-generator',
+		dest: 'src/content/docs/15-add-ons/40-og-images-generator/README.md',
+	},
+	{
+		src: 'packages/labs/babel-plugin-jsx-to-literals',
+		dest: 'src/content/docs/15-add-ons/45-babel-plugin-jsx-to-literals/README.md',
+	},
+	{
+		src: 'packages/labs/vite-plugin-babel-jsx-to-literals',
+		dest: 'src/content/docs/15-add-ons/50-vite-plugin-babel-jsx-to-literals/README.md',
+	},
+	{
+		src: 'packages/labs/jsx-forge',
+		dest: 'src/content/docs/15-add-ons/55-jsx-forge/README.md',
+	},
+	{
+		src: 'packages/labs/vite-plugin-jsx-forge',
+		dest: 'src/content/docs/15-add-ons/60-vite-plugin-jsx-forge/README.md',
+	},
+	{
+		src: 'packages/labs/hmr',
+		dest: 'src/content/docs/15-add-ons/65-hmr/README.md',
+	},
+	{
+		src: 'packages/labs/functional',
+		dest: 'src/content/docs/15-add-ons/70-functional/README.md',
+	},
+	// {
+	// 	src: 'packages/labs/literals/html-css-minifier',
+	// 	dest: 'src/content/docs/15-add-ons/75-literals-html-css-minifier/README.md',
+	// },
+	{
 		src: 'starter-projects',
 		dest: 'src/content/docs/04-starter-projects/README.md',
 	},

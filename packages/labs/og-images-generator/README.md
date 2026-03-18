@@ -1,5 +1,7 @@
 # Open Graph Images Generator <!-- omit in toc -->
 
+<div class="git-only">
+
 [![NPM](https://img.shields.io/npm/v/og-images-generator)](https://www.npmjs.com/package/og-images-generator)
 ![Downloads](https://img.shields.io/npm/dt/og-images-generator)
 [![ISC License](https://img.shields.io/npm/l/og-images-generator)](./LICENSE)
@@ -8,6 +10,8 @@
 \
 [![TypeScript](https://img.shields.io/badge/TypeScript-333333?logo=typescript)](http://www.typescriptlang.org/) [![Prettier](https://img.shields.io/badge/Prettier-333333?logo=prettier)](https://prettier.io)
 [![EditorConfig](https://img.shields.io/badge/EditorConfig-333333?logo=editorconfig)](https://editorconfig.org)
+
+</div>
 
 Generate social sharing thumbnails for your websites, with plain **HTML** +
 **CSS** templates. \
@@ -30,7 +34,7 @@ You can use gradients, borders, flexboxes, inline SVGs, and
 
 ---
 
-<div > 
+<div class="git-only"> 
 <div align="center">Table of Contents</div>
 
 - [Installation](#installation)
@@ -46,9 +50,9 @@ You can use gradients, borders, flexboxes, inline SVGs, and
 - [Notes on image optimization](#notes-on-image-optimization)
 - [References](#references)
 
-</div>
-
 ---
+
+</div>
 
 **Additional resources**
 
@@ -421,9 +425,9 @@ users efficiently.
   while Satori isn't decoding them afterward. You could use Lit's `unsafeHTML`
   but you'll encounter a bug
   ([mixed dev/prod](https://github.com/lit/lit/pull/4515)).  
-  In the meanwhile, `og-images-generator` will decode the full resulting
-  template with the `entities` library, which could have some side effects (file
-  an issue if that's the case).
+  In the meantime, `og-images-generator` will decode the full resulting template
+  with the `entities` library, which could have some side effects (file an issue
+  if that's the case).
 
 ---
 

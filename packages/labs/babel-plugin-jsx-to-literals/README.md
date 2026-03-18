@@ -1,11 +1,13 @@
-# JSX to HTML literals as a Babel transformer<!-- omit in toc -->
+# JSX to HTML literals (Babel transformer)<!-- omit in toc -->
 
-A <code>\<JSX\></code> to <code>html\`\<...\>\`</code> Babel plugin.
+A JSX to `html` template literals Babel plugin.
 
 `@gracile-labs/babel-plugin-jsx-to-literals` is a well-tested, low level library
 than you can borrow for your custom build pipeline.
 
 ![](https://ik.imagekit.io/juliancataldo/gracile/jsx2literals/screenshot-1.png?updatedAt=1762961307030)
+
+<div class="git-only">
 
 ---
 
@@ -32,6 +34,8 @@ than you can borrow for your custom build pipeline.
 - [🧭 Looking Toward Web Platform Standardization](#-looking-toward-web-platform-standardization)
 
 ---
+
+</div>
 
 ## 🧪 Specs — JSX → HTML tagged template compiler
 
@@ -622,6 +626,10 @@ it, with plenty of tests and docs.
 As I'm working on its successor, feel free to fork it if you want to make it
 more tailored to your needs.
 
+<div class="git-only">
+
 ---
 
 © 2024 — Julian Cataldo (contact@juliancataldo.com) — License ISC
+
+</div>

@@ -1,7 +1,6 @@
-# JSX Forge<!-- omit in toc -->
+# JSX Forge (TS transformer)<!-- omit in toc -->
 
-A <code>\<JSX\></code> → <code>html\`\<...\>\`</code> TypeScript compiler
-transformer.
+A JSX to `html` template literals TypeScript compiler transformer.
 
 > **Status**: Experimental — successor to
 > [`@gracile-labs/babel-plugin-jsx-to-literals`](https://github.com/user/babel-plugin-jsx-to-literals).  
@@ -9,6 +8,8 @@ transformer.
 > as a native TS compiler plugin (via
 > [ts-patch](https://github.com/nonara/ts-patch)), replacing the previous
 > Babel-based approach.
+
+<div class="git-only">
 
 ---
 
@@ -50,10 +51,13 @@ transformer.
 
 ---
 
+</div>
+
 ## Specs — JSX → HTML tagged template compiler
 
-> [!NOTE] This is **not** a JSX runtime. It compiles JSX statically to
-> <code>html\`...\`</code> tagged templates at build time.  
+> [!NOTE]  
+> This is **not** a JSX runtime. It compiles JSX statically to `html` tagged
+> templates at build time.  
 > Think Solid-style compilation, but targeting **Lit**, **µhtml**, or any
 > compatible tagged template runtime.
 
@@ -520,8 +524,12 @@ import { html } from 'lit';
 const el = html`<main>${html`<span>Inner</span>`}</main>`;
 ```
 
+<div class="git-only">
+
 ---
 
 ## License
 
 ISC — Julian Cataldo
+
+</div>

@@ -1,11 +1,11 @@
-# Islands (React, Solid, Svelte, Preact, Vue)
+# <span class=git-only>Gracile — </span>(P)React, Solid, Svelte, Vue Islands
 
 Gracile Islands let you server-render **and** hydrate components from any UI
 framework — React, Vue, Svelte, Solid, Preact — inside your Lit SSR pages using
 the `<is-land>` custom element.
 
-> [!CAUTION] Experimental. This add-on is under active development and its API
-> may change.
+> [!CAUTION]  
+> Experimental. This add-on is under active development and its API may change.
 
 ## Concept
 
