@@ -47,8 +47,7 @@ export function gracileServePlugin({
 		},
 
 		async configureServer(server) {
-			// HACK: We know we are in dev here, this will prevent incorrect
-			// vite.config hot reloading. Will be removed when adopting env. API.
+			// Reset so dev-mode config hot-reloads don't hit the guard.
 			resetClientBuiltFlag();
 
 			const version = getVersion();

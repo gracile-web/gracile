@@ -29,6 +29,8 @@ export function gracileClientBuildPlugin({
 		apply: 'build',
 
 		async config(viteConfig) {
+			state.root = viteConfig.root || null;
+
 			const viteServerForClientHtmlBuild = await createServer({
 				root: viteConfig.root || process.cwd(),
 

@@ -42,6 +42,7 @@ export async function loadForeignRouteObject({
 
 	if (vite) {
 		try {
+			// TODO: Migrate to https://vite.dev/guide/api-environment-runtimes#modulerunner
 			unknownRouteModule = await vite.ssrLoadModule(route.filePath, {});
 		} catch (error) {
 			const error_ = error;

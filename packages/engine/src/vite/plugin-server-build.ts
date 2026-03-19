@@ -1,14 +1,13 @@
 /**
  * Vite plugins: server-side build pipeline.
  *
- * After the client build completes, these plugins run a nested
- * `vite build` in SSR mode to produce the server entrypoint.
+ * Uses the Vite Environment API (`builder.buildApp()`) to coordinate
+ * client and SSR builds instead of a nested `build()` call.
  *
  * Includes:
- * - Client asset filename collector (from the client writeBundle)
- * - Server build trigger (closeBundle)
- * - Virtual entrypoint codegen
- * - Server-to-client asset mover
+ * - Client asset filename collector (client env writeBundle)
+ * - Virtual entrypoint codegen (SSR env only)
+ * - Server-to-client asset mover (SSR env only)
  *
  * @internal
  */
@@ -16,9 +15,8 @@
 import { join } from 'node:path';
 import { rename, rm } from 'node:fs/promises';
 
-import { build, type PluginOption } from 'vite';
+import type { PluginOption } from 'vite';
 
-import { virtualRoutes } from './virtual-routes.js';
 import type { PluginSharedState } from './plugin-shared-state.js';
 
 // ── Client asset collector ───────────────────────────────────────────
@@ -35,6 +33,10 @@ export function gracileCollectClientAssetsPlugin({
 	return {
 		name: 'vite-plugin-gracile-collect-client-assets-for-server',
 
+		applyToEnvironment(environment) {
+			return environment.name !== 'ssr';
+		},
+
 		writeBundle(_, bundle) {
 			if (state.outputMode === 'static') return;
 
@@ -45,100 +47,27 @@ export function gracileCollectClientAssetsPlugin({
 	};
 }
 
-// ── Server build trigger ─────────────────────────────────────────────
-
-/**
- * After the client build finishes (`closeBundle`), run a nested SSR
- * build that produces the server entrypoint and moves assets back into
- * the client output directory.
- */
-export function gracileServerBuildPlugin({
-	state,
-	virtualRoutesForClient,
-}: {
-	state: PluginSharedState;
-	virtualRoutesForClient: PluginOption;
-}): PluginOption {
-	return {
-		name: 'vite-plugin-gracile-server-build',
-		apply: 'build',
-
-		config(viteConfig) {
-			state.root = viteConfig.root || null;
-		},
-
-		async closeBundle() {
-			if (
-				state.outputMode === 'static' ||
-				!state.routes ||
-				!state.renderedRoutes
-			)
-				return;
-
-			const root = state.root || process.cwd();
-
-			await build({
-				root,
-
-				ssr: { external: ['@gracile/gracile'] },
-
-				build: {
-					target: 'esnext',
-
-					ssr: true,
-
-					copyPublicDir: false,
-					outDir: 'dist/server',
-					ssrEmitAssets: true,
-					cssMinify: true,
-					cssCodeSplit: true,
-
-					rollupOptions: {
-						input: 'entrypoint.js',
-
-						output: {
-							entryFileNames: '[name].js',
-							assetFileNames: (chunkInfo) => {
-								if (chunkInfo.name) {
-									const fileName = state.clientAssets[chunkInfo.name];
-									if (fileName) return fileName;
-									// NOTE: When not imported at all from client
-									return `assets/${chunkInfo.name.replace(/\.(.*)$/, '')}-[hash].[ext]`;
-								}
-
-								return 'assets/[name]-[hash].[ext]';
-							},
-							chunkFileNames: 'chunk/[name].js',
-						},
-					},
-				},
-
-				plugins: [
-					virtualRoutesForClient,
-
-					virtualRoutes({
-						routes: state.routes,
-						renderedRoutes: state.renderedRoutes,
-					}),
-
-					gracileEntrypointPlugin(state),
-					gracileMoveServerAssetsPlugin(state),
-				],
-			});
-		},
-	};
-}
-
 // ── Virtual entrypoint ───────────────────────────────────────────────
 
 /**
  * Generates the virtual `entrypoint.js` module for the server build.
  * This is the server's main entry: it imports routes and creates the
  * Gracile handler.
+ *
+ * Scoped to the SSR environment via `applyToEnvironment`.
  */
-function gracileEntrypointPlugin(state: PluginSharedState): PluginOption {
+export function gracileEntrypointPlugin({
+	state,
+}: {
+	state: PluginSharedState;
+}): PluginOption {
 	return {
 		name: 'vite-plugin-gracile-entry',
+		apply: 'build',
+
+		applyToEnvironment(environment) {
+			return environment.name === 'ssr';
+		},
 
 		resolveId(id) {
 			if (id === 'entrypoint.js') {
@@ -177,10 +106,22 @@ export const handler = createGracileHandler({
  * After the server build writes its bundle, move any assets from
  * `dist/server/assets/` into `dist/client/assets/` so the client
  * can serve them.
+ *
+ * Scoped to the SSR environment via `applyToEnvironment`.
  */
-function gracileMoveServerAssetsPlugin(state: PluginSharedState): PluginOption {
+export function gracileMoveServerAssetsPlugin({
+	state,
+}: {
+	state: PluginSharedState;
+}): PluginOption {
 	return {
 		name: 'gracile-move-server-assets',
+		apply: 'build',
+
+		applyToEnvironment(environment) {
+			return environment.name === 'ssr';
+		},
+
 		async writeBundle(_, bundle) {
 			const cwd = state.root || process.cwd();
 
