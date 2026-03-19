@@ -98,6 +98,14 @@ export const defaultMinifyOptions: HTMLOptions = {
  * The default strategy. This uses <code>html-minifier</code> to minify HTML and
  * <code>clean-css</code> to minify CSS.
  */
+/**
+ * Derives a valid custom element tag placeholder from the main placeholder.
+ * Used when a template expression appears in tag-name position (e.g. `<${tag}>`).
+ */
+function getTagPlaceholder(_placeholder: string): string {
+	return 'template-expression-tag';
+}
+
 export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 	getPlaceholder(parts) {
 		// Using @ and (); will cause the expression not to be removed in CSS.
@@ -106,14 +114,35 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 		// accounts for the missing semicolon.
 		const suffix = '();';
 		let placeholder = '@TEMPLATE_EXPRESSION';
-		while (parts.some((part) => part.text.includes(placeholder + suffix))) {
+		while (
+			parts.some(
+				(part) =>
+					part.text.includes(placeholder + suffix) ||
+					part.text.includes(getTagPlaceholder(placeholder + suffix)),
+			)
+		) {
 			placeholder += '_';
 		}
 
 		return placeholder + suffix;
 	},
 	combineHTMLStrings(parts, placeholder) {
-		return parts.map((part) => part.text).join(placeholder);
+		const tagPlaceholder = getTagPlaceholder(placeholder);
+		let result = '';
+		for (let i = 0; i < parts.length; i++) {
+			result += parts[i].text;
+			if (i < parts.length - 1) {
+				// Check if this part's text ends with `<` or `</`, meaning the
+				// next expression is a tag name. Use a valid custom element name
+				// so html-minifier-terser can parse it.
+				const trimmed = result.trimEnd();
+				result +=
+					trimmed.endsWith('<') || trimmed.endsWith('</')
+						? tagPlaceholder
+						: placeholder;
+			}
+		}
+		return result;
 	},
 
 	async minifyHTML(html, options = {}) {
@@ -146,8 +175,6 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 				return `${arguments_[0].replace(arguments_[3], stripped)}`;
 			},
 		);
-
-		console.log({ result });
 
 		result = await minify(result, {
 			...options,
@@ -201,6 +228,7 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 	},
 
 	splitHTMLByPlaceholder(html, placeholder) {
+		const tagPlaceholder = getTagPlaceholder(placeholder);
 		const parts = html.split(placeholder);
 		// Make the last character (a semicolon) optional. See above.
 		if (placeholder.endsWith(';')) {
@@ -211,6 +239,11 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 			for (let index = parts.length - 1; index >= 0; index--) {
 				parts.splice(index, 1, ...parts[index].split(withoutSemicolon));
 			}
+		}
+
+		// Also split by the tag-name placeholder used for dynamic tag names.
+		for (let index = parts.length - 1; index >= 0; index--) {
+			parts.splice(index, 1, ...parts[index].split(tagPlaceholder));
 		}
 
 		return parts;

@@ -476,8 +476,8 @@ importers:
         specifier: ^0.1.1
         version: 0.1.1
       '@literals/rollup-plugin-html-css-minifier':
-        specifier: ^3.0.1
-        version: 3.0.1(rollup@4.59.0)
+        specifier: workspace:^
+        version: link:../../packages/labs/literals/rollup-plugin-html-css-minifier
       '@playwright/test':
         specifier: 'catalog:'
         version: 1.58.2
@@ -1142,11 +1142,11 @@ importers:
         specifier: workspace:^
         version: link:../../internal/tsconfigs
       '@literals/html-css-minifier':
-        specifier: ^3.0.1
-        version: 3.0.1
+        specifier: workspace:^
+        version: link:../literals/html-css-minifier
       '@literals/rollup-plugin-html-css-minifier':
-        specifier: ^3.0.1
-        version: 3.0.1(rollup@4.59.0)
+        specifier: workspace:^
+        version: link:../literals/rollup-plugin-html-css-minifier
       '@rollup/plugin-terser':
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.59.0)
@@ -3060,17 +3060,6 @@ packages:
 
   '@lit/reactive-element@2.1.2':
     resolution: {integrity: sha512-pbCDiVMnne1lYUIaYNN5wrwQXDtHaYtg7YEFPeW+hws6U47WeFvISGUWekPGKWOP1ygrs0ef0o1VJMk1exos5A==}
-
-  '@literals/html-css-minifier@3.0.1':
-    resolution: {integrity: sha512-ARf9OB+v+uFt5iHWkVlL0i8TOSTuHE5WcRSZESdT8EmsgHQhc2VR0dEsH+SIBFqq6HKKITKVqkD/IUKZa5MzzQ==}
-
-  '@literals/parser@2.0.1':
-    resolution: {integrity: sha512-LVMRLc0TFAi8sSlIkEWG/Id940aaGgjtb2wonZBxcFm+mSOfa69enfAklNzpqaWr4CiVe+kNQr1BX3S79kvpnA==}
-
-  '@literals/rollup-plugin-html-css-minifier@3.0.1':
-    resolution: {integrity: sha512-KVFnxsZ03hTR6jfs+3rf3b6ovHZxL3QPUXVnaXWYNlk609xbMXrDMeIHzRapm6+qKj3o24YBnayqjbmEPS9atg==}
-    peerDependencies:
-      rollup: '^0.65.2 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0 '
 
   '@lukeed/ms@2.0.2':
     resolution: {integrity: sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA==}
@@ -12961,25 +12950,6 @@ snapshots:
   '@lit/reactive-element@2.1.2':
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.5.1
-
-  '@literals/html-css-minifier@3.0.1':
-    dependencies:
-      '@literals/parser': 2.0.1
-      '@types/html-minifier-terser': 7.0.2
-      clean-css: 4.2.1
-      html-minifier-terser: 7.2.0
-      magic-string: 0.25.0
-
-  '@literals/parser@2.0.1':
-    dependencies:
-      typescript: 5.9.3
-
-  '@literals/rollup-plugin-html-css-minifier@3.0.1(rollup@4.59.0)':
-    dependencies:
-      '@literals/html-css-minifier': 3.0.1
-      '@rollup/pluginutils': 5.3.0(rollup@4.59.0)
-      rollup: 4.59.0
-      rollup-pluginutils: 2.8.2
 
   '@lukeed/ms@2.0.2': {}
 

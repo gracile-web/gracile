@@ -32,7 +32,7 @@
     "// deploy": "pnpm -r netlify deploy -d dist",
     "// build": "turbo build --concurrency 20",
     "// clean": "turbo clean --concurrency 20",
-    "dev": "tsx --watch src/tasks/tasks.ts",
+    "dev:tasks": "tsx --watch src/tasks/tasks.ts",
     "preinstall": "npx only-allow pnpm",
     "// list-pkg": "pnpm m ls --json --depth=-1 | node -e \"const path = require('path'); console.log(JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf-8')).map((m) => path.relative(__dirname, m.path)).filter(Boolean))\" # From https://github.com/pnpm/pnpm/issues/1519",
     "// prepare": "husky",

@@ -121,7 +121,7 @@
   },
   "devDependencies": {
     "@importable/yaml": "^0.1.1",
-    "@literals/rollup-plugin-html-css-minifier": "^3.0.1",
+    "@literals/rollup-plugin-html-css-minifier": "workspace:^",
     "@playwright/test": "catalog:",
     "@rollup/plugin-strip": "^3.0.4",
     "@types/emoji-strip": "^1.0.2",

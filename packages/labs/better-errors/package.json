@@ -54,8 +54,8 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@literals/html-css-minifier": "^3.0.1",
-    "@literals/rollup-plugin-html-css-minifier": "^3.0.1",
+    "@literals/html-css-minifier": "workspace:^",
+    "@literals/rollup-plugin-html-css-minifier": "workspace:^",
     "@rollup/plugin-terser": "^0.4.4",
     "terser": "^5.46.0",
     "typescript": "catalog:"

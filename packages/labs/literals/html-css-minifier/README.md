@@ -174,3 +174,17 @@ await minifyHTMLLiterals(source, {
   },
 });
 ```
+
+## Dynamic Tag Names
+
+Libraries like [Shoelace](https://shoelace.style/) /
+[Web Awesome](https://webawesome.com/) can _sometimes_ use dynamic tag names in
+their templates (e.g. `` html`<${tag} class="foo"></${tag}>` ``). This is a
+well-known source of parse errors with HTML minifiers, since the placeholder
+value (like `@TEMPLATE_EXPRESSION();`) is not a valid HTML tag name.
+
+This library automatically detects when a template expression appears in
+tag-name position — right after `<` or `</` — and substitutes a valid custom
+element placeholder (`template-expression-tag`) so that `html-minifier-terser`
+can parse the markup without errors. The placeholder is then restored when
+splitting the minified result back into template parts.

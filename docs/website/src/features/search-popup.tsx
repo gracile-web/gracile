@@ -6,7 +6,8 @@ import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 
 await import(
 	/* @vite-ignore */
-	new URL('../../pagefind/pagefind-ui.js', import.meta.url).href
+	new URL(/* @vite-ignore */ '../../pagefind/pagefind-ui.js', import.meta.url)
+		.href
 );
 
 // FIXME: focus trap for searchbox (pagefind svelte's component issue ?)

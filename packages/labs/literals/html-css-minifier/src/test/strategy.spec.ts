@@ -100,6 +100,26 @@ describe('strategy', () => {
 					expected,
 				);
 			});
+
+			it('should use a valid tag placeholder for dynamic tag names', () => {
+				const dynamicTagParts: TemplatePart[] = [
+					{ text: '<', start: 0, end: 1 },
+					{ text: ' class="foo">', start: 1, end: 14 },
+					{ text: '</', start: 14, end: 16 },
+					{ text: '>', start: 16, end: 17 },
+				];
+
+				const placeholder = '@TEMPLATE_EXPRESSION();';
+				const result = defaultStrategy.combineHTMLStrings(
+					dynamicTagParts,
+					placeholder,
+				);
+				// Tag positions should use a valid custom element name, not the @ placeholder
+				expect(result).to.include('<template-expression-tag');
+				expect(result).to.include('</template-expression-tag>');
+				// Attribute positions should still use the regular placeholder
+				expect(result).to.include(placeholder);
+			});
 		});
 
 		describe('minifyHTML()', () => {
@@ -133,6 +153,51 @@ describe('strategy', () => {
 				expect(
 					defaultStrategy.splitHTMLByPlaceholder(html, 'EXP;'),
 				).to.deep.equal(expected);
+			});
+
+			it('should split by tag placeholder for dynamic tag names', () => {
+				const html =
+					'<template-expression-tag class="foo">content</template-expression-tag>';
+				const expected = ['<', ' class="foo">content</', '>'];
+				expect(
+					defaultStrategy.splitHTMLByPlaceholder(
+						html,
+						'@TEMPLATE_EXPRESSION();',
+					),
+				).to.deep.equal(expected);
+			});
+		});
+
+		describe('dynamic tag names (end-to-end)', () => {
+			it('should minify HTML with dynamic tag names without parse errors', async () => {
+				// Simulates: html`<${tag} part="base" class=${cls}></${tag}>`
+				const dynamicTagParts: TemplatePart[] = [
+					{ text: '<', start: 0, end: 1 },
+					{ text: '\n        part="base"\n        class=', start: 1, end: 36 },
+					{ text: '>\n      </', start: 36, end: 46 },
+					{ text: '>', start: 46, end: 47 },
+				];
+
+				const placeholder = defaultStrategy.getPlaceholder(dynamicTagParts);
+				const combined = defaultStrategy.combineHTMLStrings(
+					dynamicTagParts,
+					placeholder,
+				);
+
+				// Should not throw a parse error
+				const minified = await defaultStrategy.minifyHTML(
+					combined,
+					defaultMinifyOptions,
+				);
+				const splitParts = defaultStrategy.splitHTMLByPlaceholder(
+					minified,
+					placeholder,
+				);
+
+				// 4 parts = 3 expressions + surrounding text
+				expect(splitParts).to.have.lengthOf(4);
+				expect(splitParts[0]).to.equal('<');
+				expect(splitParts.at(-1)).to.equal('>');
 			});
 		});
 	});
