@@ -1,15 +1,15 @@
 /* stylelint-disable scss/double-slash-comment-empty-line-before */
 /* stylelint-disable at-rule-empty-line-before */
 
-@import '../features/nav-right';
-@import '../features/nav-main';
-@import '../features/menu-toggle';
+@use '../features/nav-right';
+@use '../features/nav-main';
+@use '../features/menu-toggle';
 
-@import '../styles/misc';
+@use '../styles/misc';
 
-@import '../features/footer-main';
-@import './typography/index';
-@import './layouts';
+@use '../features/footer-main';
+@use 'typography/index';
+@use 'layouts';
 
-@import '@shoelace-style/shoelace/dist/themes/light.css';
-@import '@shoelace-style/shoelace/dist/themes/dark.css';
+@use '@shoelace-style/shoelace/dist/themes/light.css';
+@use '@shoelace-style/shoelace/dist/themes/dark.css';

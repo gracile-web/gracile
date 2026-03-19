@@ -2,9 +2,9 @@
 @use '../lib/color-mode/use-color-mode' as *;
 @use '../styles/vars' as *;
 @use '../lib/shoelace/vars' as *;
-@import '../features/site-search';
-@import '../features/color-mode-toggle';
-@import '../features/nav-outline';
+@use '../features/site-search';
+@use '../features/color-mode-toggle';
+@use '../features/nav-outline';
 
 .m-nav-right {
 	position: fixed;

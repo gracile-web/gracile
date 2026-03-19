@@ -67,32 +67,32 @@ export class UnpicImg
 		>(inputProperties);
 
 		return html`
-      <img
-        part="image"
-        src=${transformedProperties.src}"
-        alt=${transformedProperties.alt}"
-        width=${transformedProperties.width}"
-        height=${transformedProperties.height}"
-        style=${styleMap(transformedProperties.style ?? {})}"
-        srcset=${transformedProperties.srcset}"
-        role=${ifDefined(transformedProperties.role)}"
-        sizes=${transformedProperties.sizes}"
-        loading=${transformedProperties.loading}"
-        fetchpriority=${ifDefined(transformedProperties.fetchpriority)}"
-        decoding=${ifDefined(transformedProperties.decoding)}"
-        crossorigin=${ifDefined(this.crossOrigin)}"
-        ismap=${ifDefined(this.isMap)}"
-        name=${ifDefined(this.name)}"
-        referrerpolicy=${ifDefined(this.referrerPolicy)}"
-        usemap=${ifDefined(this.useMap)}"
-        @error=${(event: Event) =>
+			<img
+				part="image"
+				src=${transformedProperties.src}
+				alt=${transformedProperties.alt}
+				width=${transformedProperties.width}
+				height=${transformedProperties.height}
+				style=${styleMap(transformedProperties.style ?? {})}
+				srcset=${transformedProperties.srcset}
+				role=${ifDefined(transformedProperties.role)}
+				sizes=${transformedProperties.sizes}
+				loading=${transformedProperties.loading}
+				fetchpriority=${ifDefined(transformedProperties.fetchpriority)}
+				decoding=${ifDefined(transformedProperties.decoding)}
+				crossorigin=${ifDefined(this.crossOrigin)}
+				ismap=${ifDefined(this.isMap)}
+				name=${ifDefined(this.name)}
+				referrerpolicy=${ifDefined(this.referrerPolicy)}
+				usemap=${ifDefined(this.useMap)}
+				@error=${(event: Event) =>
 					this.dispatchEvent(new ErrorEvent(event.type, event))}
-        @load=${(event: Event) =>
+				@load=${(event: Event) =>
 					this.dispatchEvent(new Event(event.type, event))}
-        @abort=${(event: Event) =>
+				@abort=${(event: Event) =>
 					this.dispatchEvent(new Event(event.type, event))}
-      />
-    `;
+			/>
+		`;
 	}
 	@property({ type: String }) crossOrigin?: string;
 	@property({ type: Boolean }) isMap?: boolean;

@@ -2,9 +2,9 @@
 @use '../../lib/color-mode/use-color-mode' as *;
 @use '../vars' as *;
 @use '../../lib/shoelace/vars' as *;
-@import '../../lib/shoelace/shiki-syntax';
-@import '../../lib/shoelace/code';
-@import './twoslash';
+@use '../../lib/shoelace/shiki-syntax';
+@use '../../lib/shoelace/code';
+@use 'twoslash';
 
 pre.shiki {
 	padding: 1rem;

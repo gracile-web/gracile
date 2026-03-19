@@ -1,3 +1,5 @@
+@use '../lib/shoelace/vars' as *;
+
 html {
 	*::-webkit-scrollbar {
 		width: 12px;

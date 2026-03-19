@@ -1,6 +1,6 @@
 @use '../../lib/shoelace/vars' as *;
-@import '../../lib/shoelace/admonitions';
-@import '../../lib/shoelace/typography';
+@use '../../lib/shoelace/admonitions';
+@use '../../lib/shoelace/typography';
 
 .git-only {
 	display: none;

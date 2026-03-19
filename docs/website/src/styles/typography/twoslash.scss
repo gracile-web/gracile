@@ -1,6 +1,6 @@
 @use '../../lib/shoelace/vars' as *;
 @use '../../lib/color-mode/use-color-mode' as *;
-@import '../../lib/shoelace/shiki-syntax';
+@use '../../lib/shoelace/shiki-syntax';
 
 .twoslash {
 	&:hover {

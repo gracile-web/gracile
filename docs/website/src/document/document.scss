@@ -3,7 +3,7 @@
 @use '../styles/global' as *;
 @use '../lib/shoelace/vars' as *;
 @use '../lib/breakpoints/use-breakpoints' as *;
-@import '../styles/scrollbars';
+@use '../styles/scrollbars';
 
 html.layout-blog,
 html.layout-default,

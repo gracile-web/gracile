@@ -2,7 +2,7 @@
 @use '../lib/color-mode/use-color-mode' as *;
 @use '../styles/vars' as *;
 @use '../lib/shoelace/vars' as *;
-@import '../features/splash-screen';
+@use '../features/splash-screen';
 
 .page-home {
 	section {
