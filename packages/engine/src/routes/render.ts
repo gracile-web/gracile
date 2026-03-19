@@ -32,19 +32,17 @@ async function streamToString(stream: Readable): Promise<string> {
 	const chunks: Buffer[] = [];
 
 	for await (const chunk of stream) {
-		// NOTE: Since using Lit's `RenderResultReadable` instead of pure
-		// Node Readable, the chunk can be a string or a Buffer.
-		// If it's a string, convert it to Buffer first.
+		// `RenderResultReadable` always pushes strings (it resolves promises,
+		// thunks, and nested iterables internally). `Readable.from(string)`
+		// used for the document-only path also yields strings.
+		// Accept Buffer too for safety (plain `Readable` streams may emit them).
 		if (typeof chunk === 'string') {
 			chunks.push(Buffer.from(chunk));
-		} else
-			throw new TypeError(
-				'Wrong buffer type from stream. Should be a `string` only.',
-			);
-		// NOTE: Disabled for now. Causes issues with `RenderResultReadable`.
-		/* else {
+		} else if (Buffer.isBuffer(chunk)) {
 			chunks.push(chunk);
-		} */
+		} else {
+			throw new TypeError(`Unexpected chunk type in stream: ${typeof chunk}`);
+		}
 	}
 
 	return Buffer.concat(chunks).toString('utf8');
