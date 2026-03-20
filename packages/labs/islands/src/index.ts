@@ -2,7 +2,11 @@ import {
 	getPluginContext,
 	type PluginContext,
 } from '@gracile/internal-utils/plugin-context';
-import type { Plugin, ViteDevServer } from 'vite';
+import {
+	isRunnableDevEnvironment,
+	type Plugin,
+	type ViteDevServer,
+} from 'vite';
 import { createGracileViteLogger } from '@gracile/internal-utils/logger/vite-logger';
 
 import { makeIslandRenderer } from './element-renderer.js';
@@ -14,9 +18,13 @@ import { makeIslandRenderer } from './element-renderer.js';
 const log = createGracileViteLogger();
 
 async function reloadRegistry(server: ViteDevServer) {
+	const ssrEnvironment = server.environments.ssr;
+	if (!isRunnableDevEnvironment(ssrEnvironment))
+		throw new Error('Not in a SSR path');
+
 	try {
-		registry.islands = await server
-			.ssrLoadModule('/islands.config.ts')
+		registry.islands = await ssrEnvironment.runner
+			.import('/islands.config.ts')
 			.then((m) => m['default']);
 	} catch {
 		log.error(

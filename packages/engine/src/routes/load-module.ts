@@ -3,7 +3,7 @@ import { pathToFileURL } from 'node:url';
 
 import { collectErrorMetadata } from '@gracile-labs/better-errors/dev/utils';
 import { enhanceViteSSRError } from '@gracile-labs/better-errors/dev/vite';
-import { type ViteDevServer } from 'vite';
+import { isRunnableDevEnvironment, type ViteDevServer } from 'vite';
 
 import { GracileError, GracileErrorData } from '../errors/errors.js';
 
@@ -42,8 +42,12 @@ export async function loadForeignRouteObject({
 
 	if (vite) {
 		try {
-			// TODO: Migrate to https://vite.dev/guide/api-environment-runtimes#modulerunner
-			unknownRouteModule = await vite.ssrLoadModule(route.filePath, {});
+			const ssrEnvironment = vite.environments.ssr;
+
+			if (!isRunnableDevEnvironment(ssrEnvironment))
+				throw new Error('Not in a SSR path');
+
+			unknownRouteModule = await ssrEnvironment.runner.import(route.filePath);
 		} catch (error) {
 			const error_ = error;
 
