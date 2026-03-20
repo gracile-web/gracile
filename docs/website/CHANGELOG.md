@@ -1,0 +1,21 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 0.10.0-next.0 (2026-03-18)
+
+### Bug Fixes
+
+* client side scripts (broke after removing CSR) ([42ef39a](https://github.com/gracile-web/gracile/commit/42ef39a206e47c8ed98196eca27445faafa37d27))
+* lint/format with monorepo rules (docs) ([63757c1](https://github.com/gracile-web/gracile/commit/63757c16e0a38c144954d82106862edf76b38580))
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+
+### Features
+
+* add docs version to footer ([c7d824c](https://github.com/gracile-web/gracile/commit/c7d824c11a19e0c52c9fd55a596e3f7d2faf26bd))
+* integrate external main docs website repository (code) ([d6a52d9](https://github.com/gracile-web/gracile/commit/d6a52d93f44f8e449d997f92ef60e45f2c0da178))
+* integrate external main docs website repository (content) ([3f6f847](https://github.com/gracile-web/gracile/commit/3f6f847f87be6b50786abd5638f2bbd1de7d1dfb))
+* more readmes (new packages) ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
+* readmes from package collection, format content ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))

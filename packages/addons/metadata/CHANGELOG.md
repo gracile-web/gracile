@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/metadata@0.3.0-next.0...@gracile/metadata@0.3.0-next.1) (2026-03-18)
+
+### Features
+
+* more readmes (new packages) ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
+
 # [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/metadata@0.2.1-next.0...@gracile/metadata@0.3.0-next.0) (2026-03-15)
 
 ### Bug Fixes

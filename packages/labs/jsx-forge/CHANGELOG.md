@@ -3,17 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.1.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile-labs/functional@0.1.0-next.1...@gracile-labs/functional@0.1.0-next.2) (2026-03-18)
-
-### Features
-
-* more readmes (new packages) ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
-
-# [0.1.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/functional@0.1.0-next.0...@gracile-labs/functional@0.1.0-next.1) (2026-03-15)
-
-**Note:** Version bump only for package @gracile-labs/functional
-
-# 0.1.0-next.0 (2026-03-15)
+# 0.1.0-next.0 (2026-03-18)
 
 ### Bug Fixes
 
@@ -24,3 +14,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * incorporate external gracile packages ([d97e488](https://github.com/gracile-web/gracile/commit/d97e488bf5c75d7aefbd0c8956212142e80719a1))
+* more readmes (new packages) ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
