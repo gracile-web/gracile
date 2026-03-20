@@ -32,6 +32,30 @@ import {
 // Re-export for consumers that import these regexes from this module.
 export { REGEX_TAG_SCRIPT, REGEX_TAG_LINK } from './route-template-pipeline.js';
 
+/**
+ * Lit SSR's `RenderResultReadable._read()` is `async`, but Node.js
+ * calls `_read()` without awaiting its return value.  If a thunk inside
+ * the render result throws (e.g. template expressions in invalid
+ * locations), the rejected Promise escapes and becomes an
+ * `unhandledRejection`.
+ *
+ * This subclass overrides `_read()` to catch that rejection and convert
+ * it into a stream `'error'` event via `this.destroy(err)`, which is
+ * the standard Node Readable contract.
+ */
+class SafeRenderResultReadable extends RenderResultReadable {
+	override _read(size: number): ReturnType<RenderResultReadable['_read']> {
+		const maybePromise = super._read(size);
+
+		void (maybePromise as Promise<void> | void)?.catch?.(
+			(error: Error): void => {
+				this.destroy(error);
+			},
+		);
+		return maybePromise;
+	}
+}
+
 export async function renderRouteTemplate({
 	url,
 	vite,
@@ -82,7 +106,7 @@ export async function renderRouteTemplate({
 			});
 
 		const fragmentRender = renderLitSsr(fragmentOutput, mergedRenderInfo);
-		const output = new RenderResultReadable(fragmentRender);
+		const output = new SafeRenderResultReadable(fragmentRender);
 
 		return { output, document: null };
 	}
@@ -184,7 +208,7 @@ export async function renderRouteTemplate({
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);
 
-		const renderStream = new RenderResultReadable(
+		const renderStream = new SafeRenderResultReadable(
 			renderLitSsr(routeOutput, mergedRenderInfo),
 		);
 
