@@ -43,8 +43,7 @@
   },
   "dependencies": {
     "@literals/html-css-minifier": "workspace:^",
-    "@rollup/pluginutils": "^5.1.0",
-    "rollup-pluginutils": "^2.8.2"
+    "@rollup/pluginutils": "^5.1.0"
   },
   "devDependencies": {
     "@types/chai": "catalog:",

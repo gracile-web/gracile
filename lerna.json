@@ -39,6 +39,7 @@
     "./packages/labs/vite-plugin-babel-jsx-to-literals",
     "./packages/labs/islands",
     "./packages/labs/jsx-forge",
+    "./packages/labs/og-images-generator",
     "./packages/labs/vite-plugin-jsx-forge",
 
     "./docs/website"

@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@gracile/gracile": "workspace:^",
     "@gracile-labs/client-router": "workspace:^",
+    "@gracile/gracile": "workspace:^",
     "lit": "catalog:",
     "vite": "catalog:"
   }

@@ -242,5 +242,3 @@ export function gracileDevtools(options?: DevtoolsOptions): any[] {
 		},
 	] satisfies Plugin[];
 }
-
-export default gracileDevtools;

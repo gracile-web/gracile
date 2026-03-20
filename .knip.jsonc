@@ -10,6 +10,7 @@
 		"packages/engine/__fixtures__/static-site",
 		"packages/labs/hmr/__fixtures__/hmr-basic-lit",
 		"packages/labs/islands/__fixtures__/static-site-islands",
+		"starter-projects",
 	],
 	"workspaces": {
 		"packages/{gracile,client,server,engine,create-gracile}": {

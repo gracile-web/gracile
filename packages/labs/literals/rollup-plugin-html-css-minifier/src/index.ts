@@ -1,4 +1,3 @@
-import '../declarations.d.ts';
 import * as minify from '@literals/html-css-minifier';
 import { SourceDescription, PluginContext } from 'rollup';
 import { createFilter } from '@rollup/pluginutils';
@@ -59,7 +58,6 @@ export function literalsHtmlCssMinifier(
 						fileName: id,
 					});
 				} catch (error) {
-					// check if Error ese treat as string
 					const message =
 						error instanceof Error ? error.message : (error as string);
 

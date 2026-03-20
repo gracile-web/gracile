@@ -11,7 +11,7 @@ import importX from 'eslint-plugin-import-x';
 /** @type {import('eslint').Linter.Config[]} */
 const config = [
 	{
-		ignores: ['coverage', 'dist', 'packages/labs/ts-plugin-esx/playground'],
+		ignores: ['coverage', 'dist'],
 	},
 	{
 		files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
@@ -106,6 +106,8 @@ const config = [
 			'@typescript-eslint/no-use-before-define': 'off',
 			'@typescript-eslint/require-await': 'error',
 
+			// '@typescript-eslint/explicit-member-accessibility': 'error',
+
 			'unicorn/no-array-sort': 'off',
 			'unicorn/require-module-specifiers': 'off',
 
@@ -177,14 +179,47 @@ const config = [
 
 			// Generated/vendor content in labs packages
 			'packages/labs/og-images-generator/docs/**',
+			'packages/labs/og-images-generator/test/**',
 			'packages/labs/og-images-generator/types/**',
 			'packages/labs/og-images-generator/demos/**',
+
+			'packages/labs/literals/**/test/**',
+			'**/__fixtures__/**',
 			'packages/labs/jsx-forge/src/_vendor/**',
 
+			/* eslint-disable @typescript-eslint/no-floating-promises */
+
+			'**/*.test.*',
 			'**/coverage/**',
 			'**/dist/**',
+
+			'./scripts',
 		],
 	},
+	// {
+	// 	files: ['packages/{server,client,create-gracile}/**'],
+	// 	rules: {
+	// 		'@typescript-eslint/explicit-function-return-type': 'error',
+	// 	},
+	// },
+	// {
+	// 	files: ['**/test/**'],
+	// 	rules: {
+	// 		'@typescript-eslint/explicit-function-return-type': 'off',
+	// 	},
+	// },
+	{
+		files: ['packages/{engine,server,client}/**'],
+		rules: {
+			// '@typescript-eslint/explicit-function-return-type': 'error',
+		},
+	},
+	// {
+	// 	files: ['packages/labs/og-images-generator/**', 'packages/labs/hmr/**'],
+	// 	rules: {
+	// 		'@typescript-eslint/explicit-function-return-type': 'off',
+	// 	},
+	// },
 
 	// TODO: Make stricter progressively
 	// Relax rules for docs website
