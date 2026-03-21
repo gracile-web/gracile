@@ -21,18 +21,18 @@
     "test:unit:dev": "tsx --test --watch tests/unit/**/*.test.ts"
   },
   "dependencies": {
-    "@gracile/gracile": "workspace:^",
-    "@hono/node-server": "catalog:",
-    "hono": "catalog:",
-    "lit": "catalog:",
-    "vite": "catalog:"
+    "@gracile/gracile": "^0.9.0-next.12",
+    "@hono/node-server": "^1.19.10",
+    "hono": "^4.12.7",
+    "lit": "^3.2.1",
+    "vite": "^7.3.1"
   },
   "devDependencies": {
-    "@playwright/test": "catalog:",
+    "@playwright/test": "^1.58.2",
     "@sand4rt/experimental-ct-web": "^1.46.0",
-    "@types/node": "catalog:",
-    "c8": "catalog:",
-    "tsx": "catalog:",
-    "typescript": "catalog:"
+    "@types/node": "^25.3.3",
+    "c8": "^11.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.3"
   }
 }

@@ -10,20 +10,20 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@gracile/gracile": "workspace:^",
-    "@gracile/markdown": "workspace:^",
-    "@gracile/markdown-preset-marked": "workspace:^",
-    "@gracile/metadata": "workspace:^",
-    "@gracile/sitemap": "workspace:^",
-    "@gracile/svg": "workspace:^",
-    "@hono/node-server": "catalog:",
-    "hono": "catalog:",
-    "lit": "catalog:",
-    "vite": "catalog:"
+    "@gracile/gracile": "^0.9.0-next.12",
+    "@gracile/markdown": "^0.5.0-next.3",
+    "@gracile/markdown-preset-marked": "^0.1.1-next.4",
+    "@gracile/metadata": "^0.3.0-next.2",
+    "@gracile/sitemap": "^0.3.1-next.0",
+    "@gracile/svg": "^0.3.0-next.1",
+    "@hono/node-server": "^1.19.10",
+    "hono": "^4.12.7",
+    "lit": "^3.2.1",
+    "vite": "^7.3.1"
   },
   "devDependencies": {
-    "@types/node": "catalog:",
-    "sass": "catalog:",
-    "typescript": "catalog:"
+    "@types/node": "^25.3.3",
+    "sass": "^1.80.6",
+    "typescript": "5.9.3"
   }
 }
