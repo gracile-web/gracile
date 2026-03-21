@@ -19,6 +19,9 @@ export interface PluginSharedState {
 	/** Rendered route definitions from the client build phase. */
 	renderedRoutes: RenderedRouteDefinition[] | null;
 
+	/** Rollup input list for the client build (populated by route renderer). */
+	clientBuildInputList: string[] | null;
+
 	/** Maps original asset names → hashed filenames from the client bundle. */
 	clientAssets: Record<string, string>;
 
@@ -41,6 +44,7 @@ export function createPluginSharedState(
 	return {
 		routes: new Map(),
 		renderedRoutes: null,
+		clientBuildInputList: null,
 		clientAssets: {},
 		root: null,
 		gracileConfig: config || ({} as GracileConfig),

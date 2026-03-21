@@ -6,7 +6,7 @@ import { viteMarkdownPlugin } from '@gracile/markdown/vite';
 import { MarkdownRenderer } from '@gracile/markdown-preset-marked';
 
 export default defineConfig(({ command }) => {
-	console.log({ command });
+
 	return {
 		plugins: [
 			gracile({
@@ -18,8 +18,7 @@ export default defineConfig(({ command }) => {
 				pages: {
 					premises: {
 						expose: true,
-						include: ['**/12-route-premises/**'],
-						// exclude: ['**/**'],
+						include: ['**/12-route-premises/**'], 
 					},
 				},
 			}),

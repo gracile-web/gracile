@@ -3,7 +3,7 @@ import {
 	getPluginContext,
 	type PluginContext,
 } from '@gracile/internal-utils/plugin-context';
-import type { PluginOption, ViteBuilder } from 'vite';
+import type { PluginOption } from 'vite';
 
 import type { GracileConfig } from './user-config.js';
 import { htmlRoutesLoader } from './vite/html-routes.js';
@@ -12,12 +12,14 @@ import { virtualRoutesClient, virtualRoutes } from './vite/virtual-routes.js';
 import { createPluginSharedState } from './vite/plugin-shared-state.js';
 import { gracileServePlugin } from './vite/plugin-serve.js';
 import { gracileClientBuildPlugin } from './vite/plugin-client-build.js';
+import { gracileBuildEnvironmentPlugin } from './vite/plugin-build-environment.js';
 import {
 	gracileCollectClientAssetsPlugin,
 	gracileEntrypointPlugin,
 	gracileMoveServerAssetsPlugin,
 } from './vite/plugin-server-build.js';
 import { gracileCETrackerPlugin } from './vite/plugin-ce-tracker.js';
+import { gracileHtmlRoutesBuildPlugins } from './vite/plugin-html-routes-build.js';
 
 // When plugin-client-build creates a temporary dev server via createServer(),
 // the user's vite.config is re-evaluated, calling gracile() again.
@@ -71,52 +73,16 @@ export const gracile = (config?: GracileConfig): any[] => {
 				state.gracileConfig.litSsr ??= { renderInfo: {} };
 				state.gracileConfig.litSsr.renderInfo =
 					sharedPluginContext.litSsrRenderInfo;
-
-				// Environment API: configure SSR environment for server mode.
-				if (state.outputMode === 'server') {
-					return {
-						ssr: { external: ['@gracile/gracile'] },
-
-						environments: {
-							ssr: {
-								build: {
-									outDir: 'dist/server',
-									copyPublicDir: false,
-									ssrEmitAssets: true,
-									cssMinify: true,
-									cssCodeSplit: true,
-
-									rollupOptions: {
-										input: 'entrypoint.js',
-
-										output: {
-											entryFileNames: '[name].js',
-											assetFileNames: (chunkInfo) => {
-												if (chunkInfo.name) {
-													const fileName = state.clientAssets[chunkInfo.name];
-													if (fileName) return fileName;
-													return `assets/${chunkInfo.name.replace(/\.(.*)$/, '')}-[hash].[ext]`;
-												}
-												return 'assets/[name]-[hash].[ext]';
-											},
-											chunkFileNames: 'chunk/[name].js',
-										},
-									},
-								},
-							},
-						},
-					};
-				}
 			},
 		},
 
-		// MARK: 1.5. CE registry tracker (dev HMR cleanup)
+		// MARK: 2. CE registry tracker (dev HMR cleanup)
 		gracileCETrackerPlugin(),
 
-		// MARK: 2. HMR SSR reload
+		// MARK: 3. HMR SSR reload
 		hmrSsrReload(),
 
-		// MARK: 3. Dev serve middleware
+		// MARK: 4. Dev serve middleware
 		gracileServePlugin({
 			state,
 			config,
@@ -126,49 +92,35 @@ export const gracile = (config?: GracileConfig): any[] => {
 			},
 		}),
 
-		// MARK: 4. Client virtual routes
+		// MARK: 5. Client virtual routes
 		virtualRoutesForClient,
 
-		// MARK: 5. HTML routes loader
+		// MARK: 6. HTML routes loader
 		htmlRoutesLoader(),
 
-		// MARK: 6. Client build
+		// MARK: 7. Client build (route rendering → populates shared state)
 		gracileClientBuildPlugin({
 			state,
 			virtualRoutesForClient,
 		}),
 
-		// MARK: 7. Collect client assets for server
+		// MARK: 8. HTML route resolution + asset collection (client build only)
+		...gracileHtmlRoutesBuildPlugins({ state }),
+
+		// MARK: 9. Build environment configuration (consumes shared state)
+		gracileBuildEnvironmentPlugin({ state }),
+
+		// MARK: 9. Collect client assets for server
 		gracileCollectClientAssetsPlugin({ state }),
 
-		// MARK: 8. Server virtual routes (SSR environment only)
+		// MARK: 10. Server virtual routes (SSR environment only)
 		...virtualRoutes({ state }),
 
-		// MARK: 9. Server entrypoint (SSR environment only)
+		// MARK: 11. Server entrypoint (SSR environment only)
 		gracileEntrypointPlugin({ state }),
 
-		// MARK: 10. Move server assets (SSR environment only)
+		// MARK: 12. Move server assets (SSR environment only)
 		gracileMoveServerAssetsPlugin({ state }),
-
-		// MARK: 11. Build coordinator (server mode only)
-		...(state.outputMode === 'server'
-			? [
-					{
-						name: 'vite-plugin-gracile-build-coordinator',
-						apply: 'build' as const,
-
-						async buildApp(builder: ViteBuilder) {
-							const client = builder.environments['client'];
-							const ssr = builder.environments['ssr'];
-							if (!client || !ssr)
-								throw new Error('Missing client or ssr build environment.');
-
-							await builder.build(client);
-							await builder.build(ssr);
-						},
-					},
-				]
-			: []),
 	] satisfies PluginOption;
 };
 

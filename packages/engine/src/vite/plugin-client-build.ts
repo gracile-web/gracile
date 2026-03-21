@@ -1,14 +1,16 @@
 /**
- * Vite plugin: client-side build configuration.
+ * Vite plugin: client-side build route rendering.
  *
  * During `vite build`, this spins up a temporary dev server to render
- * all routes into static HTML, then configures Rollup with the
- * generated HTML pages as inputs.
+ * all routes into static HTML, then populates shared state with the
+ * rendered routes and input list.
+ *
+ * The actual HTML route resolution and asset collection are handled by
+ * separate Vite plugins (see `plugin-html-routes-build.ts`) that read
+ * from shared state and use `applyToEnvironment` to scope to the client.
  *
  * @internal
  */
-
-import { join } from 'node:path';
 
 import { getPluginContext } from '@gracile/internal-utils/plugin-context';
 import { createServer, type PluginOption } from 'vite';
@@ -29,10 +31,10 @@ export function gracileClientBuildPlugin({
 		apply: 'build',
 
 		async config(viteConfig) {
-			state.root = viteConfig.root || null;
+			state.root = viteConfig.root || process.cwd();
 
 			const viteServerForClientHtmlBuild = await createServer({
-				root: viteConfig.root || process.cwd(),
+				root: state.root,
 
 				server: { middlewareMode: true },
 				// NOTE: Stub. KEEP IT!
@@ -56,6 +58,7 @@ export function gracileClientBuildPlugin({
 			});
 
 			state.renderedRoutes = htmlPages.renderedRoutes;
+			state.clientBuildInputList = htmlPages.inputList;
 
 			// NOTE: Vite's dev server does not invoke Rollup's `closeWatcher`
 			// hook when shutting down. Plugins like @rollup/plugin-typescript
@@ -71,20 +74,6 @@ export function gracileClientBuildPlugin({
 			}
 
 			await viteServerForClientHtmlBuild.close();
-
-			return {
-				build: {
-					rollupOptions: {
-						input: htmlPages.inputList,
-						plugins: [htmlPages.plugin],
-					},
-
-					outDir: join(
-						viteConfig.build?.outDir || 'dist',
-						state.outputMode === 'server' ? 'client' : '',
-					),
-				},
-			};
 		},
 	};
 }

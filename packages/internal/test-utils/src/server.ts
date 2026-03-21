@@ -13,7 +13,10 @@ import type { AddressInfo } from 'node:net';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-import { createServer as viteCreateServer, build as viteBuild } from 'vite';
+import {
+	createServer as viteCreateServer,
+	createBuilder as viteCreateBuilder,
+} from 'vite';
 
 import { resolveFixtures } from './fixtures.js';
 
@@ -74,8 +77,10 @@ export async function buildFixture(
 ): Promise<void> {
 	const fixturesDirectory = options?.fixturesDir ?? resolveFixtures();
 	const root = join(fixturesDirectory, fixture);
-	await viteBuild({
+
+	const builder = await viteCreateBuilder({
 		root,
 		logLevel: options?.logLevel ?? 'error',
 	});
+	await builder.buildApp();
 }
