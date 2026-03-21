@@ -34,8 +34,8 @@
   ],
   "scripts": {
     "// test": "pnpm test:unit",
-    "// test:unit": "c8 node --enable-source-maps --test dist/test/*.js",
-    "// test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.js",
+    "test:unit": "c8 node --enable-source-maps --test dist/test/*.js",
+    "test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.js",
     "build": "tsc",
     "check:types": "tsc --noEmit",
     "clean": "rm -rf ./dist ./coverage",

@@ -97,7 +97,8 @@ The VS Code extension:
 code --install-extension runem.lit-plugin
 \`\`\`
 
-Or the [TypeScript Language Server plugin](https://github.com/runem/lit-analyzer/tree/master/packages/ts-lit-plugin#-installation)
+Or the
+[TypeScript Language Server plugin](https://github.com/runem/lit-analyzer/tree/master/packages/ts-lit-plugin#-installation)
 for NeoVim, Zed, etc.
 
 ---
