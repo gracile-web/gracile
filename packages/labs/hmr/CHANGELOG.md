@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile-labs/hmr@0.1.0-next.4...@gracile-labs/hmr@0.1.0-next.5) (2026-03-21)
+
+### Features
+
+* group jsx packages, minor fixes ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
+
 # [0.1.0-next.4](https://github.com/gracile-web/gracile/compare/@gracile-labs/hmr@0.1.0-next.3...@gracile-labs/hmr@0.1.0-next.4) (2026-03-21)
 
 **Note:** Version bump only for package @gracile-labs/hmr

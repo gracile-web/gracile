@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-next.2](https://github.com/gracile-web/gracile/compare/og-images-generator@0.4.0-next.1...og-images-generator@0.4.0-next.2) (2026-03-21)
+
+### Features
+
+* group jsx packages, minor fixes ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
+
 # [0.4.0-next.1](https://github.com/gracile-web/gracile/compare/og-images-generator@0.4.0-next.0...og-images-generator@0.4.0-next.1) (2026-03-21)
 
 **Note:** Version bump only for package og-images-generator
