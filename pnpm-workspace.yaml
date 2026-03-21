@@ -78,5 +78,7 @@ catalog:
   '@vitejs/plugin-react': ^4.3.3
   '@vitejs/plugin-vue': ^5.2.3
   '@playwright/test': '^1.58.2'
+  '@lit-labs/signals': '^0.1.2'
+  'express': '^5.0.1'
   # reminder: some deps are intentionally not auto-cataloged yet (mixed/special ranges); align versions first
   # sinon, @lit-labs/signals, sitemap, Babel packages, rollup peer ranges, etc.

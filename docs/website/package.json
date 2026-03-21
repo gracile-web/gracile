@@ -59,7 +59,7 @@
     "@hono/node-server": "catalog:",
     "@iconify/json": "^2.2.267",
     "@iconify/utils": "^2.1.33",
-    "@lit-labs/signals": "^0.1.2",
+    "@lit-labs/signals": "catalog:",
     "@lit-labs/ssr": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
     "@ngsctt/remark-smartypants": "^0.2.0",

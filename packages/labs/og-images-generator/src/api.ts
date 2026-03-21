@@ -12,10 +12,4 @@ export * from './paths.js';
 export { html } from '@lit-labs/ssr';
 export { styled } from './dummy-literals.js';
 
-/**
- * @typedef {import('@lit-labs/ssr').ServerRenderedTemplate} LitServerTemplate
- * @typedef TemplateOptions
- * @property {import('./collect.js').Page} page
- *
- * @typedef {(options: TemplateOptions) => LitServerTemplate} Template
- */
+export type { ServerRenderedTemplate as LitServerTemplate } from '@lit-labs/ssr';

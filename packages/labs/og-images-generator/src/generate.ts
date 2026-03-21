@@ -2,68 +2,71 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import c from 'picocolors';
+import type { ServerRenderedTemplate } from '@lit-labs/ssr';
+import type { ResvgRenderOptions } from '@resvg/resvg-js';
+import type { SatoriOptions } from 'satori';
 
+import type { CollectOptions, Page, PathsOptions } from './collect.js';
 import { collectHtmlPages } from './collect.js';
+import type { RenderedOg, RenderOptions } from './render.js';
 import { renderAllPagesOg } from './render.js';
 
 export const CONFIG_FILE_NAME = 'og-images.config.js';
 
 export const CONFIG_FILE_PATH = path.join(process.cwd(), CONFIG_FILE_NAME);
 
-/**
- * @typedef UserConfig
- * @property {import('./render.js').RenderOptions} renderOptions
- * @property {import('./api.js').Template} template
- */
+export interface TemplateOptions {
+	page: Page;
+}
 
-/**
- * @param {string} [path]
- * @returns {Promise<UserConfig>}
- */
-export async function loadUserConfig(path) {
-	/** @type {unknown} */
+export type Template = (
+	options: TemplateOptions,
+) => ServerRenderedTemplate | Promise<ServerRenderedTemplate>;
+
+export interface UserConfig {
+	renderOptions: RenderOptions;
+	template: Template;
+}
+
+export async function loadUserConfig(configPath?: string): Promise<UserConfig> {
 	console.log(CONFIG_FILE_PATH);
-	const config = await import(path || CONFIG_FILE_PATH).catch((error) => {
-		console.error(error);
-		throw new Error('Configuration not found.');
-	});
+	const config: unknown = await import(configPath || CONFIG_FILE_PATH).catch(
+		(error: unknown) => {
+			console.error(error);
+			throw new Error('Configuration not found.');
+		},
+	);
 	if (typeof config !== 'object' || !config)
 		throw new Error('Configuration is invalid.');
-	if ('template' in config === false)
+	if (!('template' in config))
 		throw new Error('No template found in configuration.');
 	if (typeof config.template !== 'function')
 		throw new Error('Template should be a returning function.');
 
-	if ('renderOptions' in config === false || !config.renderOptions)
+	if (!('renderOptions' in config) || !config.renderOptions)
 		throw new Error('No render options found in configuration.');
 	if (typeof config.renderOptions !== 'object')
 		throw new Error('Return options should be an object.');
-	if ('satori' in config.renderOptions === false)
+	if (!('satori' in config.renderOptions))
 		throw new Error('Satori options are mandatory.');
 
 	// We assume the user has their config. properly typed from there,
 	// further libs will throw in case of an invalid config.
-	const resvg =
-		/** @type {import('@resvg/resvg-js').ResvgRenderOptions} */
-		('resvg' in config.renderOptions ? config.renderOptions.resvg : {});
-	const satori = /** @type {import('satori').SatoriOptions} */ (
-		config.renderOptions.satori
-	);
+	const resvg = (
+		'resvg' in config.renderOptions ? config.renderOptions.resvg : {}
+	) as ResvgRenderOptions;
+	const satori = config.renderOptions.satori as SatoriOptions;
 
 	return {
-		template:
-			/** @type {UserConfig['template']} Lit render should gobble any shape */
-			(config.template),
+		template: config.template as UserConfig['template'],
 		renderOptions: { satori, resvg },
 	};
 }
 
-/**
- *
- * @param {import('./render.js').RenderedOg[]} renderedImages
- * @param {string} out
- */
-export async function save(renderedImages, out) {
+export async function save(
+	renderedImages: RenderedOg[],
+	out: string,
+): Promise<void> {
 	await Promise.all(
 		renderedImages.map(async (rendered) => {
 			const fileDestination =
@@ -83,12 +86,8 @@ export async function save(renderedImages, out) {
 	console.log(c.bold(c.green(renderedImages.length + ' images generated.')));
 }
 
-/**
- * @param {import("./collect").PathsOptions} [options]
- * @return {Promise<void>}
- * */
-export async function generateOgImages(options) {
-	const optionsOrDefaults = {
+export async function generateOgImages(options?: PathsOptions): Promise<void> {
+	const optionsOrDefaults: CollectOptions = {
 		base: options?.base || './dist',
 		out: options?.out || './dist/og',
 		json: options?.json || './dist/og/index.json',

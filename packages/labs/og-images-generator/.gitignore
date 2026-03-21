@@ -8,7 +8,7 @@ node_modules
 /*.d.ts
 /*.d.ts.map
 
-/types
+/dist
 
 docs
 
@@ -19,6 +19,6 @@ docs
 # demos/*
 # !demos/vanilla
 
-test/__fixtures__/.test-outputs
+src/test/__fixtures__/.test-outputs
 
 dist

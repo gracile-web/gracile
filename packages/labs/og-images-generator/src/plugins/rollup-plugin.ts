@@ -1,10 +1,9 @@
+import type { Plugin } from 'rollup';
+
+import type { PathsOptions } from '../collect.js';
 import { generateOgImages } from '../generate.js';
 
-/**
- * @param {import("../collect").PathsOptions} [options]
- * @returns {import('rollup').Plugin}
- */
-export function rollupOgImagesGenerator(options) {
+export function rollupOgImagesGenerator(options?: PathsOptions): Plugin {
 	return {
 		name: 'og-images-generator',
 

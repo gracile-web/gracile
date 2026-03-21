@@ -7,26 +7,25 @@
 
     "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
 
-    "outDir": "./types",
+    "outDir": "./dist",
+    "rootDir": "./src",
 
     "strict": true,
 
-    "checkJs": true,
     "skipLibCheck": true,
 
     "moduleResolution": "Bundler",
 
+    "incremental": false,
+
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+    "noEmitOnError": false
   },
 
-  "include": [
-    //
-    "./src/*.js",
-    "./src/plugins/*.js",
-    "./test/**/*.js"
-  ]
+  "include": ["./src/**/*"],
+
+  "exclude": ["./**/dist", "./coverage"]
 }

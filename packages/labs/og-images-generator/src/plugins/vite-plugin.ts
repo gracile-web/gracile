@@ -1,31 +1,33 @@
-import { connectOgImagesGenerator } from './connect-middleware.js';
+import type { ViteDevServer, Plugin as VitePlugin } from 'vite';
+
+import type { PathsOptions } from '../collect.js';
+
+import {
+	connectOgImagesGenerator,
+	type ConfigReloader,
+} from './connect-middleware.js';
 import { rollupOgImagesGenerator } from './rollup-plugin.js';
 
-/**
- * @param {import('vite').ViteDevServer} server
- */
-export const applyViteDevServerMiddleware = async (server) => {
+export const applyViteDevServerMiddleware = async (
+	server: ViteDevServer,
+): Promise<void> => {
 	server.middlewares.use(
 		await connectOgImagesGenerator({
-			configReloader:
-				/** @type {import('./connect-middleware.js').ConfigReloader} */ (
-					() => server.ssrLoadModule('./og-images.config.js')
-				),
+			configReloader: (() =>
+				server.ssrLoadModule(
+					'./og-images.config.js',
+				)) as unknown as ConfigReloader,
 		}),
 	);
 };
 
-/**
- * @param {import("../collect").PathsOptions} [options]
- * @returns {any}
- */
-export function viteOgImagesGenerator(options) {
+export function viteOgImagesGenerator(options?: PathsOptions): VitePlugin {
 	let isBuild = false;
 
 	const rollupPlugin = rollupOgImagesGenerator(options);
 
 	// HACK: Returns as any to prevent Vite typings mismatches.
-	return /** @type {import('vite').Plugin} */ ({
+	return {
 		...rollupPlugin,
 
 		config(_config, env) {
@@ -44,5 +46,5 @@ export function viteOgImagesGenerator(options) {
 		},
 
 		configureServer: (server) => applyViteDevServerMiddleware(server),
-	});
+	} as VitePlugin;
 }

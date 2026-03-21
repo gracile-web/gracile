@@ -65,7 +65,6 @@
     "@types/express": "catalog:",
     "@types/node": "catalog:",
     "c8": "catalog:",
-    "sinon": "21.0.1",
     "tsx": "catalog:",
     "typescript": "catalog:"
   },

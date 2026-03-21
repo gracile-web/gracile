@@ -2,29 +2,34 @@ import path from 'node:path';
 import fs from 'node:fs';
 
 import fastGlob from 'fast-glob';
+import type { Options as GlobOptions } from 'fast-glob';
 import { parse } from 'parse5';
 import c from 'picocolors';
 
-/**
- * @typedef {Record<string, string>} MetaTags
- * @typedef {Record<string, any>[]} JsonLds
- *
- * @typedef Metadata
- * @property {MetaTags} [tags]
- * @property {JsonLds} [jsonLds]
- *
- * @typedef Page
- * @property {Metadata} [meta]
- * @property {string} path
- */
-// NOTE: unexposed for now
-// * @property {unknown} ast - Parse5 AST is untyped.
+export type MetaTags = Record<string, string>;
+export type JsonLds = Record<string, unknown>[];
 
-/**
- * @param {string} fileContent
- * @returns {Metadata}
- */
-export function extractMetadataFromHtml(fileContent) {
+export interface Metadata {
+	tags?: MetaTags;
+	jsonLds?: JsonLds;
+}
+
+export interface Page {
+	meta?: Metadata;
+	path: string;
+}
+
+export interface PathsOptions {
+	base?: string;
+	out?: string;
+	json?: string;
+	additionalPatterns?: string[];
+	globber?: GlobOptions;
+}
+
+export type CollectOptions = Required<PathsOptions>;
+
+export function extractMetadataFromHtml(fileContent: string): Metadata {
 	const ast = parse(fileContent);
 
 	const document_ = ast.childNodes.find((node) => node.nodeName === 'html');
@@ -46,14 +51,13 @@ export function extractMetadataFromHtml(fileContent) {
 		['meta'].includes(node.nodeName),
 	);
 
-	/** @type {JsonLds} */
-	const jsonLds = [];
+	const jsonLds: JsonLds = [];
 
 	for (const node of [...head.childNodes, ...body.childNodes]) {
 		if (
 			['script'].includes(node.nodeName) &&
 			'attrs' in node &&
-			node.attrs.find((attribute) => (attribute.name = 'type'))?.value ===
+			node.attrs.find((attribute) => attribute.name === 'type')?.value ===
 				'application/ld+json'
 		) {
 			const content = node.childNodes.at(0);
@@ -62,8 +66,7 @@ export function extractMetadataFromHtml(fileContent) {
 		}
 	}
 
-	/** @type {MetaTags} */
-	const metaTags = {};
+	const metaTags: MetaTags = {};
 	for (const node of metaTagsNode) {
 		if ('attrs' in node === false) continue;
 
@@ -71,7 +74,7 @@ export function extractMetadataFromHtml(fileContent) {
 			if (attribute.name === 'property' || attribute.name === 'name') {
 				const metaName = attribute.value;
 				const metaValue = node.attrs.find(
-					(attribute) => attribute.name === 'content',
+					(attr) => attr.name === 'content',
 				)?.value;
 
 				if (metaValue) metaTags[metaName] = metaValue;
@@ -82,22 +85,9 @@ export function extractMetadataFromHtml(fileContent) {
 	return { tags: metaTags, jsonLds };
 }
 
-/**
- * @typedef PathsOptions
- * @property {string} [base]
- * @property {string} [out]
- * @property {string} [json]
- * @property {string[]} [additionalPatterns]
- * @property {import('fast-glob').Options} [globber]
- *
- * @typedef {Required<PathsOptions>} CollectOptions
- */
-
-/**
- * @param {CollectOptions} options
- * @returns {Promise<Page[]>}
- * */
-export async function collectHtmlPages(options) {
+export async function collectHtmlPages(
+	options: CollectOptions,
+): Promise<Page[]> {
 	console.log(c.bold(c.yellow('Collecting HTML pages…')));
 
 	const files = await fastGlob(
@@ -105,8 +95,7 @@ export async function collectHtmlPages(options) {
 		options.globber,
 	);
 
-	/** @type {Page[]} */
-	const pages = [];
+	const pages: Page[] = [];
 
 	await Promise.all(
 		files.map(async (filePath) => {

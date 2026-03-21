@@ -1,21 +1,23 @@
 import satori from 'satori';
+import type { SatoriOptions } from 'satori';
 import { html as satoriHtml } from 'satori-html';
 import { render as renderLit } from '@lit-labs/ssr';
 import { collectResultSync } from '@lit-labs/ssr/lib/render-result.js';
 import { Resvg } from '@resvg/resvg-js';
+import type { ResvgRenderOptions } from '@resvg/resvg-js';
 import { decodeHTML } from 'entities';
+import type { ReactNode } from 'react';
 
-/**
- * @param {string} fontUrl
- * @returns {Promise<ArrayBuffer>}
- */
-export const fetchFont = async (fontUrl) =>
+import type { UserConfig } from './generate.js';
+import type { Page } from './collect.js';
+
+export const fetchFont = async (fontUrl: string): Promise<ArrayBuffer> =>
 	fetch(fontUrl).then((response) => response.arrayBuffer());
 
-export const OG_SIZE = /** @type {const} */ ({
+export const OG_SIZE = {
 	width: 1200,
 	height: 630,
-});
+} as const;
 
 export const SOURCE_SANS_FONT_URL =
 	'https://unpkg.com/typeface-source-sans-pro@1.1.13/files/source-sans-pro-400.woff';
@@ -27,24 +29,20 @@ export const FONTS = {
 	}),
 };
 
-/**
- * @typedef RenderedOg
- * @property {string} path
- * @property {Buffer} data
- */
+export interface RenderedOg {
+	path: string;
+	data: Buffer;
+}
 
-/**
- * @typedef RenderOptions
- * @property {import('satori').SatoriOptions} satori
- * @property {import('@resvg/resvg-js').ResvgRenderOptions} [resvg]
- */
+export interface RenderOptions {
+	satori: SatoriOptions;
+	resvg?: ResvgRenderOptions;
+}
 
-/**
- * @param {import('./generate.js').UserConfig} userConfig
- * @param {import('./collect.js').Page} [page]
- * @returns {Promise<Buffer>}
- */
-export async function renderOgImage(userConfig, page) {
+export async function renderOgImage(
+	userConfig: UserConfig,
+	page?: Page,
+): Promise<Buffer> {
 	const pageOrDefaults = page || { path: '', meta: { tags: {}, jsonLds: [] } };
 	const templateOptions = { page: pageOrDefaults };
 
@@ -60,9 +58,7 @@ export async function renderOgImage(userConfig, page) {
 	 * This hack is not optimal and should be removed ASAP.
 	 */
 	const litSsred = decodeHTML(collectResultSync(renderLit(template)));
-	const satoried = /** @type {import('react').ReactNode} Cast VNode */ (
-		satoriHtml(litSsred)
-	);
+	const satoried = satoriHtml(litSsred) as unknown as ReactNode;
 
 	const svg = await satori(
 		// @ts-expect-error - FIXME: Mismatch
@@ -77,12 +73,10 @@ export async function renderOgImage(userConfig, page) {
 	return image.asPng();
 }
 
-/**
- * @param {import('./generate.js').UserConfig} config
- * @param {import('./api.js').Page[]} pages
- * @returns {Promise<RenderedOg[]>}
- */
-export const renderAllPagesOg = (pages, config) =>
+export const renderAllPagesOg = (
+	pages: Page[],
+	config: UserConfig,
+): Promise<RenderedOg[]> =>
 	Promise.all(
 		pages.map(async (page) => ({
 			path: page.path,

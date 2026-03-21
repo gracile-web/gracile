@@ -46,7 +46,7 @@
     "urlpattern-polyfill": "catalog:"
   },
   "peerDependencies": {
-    "@lit-labs/signals": "^0.1.1"
+    "@lit-labs/signals": "catalog:"
   },
   "peerDependenciesMeta": {
     "@lit-labs/signals": {

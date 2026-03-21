@@ -10,6 +10,7 @@ import { program } from 'commander';
 import c from 'picocolors';
 
 import { generateOgImages } from './api.js';
+import type { PathsOptions } from './collect.js';
 
 console.log(c.bold(c.magenta('OG Image Generator')) + c.green(' - CLI'));
 
@@ -19,8 +20,7 @@ program.option('--json <string>').option('-j');
 
 program.parse();
 
-/** @type {import('./collect.js').PathsOptions=} */
-const options = program.opts();
+const options: PathsOptions | undefined = program.opts();
 
 if (Object.keys(options).length > 0) {
 	console.log(c.bold(c.magenta('Options:')) + c.green(' - CLI'));

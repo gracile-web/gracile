@@ -1,10 +1,4 @@
 /**
- * @license
- * Julian Cataldo
- * SPDX-License-Identifier: ISC
- */
-
-/**
  * Useful for tricking various languages IDE extensions.
  *
  * For syntax highlighting, formatting with Prettier, static analysis…
@@ -13,14 +7,11 @@
  * is provided inside a template interpolation.
  *
  * @title Dummy literals
- * @returns {string}
- * */
+ */
 export function dummyLiteral(
-	/** @type {TemplateStringsArray} */
-	templateStrings,
-	/** @type {(string | string[])[]} */
-	...arguments_
-) {
+	templateStrings: TemplateStringsArray,
+	...arguments_: (string | string[])[]
+): string {
 	return templateStrings
 		.map(
 			(templateString, index) =>

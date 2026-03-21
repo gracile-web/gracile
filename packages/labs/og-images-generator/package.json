@@ -16,7 +16,7 @@
     "api"
   ],
   "bin": {
-    "generate-og": "./src/cli.js"
+    "generate-og": "./dist/cli.js"
   },
   "repository": {
     "type": "git",
@@ -31,44 +31,24 @@
   },
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./types/index.d.ts",
-      "default": "./src/index.js"
-    },
-    "./api": {
-      "types": "./types/api.d.ts",
-      "default": "./src/api.js"
-    },
-    "./connect": {
-      "types": "./types/plugins/connect-middleware.d.ts",
-      "default": "./src/plugins/connect-middleware.js"
-    },
-    "./rollup": {
-      "types": "./types/plugins/rollup-plugin.d.ts",
-      "default": "./src/plugins/rollup-plugin.js"
-    },
-    "./vite": {
-      "types": "./types/plugins/vite-plugin.d.ts",
-      "default": "./src/plugins/vite-plugin.js"
-    },
-    "./astro": {
-      "types": "./types/plugins/astro-integration.d.ts",
-      "default": "./src/plugins/astro-integration.js"
-    }
+    ".": "./dist/index.js",
+    "./api": "./dist/api.js",
+    "./connect": "./dist/plugins/connect-middleware.js",
+    "./rollup": "./dist/plugins/rollup-plugin.js",
+    "./vite": "./dist/plugins/vite-plugin.js",
+    "./astro": "./dist/plugins/astro-integration.js"
   },
   "files": [
-    "./src/*.js",
-    "./src/plugins/*.js",
-    "./types/**/*.d.ts"
+    "./dist/**/*"
   ],
   "scripts": {
-    "build": "pnpm clean && tsc --project tsconfig.build.json",
-    "check:types": "tsc --noEmit --project tsconfig.json",
-    "clean": "rm -rf ./types",
-    "dev": "tsc --project tsconfig.build.json --watch",
+    "build": "pnpm clean && tsc",
+    "check:types": "tsc --noEmit",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch",
     "// test": "pnpm test:unit",
-    "// test:unit": "node --test ./test/*.test.js",
-    "// test:unit:dev": "node --test --watch ./test/*.test.js"
+    "test:unit": "node --test ./dist/test/*.test.js",
+    "test:unit:dev": "node --test --watch ./dist/test/*.test.js"
   },
   "dependencies": {
     "@lit-labs/ssr": "catalog:",
