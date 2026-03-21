@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0-next.9](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.8...@gracile/engine@0.9.0-next.9) (2026-03-21)
+
+### Bug Fixes
+
+* implement SafeRenderResultReadable to handle async errors with lit's RenderResultReadable ([4ee82f6](https://github.com/gracile-web/gracile/commit/4ee82f638ce2cab81d715693f866b1fbf3dd3257))
+* prevent plugin duplication, convert to typescript, enable tests ([dd85864](https://github.com/gracile-web/gracile/commit/dd85864e351854284013b3a797a9aedc0278fc2e))
+* swap `node:` `Readable` with lit ssr `RenderResultReadable` ([d1c744b](https://github.com/gracile-web/gracile/commit/d1c744b745527bb812882ca6d5655a2a3801d6d5))
+* use Vite `buildApp` in test harness, split envs configs, refactor pipeline, static/server build ([7eb32d7](https://github.com/gracile-web/gracile/commit/7eb32d75e7ff8d900c9dbd64d8f5d8704ffba920))
+
+### Features
+
+* migrate ssrLoadModule to ModuleRunner ([4c7040a](https://github.com/gracile-web/gracile/commit/4c7040a55c7f2b09e6df5ca3d187ab519d5cc338))
+* migrate the whole build process to the new vite environment api ([34c3d3a](https://github.com/gracile-web/gracile/commit/34c3d3a46f0df9bfe4ba77a8366959e912f72eb8))
+
 # [0.9.0-next.8](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.7...@gracile/engine@0.9.0-next.8) (2026-03-15)
 
 ### Bug Fixes

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.10.0-next.0...@gracile/docs@0.10.0-next.1) (2026-03-21)
+
+### Bug Fixes
+
+* cve - h3, use main lodash-es + publish og generator, clean deps ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
+* dynamic tag support for html minifier ([313cc5f](https://github.com/gracile-web/gracile/commit/313cc5f00e4ea8a2d18d8db9a0079ad031c9524e))
+* prevent plugin duplication, convert to typescript, enable tests ([dd85864](https://github.com/gracile-web/gracile/commit/dd85864e351854284013b3a797a9aedc0278fc2e))
+* unpic element incorrect attribute bindings, migrate sass old syntaxes ([6552da1](https://github.com/gracile-web/gracile/commit/6552da1cfb8499c13fa9818e74926f087b91b104))
+
 # 0.10.0-next.0 (2026-03-18)
 
 ### Bug Fixes

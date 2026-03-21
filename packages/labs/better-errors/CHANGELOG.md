@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.3.0-next.0...@gracile-labs/better-errors@0.3.0-next.1) (2026-03-21)
+
+### Bug Fixes
+
+* dynamic tag support for html minifier ([313cc5f](https://github.com/gracile-web/gracile/commit/313cc5f00e4ea8a2d18d8db9a0079ad031c9524e))
+
 # [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.2.1-next.0...@gracile-labs/better-errors@0.3.0-next.0) (2026-03-15)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.9](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.8...@gracile-labs/client-router@0.2.0-next.9) (2026-03-21)
+
+### Bug Fixes
+
+* cve - h3, use main lodash-es + publish og generator, clean deps ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
+
 # [0.2.0-next.8](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.7...@gracile-labs/client-router@0.2.0-next.8) (2026-03-18)
 
 **Note:** Version bump only for package @gracile-labs/client-router

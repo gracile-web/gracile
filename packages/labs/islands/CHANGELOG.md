@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.1.0-next.0...@gracile-labs/islands@0.1.0-next.1) (2026-03-21)
+
+### Bug Fixes
+
+* cve - h3, use main lodash-es + publish og generator, clean deps ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
+
+### Features
+
+* migrate ssrLoadModule to ModuleRunner ([4c7040a](https://github.com/gracile-web/gracile/commit/4c7040a55c7f2b09e6df5ca3d187ab519d5cc338))
+
 # 0.1.0-next.0 (2026-03-18)
 
 ### Bug Fixes

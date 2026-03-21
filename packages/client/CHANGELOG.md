@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile/client@0.5.0-next.6...@gracile/client@0.5.0-next.7) (2026-03-21)
+
+### Bug Fixes
+
+* prevent plugin duplication, convert to typescript, enable tests ([dd85864](https://github.com/gracile-web/gracile/commit/dd85864e351854284013b3a797a9aedc0278fc2e))
+
 # [0.5.0-next.6](https://github.com/gracile-web/gracile/compare/@gracile/client@0.5.0-next.5...@gracile/client@0.5.0-next.6) (2026-03-15)
 
 ### Bug Fixes
