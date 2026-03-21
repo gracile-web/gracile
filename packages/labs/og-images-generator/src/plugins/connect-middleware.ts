@@ -1,6 +1,5 @@
 import type { NextHandleFunction } from 'connect';
 
-import type { Page } from '../collect.js';
 import { extractMetadataFromHtml } from '../collect.js';
 import type { UserConfig } from '../generate.js';
 import { loadUserConfig } from '../generate.js';

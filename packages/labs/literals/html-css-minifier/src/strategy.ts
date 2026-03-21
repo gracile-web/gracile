@@ -102,6 +102,7 @@ export const defaultMinifyOptions: HTMLOptions = {
  * Derives a valid custom element tag placeholder from the main placeholder.
  * Used when a template expression appears in tag-name position (e.g. `<${tag}>`).
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTagPlaceholder(_placeholder: string): string {
 	return 'template-expression-tag';
 }
