@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.10](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.9...@gracile-labs/css-helpers@0.2.0-next.10) (2026-03-21)
+
+**Note:** Version bump only for package @gracile-labs/css-helpers
+
 # [0.2.0-next.9](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.8...@gracile-labs/css-helpers@0.2.0-next.9) (2026-03-21)
 
 **Note:** Version bump only for package @gracile-labs/css-helpers

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.3-next.0 (2026-03-21)
+
+### Bug Fixes
+
+* cve - h3, use main lodash-es + publish og generator, clean deps ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
+* lint/format with monorepo rules ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+* re-enable test + version bump for initial publish ([a2018ef](https://github.com/gracile-web/gracile/commit/a2018efea44b1e0f0b51e8645652ef3e4a5a511c))
+* ts compiler "real" path, add peer dep ([7106004](https://github.com/gracile-web/gracile/commit/71060045ad22a313bad4077adfa3e530cbdc52fc))
+
 ## [2.0.2](https://github.com/JulianCataldo/literals/compare/@literals/rollup-plugin-html-css-minifier@2.0.1...@literals/rollup-plugin-html-css-minifier@2.0.2) (2024-07-29)
 
 ### Bug Fixes

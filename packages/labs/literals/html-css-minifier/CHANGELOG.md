@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.3-next.0 (2026-03-21)
+
+### Bug Fixes
+
+* dynamic tag support for html minifier ([313cc5f](https://github.com/gracile-web/gracile/commit/313cc5f00e4ea8a2d18d8db9a0079ad031c9524e))
+* lint/format with monorepo rules ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+* re-enable test + version bump for initial publish ([a2018ef](https://github.com/gracile-web/gracile/commit/a2018efea44b1e0f0b51e8645652ef3e4a5a511c))
+* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+
 ## [2.0.2](https://github.com/JulianCataldo/literals/compare/@literals/html-css-minifier@2.0.1...@literals/html-css-minifier@2.0.2) (2024-07-29)
 
 ### Bug Fixes

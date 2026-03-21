@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.2.6-next.0 (2026-03-21)
+
+### Bug Fixes
+
+* lint/format with monorepo rules ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+* re-enable test + version bump for initial publish ([a2018ef](https://github.com/gracile-web/gracile/commit/a2018efea44b1e0f0b51e8645652ef3e4a5a511c))
+* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+
 ## [1.2.5](https://github.com/JulianCataldo/literals/compare/@literals/parser@1.2.4...@literals/parser@1.2.5) (2024-07-29)
 
 ### Bug Fixes
