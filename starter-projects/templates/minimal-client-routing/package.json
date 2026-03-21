@@ -1,21 +1,21 @@
 {
   "name": "@gracile/template--minimal-client-routing",
-  "type": "module",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "check": "tsc",
     "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@gracile/gracile": "0.8.2-next.0",
-    "@gracile-labs/client-router": "link:../../../gracile/packages/labs/client-router",
-    "lit": "^3.2.1",
-    "vite": "^6.2.5"
+    "@gracile-labs/client-router": "workspace:^",
+    "@gracile/gracile": "workspace:^",
+    "lit": "catalog:",
+    "vite": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^22.1.0",
-    "typescript": "^5.5.4"
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
   }
 }

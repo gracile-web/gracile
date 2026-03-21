@@ -1,6 +1,6 @@
-@import './tokens';
-@import './features/shell/shell';
-@import './common';
+@use './tokens';
+@use './features/shell/shell';
+@use './common';
 
 html {
 	box-sizing: border-box;

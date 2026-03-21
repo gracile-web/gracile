@@ -47,7 +47,7 @@
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",
     "@types/node": "catalog:",
-    "signal-polyfill": "^0.2.2",
+    "signal-polyfill": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   },

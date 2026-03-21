@@ -1,29 +1,29 @@
 {
   "name": "@gracile/template--basics",
-  "type": "module",
   "version": "0.0.3",
+  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "check": "tsc",
     "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
     "preview": "node -C preview --watch server.js",
     "start": "node server.js"
   },
   "dependencies": {
-    "@gracile/gracile": "0.8.2-next.0",
-    "@gracile/markdown": "0.3.1-next.0",
-    "@gracile/markdown-preset-marked": "0.0.14-next.0",
-    "@gracile/metadata": "0.1.2-next.0",
-    "@gracile/sitemap": "0.2.2-next.0",
-    "@gracile/svg": "0.1.2-next.0",
-    "lit": "^3.1.3",
-    "vite": "^6.2.5",
-    "hono": "^4.5.4",
-    "@hono/node-server": "^1.12.0"
+    "@gracile/gracile": "workspace:^",
+    "@gracile/markdown": "workspace:^",
+    "@gracile/markdown-preset-marked": "workspace:^",
+    "@gracile/metadata": "workspace:^",
+    "@gracile/sitemap": "workspace:^",
+    "@gracile/svg": "workspace:^",
+    "@hono/node-server": "catalog:",
+    "hono": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "^22.1.0",
-    "typescript": "^5.5.4",
-    "sass": "^1.76.0"
+    "@types/node": "catalog:",
+    "sass": "catalog:",
+    "typescript": "catalog:"
   }
 }

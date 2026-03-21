@@ -37,6 +37,8 @@ packages:
   - ./packages/labs/literals/rollup-plugin-html-css-minifier
   - ./docs/website
   - ./starter-projects
+  - ./starter-projects/templates/*
+  - ./starter-projects/templates-lab/*
 
 catalog:
   vite: ^7.3.1
@@ -80,5 +82,7 @@ catalog:
   '@playwright/test': '^1.58.2'
   '@lit-labs/signals': '^0.1.2'
   'express': '^5.0.1'
+  'sass': '^1.80.6'
+  'signal-polyfill': '^0.2.2'
   # reminder: some deps are intentionally not auto-cataloged yet (mixed/special ranges); align versions first
   # sinon, @lit-labs/signals, sitemap, Babel packages, rollup peer ranges, etc.

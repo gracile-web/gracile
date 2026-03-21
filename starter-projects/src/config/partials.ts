@@ -20,9 +20,9 @@ export function containers(name: string, center = true) {
 	return `
 <div${center ? ' align="center"' : ''}>
 
-[![Edit in CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/gracile-web/starter-projects/tree/main/templates/${name}?embed=1)
+[![Edit in CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/gracile-web/gracile/tree/main/starter-projects/templates/${name}?embed=1)
 &nbsp;&nbsp;&nbsp;&nbsp;
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/gracile-web/starter-projects/tree/main/templates/${name})
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/gracile-web/gracile/tree/main/starter-projects/templates/${name})
 
 </div>
 `;

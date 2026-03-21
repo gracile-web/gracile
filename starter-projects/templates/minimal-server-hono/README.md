@@ -8,9 +8,9 @@ npm create gracile@latest -t minimal-server-hono
 
 <div align="center">
 
-[![Edit in CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/gracile-web/starter-projects/tree/main/templates/minimal-server-hono?embed=1)
+[![Edit in CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/gracile-web/gracile/tree/main/starter-projects/templates/minimal-server-hono?embed=1)
 &nbsp;&nbsp;&nbsp;&nbsp;
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/gracile-web/starter-projects/tree/main/templates/minimal-server-hono)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/gracile-web/gracile/tree/main/starter-projects/templates/minimal-server-hono)
 
 </div>
 

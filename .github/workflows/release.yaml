@@ -158,7 +158,7 @@ jobs:
         shell: bash
         run: node --run lint:es
 
-      # MARK:Tests
+      # MARK: Tests
 
       - name: Tests — Units
         shell: bash
@@ -171,7 +171,8 @@ jobs:
           path: ~/.cache/ms-playwright
           key:
             playwright-${{ hashFiles('packages/labs/hmr/package.json',
-            'packages/labs/client-router/package.json') }}
+            'packages/labs/client-router/package.json',
+            'starter-projects/package.json') }}
 
       - name: Install Playwright browsers (hmr)
         shell: bash
@@ -186,6 +187,18 @@ jobs:
       - name: Tests — Integration
         shell: bash
         run: node --run test:integration
+
+      # MARK: Starter Projects — Smoke Test (pre-publish, using existing templates)
+
+      - name: Install Playwright browsers (starter-projects)
+        shell: bash
+        run: npx playwright install --with-deps chromium
+        working-directory: starter-projects
+
+      - name: Tests — Starter projects smoke
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        shell: bash
+        run: pnpm --prefix starter-projects run test:smoke
 
       # MARK: Publish packages
       # NOTE: Auth is configured by setup-node's registry-url above.
@@ -221,6 +234,19 @@ jobs:
           git stash
           pnpm lerna publish --message 'chore: publish [main] release [skip ci]' --create-release=github --yes
 
+      # MARK: Regenerate starter-project templates [main]
+      # After publish, regenerate templates so they pick up freshly published
+      # @gracile/* versions, then commit + push.
+      - name: 'Regenerate starter-project templates [main]'
+        if: github.ref == 'refs/heads/main'
+        env:
+          GRACILE_RELEASE_CHANNEL: 'latest'
+        run: |
+          pnpm --prefix starter-projects run generate
+          git add starter-projects/templates
+          git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
+          git push
+
       - name: Merge back main into next
         if: github.ref == 'refs/heads/main'
         continue-on-error: true
@@ -240,6 +266,17 @@ jobs:
           NPM_CONFIG_PROVENANCE: 'true'
         run: |
           pnpm lerna publish --message 'chore: publish [next] pre-release' --conventional-prerelease --pre-dist-tag=next --preid=next --yes
+
+      # MARK: Regenerate starter-project templates [next]
+      - name: 'Regenerate starter-project templates [next]'
+        if: github.ref == 'refs/heads/next'
+        env:
+          GRACILE_RELEASE_CHANNEL: 'next'
+        run: |
+          pnpm --prefix starter-projects run generate
+          git add starter-projects/templates
+          git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
+          git push
 
       # MARK: Docs Website
 

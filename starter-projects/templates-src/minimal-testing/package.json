@@ -1,38 +1,38 @@
 {
   "name": "@gracile/template--minimal-server-hono",
-  "type": "module",
   "version": "0.0.2",
+  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "check": "tsc",
     "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
     "preview": "node -C preview --watch server.js",
     "start": "node server.js",
-    "test:unit": "c8 tsx --test tests/unit/**/*.test.ts",
-    "test:unit:dev": "tsx --test --watch tests/unit/**/*.test.ts",
-    "test:integration": "tsx --experimental-test-snapshots --test tests/integration/**/*.test.ts",
-    "pretest:integration:dev": "node --run build",
-    "test:integration:dev": "tsx --experimental-test-snapshots --watch --test tests/integration/**/*.test.ts",
+    "test:all": "./tests/launch-all.sh",
     "test:component": "playwright test -c playwright-ct.config.ts",
     "test:component:dev": "playwright test -c playwright-ct.config.ts --ui",
     "pretest:e2e": "node --run build",
     "test:e2e": "playwright test",
     "test:e2e:dev": "playwright test --ui",
-    "test:all": "./tests/launch-all.sh"
+    "test:integration": "tsx --experimental-test-snapshots --test tests/integration/**/*.test.ts",
+    "pretest:integration:dev": "node --run build",
+    "test:integration:dev": "tsx --experimental-test-snapshots --watch --test tests/integration/**/*.test.ts",
+    "test:unit": "c8 tsx --test tests/unit/**/*.test.ts",
+    "test:unit:dev": "tsx --test --watch tests/unit/**/*.test.ts"
   },
   "dependencies": {
-    "@gracile/gracile": "link:../../../packages/gracile",
-    "@hono/node-server": "^1.12.0",
-    "hono": "^4.5.3",
-    "lit": "^3.2.1",
-    "vite": "^6.2.5"
+    "@gracile/gracile": "workspace:^",
+    "@hono/node-server": "catalog:",
+    "hono": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
   },
   "devDependencies": {
     "@playwright/test": "catalog:",
     "@sand4rt/experimental-ct-web": "^1.46.0",
-    "@types/node": "^22.1.0",
-    "c8": "^10.1.2",
-    "tsx": "^4.17.0",
-    "typescript": "^5.5.4"
+    "@types/node": "catalog:",
+    "c8": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   }
 }

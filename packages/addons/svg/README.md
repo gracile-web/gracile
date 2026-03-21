@@ -24,7 +24,8 @@ export const myPartial = html`
 npm i @gracile/svg
 ```
 
-> [!TIP] You can use this extension with any Vite+Lit setup!  
+> [!TIP]  
+> You can use this extension with any Vite+Lit setup!  
 > It's totally decoupled from the framework.
 
 ```ts

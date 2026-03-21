@@ -28,32 +28,31 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "pnpm -r build",
-    "// deploy": "pnpm -r netlify deploy -d dist",
-    "// build": "turbo build --concurrency 20",
-    "// clean": "turbo clean --concurrency 20",
-    "dev:tasks": "tsx --watch src/tasks/tasks.ts",
-    "preinstall": "npx only-allow pnpm",
     "// list-pkg": "pnpm m ls --json --depth=-1 | node -e \"const path = require('path'); console.log(JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf-8')).map((m) => path.relative(__dirname, m.path)).filter(Boolean))\" # From https://github.com/pnpm/pnpm/issues/1519",
     "// prepare": "husky",
-    "sort-pjson": "pnpm sort-package-json package.json packages/{addons,userland,cli,internal}/*/package.json packages/engine/package.json integration/package.json",
     "// test": "pnpm --prefix integration test",
-    "// test:dev": "pnpm --prefix integration test:dev"
+    "// test:dev": "pnpm --prefix integration test:dev",
+    "build": "pnpm -r build",
+    "dev:tasks": "tsx --watch src/tasks/tasks.ts",
+    "generate": "tsx src/tasks/generate.ts",
+    "generate:ci": "CI=true tsx src/tasks/generate.ts",
+    "preinstall": "npx only-allow pnpm",
+    "test:smoke": "pnpm playwright test"
   },
-  "devDependencies": {
-    "@types/node": "catalog:",
-    "tsx": "catalog:",
-    "typescript": "catalog:"
-  },
-  "packageManager": "pnpm@9.1.1",
   "dependencies": {
     "@playwright/test": "catalog:",
     "chokidar": "^3.6.0",
     "fast-glob": "^3.3.2",
     "github-slugger": "^2.0.0",
     "latest-version": "^9.0.0",
-    "picocolors": "^1.0.1",
-    "playwright": "^1.46.0",
-    "vite": "^6.2.5"
-  }
+    "picocolors": "catalog:",
+    "vite": "catalog:",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@9.1.1"
 }

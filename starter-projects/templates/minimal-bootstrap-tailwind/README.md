@@ -8,9 +8,9 @@ npm create gracile@latest -t minimal-bootstrap-tailwind
 
 <div align="center">
 
-[![Edit in CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/gracile-web/starter-projects/tree/main/templates/minimal-bootstrap-tailwind?embed=1)
+[![Edit in CodeSandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/gracile-web/gracile/tree/main/starter-projects/templates/minimal-bootstrap-tailwind?embed=1)
 &nbsp;&nbsp;&nbsp;&nbsp;
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/gracile-web/starter-projects/tree/main/templates/minimal-bootstrap-tailwind)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/gracile-web/gracile/tree/main/starter-projects/templates/minimal-bootstrap-tailwind)
 
 </div>
 
@@ -36,9 +36,6 @@ npm create gracile@latest -t minimal-bootstrap-tailwind
 │   ├─ 🔷 document.css
 │   ├─ 🟦 document.ts
 │   ├─ 📂 features/
-│   │   ├─ 🔷 adopted-1.css
-│   │   ├─ 🔷 adopted-2.css
-│   │   ├─ 🟦 my-greetings-adopted.ts
 │   │   ├─ 🟦 my-greetings-bootstrap.ts
 │   │   ├─ 🟦 my-greetings-tailwind.ts
 │   │   └─ 🟦 my-greetings.ts
@@ -49,10 +46,6 @@ npm create gracile@latest -t minimal-bootstrap-tailwind
 │   │   ├─ 🟦 404.ts
 │   │   ├─ 🟦 about.ts
 │   │   ├─ 📂 bootstrap-demo/
-│   │   │   ├─ 🟦 (index).client.ts
-│   │   │   ├─ 🔷 (index).css
-│   │   │   └─ 🟦 (index).ts
-│   │   ├─ 📂 declarative-stylesheets-demo/
 │   │   │   ├─ 🟦 (index).client.ts
 │   │   │   ├─ 🔷 (index).css
 │   │   │   └─ 🟦 (index).ts

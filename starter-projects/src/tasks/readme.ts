@@ -56,7 +56,7 @@ ${containers(template.name, false)}
 npx degit gracile-web/starter-projects/templates/${template.name} my-project
 \`\`\`
 
-📑 **Sources**: [${template.name}](https://github.com/gracile-web/starter-projects/tree/main/templates/${template.name})
+📑 **Sources**: [${template.name}](https://github.com/gracile-web/gracile/tree/main/starter-projects/templates/${template.name})
 
 </div></div>
 `;

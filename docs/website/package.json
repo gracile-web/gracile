@@ -138,7 +138,7 @@
     "importable": "^0.1.0",
     "linkinator": "^6.1.2",
     "netlify-cli": "^24.4.0",
-    "sass": "^1.80.6",
+    "sass": "catalog:",
     "ts-lit-plugin": "^2.0.2",
     "tsx": "catalog:",
     "typedoc": "^0.28.17",

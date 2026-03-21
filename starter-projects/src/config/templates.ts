@@ -1,6 +1,6 @@
 export const templates = [
 	{
-		merge: ['templates-src/basics'],
+		merge: ['inventory/__common', 'templates-src/basics'],
 		name: 'basics',
 		title: 'Basics',
 		description:
@@ -33,7 +33,7 @@ export const templates = [
 	// 	// 	},
 	{
 		merge: [
-			//
+			'inventory/__common',
 			'inventory/minimal',
 			'inventory/minimal-static',
 			'templates-src/minimal-static',
@@ -45,7 +45,7 @@ export const templates = [
 	},
 	{
 		merge: [
-			//
+			'inventory/__common',
 			'inventory/minimal',
 			'inventory/minimal-static',
 			'templates-src/minimal-bootstrap-tailwind',
@@ -57,7 +57,7 @@ export const templates = [
 	},
 	{
 		merge: [
-			//
+			'inventory/__common',
 			'inventory/minimal',
 			'inventory/minimal-server',
 			'templates-src/minimal-testing',
@@ -88,7 +88,7 @@ test:all
 	},
 	{
 		merge: [
-			//
+			'inventory/__common',
 			'inventory/minimal',
 			'inventory/minimal-static',
 			'templates-src/minimal-minification',
@@ -100,9 +100,8 @@ test:all
 	},
 	{
 		merge: [
-			//
+			'inventory/__common',
 			'inventory/minimal',
-			// 'inventory/minimal-static',
 			'templates-src/minimal-client-routing',
 		],
 		name: 'minimal-client-routing',
@@ -112,6 +111,7 @@ test:all
 	},
 	{
 		merge: [
+			'inventory/__common',
 			'inventory/minimal',
 			'inventory/minimal-server',
 			'templates-src/minimal-server-express',
@@ -124,6 +124,7 @@ test:all
 	},
 	{
 		merge: [
+			'inventory/__common',
 			'inventory/minimal',
 			'inventory/minimal-server',
 			'templates-src/minimal-server-hono',

@@ -1,7 +1,10 @@
 {
-  "name": "@gracile/template--minimal-bootstrap-tailwind",
-  "version": "0.0.0",
+  "name": "@gracile/template--minimal-static",
+  "version": "0.0.4",
   "type": "module",
+  "imports": {
+    "#jsx-lit": "./src/lib/inject.ts"
+  },
   "scripts": {
     "build": "vite build",
     "check": "tsc",
@@ -9,19 +12,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@gracile-labs/css-helpers": "workspace:^",
+    "@gracile-labs/vite-plugin-babel-jsx-to-literals": "workspace:^",
     "@gracile/gracile": "workspace:^",
-    "bootstrap": "^5.3.3",
+    "@lit-labs/signals": "catalog:",
     "lit": "catalog:",
+    "todomvc-app-css": "^2.4.3",
     "vite": "catalog:"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.14",
-    "@types/bootstrap": "^5.2.10",
     "@types/node": "catalog:",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.41",
-    "tailwindcss": "^3.4.10",
     "typescript": "catalog:"
   }
 }
