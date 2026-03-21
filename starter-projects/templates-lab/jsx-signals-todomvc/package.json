@@ -1,5 +1,5 @@
 {
-  "name": "@gracile/template--minimal-static",
+  "name": "@gracile/template--minimal-todomvc",
   "version": "0.0.4",
   "type": "module",
   "imports": {

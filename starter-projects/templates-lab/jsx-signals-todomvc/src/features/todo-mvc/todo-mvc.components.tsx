@@ -1,6 +1,6 @@
 'use html-signal';
-import { For } from '@gracile-labs/jsx/components/for';
-import { Show } from '@gracile-labs/jsx/components/show';
+import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
+import { Show } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/show';
 
 import { TodoMvcStore, type AppOptions } from './todo-mvc.store.js';
 import { computed } from '@lit-labs/signals';

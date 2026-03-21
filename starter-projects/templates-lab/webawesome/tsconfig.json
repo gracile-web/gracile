@@ -1,8 +1,0 @@
-{
-  "extends": "@gracile/gracile/tsconfigs/strictest",
-
-  "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "@gracile-labs/jsx"
-  }
-}

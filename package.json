@@ -26,12 +26,12 @@
     "audit": "pnpm audit signatures --prod",
     "build": "node --run build:libs",
     "build:docs": "pnpm --filter @gracile/docs build",
-    "build:libs": "NODE_OPTIONS=--max-old-space-size=8192 turbo build --filter=!@gracile/docs --filter=!@gracile/starter-projects --concurrency 30",
+    "build:libs": "NODE_OPTIONS=--max-old-space-size=8192 turbo build --filter=!@gracile/docs --filter=!@gracile/starter-projects --filter=!@gracile/template--* --concurrency 30",
     "check-all": "pnpm build && (pnpm test:unit & pnpm test:integration & pnpm lint:es & pnpm format)",
-    "clean": "turbo clean --concurrency 30",
+    "clean": "turbo clean --filter=!@gracile/starter-projects --filter=!@gracile/template--* --concurrency 30",
     "dev": "node --run dev:libs",
     "dev:docs": "pnpm --filter @gracile/docs dev",
-    "dev:libs": "turbo dev --filter=!@gracile/docs --concurrency 30",
+    "dev:libs": "turbo dev --filter=!@gracile/docs --filter=!@gracile/starter-projects --filter=!@gracile/template--* --concurrency 30",
     "docs:generate": "typedoc",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
@@ -47,9 +47,9 @@
     "postnolyfill": "pnpm install",
     "prepare": "husky",
     "sort-pjson": "pnpm sort-package-json '**/package.json'",
-    "test:integration": "turbo test:integration --continue --concurrency 1",
-    "test:unit": "turbo test:unit --concurrency 30",
-    "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel test:unit:dev"
+    "test:integration": "turbo test:integration --filter=!@gracile/starter-projects --filter=!@gracile/template--* --continue --concurrency 1",
+    "test:unit": "turbo test:unit --filter=!@gracile/starter-projects --filter=!@gracile/template--* --concurrency 30",
+    "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel --filter=!@gracile/starter-projects --filter=!@gracile/template--* test:unit:dev"
   },
   "resolutions": {
     "braces": "3.0.3"

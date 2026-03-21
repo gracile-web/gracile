@@ -1,5 +1,5 @@
 {
-  "name": "@gracile/template--minimal-server-hono",
+  "name": "@gracile/template--minimal-testing",
   "version": "0.0.2",
   "type": "module",
   "scripts": {
