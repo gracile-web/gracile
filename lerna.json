@@ -42,9 +42,9 @@
     "./packages/labs/jsx-forge",
     "./packages/labs/og-images-generator",
     "./packages/labs/vite-plugin-jsx-forge",
-    "./packages/labs/@literals/parser",
-    "./packages/labs/@literals/html-css-minifier",
-    "./packages/labs/@literals/rollup-plugin-html-css-minifier",
+    "./packages/labs/literals/parser",
+    "./packages/labs/literals/html-css-minifier",
+    "./packages/labs/literals/rollup-plugin-html-css-minifier",
 
     "./docs/website"
   ]
