@@ -24,6 +24,7 @@
 
     "./packages/internal/tsconfigs",
     "./packages/internal/utils",
+    "./packages/internal/test-utils",
 
     "./packages/addons/metadata",
     "./packages/addons/svg",

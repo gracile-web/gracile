@@ -48,18 +48,18 @@
     "@gracile-labs/babel-plugin-jsx-to-literals": "workspace:^",
     "@rollup/plugin-babel": "^6.0.4"
   },
-  "peerDependencies": {
-    "@lit-labs/ssr": "catalog:",
-    "clsx": "^2.1.1",
-    "lit": "catalog:",
-    "vite": "^6.2.5"
-  },
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "picocolors": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@lit-labs/ssr": "catalog:",
+    "clsx": "^2.1.1",
+    "lit": "catalog:",
+    "vite": "^6.2.5"
   },
   "publishConfig": {
     "access": "public",

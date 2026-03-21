@@ -15,9 +15,6 @@
     "withastro",
     "api"
   ],
-  "bin": {
-    "generate-og": "./dist/cli.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gracile-web/gracile",
@@ -38,15 +35,18 @@
     "./vite": "./dist/plugins/vite-plugin.js",
     "./astro": "./dist/plugins/astro-integration.js"
   },
+  "bin": {
+    "generate-og": "./dist/cli.js"
+  },
   "files": [
     "./dist/**/*"
   ],
   "scripts": {
+    "// test": "pnpm test:unit",
     "build": "pnpm clean && tsc",
     "check:types": "tsc --noEmit",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
-    "// test": "pnpm test:unit",
     "test:unit": "node --test ./dist/test/*.test.js",
     "test:unit:dev": "node --test --watch ./dist/test/*.test.js"
   },
@@ -86,11 +86,11 @@
       "optional": true
     }
   },
+  "engines": {
+    "node": ">=20"
+  },
   "publishConfig": {
     "access": "public",
     "provenance": true
-  },
-  "engines": {
-    "node": ">=20"
   }
 }

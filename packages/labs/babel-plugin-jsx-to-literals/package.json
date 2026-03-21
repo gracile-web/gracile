@@ -32,14 +32,14 @@
     "!/dist/test-*"
   ],
   "scripts": {
-    "dev": "tsc --watch",
     "build": "tsc -p ./tsconfig.build.json",
     "clean": "rm -rf ./dist",
+    "dev": "tsc --watch",
+    "playground": "pnpm tsx playground/convert.ts",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'",
     "test:unit": "c8 tsx --test src/jsx.test.ts",
     "test:unit:dev": "tsx --watch --test src/jsx.test.ts",
-    "test:unit:dev:update": "tsx --watch --test --test-update-snapshots src/jsx.test.ts",
-    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'",
-    "playground": "pnpm tsx playground/convert.ts"
+    "test:unit:dev:update": "tsx --watch --test --test-update-snapshots src/jsx.test.ts"
   },
   "dependencies": {
     "@babel/types": "^7.29.0",

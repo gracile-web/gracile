@@ -32,10 +32,6 @@
     "./tsconfigs/*": "./tsconfigs/*.json",
     "./tsconfigs/*.json": "./tsconfigs/*"
   },
-  "// bin": {
-    "gracile": "./dist/bin/gracile.js",
-    "gracile-dev": "./dist/bin/gracile-watch.js"
-  },
   "files": [
     "./ambient.d.ts",
     "./dist/**/*",
@@ -47,9 +43,9 @@
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'",
     "test:unit": "c8 node --test --enable-source-maps 'dist/**/*.test.js'",
-    "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'",
-    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
+    "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
   },
   "dependencies": {
     "@gracile-labs/better-errors": "workspace:^",
@@ -74,5 +70,9 @@
     "access": "public",
     "provenance": true
   },
-  "// @gracile/add": "workspace:^"
+  "// @gracile/add": "workspace:^",
+  "// bin": {
+    "gracile": "./dist/bin/gracile.js",
+    "gracile-dev": "./dist/bin/gracile-watch.js"
+  }
 }

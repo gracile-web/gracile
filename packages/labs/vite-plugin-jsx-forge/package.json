@@ -47,18 +47,18 @@
     "jsx-forge": "workspace:^",
     "ts-patch": "^3.3.0"
   },
+  "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  },
   "peerDependencies": {
     "@lit-labs/ssr": "^3.2.2",
     "clsx": "^2.1.1",
     "jsx-forge": "workspace:^",
     "lit": "^3.3.0",
     "vite": "^6.2.5"
-  },
-  "devDependencies": {
-    "@gracile/internal-test-utils": "workspace:^",
-    "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "catalog:",
-    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

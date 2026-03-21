@@ -37,13 +37,13 @@
     "!*.test.*"
   ],
   "scripts": {
-    "test:unit": "c8 node --test 'dist/test/**/*.test.js' --test-name-pattern '!E2E'",
-    "test:e2e": "node --test 'dist/test/e2e/**/*.e2e.test.js'",
-    "test": "pnpm test:unit && pnpm test:e2e",
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
-    "dev:cli": "pnpm tsx -C development src/cli.ts"
+    "dev:cli": "pnpm tsx -C development src/cli.ts",
+    "test": "pnpm test:unit && pnpm test:e2e",
+    "test:e2e": "node --test 'dist/test/e2e/**/*.e2e.test.js'",
+    "test:unit": "c8 node --test 'dist/test/**/*.test.js' --test-name-pattern '!E2E'"
   },
   "dependencies": {
     "@clack/prompts": "^1.0.1",

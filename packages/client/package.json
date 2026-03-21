@@ -45,6 +45,11 @@
     "@lit-labs/ssr-client": "catalog:",
     "urlpattern-polyfill": "catalog:"
   },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  },
   "peerDependencies": {
     "@lit-labs/signals": "catalog:"
   },
@@ -52,11 +57,6 @@
     "@lit-labs/signals": {
       "optional": true
     }
-  },
-  "devDependencies": {
-    "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "catalog:",
-    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

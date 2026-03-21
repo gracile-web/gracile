@@ -1,32 +1,13 @@
 {
   "name": "jsx-forge",
-  "webElements": {
-    "format": "jsx",
-    "jsxBootstrapPath": "./jsx-bootstrap.ts",
-    "conventions": {
-      "bareBindingKind": "attribute",
-      "attributes": {
-        "namespaces": [
-          null,
-          "bool",
-          "if"
-        ]
-      },
-      "events": {
-        "namespaces": [
-          "on"
-        ]
-      },
-      "properties": {
-        "namespaces": [
-          "_"
-        ]
-      }
-    }
-  },
   "version": "0.1.0-next.1",
   "description": "",
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/jsx-forge"
+  },
   "license": "ISC",
   "author": {
     "name": "Julian Cataldo",
@@ -75,5 +56,29 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "webElements": {
+    "format": "jsx",
+    "jsxBootstrapPath": "./jsx-bootstrap.ts",
+    "conventions": {
+      "bareBindingKind": "attribute",
+      "attributes": {
+        "namespaces": [
+          null,
+          "bool",
+          "if"
+        ]
+      },
+      "events": {
+        "namespaces": [
+          "on"
+        ]
+      },
+      "properties": {
+        "namespaces": [
+          "_"
+        ]
+      }
+    }
   }
 }
