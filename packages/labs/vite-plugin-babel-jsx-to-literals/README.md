@@ -1,4 +1,4 @@
-# <span class=git-only>Gracile — </span>Babel JSX to Literals Vite plugin
+# <span class=git-only>Gracile — </span>Babel JSX to Literals (Vite plugin)
 
 A [_Babel JSX to Literals_](/docs/add-ons/jsx/) convenience wrapper for Vite
 projects.  
@@ -6,7 +6,8 @@ Compiles JSX/TSX to `html` tagged template literals at build time, using
 [Babel](https://babeljs.io/) and
 [@gracile-labs/babel-plugin-jsx-to-literals](https://github.com/gracile-web/gracile/tree/main/packages/labs/babel-plugin-jsx-to-literals).
 
-> [!TIP] You can use this plugin with any Vite+Lit setup!  
+> [!TIP]  
+> You can use this plugin with any Vite+Lit setup!  
 > It's totally decoupled from the Gracile framework.
 
 > [!NOTE]  

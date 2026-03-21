@@ -1,11 +1,12 @@
-# <span class=git-only>Gracile — </span>JSX Forge Vite plugin
+# <span class=git-only>Gracile — </span>JSX Forge (Vite plugin)
 
 A [_JSX Forge_](/docs/add-ons/jsx-forge/) convenience wrapper for Vite
 projects.  
 Compiles JSX/TSX to `html` tagged template literals at build time, using
 TypeScript & [ts-patch](https://github.com/nonara/ts-patch).
 
-> [!TIP] You can use this plugin with any Vite+Lit setup!  
+> [!TIP]  
+> You can use this plugin with any Vite+Lit setup!  
 > It's totally decoupled from the Gracile framework.
 
 ## Installation

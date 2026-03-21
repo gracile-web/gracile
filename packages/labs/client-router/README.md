@@ -1,4 +1,4 @@
-# Client-side router
+# Client-side router<i-c o=ph:flask></i-c>
 
 Quickly add a description, title, open graph, etc. in your page's document
 head.  

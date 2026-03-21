@@ -1,44 +1,48 @@
 {
   "name": "@gracile/docs",
   "version": "0.10.0-next.2",
-  "type": "module",
   "private": true,
   "license": "ISC",
-  "files": [
-    "dist"
-  ],
-  "imports": {
-    "#/*": "./app/*"
-  },
   "author": {
     "name": "Julian Cataldo"
+  },
+  "type": "module",
+  "imports": {
+    "#/*": "./app/*"
   },
   "exports": {
     "./*": "./*"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite dev",
+    "// build": "node ./node_modules/@gracile/gracile/dist/cli.js build",
+    "// build:client": "vite build --outDir dist/client",
+    "// build:server": "vite build --outDir dist/server --ssr src/entry-server.ts ",
+    "// dev": "node --experimental-vm-modules --watch-path server server/server.js",
+    "// preview:client": "vite preview",
+    "// serve": "cross-env NODE_ENV=production node server/server.js",
     "prebuild": "node --run docs:generate",
     "build": "vite build",
     "postbuild": "node --run pagefind",
-    "clean": "rm -rf ./dist",
-    "docs:generate": "tsx scripts/collect-readmes.ts && tsx scripts/collect-typedocs.ts",
-    "// dev": "node --experimental-vm-modules --watch-path server server/server.js",
-    "// build": "node ./node_modules/@gracile/gracile/dist/cli.js build",
-    "pagefind": "npx pagefind -s dist --output-path dist/pagefind --exclude-selectors '[hidden]' && cp -r dist/pagefind public",
     "check:links": "linkinator --config linkinator.config.json . > linkinator-result.json",
+    "clean": "rm -rf ./dist",
     "deploy": "netlify deploy -d ./dist",
-    "deploy:next": "netlify deploy -d ./docs/website/dist --alias next --no-build",
     "deploy:main": "netlify deploy -d ./docs/website/dist --prod --no-build",
-    "release": "npm run build && npm run pagefind && npm run deploy",
+    "deploy:next": "netlify deploy -d ./docs/website/dist --alias next --no-build",
+    "dev": "vite dev",
+    "docs:generate": "tsx scripts/collect-readmes.ts && tsx scripts/collect-typedocs.ts",
+    "pagefind": "npx pagefind -s dist --output-path dist/pagefind --exclude-selectors '[hidden]' && cp -r dist/pagefind public",
     "preview": "vite preview",
-    "// build:client": "vite build --outDir dist/client",
-    "// build:server": "vite build --outDir dist/server --ssr src/entry-server.ts ",
-    "// serve": "cross-env NODE_ENV=production node server/server.js",
-    "// preview:client": "vite preview",
+    "release": "npm run build && npm run pagefind && npm run deploy",
     "test:smoke": "playwright test",
-    "test:smoke:ui": "playwright test --ui",
-    "test:smoke:headed": "playwright test --headed"
+    "test:smoke:headed": "playwright test --headed",
+    "test:smoke:ui": "playwright test --ui"
+  },
+  "overrides": {
+    "@types/react": "npm:types-react@rc",
+    "lit": "^3.3.0"
   },
   "dependencies": {
     "@fontsource-variable/fira-code": "^5.2.7",
@@ -146,9 +150,5 @@
     "vite-plugin-solid": "catalog:",
     "vite-plugin-static-copy": "^2.0.0",
     "yaml": "^2.6.0"
-  },
-  "overrides": {
-    "@types/react": "npm:types-react@rc",
-    "lit": "^3.3.0"
   }
 }

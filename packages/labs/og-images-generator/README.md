@@ -429,6 +429,8 @@ users efficiently.
   with the `entities` library, which could have some side effects (file an issue
   if that's the case).
 
+<div class=git-only>
+
 ---
 
 **Other projects 👀**…
@@ -453,3 +455,5 @@ users efficiently.
 ---
 
 🔗  [JulianCataldo.com](https://www.juliancataldo.com)
+
+</div>

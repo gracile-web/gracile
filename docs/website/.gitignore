@@ -35,7 +35,8 @@ public/pagefind
 
 # Generated from package READMEs by `docs:generate` — do not edit directly
 # Canonical source: packages/*/README.md
-src/content/docs/15-add-ons/*/README.md
+src/content/docs/15-add-ons/**/README.md
+!src/content/docs/15-add-ons/56-jsx/README.md
 
 src/content/docs/04-starter-projects/README.md
 src/content/docs/25-references

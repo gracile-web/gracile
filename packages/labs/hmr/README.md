@@ -1,4 +1,4 @@
-# <span class=git-only>Gracile — </span>Hot Module Replacement
+# <span class=git-only>Gracile — </span>Hot Module Replacement<i-c o=ph:flask></i-c>
 
 Web Components HMR (Hot Module Replacement) Vite plugin, to be used with
 [Gracile](https://gracile.js.org) or any Vite project that use Custom Elements.
