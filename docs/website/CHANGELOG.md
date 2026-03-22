@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.10.1...@gracile/docs@0.11.0-next.0) (2026-03-22)
+
+### Features
+
+* prepare vite 8 migration - pre minor bug fixes ([a9bb25f](https://github.com/gracile-web/gracile/commit/a9bb25fb55dd9fe11fff874acf9d10e64d99617a))
+
 ## [0.10.1](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.10.1-next.0...@gracile/docs@0.10.1) (2026-03-22)
 
 **Note:** Version bump only for package @gracile/docs

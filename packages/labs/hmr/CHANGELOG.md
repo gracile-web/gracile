@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/hmr@0.1.1...@gracile-labs/hmr@0.2.0-next.0) (2026-03-22)
+
+### Features
+
+* make vite a peerdep, align all to 7/8 ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
+* prepare vite 8 migration - pre minor bug fixes ([a9bb25f](https://github.com/gracile-web/gracile/commit/a9bb25fb55dd9fe11fff874acf9d10e64d99617a))
+
 ## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/hmr@0.1.1-next.0...@gracile-labs/hmr@0.1.1) (2026-03-22)
 
 **Note:** Version bump only for package @gracile-labs/hmr

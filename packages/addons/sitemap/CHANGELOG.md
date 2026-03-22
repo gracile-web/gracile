@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/sitemap@0.4.1...@gracile/sitemap@0.5.0-next.0) (2026-03-22)
+
+### Features
+
+* make vite a peerdep, align all to 7/8 ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
+
 ## [0.4.1](https://github.com/gracile-web/gracile/compare/@gracile/sitemap@0.4.1-next.0...@gracile/sitemap@0.4.1) (2026-03-22)
 
 **Note:** Version bump only for package @gracile/sitemap
