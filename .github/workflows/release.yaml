@@ -226,7 +226,9 @@ jobs:
       # packages that fail --conventional-graduate). Fail explicitly if neither
       # the graduate nor the fallback actually published anything.
       - name: 'Lerna publish [main] — fallback (non-graduate)'
-        if: ${{ always() && github.ref == 'refs/heads/main' && steps.graduateRelease.outcome == 'failure' }}
+        if:
+          ${{ always() && github.ref == 'refs/heads/main' &&
+          steps.graduateRelease.outcome == 'failure' }}
         env:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}'
