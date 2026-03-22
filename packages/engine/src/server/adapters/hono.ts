@@ -2,6 +2,7 @@ import { relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 
+import { nodeCondition } from '@gracile/internal-utils/node-condition/production-ssr';
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
 
 import { GracileError, GracileErrorData } from '../../errors/errors.js';
@@ -41,12 +42,18 @@ export interface HonoAdapterOptions extends AdapterOptions {
 export const honoAdapter =
 	(handler: GracileHandler, options?: HonoAdapterOptions): GracileHonoHandler =>
 	async (context) => {
-		createLogger(options?.logger);
+		const logger = createLogger(options?.logger);
 
 		const result = await handler(context.req.raw, context.var);
 
-		// TODO: Handle stream abortion as gracefully as with Express.
 		if (result?.body) {
+			// NOTE: Mirror the Node adapter: surface stream errors rather than
+			// silently dropping them. In development the message is forwarded to
+			// the client so the developer sees what went wrong.
+			result.body.addListener('error', (error) => {
+				if (nodeCondition.DEV) logger.error(String(error));
+			});
+
 			// NOTE: Typings mismatches
 			const body = Readable.toWeb(result.body) as ReadableStream;
 			return new Response(body, result.init);

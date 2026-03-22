@@ -115,13 +115,13 @@ export function builtIn404Page(path: string, development = false) {
 	`;
 }
 
-// TODO: Extract
-// const ESCAPE_SEQUENCE_CHARACTER =
-// 	// eslint-disable-next-line no-control-regex
-// 	/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
+// eslint-disable-next-line no-control-regex
+const ESCAPE_SEQUENCE_CHARACTER =
+	/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g;
 
 export function builtInErrorPage(name = 'Error', development = false) {
-	const title = `500: ${name ? `${name} | ` : ''}Internal Server Error`;
+	const safeName = name.replace(ESCAPE_SEQUENCE_CHARACTER, '');
+	const title = `500: ${safeName ? `${safeName} | ` : ''}Internal Server Error`;
 
 	return html`
 		<!doctype html>

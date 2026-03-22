@@ -14,7 +14,7 @@ import { createFilter } from 'vite';
 
 import { emptyRoutes } from '../logging/messages.js';
 
-import { prepareSortableRoutes, routeComparator } from './comparator.js';
+import { sortRoutes } from './comparator.js';
 import { REGEXES } from './load-module.js';
 import type * as R from './route.js';
 
@@ -122,10 +122,7 @@ export async function collectRoutes(
 	}
 
 	// MARK: Routes priority order
-	// TODO: `prepareSortableRoutes` and `routeComparator` in same function `sortRoutes`.
-	const serverEntrypointsSorted = prepareSortableRoutes(serverEntrypoints)
-		.sort((a, b) => routeComparator(a, b))
-		.map((r) => r.route);
+	const serverEntrypointsSorted = sortRoutes(serverEntrypoints);
 
 	const serverPageClientAssetsFilter = createFilter(
 		['**/*.client.{js,ts,jsx,tsx}', '**/*.{css,scss,sass,less,styl,stylus}'],

@@ -5,6 +5,7 @@ import { describe, test } from 'node:test';
 import {
 	prepareSortableRoutes,
 	routeComparator,
+	sortRoutes,
 	type RouteCompareObject,
 } from '../../routes/comparator.js';
 
@@ -17,13 +18,6 @@ function compare(a: string, b: string): number {
 		RouteCompareObject,
 	];
 	return routeComparator(parsedA, parsedB);
-}
-
-/** Sort an array of route file paths using the full pipeline. */
-function sortRoutes(routes: string[]): string[] {
-	return prepareSortableRoutes(routes)
-		.sort((a, b) => routeComparator(a, b))
-		.map((r) => r.route);
 }
 
 // ── prepareSortableRoutes ────────────────────────────────────────────

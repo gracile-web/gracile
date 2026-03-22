@@ -167,3 +167,19 @@ export function prepareSortableRoutes(routes: string[]) {
 
 	return routesParsed;
 }
+
+/**
+ * Sort an array of route file-path strings into resolution priority order.
+ *
+ * Combines {@link prepareSortableRoutes} and {@link routeComparator} into a
+ * single call so callers do not have to manage the intermediate
+ * {@link RouteCompareObject} representation themselves.
+ *
+ * @param routes - Raw route file-path strings to be sorted in-place equivalent.
+ * @returns A new array of route strings sorted by resolution priority.
+ */
+export function sortRoutes(routes: string[]): string[] {
+	return prepareSortableRoutes(routes)
+		.sort((a, b) => routeComparator(a, b))
+		.map((r) => r.route);
+}
