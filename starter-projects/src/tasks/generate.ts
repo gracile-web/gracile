@@ -130,7 +130,9 @@ await Promise.all(
 
 		// MARK: Install (CI only)
 		if (isCi) {
-			await e(`pnpm install --prefix templates/${template.name}`);
+			await e(
+				`pnpm install --no-frozen-lockfile --prefix templates/${template.name}`,
+			);
 		}
 	}),
 );
