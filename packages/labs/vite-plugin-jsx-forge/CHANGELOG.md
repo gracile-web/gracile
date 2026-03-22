@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.2.0-next.0...@gracile-labs/vite-plugin-jsx-forge@0.2.0) (2026-03-22)
+
+**Note:** Version bump only for package @gracile-labs/vite-plugin-jsx-forge
+
 # [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.1.1...@gracile-labs/vite-plugin-jsx-forge@0.2.0-next.0) (2026-03-22)
 
 ### Features
