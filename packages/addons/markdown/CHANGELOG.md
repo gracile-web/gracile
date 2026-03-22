@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/markdown@0.5.0-next.4...@gracile/markdown@0.5.1-next.0) (2026-03-22)
+
+**Note:** Version bump only for package @gracile/markdown
+
 # [0.5.0](https://github.com/gracile-web/gracile/compare/@gracile/markdown@0.5.0-next.4...@gracile/markdown@0.5.0) (2026-03-22)
 
 **Note:** Version bump only for package @gracile/markdown

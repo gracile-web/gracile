@@ -1,6 +1,6 @@
 {
   "name": "@literals/rollup-plugin-html-css-minifier",
-  "version": "2.0.3",
+  "version": "2.0.4-next.0",
   "description": "Rollup plugin to minify HTML template literal strings",
   "keywords": [
     "rollup-plugin",
