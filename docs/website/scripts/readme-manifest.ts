@@ -56,6 +56,10 @@ export const README_MAP: { src: string; dest: string }[] = [
 		dest: 'src/content/docs/15-add-ons/56-jsx/60-vite-plugin-jsx-forge/README.md',
 	},
 	{
+		src: 'packages/labs/vite-plugin-standard-css-modules',
+		dest: 'src/content/docs/15-add-ons/62-vite-plugin-standard-css-modules/README.md',
+	},
+	{
 		src: 'packages/labs/hmr',
 		dest: 'src/content/docs/15-add-ons/65-hmr/README.md',
 	},

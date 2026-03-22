@@ -1,0 +1,4 @@
+{
+  "extends": "@gracile/internal-tsconfigs/config-base.json",
+  "exclude": ["src/test/fixtures"]
+}

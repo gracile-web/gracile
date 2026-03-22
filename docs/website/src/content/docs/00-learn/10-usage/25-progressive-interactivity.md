@@ -99,7 +99,8 @@ It's very important to include this bit if you don't want your Lit Custom Elemen
 
 ### 5. Whole-page hydration
 
-> [!CAUTION] Experimental. This is not well tested, nor it is customizable.
+> [!CAUTION]  
+> Experimental. This is not well tested, nor it is customizable.
 
 Sometimes, you need more than isolated Islands of interactivity.  
 For example, you may want to attach event handlers to your templates in the
@@ -126,8 +127,8 @@ website will behave as any "MPA"; the whole page context will be blown away.
 
 ### 6. Client-side routing
 
-> [!CAUTION] Experimental. This is not well tested, nor it is customizable
-> enough.
+> [!CAUTION]  
+> Experimental. This is not well tested, nor it is customizable enough.
 
 If you want to persist your page state between routes, you will need to resort
 to a client-side router.  

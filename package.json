@@ -71,7 +71,6 @@
     "eslint-plugin-jsdoc": "^62.7.1",
     "eslint-plugin-markdown-frontmatter-schema": "^0.0.1",
     "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unicorn": "^63.0.0",
     "globals": "^17.4.0",
     "husky": "^9.1.7",
@@ -129,7 +128,8 @@
       "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@^1",
       "string.prototype.repeat": "npm:@nolyfill/string.prototype.repeat@^1",
       "tar": ">=7.5.11",
-      "undici": "^7.24.0"
+      "undici": "^7.24.0",
+      "safe-buffer": "npm:@nolyfill/safe-buffer@^1"
     }
   }
 }

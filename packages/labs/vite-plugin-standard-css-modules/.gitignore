@@ -1,0 +1,10 @@
+.old*
+.dev*
+
+node_modules
+
+.DS_Store
+
+/*.d.ts
+!css-modules.d.ts
+dist

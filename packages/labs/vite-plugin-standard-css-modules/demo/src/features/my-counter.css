@@ -1,0 +1,16 @@
+:host {
+	display: block;
+	padding: 1.5rem;
+	border: 1px solid currentcolor;
+	border-radius: 0.5rem;
+}
+
+.card {
+	margin-block: 1rem;
+}
+
+button {
+	font-size: 1.25rem;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+}

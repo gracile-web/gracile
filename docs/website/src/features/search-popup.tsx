@@ -1,4 +1,4 @@
-import { LitElement, unsafeCSS } from 'lit';
+import { LitElement } from 'lit';
 import { customElement, queryAssignedElements, state } from 'lit/decorators.js';
 import { createRef } from 'lit/directives/ref.js';
 
@@ -12,18 +12,14 @@ await import(
 
 // FIXME: focus trap for searchbox (pagefind svelte's component issue ?)
 
-import links from '../styles/typography/links.scss?inline';
+import links from '../styles/typography/links.scss' with { type: 'css' };
 import { router } from '../lib/router.js';
 
-import styles from './search-popup.scss?inline';
+import styles from './search-popup.scss' with { type: 'css' };
 
 @customElement('search-popup')
 export class SearchPopup extends LitElement {
-	static override styles = [
-		unsafeCSS(styles),
-		unsafeCSS(links),
-		/* styles */
-	];
+	static override styles = [styles, links];
 
 	@queryAssignedElements({ selector: 'button' }) button!: HTMLElement[];
 

@@ -1,39 +1,55 @@
 packages:
+  # Core
   - ./packages/gracile
   - ./packages/client
   - ./packages/server
   - ./packages/engine
   - ./packages/cli
   - ./packages/create-gracile
+
+  # Internal
   - ./packages/internal/tsconfigs
   - ./packages/internal/utils
   - ./packages/internal/test-utils
-  - ./packages/addons/metadata
-  - ./packages/addons/svg
-  - ./packages/addons/sitemap
+
+  # Addons
   - ./packages/addons/markdown
   - ./packages/addons/markdown-preset-marked
+  - ./packages/addons/metadata
+  - ./packages/addons/sitemap
+  - ./packages/addons/svg
+
+  # Labs
+  - ./packages/labs/better-errors
+  - ./packages/labs/client-router
+  - ./packages/labs/css-helpers
+  - ./packages/labs/devtools
+  - ./packages/labs/functional
+  - ./packages/labs/hmr
+  - ./packages/labs/islands
+  - ./packages/labs/og-images-generator
+  - ./packages/labs/vite-plugin-standard-css-modules
+  # Labs — JSX
+  - ./packages/labs/babel-plugin-jsx-to-literals
+  - ./packages/labs/vite-plugin-babel-jsx-to-literals
+  - ./packages/labs/jsx-forge
+  - ./packages/labs/vite-plugin-jsx-forge
+  # Labs — Literals
+  - ./packages/labs/literals/parser
+  - ./packages/labs/literals/html-css-minifier
+  - ./packages/labs/literals/rollup-plugin-html-css-minifier
+
+  # Fixtures
   - ./packages/engine/__fixtures__/static-site
   - ./packages/engine/__fixtures__/server-express
   - ./packages/engine/__fixtures__/ce-tracker
   - ./packages/labs/client-router/__fixtures__/client-routing-basic
   - ./packages/labs/hmr/__fixtures__/hmr-basic-lit
   - ./packages/labs/islands/__fixtures__/static-site-islands
-  - ./packages/labs/client-router
-  - ./packages/labs/css-helpers
-  - ./packages/labs/better-errors
-  - ./packages/labs/hmr
-  - ./packages/labs/devtools
-  - ./packages/labs/islands
-  - ./packages/labs/functional
-  - ./packages/labs/babel-plugin-jsx-to-literals
-  - ./packages/labs/vite-plugin-babel-jsx-to-literals
-  - ./packages/labs/jsx-forge
-  - ./packages/labs/vite-plugin-jsx-forge
-  - ./packages/labs/og-images-generator
-  - ./packages/labs/literals/parser
-  - ./packages/labs/literals/html-css-minifier
-  - ./packages/labs/literals/rollup-plugin-html-css-minifier
+
+  # Demos
+  - ./packages/labs/vite-plugin-standard-css-modules/demo
+  # Docs & starters
   - ./docs/website
   - ./starter-projects
   - ./starter-projects/templates/*
@@ -83,5 +99,6 @@ catalog:
   'express': '^5.0.1'
   'sass': '^1.80.6'
   'signal-polyfill': '^0.2.2'
+  magic-string: '^0.30.21'
   # reminder: some deps are intentionally not auto-cataloged yet (mixed/special ranges); align versions first
   # sinon, @lit-labs/signals, sitemap, Babel packages, rollup peer ranges, etc.

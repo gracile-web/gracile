@@ -1,0 +1,83 @@
+{
+  "name": "vite-plugin-standard-css-modules",
+  "version": "0.1.0-next.0",
+  "description": "Use import attributes to get a CSSStyleSheet or a Lit CSSResult from your CSS files in Vite",
+  "keywords": [
+    "import-attributes",
+    "native-css-modules",
+    "with-type-css",
+    "constructable-stylesheets",
+    "css-module-scripts",
+    "vite-plugin",
+    "oxc",
+    "web-components",
+    "lit"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/vite-plugin-standard-css-modules"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/JulianCataldo"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./css-modules": {
+      "types": "./css-modules.d.ts"
+    }
+  },
+  "files": [
+    "./dist/**/*",
+    "css-modules.d.ts",
+    "!/dist/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch",
+    "test:integration": "node --test dist/test/*.test.js"
+  },
+  "dependencies": {
+    "magic-string": "catalog:"
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@oxc-project/types": "^0.121.0",
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "peerDependencies": {
+    "lit": "3.x",
+    "vite": "5.x || 6.x || 7.x || 8.x",
+    "oxc-parser": "^0.121.0"
+  },
+  "peerDependenciesMeta": {
+    "lit": {
+      "optional": true
+    },
+    "oxc-parser": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

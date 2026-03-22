@@ -1,12 +1,9 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
-// import pluginReact from 'eslint-plugin-react';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-import jsdoc from 'eslint-plugin-jsdoc';
+// import jsdoc from 'eslint-plugin-jsdoc';
 import importX from 'eslint-plugin-import-x';
-// import importX from 'eslint-plugin-import-x';
-// import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = [
@@ -51,6 +48,7 @@ const config = [
 					'./packages/labs/literals/parser/tsconfig.json',
 					'./packages/labs/literals/html-css-minifier/tsconfig.json',
 					'./packages/labs/literals/rollup-plugin-html-css-minifier/tsconfig.json',
+					'./packages/labs/vite-plugin-standard-css-modules/tsconfig.json',
 					'./docs/website/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,
@@ -183,6 +181,11 @@ const config = [
 			'packages/labs/og-images-generator/types/**',
 			'packages/labs/og-images-generator/demos/**',
 
+			'packages/labs/literals/rollup-plugin-html-css-minifier/demo/**',
+
+			'packages/labs/vite-plugin-standard-css-modules/css-modules.d.ts',
+			'packages/labs/vite-plugin-standard-css-modules/demo/**',
+			'packages/labs/vite-plugin-standard-css-modules/src/test/**',
 			'packages/labs/literals/**/test/**',
 			'**/__fixtures__/**',
 			'packages/labs/jsx-forge/src/_vendor/**',

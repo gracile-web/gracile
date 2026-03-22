@@ -8,6 +8,7 @@ import strip from '@rollup/plugin-strip';
 import { literalsHtmlCssMinifier } from '@literals/rollup-plugin-html-css-minifier';
 import { getIcons } from '@iconify/utils';
 import { loadCollection } from '@iconify/json';
+import { standardCssModules } from 'vite-plugin-standard-css-modules';
 // import Inspect from 'vite-plugin-inspect';
 
 import { SITE_URL } from './src/content/global.js';
@@ -125,9 +126,11 @@ export default defineConfig({
 			additionalPatterns: ['!**/__*'],
 		}),
 
-		literalsHtmlCssMinifier(),
-
 		gracileJsx(),
+
+		standardCssModules({ outputMode: 'CSSResult' }),
+
+		literalsHtmlCssMinifier(),
 
 		// FIXME: Breaks HMR
 		// Inspect(),
@@ -136,7 +139,6 @@ export default defineConfig({
 	esbuild: {
 		target: 'es2022',
 	},
-	oxc: { jsx: 'preserve' },
 
 	css: { devSourcemap: true },
 

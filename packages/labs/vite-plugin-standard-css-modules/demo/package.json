@@ -1,0 +1,22 @@
+{
+  "name": "@gracile-labs/demo--vite-plugin-standard-css-modules",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "vite-plugin-standard-css-modules": "workspace:^",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}
