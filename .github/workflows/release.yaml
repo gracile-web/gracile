@@ -188,18 +188,6 @@ jobs:
         shell: bash
         run: node --run test:integration
 
-      # MARK: Starter Projects — Smoke Test (pre-publish, using existing templates)
-
-      - name: Install Playwright browsers (starter-projects)
-        shell: bash
-        run: npx playwright install --with-deps chromium
-        working-directory: starter-projects
-
-      - name: Tests — Starter projects smoke
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        shell: bash
-        run: pnpm --prefix starter-projects run test:smoke
-
       # MARK: Publish packages
       # NOTE: Auth is configured by setup-node's registry-url above.
       # The NPM_TOKEN secret MUST be a Granular Access Token (or classic Automation
@@ -283,6 +271,19 @@ jobs:
           git add starter-projects/templates pnpm-lock.yaml
           git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
           git push
+
+      # MARK: Starter Projects — Smoke Test (post-publish, using regenerated templates)
+
+      - name: Install Playwright browsers (starter-projects)
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        shell: bash
+        run: npx playwright install --with-deps chromium
+        working-directory: starter-projects
+
+      - name: Tests — Starter projects smoke
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        shell: bash
+        run: pnpm --prefix starter-projects run test:smoke
 
       # MARK: Docs Website
 
