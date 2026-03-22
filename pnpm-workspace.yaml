@@ -49,6 +49,7 @@ packages:
 
   # Demos
   - ./packages/labs/vite-plugin-standard-css-modules/demo
+  - ./packages/labs/literals/rollup-plugin-html-css-minifier/demo
   # Docs & starters
   - ./docs/website
   - ./starter-projects

@@ -9,7 +9,7 @@
   "command": {
     "publish": {
       "cleanupTempFiles": true,
-      "removePackageFields": ["devDependencies", "scripts"]
+      "stripPackageKeys": ["devDependencies", "scripts"]
     }
   },
 
