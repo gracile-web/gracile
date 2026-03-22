@@ -1,0 +1,104 @@
+// NOTE: Used accross Shadowed DOM elements and root document for
+// consistent base styles. Keep it concise.
+
+:host,
+body {
+	font-family: system-ui, sans-serif;
+	line-height: 1.618;
+	color: var(--color-gray-900);
+}
+
+hr {
+	margin: 2rem 0;
+	border: none;
+	border-top: 2px solid var(--color-emerald-300);
+}
+
+a {
+	color: var(--color-emerald-700);
+
+	&:active,
+	&:visited {
+		color: var(--color-emerald-700);
+	}
+
+	&:hover {
+		color: var(--color-emerald-900);
+	}
+}
+
+.prose {
+	width: min(100vw, 54rem);
+	padding: calc(0.5rem + 2vw);
+	margin: 4rem auto;
+
+	h1 {
+		font-size: 2rem;
+	}
+}
+
+table {
+	width: 100%;
+	margin: 3rem 0;
+}
+
+blockquote {
+	display: inline-block;
+	padding: 1rem 2rem;
+	margin: 2rem auto;
+	font-style: italic;
+	background: var(--color-gray-200);
+	border-radius: 0.5rem;
+}
+
+pre {
+	padding: 1rem;
+	margin: 3rem 0;
+	line-height: 1.5;
+	background: var(--color-gray-200);
+	border-radius: 0.5rem;
+}
+
+:not(pre) > code {
+	padding: 0.05rem 0.3334rem;
+	margin: 0 0.15rem;
+	font-size: 0.9rem;
+	background: var(--color-gray-200);
+	border-radius: 0.25rem;
+}
+
+button {
+	--bg: var(--color-emerald-200);
+	--border: var(--color-emerald-600);
+	--bg-hover: var(--color-emerald-300);
+	--border-hover: var(--color-emerald-600);
+
+	cursor: pointer;
+}
+
+input {
+	--bg: var(--color-gray-200);
+	--border: var(--color-gray-600);
+	--bg-hover: var(--color-gray-300);
+	--border-hover: var(--color-gray-600);
+}
+
+button,
+input {
+	padding: 1rem;
+	margin: 0.25em;
+	font-size: inherit;
+	color: currentcolor;
+	background-color: var(--bg);
+	border: 1px solid var(--border);
+	border-radius: 0.5rem 0.25rem;
+
+	&:hover {
+		background-color: var(--bg-hover);
+		border-color: var(--bg-border-hover);
+	}
+}
+
+.git-only {
+	display: none;
+}

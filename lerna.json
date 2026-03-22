@@ -16,7 +16,6 @@
   "packages": [
     "./packages/gracile",
 
-    // "./packages/cli",
     "./packages/client",
     "./packages/server",
     "./packages/engine",
@@ -25,6 +24,7 @@
 
     "./packages/internal/tsconfigs",
     "./packages/internal/utils",
+    "./packages/internal/test-utils",
 
     "./packages/addons/metadata",
     "./packages/addons/svg",
@@ -33,7 +33,19 @@
     "./packages/addons/markdown-preset-marked",
     "./packages/labs/better-errors",
     "./packages/labs/client-router",
-    "./packages/labs/css-helpers"
-    // "./packages/addons/minify"
+    "./packages/labs/css-helpers",
+    "./packages/labs/hmr",
+    "./packages/labs/babel-plugin-jsx-to-literals",
+    "./packages/labs/functional",
+    "./packages/labs/vite-plugin-babel-jsx-to-literals",
+    "./packages/labs/islands",
+    "./packages/labs/jsx-forge",
+    "./packages/labs/og-images-generator",
+    "./packages/labs/vite-plugin-jsx-forge",
+    "./packages/labs/literals/parser",
+    "./packages/labs/literals/html-css-minifier",
+    "./packages/labs/literals/rollup-plugin-html-css-minifier",
+
+    "./docs/website"
   ]
 }

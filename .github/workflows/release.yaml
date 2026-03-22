@@ -35,6 +35,8 @@ jobs:
   release:
     name: CI / Release
 
+    timeout-minutes: 30
+
     permissions:
       contents: write # to be able to publish a GitHub release
       issues: write # to be able to comment on released issues
@@ -105,7 +107,9 @@ jobs:
       # never shipped to the user. But that's not 100% optimal, as devDeps could
       # provoke some sec issues, too? A middleground is better than nothing and
       # regularly blocked releases for obscure root mono-repo tooling deps.
-      - name: 'Verify the integrity of provenance attestations and registry signatures for installed [prod] dependencies'
+      - name:
+          'Verify the integrity of provenance attestations and registry
+          signatures for installed [prod] dependencies'
         run: 'node --run audit'
 
       # MARK: Lint/Checks pre-build
@@ -127,25 +131,74 @@ jobs:
       - name: Setup Turbo cache
         uses: dtinth/setup-github-actions-caching-for-turbo@cc723b4600e40a6b8815b65701d8614b91e2669e # v1.3.0
 
-      - name: Build all packages
+      - name: Build libraries
         shell: bash
-        run: node --run build
+        run: node --run build:libs
+
+      - name: Generate Typedoc
+        shell: bash
+        run: node --run docs:generate
+
+      - name: Build docs website
+        shell: bash
+        env:
+          VITE_DOCS_IS_NEXT:
+            ${{ github.ref == 'refs/heads/next' && 'true' || 'false' }}
+        run: node --run build:docs
 
       # MARK: Lint/Checks post-build
+
+      - name: Cache ESLint results
+        uses: actions/cache@v4
+        with:
+          path: .eslintcache
+          key: eslint-${{ hashFiles('pnpm-lock.yaml', 'eslint.config.js') }}
 
       - name: Lint JS/TS — ESLint
         shell: bash
         run: node --run lint:es
 
-      # MARK:Tests
+      # MARK: Tests
 
       - name: Tests — Units
         shell: bash
         run: node --run test:unit
 
+      # IDEA: Can we avoid duplicating Playwright browser installation for each package? Maybe a single root-level install with a shared cache is enough? For now, just cache per-package to speed up subsequent runs.
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key:
+            playwright-${{ hashFiles('packages/labs/hmr/package.json',
+            'packages/labs/client-router/package.json',
+            'starter-projects/package.json') }}
+
+      - name: Install Playwright browsers (hmr)
+        shell: bash
+        run: npx playwright install --with-deps chromium
+        working-directory: packages/labs/hmr
+
+      - name: Install Playwright browsers (client-router)
+        shell: bash
+        run: npx playwright install --with-deps chromium
+        working-directory: packages/labs/client-router
+
       - name: Tests — Integration
         shell: bash
         run: node --run test:integration
+
+      # MARK: Starter Projects — Smoke Test (pre-publish, using existing templates)
+
+      - name: Install Playwright browsers (starter-projects)
+        shell: bash
+        run: npx playwright install --with-deps chromium
+        working-directory: starter-projects
+
+      - name: Tests — Starter projects smoke
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        shell: bash
+        run: pnpm --prefix starter-projects run test:smoke
 
       # MARK: Publish packages
       # NOTE: Auth is configured by setup-node's registry-url above.
@@ -181,14 +234,28 @@ jobs:
           git stash
           pnpm lerna publish --message 'chore: publish [main] release [skip ci]' --create-release=github --yes
 
-      # # TRY: https://www.jessesquires.com/blog/2021/10/17/github-actions-workflows-for-automatic-rebasing-and-merging/
-      # - name: Merge (rebase) back main into next
-      #   env:
-      #     GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-      #   run: |
-      #     git checkout next
-      #     git rebase main
-      #     git push
+      # MARK: Regenerate starter-project templates [main]
+      # After publish, regenerate templates so they pick up freshly published
+      # @gracile/* versions, then commit + push.
+      - name: 'Regenerate starter-project templates [main]'
+        if: github.ref == 'refs/heads/main'
+        env:
+          GRACILE_RELEASE_CHANNEL: 'latest'
+        run: |
+          pnpm --prefix starter-projects run generate
+          git add starter-projects/templates
+          git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
+          git push
+
+      - name: Merge back main into next
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        run: |
+          git checkout next
+          git merge main --no-ff -m 'chore: auto-merge main into next [skip ci]'
+          git push
 
       # MARK: [NEXT]
       - name: 'Lerna publish [next]'
@@ -199,3 +266,50 @@ jobs:
           NPM_CONFIG_PROVENANCE: 'true'
         run: |
           pnpm lerna publish --message 'chore: publish [next] pre-release' --conventional-prerelease --pre-dist-tag=next --preid=next --yes
+
+      # MARK: Regenerate starter-project templates [next]
+      - name: 'Regenerate starter-project templates [next]'
+        if: github.ref == 'refs/heads/next'
+        env:
+          GRACILE_RELEASE_CHANNEL: 'next'
+        run: |
+          pnpm --prefix starter-projects run generate
+          git add starter-projects/templates
+          git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
+          git push
+
+      # MARK: Docs Website
+
+      - name: Cache Playwright browsers (docs)
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-docs-${{ hashFiles('docs/website/package.json') }}
+
+      - name: Install Playwright browsers (docs)
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        shell: bash
+        run: npx playwright install --with-deps chromium
+        working-directory: docs/website
+
+      - name: Tests — Docs smoke
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        shell: bash
+        run: pnpm --prefix docs/website run test:smoke
+
+      - name: 'Deploy docs website [main → production]'
+        if: github.ref == 'refs/heads/main'
+        env:
+          NETLIFY_AUTH_TOKEN: '${{ secrets.NETLIFY_AUTH_TOKEN }}'
+          NETLIFY_SITE_ID: '${{ secrets.NETLIFY_SITE_ID }}'
+        shell: bash
+        run: pnpm --prefix ./docs/website deploy:main
+
+      - name: 'Deploy docs website [next → preview]'
+        if: github.ref == 'refs/heads/next'
+        env:
+          NETLIFY_AUTH_TOKEN: '${{ secrets.NETLIFY_AUTH_TOKEN }}'
+          NETLIFY_SITE_ID: '${{ secrets.NETLIFY_SITE_ID }}'
+        shell: bash
+        run: pnpm --prefix ./docs/website deploy:next

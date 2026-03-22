@@ -1,0 +1,78 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 0.1.0 (2024-07-28)
+
+### Bug Fixes
+
+* accept rollup 1 as peerDep ([#2](https://github.com/JulianCataldo/minify-html-literals/issues/2)) ([2867985](https://github.com/JulianCataldo/minify-html-literals/commit/286798521d2d1a5c95648eb2bf3649c11e6689ed))
+* add support for rollup 2.0.0 ([f305718](https://github.com/JulianCataldo/minify-html-literals/commit/f30571856c744efc3a90cc2f5b0c97a122ea3043)), closes [#15](https://github.com/JulianCataldo/minify-html-literals/issues/15)
+* build errors ([ee4d596](https://github.com/JulianCataldo/minify-html-literals/commit/ee4d596c2797cea335af2c43ba0368ec3d6fa518))
+* css tagged templates not respecting semicolons ([#22](https://github.com/JulianCataldo/minify-html-literals/issues/22)) ([3651a0b](https://github.com/JulianCataldo/minify-html-literals/commit/3651a0bc30167deccdfb21b4177827072df16cb5))
+* do not collapse boolean attributes for Polymer binding syntax ([8597d14](https://github.com/JulianCataldo/minify-html-literals/commit/8597d1411882a72808adedea9f6683ec45e34ed0))
+* do not collapse boolean attributes for Polymer binding syntax ([80df154](https://github.com/JulianCataldo/minify-html-literals/commit/80df154f1650bbadf74915b2f5e00526254c1d76))
+* do not fail on empty template literals ([b74973a](https://github.com/JulianCataldo/minify-html-literals/commit/b74973a22166544a255c80d01a33b9ade9a3d604))
+* do not remove tag whitespace ([7d4d289](https://github.com/JulianCataldo/minify-html-literals/commit/7d4d289213070da397b8a304c6c7eb58a43b68d0))
+* do not remove tag whitespace ([89f362a](https://github.com/JulianCataldo/minify-html-literals/commit/89f362ad6f51cf1a77c94d2411cb34037f204d7e))
+* do not require fileName in minify options ([9543ef1](https://github.com/JulianCataldo/minify-html-literals/commit/9543ef1d2859c37b6b9a358796e6e2462445e9c8))
+* do not sort attributes or class names ([b72a5c4](https://github.com/JulianCataldo/minify-html-literals/commit/b72a5c43d117d6a33f76ae85fb0bf01161b48226))
+* don't remove attribute quotes by default. Fixes [#12](https://github.com/JulianCataldo/minify-html-literals/issues/12). ([#13](https://github.com/JulianCataldo/minify-html-literals/issues/13)) ([e18ae65](https://github.com/JulianCataldo/minify-html-literals/commit/e18ae65e202802cb2fd793089f76de3af54fec6f))
+* fail to minify with <style> placeholders ([64b9b6f](https://github.com/JulianCataldo/minify-html-literals/commit/64b9b6f4a2e0406537ccc7993d80edd48037066b))
+* failure to minify templates prefixed with comments ([ea8c98e](https://github.com/JulianCataldo/minify-html-literals/commit/ea8c98e84ea22d0e86bad7a212bccbf055ab7e99))
+* failure to minify templates prefixed with comments ([8805f69](https://github.com/JulianCataldo/minify-html-literals/commit/8805f6991c7bef9d51f6844f3ac7a7eba6af3cbb))
+* failure when templates are prefixed with commentss ([3f34507](https://github.com/JulianCataldo/minify-html-literals/commit/3f34507760e8e166477fcd736bd3b1c130002422))
+* handle "return `simple`" style literals ([f0e30ab](https://github.com/JulianCataldo/minify-html-literals/commit/f0e30ab887c0d31287215965b56a5d4461e9a67d))
+* html attribute placeholders throwing split error [#28](https://github.com/JulianCataldo/minify-html-literals/issues/28) ([b1e14dc](https://github.com/JulianCataldo/minify-html-literals/commit/b1e14dca1a5ed9e6599193f474992729953f885d))
+* incorrect package main and types ([3000afc](https://github.com/JulianCataldo/minify-html-literals/commit/3000afc539ec8a662d4e151a70682be32eda78c3))
+* minify multiline svg elements ([9f37d2d](https://github.com/JulianCataldo/minify-html-literals/commit/9f37d2d6442a6533a90c1728f80aeb78d6060d9b))
+* option type errors ([b917607](https://github.com/JulianCataldo/minify-html-literals/commit/b917607e5652cbfbfa7c6f72ebfa0f1dba1aec56))
+* parse errors with JS comments at end of expressions ([3bf9053](https://github.com/JulianCataldo/minify-html-literals/commit/3bf90534db2d343acfabc7610116479523c60f0d))
+* parse errors with JS comments in HTML attributes with no quotes ([0f5a842](https://github.com/JulianCataldo/minify-html-literals/commit/0f5a842c54f3514c72c79eaf6749f15770818550))
+* parse escaped characters properly ([7a677bb](https://github.com/JulianCataldo/minify-html-literals/commit/7a677bb270066ffe04895432aa6b9bd5e98876c1))
+* pin clean-css version for breaking typings change ([1abb0a7](https://github.com/JulianCataldo/minify-html-literals/commit/1abb0a7a891b63f24a0c0e259c7b7e4fbaae79cb))
+* remove source files from package ([b784735](https://github.com/JulianCataldo/minify-html-literals/commit/b7847359c968a68d8effa15a3d2d4fc43407d236))
+* remove source files from package ([b53c052](https://github.com/JulianCataldo/minify-html-literals/commit/b53c05244253ecac9ca10361bb199fe4200502a7))
+* remove unused import ([e37a43a](https://github.com/JulianCataldo/minify-html-literals/commit/e37a43afc0a8b5d36c30f1735e50a4413f0935af))
+* spaces in pseudo classes (like ::part) are not removed ([85526fc](https://github.com/JulianCataldo/minify-html-literals/commit/85526fcb889e288e1adbb5c7ff9feca41d45acff)), closes [#26](https://github.com/JulianCataldo/minify-html-literals/issues/26)
+* **strategy:** error when minifying inline CSS style placeholders [#1](https://github.com/JulianCataldo/minify-html-literals/issues/1) ([2226ae2](https://github.com/JulianCataldo/minify-html-literals/commit/2226ae2adf37697026945b9cd3772db2291efea9))
+* support TS v3 [#8](https://github.com/JulianCataldo/minify-html-literals/issues/8) ([a5d7460](https://github.com/JulianCataldo/minify-html-literals/commit/a5d7460a5a63a428b4d98348b71e5e00bc4326d4))
+* support typescript v4 ([9c00311](https://github.com/JulianCataldo/minify-html-literals/commit/9c00311d5f549bf2e6e8637bc9ff72fc5c030a26))
+* typescript build issues ([0d1b01f](https://github.com/JulianCataldo/minify-html-literals/commit/0d1b01f208746b07a3e95528d1d0249af7282fd3))
+* typing build error ([9571152](https://github.com/JulianCataldo/minify-html-literals/commit/9571152724e542d329aea6e79bf609a67e20bec6))
+* unable to import TypescriptStrategy type ([8d2e3e9](https://github.com/JulianCataldo/minify-html-literals/commit/8d2e3e9e1329fac862c494d4abc7b8ace84454ad))
+* upate minify-html-literals to v1.3.5 ([ab89bb0](https://github.com/JulianCataldo/minify-html-literals/commit/ab89bb00b2391b7c342f05cca73d640f68e7c7c5))
+* update dependencies and typings ([0a43630](https://github.com/JulianCataldo/minify-html-literals/commit/0a43630ee0fd594ed0cbfb7b52c863983bd24cb0))
+* update minify-html-literals to 1.1.1 ([6abe9bb](https://github.com/JulianCataldo/minify-html-literals/commit/6abe9bbd03bc5a1a08966ca8f490ab1c9f2d6a8a))
+* update minify-html-literals to 1.1.2 ([2a26e9c](https://github.com/JulianCataldo/minify-html-literals/commit/2a26e9cd327e5bbd7bbc11479e75a79d25aae0ec))
+* update minify-html-literals to not sort attributes or classes ([dc66de0](https://github.com/JulianCataldo/minify-html-literals/commit/dc66de0044e5e4a83e36f3fc5c1aff2f8057715c))
+* update minify-html-literals to use hires sourcemaps ([8dcb055](https://github.com/JulianCataldo/minify-html-literals/commit/8dcb055f9d94ddaef1a4d742482e453e52db85b4))
+* update minify-html-literals to v1.3.1 ([a1eb2ef](https://github.com/JulianCataldo/minify-html-literals/commit/a1eb2ef26587c2abc521ffe66d16a6c22451043b))
+* update minify-html-literals to v1.3.2 ([3408e5c](https://github.com/JulianCataldo/minify-html-literals/commit/3408e5c8edd76452dc58745444e33e70ef1a93e3))
+* update parse-literals to 1.1.0 ([5ba1e99](https://github.com/JulianCataldo/minify-html-literals/commit/5ba1e9928e62c7e188a232f7fa8234f7a63d1908))
+* update parse-literals to fix escaped character minifying ([93922c8](https://github.com/JulianCataldo/minify-html-literals/commit/93922c8572a538024c7390ccd80ae526c3fdf90d))
+* update parse-literals to minify escaped characters properly ([ff2df26](https://github.com/JulianCataldo/minify-html-literals/commit/ff2df26fd5c12fa3a890a7e5410f51f7e1156e00))
+* update to html-minifier 3.5.21 ([11a9f6b](https://github.com/JulianCataldo/minify-html-literals/commit/11a9f6b97ca644392c67a9627a014e93731beaec))
+* update to html-minifier v4.0.0 ([6ddfd10](https://github.com/JulianCataldo/minify-html-literals/commit/6ddfd104307347b7a66739b3c4e418bb6686e94e))
+* update to minify-html-literals v1.3.0 ([56cfb8d](https://github.com/JulianCataldo/minify-html-literals/commit/56cfb8d3dfc5d828a824cbeb92c3aab53bda379a))
+* update to parse-literals v1.2.0 ([bba4c7d](https://github.com/JulianCataldo/minify-html-literals/commit/bba4c7d12b9d92635ed1d72d00d69086a45d8edb))
+* use hires sourcemaps by default ([7f132b2](https://github.com/JulianCataldo/minify-html-literals/commit/7f132b22709bb98888da059cc6a5d7eb4c61d0e8))
+
+### Features
+
+* add ability to minify css-tagged templates ([d37a037](https://github.com/JulianCataldo/minify-html-literals/commit/d37a037d3b9f4ad5cf9ddb1768f9e8cebbd4c32a)), closes [#3](https://github.com/JulianCataldo/minify-html-literals/issues/3)
+* allow partial minify options to make it easier to customize ([f007988](https://github.com/JulianCataldo/minify-html-literals/commit/f00798841b13434db0c6f3ff8066add02bf416da))
+* allow partial strategy overrides ([c970ac9](https://github.com/JulianCataldo/minify-html-literals/commit/c970ac91d9ec51c9d8d65fbe7f73da5e80b2ef7e))
+* do not require options or filename ([6649ac9](https://github.com/JulianCataldo/minify-html-literals/commit/6649ac91bf77d92864c768ff076aed2b11705e12))
+* initial release ([e3f2d8c](https://github.com/JulianCataldo/minify-html-literals/commit/e3f2d8c9d25c181bbc4cab64b3e8e5a197ecb061))
+* initial release ([cadf7c2](https://github.com/JulianCataldo/minify-html-literals/commit/cadf7c29492a274a27a8b183ea4572fce99111bf))
+* initial release with typescript strategy ([a4ecdef](https://github.com/JulianCataldo/minify-html-literals/commit/a4ecdeff3d330a941a5db84229a99ac734c19487))
+* minify CSS tagged template literals ([6baf3c2](https://github.com/JulianCataldo/minify-html-literals/commit/6baf3c2a36b8172a947257a43db12649418e03a5))
+* minify svg-tagged templates [#9](https://github.com/JulianCataldo/minify-html-literals/issues/9) ([62da810](https://github.com/JulianCataldo/minify-html-literals/commit/62da810894a1f2c3705783ebb1a4264cf8989ee4))
+* support rollup3 ([#26](https://github.com/JulianCataldo/minify-html-literals/issues/26)) ([470561c](https://github.com/JulianCataldo/minify-html-literals/commit/470561c035b495e3d175ff5a6450e59a94400d94))
+* update minify-html-literals to 1.1.0 ([a1d9f1d](https://github.com/JulianCataldo/minify-html-literals/commit/a1d9f1dc8ad7a057a595375ad9632553ae858c15))
+
+### Reverts
+
+* "chore: wireit + static html parse error unit test ([#53](https://github.com/JulianCataldo/minify-html-literals/issues/53))" ([7e5bb08](https://github.com/JulianCataldo/minify-html-literals/commit/7e5bb086030418c7af2d2d542782c5dd21437263))

@@ -1,0 +1,96 @@
+{
+  "name": "og-images-generator",
+  "version": "0.4.0-next.2",
+  "description": "Generate OG images from a static folder and / or a middleware. Extract metadata from HTML pages. No headless browser involved. Comes as a CLI, API or plugins.",
+  "keywords": [
+    "og-images",
+    "social-networks",
+    "open-graph",
+    "svg-png",
+    "static",
+    "seo",
+    "ssg",
+    "cli",
+    "vite-plugin",
+    "withastro",
+    "api"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/og-images-generator"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./api": "./dist/api.js",
+    "./connect": "./dist/plugins/connect-middleware.js",
+    "./rollup": "./dist/plugins/rollup-plugin.js",
+    "./vite": "./dist/plugins/vite-plugin.js",
+    "./astro": "./dist/plugins/astro-integration.js"
+  },
+  "bin": {
+    "generate-og": "./dist/cli.js"
+  },
+  "files": [
+    "./dist/**/*"
+  ],
+  "scripts": {
+    "// test": "pnpm test:unit",
+    "build": "pnpm clean && tsc",
+    "check:types": "tsc --noEmit",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch",
+    "test:unit": "node --test ./dist/test/*.test.js",
+    "test:unit:dev": "node --test --watch ./dist/test/*.test.js"
+  },
+  "dependencies": {
+    "@lit-labs/ssr": "catalog:",
+    "@resvg/resvg-js": "^2.6.2",
+    "commander": "catalog:",
+    "entities": "^5.0.0",
+    "fast-glob": "^3.3.2",
+    "parse5": "^7.2.1",
+    "picocolors": "catalog:",
+    "satori": "^0.10.14",
+    "satori-html": "^0.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@types/connect": "^3.4.38",
+    "astro": "^5.1.1",
+    "rollup": "^4.29.1",
+    "vite": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "@types/connect": {
+      "optional": true
+    },
+    "astro": {
+      "optional": true
+    },
+    "rollup": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

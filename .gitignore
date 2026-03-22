@@ -31,10 +31,19 @@ dist-ssr
 .old*
 .dev*
 
-/docs
+docs/typedocs
 
 integration/**/*.js.map
 
 .tmp
 
 coverage
+
+# Playwright
+test-results
+
+# ESLint
+.eslintcache
+
+# Local Netlify folder
+.netlify

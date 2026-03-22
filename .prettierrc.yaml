@@ -2,6 +2,7 @@
 # editorConfig: true
 singleQuote: true
 useTabs: true
+proseWrap: always
 
 overrides:
   - files: ['*.md', '*.yaml', '*.json', '.*rc*']

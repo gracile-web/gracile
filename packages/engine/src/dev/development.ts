@@ -32,7 +32,12 @@ export async function createDevelopmentHandler({
 	logger.info(c.dim('Creating the request handler…'), { timestamp: true });
 
 	const collectAndCodegen = async () => {
-		await collectRoutes(routes, root, gracileConfig.routes?.exclude);
+		await collectRoutes(
+			routes,
+			root,
+			gracileConfig.routes?.exclude,
+			gracileConfig.trailingSlash,
+		);
 
 		if (gracileConfig.experimental?.generateRoutesTypings)
 			await generateRoutesTypings(root, routes).catch((error) =>

@@ -1,0 +1,56 @@
+{
+  "name": "@literals/parser",
+  "version": "1.2.6-next.0",
+  "description": "Parse template literals from code",
+  "keywords": [
+    "parse",
+    "extract",
+    "literal",
+    "literals",
+    "template",
+    "tagged",
+    "lit-html"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/literals/parser"
+  },
+  "license": "MIT",
+  "author": "Liz Mitchell <asyncliz@gmail.com>",
+  "maintainers": [
+    "Julian Cataldo <jcprofree@gmail.com>"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/test"
+  ],
+  "scripts": {
+    "// test": "pnpm test:unit",
+    "test:unit": "c8 node --enable-source-maps --test dist/test/*.js",
+    "test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.js",
+    "build": "tsc",
+    "check:types": "tsc --noEmit",
+    "clean": "rm -rf ./dist ./coverage",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "@types/chai": "catalog:",
+    "@types/node": "catalog:",
+    "@types/sinon": "catalog:",
+    "c8": "catalog:",
+    "chai": "catalog:",
+    "sinon": "^6.3.5",
+    "typescript": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

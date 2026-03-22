@@ -1,0 +1,30 @@
+@use '../features/gracile-welcome';
+
+article {
+	padding: 2rem;
+}
+
+.custom-elements-demo {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7rem;
+	align-items: center;
+	justify-content: space-evenly;
+	padding: 6rem 2rem;
+}
+
+section {
+	width: 100%;
+	padding: 3rem;
+	background-color: color-mix(in srgb, var(--color-gray-0), transparent 60%);
+	border-top: 1px solid var(--color-emerald-600);
+}
+
+.readme {
+	padding: 6rem 0;
+
+	header,
+	footer {
+		text-align: center;
+	}
+}

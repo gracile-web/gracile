@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0-next.12](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.11...@gracile/server@0.7.0-next.12) (2026-03-21)
+
+**Note:** Version bump only for package @gracile/server
+
+# [0.7.0-next.11](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.10...@gracile/server@0.7.0-next.11) (2026-03-21)
+
+**Note:** Version bump only for package @gracile/server
+
+# [0.7.0-next.10](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.9...@gracile/server@0.7.0-next.10) (2026-03-21)
+
+**Note:** Version bump only for package @gracile/server
+
+# [0.7.0-next.9](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.8...@gracile/server@0.7.0-next.9) (2026-03-18)
+
+**Note:** Version bump only for package @gracile/server
+
+# [0.7.0-next.8](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.7...@gracile/server@0.7.0-next.8) (2026-03-15)
+
+### Bug Fixes
+
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+
+# [0.7.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.6...@gracile/server@0.7.0-next.7) (2026-03-09)
+
+**Note:** Version bump only for package @gracile/server
+
+# [0.7.0-next.6](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.5...@gracile/server@0.7.0-next.6) (2026-03-07)
+
+**Note:** Version bump only for package @gracile/server
+
+# [0.7.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.4...@gracile/server@0.7.0-next.5) (2026-03-06)
 # [0.7.0](https://github.com/gracile-web/gracile/compare/@gracile/server@0.7.0-next.4...@gracile/server@0.7.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile/server

@@ -1,38 +1,34 @@
 import { normalizeToPosix } from '@gracile/internal-utils/paths';
 import { createFilter, type Plugin } from 'vite';
 
-import type { RenderedRouteDefinition } from '../routes/render.js';
 import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
 
+import type { PluginSharedState } from './plugin-shared-state.js';
+
 /**
- * @todo Client-side testing, docs.
+ * Server-side routes virtual module (`gracile:routes`).
+ *
+ * Scoped to the SSR build environment via `applyToEnvironment`.
+ * Reads from shared state lazily so `renderedRoutes` is available
+ * (populated during the client build).
  */
 export function virtualRoutes({
-	// root,
-	routes,
-	renderedRoutes,
+	state,
 }: {
-	// root: string;
-	routes: RoutesManifest;
-	renderedRoutes: RenderedRouteDefinition[];
+	state: PluginSharedState;
 }): Plugin[] {
 	const virtualModuleId = 'gracile:routes';
 	const resolvedVirtualModuleId = `\0${virtualModuleId}`;
 
-	// TODO: Remove handler when prerendering route
-	const routesWithoutPrerender = [...routes];
-	const renderedRoutesWithoutPrerender = renderedRoutes;
-	// const routesWithoutPrerender = [...routes].filter(
-	// 	([, r]) => r.prerender !== true,
-	// );
-	// const renderedRoutesWithoutPrerender = renderedRoutes.filter(
-	// 	(r) => r.savePrerender !== true,
-	// );
-
 	return [
 		{
 			name: 'gracile-server-routes',
+			apply: 'build',
+
+			applyToEnvironment(environment) {
+				return environment.name === 'ssr';
+			},
 
 			resolveId(id) {
 				if (id === virtualModuleId) {
@@ -42,25 +38,32 @@ export function virtualRoutes({
 			},
 
 			load(id) {
-				if (id === resolvedVirtualModuleId) {
-					return `
+				if (id !== resolvedVirtualModuleId) return null;
+
+				const routes = state.routes;
+				const renderedRoutes = state.renderedRoutes;
+				if (!routes || routes.size === 0 || !renderedRoutes) return null;
+
+				const routesArray = [...routes];
+
+				return `
 import { URLPattern } from '@gracile/gracile/url-pattern';
 
 const routes = new Map(${
-						//
-						JSON.stringify(routesWithoutPrerender, null, 2).replaceAll(
-							// NOTE: Not strictly necessary, but just in case.
-							'"pattern": {}',
-							'"pattern": null',
-						)
-					})
+					//
+					JSON.stringify(routesArray, null, 2).replaceAll(
+						// NOTE: Not strictly necessary, but just in case.
+						'"pattern": {}',
+						'"pattern": null',
+					)
+				})
 routes.forEach((route, pattern) => {
 	route.pattern = new URLPattern(pattern, 'http://gracile');
 });
 
 const routeImports = new Map(
 	[
-		${routesWithoutPrerender
+		${routesArray
 			.map(
 				([pattern, route]) =>
 					`['${pattern}', () => import('/${normalizeToPosix(route.filePath)}')],`,
@@ -70,22 +73,19 @@ const routeImports = new Map(
 );
 
 const routeAssets = new Map(${JSON.stringify(
-						renderedRoutesWithoutPrerender.map((r) => [
-							`/${r.name
-								//
-								.replace(/index\.html$/, '')
-								.replace(/* Error pages */ /\.html$/, '/')}`,
-							r.handlerAssets,
-						]),
-						null,
-						2,
-					)});
+					renderedRoutes.map((r) => [
+						`/${r.name
+							//
+							.replace(/index\.html$/, '')
+							.replace(/* Error pages */ /\.html$/, '/')}`,
+						r.handlerAssets,
+					]),
+					null,
+					2,
+				)});
 
 export { routes, routeImports, routeAssets };
 `;
-				}
-
-				return null;
 			},
 		},
 	];

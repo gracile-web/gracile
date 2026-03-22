@@ -14,11 +14,9 @@
       // "persistent": true
     },
     "test": {
+      "dependsOn": ["build"],
       "cache": false,
       "persistent": true
-    },
-    "test:dev2": {
-      "cache": false
     },
     "test:unit": {
       "cache": false,
@@ -27,14 +25,47 @@
     "test:unit:dev": {
       "cache": false
     },
+    "test:integration": {
+      // "dependsOn": ["build"],
+      "cache": false
+    },
     "build": {
+      "dependsOn": ["^build"],
       "cache": false,
-      "dependsOn": [
-        //
-        "^clean",
-        "^build"
-      ],
       "outputs": ["dist/**"]
+    },
+    "check:types": {
+      "dependsOn": ["^build"]
     }
+
+    // // Base docs:generate task — each package that defines the script runs it.
+    // // Root workspace runs `typedoc`; @gracile/docs runs the collect scripts.
+    // "docs:generate": {
+    //   "dependsOn": ["^build"],
+    //   "outputs": [
+    //     "docs/typedocs/**",
+    //     "src/content/docs/25-references/01-api/**",
+    //     "public/playground-data.json"
+    //   ]
+    // },
+
+    // // Root docs:generate (runs typedoc at the monorepo root).
+    // // Build deps are handled by the general docs:generate task above.
+    // "//#docs:generate": {
+    //   "outputs": ["docs/typedocs/**"]
+    // },
+
+    // // @gracile/docs's collect scripts must run after the root typedoc step.
+    // "@gracile/docs#docs:generate": {
+    //   "dependsOn": ["//#docs:generate"],
+    //   "outputs": ["src/content/docs/25-references/01-api/**"]
+    // },
+
+    // // Doc site build depends on freshly generated content.
+    // "@gracile/docs#build": {
+    //   "dependsOn": ["@gracile/docs#docs:generate", "^build"],
+    //   "cache": false,
+    //   "outputs": ["dist/**"]
+    // }
   }
 }

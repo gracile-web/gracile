@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2022",
+
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+
+    "strict": true,
+
+    "checkJs": true,
+    "skipLibCheck": true,
+
+    "moduleResolution": "Bundler",
+
+    "incremental": false,
+
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noEmitOnError": false,
+
+    "declaration": true,
+    "declarationMap": true,
+
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+
+  "include": ["./src/**/*", "./ambient.d.ts"],
+
+  "exclude": ["./**/dist", "./coverage"]
+}

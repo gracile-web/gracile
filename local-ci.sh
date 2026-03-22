@@ -3,15 +3,14 @@
 # NOTE: Mac only
 killall node
 
-node --run format:fix
-node --run lint:es:fix
+# node --run format:fix
+# node --run lint:es:fix
 
 set -e
 
 pnpm install --frozen-lockfile
 
-# TODO: More
-# node --run syncpack:lint
+# pnpm --prefix docs/website exec playwright install chromium
 
 node --run audit
 
@@ -19,12 +18,28 @@ node --run lint:commit
 
 node --run format
 
-node --run build
+node --run clean
+
+node --run build:libs
+
+node --run docs:generate
+
+node --run build:docs
 
 node --run lint:es
 
 node --run test:unit
 
 node --run test:integration
+
+# MARK: Starter projects
+
+pnpm --prefix starter-projects run generate
+
+pnpm --prefix starter-projects run test:smoke
+
+# MARK: Docs
+
+pnpm --prefix docs/website run test:smoke
 
 # Lerna…

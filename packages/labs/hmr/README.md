@@ -1,0 +1,52 @@
+# <span class=git-only>Gracile — </span>Hot Module Replacement<i-c o=ph:flask></i-c>
+
+Web Components HMR (Hot Module Replacement) Vite plugin, to be used with
+[Gracile](https://gracile.js.org) or any Vite project that use Custom Elements.
+
+Enables granular hot replacement for Lit, FAST Element, Haunted, and vanilla web
+components during development — updating templates and styles without full page
+reloads.
+
+## Credits
+
+This package is derived from:
+
+- **[vite-plugin-web-components-hmr](https://github.com/fi3ework/vite-plugin-web-components-hmr)**
+  by [@fi3ework](https://github.com/fi3ework) — MIT License
+  - Which is itself a fork of
+    **[@open-wc/dev-server-hmr](https://github.com/open-wc/open-wc/tree/master/packages/dev-server-hmr)**
+    by [Open Web Components](https://open-wc.org/) — MIT License
+
+The source was extracted and converted to ESM for long-term maintainability
+within the Gracile ecosystem.  
+Note that only the core (vanilla CE) and the Lit preset are tested.
+
+## Usage
+
+```ts
+// vite.config.ts
+import { gracile } from '@gracile/gracile/plugin';
+import { gracileHmr, presets } from '@gracile-labs/hmr';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [
+    gracile(),
+    gracileHmr({
+      include: ['src/**/*.el.ts', 'src/**/*.el.tsx'],
+      presets: [presets.lit],
+    }),
+  ],
+});
+```
+
+## Available presets
+
+- `presets.lit` — for `lit` (v2+)
+- `presets.litElement` — for `lit-element` (v1)
+- `presets.fastElement` — for `@microsoft/fast-element`
+- `presets.haunted` — for `haunted`
+
+## License
+
+ISC (this package) / MIT (upstream sources)

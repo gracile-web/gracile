@@ -1,3 +1,7 @@
 {
-  "extends": "@gracile/internal-tsconfigs/config-base.json"
+  "extends": "@gracile/internal-tsconfigs/config-base.json",
+
+  // NOTE: ambient.d.ts imports from ./dist/ for consumer typings.
+  // Including it would cause TS5055 (input/output conflict).
+  "include": ["src/**/*"]
 }

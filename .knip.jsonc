@@ -1,26 +1,37 @@
 {
+	"$schema": "https://unpkg.com/knip@5/schema.json",
+	"ignore": ["**/.dev/**", "**/.dev.*", "**/.old/**", "**/*.d.ts"],
+	"ignoreWorkspaces": [
+		".",
+		"docs/website",
+		"packages/cli",
+		"packages/engine/__fixtures__/ce-tracker",
+		"packages/engine/__fixtures__/server-express",
+		"packages/engine/__fixtures__/static-site",
+		"packages/labs/hmr/__fixtures__/hmr-basic-lit",
+		"packages/labs/islands/__fixtures__/static-site-islands",
+		"starter-projects",
+	],
 	"workspaces": {
-		// ".": {
-		//   "entry": "scripts/*.js",
-		//   "project": "scripts/**/*.js"
-		// },
-		"packages/gracile": {
-			"entry": "src/index.ts",
-			"project": "src/**/*.ts",
+		"packages/{gracile,client,server,engine,create-gracile}": {
+			"entry": "src/**/*.{ts,tsx,js,mjs,cjs}",
+			"project": "src/**/*.{ts,tsx,js,mjs,cjs}",
 		},
-		// "packages/*": {
-		//   "entry": "{index,cli}.ts",
-		//   "project": "**/*.ts"
-		// },
-		// "packages/cli": {
-		//   "entry": "bin/cli.js"
-		// }
+		"packages/addons/*": {
+			"entry": "src/**/*.{ts,tsx,js,mjs,cjs}",
+			"project": "src/**/*.{ts,tsx,js,mjs,cjs}",
+		},
+		"packages/internal/{utils,test-utils}": {
+			"entry": "src/**/*.{ts,tsx,js,mjs,cjs}",
+			"project": "src/**/*.{ts,tsx,js,mjs,cjs}",
+		},
+		"packages/labs/{babel-plugin-jsx-to-literals,better-errors,client-router,css-helpers,devtools,functional,hmr,islands,jsx-forge,og-images-generator,vite-plugin-babel-jsx-to-literals,vite-plugin-jsx-forge}": {
+			"entry": "src/**/*.{ts,tsx,js,mjs,cjs}",
+			"project": "src/**/*.{ts,tsx,js,mjs,cjs}",
+		},
+		"packages/labs/literals/{parser,html-css-minifier,rollup-plugin-html-css-minifier}": {
+			"entry": "src/**/*.{ts,tsx,js,mjs,cjs}",
+			"project": "src/**/*.{ts,tsx,js,mjs,cjs}",
+		},
 	},
-	// "entry": [
-	// 	"packages/gracile/src/index.ts",
-	// 	// "plugin.ts",
-	// 	//
-	// 	// "src/index.{js,ts}",
-	// ],
-	// "project": ["packages/**/*.{js,ts}"],
 }

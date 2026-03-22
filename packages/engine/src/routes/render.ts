@@ -32,9 +32,17 @@ async function streamToString(stream: Readable): Promise<string> {
 	const chunks: Buffer[] = [];
 
 	for await (const chunk of stream) {
+		// `RenderResultReadable` always pushes strings (it resolves promises,
+		// thunks, and nested iterables internally). `Readable.from(string)`
+		// used for the document-only path also yields strings.
+		// Accept Buffer too for safety (plain `Readable` streams may emit them).
 		if (typeof chunk === 'string') {
 			chunks.push(Buffer.from(chunk));
-		} else throw new TypeError('Wrong buffer');
+		} else if (Buffer.isBuffer(chunk)) {
+			chunks.push(chunk);
+		} else {
+			throw new TypeError(`Unexpected chunk type in stream: ${typeof chunk}`);
+		}
 	}
 
 	return Buffer.concat(chunks).toString('utf8');
@@ -57,7 +65,12 @@ export async function renderRoutes({
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 
 	// MARK: Collect
-	await collectRoutes(routes, root, gracileConfig.routes?.exclude);
+	await collectRoutes(
+		routes,
+		root,
+		gracileConfig.routes?.exclude,
+		gracileConfig.trailingSlash,
+	);
 
 	const renderedRoutes: RenderedRouteDefinition[] = [];
 

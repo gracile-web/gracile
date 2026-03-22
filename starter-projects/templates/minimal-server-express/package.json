@@ -1,0 +1,23 @@
+{
+  "name": "@gracile/template--minimal-server-express",
+  "version": "0.0.2",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
+    "preview": "node -C preview --watch server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@gracile/gracile": "^0.9.0-next.12",
+    "express": "^5.0.1",
+    "lit": "^3.2.1",
+    "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.3",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "private": true,
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "dev": "node --watch programmatic.js",
+    "og": "npm run clean && npx generate-og --base pages --out dist --json dist/index.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "og-images-generator": "link:../.."
+  }
+}

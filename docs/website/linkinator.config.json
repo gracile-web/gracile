@@ -1,0 +1,5 @@
+{
+  "serverRoot": "./dist",
+  "recurse": true,
+  "format": "json"
+}

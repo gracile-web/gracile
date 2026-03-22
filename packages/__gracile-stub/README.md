@@ -4,7 +4,9 @@ A thin, full-stack, **web** framework.
 
 # ⚠️ Attention, please!
 
-> You might want to go to [`@gracile/gracile`](https://www.npmjs.com/package/@gracile/gracile) (with the `@` scope).  
+> You might want to go to
+> [`@gracile/gracile`](https://www.npmjs.com/package/@gracile/gracile) (with the
+> `@` scope).  
 > This package is a stub. It will be re-used at a latter time.
 
 ---
@@ -13,9 +15,12 @@ Features:
 
 - Portable **HTML**, **CSS** and **JS**, thanks to **Lit (SSR)**.
 - Highly responsive during dev. and build, thanks to **Vite**.
-- **Minimal dependency footprint** for its **runtime** and your **distributable**.
-- Embrace web standards like **Custom Elements** (aka Web Components) or the **WhatWG Fetch** API.
-- A streamlined **D**eveloper e**X**perience for building, instead of fiddling around.
+- **Minimal dependency footprint** for its **runtime** and your
+  **distributable**.
+- Embrace web standards like **Custom Elements** (aka Web Components) or the
+  **WhatWG Fetch** API.
+- A streamlined **D**eveloper e**X**perience for building, instead of fiddling
+  around.
 
 # 🏁 Get Started
 
@@ -28,7 +33,8 @@ bun create gracile@latest
 yarn create gracile@latest
 ```
 
-For more information, head over to the [documentation website (gracile.js.org)](https://gracile.js.org/).
+For more information, head over to the
+[documentation website (gracile.js.org)](https://gracile.js.org/).
 
 ## 🌐 A platform-minded meta-framework
 
@@ -46,12 +52,15 @@ With it, you can achieve:
 - Progressive enhancements
 - And more, via **Add-ons** (Markdown, Metadata, SVG…)
 
-All that, with a **few conventions**, a **standard-oriented** approach and a very **contained footprint** 🤏.
+All that, with a **few conventions**, a **standard-oriented** approach and a
+very **contained footprint** 🤏.
 
-Web Components, TypeScript, SASS, Lit, and other DX perks are all at your fingertips; while remaining optional.
+Web Components, TypeScript, SASS, Lit, and other DX perks are all at your
+fingertips; while remaining optional.
 
-Thanks to the Vite modular architecture, and Node.js versatility, **developer experience** is smoothed up
-across the board, while in **development** and when building for **production**.
+Thanks to the Vite modular architecture, and Node.js versatility, **developer
+experience** is smoothed up across the board, while in **development** and when
+building for **production**.
 
 ## 👐 Contributing
 
@@ -65,7 +74,9 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ---
 
-> “Perfection is achieved, not when there is nothing more to add,
-> but when there is nothing left to take away.”
+> “Perfection is achieved, not when there is nothing more to add, but when there
+> is nothing left to take away.”
 >
-> ― [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry), _Airman's Odyssey_
+> ―
+> [Antoine de Saint-Exupéry](https://en.wikipedia.org/wiki/Antoine_de_Saint-Exup%C3%A9ry),
+> _Airman's Odyssey_

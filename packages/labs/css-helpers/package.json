@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/css-helpers",
-  "version": "0.2.0",
+  "version": "0.2.0-next.10",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -37,7 +37,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "dependencies": {
     "@gracile/engine": "workspace:^",
@@ -45,9 +46,11 @@
     "@lit-labs/ssr-client": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.3"
+    "lit": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "catalog:"

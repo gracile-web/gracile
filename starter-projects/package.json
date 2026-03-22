@@ -1,0 +1,58 @@
+{
+  "name": "@gracile/starter-projects",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A thin, full-stack, web framework",
+  "keywords": [
+    "full-stack",
+    "custom-elements",
+    "ssr",
+    "server",
+    "server-side-rendering",
+    "static",
+    "web-components",
+    "lit"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "starter-projects"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "// list-pkg": "pnpm m ls --json --depth=-1 | node -e \"const path = require('path'); console.log(JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf-8')).map((m) => path.relative(__dirname, m.path)).filter(Boolean))\" # From https://github.com/pnpm/pnpm/issues/1519",
+    "// prepare": "husky",
+    "// test": "pnpm --prefix integration test",
+    "// test:dev": "pnpm --prefix integration test:dev",
+    "build": "pnpm -r build",
+    "dev:tasks": "tsx --watch src/tasks/tasks.ts",
+    "generate": "tsx src/tasks/generate.ts",
+    "generate:ci": "CI=true tsx src/tasks/generate.ts",
+    "preinstall": "npx only-allow pnpm",
+    "test:smoke": "pnpm playwright test"
+  },
+  "dependencies": {
+    "@playwright/test": "catalog:",
+    "chokidar": "^3.6.0",
+    "fast-glob": "^3.3.2",
+    "github-slugger": "^2.0.0",
+    "latest-version": "^9.0.0",
+    "picocolors": "catalog:",
+    "vite": "catalog:",
+    "yaml": "^2.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@9.1.1"
+}

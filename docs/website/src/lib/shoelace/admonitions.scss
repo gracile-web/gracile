@@ -1,0 +1,109 @@
+/* stylelint-disable selector-class-pattern */
+
+@use './vars' as *;
+
+.admonition {
+	position: relative;
+	display: inline-block;
+	padding: $spacing-large $spacing-x-large $spacing-large $spacing-x-large;
+	margin: $spacing-2x-large $spacing-x-large $spacing-2x-large $spacing-x-large;
+	color: $color-neutral-800;
+	text-wrap: balance;
+	background-color: $color-neutral-50;
+	border-left: solid 4px $color-neutral-500;
+	border-radius: $border-radius-medium;
+}
+
+.admonition > :first-child {
+	margin-top: 0;
+}
+
+.admonition > :last-child {
+	margin-bottom: 0;
+}
+
+.admonition-title {
+	font-size: $font-size-large;
+	font-weight: $font-weight-bold;
+	font-variant: small-caps;
+}
+
+.admonition::before {
+	position: absolute;
+	top: calc(50% - 0.8rem);
+	left: calc(-0.8rem - 2px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.6rem;
+	height: 1.6rem;
+	clip-path: circle(50% at 50% 50%);
+	font-family: $font-serif;
+	font-weight: $font-weight-bold;
+	color: $color-neutral-0;
+	content: '';
+}
+
+.admonition--tip {
+	color: $color-primary-800;
+	background-color: $color-primary-50;
+	border-left-color: $color-primary-600;
+}
+
+.admonition--tip::before {
+	content: '?';
+	background-color: $color-primary-600;
+}
+
+.admonition--warning {
+	color: $color-warning-800;
+	background-color: $color-warning-50;
+	border-left-color: $color-warning-600;
+}
+
+.admonition--warning::before {
+	content: '!';
+	background-color: $color-warning-600;
+}
+
+.admonition--important {
+	color: $color-purple-800;
+	background-color: $color-purple-50;
+	border-left-color: $color-purple-600;
+}
+
+.admonition--important::before {
+	content: '!';
+	background-color: $color-purple-600;
+}
+
+.admonition--note {
+	color: $color-neutral-800;
+	background-color: $color-neutral-100;
+	border-left-color: $color-neutral-600;
+}
+
+.admonition--note::before {
+	font-style: italic;
+	content: 'i';
+	background-color: $color-neutral-600;
+}
+
+.admonition--caution {
+	color: $color-danger-800;
+	background-color: $color-danger-50;
+	border-left-color: $color-danger-600;
+}
+
+.admonition--caution::before {
+	content: '‼';
+	background-color: $color-danger-600;
+}
+
+.admonition + .admonition {
+	margin-top: calc(-0.5 * $spacing-2x-large);
+}
+
+.admonition a {
+	color: inherit;
+}

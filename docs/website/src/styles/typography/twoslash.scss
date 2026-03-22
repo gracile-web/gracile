@@ -1,0 +1,156 @@
+@use '../../lib/shoelace/vars' as *;
+@use '../../lib/color-mode/use-color-mode' as *;
+@use '../../lib/shoelace/shiki-syntax';
+
+.twoslash {
+	&:hover {
+		[style*='--shiki-color-text'] {
+			--hover-color: #{$color-neutral-900};
+		}
+
+		[style*='--shiki-color-background'] {
+			--hover-color: #{$color-neutral-50};
+		}
+
+		[style*='--shiki-foreground'] {
+			--hover-color: #{$color-neutral-300};
+		}
+
+		[style*='--shiki-token-constant'] {
+			--hover-color: #{$color-emerald-100};
+		}
+
+		[style*='--shiki-token-string'] {
+			--hover-color: #{$color-violet-50};
+		}
+
+		[style*='--shiki-token-comment'] {
+			--hover-color: #{$color-neutral-700};
+		}
+
+		[style*='--shiki-token-keyword'] {
+			--hover-color: #{$color-red-50};
+		}
+
+		[style*='--shiki-token-parameter'] {
+			--hover-color: #{$color-purple-700};
+		}
+
+		[style*='--shiki-token-function'] {
+			--hover-color: #{$color-blue-100};
+		}
+
+		[style*='--shiki-token-string-expression'] {
+			--hover-color: #{$color-orange-50};
+		}
+
+		[style*='--shiki-token-punctuation'] {
+			--hover-color: #{$color-neutral-700};
+		}
+
+		[style*='--shiki-token-link'] {
+			--hover-color: #{$color-violet-700};
+		}
+	}
+
+	.twoslash-hover {
+		display: inline-block;
+		white-space: normal;
+		border-radius: 2.5px;
+		outline: 1px solid;
+		outline-color: var(--hover-color, transparent);
+		outline-offset: -0.5px;
+		transition: outline-color 0.14s;
+
+		&:hover {
+			background-color: var(--hover-color, transparent);
+		}
+	}
+
+	.twoslash-popup-container {
+		& > * {
+			display: block;
+			padding: $spacing-large;
+		}
+	}
+
+	.twoslash-popup-code {
+		white-space: pre-wrap;
+	}
+
+	.twoslash-popup-docs-tags {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.twoslash-popup-docs-tag-name {
+		color: $color-red-800;
+	}
+
+	.twoslash-popup-docs-tag {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.twoslash-popup-docs-tag-value {
+		white-space: pre-wrap;
+	}
+
+	.twoslash-popup-docs {
+		color: $color-neutral-900;
+		background-color: $color-neutral-100;
+		border-top: 1px dashed $color-neutral-400;
+
+		& > :first-of-type {
+			margin-top: 0;
+		}
+
+		& > :last-of-type {
+			margin-bottom: 0;
+		}
+	}
+
+	sl-tooltip {
+		--max-width: 50vw;
+
+		&:defined {
+			[slot='content'] {
+				display: initial;
+			}
+		}
+
+		&::part(body) {
+			max-height: 30vh;
+			padding: 0;
+			overflow: auto;
+			color: inherit;
+			pointer-events: all;
+			user-select: unset;
+			border: 1px solid $color-neutral-200;
+		}
+
+		&::part(body),
+		&::part(base__arrow) {
+			@include color-mode(light) {
+				background-color: color-mix(in oklab, $color-neutral-0, black 5%);
+			}
+
+			@include color-mode(dark) {
+				background-color: color-mix(in oklab, $color-neutral-0, black 15%);
+			}
+
+			box-shadow: 1px 1px 6px color-mix(in oklab, $color-neutral-0, black 10%);
+		}
+
+		&::part(base__arrow) {
+			@include color-mode(light) {
+				background-color: $color-neutral-400;
+			}
+
+			@include color-mode(dark) {
+				background-color: $color-neutral-300;
+			}
+		}
+	}
+}

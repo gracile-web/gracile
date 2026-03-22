@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0-next.12](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.11...@gracile/gracile@0.9.0-next.12) (2026-03-21)
+
+**Note:** Version bump only for package @gracile/gracile
+
+# [0.9.0-next.11](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.10...@gracile/gracile@0.9.0-next.11) (2026-03-21)
+
+**Note:** Version bump only for package @gracile/gracile
+
+# [0.9.0-next.10](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.9...@gracile/gracile@0.9.0-next.10) (2026-03-21)
+
+**Note:** Version bump only for package @gracile/gracile
+
+# [0.9.0-next.9](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.8...@gracile/gracile@0.9.0-next.9) (2026-03-18)
+
+**Note:** Version bump only for package @gracile/gracile
+
+# [0.9.0-next.8](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.7...@gracile/gracile@0.9.0-next.8) (2026-03-15)
+
+### Bug Fixes
+
+* lint/format with monorepo rules ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+
+# [0.9.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.6...@gracile/gracile@0.9.0-next.7) (2026-03-09)
+
+**Note:** Version bump only for package @gracile/gracile
+
+# [0.9.0-next.6](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.5...@gracile/gracile@0.9.0-next.6) (2026-03-07)
+
+**Note:** Version bump only for package @gracile/gracile
+
+# [0.9.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.4...@gracile/gracile@0.9.0-next.5) (2026-03-06)
 # [0.9.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.4...@gracile/gracile@0.9.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile/gracile

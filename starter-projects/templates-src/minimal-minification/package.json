@@ -1,0 +1,26 @@
+{
+  "name": "@gracile/template--minimal-minification",
+  "version": "0.0.2",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "build:static": "DEMO_MODE=static vite build",
+    "check": "tsc",
+    "dev": "vite",
+    "preview": "node -C preview --watch server.js",
+    "preview:static": "vite preview",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@hono/node-server": "catalog:",
+    "hono": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@literals/rollup-plugin-html-css-minifier": "workspace:^",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

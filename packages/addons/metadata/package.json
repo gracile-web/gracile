@@ -1,6 +1,6 @@
 {
   "name": "@gracile/metadata",
-  "version": "0.2.0",
+  "version": "0.3.0-next.2",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -33,7 +33,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
@@ -41,9 +42,11 @@
     "lit": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^25.3.3",
-    "typescript": "5.9.3"
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

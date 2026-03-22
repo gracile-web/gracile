@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.10](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.9...@gracile-labs/css-helpers@0.2.0-next.10) (2026-03-21)
+
+**Note:** Version bump only for package @gracile-labs/css-helpers
+
+# [0.2.0-next.9](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.8...@gracile-labs/css-helpers@0.2.0-next.9) (2026-03-21)
+
+**Note:** Version bump only for package @gracile-labs/css-helpers
+
+# [0.2.0-next.8](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.7...@gracile-labs/css-helpers@0.2.0-next.8) (2026-03-21)
+
+**Note:** Version bump only for package @gracile-labs/css-helpers
+
+# [0.2.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.6...@gracile-labs/css-helpers@0.2.0-next.7) (2026-03-18)
+
+**Note:** Version bump only for package @gracile-labs/css-helpers
+
+# [0.2.0-next.6](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.5...@gracile-labs/css-helpers@0.2.0-next.6) (2026-03-15)
+
+### Bug Fixes
+
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+
+### Features
+
+* readmes from package collection, format content ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))
+
+# [0.2.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.4...@gracile-labs/css-helpers@0.2.0-next.5) (2026-03-09)
+
+**Note:** Version bump only for package @gracile-labs/css-helpers
+
+# [0.2.0-next.4](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.3...@gracile-labs/css-helpers@0.2.0-next.4) (2026-03-07)
+
+**Note:** Version bump only for package @gracile-labs/css-helpers
+
+# [0.2.0-next.3](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.2...@gracile-labs/css-helpers@0.2.0-next.3) (2026-03-06)
 # [0.2.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.2...@gracile-labs/css-helpers@0.2.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile-labs/css-helpers

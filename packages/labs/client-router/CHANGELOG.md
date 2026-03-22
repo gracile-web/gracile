@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.12](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.11...@gracile-labs/client-router@0.2.0-next.12) (2026-03-21)
+
+**Note:** Version bump only for package @gracile-labs/client-router
+
+# [0.2.0-next.11](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.10...@gracile-labs/client-router@0.2.0-next.11) (2026-03-21)
+
+### Features
+
+* group jsx packages, minor fixes ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
+
+# [0.2.0-next.10](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.9...@gracile-labs/client-router@0.2.0-next.10) (2026-03-21)
+
+**Note:** Version bump only for package @gracile-labs/client-router
+
+# [0.2.0-next.9](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.8...@gracile-labs/client-router@0.2.0-next.9) (2026-03-21)
+
+### Bug Fixes
+
+* cve - h3, use main lodash-es + publish og generator, clean deps ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
+
+# [0.2.0-next.8](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.7...@gracile-labs/client-router@0.2.0-next.8) (2026-03-18)
+
+**Note:** Version bump only for package @gracile-labs/client-router
+
+# [0.2.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.6...@gracile-labs/client-router@0.2.0-next.7) (2026-03-15)
+
+### Bug Fixes
+
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+
+### Features
+
+* readmes from package collection, format content ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))
+
+# [0.2.0-next.6](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.5...@gracile-labs/client-router@0.2.0-next.6) (2026-03-09)
+
+**Note:** Version bump only for package @gracile-labs/client-router
+
+# [0.2.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.4...@gracile-labs/client-router@0.2.0-next.5) (2026-03-07)
+
+### Bug Fixes
+
+* types and lint ([4815c11](https://github.com/gracile-web/gracile/commit/4815c1153a4d8120d376be8e7d14828265a5e479))
+
+# [0.2.0-next.4](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.3...@gracile-labs/client-router@0.2.0-next.4) (2026-03-07)
+
+**Note:** Version bump only for package @gracile-labs/client-router
+
+# [0.2.0-next.3](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.2...@gracile-labs/client-router@0.2.0-next.3) (2026-03-06)
 # [0.2.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.2.0-next.2...@gracile-labs/client-router@0.2.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile-labs/client-router

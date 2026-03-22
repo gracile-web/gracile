@@ -1,0 +1,12 @@
+/* LIGHT DOM only */
+@import 'todomvc-app-css/index.css';
+
+body {
+	padding: 4rem;
+}
+
+.demo {
+	display: flex;
+	flex-direction: column;
+	gap: 5rem;
+}

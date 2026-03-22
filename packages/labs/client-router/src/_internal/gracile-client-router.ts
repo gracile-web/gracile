@@ -14,6 +14,7 @@ class RouteEvent extends Event {
 }
 
 // TODO: Injectable/configurable logger.
+
 const log = console.log;
 
 /**

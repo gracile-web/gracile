@@ -1,0 +1,45 @@
+# gracile.js.org llms.txt
+
+> Gracile is a minimalistic web framework designed to facilitate the development of full-stack applications using familiar web technologies like HTML, CSS, and JavaScript, while promoting simplicity, performance, and a seamless developer experience.
+
+- [Defining Routes in Gracile](https://gracile.js.org/docs/learn/usage/defining-routes/): Explains how to define routes in the Gracile framework for web applications.
+- [Handling Forms with JS](https://gracile.js.org/docs/recipes/working-with-forms-js/): Demonstrates handling forms in Gracile using JavaScript for enhanced user experience without full-page reloads.
+- [Gracile Add-ons Overview](https://gracile.js.org/docs/add-ons/): Provides information on add-ons that extend Gracile's capabilities for web development.
+- [Sitemap Generation Guide](https://gracile.js.org/docs/add-ons/sitemap/): Guide for generating a sitemap using the Gracile framework.
+- [Working with CSS Styles](https://gracile.js.org/docs/learn/usage/working-styles/): This webpage discusses various methods and best practices for working with CSS styles in web development.
+- [JSON Endpoint with Routing](https://gracile.js.org/docs/recipes/json-endpoint-with-routing/): The page demonstrates creating JSON endpoints with routing using the Gracile framework.
+- [Gracile Configuration Guide](https://gracile.js.org/docs/learn/getting-started/configuration/): Guide for configuring the Gracile framework using Vite.
+- [Open Graph Images](https://gracile.js.org/docs/references/external/open-graph-images-generation/): To provide information about generating Open Graph images using the og-images-generator package.
+- [SVG Integration Guide](https://gracile.js.org/docs/add-ons/svg/): Guide for importing and optimizing SVG files in HTML using Gracile.
+- [Gracile Output Modes](https://gracile.js.org/docs/learn/usage/output-modes/): Explains Gracile's output modes for building web applications using SPA, MPA, SSG, SSR, and CSR.
+- [Gracile API Documentation](https://gracile.js.org/docs/references/api/server-runtime/): Documentation of Gracile API references for server runtime, including functions, classes, and constants.
+- [Gracile Framework Documentation](https://gracile.js.org/docs/): This webpage serves as the documentation for the Gracile web framework, detailing its features and usage.
+- [Gracile/Vite Configuration](https://gracile.js.org/docs/references/api/gracilevite-configuration/): Documentation for Gracile/Vite configuration options and usage examples.
+- [Client Router Documentation](https://gracile.js.org/docs/add-ons/client-router/): Guide for implementing a client-side router in Gracile framework applications.
+- [Working with Assets](https://gracile.js.org/docs/learn/usage/working-with-assets/): Explains how to manage and work with static and optimized assets in Gracile using Vite.
+- [Gracile Project Setup Guide](https://gracile.js.org/docs/learn/): Guide users in setting up, using, and deploying projects with Gracile APIs.
+- [Gracile Usage Guide](https://gracile.js.org/docs/learn/usage/): Guide for using the Gracile framework in web project development.
+- [Gracile Playground](https://gracile.js.org/docs/playground/): Explore and experience Gracile's coding environment with live editing and integrated features for CSS/HTML template literals.
+- [Gracile API References](https://gracile.js.org/docs/references/): Providing documentation for Gracile's APIs and resources related to the project.
+- [External Resources for Gracile](https://gracile.js.org/docs/references/external/): To provide links to external resources related to Gracile documentation.
+- [Gracile Getting Started](https://gracile.js.org/docs/learn/getting-started/): Guide users in setting up and configuring the Gracile framework.
+- [Server-Sent Events Guide](https://gracile.js.org/docs/recipes/server-sent-event-streams/): This page outlines how to implement server-sent events using Gracile for real-time data streaming.
+- [Page Metadata Integration](https://gracile.js.org/docs/add-ons/metadata/): Guide for integrating metadata in a website's document head using Gracile add-on.
+- [Gracile Starter Projects](https://gracile.js.org/docs/starter-projects/): Provide starter project templates for the Gracile web framework.
+- [Gracile Installation Guide](https://gracile.js.org/docs/learn/getting-started/installation/): Guide to installing and starting projects with Gracile framework.
+- [Gracile Command-Line Interface](https://gracile.js.org/docs/learn/getting-started/command-line-interface/): Provides instructions on using the Gracile command-line interface for project development.
+- [Gracile FAQ](https://gracile.js.org/docs/faq/): Addresses common questions regarding the Gracile full-stack web framework and its unique features.
+- [Gracile API References](https://gracile.js.org/docs/references/api/routes-and-documents/): Provides API references and usage details for defining routes and documents in Gracile.
+- [Progressive Interactivity Guide](https://gracile.js.org/docs/learn/usage/progressive-interactivity/): Explore various strategies for implementing progressive interactivity in web projects using JavaScript.
+- [Defining Base Documents](https://gracile.js.org/docs/learn/usage/defining-base-document/): Guide for defining base documents in Gracile framework for server-side rendering.
+- [Gracile API Documentation](https://gracile.js.org/docs/references/api/): Documentation of Gracile's public API, including routes, server utilities, and configuration details.
+- [Forms Handling in Gracile](https://gracile.js.org/docs/recipes/working-with-forms/): Demonstrates how to handle forms without JavaScript in the Gracile framework.
+- [Markdown Add-on Documentation](https://gracile.js.org/docs/add-ons/markdown/): Guide for using the Gracile Markdown add-on in web projects.
+- [Gracile Framework Recipes](https://gracile.js.org/docs/recipes/): To provide practical recipes for using the Gracile web framework in various scenarios.
+- [Gracile Framework Overview](https://gracile.js.org): Showcases the Gracile framework's features for web development with server-side rendering and modular architecture.
+- [Discord server](https://gracile.js.org/chat/): Provides the invitation link to join the Discord server.
+- [Acknowledgements](https://gracile.js.org/docs/acknowledgements/): Acknowledges the open-source projects and technologies that contributed to Gracile's development.
+- [HTML Minification Options](https://gracile.js.org/docs/references/external/minification/): This page discusses HTML minification techniques and relevant plugins for optimizing web performance.
+- [Developer Experience](https://gracile.js.org/docs/developer-experience/): To enhance developer experience through tools and resources for building with Gracile framework.
+- [Passing Data to Client](https://gracile.js.org/docs/learn/usage/passing-data-from-server-to-client/): Explains how to pass server-generated data to web components for efficient rendering.
+- [Gracile Deployment Options](https://gracile.js.org/docs/learn/deployment/): This page outlines deployment options for Gracile websites, including static and server deployment strategies.

@@ -12,14 +12,36 @@ type MatchedRoute = {
 	pathname: string;
 };
 
-function matchRouteFromUrl(
+export type TrailingSlashRedirect = { redirect: string };
+
+/** @internal Exported for unit testing. */
+export function matchRouteFromUrl(
 	url: string,
 	routes: R.RoutesManifest,
-): MatchedRoute | null {
+	trailingSlash: 'always' | 'never' | 'ignore' = 'ignore',
+): MatchedRoute | TrailingSlashRedirect | null {
 	let match: URLPatternResult | undefined;
 	let foundRoute: R.Route | undefined;
 
-	const pathname = new URL(url).pathname;
+	const rawPathname = new URL(url).pathname;
+
+	// Handle redirect cases for 'always' and 'never' before matching.
+	// Root '/' is exempt — it always keeps its slash.
+	if (rawPathname !== '/') {
+		if (trailingSlash === 'always' && !rawPathname.endsWith('/'))
+			return { redirect: rawPathname + '/' };
+
+		if (trailingSlash === 'never' && rawPathname.endsWith('/'))
+			return { redirect: rawPathname.slice(0, -1) };
+	}
+
+	// For 'ignore', normalize to trailing-slash so it matches stored patterns.
+	const pathname =
+		trailingSlash === 'ignore' &&
+		rawPathname !== '/' &&
+		!rawPathname.endsWith('/')
+			? rawPathname + '/'
+			: rawPathname;
 
 	for (const [, route] of routes) {
 		if (match) break;
@@ -51,7 +73,8 @@ type ExtractedStaticPaths = {
  * @param options.params
  * @param options.pathname
  */
-async function extractStaticPaths(options: {
+/** @internal Exported for unit testing. */
+export async function extractStaticPaths(options: {
 	routeModule: R.RouteModule;
 	foundRoute: R.Route;
 	params: Parameters_;
@@ -100,9 +123,15 @@ export async function getRoute(options: {
 	vite?: ViteDevServer | undefined;
 	routes: R.RoutesManifest;
 	routeImports?: R.RoutesImports | undefined;
-}): Promise<RouteInfos | null> {
-	const matchedRoute = matchRouteFromUrl(options.url, options.routes);
-	if (!matchedRoute) return matchedRoute;
+	trailingSlash?: 'always' | 'never' | 'ignore';
+}): Promise<RouteInfos | TrailingSlashRedirect | null> {
+	const matchedRoute = matchRouteFromUrl(
+		options.url,
+		options.routes,
+		options.trailingSlash,
+	);
+	if (!matchedRoute) return null;
+	if ('redirect' in matchedRoute) return matchedRoute;
 	const { foundRoute, pathname, params } = matchedRoute;
 
 	const routeModule = await loadForeignRouteObject({

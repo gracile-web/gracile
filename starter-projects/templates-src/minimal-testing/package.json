@@ -1,0 +1,38 @@
+{
+  "name": "@gracile/template--minimal-testing",
+  "version": "0.0.2",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
+    "preview": "node -C preview --watch server.js",
+    "start": "node server.js",
+    "test:all": "./tests/launch-all.sh",
+    "test:component": "playwright test -c playwright-ct.config.ts",
+    "test:component:dev": "playwright test -c playwright-ct.config.ts --ui",
+    "pretest:e2e": "node --run build",
+    "test:e2e": "playwright test",
+    "test:e2e:dev": "playwright test --ui",
+    "test:integration": "tsx --experimental-test-snapshots --test tests/integration/**/*.test.ts",
+    "pretest:integration:dev": "node --run build",
+    "test:integration:dev": "tsx --experimental-test-snapshots --watch --test tests/integration/**/*.test.ts",
+    "test:unit": "c8 tsx --test tests/unit/**/*.test.ts",
+    "test:unit:dev": "tsx --test --watch tests/unit/**/*.test.ts"
+  },
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@hono/node-server": "catalog:",
+    "hono": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@playwright/test": "catalog:",
+    "@sand4rt/experimental-ct-web": "^1.46.0",
+    "@types/node": "catalog:",
+    "c8": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  }
+}

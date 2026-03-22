@@ -1,0 +1,27 @@
+[[redirects]]
+from = "/playground"
+to = "https://gracile-play.netlify.app"
+status = 200
+force = true                            # COMMENT: ensure that we always redirect
+headers = { X-From = "Netlify" }
+
+# [[redirects]]
+# from = "/web-elements-analyzer"
+# to = "https://web-elements-analyzer.netlify.app"
+# status = 200
+# force = true                                     # COMMENT: ensure that we always redirect
+# headers = { X-From = "Netlify" }
+
+[[redirects]]
+from = "/web-elements-analyzer/playground"
+to = "https://web-elements-analyzer--playground.netlify.app"
+status = 200
+force = true                                                 # COMMENT: ensure that we always redirect
+headers = { X-From = "Netlify" }
+
+[[redirects]]
+from = "/slides"
+to = "https://gracile-slides.netlify.app"
+status = 200
+force = true                              # COMMENT: ensure that we always redirect
+headers = { X-From = "Netlify" }

@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/better-errors",
-  "version": "0.2.0",
+  "version": "0.3.0-next.2",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "vite",
@@ -54,11 +54,11 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@literals/html-css-minifier": "^3.0.1",
-    "@literals/rollup-plugin-html-css-minifier": "^3.0.1",
+    "@literals/html-css-minifier": "workspace:^",
+    "@literals/rollup-plugin-html-css-minifier": "workspace:^",
     "@rollup/plugin-terser": "^0.4.4",
     "terser": "^5.46.0",
-    "typescript": "5.9.3"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

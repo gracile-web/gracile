@@ -1,0 +1,13 @@
+const patch = `import { WebComponentHmr } from '/__web-dev-server__/wc-hmr/runtime.js';
+
+HTMLElement.prototype.hotReplacedCallback = function hotReplacedCallback() {
+  const temp = document.createElement(this.localName);
+  this._scheduler.renderer = temp._scheduler.renderer;
+  this._scheduler.update();
+};
+`;
+
+export const haunted = {
+	functions: [{ name: 'component', import: 'haunted' }],
+	patch,
+};

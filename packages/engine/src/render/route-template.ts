@@ -1,11 +1,14 @@
 import { Readable } from 'node:stream';
 
 import * as assert from '@gracile/internal-utils/assertions';
-import { html } from '@gracile/internal-utils/dummy-literals';
 import type { ErrorLocation } from '@gracile-labs/better-errors/errors';
 import { render as renderLitSsr, type RenderInfo } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
-import { LitElementRenderer } from '@lit-labs/ssr/lib/lit-element-renderer.js';
+// Lit's purpose-built Readable subclass for RenderResult. Handles nested
+// iterables, thunks, and Promises from sub-templates with proper back-pressure,
+// whereas generic `Readable.from()` only sees the top-level iterable.
+// Inherits from the same Node `Readable` we already depend on.
+import { RenderResultReadable } from '@lit-labs/ssr/lib/render-result-readable.js';
 import type { ViteDevServer } from 'vite';
 
 import {
@@ -16,20 +19,42 @@ import {
 import type { RouteInfos } from '../routes/match.js';
 import type * as R from '../routes/route.js';
 
-import { PAGE_ASSETS_MARKER, SSR_OUTLET_MARKER } from './markers.js';
+import { SSR_OUTLET_MARKER } from './markers.js';
+import {
+	concatStreams,
+	mergeRenderInfo,
+	injectSiblingAssets,
+	ensureDoctype,
+	injectDevelopmentOverlay,
+	injectServerAssets,
+} from './route-template-pipeline.js';
 
-async function* concatStreams(...readables: Readable[]) {
-	for (const readable of readables) {
-		for await (const chunk of readable) {
-			yield chunk;
-		}
+// Re-export for consumers that import these regexes from this module.
+export { REGEX_TAG_SCRIPT, REGEX_TAG_LINK } from './route-template-pipeline.js';
+
+/**
+ * Lit SSR's `RenderResultReadable._read()` is `async`, but Node.js
+ * calls `_read()` without awaiting its return value.  If a thunk inside
+ * the render result throws (e.g. template expressions in invalid
+ * locations), the rejected Promise escapes and becomes an
+ * `unhandledRejection`.
+ *
+ * This subclass overrides `_read()` to catch that rejection and convert
+ * it into a stream `'error'` event via `this.destroy(err)`, which is
+ * the standard Node Readable contract.
+ */
+class SafeRenderResultReadable extends RenderResultReadable {
+	override _read(size: number): ReturnType<RenderResultReadable['_read']> {
+		const maybePromise = super._read(size);
+
+		void (maybePromise as Promise<void> | void)?.catch?.(
+			(error: Error): void => {
+				this.destroy(error);
+			},
+		);
+		return maybePromise;
 	}
 }
-
-export const REGEX_TAG_SCRIPT =
-	/\s?<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script\s*>\s?/gi;
-
-export const REGEX_TAG_LINK = /\s?<link\b[^>]*?>\s?/gi;
 
 export async function renderRouteTemplate({
 	url,
@@ -59,13 +84,7 @@ export async function renderRouteTemplate({
 		return { output: null, document: null };
 
 	// MARK: Merged render info
-	const mergedRenderInfo: Partial<RenderInfo> = {
-		...renderInfo,
-		elementRenderers: [
-			...(renderInfo?.elementRenderers || []),
-			LitElementRenderer,
-		],
-	};
+	const mergedRenderInfo = mergeRenderInfo(renderInfo);
 
 	// MARK: Context
 	const context: R.RouteContextGeneric = {
@@ -87,7 +106,7 @@ export async function renderRouteTemplate({
 			});
 
 		const fragmentRender = renderLitSsr(fragmentOutput, mergedRenderInfo);
-		const output = Readable.from(fragmentRender);
+		const output = new SafeRenderResultReadable(fragmentRender);
 
 		return { output, document: null };
 	}
@@ -135,96 +154,29 @@ export async function renderRouteTemplate({
 		);
 	}
 
-	// MARK: Sibling assets
-
-	// NOTE: If the user doesn't use `pageAssetCustomLocation`,
-	// we put this as a fallback.
-	baseDocumentRendered = baseDocumentRendered
-		.replace('</head>', `\n${PAGE_ASSETS_MARKER}</head>`)
-		.replace(
-			PAGE_ASSETS_MARKER,
-
-			routeInfos.foundRoute.pageAssets.length > 0
-				? html`<!-- PAGE ASSETS -->` +
-						`${routeInfos.foundRoute.pageAssets
-							.map((path) => {
-								//
-								if (/\.(js|ts|jsx|tsx)$/.test(path)) {
-									// prettier-ignore
-									return html`		<script type="module" src="/${path}"></script>`;
-								}
-
-								if (/\.(css|scss|sass|less|styl|stylus)$/.test(path)) {
-									// prettier-ignore
-									return html`		<link rel="stylesheet" href="/${path}" />`;
-								}
-
-								// NOTE: Never called (filtered upstream in `collectRoutes`)
-								return null;
-							})
-							.join('\n')}` +
-						`<!-- /PAGE ASSETS -->\n		`
-				: '',
-		);
-
-	// MARK: Add doctype if missing.
-	if (
-		baseDocumentRendered
-			.trimStart()
-			.toLocaleLowerCase()
-			.startsWith('<!doctype') === false
-	)
-		baseDocumentRendered = `<!doctype html>\n${baseDocumentRendered}`;
-
-	// MARK: Dev. overlay.
-	// TODO: Need more testing and refinement (refreshes kills its usefulness).
-	const overlay = () => html`
-		<script type="module">
-			if (import.meta.hot) {
-				import.meta.hot.on('gracile:ssr-error', (error) => {
-					console.error(error.message);
-				});
-				import.meta.hot.on('error', (payload) => {
-					console.error(payload.err.message);
-				});
-			}
-		</script>
-	`;
+	// MARK: Post-process document HTML (pure transforms)
+	baseDocumentRendered = injectSiblingAssets(
+		baseDocumentRendered,
+		routeInfos.foundRoute.pageAssets,
+	);
+	baseDocumentRendered = ensureDoctype(baseDocumentRendered);
 
 	if (mode === 'dev')
-		baseDocumentRendered = baseDocumentRendered.replace(
-			'<head>',
-			`<head>\n${overlay()}`,
-		);
+		baseDocumentRendered = injectDevelopmentOverlay(baseDocumentRendered);
 
-	// MARK: Inject assets for server output runtime only.
 	const routeAssetsString = routeAssets?.get?.(
 		routeInfos.foundRoute.pattern.pathname,
 	);
 	if (routeAssetsString)
-		baseDocumentRendered = baseDocumentRendered
-			.replaceAll(REGEX_TAG_SCRIPT, (s) => {
-				if (s.includes(`type="module"`)) return '';
-				return s;
-			})
-			.replaceAll(REGEX_TAG_LINK, (s) => {
-				if (s.includes(`rel="stylesheet"`)) return '';
-				return s;
-			})
-			.replace('</head>', `${routeAssetsString}\n</head>`);
+		baseDocumentRendered = injectServerAssets(
+			baseDocumentRendered,
+			routeAssetsString,
+		);
 
-	// MARK: Base document
+	// MARK: Base document (Vite HTML transform in dev)
 	const baseDocumentHtml =
 		vite && mode === 'dev'
-			? await vite.transformIndexHtml(
-					// HACK: Sometimes, we need to invalidate for server asset url
-					// imports to work. So we keep this hack around just in case.
-					// Maybe it's linked to the way hashed assets are invalidating
-					// the html proxy module…
-					// `${routeInfos.pathname}?r=${Math.random()}`,
-					routeInfos.pathname,
-					baseDocumentRendered,
-				)
+			? await vite.transformIndexHtml(routeInfos.pathname, baseDocumentRendered)
 			: baseDocumentRendered;
 
 	if (docOnly) return { document: baseDocumentHtml, output: null };
@@ -251,20 +203,12 @@ export async function renderRouteTemplate({
 			routeInfos.routeModule.template(context),
 		);
 
-		// NOTE: Explicitely unset template (maybe a bad idea as a feature. We'll see)
-		// if (routeOutput === null || routeOutput === undefined) {
-		// 	const output = Readable.from(
-		// 		concatStreams(baseDocRenderStreamPre, baseDocRenderStreamPost),
-		// 	);
-		// 	return { output, document: null };
-		// }
-
 		if (assert.isLitTemplate(routeOutput) === false)
 			throw new Error(
 				`Wrong template result for page template ${routeInfos.foundRoute.filePath}.`,
 			);
 
-		const renderStream = Readable.from(
+		const renderStream = new SafeRenderResultReadable(
 			renderLitSsr(routeOutput, mergedRenderInfo),
 		);
 

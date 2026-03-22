@@ -1,0 +1,43 @@
+@use '../lib/breakpoints/use-breakpoints' as *;
+@use '../lib/color-mode/use-color-mode' as *;
+@use '../styles/vars' as *;
+@use '../lib/shoelace/vars' as *;
+
+.m-site-search {
+	top: 6.2rem;
+	right: 0;
+	left: 0;
+	z-index: 1;
+
+	button {
+		all: unset;
+		display: inline-flex;
+		gap: $spacing-medium;
+		align-items: center;
+		width: calc(100% - 1.4rem * 2);
+		padding: $spacing-x-small $spacing-small;
+		margin: $spacing-x-small;
+		color: $color-neutral-800;
+		cursor: text;
+		background: $color-gray-100;
+		border: 1px solid $color-neutral-300;
+		border-radius: $border-radius-small;
+
+		&:focus {
+			outline: $focus-ring-style;
+		}
+
+		&:hover {
+			background: $color-gray-200;
+			border: 1px solid $color-neutral-400;
+		}
+
+		kbd {
+			position: absolute;
+			right: 2.5rem;
+			font-family: inherit;
+			font-size: $font-size-small;
+			color: $color-neutral-900;
+		}
+	}
+}

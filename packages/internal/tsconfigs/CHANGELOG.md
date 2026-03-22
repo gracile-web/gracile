@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-tsconfigs@0.1.1-next.0...@gracile/internal-tsconfigs@0.1.1-next.1) (2026-03-15)
+
+### Bug Fixes
+
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+
+## [0.1.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-tsconfigs@0.1.0-next.0...@gracile/internal-tsconfigs@0.1.1-next.0) (2026-03-07)
+
+**Note:** Version bump only for package @gracile/internal-tsconfigs
+
 # [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-tsconfigs@0.1.0-next.0...@gracile/internal-tsconfigs@0.1.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile/internal-tsconfigs

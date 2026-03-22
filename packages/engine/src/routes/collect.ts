@@ -7,7 +7,7 @@ import c from 'picocolors';
 // eslint-disable-next-line import-x/order
 import { URLPattern as URLPatternPolyfill } from 'urlpattern-polyfill/urlpattern';
 
-// NOTE: The polyfill type lacks `hasRegExpGroups` from the global URLPattern.
+// HACK: The polyfill type lacks `hasRegExpGroups` from the global URLPattern.
 const URLPattern =
 	URLPatternPolyfill as unknown as typeof globalThis.URLPattern;
 import { createFilter } from 'vite';
@@ -20,8 +20,10 @@ import type * as R from './route.js';
 
 const logger = getLogger();
 
-function extractRoutePatterns(
+/** @internal Exported for unit testing. */
+export function extractRoutePatterns(
 	routeFilePath: string,
+	trailingSlash: 'always' | 'never' | 'ignore' = 'ignore',
 ): Pick<R.Route, 'pattern' | 'hasParams'> & { patternString: string } {
 	const routePathname = routeFilePath.replace(/\.(js|ts|jsx|tsx|html)$/, '');
 
@@ -64,8 +66,9 @@ function extractRoutePatterns(
 		return entry;
 	});
 
-	const trailingSlash = pathRelativeNormalized.length > 0 ? '/' : '';
-	const normalizedUrlPattern = `/${pathRelativeNormalized.join('/')}${trailingSlash}`;
+	const isRoot = pathRelativeNormalized.length === 0;
+	const slash = isRoot || trailingSlash === 'never' ? '' : '/';
+	const normalizedUrlPattern = `/${pathRelativeNormalized.join('/')}${slash}`;
 
 	return {
 		patternString: normalizedUrlPattern,
@@ -81,6 +84,7 @@ export async function collectRoutes(
 	routes: R.RoutesManifest,
 	root: string,
 	excludePatterns: string[] = [],
+	trailingSlash: 'always' | 'never' | 'ignore' = 'ignore',
 ): Promise<void> {
 	routes.clear();
 
@@ -154,7 +158,7 @@ export async function collectRoutes(
 
 	for (const routePath of serverEntrypointsSorted) {
 		const filePath = join(routesFolder, routePath);
-		const routeWithPatterns = extractRoutePatterns(routePath);
+		const routeWithPatterns = extractRoutePatterns(routePath, trailingSlash);
 
 		routes.set(routeWithPatterns.patternString, {
 			filePath,

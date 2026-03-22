@@ -1,0 +1,68 @@
+{
+  "name": "@gracile-labs/vite-plugin-babel-jsx-to-literals",
+  "version": "0.1.0-next.5",
+  "description": "A thin, full-stack, web framework",
+  "keywords": [
+    "custom-elements",
+    "full-stack",
+    "lit",
+    "meta-framework",
+    "server",
+    "server-side-rendering",
+    "ssr",
+    "static",
+    "web-components"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/vite-plugin-babel-jsx-to-literals"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./*": "./dist/*.js",
+    "./ambient": "./ambient.d.ts"
+  },
+  "files": [
+    "./jsx-runtime.d.ts",
+    "./ambient.d.ts",
+    "./dist/**/*",
+    "!/dist/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
+  },
+  "dependencies": {
+    "@babel/plugin-syntax-typescript": "^7.27.1",
+    "@gracile-labs/babel-plugin-jsx-to-literals": "workspace:^",
+    "@rollup/plugin-babel": "^6.0.4"
+  },
+  "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "picocolors": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@lit-labs/ssr": "catalog:",
+    "clsx": "^2.1.1",
+    "lit": "catalog:",
+    "vite": "^6.2.5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

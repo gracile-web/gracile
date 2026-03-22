@@ -1,6 +1,6 @@
 {
   "name": "@gracile/client",
-  "version": "0.5.0",
+  "version": "0.5.0-next.9",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -45,18 +45,18 @@
     "@lit-labs/ssr-client": "catalog:",
     "urlpattern-polyfill": "catalog:"
   },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  },
   "peerDependencies": {
-    "@lit-labs/signals": "^0.1.1"
+    "@lit-labs/signals": "catalog:"
   },
   "peerDependenciesMeta": {
     "@lit-labs/signals": {
       "optional": true
     }
-  },
-  "devDependencies": {
-    "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.3"
   },
   "publishConfig": {
     "access": "public",

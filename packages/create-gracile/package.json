@@ -1,6 +1,6 @@
 {
   "name": "create-gracile",
-  "version": "0.5.0",
+  "version": "0.5.1-next.3",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -37,12 +37,13 @@
     "!*.test.*"
   ],
   "scripts": {
-    "// test": "node --test dist/**/*.ts",
-    "// test:dev": "npm run test -- --watch",
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
-    "dev:cli": "pnpm tsx -C development src/cli.ts"
+    "dev:cli": "pnpm tsx -C development src/cli.ts",
+    "test": "pnpm test:unit && pnpm test:e2e",
+    "test:e2e": "node --test 'dist/test/e2e/**/*.e2e.test.js'",
+    "test:unit": "c8 node --test 'dist/test/**/*.test.js' --test-name-pattern '!E2E'"
   },
   "dependencies": {
     "@clack/prompts": "^1.0.1",
@@ -57,9 +58,9 @@
     "@gracile/internal-tsconfigs": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@types/degit": "^2.8.6",
-    "@types/node": "^25.3.3",
+    "@types/node": "catalog:",
     "cli-testing-library": "^3.0.1",
-    "typescript": "5.9.3"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

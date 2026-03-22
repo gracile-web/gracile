@@ -1,6 +1,6 @@
 {
   "name": "@gracile/markdown-preset-marked",
-  "version": "0.1.0",
+  "version": "0.1.1-next.4",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -36,7 +36,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "dependencies": {
     "@gracile/markdown": "workspace:^",
@@ -46,9 +47,11 @@
     "ultramatter": "^0.0.4"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/node": "^25.3.3",
-    "typescript": "5.9.3"
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "lit": "catalog:",

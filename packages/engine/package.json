@@ -1,7 +1,7 @@
 {
   "name": "@gracile/engine",
-  "version": "0.9.0",
-  "description": "A thin, full-stack, web framework",
+  "version": "0.9.0-next.11",
+  "description": "Vite-powered build and dev server engine for the Gracile framework",
   "keywords": [
     "custom-elements",
     "full-stack",
@@ -46,6 +46,7 @@
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'",
     "test:unit": "c8 node --test --enable-source-maps 'dist/**/*.test.js'",
     "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
   },
@@ -59,13 +60,13 @@
     "vite": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
-    "@types/express": "5.0.6",
-    "@types/node": "^25.3.3",
-    "c8": "^11.0.0",
-    "sinon": "21.0.1",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.3"
+    "@types/express": "catalog:",
+    "@types/node": "catalog:",
+    "c8": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "catalog:",

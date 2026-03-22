@@ -1,0 +1,73 @@
+{
+  "name": "@gracile-labs/babel-plugin-jsx-to-literals",
+  "version": "0.1.0-next.4",
+  "description": "A JSX to tagged template literals Babel plugin, with a few helper components and a mapped JSX namespace.",
+  "keywords": [
+    "lit",
+    "literals",
+    "jsx",
+    "transform"
+  ],
+  "homepage": "https://gracile.js.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/babel-plugin-jsx-to-literals"
+  },
+  "license": "ISC",
+  "author": {
+    "name": "Julian Cataldo",
+    "email": "contact@juliancataldo.com",
+    "url": "https://www.juliancataldo.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./dist/babel-plugin-jsx-to-literals.js",
+    "./components/*": "./dist/components/*.js",
+    "./jsx-runtime": "./dist/jsx-runtime.js"
+  },
+  "files": [
+    "./dist/**/*",
+    "!/dist/**/*.test.*",
+    "!/dist/test-*"
+  ],
+  "scripts": {
+    "build": "tsc -p ./tsconfig.build.json",
+    "clean": "rm -rf ./dist",
+    "dev": "tsc --watch",
+    "playground": "pnpm tsx playground/convert.ts",
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'",
+    "test:unit": "c8 tsx --test src/jsx.test.ts",
+    "test:unit:dev": "tsx --watch --test src/jsx.test.ts",
+    "test:unit:dev:update": "tsx --watch --test --test-update-snapshots src/jsx.test.ts"
+  },
+  "dependencies": {
+    "@babel/types": "^7.29.0",
+    "@types/babel__core": "^7.20.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/generator": "^7.28.5",
+    "@babel/parser": "^7.28.5",
+    "@babel/plugin-syntax-decorators": "^7.27.1",
+    "@babel/plugin-syntax-jsx": "^7.27.1",
+    "@babel/plugin-syntax-typescript": "^7.27.1",
+    "@babel/traverse": "^7.28.5",
+    "@gracile/internal-test-utils": "workspace:^",
+    "@lit-labs/ssr": "catalog:",
+    "@types/babel__generator": "^7.27.0",
+    "@types/babel__traverse": "^7.28.0",
+    "@types/node": "catalog:",
+    "c8": "catalog:",
+    "clsx": "catalog:",
+    "csstype": "^3.1.3",
+    "lit": "catalog:",
+    "recast": "^0.23.11",
+    "tsx": "catalog:",
+    "typescript": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@gracile/template--minimal-hmr",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lit": "catalog:",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@gracile-labs/hmr": "workspace:^",
+    "@gracile/gracile": "workspace:^",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

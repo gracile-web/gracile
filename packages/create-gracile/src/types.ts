@@ -45,9 +45,105 @@ export interface Settings {
 
 	usePreviousSettings: boolean | undefined;
 	clearPreviousSettings: boolean | undefined;
+
+	dryRun: boolean | undefined;
 }
 
+export type PartialSettings = Partial<Settings>;
+
 export type FilesMap = Map<string, string>;
+
+// MARK: Dependency injection interfaces
+
+export interface CliFsDeps {
+	readFile: (path: string | URL, encoding: BufferEncoding) => Promise<string>;
+	writeFile: (path: string, data: string) => Promise<void>;
+	rename: (oldPath: string, updatedPath: string) => Promise<void>;
+	rm: (
+		path: string,
+		options?: { force?: boolean; recursive?: boolean },
+	) => Promise<void>;
+	existsSync: (path: string) => boolean;
+}
+
+export interface CliExecResult {
+	stdout: string;
+	stderr: string;
+}
+
+export type CliExecFunction = (
+	command: string,
+	options?: { cwd?: string },
+) => Promise<CliExecResult>;
+
+export interface CliPromptsDeps {
+	intro: (title?: string) => void;
+	outro: (message?: string) => void;
+	text: (options: {
+		message: string;
+		placeholder?: string;
+		validate?: (value: string) => string | void;
+	}) => Promise<string | symbol>;
+	select: <T>(options: {
+		message: string;
+		options: { value: T; label: string; hint?: string }[];
+	}) => Promise<T | symbol>;
+	confirm: (options: { message: string }) => Promise<boolean | symbol>;
+	log: {
+		info: (message: string) => void;
+		warn: (message: string) => void;
+		error: (message: string) => void;
+		success: (message: string) => void;
+	};
+	note: (message: string, title?: string) => void;
+	spinner: () => {
+		start: (message?: string) => void;
+		stop: (message?: string) => void;
+	};
+	cancel: (message?: string) => void;
+	isCancel: (value: unknown) => value is symbol;
+}
+
+export interface CliConfigDeps<T extends Record<string, unknown>> {
+	get: <K extends keyof T>(key: K) => T[K];
+	set: <K extends keyof T>(key: K, value: T[K]) => void;
+	clear: () => void;
+	store: T;
+}
+
+export type CliFetchLatestVersion = (
+	packageName: string,
+	options?: { version?: string },
+) => Promise<string>;
+
+export interface CliLoggerDeps {
+	info: (...arguments_: unknown[]) => void;
+	error: (...arguments_: unknown[]) => void;
+	warn: (...arguments_: unknown[]) => void;
+}
+
+export interface CliEnvironment {
+	DEV?: string | undefined;
+	npm_config_user_agent?: string | undefined;
+}
+
+export interface CliDeps {
+	fs: CliFsDeps;
+	exec: CliExecFunction;
+	prompts: CliPromptsDeps;
+	config: CliConfigDeps<PartialSettings>;
+	fetchLatestVersion: CliFetchLatestVersion;
+	exit: (code?: number) => never;
+	logger: CliLoggerDeps;
+	env: CliEnvironment;
+}
+
+export interface CliContext {
+	cliVersion: string;
+	packageManager: string;
+	settings: PartialSettings;
+	projectDestination: string;
+}
 
 export const TEMPLATE_LIST = [
 	//

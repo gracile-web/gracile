@@ -1,0 +1,21 @@
+@use './tokens';
+@use './features/shell/shell';
+@use './common';
+
+html {
+	box-sizing: border-box;
+	color-scheme: light dark;
+	scrollbar-gutter: stable;
+	scroll-padding-top: 2rem;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+body {
+	margin: 0;
+	background-color: var(--color-gray-0);
+}

@@ -1,0 +1,57 @@
+@use '../lib/breakpoints/use-breakpoints' as *;
+@use '../lib/color-mode/use-color-mode' as *;
+@use '../styles/vars' as *;
+@use '../lib/shoelace/vars' as *;
+
+.m-footer-main {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: calc(4vh + 1.5rem) 3vw;
+	font-size: 0.85em;
+	text-align: center;
+	background-color: alpha($color-neutral-0, 0.5);
+	border-top: 1px solid alpha($color-primary-500, 0.2);
+
+	@include breakpoint(xl) {
+		flex-direction: column;
+		font-size: 1em;
+	}
+
+	.copyright {
+		color: $color-neutral-800;
+	}
+
+	.sep {
+		opacity: 0.15;
+	}
+
+	& > .m-footer-main-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: calc(0.5rem + 0.5vw);
+		align-items: center;
+		justify-content: center;
+		max-width: calc(31rem + 15vw);
+		padding: 0 5vw;
+
+		a {
+			display: inline-flex;
+			align-items: center;
+			font-weight: 400 !important;
+
+			i-c {
+				margin: 0 0.5em;
+			}
+		}
+	}
+
+	svg {
+		width: 2ex;
+		height: 2ex;
+		margin-right: 0.75ch;
+	}
+}

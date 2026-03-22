@@ -1,0 +1,18 @@
+h1 {
+	margin-bottom: 1em;
+}
+
+dt {
+	margin-bottom: 1em;
+}
+
+dd {
+	margin-bottom: 2em;
+}
+
+is-land {
+	display: block;
+	padding: 1em;
+	border: 1px solid light-dark(darkslategray, mintcream);
+	border-radius: 0.5em;
+}

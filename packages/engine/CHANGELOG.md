@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0-next.11](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.10...@gracile/engine@0.9.0-next.11) (2026-03-21)
+
+**Note:** Version bump only for package @gracile/engine
+
+# [0.9.0-next.10](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.9...@gracile/engine@0.9.0-next.10) (2026-03-21)
+
+**Note:** Version bump only for package @gracile/engine
+
+# [0.9.0-next.9](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.8...@gracile/engine@0.9.0-next.9) (2026-03-21)
+
+### Bug Fixes
+
+* implement SafeRenderResultReadable to handle async errors with lit's RenderResultReadable ([4ee82f6](https://github.com/gracile-web/gracile/commit/4ee82f638ce2cab81d715693f866b1fbf3dd3257))
+* prevent plugin duplication, convert to typescript, enable tests ([dd85864](https://github.com/gracile-web/gracile/commit/dd85864e351854284013b3a797a9aedc0278fc2e))
+* swap `node:` `Readable` with lit ssr `RenderResultReadable` ([d1c744b](https://github.com/gracile-web/gracile/commit/d1c744b745527bb812882ca6d5655a2a3801d6d5))
+* use Vite `buildApp` in test harness, split envs configs, refactor pipeline, static/server build ([7eb32d7](https://github.com/gracile-web/gracile/commit/7eb32d75e7ff8d900c9dbd64d8f5d8704ffba920))
+
+### Features
+
+* migrate ssrLoadModule to ModuleRunner ([4c7040a](https://github.com/gracile-web/gracile/commit/4c7040a55c7f2b09e6df5ca3d187ab519d5cc338))
+* migrate the whole build process to the new vite environment api ([34c3d3a](https://github.com/gracile-web/gracile/commit/34c3d3a46f0df9bfe4ba77a8366959e912f72eb8))
+
+# [0.9.0-next.8](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.7...@gracile/engine@0.9.0-next.8) (2026-03-15)
+
+### Bug Fixes
+
+* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+
+# [0.9.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.6...@gracile/engine@0.9.0-next.7) (2026-03-09)
+
+### Bug Fixes
+
+* full rollupTypescript options and address leaking rollup tsc watcher ([c6e7203](https://github.com/gracile-web/gracile/commit/c6e7203b135436b8e210907bb402fc3a75c3e8f7))
+
+### Features
+
+* plugin for tracking server side CEs, clean orphaned during dev + tests ([e2bbf87](https://github.com/gracile-web/gracile/commit/e2bbf87cf6be2675f2f5d7bd251112d5bf20aafb))
+
+# [0.9.0-next.6](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.5...@gracile/engine@0.9.0-next.6) (2026-03-07)
+
+### Features
+
+* router support for trailing slash with user preference ([b214298](https://github.com/gracile-web/gracile/commit/b2142988f85d2cb6a2c6920a2953ad02636aba54))
+* use lit's own `RenderResultReadable` for improved output handling in route template render ([15e4ee8](https://github.com/gracile-web/gracile/commit/15e4ee851b5d4ecce383dab60a5c9555680b5313))
+
+### Reverts
+
+* reuse older technique for rendering streams to string ([339cc19](https://github.com/gracile-web/gracile/commit/339cc19e0215a5c7709d8e6a5e990397a84a8138))
+
+# [0.9.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.4...@gracile/engine@0.9.0-next.5) (2026-03-06)
 # [0.9.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.9.0-next.4...@gracile/engine@0.9.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile/engine

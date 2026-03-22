@@ -1,0 +1,28 @@
+{
+  "name": "@gracile/template--minimal-island",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@gracile-labs/islands": "workspace:^",
+    "@gracile/gracile": "workspace:^",
+    "lit": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "vite": "catalog:",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "typescript": "catalog:"
+  }
+}

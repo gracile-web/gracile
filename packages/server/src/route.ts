@@ -8,6 +8,32 @@ import * as R from '@gracile/engine/routes/route';
 /**
  * **Defines a file-based route** for Gracile to consume.
  *
+ * **Important: Property order matters for type inference.**
+ * `handler` (or `staticPaths`) must be declared **before** `document` and
+ * `template` in the options object. TypeScript resolves generic type
+ * parameters from object properties in declaration order — the handler's
+ * return type feeds into `RouteContext.props`, which is then used to type
+ * the `context` parameter of `document` and `template`.
+ * If `document`/`template` appear first, `props` will be inferred as
+ * `undefined`.
+ *
+ * @example
+ * ```ts
+ * // ✅ Correct — handler first
+ * defineRoute({
+ *   handler: { GET: async (ctx) => ({ id: 1 }) },
+ *   document: (ctx) => html`…${ctx.props.GET.id}…`,
+ *   template: (ctx) => html`…${ctx.props.GET.id}…`,
+ * });
+ *
+ * // ❌ Broken — document before handler, props is undefined
+ * defineRoute({
+ *   document: (ctx) => html`…`,
+ *   handler: { GET: async (ctx) => ({ id: 1 }) },
+ *   template: (ctx) => html`…${ctx.props.GET.id}…`, // TS error!
+ * });
+ * ```
+ *
  * @see full guide in the [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/).
  */
 export function defineRoute<
@@ -48,6 +74,9 @@ export function defineRoute<
 		 * A handler can return either a standard `Response` that will terminate the
 		 * request pipeline, or any object to populate the current route template
 		 * and document contexts.
+		 *
+		 * **Must be declared before `document` and `template`** so TypeScript can
+		 * infer `RouteContext.props` from the handler's return type.
 		 *
 		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_handler)
 		 */
@@ -90,6 +119,9 @@ export function defineRoute<
 		 * A function that returns a server only template.
 		 * Route context is provided at runtime during the build.
 		 *
+		 * Receives the same `RouteContext` as `template` — including typed
+		 * `props` from `handler`. Declare `handler` **above** this property.
+		 *
 		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_document)
 		 */
 		document?: R.DocumentTemplate<RouteContext> | undefined;
@@ -97,6 +129,9 @@ export function defineRoute<
 		/**
 		 * A function that returns a server only or a Lit client hydratable template.
 		 * Route context is provided at runtime during the build.
+		 *
+		 * Receives the same `RouteContext` as `document` — including typed
+		 * `props` from `handler`. Declare `handler` **above** this property.
 		 *
 		 * @see [documentation](https://gracile.js.org/docs/learn/usage/defining-routes/#doc_template)
 		 */

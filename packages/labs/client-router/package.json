@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/client-router",
-  "version": "0.2.0",
+  "version": "0.2.0-next.12",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
@@ -40,7 +40,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test:integration": "playwright test"
   },
   "dependencies": {
     "@gracile/client": "workspace:^",
@@ -51,9 +52,12 @@
     "urlpattern-polyfill": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
-    "tsx": "^4.21.0",
-    "typescript": "5.9.3"
+    "@playwright/test": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "catalog:"
