@@ -1,4 +1,4 @@
-import type { ViteDevServer, Plugin as VitePlugin } from 'vite';
+import type { ViteDevServer, PluginOption } from 'vite';
 
 import type { PathsOptions } from '../collect.js';
 
@@ -21,7 +21,7 @@ export const applyViteDevServerMiddleware = async (
 	);
 };
 
-export function viteOgImagesGenerator(options?: PathsOptions): VitePlugin {
+export function viteOgImagesGenerator(options?: PathsOptions): PluginOption {
 	let isBuild = false;
 
 	const rollupPlugin = rollupOgImagesGenerator(options);
@@ -46,5 +46,5 @@ export function viteOgImagesGenerator(options?: PathsOptions): VitePlugin {
 		},
 
 		configureServer: (server) => applyViteDevServerMiddleware(server),
-	} as VitePlugin;
+	};
 }

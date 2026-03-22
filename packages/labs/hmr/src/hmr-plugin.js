@@ -150,7 +150,13 @@ export function gracileHmr(pluginConfig) {
 					if (result.code) {
 						return {
 							code: result.code,
-							map: result.map,
+							...(result.map
+								? {
+										map: /* HACK: Types mismatch (rolldown) */ /** @type {any} */ (
+											result.map
+										),
+									}
+								: {}),
 						};
 					}
 				} catch (/** @type {any} */ error) {

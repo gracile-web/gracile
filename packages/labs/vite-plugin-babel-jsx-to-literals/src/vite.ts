@@ -94,7 +94,7 @@ export function gracileJsx(
 			name: VITE_PLUGIN_NAME,
 
 			config() {
-				return { esbuild: { jsx: 'preserve' } };
+				return { esbuild: { jsx: 'preserve', oxc: { jsx: 'preserve' } } };
 			},
 		} satisfies PluginOption,
 

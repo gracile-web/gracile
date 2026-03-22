@@ -26,7 +26,7 @@ export function gracileJsxTs(
 
 			config() {
 				// TODO: Investigate if it's always needed.
-				return { esbuild: { jsx: 'preserve' } };
+				return { esbuild: { jsx: 'preserve' }, oxc: { jsx: 'preserve' } };
 			},
 		} satisfies PluginOption,
 

@@ -136,6 +136,7 @@ export default defineConfig({
 	esbuild: {
 		target: 'es2022',
 	},
+	oxc: { jsx: 'preserve' },
 
 	css: { devSourcemap: true },
 

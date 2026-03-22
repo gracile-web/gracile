@@ -15,18 +15,19 @@ export class MyEl extends LitElement {
 
 	@state() toggled = false;
 
-	@property({ type: Array, converter: (s) => s?.split(',') })
-	'extra-styles': string[] | string | null = null;
+	@property({ attribute: 'extra-styles', type: Array, converter: (s) => s?.split(',') })
+	// NOTE: 'extra-styles' crashes with Vite 8.0.1 (https://github.com/oxc-project/oxc/issues/20418)
+	extraStyles: string[] | string | null = null; 
 
 	render() {
-		if (typeof this['extra-styles'] === 'string') throw new Error();
+		if (typeof this.extraStyles === 'string') throw new Error();
 
 		return html`
 			<!--  -->
 			<link rel="stylesheet" href=${styles} />
 
-			${this['extra-styles']?.join(' --- ')}
-			${this['extra-styles']?.map(
+			${this.extraStyles?.join(' --- ')}
+			${this.extraStyles?.map(
 				(styleSheet) => html`<link rel="stylesheet" href=${styleSheet} />`,
 			)}
 

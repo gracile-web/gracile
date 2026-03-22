@@ -10,7 +10,6 @@ import { fileURLToPath } from 'node:url';
 // import { escape } from 'html-escaper';
 // import { bold, underline } from 'kleur/colors';
 // import stripAnsi from 'strip-ansi';
-import type { ESBuildTransformResult } from 'vite';
 import { normalizePath } from 'vite';
 import { codeFrame } from './printer.js';
 import { removeLeadingForwardSlashWindows } from '@gracile/internal-utils/paths';
@@ -22,7 +21,17 @@ import {
 } from '../errors.js';
 import type { BetterErrorData } from '../errors-data.js';
 
-type EsbuildMessage = ESBuildTransformResult['warnings'][number];
+// TODO: Vite 8 removed the `ESBuildTransformResult` export. Verify error overlay still works with OXC errors.
+type EsbuildMessage = {
+	text: string;
+	location: {
+		file: string;
+		line: number;
+		column: number;
+		lineText: string;
+	} | null;
+	pluginName: string;
+};
 
 const ansiPattern = [
 	'[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)',
