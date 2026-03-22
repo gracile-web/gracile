@@ -238,16 +238,6 @@ jobs:
           git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
           git push
 
-      - name: Merge back main into next
-        if: github.ref == 'refs/heads/main'
-        continue-on-error: true
-        env:
-          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-        run: |
-          git checkout next
-          git merge main --no-ff -m 'chore: auto-merge main into next [skip ci]'
-          git push
-
       # MARK: [NEXT]
       - name: 'Lerna publish [next]'
         if: github.ref == 'refs/heads/next'
@@ -284,6 +274,18 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
         shell: bash
         run: pnpm --prefix starter-projects run test:smoke
+
+      # MARK: Merge back (after smoke tests pass)
+
+      - name: Merge back main into next
+        if: github.ref == 'refs/heads/main'
+        continue-on-error: true
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        run: |
+          git checkout next
+          git merge main --no-ff -m 'chore: auto-merge main into next [skip ci]'
+          git push
 
       # MARK: Docs Website
 
