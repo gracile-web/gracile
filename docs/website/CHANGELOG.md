@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.11.0...@gracile/docs@0.12.0-next.0) (2026-03-22)
+
+### Features
+
+* rehaul import attributes handling strategy entirely ([806c355](https://github.com/gracile-web/gracile/commit/806c355eddab7160010101a65acba317ed9c91d5))
+
 # [0.11.0](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.11.0-next.0...@gracile/docs@0.11.0) (2026-03-22)
 
 **Note:** Version bump only for package @gracile/docs

@@ -1,6 +1,6 @@
 {
   "name": "@gracile/docs",
-  "version": "0.11.0",
+  "version": "0.12.0-next.0",
   "private": true,
   "license": "ISC",
   "author": {
@@ -123,7 +123,6 @@
   },
   "devDependencies": {
     "@importable/yaml": "^0.1.1",
-    "vite-plugin-standard-css-modules": "workspace:^",
     "@literals/rollup-plugin-html-css-minifier": "workspace:^",
     "@playwright/test": "catalog:",
     "@rollup/plugin-strip": "^3.0.4",
@@ -149,6 +148,7 @@
     "vite-plugin-cross-origin-isolation": "^0.1.6",
     "vite-plugin-inspect": "^0.10.6",
     "vite-plugin-solid": "catalog:",
+    "vite-plugin-standard-css-modules": "workspace:^",
     "vite-plugin-static-copy": "^2.0.0",
     "yaml": "^2.6.0"
   }

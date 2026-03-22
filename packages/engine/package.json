@@ -1,6 +1,6 @@
 {
   "name": "@gracile/engine",
-  "version": "0.10.0",
+  "version": "0.10.1-next.0",
   "description": "Vite-powered build and dev server engine for the Gracile framework",
   "keywords": [
     "custom-elements",
