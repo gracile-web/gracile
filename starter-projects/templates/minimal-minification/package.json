@@ -12,15 +12,15 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@gracile/gracile": "^0.9.0-next.12",
-    "@hono/node-server": "^1.19.10",
-    "hono": "^4.12.7",
-    "lit": "^3.2.1",
-    "vite": "^7.3.1"
+    "@gracile/gracile": "workspace:^",
+    "@hono/node-server": "catalog:",
+    "hono": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
   },
   "devDependencies": {
-    "@literals/rollup-plugin-html-css-minifier": "^2.0.3-next.0",
-    "@types/node": "^25.3.3",
-    "typescript": "5.9.3"
+    "@literals/rollup-plugin-html-css-minifier": "workspace:^",
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
   }
 }

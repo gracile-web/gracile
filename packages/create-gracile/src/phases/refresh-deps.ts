@@ -44,9 +44,13 @@ export async function refreshDeps(
 		[packageName, version]: [string, string],
 		type: keyof ProjectPackageJson,
 	) {
+		const replacedProtocol =
+			version.startsWith('catalog:') || version.startsWith('workspace:')
+				? 'latest'
+				: version;
 		const shiftedVersion = packageName.startsWith('@gracile/')
 			? gracileVersion
-			: version;
+			: replacedProtocol;
 		const updatedVersion = await deps.fetchLatestVersion(packageName, {
 			version: shiftedVersion,
 		});

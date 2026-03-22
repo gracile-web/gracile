@@ -63,6 +63,9 @@ catalogs:
     commander:
       specifier: ^14.0.3
       version: 14.0.3
+    express:
+      specifier: ^5.0.1
+      version: 5.2.1
     lit:
       specifier: ^3.2.1
       version: 3.3.2
@@ -1772,18 +1775,12 @@ importers:
       github-slugger:
         specifier: ^2.0.0
         version: 2.0.0
-      latest-version:
-        specifier: ^9.0.0
-        version: 9.0.0
       picocolors:
         specifier: 'catalog:'
         version: 1.1.1
       vite:
         specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      yaml:
-        specifier: ^2.6.0
-        version: 2.8.2
     devDependencies:
       '@types/node':
         specifier: 25.3.3
@@ -1906,62 +1903,62 @@ importers:
   starter-projects/templates/basics:
     dependencies:
       '@gracile/gracile':
-        specifier: ^0.9.0-next.12
-        version: 0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/gracile
       '@gracile/markdown':
-        specifier: ^0.5.0-next.3
-        version: 0.5.0-next.3(lit@3.3.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: workspace:^
+        version: link:../../../packages/addons/markdown
       '@gracile/markdown-preset-marked':
-        specifier: ^0.1.1-next.4
-        version: 0.1.1-next.4(lit@3.3.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: workspace:^
+        version: link:../../../packages/addons/markdown-preset-marked
       '@gracile/metadata':
-        specifier: ^0.3.0-next.2
-        version: 0.3.0-next.2(@types/node@25.3.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: workspace:^
+        version: link:../../../packages/addons/metadata
       '@gracile/sitemap':
-        specifier: ^0.3.1-next.0
-        version: 0.3.1-next.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: workspace:^
+        version: link:../../../packages/addons/sitemap
       '@gracile/svg':
-        specifier: ^0.3.0-next.1
-        version: 0.3.0-next.1(lit@3.3.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: workspace:^
+        version: link:../../../packages/addons/svg
       '@hono/node-server':
-        specifier: ^1.19.10
+        specifier: 'catalog:'
         version: 1.19.11(hono@4.12.8)
       hono:
         specifier: '>=4.12.7'
         version: 4.12.8
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
-        specifier: ^7.3.1
+        specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       sass:
-        specifier: ^1.80.6
+        specifier: 'catalog:'
         version: 1.98.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   starter-projects/templates/minimal-bootstrap-tailwind:
     dependencies:
       '@gracile-labs/css-helpers':
-        specifier: ^0.2.0-next.10
-        version: 0.2.0(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/labs/css-helpers
       '@gracile/gracile':
-        specifier: ^0.9.0-next.12
-        version: 0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/gracile
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.8(@popperjs/core@2.11.8)
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
-        specifier: ^7.3.1
+        specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
       '@tailwindcss/typography':
@@ -1983,148 +1980,148 @@ importers:
         specifier: ^3.4.10
         version: 3.4.19(tsx@4.21.0)(yaml@2.8.2)
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   starter-projects/templates/minimal-client-routing:
     dependencies:
       '@gracile-labs/client-router':
-        specifier: ^0.2.0-next.12
-        version: 0.2.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/labs/client-router
       '@gracile/gracile':
-        specifier: ^0.9.0-next.12
-        version: 0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/gracile
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
-        specifier: ^7.3.1
+        specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   starter-projects/templates/minimal-minification:
     dependencies:
       '@gracile/gracile':
-        specifier: ^0.9.0-next.12
-        version: 0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/gracile
       '@hono/node-server':
-        specifier: ^1.19.10
+        specifier: 'catalog:'
         version: 1.19.11(hono@4.12.8)
       hono:
         specifier: '>=4.12.7'
         version: 4.12.8
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
-        specifier: ^7.3.1
+        specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
       '@literals/rollup-plugin-html-css-minifier':
-        specifier: ^2.0.3-next.0
-        version: 2.0.3-next.0(rollup@4.59.0)
+        specifier: workspace:^
+        version: link:../../../packages/labs/literals/rollup-plugin-html-css-minifier
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   starter-projects/templates/minimal-server-express:
     dependencies:
       '@gracile/gracile':
-        specifier: ^0.9.0-next.12
-        version: 0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/gracile
       express:
-        specifier: ^5.0.1
+        specifier: 'catalog:'
         version: 5.2.1
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
-        specifier: ^7.3.1
+        specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
       '@types/express':
-        specifier: ^5.0.6
+        specifier: 'catalog:'
         version: 5.0.6
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   starter-projects/templates/minimal-server-hono:
     dependencies:
       '@gracile/gracile':
-        specifier: ^0.9.0-next.12
-        version: 0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/gracile
       '@hono/node-server':
-        specifier: ^1.19.10
+        specifier: 'catalog:'
         version: 1.19.11(hono@4.12.8)
       hono:
         specifier: '>=4.12.7'
         version: 4.12.8
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
-        specifier: ^7.3.1
+        specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   starter-projects/templates/minimal-static:
     dependencies:
       '@gracile/gracile':
-        specifier: ^0.9.0-next.12
-        version: 0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/gracile
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
-        specifier: ^7.3.1
+        specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
   starter-projects/templates/minimal-testing:
     dependencies:
       '@gracile/gracile':
-        specifier: ^0.9.0-next.12
-        version: 0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        specifier: workspace:^
+        version: link:../../../packages/gracile
       '@hono/node-server':
-        specifier: ^1.19.10
+        specifier: 'catalog:'
         version: 1.19.11(hono@4.12.8)
       hono:
         specifier: '>=4.12.7'
         version: 4.12.8
       lit:
-        specifier: ^3.2.1
+        specifier: 'catalog:'
         version: 3.3.2
       vite:
-        specifier: ^7.3.1
+        specifier: 'catalog:'
         version: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     devDependencies:
       '@playwright/test':
-        specifier: ^1.58.2
+        specifier: 'catalog:'
         version: 1.58.2
       '@sand4rt/experimental-ct-web':
         specifier: ^1.46.0
@@ -2133,13 +2130,13 @@ importers:
         specifier: 25.3.3
         version: 25.3.3
       c8:
-        specifier: ^11.0.0
+        specifier: 'catalog:'
         version: 11.0.0
       tsx:
-        specifier: ^4.21.0
+        specifier: 'catalog:'
         version: 4.21.0
       typescript:
-        specifier: 5.9.3
+        specifier: 'catalog:'
         version: 5.9.3
 
 packages:
@@ -2943,85 +2940,6 @@ packages:
   '@gerrit0/mini-shiki@3.23.0':
     resolution: {integrity: sha512-bEMORlG0cqdjVyCEuU0cDQbORWX+kYCeo0kV1lbxF5bt4r7SID2l9bqsxJEM0zndaxpOUT7riCyIVEuqq/Ynxg==}
 
-  '@gracile-labs/better-errors@0.2.0':
-    resolution: {integrity: sha512-eH0ERIClrCPF9Ird2DZEfBVEw0mIbi0yX86EagYK7cCvYU+U9ryXg2doKLgFXmUAsIIsW9mqzK2vSlIeulq/dQ==}
-
-  '@gracile-labs/client-router@0.2.0':
-    resolution: {integrity: sha512-6GQ/fsBZfxiOBNFdePvboogF24Tfj229ZwUwJdnDj3rm0Pm5iOxbCcQtIwdOeyqD01cPMIc5RXz3aoQvvI+2lg==}
-    peerDependencies:
-      '@lit-labs/ssr': ^4.0.0
-
-  '@gracile-labs/css-helpers@0.2.0':
-    resolution: {integrity: sha512-2DePS87hzO3Ni2JtBF4rAqbJu4fwoGqpqFhNbPVs2fprm2Pnot+HuOEp/RRtRLPw95eObHNVf1jQLoY/cmWpEw==}
-    peerDependencies:
-      '@lit-labs/ssr': ^4.0.0
-
-  '@gracile/client@0.5.0':
-    resolution: {integrity: sha512-X38R5Ehj/M5dSUV40r8fkeAjCEmblE2lrRV8/cQTq/ARjj3+AXXrZz1GSu4GDY9d6Ih4DJzkNtxYyReJwxk/cw==}
-    peerDependencies:
-      '@lit-labs/signals': ^0.1.1
-    peerDependenciesMeta:
-      '@lit-labs/signals':
-        optional: true
-
-  '@gracile/engine@0.9.0':
-    resolution: {integrity: sha512-4WgBKEZkuEUxA/v5LM3IjdQyewAisJCzBX7nXHeZrfSQ+mOql1jMNScuKdTlM6G0NJ8curp25/VHNSOHg0yZOA==}
-    peerDependencies:
-      '@lit-labs/ssr': ^4.0.0
-      '@lit-labs/ssr-client': ^1.1.8
-      lit: ^3.2.1
-
-  '@gracile/gracile@0.9.0':
-    resolution: {integrity: sha512-mkynNly2iWVZwqufDtZj+tqHaIqdtA+fXCGUkHjaDRFDMLw5ZU0BLdl4LdG2mf0NMDGPJ3yXI40oGbNpvAkGZg==}
-
-  '@gracile/internal-utils@0.6.0':
-    resolution: {integrity: sha512-KQ/VYpIyHYW854TJ0zpqxF2dEdJn/9CwV1vOdZSwvYCc3goMTJuYWOMBJegM3FZ7Jr56tYZpbDMD9ILMYCOA7w==}
-    peerDependencies:
-      vite: ^7.3.1
-    peerDependenciesMeta:
-      vite:
-        optional: true
-
-  '@gracile/internal-utils@0.6.1-next.1':
-    resolution: {integrity: sha512-hdCiFZQQSsqC945bOmuoM9Yo9qB1t066eaxAEMNRwWjPXII1o+dbTjZP9z3fU89qJf0pvdq15Gj9EONIKJOzLA==}
-    peerDependencies:
-      vite: ^7.3.1
-    peerDependenciesMeta:
-      vite:
-        optional: true
-
-  '@gracile/markdown-preset-marked@0.1.1-next.4':
-    resolution: {integrity: sha512-lQLhLQ4K8LnW4/z/XyEzcImZo7UG3KpILtyWhIVGy5bIOW1CHkF121tZmYneETbdBWBZ71jsj3xupsSqmDxPEw==}
-    peerDependencies:
-      lit: ^3.2.1
-      vite: ^7.3.1
-
-  '@gracile/markdown@0.5.0-next.3':
-    resolution: {integrity: sha512-tViUc6gWvQTKEirgwwssDnWRAMZQQ/IvsfhuLpyq4aDY3A3m6sOSsf0vW0bxmAsfgliR7kNKmKxdsFxB6gaPsg==}
-    peerDependencies:
-      lit: ^3.2.1
-      vite: ^7.3.1
-
-  '@gracile/metadata@0.3.0-next.2':
-    resolution: {integrity: sha512-U1d6rnF9oqZWcpp/llcC397S7CC/wp0mpm5Irq4J5S+fNivyy7O9F28NV3Ss3/tsNRZWiW1ZhPKzKdw3MVWs+g==}
-
-  '@gracile/server@0.7.0':
-    resolution: {integrity: sha512-qVUzJNaSTGqW/aL9vlOAPmS7OydR12dCYMYRGPn4mq3Y+nKVqCDiqfbavGYw5b6cdMuob9FOsGo+Yf83H1NOPA==}
-    peerDependencies:
-      '@lit-labs/ssr': ^4.0.0
-      lit: ^3.2.1
-
-  '@gracile/sitemap@0.3.1-next.0':
-    resolution: {integrity: sha512-YCo1lEFvzniPfI2nK+Gjsd5YSEPQkQXW/nr8i1QW7vPIJ9kKaGEaQ/bmNseqNeSyTORj98bOFYQalILkopCYAA==}
-    peerDependencies:
-      vite: ^7.3.1
-
-  '@gracile/svg@0.3.0-next.1':
-    resolution: {integrity: sha512-k2pHler+8Tm5/v8Aim3e2nd1uguVF0RNQiax/y+8bAC6UblVePNgl+3+hprg/RDbE7ycAvJnc8vIjlaAiYnA9Q==}
-    peerDependencies:
-      lit: ^3.2.1
-      vite: ^7.3.1
-
   '@hono/node-server@1.19.11':
     resolution: {integrity: sha512-dr8/3zEaB+p0D2n/IUrlPF1HZm586qgJNXK1a9fhg/PzdtkK7Ksd5l312tJX2yBuALqDYBlG20QEbayqPyxn+g==}
     engines: {node: '>=18.14.1'}
@@ -3403,17 +3321,6 @@ packages:
 
   '@lit/reactive-element@2.1.2':
     resolution: {integrity: sha512-pbCDiVMnne1lYUIaYNN5wrwQXDtHaYtg7YEFPeW+hws6U47WeFvISGUWekPGKWOP1ygrs0ef0o1VJMk1exos5A==}
-
-  '@literals/html-css-minifier@2.0.3-next.0':
-    resolution: {integrity: sha512-PTShAT27/adeXZjoPKSLl7Teuyt4brouf+0vcrfph3dOmVvxADh5xTKgS/bCy9D9I5D+PxHHK7J5CcHKq5hPhw==}
-
-  '@literals/parser@1.2.6-next.0':
-    resolution: {integrity: sha512-+8m/s7T2QaLscbLoJk/lz9bGFUIYN5zw72PKAeBm6Webu0Xaw8zBZj6uF1k5L91HReW8Lqj8mRQlJGtOsAtEPw==}
-
-  '@literals/rollup-plugin-html-css-minifier@2.0.3-next.0':
-    resolution: {integrity: sha512-dp1uW5hyGT0FqPeAX/p6enGOe/0fvc1hUfjluseZ0gjNwaHyYQi1wRhCrnti7A2eCa6ImmCF+Zc0jIFLTBLwBQ==}
-    peerDependencies:
-      rollup: ^0.65.2 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
 
   '@lukeed/ms@2.0.2':
     resolution: {integrity: sha512-9I2Zn6+NJLfaGoz9jN3lpwDgAYvfGeNYdbAIjJOqzs4Tpc+VU3Jqq4IofSUBKajiDS8k9fZIg18/z13mpk1bsA==}
@@ -12107,341 +12014,6 @@ snapshots:
       '@shikijs/types': 3.23.0
       '@shikijs/vscode-textmate': 10.0.2
 
-  '@gracile-labs/better-errors@0.2.0(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
-    dependencies:
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client': 1.1.8
-      lit: 3.3.2
-      picocolors: 1.1.1
-      vite: 7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - yaml
-
-  '@gracile-labs/better-errors@0.2.0(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
-    dependencies:
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client': 1.1.8
-      lit: 3.3.2
-      picocolors: 1.1.1
-      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - yaml
-
-  '@gracile-labs/client-router@0.2.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)':
-    dependencies:
-      '@gracile/client': 0.5.0(@lit-labs/signals@0.1.3)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
-      '@gracile/engine': 0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client': 1.1.8
-      lit: 3.3.2
-      urlpattern-polyfill: 10.1.0
-    transitivePeerDependencies:
-      - '@lit-labs/signals'
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - vite
-      - yaml
-
-  '@gracile-labs/css-helpers@0.2.0(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
-    dependencies:
-      '@gracile/engine': 0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/server': 0.7.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client': 1.1.8
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - lit
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - yaml
-
-  '@gracile/client@0.5.0(@lit-labs/signals@0.1.3)(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)':
-    dependencies:
-      '@gracile/engine': 0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client': 1.1.8
-      urlpattern-polyfill: 10.1.0
-    optionalDependencies:
-      '@lit-labs/signals': 0.1.3
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - lit
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - vite
-      - yaml
-
-  '@gracile/client@0.5.0(@lit-labs/signals@0.1.3)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)':
-    dependencies:
-      '@gracile/engine': 0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client': 1.1.8
-      urlpattern-polyfill: 10.1.0
-    optionalDependencies:
-      '@lit-labs/signals': 0.1.3
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - lit
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - vite
-      - yaml
-
-  '@gracile/engine@0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
-    dependencies:
-      '@gracile-labs/better-errors': 0.2.0(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client': 1.1.8
-      '@whatwg-node/server': 0.10.18
-      fdir: 6.5.0(picomatch@4.0.3)
-      lit: 3.3.2
-      picocolors: 1.1.1
-      urlpattern-polyfill: 10.1.0
-      vite: 7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - yaml
-
-  '@gracile/engine@0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
-    dependencies:
-      '@gracile-labs/better-errors': 0.2.0(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      '@lit-labs/ssr-client': 1.1.8
-      '@whatwg-node/server': 0.10.18
-      fdir: 6.5.0(picomatch@4.0.3)
-      lit: 3.3.2
-      picocolors: 1.1.1
-      urlpattern-polyfill: 10.1.0
-      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - yaml
-
-  '@gracile/gracile@0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)':
-    dependencies:
-      '@gracile-labs/better-errors': 0.2.0(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/client': 0.5.0(@lit-labs/signals@0.1.3)(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
-      '@gracile/engine': 0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@gracile/server': 0.7.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      urlpattern-polyfill: 10.1.0
-    transitivePeerDependencies:
-      - '@lit-labs/signals'
-      - '@lit-labs/ssr-client'
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - lit
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - vite
-      - yaml
-
-  '@gracile/gracile@0.9.0(@lit-labs/signals@0.1.3)(@lit-labs/ssr-client@1.1.8)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)':
-    dependencies:
-      '@gracile-labs/better-errors': 0.2.0(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/client': 0.5.0(@lit-labs/signals@0.1.3)(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
-      '@gracile/engine': 0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@gracile/internal-utils': 0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@gracile/server': 0.7.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      urlpattern-polyfill: 10.1.0
-    transitivePeerDependencies:
-      - '@lit-labs/signals'
-      - '@lit-labs/ssr-client'
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - lit
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - vite
-      - yaml
-
-  '@gracile/internal-utils@0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
-    optionalDependencies:
-      vite: 7.3.1(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-
-  '@gracile/internal-utils@0.6.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
-    optionalDependencies:
-      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-
-  '@gracile/internal-utils@0.6.1-next.1(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
-    optionalDependencies:
-      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-
-  '@gracile/markdown-preset-marked@0.1.1-next.4(lit@3.3.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
-    dependencies:
-      '@gracile/markdown': 0.5.0-next.3(lit@3.3.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      github-slugger: 2.0.0
-      lit: 3.3.2
-      marked: 17.0.3
-      marked-gfm-heading-id: 4.1.3(marked@17.0.3)
-      ultramatter: 0.0.4
-      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-
-  '@gracile/markdown@0.5.0-next.3(lit@3.3.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
-    dependencies:
-      '@gracile/internal-utils': 0.6.1-next.1(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      lit: 3.3.2
-      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-
-  '@gracile/metadata@0.3.0-next.2(@types/node@25.3.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
-    dependencies:
-      '@gracile/internal-utils': 0.6.1-next.1(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      lit: 3.3.2
-    transitivePeerDependencies:
-      - '@types/node'
-      - vite
-
-  '@gracile/server@0.7.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
-    dependencies:
-      '@gracile/engine': 0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@1.21.7)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      lit: 3.3.2
-    transitivePeerDependencies:
-      - '@lit-labs/ssr-client'
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - yaml
-
-  '@gracile/server@0.7.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)':
-    dependencies:
-      '@gracile/engine': 0.9.0(@lit-labs/ssr-client@1.1.8)(@lit-labs/ssr@4.0.0(@types/node@25.3.3))(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(lit@3.3.2)(picomatch@4.0.3)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-      '@lit-labs/ssr': 4.0.0(@types/node@25.3.3)
-      lit: 3.3.2
-    transitivePeerDependencies:
-      - '@lit-labs/ssr-client'
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - picomatch
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - terser
-      - tsx
-      - yaml
-
-  '@gracile/sitemap@0.3.1-next.0(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
-    dependencies:
-      '@gracile/internal-utils': 0.6.1-next.1(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      picocolors: 1.1.1
-      sitemap: 9.0.1
-      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-
-  '@gracile/svg@0.3.0-next.1(lit@3.3.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
-    dependencies:
-      '@gracile/internal-utils': 0.6.1-next.1(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      lit: 3.3.2
-      svgo: 4.0.1
-      vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
-
   '@hono/node-server@1.19.11(hono@4.12.8)':
     dependencies:
       hono: 4.12.8
@@ -12934,22 +12506,6 @@ snapshots:
   '@lit/reactive-element@2.1.2':
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.5.1
-
-  '@literals/html-css-minifier@2.0.3-next.0':
-    dependencies:
-      '@literals/parser': 1.2.6-next.0
-      '@types/html-minifier-terser': 7.0.2
-      clean-css: 4.2.1
-      html-minifier-terser: 7.2.0
-      magic-string: 0.25.0
-
-  '@literals/parser@1.2.6-next.0': {}
-
-  '@literals/rollup-plugin-html-css-minifier@2.0.3-next.0(rollup@4.59.0)':
-    dependencies:
-      '@literals/html-css-minifier': 2.0.3-next.0
-      '@rollup/pluginutils': 5.3.0(rollup@4.59.0)
-      rollup: 4.59.0
 
   '@lukeed/ms@2.0.2': {}
 
