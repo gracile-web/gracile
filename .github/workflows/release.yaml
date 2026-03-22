@@ -231,17 +231,6 @@ jobs:
           git stash
           pnpm lerna publish --message 'chore: publish [main] release [skip ci]' --create-release=github --yes
 
-      # MARK: Regenerate starter-project templates [main]
-      # After publish, regenerate templates (rsync + README) then commit + push.
-      # Templates keep workspace:/catalog: refs — create-gracile resolves at scaffold time.
-      - name: 'Regenerate starter-project templates [main]'
-        if: github.ref == 'refs/heads/main'
-        run: |
-          pnpm --prefix starter-projects run generate
-          git add starter-projects/templates
-          git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
-          git push
-
       # MARK: [NEXT]
       - name: 'Lerna publish [next]'
         if: github.ref == 'refs/heads/next'
@@ -252,11 +241,12 @@ jobs:
         run: |
           pnpm lerna publish --message 'chore: publish [next] pre-release' --conventional-prerelease --pre-dist-tag=next --preid=next --yes
 
-      # MARK: Regenerate starter-project templates [next]
-      - name: 'Regenerate starter-project templates [next]'
-        if: github.ref == 'refs/heads/next'
+      # MARK: Commit regenerated starter-project templates
+      # Templates were generated pre-publish (rsync + README) and keep
+      # workspace:/catalog: refs — create-gracile resolves at scaffold time.
+      - name: 'Commit starter-project templates'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
         run: |
-          pnpm --prefix starter-projects run generate
           git add starter-projects/templates
           git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
           git push
