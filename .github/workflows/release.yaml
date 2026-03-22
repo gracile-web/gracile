@@ -267,6 +267,9 @@ jobs:
       # outside the workspace to catch duplicate-package issues (e.g. Symbol
       # identity mismatches from duplicated @gracile/internal-utils).
 
+      # FIXME: Isolation still isn't working as intended (HACK: Symbol.for in logger)
+      # Maybe PNPM is still resolving sound versions to local (cached) workspace?
+      # This script isn't achieving its purpose until this is addressed.
       - name: 'Smoke test — isolated (post-publish)'
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
         shell: bash
