@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/islands",
-  "version": "0.1.1-next.0",
+  "version": "0.1.1",
   "description": "Islands architecture add-on for Gracile — SSR and hydrate components from any framework",
   "keywords": [
     "custom-elements",
