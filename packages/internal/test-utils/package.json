@@ -17,12 +17,15 @@
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
-    "cheerio": "1.2.0",
-    "vite": "catalog:"
+    "cheerio": "1.2.0"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "peerDependencies": {
+    "vite": "^7.0.0 || ^8.0.0"
   }
 }

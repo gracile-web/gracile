@@ -62,10 +62,11 @@
     "@types/node": "catalog:",
     "c8": "catalog:",
     "lit": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "peerDependencies": {
-    "vite": "catalog:"
+    "vite": "^7.0.0 || ^8.0.0"
   },
   "peerDependenciesMeta": {
     "vite": {

@@ -60,7 +60,13 @@
     "vite": "catalog:"
   },
   "peerDependencies": {
-    "@lit-labs/ssr": "catalog:"
+    "@lit-labs/ssr": "catalog:",
+    "vite": "^7.0.0 || ^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public",

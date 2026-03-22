@@ -56,8 +56,7 @@
     "@whatwg-node/server": "^0.10.18",
     "fdir": "^6.5.0",
     "picocolors": "catalog:",
-    "urlpattern-polyfill": "catalog:",
-    "vite": "catalog:"
+    "urlpattern-polyfill": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",
@@ -66,12 +65,14 @@
     "@types/node": "catalog:",
     "c8": "catalog:",
     "tsx": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "peerDependencies": {
     "@lit-labs/ssr": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
-    "lit": "catalog:"
+    "lit": "catalog:",
+    "vite": "^7.0.0 || ^8.0.0"
   },
   "publishConfig": {
     "access": "public",

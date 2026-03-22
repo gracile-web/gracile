@@ -46,10 +46,11 @@
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vite": "catalog:"
   },
   "peerDependencies": {
-    "vite": "catalog:"
+    "vite": "^7.0.0 || ^8.0.0"
   },
   "publishConfig": {
     "access": "public",

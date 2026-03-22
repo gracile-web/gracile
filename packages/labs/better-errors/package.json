@@ -49,8 +49,7 @@
     "@lit-labs/ssr": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
     "lit": "catalog:",
-    "picocolors": "catalog:",
-    "vite": "catalog:"
+    "picocolors": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
@@ -58,7 +57,11 @@
     "@literals/rollup-plugin-html-css-minifier": "workspace:^",
     "@rollup/plugin-terser": "^0.4.4",
     "terser": "^5.46.0",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "peerDependencies": {
+    "vite": "^7.0.0 || ^8.0.0"
   },
   "publishConfig": {
     "access": "public",
