@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-test-utils@0.0.1-next.0...@gracile/internal-test-utils@0.0.1) (2026-03-22)
+
+**Note:** Version bump only for package @gracile/internal-test-utils
+
 ## 0.0.1-next.0 (2026-03-22)
 
 ### Bug Fixes
