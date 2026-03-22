@@ -164,29 +164,38 @@ jobs:
         shell: bash
         run: node --run test:unit
 
-      # IDEA: Can we avoid duplicating Playwright browser installation for each package? Maybe a single root-level install with a shared cache is enough? For now, just cache per-package to speed up subsequent runs.
+      # MARK: Playwright — single install for all test suites
+      # All packages use the same @playwright/test version (catalog:).
+      # Browsers land in ~/.cache/ms-playwright regardless of working directory.
       - name: Cache Playwright browsers
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key:
-            playwright-${{ hashFiles('packages/labs/hmr/package.json',
-            'packages/labs/client-router/package.json',
-            'starter-projects/package.json') }}
+          key: playwright-${{ hashFiles('pnpm-lock.yaml') }}
 
-      - name: Install Playwright browsers (hmr)
+      - name: Install Playwright browsers
         shell: bash
         run: npx playwright install --with-deps chromium
-        working-directory: packages/labs/hmr
-
-      - name: Install Playwright browsers (client-router)
-        shell: bash
-        run: npx playwright install --with-deps chromium
-        working-directory: packages/labs/client-router
+        working-directory: starter-projects
 
       - name: Tests — Integration
         shell: bash
         run: node --run test:integration
+
+      # MARK: Starter Projects — Smoke Test (pre-publish, workspace-linked)
+
+      - name: 'Regenerate starter-project templates'
+        run: pnpm --prefix starter-projects run generate
+
+      - name: Tests — Starter projects smoke
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        shell: bash
+        run: pnpm --prefix starter-projects run test:smoke
+
+      - name: Tests — Docs smoke
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+        shell: bash
+        run: pnpm --prefix docs/website run test:smoke
 
       # MARK: Publish packages
       # NOTE: Auth is configured by setup-node's registry-url above.
@@ -261,26 +270,6 @@ jobs:
           git checkout next
           git merge main --no-ff -m 'chore: auto-merge main into next [skip ci]'
           git push
-
-      # MARK: Docs Website
-
-      - name: Cache Playwright browsers (docs)
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-docs-${{ hashFiles('docs/website/package.json') }}
-
-      - name: Install Playwright browsers (docs)
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        shell: bash
-        run: npx playwright install --with-deps chromium
-        working-directory: docs/website
-
-      - name: Tests — Docs smoke
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        shell: bash
-        run: pnpm --prefix docs/website run test:smoke
 
       - name: 'Deploy docs website [main → production]'
         if: github.ref == 'refs/heads/main'
