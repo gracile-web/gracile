@@ -310,7 +310,18 @@ export async function minifyHTMLLiterals(
 		templates.map(async (template) => {
 			const minifyHTML = shouldMinify(template);
 			const minifyCSS = !!strategy.minifyCSS && shouldMinifyCSS(template);
-			if (minifyHTML || minifyCSS) {
+			if (minifyCSS) {
+				// CSS interpolation is not supported — only minify fully static
+				// css`…` templates (single part, no expressions).
+				if (template.parts.length === 1 && strategy.minifyCSS) {
+					const part = template.parts[0];
+					if (part.start < part.end) {
+						const min = strategy.minifyCSS(part.text);
+						ms.overwrite(part.start, part.end, min);
+					}
+				}
+				// Templates with expressions are left untouched.
+			} else if (minifyHTML) {
 				const placeholder = strategy.getPlaceholder(template.parts);
 				if (validate) {
 					validate.ensurePlaceholderValid(placeholder);
@@ -320,25 +331,7 @@ export async function minifyHTMLLiterals(
 					template.parts,
 					placeholder,
 				);
-				let min: string;
-				if (minifyCSS) {
-					const minifyCSSOptions = (
-						(options as DefaultOptions).minifyOptions || {}
-					).minifyCSS;
-					if (typeof minifyCSSOptions === 'function') {
-						min = minifyCSSOptions(combined);
-					} else if (minifyCSSOptions === false) {
-						min = combined;
-					} else {
-						const cssOptions =
-							typeof minifyCSSOptions === 'object'
-								? minifyCSSOptions
-								: undefined;
-						min = strategy.minifyCSS!(combined, cssOptions);
-					}
-				} else {
-					min = await strategy.minifyHTML(combined, minifyOptions);
-				}
+				const min = await strategy.minifyHTML(combined, minifyOptions);
 
 				const minParts = strategy.splitHTMLByPlaceholder(min, placeholder);
 				if (validate) {

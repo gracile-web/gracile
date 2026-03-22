@@ -46,13 +46,9 @@
     "@rollup/pluginutils": "^5.1.0"
   },
   "devDependencies": {
-    "@types/chai": "catalog:",
     "@types/node": "catalog:",
-    "@types/sinon": "catalog:",
     "c8": "catalog:",
-    "chai": "catalog:",
     "rollup": "^4.19.1",
-    "sinon": "^6.3.5",
     "typescript": "catalog:"
   },
   "peerDependencies": {

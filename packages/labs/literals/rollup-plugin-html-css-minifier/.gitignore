@@ -1,7 +1,5 @@
 /node_modules
 /coverage
 /.nyc_output
-**/*.js
-**/*.map
-**/*.d.ts
+
 !declarations.d.ts

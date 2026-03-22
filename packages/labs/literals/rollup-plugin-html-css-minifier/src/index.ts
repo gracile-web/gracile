@@ -50,6 +50,9 @@ export function literalsHtmlCssMinifier(
 
 	return {
 		name: 'minify-html-literals',
+		// Run before esbuild/TypeScript transforms, which compile away
+		// tagged template literals into function calls.
+		enforce: 'pre' as const,
 		async transform(this: PluginContext, code: string, id: string) {
 			if (options.filter!(id)) {
 				try {

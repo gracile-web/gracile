@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
+import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-
-import { expect } from 'chai';
 
 import * as pl from '../index.js';
 import { parseLiterals } from '../parse-literals.js';
@@ -9,11 +8,11 @@ import typescript from '../strategies/typescript.js';
 
 describe('exports', () => {
 	it('should export parseLiterals() function', () => {
-		expect(pl.parseLiterals).to.equal(parseLiterals);
+		assert.strictEqual(pl.parseLiterals, parseLiterals);
 	});
 
 	it('should export strategies map', () => {
-		expect(pl.strategies).to.deep.equal({
+		assert.deepStrictEqual(pl.strategies, {
 			typescript,
 		});
 	});

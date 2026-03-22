@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
+import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
-import { expect } from 'chai';
-import { minify } from 'html-minifier-terser';
+import { minify } from 'html-minifier-next';
 import { TemplatePart } from '@literals/parser';
 
 import { defaultMinifyOptions, defaultStrategy } from '../strategy.js';
@@ -25,8 +25,8 @@ describe('strategy', () => {
 		describe('getPlaceholder()', () => {
 			it('should return a string with @ and () in it with no spaces', () => {
 				const placeholder = defaultStrategy.getPlaceholder(parts);
-				expect(placeholder.indexOf('@')).to.equal(0, 'should start with @');
-				expect(placeholder).to.include('()', 'should contain function parens');
+				assert.strictEqual(placeholder.indexOf('@'), 0, 'should start with @');
+				assert.ok(placeholder.includes('()'), 'should contain function parens');
 			});
 
 			it('should append "_" if placeholder exists in templates', () => {
@@ -39,8 +39,8 @@ describe('strategy', () => {
 					},
 				]);
 
-				expect(oneUnderscore).not.to.equal(regularPlaceholder);
-				expect(oneUnderscore).to.include('_');
+				assert.notStrictEqual(oneUnderscore, regularPlaceholder);
+				assert.ok(oneUnderscore.includes('_'));
 
 				const twoUnderscores = defaultStrategy.getPlaceholder([
 					{
@@ -55,9 +55,9 @@ describe('strategy', () => {
 					},
 				]);
 
-				expect(twoUnderscores).not.to.equal(regularPlaceholder);
-				expect(twoUnderscores).not.to.equal(oneUnderscore);
-				expect(twoUnderscores).to.include('__');
+				assert.notStrictEqual(twoUnderscores, regularPlaceholder);
+				assert.notStrictEqual(twoUnderscores, oneUnderscore);
+				assert.ok(twoUnderscores.includes('__'));
 			});
 
 			it('should return a value that is preserved by html-minifier when splitting', async () => {
@@ -87,16 +87,18 @@ describe('strategy', () => {
 				console.log(minHtml);
 
 				// 8 placeholders, 9 parts
-				expect(
-					defaultStrategy.splitHTMLByPlaceholder(minHtml, placeholder),
-				).to.have.lengthOf(9);
+				assert.strictEqual(
+					defaultStrategy.splitHTMLByPlaceholder(minHtml, placeholder).length,
+					9,
+				);
 			});
 		});
 
 		describe('combineHTMLStrings()', () => {
 			it('should join part texts by the placeholder', () => {
 				const expected = '<h1>EXP</h1>';
-				expect(defaultStrategy.combineHTMLStrings(parts, 'EXP')).to.equal(
+				assert.strictEqual(
+					defaultStrategy.combineHTMLStrings(parts, 'EXP'),
 					expected,
 				);
 			});
@@ -114,11 +116,9 @@ describe('strategy', () => {
 					dynamicTagParts,
 					placeholder,
 				);
-				// Tag positions should use a valid custom element name, not the @ placeholder
-				expect(result).to.include('<template-expression-tag');
-				expect(result).to.include('</template-expression-tag>');
-				// Attribute positions should still use the regular placeholder
-				expect(result).to.include(placeholder);
+				assert.ok(result.includes('<template-expression-tag'));
+				assert.ok(result.includes('</template-expression-tag>'));
+				assert.ok(result.includes(placeholder));
 			});
 		});
 
@@ -133,44 +133,47 @@ describe('strategy', () => {
           </ul>
         `;
 
-				expect(
+				assert.strictEqual(
 					await defaultStrategy.minifyHTML(html, defaultMinifyOptions),
-				).to.equal(await minify(html, defaultMinifyOptions));
+					await minify(html, defaultMinifyOptions),
+				);
 			});
 		});
 
 		describe('splitHTMLByPlaceholder()', () => {
 			it('should split string by the placeholder', () => {
 				const expected = ['<h1>', '</h1>'];
-				expect(
+				assert.deepStrictEqual(
 					defaultStrategy.splitHTMLByPlaceholder('<h1>EXP</h1>', 'EXP'),
-				).to.deep.equal(expected);
+					expected,
+				);
 			});
 
 			it('should handle if a placeholder is missing its semicolon', () => {
 				const expected = ['<h1>', '</h1><button onclick="', '"></button>'];
 				const html = `<h1>EXP;</h1><button onclick="EXP"></button>`;
-				expect(
+				assert.deepStrictEqual(
 					defaultStrategy.splitHTMLByPlaceholder(html, 'EXP;'),
-				).to.deep.equal(expected);
+					expected,
+				);
 			});
 
 			it('should split by tag placeholder for dynamic tag names', () => {
 				const html =
 					'<template-expression-tag class="foo">content</template-expression-tag>';
 				const expected = ['<', ' class="foo">content</', '>'];
-				expect(
+				assert.deepStrictEqual(
 					defaultStrategy.splitHTMLByPlaceholder(
 						html,
 						'@TEMPLATE_EXPRESSION();',
 					),
-				).to.deep.equal(expected);
+					expected,
+				);
 			});
 		});
 
 		describe('dynamic tag names (end-to-end)', () => {
 			it('should minify HTML with dynamic tag names without parse errors', async () => {
-				// Simulates: html`<${tag} part="base" class=${cls}></${tag}>`
 				const dynamicTagParts: TemplatePart[] = [
 					{ text: '<', start: 0, end: 1 },
 					{ text: '\n        part="base"\n        class=', start: 1, end: 36 },
@@ -184,7 +187,6 @@ describe('strategy', () => {
 					placeholder,
 				);
 
-				// Should not throw a parse error
 				const minified = await defaultStrategy.minifyHTML(
 					combined,
 					defaultMinifyOptions,
@@ -194,10 +196,9 @@ describe('strategy', () => {
 					placeholder,
 				);
 
-				// 4 parts = 3 expressions + surrounding text
-				expect(splitParts).to.have.lengthOf(4);
-				expect(splitParts[0]).to.equal('<');
-				expect(splitParts.at(-1)).to.equal('>');
+				assert.strictEqual(splitParts.length, 4);
+				assert.strictEqual(splitParts[0], '<');
+				assert.strictEqual(splitParts.at(-1), '>');
 			});
 		});
 	});

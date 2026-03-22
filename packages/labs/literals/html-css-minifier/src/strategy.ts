@@ -1,16 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/// <reference types="./types/clean-css/index.d.ts" />
-// Reference needed for d.ts distribution files in rollup-plugin-minify-html-literals
-import CleanCSS from 'clean-css';
-import {
-	OptimizationLevel,
-	optimizationLevelFrom,
-	// FIXME:
-	// @ts-expect-error No typings.
-} from 'clean-css/lib/options/optimization-level.js';
-import { Options as HTMLOptions, minify } from 'html-minifier-terser';
+import { minify, type MinifierOptions } from 'html-minifier-next';
+import { transform, type TransformOptions } from 'lightningcss';
 import { TemplatePart } from '@literals/parser';
-import * as ts from 'typescript';
+
+import { stripTypeScriptInScripts } from './strip-types.js';
 
 /**
  * A strategy on how to minify HTML and optionally CSS.
@@ -70,20 +63,27 @@ export interface Strategy<O = any, C = any> {
 }
 
 /**
- * The default <code>clean-css</code> options, optimized for production
- * minification.
+ * CSS minification options for <code>lightningcss</code>.
  */
-export const defaultMinifyCSSOptions: CleanCSS.Options = {};
+export type MinifyCSSOptions = Omit<
+	TransformOptions<never>,
+	'filename' | 'code' | 'minify'
+>;
 
 /**
- * The default <code>html-minifier</code> options, optimized for production
+ * The default <code>lightningcss</code> options.
+ */
+export const defaultMinifyCSSOptions: MinifyCSSOptions = {};
+
+/**
+ * The default <code>html-minifier-next</code> options, optimized for production
  * minification.
  */
-export const defaultMinifyOptions: HTMLOptions = {
+export const defaultMinifyOptions: MinifierOptions = {
 	caseSensitive: true,
 	collapseWhitespace: true,
 	decodeEntities: true,
-	minifyCSS: defaultMinifyCSSOptions,
+	minifyCSS: false,
 	minifyJS: true,
 	processConditionalComments: true,
 	removeAttributeQuotes: false,
@@ -95,10 +95,6 @@ export const defaultMinifyOptions: HTMLOptions = {
 };
 
 /**
- * The default strategy. This uses <code>html-minifier</code> to minify HTML and
- * <code>clean-css</code> to minify CSS.
- */
-/**
  * Derives a valid custom element tag placeholder from the main placeholder.
  * Used when a template expression appears in tag-name position (e.g. `<${tag}>`).
  */
@@ -107,7 +103,11 @@ function getTagPlaceholder(_placeholder: string): string {
 	return 'template-expression-tag';
 }
 
-export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
+/**
+ * The default strategy. This uses <code>html-minifier-next</code> to minify
+ * HTML and <code>lightningcss</code> to minify CSS.
+ */
+export const defaultStrategy: Strategy<MinifierOptions, MinifyCSSOptions> = {
 	getPlaceholder(parts) {
 		// Using @ and (); will cause the expression not to be removed in CSS.
 		// However, sometimes the semicolon can be removed (ex: inline styles).
@@ -135,7 +135,7 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 			if (i < parts.length - 1) {
 				// Check if this part's text ends with `<` or `</`, meaning the
 				// next expression is a tag name. Use a valid custom element name
-				// so html-minifier-terser can parse it.
+				// so html-minifier-next can parse it.
 				const trimmed = result.trimEnd();
 				result +=
 					trimmed.endsWith('<') || trimmed.endsWith('</')
@@ -147,39 +147,28 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 	},
 
 	async minifyHTML(html, options = {}) {
-		let minifyCSSOptions: HTMLOptions['minifyCSS'];
-		if (options.minifyCSS) {
-			minifyCSSOptions =
-				options.minifyCSS !== true && typeof options.minifyCSS !== 'function'
-					? { ...options.minifyCSS }
-					: {};
-		} else {
-			minifyCSSOptions = false;
-		}
-
-		let adjustedMinifyCSSOptions:
-			| false
-			| ReturnType<typeof adjustMinifyCSSOptions> = false;
-		if (minifyCSSOptions) {
-			adjustedMinifyCSSOptions = adjustMinifyCSSOptions(minifyCSSOptions);
-		}
-
-		let result = html.replaceAll(
-			/<script[\S\s]lang=('|")?ts('|"| )[\S\s]*?>([\S\s]*?)<\/script>/gi,
-			(...arguments_) => {
-				console.log(arguments_);
-
-				// const stripped = args[3];
-				// const stripped = '__';
-				const stripped = ts.transpile(arguments_[3]);
-				console.log({ stripped });
-				return `${arguments_[0].replace(arguments_[3], stripped)}`;
-			},
-		);
+		let result = stripTypeScriptInScripts(html);
 
 		result = await minify(result, {
 			...options,
-			minifyCSS: adjustedMinifyCSSOptions,
+			// Minify CSS in <style> blocks and inline styles, but skip any
+			// that contain template expression placeholders (which would be
+			// corrupted by the CSS parser).
+			minifyCSS: (css: string) => {
+				if (css.includes('@TEMPLATE_EXPRESSION')) {
+					return css;
+				}
+				try {
+					const out = transform({
+						filename: 'style.css',
+						code: new TextEncoder().encode(css),
+						minify: true,
+					});
+					return new TextDecoder().decode(out.code);
+				} catch {
+					return css;
+				}
+			},
 		});
 
 		if (options.collapseWhitespace) {
@@ -203,29 +192,17 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 			}
 		}
 
-		if (
-			adjustedMinifyCSSOptions &&
-			adjustedMinifyCSSOptions.level[OptimizationLevel.One].tidySelectors
-		) {
-			// Fix https://github.com/jakubpawlowicz/clean-css/issues/996
-			result = fixCleanCssTidySelectors(html, result);
-		}
-
 		return result;
 	},
 
 	minifyCSS(css, options = {}) {
-		const adjustedOptions = adjustMinifyCSSOptions(options);
-		const output = new CleanCSS(adjustedOptions).minify(css);
-		if (output.errors && output.errors.length > 0) {
-			throw new Error(output.errors.join('\n\n'));
-		}
-
-		if (adjustedOptions.level[OptimizationLevel.One].tidySelectors) {
-			output.styles = fixCleanCssTidySelectors(css, output.styles);
-		}
-
-		return output.styles;
+		const result = transform({
+			filename: 'template.css',
+			code: new TextEncoder().encode(css),
+			minify: true,
+			...options,
+		});
+		return new TextDecoder().decode(result.code);
 	},
 
 	splitHTMLByPlaceholder(html, placeholder) {
@@ -250,60 +227,3 @@ export const defaultStrategy: Strategy<HTMLOptions, CleanCSS.Options> = {
 		return parts;
 	},
 };
-
-export function adjustMinifyCSSOptions(options: CleanCSS.Options = {}) {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-	const level = optimizationLevelFrom(options.level);
-	const originalTransform =
-		typeof options.level === 'object' &&
-		options.level[1] &&
-		options.level[1].transform;
-	// FIXME:
-	// @ts-expect-error No typings
-	level[OptimizationLevel.One].transform = (property, value) => {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-call
-		if (value.startsWith('@TEMPLATE_EXPRESSION') && !value.endsWith(';')) {
-			// The CSS minifier has removed the semicolon from the placeholder
-			// and we need to add it back.
-			return (value = `${value};`);
-		}
-
-		return originalTransform ? originalTransform(property, value) : value;
-	};
-
-	return {
-		...options,
-		level,
-	};
-}
-
-function fixCleanCssTidySelectors(original: string, result: string) {
-	const regex = /(::?.+\((.*)\))\s*{/gm;
-	let match: RegExpMatchArray | null;
-	while ((match = regex.exec(original)) != null) {
-		const pseudoClass = match[1];
-		const parameters = match[2];
-		if (!/\s/.test(parameters)) {
-			continue;
-		}
-
-		const parametersWithoutSpaces = parameters.replaceAll(/\s/g, '');
-		const resultPseudoClass = pseudoClass.replace(
-			parameters,
-			parametersWithoutSpaces,
-		);
-		const resultStartIndex = result.indexOf(resultPseudoClass);
-		if (resultStartIndex === -1) {
-			continue;
-		}
-
-		const resultEndIndex = resultStartIndex + resultPseudoClass.length;
-		// Restore the original pseudo class with spaces
-		result =
-			result.slice(0, Math.max(0, resultStartIndex)) +
-			pseudoClass +
-			result.slice(Math.max(0, resultEndIndex));
-	}
-
-	return result;
-}

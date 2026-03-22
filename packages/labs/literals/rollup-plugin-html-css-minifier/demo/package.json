@@ -1,0 +1,25 @@
+{
+  "name": "@literals/demo--rollup-plugin-html-css-minifier",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "check": "tsc",
+    "dev": "vite",
+    "preview": "node -C preview --watch server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@hono/node-server": "^1.19.10",
+    "@literals/rollup-plugin-html-css-minifier": "workspace:^",
+    "hono": "^4.12.7",
+    "lit": "^3.2.1",
+    "vite": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:"
+  }
+}

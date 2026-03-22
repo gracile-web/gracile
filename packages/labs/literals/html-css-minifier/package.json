@@ -42,19 +42,13 @@
   },
   "dependencies": {
     "@literals/parser": "workspace:^",
-    "@types/html-minifier-terser": "^7.0.2",
-    "clean-css": "4.2.1",
-    "html-minifier-terser": "^7.2.0",
-    "magic-string": "0.25.0"
+    "html-minifier-next": "^5.2.1",
+    "lightningcss": "^1.32.0",
+    "magic-string": "catalog:"
   },
   "devDependencies": {
-    "@types/chai": "catalog:",
-    "@types/clean-css": "4.2.0",
     "@types/node": "catalog:",
-    "@types/sinon": "catalog:",
     "c8": "catalog:",
-    "chai": "catalog:",
-    "sinon": "^6.3.5",
     "typescript": "catalog:"
   },
   "publishConfig": {

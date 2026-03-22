@@ -41,12 +41,8 @@
     "dev": "tsc --watch"
   },
   "devDependencies": {
-    "@types/chai": "catalog:",
     "@types/node": "catalog:",
-    "@types/sinon": "catalog:",
     "c8": "catalog:",
-    "chai": "catalog:",
-    "sinon": "^6.3.5",
     "typescript": "catalog:"
   },
   "publishConfig": {

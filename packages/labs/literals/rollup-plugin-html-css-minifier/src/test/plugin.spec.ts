@@ -1,45 +1,49 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import { describe, beforeEach, it } from 'node:test';
+import { describe, beforeEach, it, mock } from 'node:test';
 import * as path from 'node:path';
+import assert from 'node:assert/strict';
 
-import { expect } from 'chai';
 import * as minify from '@literals/html-css-minifier';
 import { TransformPluginContext } from 'rollup';
-import sinon, { type SinonSpy } from 'sinon';
 
 import { literalsHtmlCssMinifier, Options } from '../index.js';
 
-// HACK: Before upgrading to modern ESM version
-const { match, spy } = sinon;
-
 describe('minify-html-literals', () => {
 	const fileName = path.resolve('test.js');
-	let context: { warn: SinonSpy; error: SinonSpy };
+	let context: {
+		warn: ReturnType<typeof mock.fn>;
+		error: ReturnType<typeof mock.fn>;
+	};
 	beforeEach(() => {
 		context = {
-			warn: spy(),
-			error: spy(),
+			warn: mock.fn(),
+			error: mock.fn(),
 		};
 	});
 
 	it('should return a plugin with a transform function', () => {
 		const plugin = literalsHtmlCssMinifier();
-		expect(plugin).to.be.an('object');
-		expect(plugin.name).to.be.a('string');
-		expect(plugin.transform).to.be.a('function');
+		assert.ok(typeof plugin === 'object');
+		assert.ok(typeof plugin.name === 'string');
+		assert.ok(typeof plugin.transform === 'function');
 	});
 
 	it('should call minifyHTMLLiterals()', () => {
 		const options: Options = {};
 		const plugin = literalsHtmlCssMinifier(options);
-		expect(options.minifyHTMLLiterals).to.be.a('function');
-		const minifySpy = spy(options, 'minifyHTMLLiterals');
+		assert.ok(typeof options.minifyHTMLLiterals === 'function');
+		const original = options.minifyHTMLLiterals!;
+		let called = false;
+		options.minifyHTMLLiterals = (...args: any[]) => {
+			called = true;
+			return (original as any)(...args);
+		};
 		plugin.transform.apply(context as unknown as TransformPluginContext, [
 			'return',
 			fileName,
 		]);
-		expect(minifySpy.called).to.be.true;
+		assert.ok(called);
 	});
 
 	it('should pass id and options to minifyHTMLLiterals()', () => {
@@ -52,26 +56,24 @@ describe('minify-html-literals', () => {
 		};
 
 		const plugin = literalsHtmlCssMinifier(options);
-		const minifySpy = spy(options, 'minifyHTMLLiterals');
+		let capturedArgs: any[] = [];
+		const original = options.minifyHTMLLiterals!;
+		options.minifyHTMLLiterals = (...args: any[]) => {
+			capturedArgs = args;
+			return (original as any)(...args);
+		};
 		plugin.transform.apply(context as unknown as TransformPluginContext, [
 			'return',
 			fileName,
 		]);
-		expect(
-			minifySpy.calledWithMatch(
-				match.string,
-				match({
-					fileName,
-					minifyOptions: {
-						minifyCSS: false,
-					},
-				}),
-			),
-		).to.be.true;
+		assert.ok(capturedArgs.length >= 2);
+		assert.ok(typeof capturedArgs[0] === 'string');
+		assert.strictEqual(capturedArgs[1].fileName, fileName);
+		assert.strictEqual(capturedArgs[1].minifyOptions.minifyCSS, false);
 	});
 
 	it('should allow custom minifyHTMLLiterals', () => {
-		const customMinify = spy((source: string, options: minify.Options) => {
+		const customMinify = mock.fn((source: string, options?: minify.Options) => {
 			return minify.minifyHTMLLiterals(source, options);
 		});
 
@@ -83,7 +85,7 @@ describe('minify-html-literals', () => {
 			'return',
 			fileName,
 		]);
-		expect(customMinify.called).to.be.true;
+		assert.ok(customMinify.mock.callCount() > 0);
 	});
 
 	it('should warn errors', () => {
@@ -97,8 +99,9 @@ describe('minify-html-literals', () => {
 			'return',
 			fileName,
 		]);
-		expect(context.warn.calledWith('failed')).to.be.true;
-		expect(context.error.called).to.be.false;
+		assert.ok(context.warn.mock.callCount() > 0);
+		assert.strictEqual(context.warn.mock.calls[0].arguments[0], 'failed');
+		assert.strictEqual(context.error.mock.callCount(), 0);
 	});
 
 	it('should fail is failOnError is true', () => {
@@ -113,35 +116,38 @@ describe('minify-html-literals', () => {
 			'return',
 			fileName,
 		]);
-		expect(context.error.calledWith('failed')).to.be.true;
-		expect(context.warn.called).to.be.false;
+		assert.ok(context.error.mock.callCount() > 0);
+		assert.strictEqual(context.error.mock.calls[0].arguments[0], 'failed');
+		assert.strictEqual(context.warn.mock.callCount(), 0);
 	});
 
 	it('should filter ids', () => {
 		let options: Options = {};
 		literalsHtmlCssMinifier(options);
-		expect(options.filter).to.be.a('function');
-		expect(options.filter!(fileName)).to.be.true;
+		assert.ok(typeof options.filter === 'function');
+		assert.strictEqual(options.filter!(fileName), true);
 		options = {
 			include: '*.ts',
 		};
 
 		literalsHtmlCssMinifier(options);
-		expect(options.filter).to.be.a('function');
-		expect(options.filter!(fileName)).to.be.false;
-		expect(options.filter!(path.resolve('test.ts'))).to.be.true;
+		assert.ok(typeof options.filter === 'function');
+		assert.strictEqual(options.filter!(fileName), false);
+		assert.strictEqual(options.filter!(path.resolve('test.ts')), true);
 	});
 
 	it('should allow custom filter', () => {
-		const options = {
-			filter: spy(() => false),
-		};
+		const filterFn = mock.fn((_id: string) => false);
 
-		const plugin = literalsHtmlCssMinifier(options);
+		const plugin = literalsHtmlCssMinifier({
+			filter: filterFn,
+		});
+
 		plugin.transform.apply(context as unknown as TransformPluginContext, [
 			'return',
 			fileName,
 		]);
-		expect(options.filter.calledWith(fileName)).to.be.true;
+		assert.ok(filterFn.mock.callCount() > 0);
+		assert.strictEqual(filterFn.mock.calls[0].arguments[0], fileName);
 	});
 });
