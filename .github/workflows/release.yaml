@@ -262,18 +262,45 @@ jobs:
           git commit -m 'chore: regenerate starter-project templates [skip ci]' || echo 'No template changes to commit'
           git push
 
-      # MARK: Starter Projects — Smoke Test (post-publish, using regenerated templates)
+      # MARK: Starter Projects — Smoke Test (isolated, post-publish)
+      # Templates are workspace members for local dev, but smoke tests must run
+      # outside the workspace to catch duplicate-package issues (e.g. Symbol
+      # identity mismatches from duplicated @gracile/internal-utils).
 
-      - name: Install Playwright browsers (starter-projects)
+      - name: 'Smoke test — isolated (post-publish)'
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
         shell: bash
-        run: npx playwright install --with-deps chromium
-        working-directory: starter-projects
+        run: |
+          SMOKE_DIR=$(mktemp -d)
 
-      - name: Tests — Starter projects smoke
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        shell: bash
-        run: pnpm --prefix starter-projects run test:smoke
+          # Mirror starter-projects structure (without node_modules)
+          rsync -a --exclude=node_modules starter-projects/ "$SMOKE_DIR/"
+
+          # Replace catalog:-based package.json with standalone deps
+          cat > "$SMOKE_DIR/package.json" <<'PJSON'
+          {
+            "private": true,
+            "type": "module",
+            "scripts": { "test:smoke": "pnpm playwright test" },
+            "dependencies": {
+              "@playwright/test": "^1.58.2",
+              "vite": "^7.3.1"
+            }
+          }
+          PJSON
+
+          cd "$SMOKE_DIR"
+
+          # Install test runner deps (outside workspace → no interference)
+          pnpm install
+
+          # Reinstall each template's deps in true isolation
+          for tpl in templates/*/; do
+            (cd "$tpl" && rm -rf node_modules && pnpm install)
+          done
+
+          npx playwright install --with-deps chromium
+          pnpm test:smoke
 
       # MARK: Merge back (after smoke tests pass)
 
