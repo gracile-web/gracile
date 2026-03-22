@@ -35,7 +35,6 @@
     "build": "pnpm -r build",
     "dev:tasks": "tsx --watch src/tasks/tasks.ts",
     "generate": "tsx src/tasks/generate.ts",
-    "generate:ci": "CI=true tsx src/tasks/generate.ts",
     "preinstall": "npx only-allow pnpm",
     "test:smoke": "pnpm playwright test"
   },
@@ -44,10 +43,8 @@
     "chokidar": "^3.6.0",
     "fast-glob": "^3.3.2",
     "github-slugger": "^2.0.0",
-    "latest-version": "^9.0.0",
     "picocolors": "catalog:",
-    "vite": "catalog:",
-    "yaml": "^2.6.0"
+    "vite": "catalog:"
   },
   "devDependencies": {
     "@types/node": "catalog:",

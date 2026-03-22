@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import type { LogErrorOptions, Logger, LogOptions, LogType } from 'vite';
 
-export const loggerSymbol = Symbol('logger');
+export const loggerSymbol = Symbol.for('__gracile:logger');
 
 export class GracileLogger implements Logger {
 	hasWarned = false;

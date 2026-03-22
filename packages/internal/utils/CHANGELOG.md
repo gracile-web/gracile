@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1-next.2](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.1-next.1...@gracile/internal-utils@0.6.1-next.2) (2026-03-22)
+
+### Bug Fixes
+
+* use global symbol to survive realms mismatches (hack) ([970da67](https://github.com/gracile-web/gracile/commit/970da67b6ce0e6a45db4e813d4e37e3e782574b5))
+
 ## [0.6.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.1-next.0...@gracile/internal-utils@0.6.1-next.1) (2026-03-15)
 
 ### Bug Fixes
