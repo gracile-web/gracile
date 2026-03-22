@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.6](https://github.com/gracile-web/gracile/compare/@literals/parser@1.2.6-next.0...@literals/parser@1.2.6) (2026-03-22)
+
+**Note:** Version bump only for package @literals/parser
+
 ## 1.2.6-next.0 (2026-03-21)
 
 ### Bug Fixes

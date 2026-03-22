@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/gracile-web/gracile/compare/@literals/html-css-minifier@2.0.3-next.0...@literals/html-css-minifier@2.0.3) (2026-03-22)
+
+**Note:** Version bump only for package @literals/html-css-minifier
+
 ## 2.0.3-next.0 (2026-03-21)
 
 ### Bug Fixes
