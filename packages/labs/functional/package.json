@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/functional",
-  "version": "0.1.2-next.0",
+  "version": "0.1.2",
   "description": "Lightweight hooks and context primitives for signal-based render trees. Works anywhere a render function can be scoped, with Lit or similar templating libraries. Uses the TC39 Signal Proposal for its backend.",
   "keywords": [
     "custom-elements",
