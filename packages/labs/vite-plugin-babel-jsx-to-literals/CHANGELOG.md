@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1-next.2](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-babel-jsx-to-literals@0.2.1-next.1...@gracile-labs/vite-plugin-babel-jsx-to-literals@0.2.1-next.2) (2026-03-23)
+
+### Bug Fixes
+
+* oxc/esbuild settings, temp hack for broken hydration (rolldown different chunking) ([df4b018](https://github.com/gracile-web/gracile/commit/df4b0183167e2863c7793d8b2f830035a75aec76))
+
 ## [0.2.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-babel-jsx-to-literals@0.2.1-next.0...@gracile-labs/vite-plugin-babel-jsx-to-literals@0.2.1-next.1) (2026-03-23)
 
 **Note:** Version bump only for package @gracile-labs/vite-plugin-babel-jsx-to-literals

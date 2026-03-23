@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0-next.3](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.12.0-next.2...@gracile/docs@0.12.0-next.3) (2026-03-23)
+
+### Bug Fixes
+
+* oxc/esbuild settings, temp hack for broken hydration (rolldown different chunking) ([df4b018](https://github.com/gracile-web/gracile/commit/df4b0183167e2863c7793d8b2f830035a75aec76))
+
 # [0.12.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.12.0-next.1...@gracile/docs@0.12.0-next.2) (2026-03-23)
 
 **Note:** Version bump only for package @gracile/docs
