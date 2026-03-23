@@ -147,6 +147,21 @@ export default defineConfig({
 		target: 'es2022',
 		rollupOptions: {
 			plugins: [strip({})],
+			output: {
+				// HACK: Temporary fix.
+				// @lit-labs/ssr-client/lit-element-hydrate-support.js sets globalThis.litElementHydrateSupport
+				// lit-element.js checks globalThis.litElementHydrateSupport?.({LitElement}) during class initialization
+				// The global must be set before LitElement class is defined
+				// With Vite 7 (Rollup): The chunking preserves this ordering — the hydration support assignment ends up before or with the LitElement definition.
+				// With Vite 8 (Rolldown): The hydration support code gets placed in the router chunk, while LitElement ends up in the decorators chunk. Since router depends on decorators, the LitElement class initializes first (calling globalThis.litElementHydrateSupport → undefined), then the router sets it — too late.
+				manualChunks(id) {
+					if (id.includes('lit-element-hydrate-support')) return 'lit-core';
+					if (id.includes('lit-element') || id.includes('reactive-element'))
+						return 'lit-core';
+
+					return null;
+				},
+			},
 		},
 	},
 });

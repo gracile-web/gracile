@@ -95,7 +95,7 @@ export function gracileJsx(
 
 			config() {
 				// TODO: Vite 7/8 bifurcation (esbuild/oxc)
-				return { esbuild: { jsx: 'preserve', oxc: { jsx: 'preserve' } } };
+				return { esbuild: { jsx: 'preserve' }, oxc: { jsx: 'preserve' } };
 			},
 		} as const satisfies PluginOption,
 
