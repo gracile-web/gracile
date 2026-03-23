@@ -1,6 +1,6 @@
 {
   "name": "jsx-forge",
-  "version": "0.1.3-next.0",
+  "version": "0.2.0-next.0",
   "description": "",
   "keywords": [],
   "repository": {
@@ -46,8 +46,8 @@
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "ts-patch": "^3.3.0",
     "@lit-labs/compiler": "^1.1.2",
+    "ts-patch": "^3.3.0",
     "typescript": ">=5"
   },
   "peerDependenciesMeta": {

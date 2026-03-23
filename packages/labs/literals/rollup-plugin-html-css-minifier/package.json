@@ -1,6 +1,6 @@
 {
   "name": "@literals/rollup-plugin-html-css-minifier",
-  "version": "2.0.6-next.1",
+  "version": "2.1.0-next.0",
   "description": "Rollup plugin to minify HTML template literal strings",
   "keywords": [
     "rollup-plugin",
@@ -46,11 +46,11 @@
     "@rollup/pluginutils": "^5.1.0"
   },
   "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "catalog:",
     "c8": "catalog:",
     "rollup": "^4.19.1",
-    "typescript": "catalog:",
-    "@gracile/internal-tsconfigs": "workspace:^"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "rollup": "^0.65.2 || ^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0"

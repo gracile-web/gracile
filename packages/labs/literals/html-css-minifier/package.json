@@ -1,6 +1,6 @@
 {
   "name": "@literals/html-css-minifier",
-  "version": "2.0.6-next.1",
+  "version": "2.1.0-next.0",
   "description": "Minify HTML template literal strings",
   "keywords": [
     "minify",
@@ -47,10 +47,10 @@
     "magic-string": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "catalog:",
     "c8": "catalog:",
-    "typescript": "catalog:",
-    "@gracile/internal-tsconfigs": "workspace:^"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

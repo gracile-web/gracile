@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.6-next.1...@literals/rollup-plugin-html-css-minifier@2.1.0-next.0) (2026-03-23)
+
+### Features
+
+* migrate to typescript 6 + monorepo wide shared settings for new packages ([40c1743](https://github.com/gracile-web/gracile/commit/40c1743287fb68cb13de50ac8131b347fe6b6ba1))
+
 ## [2.0.6-next.1](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.6-next.0...@literals/rollup-plugin-html-css-minifier@2.0.6-next.1) (2026-03-22)
 
 **Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier

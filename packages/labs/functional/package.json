@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/functional",
-  "version": "0.1.3-next.0",
+  "version": "0.2.0-next.0",
   "description": "Lightweight hooks and context primitives for signal-based render trees. Works anywhere a render function can be scoped, with Lit or similar templating libraries. Uses the TC39 Signal Proposal for its backend.",
   "keywords": [
     "custom-elements",
@@ -46,11 +46,11 @@
   },
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",
+    "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "catalog:",
     "signal-polyfill": "catalog:",
     "tsx": "catalog:",
-    "typescript": "catalog:",
-    "@gracile/internal-tsconfigs": "workspace:^"
+    "typescript": "catalog:"
   },
   "publishConfig": {
     "access": "public",

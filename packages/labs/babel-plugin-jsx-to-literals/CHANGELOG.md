@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/babel-plugin-jsx-to-literals@0.1.3-next.0...@gracile-labs/babel-plugin-jsx-to-literals@0.2.0-next.0) (2026-03-23)
+
+### Features
+
+* migrate to typescript 6 + monorepo wide shared settings for new packages ([40c1743](https://github.com/gracile-web/gracile/commit/40c1743287fb68cb13de50ac8131b347fe6b6ba1))
+
 ## [0.1.3-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/babel-plugin-jsx-to-literals@0.1.2...@gracile-labs/babel-plugin-jsx-to-literals@0.1.3-next.0) (2026-03-22)
 
 **Note:** Version bump only for package @gracile-labs/babel-plugin-jsx-to-literals
