@@ -6,16 +6,16 @@
 import assert from 'node:assert/strict';
 import { afterEach, beforeEach, describe, it, mock } from 'node:test';
 
-import MagicString, { SourceMapOptions } from 'magic-string';
+import MagicString, { type SourceMapOptions } from 'magic-string';
 import {
-	ParseLiteralsOptions,
-	Template,
-	TemplatePart,
+	type ParseLiteralsOptions,
+	type Template,
+	type TemplatePart,
 	parseLiterals,
 } from '@literals/parser';
 
 import {
-	SourceMap,
+	type SourceMap,
 	defaultGenerateSourceMap,
 	defaultShouldMinify,
 	defaultShouldMinifyCSS,
@@ -333,7 +333,7 @@ describe('minifyHTMLLiterals()', () => {
 
 		it('should use defaultMinifyOptions', async () => {
 			await minifyHTMLLiterals(SOURCE, { fileName: 'test.js' });
-			const parts = parseLiterals(SOURCE)[1].parts;
+			const parts = parseLiterals(SOURCE)[1]!.parts;
 			const html = defaultStrategy.combineHTMLStrings(
 				parts,
 				defaultStrategy.getPlaceholder(parts),
@@ -346,7 +346,7 @@ describe('minifyHTMLLiterals()', () => {
 		it('should allow custom partial minifyOptions', () => {
 			const minifyOptions = { caseSensitive: false };
 			minifyHTMLLiterals(SOURCE, { fileName: 'test.js', minifyOptions });
-			const parts = parseLiterals(SOURCE)[1].parts;
+			const parts = parseLiterals(SOURCE)[1]!.parts;
 			const html = defaultStrategy.combineHTMLStrings(
 				parts,
 				defaultStrategy.getPlaceholder(parts),

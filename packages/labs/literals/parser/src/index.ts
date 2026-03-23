@@ -1,4 +1,6 @@
-import typescript, { TypescriptStrategy } from './strategies/typescript.js';
+import typescript, {
+	type TypescriptStrategy,
+} from './strategies/typescript.js';
 
 export * from './models.js';
 export * from './parse-literals.js';

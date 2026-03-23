@@ -24,7 +24,7 @@ describe('parseLiterals()', () => {
 		parseLiterals('true', { strategy });
 		assert.strictEqual(strategy.getRootNode.mock.callCount(), 1);
 		assert.deepStrictEqual(
-			strategy.getRootNode.mock.calls[0].arguments[0],
+			strategy.getRootNode.mock.calls[0]!.arguments[0],
 			'true',
 		);
 		assert.ok(strategy.walkNodes.mock.callCount() > 0);

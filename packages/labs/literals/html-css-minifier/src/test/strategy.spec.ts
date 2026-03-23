@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 
 import { minify } from 'html-minifier-next';
-import { TemplatePart } from '@literals/parser';
+import type { TemplatePart } from '@literals/parser';
 
 import { defaultMinifyOptions, defaultStrategy } from '../strategy.js';
 

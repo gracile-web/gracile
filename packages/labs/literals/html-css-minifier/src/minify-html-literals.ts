@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import MagicString, { SourceMapOptions } from 'magic-string';
+import MagicString, { type SourceMapOptions } from 'magic-string';
 import {
-	Template,
-	TemplatePart,
-	ParseLiteralsOptions,
+	type Template,
+	type TemplatePart,
+	type ParseLiteralsOptions,
 	parseLiterals,
 } from '@literals/parser';
 
-import { Strategy, defaultMinifyOptions, defaultStrategy } from './strategy.js';
+import {
+	type Strategy,
+	defaultMinifyOptions,
+	defaultStrategy,
+} from './strategy.js';
 
 /**
  * Options for <code>minifyHTMLLiterals()</code>.
@@ -315,9 +319,9 @@ export async function minifyHTMLLiterals(
 				// css`…` templates (single part, no expressions).
 				if (template.parts.length === 1 && strategy.minifyCSS) {
 					const part = template.parts[0];
-					if (part.start < part.end) {
-						const min = strategy.minifyCSS(part.text);
-						ms.overwrite(part.start, part.end, min);
+					if (part!.start < part!.end) {
+						const min = strategy.minifyCSS(part!.text);
+						ms.overwrite(part!.start, part!.end, min);
 					}
 				}
 				// Templates with expressions are left untouched.
@@ -341,7 +345,7 @@ export async function minifyHTMLLiterals(
 				for (const [index, part] of template.parts.entries()) {
 					if (part.start < part.end) {
 						// Only overwrite if the literal part has text content
-						ms.overwrite(part.start, part.end, minParts[index]);
+						ms.overwrite(part.start, part.end, minParts[index]!);
 					}
 				}
 			}

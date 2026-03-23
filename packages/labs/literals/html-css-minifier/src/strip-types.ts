@@ -136,23 +136,23 @@ export function stripTypeScriptInScripts(html: string): string {
 	for (let i = blocks.length - 1; i >= 0; i--) {
 		const block = blocks[i];
 
-		const stripped = ts.transpileModule(block.content, {
+		const stripped = ts.transpileModule(block!.content, {
 			compilerOptions: {
 				target: ts.ScriptTarget.ESNext,
 				module: ts.ModuleKind.ESNext,
 			},
 		}).outputText;
 
-		const cleanedAttrs = block.attributes.replace(
+		const cleanedAttrs = block!.attributes.replace(
 			/\s*\blang\s*=\s*('|")(?:ts|typescript)\1/i,
 			'',
 		);
 
 		const replacement = `<script${cleanedAttrs}>${stripped}</script>`;
 		result =
-			result.slice(0, block.outerStart) +
+			result.slice(0, block!.outerStart) +
 			replacement +
-			result.slice(block.outerEnd);
+			result.slice(block!.outerEnd);
 	}
 
 	return result;

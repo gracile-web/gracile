@@ -1,5 +1,5 @@
 import * as minify from '@literals/html-css-minifier';
-import { SourceDescription, PluginContext } from 'rollup';
+import type { SourceDescription, PluginContext } from 'rollup';
 import { createFilter } from '@rollup/pluginutils';
 
 /**

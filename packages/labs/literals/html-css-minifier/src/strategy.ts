@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { minify, type MinifierOptions } from 'html-minifier-next';
 import { transform, type TransformOptions } from 'lightningcss';
-import { TemplatePart } from '@literals/parser';
+import type { TemplatePart } from '@literals/parser';
 
 import { stripTypeScriptInScripts } from './strip-types.js';
 
@@ -131,7 +131,7 @@ export const defaultStrategy: Strategy<MinifierOptions, MinifyCSSOptions> = {
 		const tagPlaceholder = getTagPlaceholder(placeholder);
 		let result = '';
 		for (let i = 0; i < parts.length; i++) {
-			result += parts[i].text;
+			result += parts[i]!.text;
 			if (i < parts.length - 1) {
 				// Check if this part's text ends with `<` or `</`, meaning the
 				// next expression is a tag name. Use a valid custom element name
@@ -215,13 +215,13 @@ export const defaultStrategy: Strategy<MinifierOptions, MinifyCSSOptions> = {
 				Math.max(0, placeholder.length - 1),
 			);
 			for (let index = parts.length - 1; index >= 0; index--) {
-				parts.splice(index, 1, ...parts[index].split(withoutSemicolon));
+				parts.splice(index, 1, ...parts[index]!.split(withoutSemicolon));
 			}
 		}
 
 		// Also split by the tag-name placeholder used for dynamic tag names.
 		for (let index = parts.length - 1; index >= 0; index--) {
-			parts.splice(index, 1, ...parts[index].split(tagPlaceholder));
+			parts.splice(index, 1, ...parts[index]!.split(tagPlaceholder));
 		}
 
 		return parts;

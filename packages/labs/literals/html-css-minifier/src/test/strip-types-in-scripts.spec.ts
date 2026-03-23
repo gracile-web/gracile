@@ -13,21 +13,21 @@ describe('extractTypeScriptScripts()', () => {
 		const html = '<div><script lang="ts">const x: number = 1;</script></div>';
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, 'const x: number = 1;');
+		assert.strictEqual(blocks[0]!.content, 'const x: number = 1;');
 	});
 
 	it('should extract <script lang="typescript"> blocks', () => {
 		const html = '<script lang="typescript">const x: string = "hi";</script>';
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, 'const x: string = "hi";');
+		assert.strictEqual(blocks[0]!.content, 'const x: string = "hi";');
 	});
 
 	it('should handle single-quoted lang attribute', () => {
 		const html = "<script lang='ts'>const x: number = 1;</script>";
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, 'const x: number = 1;');
+		assert.strictEqual(blocks[0]!.content, 'const x: number = 1;');
 	});
 
 	it('should be case-insensitive for the tag name', () => {
@@ -46,7 +46,7 @@ describe('extractTypeScriptScripts()', () => {
 		const html = '<script lang = "ts">const x: number = 1;</script>';
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, 'const x: number = 1;');
+		assert.strictEqual(blocks[0]!.content, 'const x: number = 1;');
 	});
 
 	it('should handle additional attributes alongside lang', () => {
@@ -54,8 +54,8 @@ describe('extractTypeScriptScripts()', () => {
 			'<script type="module" lang="ts" defer>const x: number = 1;</script>';
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.ok(blocks[0].attributes.includes('type="module"'));
-		assert.ok(blocks[0].attributes.includes('defer'));
+		assert.ok(blocks[0]!.attributes.includes('type="module"'));
+		assert.ok(blocks[0]!.attributes.includes('defer'));
 	});
 
 	it('should handle lang attribute appearing first', () => {
@@ -72,7 +72,7 @@ describe('extractTypeScriptScripts()', () => {
 >const x: number = 1;</script>`;
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, 'const x: number = 1;');
+		assert.strictEqual(blocks[0]!.content, 'const x: number = 1;');
 	});
 
 	it('should extract multiple TypeScript script blocks', () => {
@@ -83,8 +83,8 @@ describe('extractTypeScriptScripts()', () => {
 		`;
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 2);
-		assert.strictEqual(blocks[0].content, 'const a: number = 1;');
-		assert.strictEqual(blocks[1].content, 'const b: string = "hi";');
+		assert.strictEqual(blocks[0]!.content, 'const a: number = 1;');
+		assert.strictEqual(blocks[1]!.content, 'const b: string = "hi";');
 	});
 
 	it('should skip non-TypeScript script blocks', () => {
@@ -95,7 +95,7 @@ describe('extractTypeScriptScripts()', () => {
 		`;
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, 'const x: number = 1;');
+		assert.strictEqual(blocks[0]!.content, 'const x: number = 1;');
 	});
 
 	it('should not match <scripting> or similar tags', () => {
@@ -109,7 +109,7 @@ describe('extractTypeScriptScripts()', () => {
 			'<script lang="ts" data-info="a > b">const x: number = 1;</script>';
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, 'const x: number = 1;');
+		assert.strictEqual(blocks[0]!.content, 'const x: number = 1;');
 	});
 
 	it('should handle script content containing string with </script pattern', () => {
@@ -130,14 +130,14 @@ describe('extractTypeScriptScripts()', () => {
 		const html = `<script lang="ts">${content}</script>`;
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, content);
+		assert.strictEqual(blocks[0]!.content, content);
 	});
 
 	it('should handle empty script content', () => {
 		const html = '<script lang="ts"></script>';
 		const blocks = extractTypeScriptScripts(html);
 		assert.strictEqual(blocks.length, 1);
-		assert.strictEqual(blocks[0].content, '');
+		assert.strictEqual(blocks[0]!.content, '');
 	});
 
 	it('should skip script with lang="js" or other values', () => {

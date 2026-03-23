@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Template, Strategy } from './models.js';
+import type { Template, Strategy } from './models.js';
 import typescript from './strategies/typescript.js';
 
 export interface ParseLiteralsOptions {
-	fileName?: string;
-	strategy?: Partial<Strategy<any>>;
+	fileName?: string | undefined;
+	strategy?: Partial<Strategy<any>> | undefined;
 }
 
 export function parseLiterals(

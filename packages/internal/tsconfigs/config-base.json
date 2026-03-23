@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "target": "ES2022",
+    "target": "ES2023",
 
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
     "types": ["node"], // Required for TS > 6
 
     "strict": true,

@@ -1,53 +1,5 @@
 {
-  "compilerOptions": {
-    "module": "es2022",
-    "target": "es2023",
-    "outDir": "./dist",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "removeComments": false,
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-
-    "isolatedModules": true,
-
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "exactOptionalPropertyTypes": true,
-    "forceConsistentCasingInFileNames": true,
-
-    "moduleResolution": "bundler",
-    "allowJs": false,
-    "resolveJsonModule": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-
-    "inlineSources": true,
-    "inlineSourceMap": false,
-    "preserveWatchOutput": true,
-
-    "rootDir": "./src",
-
-    "preserveConstEnums": true,
-    "allowUnusedLabels": false,
-    "checkJs": false,
-    "noEmitOnError": false,
-    "noEmitHelpers": true,
-    "useDefineForClassFields": false,
-    "importsNotUsedAsValues": "remove",
-
-    "verbatimModuleSyntax": false,
-    "allowImportingTsExtensions": false,
-
-    "stripInternal": true,
-
-    "types": ["node"]
-  },
+  "extends": "@gracile/internal-tsconfigs/config-base.json",
 
   "include": [
     "src/**/*.ts",

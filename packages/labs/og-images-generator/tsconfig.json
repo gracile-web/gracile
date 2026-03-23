@@ -1,31 +1,3 @@
 {
-  "compilerOptions": {
-    "module": "ESNext",
-    "target": "ES2022",
-
-    "lib": ["ES2022", "DOM"],
-
-    "declaration": true,
-    "declarationMap": true,
-
-    "outDir": "./dist",
-    "rootDir": "./src",
-
-    "strict": true,
-
-    "skipLibCheck": true,
-
-    "moduleResolution": "Bundler",
-
-    "incremental": false,
-
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "noEmitOnError": false
-  },
-
-  "include": ["./src/**/*"],
-
-  "exclude": ["./**/dist", "./coverage"]
+  "extends": "@gracile/internal-tsconfigs/config-base.json"
 }

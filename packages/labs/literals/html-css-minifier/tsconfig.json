@@ -1,20 +1,3 @@
 {
-  "compilerOptions": {
-    "declaration": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "ES2023",
-    "outDir": "dist",
-
-    "declarationMap": true,
-
-    "rootDir": "src",
-
-    "types": ["node"]
-  },
-  "include": ["src/**/*.ts"]
+  "extends": "@gracile/internal-tsconfigs/config-base.json"
 }

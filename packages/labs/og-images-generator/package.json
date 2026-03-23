@@ -65,6 +65,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "typescript": "catalog:",
+    "@gracile/internal-tsconfigs": "workspace:^",
     "vite": "catalog:"
   },
   "peerDependencies": {

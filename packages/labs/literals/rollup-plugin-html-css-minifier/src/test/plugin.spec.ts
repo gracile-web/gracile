@@ -5,9 +5,9 @@ import * as path from 'node:path';
 import assert from 'node:assert/strict';
 
 import * as minify from '@literals/html-css-minifier';
-import { TransformPluginContext } from 'rollup';
+import type { TransformPluginContext } from 'rollup';
 
-import { literalsHtmlCssMinifier, Options } from '../index.js';
+import { literalsHtmlCssMinifier, type Options } from '../index.js';
 
 describe('minify-html-literals', () => {
 	const fileName = path.resolve('test.js');
@@ -100,7 +100,7 @@ describe('minify-html-literals', () => {
 			fileName,
 		]);
 		assert.ok(context.warn.mock.callCount() > 0);
-		assert.strictEqual(context.warn.mock.calls[0].arguments[0], 'failed');
+		assert.strictEqual(context.warn.mock.calls[0]!.arguments[0], 'failed');
 		assert.strictEqual(context.error.mock.callCount(), 0);
 	});
 
@@ -117,7 +117,7 @@ describe('minify-html-literals', () => {
 			fileName,
 		]);
 		assert.ok(context.error.mock.callCount() > 0);
-		assert.strictEqual(context.error.mock.calls[0].arguments[0], 'failed');
+		assert.strictEqual(context.error.mock.calls[0]!.arguments[0], 'failed');
 		assert.strictEqual(context.warn.mock.callCount(), 0);
 	});
 
@@ -148,6 +148,6 @@ describe('minify-html-literals', () => {
 			fileName,
 		]);
 		assert.ok(filterFn.mock.callCount() > 0);
-		assert.strictEqual(filterFn.mock.calls[0].arguments[0], fileName);
+		assert.strictEqual(filterFn.mock.calls[0]!.arguments[0], fileName);
 	});
 });
