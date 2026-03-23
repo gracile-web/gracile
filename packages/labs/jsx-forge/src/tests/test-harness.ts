@@ -164,5 +164,5 @@ function createVirtualCompilerHost(
 		writeFile: () => {
 			/* noop — we capture output via the emit result */
 		},
-	};
+	} as const;
 }

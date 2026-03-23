@@ -1,6 +1,6 @@
 import type { ErrorLocation } from '../errors.js';
 
-export function normalizeLF(code: string) {
+export function normalizeLF(code: string): string {
 	return code.replaceAll(/\r\n|\r(?!\n)|\n/g, '\n');
 }
 

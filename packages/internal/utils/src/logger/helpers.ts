@@ -1,6 +1,6 @@
 import { GracileLogger, loggerSymbol } from './logger.js';
 
-export function getLogger() {
+export function getLogger(): GracileLogger {
 	// @ts-expect-error ............
 	const logger = globalThis[loggerSymbol] as GracileLogger | undefined;
 
@@ -8,7 +8,7 @@ export function getLogger() {
 	return logger;
 }
 
-export function createLogger(instance?: GracileLogger) /* :  */ {
+export function createLogger(instance?: GracileLogger): GracileLogger /* :  */ {
 	// mode: keyof typeof modes = 'prod',
 	const logger =
 		// @ts-expect-error ............

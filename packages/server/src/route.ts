@@ -137,11 +137,11 @@ export function defineRoute<
 		 */
 		template?: R.BodyTemplate<RouteContext> | undefined;
 	},
-) {
+): (RouteModule: typeof R.RouteModule) => R.RouteModule {
 	// NOTE: We need a factory so `instanceof` will work cross-realm.
 	// Otherwise it breaks. when invoked from an `ssrLoadModule` context
 	// (due to JS>TS transpilation?). Hence "userland".
-	return (RouteModule: typeof R.RouteModule) => {
+	return (RouteModule: typeof R.RouteModule): R.RouteModule => {
 		const routeModule = new RouteModule(options as unknown as R.ModuleOptions);
 		return routeModule;
 	};

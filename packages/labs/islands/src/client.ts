@@ -10,7 +10,7 @@ class IslandElement extends HTMLElement {
 		customElements.define('is-land', this);
 	}
 
-	connectedCallback() {
+	connectedCallback(): void {
 		const light = this.hasAttribute('light');
 		const load = this.getAttribute('load');
 		if (!load) throw new ReferenceError('"load" attribute missing');

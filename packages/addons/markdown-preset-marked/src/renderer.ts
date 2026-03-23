@@ -9,7 +9,7 @@ let collectedHeadings: Heading[] = [];
 let collectedExcerpt = '';
 
 export class MarkdownRenderer extends MarkdownRendererBase {
-	async parseDocument() {
+	async parseDocument(): Promise<void> {
 		if (this.source === null) throw new Error('No source set for document.');
 
 		const { frontmatter, content } = ultramatter.parse(this.source);
@@ -40,12 +40,12 @@ export class MarkdownRenderer extends MarkdownRendererBase {
 	}
 }
 
-function buildHierarchy(flatToc: Heading[]) {
+function buildHierarchy(flatToc: Heading[]): TocLevel[] {
 	const toc: TocLevel[] = [];
 	const parentHeadings = new Map<number, TocLevel>();
 
 	// eslint-disable-next-line unicorn/no-array-for-each
-	flatToc.forEach((h: Heading) => {
+	flatToc.forEach((h: Heading): void => {
 		const heading: TocLevel = { ...h, children: [] };
 		parentHeadings.set(heading.depth, heading);
 
@@ -59,7 +59,7 @@ function buildHierarchy(flatToc: Heading[]) {
 	return toc;
 }
 
-const collectHeadingsWalker = (token: Token) => {
+const collectHeadingsWalker = (token: Token): void => {
 	if (token.type !== 'heading') return;
 	if (typeof token.text !== 'string') return;
 	if (typeof token.depth !== 'number') return;
@@ -72,7 +72,7 @@ const collectHeadingsWalker = (token: Token) => {
 	});
 };
 
-const collectExcerpt = (token: Token) => {
+const collectExcerpt = (token: Token): void => {
 	if (collectedExcerpt) return;
 	if (token.type !== 'paragraph') return;
 	if (typeof token.text !== 'string') return;

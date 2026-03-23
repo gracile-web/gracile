@@ -1,1 +1,1 @@
-export const noop = (...input: unknown[]) => input;
+export const noop = (...input: unknown[]): unknown[] => input;

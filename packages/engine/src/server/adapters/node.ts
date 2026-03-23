@@ -21,7 +21,7 @@ const nodeRequestToStandardRequest = createServerAdapter((request) => request);
 function standardResponseInitToNodeResponse(
 	responseInit: ResponseInit | Response,
 	response: ServerResponse,
-) {
+): void {
 	const headers =
 		responseInit instanceof Response
 			? responseInit.headers
@@ -70,7 +70,7 @@ export function nodeAdapter(
 		request: IncomingMessage,
 		response: ServerResponse,
 		locals?: unknown,
-	) {
+	): Promise<void | ServerResponse<IncomingMessage>> {
 		const logger = createLogger(options?.logger);
 
 		let webRequest: Request;
@@ -153,7 +153,7 @@ export function nodeAdapter(
  * app.use(express.static(gracile.getClientBuildPath(import.meta.url)));
  * ```
  */
-export function getClientBuildPath(root: string) {
+export function getClientBuildPath(root: string): string {
 	return fileURLToPath(new URL(constants.CLIENT_DIST_DIR, root));
 }
 

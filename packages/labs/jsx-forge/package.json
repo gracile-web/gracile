@@ -46,6 +46,7 @@
     "typescript": "catalog:"
   },
   "peerDependencies": {
+    "ts-patch": "^3.3.0",
     "@lit-labs/compiler": "^1.1.2",
     "typescript": ">=5"
   },

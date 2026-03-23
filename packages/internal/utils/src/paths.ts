@@ -1,8 +1,8 @@
-export function removeAllExtension(p: string) {
+export function removeAllExtension(p: string): string {
 	return p.replace(/\.(.*)$/, '');
 }
 
-export function isWindows() {
+export function isWindows(): boolean {
 	if ('process' in globalThis && 'platform' in globalThis.process)
 		return process.platform === 'win32' ? true : false;
 
@@ -11,17 +11,17 @@ export function isWindows() {
 
 export const WINDOWS_PATH_SEPARATOR = '\\';
 
-export function normalizeToPosix(input: string) {
+export function normalizeToPosix(input: string): string {
 	if (isWindows()) return input.replaceAll(WINDOWS_PATH_SEPARATOR, '/');
 
 	return input;
 }
 
-export function removeLeadingForwardSlashWindows(path: string) {
+export function removeLeadingForwardSlashWindows(path: string): string {
 	return path.startsWith('/') && path[2] === ':' ? path.slice(1) : path;
 }
 
-export const premiseUrl = (p: string, suffix: 'props' | 'doc') => {
+export const premiseUrl = (p: string, suffix: 'props' | 'doc'): string => {
 	const s = suffix === 'props' ? 'props.json' : 'doc.html';
 	return `${p ?? '/'}`
 		.replace(/\/404\/$/, '/__404.' + s)

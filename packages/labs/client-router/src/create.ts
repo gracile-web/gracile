@@ -48,7 +48,7 @@ export const loadedRoutes = new Map<string, RouteModule>();
 const ROUTE_URL_404 = '/404/';
 
 // NOTE: For prefetching only
-async function importRoute(key: string) {
+async function importRoute(key: string): Promise<void> {
 	if (loadedRoutes.has(key)) return;
 	const loaded = await routeImports
 		.get(key)?.()
@@ -62,7 +62,7 @@ async function importRoute(key: string) {
 export function prefetchRoutePremises(options: {
 	pattern: string;
 	href: string;
-}) {
+}): void {
 	// TODO: Use typed context
 	void importRoute(options.pattern);
 	const preDocument = premiseUrl(options.href, 'doc');
@@ -92,7 +92,7 @@ export type GracileRouterConfig = Partial<
  * @returns The client router as an observable or controllable event target.
  */
 
-export function createRouter(config?: GracileRouterConfig) {
+export function createRouter(config?: GracileRouterConfig): GracileRouter {
 	const serverRoutes: RouteDefinition[] = [];
 
 	let previousPathname: string | null = null;
@@ -200,7 +200,7 @@ export function createRouter(config?: GracileRouterConfig) {
 
 				// TODO: Metas? `<base>`? HTML lang? Body classes? Inline styles?…
 
-				const processPage = async (resolve: () => void) => {
+				const processPage = async (resolve: () => void): Promise<void> => {
 					if (!loaded?.template) throw new Error('No template.');
 
 					// MARK: Transform head
@@ -360,7 +360,7 @@ export function createRouter(config?: GracileRouterConfig) {
 
 	prefetching.init({
 		prefetchAll: true,
-		before: (url) => {
+		before: (url): void => {
 			for (const route of router.routes) {
 				const toPrefetch = (route.urlPattern as URLPattern).exec(url);
 				if (toPrefetch) {
@@ -370,7 +370,10 @@ export function createRouter(config?: GracileRouterConfig) {
 				}
 			}
 		},
-		hrefToUrls: (url) => [premiseUrl(url, 'props'), premiseUrl(url, 'doc')],
+		hrefToUrls: (url): string[] => [
+			premiseUrl(url, 'props'),
+			premiseUrl(url, 'doc'),
+		],
 	});
 
 	return router;

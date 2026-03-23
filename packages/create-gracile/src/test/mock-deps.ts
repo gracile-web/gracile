@@ -158,8 +158,8 @@ export function createMockDeps(
 			},
 			note: () => {},
 			spinner: () => ({
-				start: () => {},
-				stop: () => {},
+				start: (): void => {},
+				stop: (): void => {},
 			}),
 			cancel: () => {},
 			isCancel: (value): value is symbol => typeof value === 'symbol',

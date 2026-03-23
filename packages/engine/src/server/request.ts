@@ -50,10 +50,13 @@ export function createGracileHandler({
 	root: string;
 	serverMode?: boolean | undefined;
 	gracileConfig: GracileConfig;
-}) {
+}): GracileHandler {
 	const logger = getLogger();
 
-	const middleware: GracileHandler = async (request, locals) => {
+	const middleware: GracileHandler = async (
+		request,
+		locals,
+	): Promise<HandlerResult> => {
 		const { url: requestedUrl, method } = request;
 
 		let emitViteBetterError: typeof emitViteBe | null = null;

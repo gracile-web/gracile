@@ -12,7 +12,7 @@ const log = console;
 // const { DEV } = nodeCondition;
 // const log = new GracileLogger();
 
-export function debug(message: string, ...object: unknown[]) {
+export function debug(message: string, ...object: unknown[]): void {
 	if (DEV) log.debug(message, ...object);
 }
 
@@ -26,14 +26,16 @@ const signalFinalizers = new FinalizationRegistry<Signal.State<any>>(
 		debug('[Signal GC]', signal);
 	},
 );
-export function trackSignal(host: object, signal: Signal.State<any>) {
+export function trackSignal(host: object, signal: Signal.State<any>): void {
 	if (DEV) {
 		globalSignalSet.add(signal);
 		signalFinalizers.register(host, signal);
 	}
 }
 
-export function initDebugging(context: FunctionalState) {
+export function initDebugging(context: FunctionalState): {
+	readonly registerDebugFinalizers: (host: object, id?: string) => void;
+} {
 	const debugFinalizers = new FinalizationRegistry<{
 		host: object;
 		id: string;
@@ -49,13 +51,13 @@ export function initDebugging(context: FunctionalState) {
 	if (DEV) (globalThis as any).__debugSignals = context;
 
 	return {
-		registerDebugFinalizers(host: object, id?: string) {
+		registerDebugFinalizers(host: object, id?: string): void {
 			if (!DEV) return;
 
 			const _id = id || `anon@${Math.random().toFixed(6)}`;
 
 			debugFinalizers.register(host, { host, id: _id });
 		},
-	};
+	} as const;
 }
 /* c8 ignore stop */

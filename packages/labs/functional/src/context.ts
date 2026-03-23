@@ -8,7 +8,10 @@ import { debug } from './debug.js';
  * Provides a context value inside the current render frame.
  * Each call pushes a new frame, preserving prior contexts (for shadowing).
  */
-export function provideContext<T>(key: ContextKey<T>, value: Signal.State<T>) {
+export function provideContext<T>(
+	key: ContextKey<T>,
+	value: Signal.State<T>,
+): void {
 	debug(
 		'[provideContext]',
 		key.id,
@@ -90,7 +93,7 @@ export function createContext<T>(
 		});
 	};
 
-	const use = () => useContext<T>(context);
+	const use = (): Signal.State<T> => useContext<T>(context);
 
 	return { Provider, use, context };
 }

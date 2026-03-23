@@ -25,7 +25,7 @@ let installed = false;
 
 // ── Registry wrapper ────────────────────────────────────────────────
 
-function wrapRegistry(registry: CeRegistrySubset) {
+function wrapRegistry(registry: CeRegistrySubset): void {
 	const origDefine = registry.define.bind(registry);
 	const origGet = registry.get.bind(registry);
 
@@ -33,7 +33,7 @@ function wrapRegistry(registry: CeRegistrySubset) {
 		name: string,
 		ctor: CustomElementConstructor,
 		options?: ElementDefinitionOptions,
-	) {
+	): void {
 		// If re-registered after being blocked, unblock.
 		blocked.delete(name);
 
@@ -53,7 +53,7 @@ function wrapRegistry(registry: CeRegistrySubset) {
 		}
 	};
 
-	registry.get = function (name: string) {
+	registry.get = function (name: string): CustomElementConstructor | undefined {
 		if (blocked.has(name)) return;
 		return origGet(name);
 	};
@@ -61,7 +61,7 @@ function wrapRegistry(registry: CeRegistrySubset) {
 
 // ── Public API ──────────────────────────────────────────────────────
 
-export function installCeTracker() {
+export function installCeTracker(): void {
 	if (installed) return;
 	installed = true;
 
@@ -85,10 +85,10 @@ export function installCeTracker() {
 	// Expose for transform-injected code.
 	// Runs in the same process via Vite's ssrLoadModule.
 	(globalThis as Record<string, unknown>)['__gracile_ce_tracker'] = {
-		setModule(id: string) {
+		setModule(id: string): void {
 			currentModuleId = id;
 		},
-		clearModule() {
+		clearModule(): void {
 			currentModuleId = null;
 		},
 	};
@@ -98,7 +98,7 @@ export function installCeTracker() {
  * Block all CEs registered by a given module.
  * They will be unblocked if the module is re-evaluated and calls define() again.
  */
-export function blockCesForModule(moduleId: string) {
+export function blockCesForModule(moduleId: string): void {
 	const tags = moduleToTags.get(moduleId);
 	if (!tags) return;
 	for (const tag of tags) {
@@ -116,7 +116,7 @@ export function hasCeRegistrations(moduleId: string): boolean {
  * @param full - Also reset installation state (for test suite teardown
  *   so a subsequent `installCeTracker` call takes effect).
  */
-export function resetCeTracker(full = false) {
+export function resetCeTracker(full = false): void {
 	moduleToTags.clear();
 	blocked.clear();
 	currentModuleId = null;

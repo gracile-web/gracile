@@ -104,7 +104,7 @@ function scanRoutesFromFs(root: string): SerializedRoute[] {
 
 		const results: SerializedRoute[] = [];
 
-		function walk(dir: string, prefix: string) {
+		function walk(dir: string, prefix: string): void {
 			for (const entry of readdirSync(dir, { withFileTypes: true })) {
 				if (entry.name.startsWith('_') || entry.name.startsWith('.')) continue;
 
@@ -239,6 +239,6 @@ export function gracileDevtools(options?: DevtoolsOptions): any[] {
 					];
 				},
 			},
-		},
+		} as const,
 	] satisfies Plugin[];
 }

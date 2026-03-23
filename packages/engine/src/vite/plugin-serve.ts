@@ -86,5 +86,5 @@ export function gracileServePlugin({
 				});
 			};
 		},
-	};
+	} as const;
 }

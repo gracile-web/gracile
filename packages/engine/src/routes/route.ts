@@ -38,37 +38,39 @@ export type ModuleOptions = {
 export class RouteModule {
 	readonly #staticPaths;
 
-	public get staticPaths() {
+	public get staticPaths(): StaticPathsGeneric | undefined {
 		return this.#staticPaths;
 	}
 
 	readonly #locals;
 
-	public get locals() {
+	public get locals(): unknown {
 		return this.#locals;
 	}
 
 	readonly #handler;
 
-	public get handler() {
+	public get handler(): HandlerGeneric | undefined {
 		return this.#handler;
 	}
 
 	readonly #document;
 
-	public get document() {
+	public get document(): DocumentTemplate<RouteContextGeneric> | undefined {
 		return this.#document;
 	}
 
 	readonly #prerender;
 
-	public get prerender() {
+	public get prerender(): boolean | undefined {
 		return this.#prerender;
 	}
 
 	readonly #template;
 
-	public get template() {
+	public get template():
+		| ((context: RouteContextGeneric) => RouteTemplateResult)
+		| undefined {
 		return this.#template;
 	}
 

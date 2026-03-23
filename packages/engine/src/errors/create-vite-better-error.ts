@@ -19,7 +19,7 @@ export async function emitViteBetterError({
 }: {
 	error: Error;
 	vite: ViteDevServer;
-}) {
+}): Promise<string> {
 	const errorWithMetadata = collectErrorMetadata(
 		error,
 		pathToFileURL(vite.config.root),

@@ -110,5 +110,5 @@ export function gracileCETrackerPlugin(): Plugin {
 				}
 			},
 		},
-	};
+	} as const;
 }

@@ -26,9 +26,10 @@ export function gracileJsxTs(
 
 			config() {
 				// TODO: Investigate if it's always needed.
+				// TODO: Vite 7/8 bifurcation (esbuild/oxc)
 				return { esbuild: { jsx: 'preserve' }, oxc: { jsx: 'preserve' } };
 			},
-		} satisfies PluginOption,
+		} as const satisfies PluginOption,
 
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-explicit-any
 		(typescript as any)(

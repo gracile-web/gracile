@@ -20,7 +20,7 @@ import { resolveFixtures } from './fixtures.js';
 export async function assertFileExists(
 	fixture: string,
 	...pathParts: string[]
-) {
+): Promise<void> {
 	const fixturesDirectory = resolveFixtures();
 	const fullPath = join(fixturesDirectory, fixture, ...pathParts);
 	try {
@@ -64,10 +64,10 @@ export async function assertBuildContains(
 	fixture: string,
 	distributionDirectory: string,
 	expectedPatterns: string[],
-) {
+): Promise<void> {
 	const files = await listDirectory(fixture, distributionDirectory);
 	for (const pattern of expectedPatterns) {
-		const found = files.some((f) => f.includes(pattern));
+		const found = files.some((f): boolean => f.includes(pattern));
 		assert.ok(
 			found,
 			`Expected build output "${distributionDirectory}" to contain a file matching "${pattern}"\nFiles found: ${files.join(', ')}`,
@@ -87,7 +87,7 @@ export async function assertHtmlFile(
 		bodyIncludes?: string[];
 		bodyExcludes?: string[];
 	},
-) {
+): Promise<void> {
 	const content = await readFixtureFile(fixture, filePath);
 	assert.ok(
 		content.includes('<!') || content.includes('<html'),

@@ -60,7 +60,10 @@ export async function renderRoutes({
 	serverMode: boolean;
 	root?: string;
 	gracileConfig: GracileConfig;
-}) {
+}): Promise<{
+	routes: RoutesManifest;
+	renderedRoutes: RenderedRouteDefinition[];
+}> {
 	const logger = getLogger();
 	logger.info(c.green('Rendering routes…'), { timestamp: true });
 

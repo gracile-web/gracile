@@ -89,7 +89,7 @@ export function renderRegisteredCEsView(): string {
 function collectCETagsInPage(): string[] {
 	const tags = new Set<string>();
 
-	function walk(root: Element | DocumentFragment) {
+	function walk(root: Element | DocumentFragment): void {
 		const children =
 			root instanceof Element && root.shadowRoot
 				? [...root.children, ...root.shadowRoot.children]

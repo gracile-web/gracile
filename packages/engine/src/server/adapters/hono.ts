@@ -75,7 +75,7 @@ export const honoAdapter =
  * app.get('*', serveStatic({ root: gracile.getClientBuildPath(import.meta.url) }));
  * ```
  */
-export function getClientBuildPath(root: string) {
+export function getClientBuildPath(root: string): string {
 	return relative(
 		process.cwd(),
 		fileURLToPath(new URL(constants.CLIENT_DIST_DIR, root)),

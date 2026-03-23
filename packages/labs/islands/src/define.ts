@@ -7,12 +7,14 @@ import type {
 
 export function defineIslandsFactory(
 	renderOrHydrateFactory: RenderOrHydrateFactory,
-) {
+): (
+	rawRegistry: RawRegistry,
+) => Record<string, (properties: Data, host: EligibleHost) => void> {
 	return (rawRegistry: RawRegistry) =>
 		Object.fromEntries(
 			Object.entries(rawRegistry).map(([name, Component]) => [
 				name,
-				(properties: Data, host: EligibleHost) => {
+				(properties: Data, host: EligibleHost): void => {
 					try {
 						return renderOrHydrateFactory(Component, properties, host);
 					} catch (error) {

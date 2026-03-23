@@ -88,7 +88,7 @@ export class GracileRouter extends EventTarget {
 
 	#aborter = new AbortController();
 
-	public uninstall() {
+	public uninstall(): void {
 		this.#aborter.abort();
 	}
 
@@ -122,7 +122,7 @@ export class GracileRouter extends EventTarget {
 	}
 
 	// TODO: Restore scroll when it's the same page but with hash, to no hash.
-	public restoreRouteScrolling() {
+	public restoreRouteScrolling(): void {
 		const top = this.#savedScrollPosition.get(this.context.url.href) || 0;
 		window.scrollTo({ behavior: 'instant', left: 0, top });
 	}

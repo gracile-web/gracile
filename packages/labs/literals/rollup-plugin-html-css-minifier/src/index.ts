@@ -72,5 +72,5 @@ export function literalsHtmlCssMinifier(
 				}
 			}
 		},
-	};
+	} as const;
 }

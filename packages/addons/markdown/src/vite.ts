@@ -91,6 +91,6 @@ export default Object.freeze({
 				}
 				return null;
 			},
-		} satisfies PluginOption,
+		} as const satisfies PluginOption,
 	];
 }

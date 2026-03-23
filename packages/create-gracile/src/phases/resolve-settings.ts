@@ -20,7 +20,7 @@ export interface ResolveSettingsDeps {
 function handleCancel(
 	result: unknown,
 	deps: Pick<ResolveSettingsDeps, 'prompts' | 'exit'>,
-) {
+): void {
 	if (deps.prompts.isCancel(result)) {
 		deps.prompts.cancel('Operation cancelled by user. Exiting…');
 		deps.exit(0);
@@ -31,7 +31,7 @@ export function settingsNote(
 	settings: PartialSettings,
 	title: string,
 	prompts: CliPromptsDeps,
-) {
+): void {
 	const savedSettingsNote = [];
 
 	if (settings.location !== undefined)

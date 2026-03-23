@@ -67,14 +67,14 @@ class GracileDevtools extends HTMLElement {
 		this.#shadow = this.attachShadow({ mode: 'open' });
 	}
 
-	connectedCallback() {
+	connectedCallback(): void {
 		this.#render();
 		void this.#fetchData();
 	}
 
 	// ── Data fetching ──────────────────────────────────────────────
 
-	async #fetchData() {
+	async #fetchData(): Promise<void> {
 		try {
 			const res = await fetch('/__gracile_devtools__/api');
 			if (res.ok) {
@@ -93,7 +93,7 @@ class GracileDevtools extends HTMLElement {
 
 	// ── Rendering ──────────────────────────────────────────────────
 
-	#render() {
+	#render(): void {
 		const position = this.getAttribute('position') ?? 'bottom-center';
 
 		this.#shadow.innerHTML = /* html */ `
@@ -180,7 +180,7 @@ class GracileDevtools extends HTMLElement {
 
 	// ── Event handling ─────────────────────────────────────────────
 
-	#attachListeners() {
+	#attachListeners(): void {
 		// Tab switching
 		const navItems =
 			this.#shadow.querySelectorAll<HTMLButtonElement>('.nav-item');

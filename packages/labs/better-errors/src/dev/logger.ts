@@ -53,7 +53,7 @@ function formatErrorStackTrace(
 	);
 }
 
-export function padMultilineString(source: string, n = 2) {
+export function padMultilineString(source: string, n = 2): string {
 	const lines = source.split(/\r?\n/);
 	return lines.map((l) => ` `.repeat(n) + l).join(`\n`);
 }

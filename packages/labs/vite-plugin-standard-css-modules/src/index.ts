@@ -301,5 +301,5 @@ export function standardCssModules(options?: Options): Plugin {
 
 			return modules.length > 0 ? modules : undefined;
 		},
-	};
+	} as const;
 }

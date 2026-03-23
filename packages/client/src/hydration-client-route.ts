@@ -7,7 +7,7 @@ import { routeImports } from 'gracile:client:routes';
 import { premiseUrl } from '@gracile/internal-utils/paths';
 import { URLPattern } from 'urlpattern-polyfill/urlpattern';
 
-async function init(options?: HydrationOptions) {
+async function init(options?: HydrationOptions): Promise<void> {
 	const url = new URL(globalThis.document.location.href);
 	// NOTE: Remove hash and query.
 	const baseURL = `${url.origin}${url.pathname}`;
@@ -29,7 +29,9 @@ async function init(options?: HydrationOptions) {
 	if (!route?.template) throw new ReferenceError('No route template found.');
 
 	const propertiesUrl = premiseUrl(url.pathname, 'props');
-	const properties = await fetch(propertiesUrl).then((r) => r.json());
+	const properties = await fetch(propertiesUrl).then(
+		(r): Promise<unknown> => r.json(),
+	);
 
 	const rootValue = route.template({
 		url,
@@ -50,8 +52,8 @@ export interface HydrationOptions {
 	signalHost?: boolean | undefined;
 }
 
-export function createHydrationRoot(options?: HydrationOptions) {
-	document.addEventListener('DOMContentLoaded', () => {
+export function createHydrationRoot(options?: HydrationOptions): void {
+	document.addEventListener('DOMContentLoaded', (): void => {
 		void init(options);
 	});
 }

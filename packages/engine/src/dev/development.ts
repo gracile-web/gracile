@@ -31,7 +31,7 @@ export async function createDevelopmentHandler({
 	logger.info('');
 	logger.info(c.dim('Creating the request handler…'), { timestamp: true });
 
-	const collectAndCodegen = async () => {
+	const collectAndCodegen = async (): Promise<void> => {
 		await collectRoutes(
 			routes,
 			root,

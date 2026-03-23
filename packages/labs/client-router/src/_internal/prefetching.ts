@@ -40,7 +40,7 @@ let inited = false;
  *
  * @param defaultOpts Default options for prefetching if not already set by the user config.
  */
-export function init(defaultOptions?: InitOptions) {
+export function init(defaultOptions?: InitOptions): void {
 	if (!inBrowser) return;
 
 	if (defaultOptions?.hrefToUrls) hrefToUrls = defaultOptions?.hrefToUrls;
@@ -67,7 +67,7 @@ export function init(defaultOptions?: InitOptions) {
 /**
  * Prefetch links with higher priority when the user taps on them
  */
-function initTapStrategy() {
+function initTapStrategy(): void {
 	for (const event of ['touchstart', 'mousedown']) {
 		document.body.addEventListener(
 			event,
@@ -84,7 +84,7 @@ function initTapStrategy() {
 /**
  * Prefetch links with higher priority when the user hovers over them
  */
-function initHoverStrategy() {
+function initHoverStrategy(): void {
 	let timeout: number;
 
 	// Handle focus listeners
@@ -115,7 +115,7 @@ function initHoverStrategy() {
 		}
 	});
 
-	function handleHoverIn(event: Event) {
+	function handleHoverIn(event: Event): void {
 		const href = (event.target as HTMLAnchorElement).href;
 
 		// Debounce hover prefetches by 80ms
@@ -128,7 +128,7 @@ function initHoverStrategy() {
 	}
 
 	// Cancel prefetch if the user hovers away
-	function handleHoverOut() {
+	function handleHoverOut(): void {
 		if (timeout) {
 			clearTimeout(timeout);
 			timeout = 0;
@@ -139,7 +139,7 @@ function initHoverStrategy() {
 /**
  * Prefetch links with lower priority as they enter the viewport
  */
-function initViewportStrategy() {
+function initViewportStrategy(): void {
 	let observer: IntersectionObserver;
 
 	onPageLoad(() => {
@@ -156,7 +156,7 @@ function initViewportStrategy() {
 	});
 }
 
-function createViewportIntersectionObserver() {
+function createViewportIntersectionObserver(): IntersectionObserver {
 	const timeouts = new WeakMap<HTMLAnchorElement, number>();
 
 	return new IntersectionObserver((entries, observer) => {
@@ -191,7 +191,7 @@ function createViewportIntersectionObserver() {
 /**
  * Prefetch links with lower priority when page load
  */
-function initLoadStrategy() {
+function initLoadStrategy(): void {
 	onPageLoad(() => {
 		for (const anchor of document.querySelectorAll('a')) {
 			if (elementMatchesStrategy(anchor, 'load')) {
@@ -230,7 +230,10 @@ export interface PrefetchOptions {
  *   - The URL has not already been prefetched
  * @param opts Additional options for prefetching.
  */
-export async function prefetch(url: string, options?: PrefetchOptions) {
+export async function prefetch(
+	url: string,
+	options?: PrefetchOptions,
+): Promise<void> {
 	// Remove url hash to avoid prefetching the same URL multiple times
 	const urlNoHash = url.replace(/#.*/, '');
 
@@ -279,7 +282,7 @@ export async function prefetch(url: string, options?: PrefetchOptions) {
 	if (after) await Promise.resolve(after(url));
 }
 
-function canPrefetchUrl(url: string, ignoreSlowConnection: boolean) {
+function canPrefetchUrl(url: string, ignoreSlowConnection: boolean): boolean {
 	// Skip prefetch if offline
 	if (!navigator.onLine) return false;
 	// Skip prefetch if using data saver mode or slow connection
@@ -334,7 +337,7 @@ function elementMatchesStrategy(
 	return false;
 }
 
-function isSlowConnection() {
+function isSlowConnection(): unknown {
 	if ('connection' in navigator) {
 		// Untyped Chrome-only feature: https://developer.mozilla.org/en-US/docs/Web/API/Navigator/connection
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -347,7 +350,7 @@ function isSlowConnection() {
 /**
  * Listen to page loads and handle Astro's View Transition specific events
  */
-function onPageLoad(callback: () => void) {
+function onPageLoad(callback: () => void): void {
 	callback();
 	// Ignore first call of `astro-page-load` as we already call `cb` above.
 	// We have to call `cb` eagerly as View Transitions may not be enabled.
@@ -373,7 +376,7 @@ function onPageLoad(callback: () => void) {
  *
  * @param url The url of the page to prerender.
  */
-function appendSpeculationRules(url: string) {
+function appendSpeculationRules(url: string): void {
 	const script = document.createElement('script');
 	script.type = 'speculationrules';
 	script.textContent = JSON.stringify({

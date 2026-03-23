@@ -23,7 +23,7 @@ import { REGEX_TAG_LINK, REGEX_TAG_SCRIPT } from '../render/route-template.js';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
 
-function stripPremises(input: string) {
+function stripPremises(input: string): string {
 	return input
 		.replace(/index\.html$/, '__index.doc.html')
 		.replace(/404\.html$/, '__404.doc.html')
@@ -87,7 +87,7 @@ export function gracileHtmlRoutesBuildPlugins({
 
 				return null;
 			},
-		},
+		} as const,
 
 		{
 			name: 'gracile-collect-handler-assets',
@@ -177,6 +177,6 @@ export function gracileHtmlRoutesBuildPlugins({
 					}
 				}
 			},
-		},
+		} as const,
 	];
 }

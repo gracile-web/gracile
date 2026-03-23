@@ -1,7 +1,7 @@
-import type { Plugin, EnvironmentModuleNode } from 'vite';
+import type { PluginOption, EnvironmentModuleNode } from 'vite';
 
 // NOTE: From https://vite.dev/guide/migration#advanced (Vite 5>6 migration).
-export function hmrSsrReload(): Plugin {
+export function hmrSsrReload(): PluginOption {
 	return {
 		name: 'vite-plugin-gracile-hmr-ssr-reload',
 		enforce: 'post',
@@ -36,5 +36,5 @@ export function hmrSsrReload(): Plugin {
 				}
 			},
 		},
-	};
+	} as const;
 }

@@ -81,7 +81,7 @@ export function gracileBuildEnvironmentPlugin({
 							},
 						},
 					},
-				};
+				} as const;
 			}
 
 			return null;
@@ -99,5 +99,5 @@ export function gracileBuildEnvironmentPlugin({
 				await builder.build(ssr);
 			}
 		},
-	};
+	} as const;
 }

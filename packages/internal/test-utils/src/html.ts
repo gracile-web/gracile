@@ -23,12 +23,12 @@ export function parseHtml(html: string): Document_ {
 // ── Element assertions ───────────────────────────────────────────────
 
 /** Assert the text content of `<title>`. */
-export function assertTitle($: Document_, expected: string) {
+export function assertTitle($: Document_, expected: string): void {
 	assert.equal($('title').text().trim(), expected, `<title> mismatch`);
 }
 
 /** Assert `<title>` text includes a substring. */
-export function assertTitleIncludes($: Document_, substring: string) {
+export function assertTitleIncludes($: Document_, substring: string): void {
 	const title = $('title').text().trim();
 	assert.ok(
 		title.includes(substring),
@@ -37,18 +37,22 @@ export function assertTitleIncludes($: Document_, substring: string) {
 }
 
 /** Assert the text of the first `<h1>`. */
-export function assertH1($: Document_, expected: string) {
+export function assertH1($: Document_, expected: string): void {
 	assert.equal($('h1').first().text().trim(), expected, `<h1> mismatch`);
 }
 
 /** Assert the trimmed text of the first element matching `selector`. */
-export function assertText($: Document_, selector: string, expected: string) {
+export function assertText(
+	$: Document_,
+	selector: string,
+	expected: string,
+): void {
 	const actual = $(selector).first().text().trim();
 	assert.equal(actual, expected, `"${selector}" text mismatch`);
 }
 
 /** Assert at least one element matching `selector` exists. */
-export function assertExists($: Document_, selector: string) {
+export function assertExists($: Document_, selector: string): void {
 	assert.ok(
 		$(selector).length > 0,
 		`Expected to find "${selector}" in the document`,
@@ -60,7 +64,7 @@ export function assertTextIncludes(
 	$: Document_,
 	selector: string,
 	substring: string,
-) {
+): void {
 	const text = $(selector).first().text();
 	assert.ok(
 		text.includes(substring),
@@ -69,7 +73,7 @@ export function assertTextIncludes(
 }
 
 /** Assert the raw HTML string includes a substring. */
-export function assertBodyIncludes(html: string, substring: string) {
+export function assertBodyIncludes(html: string, substring: string): void {
 	assert.ok(
 		html.includes(substring),
 		`Expected HTML body to include "${substring}"`,
@@ -77,7 +81,7 @@ export function assertBodyIncludes(html: string, substring: string) {
 }
 
 /** Assert the raw HTML string does NOT include a substring. */
-export function assertBodyExcludes(html: string, substring: string) {
+export function assertBodyExcludes(html: string, substring: string): void {
 	assert.ok(
 		!html.includes(substring),
 		`Expected HTML body NOT to include "${substring}"`,
@@ -90,7 +94,7 @@ export function assertAttribute(
 	selector: string,
 	attribute: string,
 	expected: string,
-) {
+): void {
 	const actual = $(selector).first().attr(attribute);
 	assert.equal(actual, expected, `"${selector}" attr "${attribute}" mismatch`);
 }
@@ -98,7 +102,7 @@ export function assertAttribute(
 // ── Response assertions ──────────────────────────────────────────────
 
 /** Assert HTTP status code. */
-export function assertStatus(response: Response, expected: number) {
+export function assertStatus(response: Response, expected: number): void {
 	assert.equal(
 		response.status,
 		expected,
@@ -107,7 +111,7 @@ export function assertStatus(response: Response, expected: number) {
 }
 
 /** Assert Content-Type header starts with expected MIME. */
-export function assertContentType(response: Response, expected: string) {
+export function assertContentType(response: Response, expected: string): void {
 	const actual = response.headers.get('Content-Type') ?? '';
 	assert.ok(
 		actual.startsWith(expected),
@@ -120,7 +124,7 @@ export function assertHeader(
 	response: Response,
 	name: string,
 	expected: string,
-) {
+): void {
 	assert.equal(
 		response.headers.get(name),
 		expected,
@@ -129,7 +133,10 @@ export function assertHeader(
 }
 
 /** Assert the response was redirected. */
-export function assertRedirected(response: Response, expectedUrl?: string) {
+export function assertRedirected(
+	response: Response,
+	expectedUrl?: string,
+): void {
 	assert.equal(response.redirected, true, 'Expected response to be redirected');
 	if (expectedUrl) {
 		assert.ok(

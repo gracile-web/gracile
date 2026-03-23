@@ -1,13 +1,13 @@
 import { readFile } from 'node:fs/promises';
 
-import type { Plugin } from 'vite';
+import type { PluginOption } from 'vite';
 
 /**
  * It make it possible to have HTML routes. It's funny,
  * but not THAT useful.
  * @todo Make tests and document this simple feature.
  */
-export function htmlRoutesLoader(): Plugin[] {
+export function htmlRoutesLoader(): PluginOption {
 	return [
 		{
 			name: 'gracile-html-route-loader',
@@ -25,6 +25,6 @@ export default defineRoute({
 });
 `;
 			},
-		},
+		} as const,
 	];
 }

@@ -15,12 +15,12 @@ export class SignalHost {
 		this.__pendingWatches.delete(directive);
 	}
 
-	protected requestUpdate() {
+	protected requestUpdate(): void {
 		if (this.isPendingUpdate) return;
 
 		this.isPendingUpdate = true;
 
-		queueMicrotask(() => {
+		queueMicrotask((): void => {
 			try {
 				for (const directive of this.__pendingWatches) directive.commit();
 			} catch {

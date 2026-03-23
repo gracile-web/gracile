@@ -2,7 +2,9 @@ import { ElementRenderer } from '@lit-labs/ssr/lib/element-renderer.js';
 
 import { TAG_NAME, type Data, type IslandRegistry } from './types.js';
 
-export function makeIslandRenderer(registry: IslandRegistry) {
+export function makeIslandRenderer(
+	registry: IslandRegistry,
+): typeof ElementRenderer {
 	const renderer = class GenericIslandRenderer extends ElementRenderer {
 		static override matchesClass(
 			_ceClass: typeof HTMLElement,
@@ -28,7 +30,7 @@ export function makeIslandRenderer(registry: IslandRegistry) {
 			if (name === 'load') this.load = value;
 		}
 
-		override renderAttributes() {
+		override renderAttributes(): string[] {
 			const raw = JSON.stringify(this.props ?? {});
 			return [
 				this.light ? ' light' : '',
@@ -38,13 +40,13 @@ export function makeIslandRenderer(registry: IslandRegistry) {
 		}
 
 		// @ts-expect-error - return type is actually `Iterable<string> | void`
-		renderShadow() {
+		renderShadow(): Iterable<string> | undefined {
 			if (this.light) return;
 			return this.#render();
 		}
 
 		// @ts-expect-error - return type is actually `Iterable<string> | void`
-		renderLight() {
+		renderLight(): Iterable<string> | undefined {
 			if (this.light) return this.#render();
 		}
 
@@ -61,7 +63,7 @@ export function makeIslandRenderer(registry: IslandRegistry) {
 		}
 	};
 
-	return renderer;
+	return renderer as typeof ElementRenderer;
 }
 
 // NOTE: On server, Lit SSR doesn't seems to care at all about CE ctors.

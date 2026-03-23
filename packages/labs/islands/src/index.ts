@@ -17,7 +17,7 @@ import { makeIslandRenderer } from './element-renderer.js';
 
 const log = createGracileViteLogger();
 
-async function reloadRegistry(server: ViteDevServer) {
+async function reloadRegistry(server: ViteDevServer): Promise<void> {
 	const ssrEnvironment = server.environments.ssr;
 	if (!isRunnableDevEnvironment(ssrEnvironment))
 		throw new Error('Not in a SSR path');
@@ -63,7 +63,7 @@ export function gracileIslands(options?: { debug?: boolean }): any[] {
 					},
 				};
 			},
-		},
+		} as const,
 
 		{
 			enforce: 'pre',
@@ -97,6 +97,6 @@ export function gracileIslands(options?: { debug?: boolean }): any[] {
 					);
 				});
 			},
-		},
+		} as const,
 	] as Plugin[];
 }

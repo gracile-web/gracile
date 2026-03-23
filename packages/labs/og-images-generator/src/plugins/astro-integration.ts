@@ -18,5 +18,5 @@ export function astroOgImagesGenerator(
 
 			'astro:build:done': () => generateOgImages(options),
 		},
-	};
+	} as const;
 }

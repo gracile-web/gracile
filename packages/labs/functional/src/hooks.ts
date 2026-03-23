@@ -35,7 +35,7 @@ export function useState<T>(initial: T): [Signal.State<T>, (value: T) => void] {
 	const sig = store[index];
 	return [
 		sig as Signal.State<T>,
-		(v: T) => {
+		(v: T): void => {
 			debug(`[useState] set signal at index ${index}`, v);
 			sig.set(v);
 		},
@@ -106,7 +106,7 @@ export function useReducer<S, A>(
 	initial: S,
 ): [Signal.State<S>, (action: A) => void] {
 	const [state] = useState(initial);
-	const dispatch = (action: A) => state.set(reducer(state.get(), action));
+	const dispatch = (action: A): void => state.set(reducer(state.get(), action));
 	return [state, dispatch];
 }
 
@@ -117,7 +117,7 @@ export function useReducer<S, A>(
  *
  * ⚠️ Effects are only flushed once per render frame.
  */
-export function useEffect(function_: () => void | (() => void)) {
+export function useEffect(function_: () => void | (() => void)): void {
 	const host = guard(
 		'useEffect() called outside render',
 		functionalState.currentRenderElement,
@@ -144,7 +144,7 @@ export function useEffect(function_: () => void | (() => void)) {
  * Runs an effect once after mount.
  * Sugar over `useEffect()` with no cleanup.
  */
-export function onMount(function_: () => void) {
+export function onMount(function_: () => void): void {
 	useEffect(() => {
 		function_();
 	});
@@ -154,6 +154,6 @@ export function onMount(function_: () => void) {
  * Runs a cleanup once after unmount.
  * Sugar over `useEffect(() => fn)`.
  */
-export function onCleanup(function_: () => void) {
+export function onCleanup(function_: () => void): void {
 	useEffect(() => function_);
 }

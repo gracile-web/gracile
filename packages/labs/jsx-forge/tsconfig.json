@@ -1,21 +1,16 @@
 {
   "compilerOptions": {
-    // "module": "CommonJS",
     "module": "es2022",
     "target": "es2023",
     "outDir": "./dist",
-    "esModuleInterop": false,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "removeComments": false,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "downlevelIteration": true,
-    // "incremental": true,
-    // "tsBuildInfoFile": "./dist/.tsbuildinfo",
+
     "isolatedModules": true,
-    "allowSyntheticDefaultImports": false,
 
     "strict": true,
     "noUncheckedIndexedAccess": true,
@@ -49,7 +44,9 @@
     "verbatimModuleSyntax": false,
     "allowImportingTsExtensions": false,
 
-    "stripInternal": true
+    "stripInternal": true,
+
+    "types": ["node"]
   },
 
   "include": [

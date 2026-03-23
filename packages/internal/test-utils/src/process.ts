@@ -96,7 +96,7 @@ export async function launchServer(
 		child,
 		address,
 		port,
-		kill: () => {
+		kill: (): void => {
 			if (!exited) child.kill();
 		},
 	};

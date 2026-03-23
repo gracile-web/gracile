@@ -94,9 +94,10 @@ export function gracileJsx(
 			name: VITE_PLUGIN_NAME,
 
 			config() {
+				// TODO: Vite 7/8 bifurcation (esbuild/oxc)
 				return { esbuild: { jsx: 'preserve', oxc: { jsx: 'preserve' } } };
 			},
-		} satisfies PluginOption,
+		} as const satisfies PluginOption,
 
 		babel({
 			extensions: ['.tsx', '.jsx'],

@@ -1,6 +1,6 @@
 import c from 'picocolors';
 
-export function emptyRoutes() {
+export function emptyRoutes(): string {
 	const message =
 		c.yellow(`No route were found in the \`src/routes/\` folder.\n\n`) +
 		c.magenta(

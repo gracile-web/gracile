@@ -74,7 +74,7 @@ export const gracile = (config?: GracileConfig): any[] => {
 				state.gracileConfig.litSsr.renderInfo =
 					sharedPluginContext.litSsrRenderInfo;
 			},
-		},
+		} as const,
 
 		// MARK: 2. CE registry tracker (dev HMR cleanup)
 		gracileCETrackerPlugin(),
@@ -121,7 +121,7 @@ export const gracile = (config?: GracileConfig): any[] => {
 
 		// MARK: 12. Move server assets (SSR environment only)
 		gracileMoveServerAssetsPlugin({ state }),
-	] satisfies PluginOption;
+	] as const satisfies PluginOption;
 };
 
 export type { GracileConfig } from './user-config.js';

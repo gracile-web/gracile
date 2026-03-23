@@ -7,6 +7,6 @@ export default function transformTest(
 	_program: Ts.Program,
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	_pluginConfig: PluginConfig,
-) {
-	return compileLitTemplates();
+): Ts.TransformerFactory<Ts.SourceFile> {
+	return compileLitTemplates() as Ts.TransformerFactory<Ts.SourceFile> /* HACK */;
 }

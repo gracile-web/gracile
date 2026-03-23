@@ -30,7 +30,9 @@
     "allowImportingTsExtensions": false,
 
     "experimentalDecorators": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+
+    "types": ["node"]
   },
 
   "include": ["./src", "./playground"]

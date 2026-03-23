@@ -8,7 +8,7 @@ export function Show({
 	when: unknown;
 	fallback?: unknown;
 	children: unknown;
-}) {
+}): unknown {
 	return when(
 		w,
 		() => children,

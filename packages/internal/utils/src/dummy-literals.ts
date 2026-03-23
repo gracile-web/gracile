@@ -12,7 +12,7 @@ export function dummyLiteral(
 ): string {
 	return templateStrings
 		.map(
-			(templateString, index) =>
+			(templateString, index): string =>
 				templateString +
 				(Array.isArray(arguments_[index])
 					? arguments_[index].join('')

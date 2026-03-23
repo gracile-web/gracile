@@ -7,7 +7,7 @@ import {
 import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
 
-function stripPremises(input: string) {
+function stripPremises(input: string): string {
 	return input
 		.replace(/index\.html$/, '__index.doc.html')
 		.replace(/404\.html$/, '__404.doc.html')

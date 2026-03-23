@@ -1,4 +1,4 @@
-import { html as LitHtml, LitElement } from 'lit';
+import { html as LitHtml, LitElement, type TemplateResult } from 'lit';
 
 export { pageAssetsCustomLocation } from './assets.js';
 
@@ -7,7 +7,7 @@ export { pageAssetsCustomLocation } from './assets.js';
  */
 export class RouteTemplateOutlet extends LitElement {
 	// eslint-disable-next-line class-methods-use-this
-	render() {
+	render(): TemplateResult<1> {
 		return LitHtml`Something went wrong during server side rendering!`;
 	}
 }

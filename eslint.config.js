@@ -199,12 +199,24 @@ const config = [
 			'./scripts',
 		],
 	},
-	// {
-	// 	files: ['packages/{server,client,create-gracile}/**'],
-	// 	rules: {
-	// 		'@typescript-eslint/explicit-function-return-type': 'error',
-	// 	},
-	// },
+	{
+		files: [
+			'packages/**',
+			// 'packages/internal/**',
+			// 'packages/{server,client,create-gracile,engine,gracile,cli}/**',
+			// 'packages/addons/**',
+			// 'packages/labs/**',
+		],
+		rules: {
+			'@typescript-eslint/explicit-function-return-type': 'error',
+		},
+	},
+	{
+		files: ['packages/labs/hmr/**'],
+		rules: {
+			'@typescript-eslint/explicit-function-return-type': 'off',
+		},
+	},
 	// {
 	// 	files: ['**/test/**'],
 	// 	rules: {

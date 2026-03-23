@@ -87,7 +87,7 @@ const routeAssets = new Map(${JSON.stringify(
 export { routes, routeImports, routeAssets };
 `;
 			},
-		},
+		} as const,
 	];
 }
 
@@ -160,6 +160,6 @@ export { routeImports };
 
 				return null;
 			},
-		},
+		} as const,
 	];
 }

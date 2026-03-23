@@ -21,7 +21,7 @@ export const REGEXES = {
 	index: /\((.*)\)/,
 };
 
-const incorrectRouteModuleError = (p: string) =>
+const incorrectRouteModuleError = (p: string): GracileError =>
 	new GracileError({
 		...GracileErrorData.InvalidRouteExport,
 		message: GracileErrorData.InvalidRouteExport.message(p),
@@ -35,7 +35,7 @@ export async function loadForeignRouteObject({
 	vite?: ViteDevServer | undefined;
 	route: R.Route;
 	routeImports?: R.RoutesImports | undefined;
-}) {
+}): Promise<R.RouteModule> {
 	// NOTE: Check and assert unknown userland module to correct RouteModule instance (in the engine's realm)
 
 	let unknownRouteModule: Record<string, unknown> | undefined;

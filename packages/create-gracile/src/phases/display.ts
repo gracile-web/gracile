@@ -16,7 +16,7 @@ export function displayIntro(
 	packageManager: string,
 	isDevelopment: boolean,
 	deps: DisplayDeps,
-) {
+): void {
 	deps.logger.info('' /* Blank line */);
 	deps.prompts.intro(
 		c.cyan(
@@ -36,7 +36,7 @@ export function displayOutro(
 	settings: PartialSettings,
 	packageManager: string,
 	deps: DisplayDeps,
-) {
+): void {
 	deps.prompts.outro(c.bold(`You're all set ✨! You can now do:`));
 
 	deps.logger.info(`${c.green(`cd ${settings.location}`)}`);

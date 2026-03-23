@@ -27,7 +27,7 @@ export const FONTS = {
 		name: 'Source Sans Pro',
 		data: await fetchFont(SOURCE_SANS_FONT_URL),
 	}),
-};
+} as const;
 
 export interface RenderedOg {
 	path: string;

@@ -1,7 +1,7 @@
 /* eslint-disable import-x/order */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import babelGenerator from '@babel/generator';
+import babelGenerator, { type GeneratorResult } from '@babel/generator';
 import * as parser from '@babel/parser';
 import babelTraverse from '@babel/traverse';
 import { styleText } from 'node:util';
@@ -31,7 +31,10 @@ import babelPluginJsx, {
 	type PluginOptions,
 } from '@gracile-labs/babel-plugin-jsx-to-literals';
 
-export function transform(code: string, options: PluginOptions) {
+export function transform(
+	code: string,
+	options: PluginOptions,
+): GeneratorResult {
 	const visitor = babelPluginJsx(undefined, options).visitor;
 	console.log(styleText('red', '-------------'));
 
@@ -56,7 +59,10 @@ export function transform(code: string, options: PluginOptions) {
 	return output;
 }
 
-export function renderRaw(code: string, autoImports = false) {
+export function renderRaw(
+	code: string,
+	autoImports = false,
+): { ssr: string; transformed: string } {
 	let testResult: unknown;
 	const transformed = transform(code, { autoImports }).code;
 	setTimeout(() => {

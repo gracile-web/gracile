@@ -100,6 +100,6 @@ Sitemap: ${options.siteUrl}sitemap.xml
 				logger.info(c.cyan(c.bold('Sitemap generated. Found links:')));
 				logger.info(c.gray(`- ${links.join('\n- ')}`));
 			},
-		} satisfies PluginOption,
+		} as const satisfies PluginOption,
 	];
 }

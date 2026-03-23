@@ -44,7 +44,7 @@ export function gracileCollectClientAssetsPlugin({
 				if (file.type === 'asset' && file.name)
 					state.clientAssets[file.name] = file.fileName;
 		},
-	};
+	} as const;
 }
 
 // ── Virtual entrypoint ───────────────────────────────────────────────
@@ -97,7 +97,7 @@ export const handler = createGracileHandler({
 			}
 			return null;
 		},
-	};
+	} as const;
 }
 
 // ── Server asset mover ───────────────────────────────────────────────
@@ -139,5 +139,5 @@ export function gracileMoveServerAssetsPlugin({
 				recursive: true,
 			}).catch(() => null);
 		},
-	};
+	} as const;
 }

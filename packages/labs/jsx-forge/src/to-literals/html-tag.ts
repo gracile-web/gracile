@@ -35,7 +35,7 @@ export function handleTag(
 				return '';
 			},
 			skipBody: true,
-		};
+		} as const;
 
 	appendStaticToCurrentLiteral(`<${openingTagName}`);
 
@@ -100,5 +100,5 @@ export function handleTag(
 			if (!HTML_VOID_ELEMENTS.has(openingTagName))
 				appendStaticToCurrentLiteral(`</${openingTagName}>`);
 		},
-	};
+	} as const;
 }

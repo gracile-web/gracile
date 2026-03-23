@@ -30,7 +30,7 @@ import { constants } from './constants.js';
  * );
  * ```
  */
-export function printUrls(server: string | AddressInfo | null) {
+export function printUrls(server: string | AddressInfo | null): void {
 	const logger = getLogger();
 
 	let address: null | string = null;

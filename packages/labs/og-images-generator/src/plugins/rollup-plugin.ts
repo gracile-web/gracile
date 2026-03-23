@@ -10,5 +10,5 @@ export function rollupOgImagesGenerator(options?: PathsOptions): Plugin {
 		async closeBundle() {
 			await generateOgImages(options);
 		},
-	};
+	} as const;
 }

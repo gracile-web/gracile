@@ -36,7 +36,10 @@ export interface RouteCompareObject {
  *   For example, `/bar` is sorted before `/foo`.
  *   The definition of "alphabetically" is dependent on the default locale of the running system.
  */
-export function routeComparator(a: RouteCompareObject, b: RouteCompareObject) {
+export function routeComparator(
+	a: RouteCompareObject,
+	b: RouteCompareObject,
+): number {
 	const commonLength = Math.min(a.segments.length, b.segments.length);
 
 	for (let index = 0; index < commonLength; index += 1) {
@@ -129,7 +132,7 @@ export function routeComparator(a: RouteCompareObject, b: RouteCompareObject) {
 	return a.route.localeCompare(b.route);
 }
 
-export function prepareSortableRoutes(routes: string[]) {
+export function prepareSortableRoutes(routes: string[]): RouteCompareObject[] {
 	const routesParsed: RouteCompareObject[] = routes.map((route) => {
 		const segments: RoutePart[] = route.split('/').map((part) => {
 			const segment = {

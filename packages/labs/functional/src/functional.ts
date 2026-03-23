@@ -7,7 +7,7 @@ import { initDebugging } from './debug.js';
 /**
  * Injects a custom Signal constructor (e.g., from signal-polyfill).
  */
-export function setSignalConstructor(ctor: typeof Signal) {
+export function setSignalConstructor(ctor: typeof Signal): void {
 	FunctionalState.manualSignalCtor = ctor;
 }
 
@@ -144,7 +144,7 @@ export function withFunctional<T>(
 export function WithFunctional(properties: {
 	host?: object;
 	children: () => void;
-}) {
+}): void {
 	return withFunctional(properties.children, properties.host);
 }
 

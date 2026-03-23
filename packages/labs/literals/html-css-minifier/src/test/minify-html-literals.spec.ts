@@ -363,7 +363,6 @@ describe('minifyHTMLLiterals()', () => {
 			let msUsed: any;
 			await minifyHTMLLiterals(SOURCE, {
 				fileName: 'test.js',
-				// @ts-expect-error testing custom MagicString constructor
 				generateSourceMap(ms) {
 					msUsed = ms;
 					return;
@@ -378,7 +377,6 @@ describe('minifyHTMLLiterals()', () => {
 			await minifyHTMLLiterals(SOURCE, {
 				fileName: 'test.js',
 				MagicString: MagicStringLike,
-				// @ts-expect-error testing custom MagicString constructor
 				generateSourceMap(ms) {
 					msUsed = ms;
 					return;

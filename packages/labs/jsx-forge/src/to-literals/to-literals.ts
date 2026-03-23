@@ -125,7 +125,7 @@ export function createJsxToLiteralsTransformer(
 						// eslint-disable-next-line unicorn/prefer-at
 						strings[strings.length - 1]! += text;
 					},
-				} satisfies Context;
+				} as const satisfies Context;
 
 				collectLiteralEntitiesInJsx(node, localContext);
 

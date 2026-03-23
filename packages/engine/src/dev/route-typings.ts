@@ -6,7 +6,7 @@ import type { RoutesManifest } from '../routes/route.js';
 export async function generateRoutesTypings(
 	root: string,
 	routes: RoutesManifest,
-) {
+): Promise<void> {
 	// NOTE: For future, we'll provide parameters like:
 	// `route('/blog/:id', { id: 'foo' })`.
 	//

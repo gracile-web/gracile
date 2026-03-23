@@ -46,5 +46,5 @@ export function viteOgImagesGenerator(options?: PathsOptions): PluginOption {
 		},
 
 		configureServer: (server) => applyViteDevServerMiddleware(server),
-	};
+	} as const;
 }

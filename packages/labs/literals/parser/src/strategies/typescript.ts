@@ -11,7 +11,8 @@ export interface TypescriptStrategy extends Strategy<ts.Node> {
 }
 
 let currentRoot: ts.SourceFile | undefined;
-export default <TypescriptStrategy>{
+
+export default {
 	getRootNode(source: string, fileName: string = ''): ts.SourceFile {
 		return ts.createSourceFile(fileName, source, ts.ScriptTarget.ESNext);
 	},
@@ -75,4 +76,4 @@ export default <TypescriptStrategy>{
 			end: node.end - endOffset,
 		};
 	},
-};
+} as const satisfies TypescriptStrategy;

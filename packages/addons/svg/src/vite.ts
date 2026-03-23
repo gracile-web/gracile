@@ -49,6 +49,6 @@ export default html\`${optimizedSvg.data}\`;`;
 				}
 				return null;
 			},
-		} satisfies PluginOption,
+		} as const satisfies PluginOption,
 	];
 }

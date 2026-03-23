@@ -43,7 +43,7 @@ export async function refreshDeps(
 	async function update(
 		[packageName, version]: [string, string],
 		type: keyof ProjectPackageJson,
-	) {
+	): Promise<void> {
 		const replacedProtocol =
 			version.startsWith('catalog:') || version.startsWith('workspace:')
 				? 'latest'

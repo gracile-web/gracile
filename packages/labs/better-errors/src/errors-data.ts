@@ -17,4 +17,4 @@ export const FailedToLoadModuleSSR = {
 	title: 'Could not import file.',
 	message: (importName: string) => `Could not import \`${importName}\`.`,
 	hint: 'This is often caused by a typo in the import path. Please make sure the file exists.',
-} satisfies BetterErrorData;
+} as const satisfies BetterErrorData;

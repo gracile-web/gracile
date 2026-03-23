@@ -1,4 +1,4 @@
-import { html as litHtml } from 'lit';
+import { html as litHtml, type TemplateResult } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import type { Heading, TocLevel } from './module.js';
@@ -6,73 +6,73 @@ import type { Heading, TocLevel } from './module.js';
 export abstract class MarkdownRendererBase {
 	#path: string | null = null;
 
-	public get path() {
+	public get path(): string | null {
 		return this.#path;
 	}
 
-	public setPath(path: this['path']) {
+	public setPath(path: this['path']): void {
 		this.#path = path;
 	}
 
 	#source: string | null = null;
 
-	public get source() {
+	public get source(): string | null {
 		return this.#source;
 	}
 
-	public setSource(source: this['source']) {
+	public setSource(source: this['source']): void {
 		this.#source = source;
 	}
 
 	#sourceMarkdown: string | null = null;
 
-	public get sourceMarkdown() {
+	public get sourceMarkdown(): string | null {
 		return this.#sourceMarkdown;
 	}
 
-	public setSourceMarkdown(sourceMarkdown: this['sourceMarkdown']) {
+	public setSourceMarkdown(sourceMarkdown: this['sourceMarkdown']): void {
 		this.#sourceMarkdown = sourceMarkdown;
 	}
 
 	#sourceYaml: string | null = null;
 
-	public get sourceYaml() {
+	public get sourceYaml(): string | null {
 		return this.#sourceYaml;
 	}
 
-	public setSourceYaml(sourceYaml: this['sourceYaml']) {
+	public setSourceYaml(sourceYaml: this['sourceYaml']): void {
 		this.#sourceYaml = sourceYaml;
 	}
 
 	#frontmatter: unknown = null;
 
-	public get frontmatter() {
+	public get frontmatter(): unknown {
 		return this.#frontmatter;
 	}
 
-	public setFrontmatter(frontmatter: this['frontmatter']) {
+	public setFrontmatter(frontmatter: this['frontmatter']): void {
 		this.#frontmatter = frontmatter;
 	}
 
 	#tableOfContents: TocLevel[] = [];
 
-	public get tableOfContents() {
+	public get tableOfContents(): TocLevel[] {
 		return this.#tableOfContents;
 	}
 
-	public setTableOfContents(tableOfContents: this['tableOfContents']) {
+	public setTableOfContents(tableOfContents: this['tableOfContents']): void {
 		this.#tableOfContents = tableOfContents;
 	}
 
 	#tableOfContentsFlat: Heading[] = [];
 
-	public get tableOfContentsFlat() {
+	public get tableOfContentsFlat(): Heading[] {
 		return this.#tableOfContentsFlat;
 	}
 
 	public setTableOfContentsFlat(
 		tableOfContentsFlat: this['tableOfContentsFlat'],
-	) {
+	): void {
 		this.#tableOfContentsFlat = tableOfContentsFlat;
 	}
 
@@ -86,7 +86,7 @@ export abstract class MarkdownRendererBase {
 	// 	this.#excerptLit = excerptLit;
 	// }
 
-	public get excerptLit() {
+	public get excerptLit(): TemplateResult<1> | null {
 		return this.#excerptHtml ? litHtml`${unsafeHTML(this.#excerptHtml)}` : null;
 	}
 
@@ -94,21 +94,21 @@ export abstract class MarkdownRendererBase {
 
 	#excerptHtml: string | null = null;
 
-	public get excerptHtml() {
+	public get excerptHtml(): string | null {
 		return this.#excerptHtml;
 	}
 
-	public setExcerptHtml(excerptHtml: this['excerptHtml']) {
+	public setExcerptHtml(excerptHtml: this['excerptHtml']): void {
 		this.#excerptHtml = excerptHtml;
 	}
 
 	#excerptText: string | null = null;
 
-	public get excerptText() {
+	public get excerptText(): string | null {
 		return this.#excerptText;
 	}
 
-	public setExcerptText(excerptText: this['excerptText']) {
+	public setExcerptText(excerptText: this['excerptText']): void {
 		this.#excerptText = excerptText;
 	}
 
@@ -116,31 +116,31 @@ export abstract class MarkdownRendererBase {
 
 	#slug: string | null = null;
 
-	public get slug() {
+	public get slug(): string | null {
 		return this.#slug;
 	}
 
-	public setSlug(slug: this['slug']) {
+	public setSlug(slug: this['slug']): void {
 		this.#slug = slug;
 	}
 
 	#title: string | null = null;
 
-	public get title() {
+	public get title(): string | null {
 		return this.#title;
 	}
 
-	public setTitle(title: this['title']) {
+	public setTitle(title: this['title']): void {
 		this.#title = title;
 	}
 
 	#html: string | null = null;
 
-	public get html() {
+	public get html(): string | null {
 		return this.#html;
 	}
 
-	public setHtml(html: this['html']) {
+	public setHtml(html: this['html']): void {
 		this.#html = html;
 	}
 
@@ -155,11 +155,11 @@ export abstract class MarkdownRendererBase {
 	// }
 
 	// NOTE: Not working with serialization (with Vite module generation).
-	public get lit() {
+	public get lit(): TemplateResult<1> {
 		return litHtml`${unsafeHTML(this.#html)}`;
 	}
 
-	public get() {
+	public get(): TemplateResult<1> {
 		return litHtml`${unsafeHTML(this.#html)}`;
 	}
 

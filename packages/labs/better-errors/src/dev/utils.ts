@@ -37,7 +37,7 @@ const ansiPattern = [
 	'[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)',
 	'(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))',
 ].join('|');
-const stripAnsi = (input: string, { onlyFirst = false } = {}) => {
+const stripAnsi = (input: string, { onlyFirst = false } = {}): string => {
 	return input.replace(
 		new RegExp(ansiPattern, onlyFirst ? undefined : 'g'),
 		'',
@@ -58,7 +58,7 @@ export function createSafeError(err: any): Error {
 	}
 }
 
-export function normalizeLF(code: string) {
+export function normalizeLF(code: string): string {
 	return code.replace(/\r\n|\r(?!\n)|\n/g, '\n');
 }
 
@@ -298,7 +298,7 @@ function collectInfoFromStacktrace(
 	return stackInfo;
 }
 
-function cleanErrorStack(stack: string) {
+function cleanErrorStack(stack: string): string {
 	return stack
 		.split(/\n/)
 		.map((l) => l.replace(/\/@fs\//g, '/'))
@@ -334,7 +334,10 @@ const codeRegex = /`([^`]+)`/g;
 /**
  * Render a subset of Markdown to HTML or a CLI output
  */
-export function renderErrorMarkdown(markdown: string, target: 'html' | 'cli') {
+export function renderErrorMarkdown(
+	markdown: string,
+	target: 'html' | 'cli',
+): string {
 	if (target === 'html') {
 		//  escape()
 		return markdown

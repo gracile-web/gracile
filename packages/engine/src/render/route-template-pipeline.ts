@@ -28,7 +28,9 @@ export const REGEX_TAG_LINK = /\s?<link\b[^>]*?>\s?/gi;
 /**
  * Concatenate multiple `Readable` streams into a single async iterable.
  */
-export async function* concatStreams(...readables: Readable[]) {
+export async function* concatStreams(
+	...readables: Readable[]
+): AsyncGenerator<unknown, void, unknown> {
 	for (const readable of readables) {
 		for await (const chunk of readable) {
 			yield chunk;

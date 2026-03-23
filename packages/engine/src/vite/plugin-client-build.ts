@@ -75,5 +75,5 @@ export function gracileClientBuildPlugin({
 
 			await viteServerForClientHtmlBuild.close();
 		},
-	};
+	} as const;
 }

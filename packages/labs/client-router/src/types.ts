@@ -1,4 +1,4 @@
-import type { URLPattern } from 'urlpattern-polyfill';
+// import type { URLPattern } from 'urlpattern-polyfill';
 
 export interface Config {
 	fallback?: string | undefined;

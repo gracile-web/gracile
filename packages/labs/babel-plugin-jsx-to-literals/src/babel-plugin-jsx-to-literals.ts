@@ -581,7 +581,7 @@ export default function babelPluginJsxToLiterals(
 				}
 			},
 		},
-	};
+	} as const;
 }
 
 export { type PluginOptions } from './types.js';
