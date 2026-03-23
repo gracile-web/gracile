@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.12.0-next.3...@gracile/docs@0.12.0) (2026-03-23)
+
+**Note:** Version bump only for package @gracile/docs
+
 # [0.12.0-next.3](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.12.0-next.2...@gracile/docs@0.12.0-next.3) (2026-03-23)
 
 ### Bug Fixes

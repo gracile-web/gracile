@@ -1,6 +1,6 @@
 {
   "name": "create-gracile",
-  "version": "0.5.4-next.1",
+  "version": "0.5.4",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",

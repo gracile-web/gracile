@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/babel-plugin-jsx-to-literals",
-  "version": "0.2.0-next.0",
+  "version": "0.2.0",
   "description": "A JSX to tagged template literals Babel plugin, with a few helper components and a mapped JSX namespace.",
   "keywords": [
     "lit",

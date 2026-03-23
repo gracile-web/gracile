@@ -1,6 +1,6 @@
 {
   "name": "@literals/parser",
-  "version": "1.3.0-next.0",
+  "version": "1.3.0",
   "description": "Parse template literals from code",
   "keywords": [
     "parse",

@@ -1,6 +1,6 @@
 {
   "name": "@gracile/internal-test-utils",
-  "version": "0.1.1-next.1",
+  "version": "0.1.1",
   "private": true,
   "description": "Shared integration-test helpers for the Gracile monorepo",
   "type": "module",
