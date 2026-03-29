@@ -2,7 +2,11 @@
 
 _Minify HTML and CSS markup inside JavaScript template literal strings._
 
+<div class="git-only">
+
 [![npm](https://img.shields.io/npm/v/%40literals%2Fhtml-css-minifier.svg)](https://www.npmjs.com/package/%40literals%2Fhtml-css-minifier)
+
+</div>
 
 ## Why?
 
