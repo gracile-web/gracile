@@ -206,7 +206,8 @@ export function buildReplacement(
 // Plugin
 // -----------------------------------------------------------------------------
 
-export function standardCssModules(options?: Options): Plugin {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function standardCssModules(options?: Options): any {
 	const opts = { ...defaultOptions, ...options };
 
 	const filter = createFilter(opts.include, opts.exclude);
