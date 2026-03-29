@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.0-next.0](https://github.com/gracile-web/gracile/compare/@literals/html-css-minifier@2.1.0...@literals/html-css-minifier@3.0.0-next.0) (2026-03-29)
+
+### ⚠ BREAKING CHANGES
+
+* CSS interpolation support was removed in the previous cycle.
+This commit corrects the semver signal that was missed due to a parser bug.
+
+### Features
+
+* mark @literals/html-css-minifier v3: css interpolation removed ([a51f5b7](https://github.com/gracile-web/gracile/commit/a51f5b7411a9661f9fa924a9f6229ac7631334b7))
+
 # [2.1.0](https://github.com/gracile-web/gracile/compare/@literals/html-css-minifier@2.1.0-next.0...@literals/html-css-minifier@2.1.0) (2026-03-23)
 
 **Note:** Version bump only for package @literals/html-css-minifier
