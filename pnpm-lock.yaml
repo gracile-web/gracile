@@ -181,6 +181,9 @@ importers:
       concurrently:
         specifier: ^9.2.1
         version: 9.2.1
+      conventional-changelog-conventionalcommits:
+        specifier: ^9.3.0
+        version: 9.3.0
       eslint:
         specifier: ^9.39.3
         version: 9.39.4(jiti@2.6.1)

@@ -234,12 +234,26 @@ jobs:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}'
           NPM_CONFIG_PROVENANCE: 'true'
         run: |
-          echo "Graduate publish failed — falling back to non-graduate release (lerna#2532)"
-          git stash
-          OUTPUT=$(pnpm lerna publish --message 'chore: publish [main] release [skip ci]' --create-release=github --yes 2>&1) || exit 1
+          echo "Graduate publish failed — attempting recovery"
+          git stash || true
+
+          # Recovery 1: from-package (handles Sigstore/Rekor TLOG_CREATE_ENTRY_ERROR 409)
+          # Queries npm directly and publishes any package versions not yet in the registry,
+          # regardless of git tags — safe to run even if some packages are already published.
+          echo "==> from-package: recovering partial publish"
+          FROM_PKG_OUT=$(pnpm lerna publish from-package --yes 2>&1)
+          FROM_PKG_EXIT=$?
+          echo "$FROM_PKG_OUT"
+
+          # Recovery 2: non-graduate lerna publish (handles lerna#2532: newly introduced
+          # packages that have no pre-release version to graduate from).
+          echo "==> non-graduate: publishing new or changed packages"
+          OUTPUT=$(pnpm lerna publish --message 'chore: publish [main] release [skip ci]' --create-release=github --yes 2>&1) || true
           echo "$OUTPUT"
-          if echo "$OUTPUT" | grep -q 'No changed packages to publish'; then
-            echo "::error::Neither graduate nor fallback published anything"
+
+          # Fail explicitly only when BOTH approaches published nothing useful.
+          if [ "$FROM_PKG_EXIT" -ne 0 ] && echo "$OUTPUT" | grep -q 'No changed packages to publish'; then
+            echo "::error::Neither from-package nor conventional fallback published anything"
             exit 1
           fi
 

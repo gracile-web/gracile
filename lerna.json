@@ -4,6 +4,7 @@
   "npmClient": "pnpm",
 
   "conventionalCommits": true,
+  "changelogPreset": "conventional-changelog-conventionalcommits",
   "exact": true,
 
   "command": {
