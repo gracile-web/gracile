@@ -1,3 +1,5 @@
+import '../features/server-only-widget.js';
+
 import { defineRoute } from '@gracile/gracile/route';
 import { html } from 'lit';
 
@@ -15,6 +17,8 @@ export default defineRoute({
 			<p class="description">
 				This is the about page for the client routing test fixture.
 			</p>
+			<p class="about-accent">About accent styled by sibling CSS.</p>
+			<server-only-widget></server-only-widget>
 		</main>
 	`,
 });

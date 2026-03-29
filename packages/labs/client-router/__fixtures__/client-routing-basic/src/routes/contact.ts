@@ -17,6 +17,7 @@ export default defineRoute({
 				<li>Email: test@example.com</li>
 				<li>Phone: 555-0123</li>
 			</ul>
+			<client-only-widget></client-only-widget>
 		</main>
 	`,
 });

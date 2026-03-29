@@ -16,6 +16,7 @@ import { SignalHost } from '@gracile/client/signal-host';
 import { GracileRouter } from './_internal/gracile-client-router.js';
 import * as prefetching from './_internal/prefetching.js';
 import type { Config, RouteDefinition } from './types.js';
+import { reAdoptAllStylesFix } from './_internal/adopt-styles-hydrate-fix.js';
 
 if (!enabled) throw new Error('Gracile client router is disabled!');
 
@@ -238,6 +239,7 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 						))
 							upcomingDocumentScripts.set(script.src, script);
 
+						const scriptImports: Promise<unknown>[] = [];
 						for (const script of upcomingDocumentScripts.values()) {
 							if (existingDocumentScripts.has(script.src) === false) {
 								// NOTE 1: Appending a script tag seems to be ignored by the
@@ -245,9 +247,12 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 								// NOTE 2: Rollup will yell without this comment.
 								// It's fine, we are getting already processed `<link>`, so,
 								// their always correct and well funded.
-								void import(/* @vite-ignore */ script.src);
+								scriptImports.push(
+									import(/* @vite-ignore */ script.src),
+								);
 							}
 						}
+						await Promise.all(scriptImports);
 
 						// TODO: Handle inline scripts? IDK how to treat them.
 						// They can produce side-effects. Maybe make this configurable?
@@ -308,6 +313,8 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 					// TODO: early detection
 					if (url.pathname !== previousPathname) {
 						render(renderedTemplate, document.body, hydrationOptions);
+
+						await reAdoptAllStylesFix(document.body);
 
 						// MARK: Extras meta
 						if (parsedDocument) {
