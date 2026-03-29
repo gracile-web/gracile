@@ -1,2552 +1,1895 @@
+/* eslint-disable */ /* prettier-ignore */
+// @ts-nocheck
+
 interface BaseHTMLElements {
-	a: {
+	"a": {
 		attributes: {
-			attributionsrc: string;
-			/** @deprecated */ charset: string;
-			/** @deprecated */ coords: string;
-			download: string;
-			href: string;
-			hreflang: string;
-			/** @deprecated */ name: string;
-			ping: string;
-			referrerpolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			rel: string;
-			/** @deprecated */ rev: string;
-			/** @deprecated */ shape: 'rect' | 'circle' | 'poly' | 'default';
-			target: '_self' | '_blank' | '_parent' | '_top' | (string & {});
-			type: string;
+			"attributionsrc": string;
+			/** @deprecated */ "charset": string;
+			/** @deprecated */ "coords": string;
+			"download": string;
+			"href": string;
+			"hreflang": string;
+			/** @deprecated */ "name": string;
+			"ping": string;
+			"referrerpolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"rel": string;
+			/** @deprecated */ "rev": string;
+			/** @deprecated */ "shape": 'rect' | 'circle' | 'poly' | 'default';
+			"target": '_self' | '_blank' | '_parent' | '_top' | (string & {});
+			"type": string;
 		};
 		properties: {
-			attributionSrc: string;
-			/** @deprecated */ charset: string;
-			/** @deprecated */ coords: string;
-			download: string;
-			hash: string;
-			host: string;
-			hostname: string;
-			href: string;
-			hreflang: string;
-			/** @deprecated */ name: string;
-			password: string;
-			pathname: string;
-			ping: string;
-			port: string;
-			protocol: string;
-			referrerPolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			relList: string;
-			/** @deprecated */ rev: string;
-			search: string;
-			/** @deprecated */ shape: 'rect' | 'circle' | 'poly' | 'default';
-			target: '_self' | '_blank' | '_parent' | '_top' | (string & {});
-			text: string;
-			type: string;
-			username: string;
+			"attributionSrc": string;
+			/** @deprecated */ "charset": string;
+			/** @deprecated */ "coords": string;
+			"download": string;
+			"hash": string;
+			"host": string;
+			"hostname": string;
+			"href": string;
+			"hreflang": string;
+			/** @deprecated */ "name": string;
+			"password": string;
+			"pathname": string;
+			"ping": string;
+			"port": string;
+			"protocol": string;
+			"referrerPolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"relList": string;
+			/** @deprecated */ "rev": string;
+			"search": string;
+			/** @deprecated */ "shape": 'rect' | 'circle' | 'poly' | 'default';
+			"target": '_self' | '_blank' | '_parent' | '_top' | (string & {});
+			"text": string;
+			"type": string;
+			"username": string;
 		};
 		events: {};
 	};
-	abbr: {
+	"abbr": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	/** @deprecated */ acronym: {
+	/** @deprecated */ "acronym": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	address: {
+	"address": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	/** @deprecated */ applet: {
+	/** @deprecated */ "applet": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	area: {
+	"area": {
 		attributes: {
-			alt: string;
-			attributionsrc: string;
-			coords: string;
-			download: string;
-			href: string;
-			/** @deprecated */ nohref: boolean;
-			ping: string;
-			referrerpolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			rel: string;
-			shape: 'rect' | 'circle' | 'poly' | 'default';
-			target: '_self' | '_blank' | '_parent' | '_top' | (string & {});
+			"alt": string;
+			"attributionsrc": string;
+			"coords": string;
+			"download": string;
+			"href": string;
+			/** @deprecated */ "nohref": boolean;
+			"ping": string;
+			"referrerpolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"rel": string;
+			"shape": 'rect' | 'circle' | 'poly' | 'default';
+			"target": '_self' | '_blank' | '_parent' | '_top' | (string & {});
 		};
 		properties: {
-			alt: string;
-			attributionSrc: string;
-			coords: string;
-			download: string;
-			hash: string;
-			host: string;
-			hostname: string;
-			href: string;
-			/** @deprecated */ noHref: boolean;
-			password: string;
-			pathname: string;
-			ping: string;
-			port: string;
-			protocol: string;
-			referrerPolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			relList: string;
-			search: string;
-			shape: 'rect' | 'circle' | 'poly' | 'default';
-			target: '_self' | '_blank' | '_parent' | '_top' | (string & {});
-			username: string;
+			"alt": string;
+			"attributionSrc": string;
+			"coords": string;
+			"download": string;
+			"hash": string;
+			"host": string;
+			"hostname": string;
+			"href": string;
+			/** @deprecated */ "noHref": boolean;
+			"password": string;
+			"pathname": string;
+			"ping": string;
+			"port": string;
+			"protocol": string;
+			"referrerPolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"relList": string;
+			"search": string;
+			"shape": 'rect' | 'circle' | 'poly' | 'default';
+			"target": '_self' | '_blank' | '_parent' | '_top' | (string & {});
+			"username": string;
 		};
 		events: {};
 	};
-	article: {
+	"article": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	aside: {
+	"aside": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	audio: {
+	"audio": {
 		attributes: {
-			autoplay: boolean;
-			controls: boolean;
-			controlslist:
-				| 'nodownload'
-				| 'nofullscreen'
-				| 'noplaybackrate'
-				| 'noremoteplayback'
-				| (string & {});
-			crossorigin: 'anonymous' | 'use-credentials' | '';
-			disableremoteplayback: boolean;
-			loop: boolean;
-			muted: boolean;
-			preload: 'none' | 'metadata' | 'auto' | '';
-			src: string;
+			"autoplay": boolean;
+			"controls": boolean;
+			"controlslist": 'nodownload' | 'nofullscreen' | 'noplaybackrate' | 'noremoteplayback' | (string & {});
+			"crossorigin": 'anonymous' | 'use-credentials' | '';
+			"disableremoteplayback": boolean;
+			"loop": boolean;
+			"muted": boolean;
+			"preload": 'none' | 'metadata' | 'auto' | '';
+			"src": string;
 		};
 		properties: {
-			autoplay: boolean;
-			controls: boolean;
-			controlsList: string;
-			crossOrigin: 'anonymous' | 'use-credentials' | '';
-			currentTime: number;
-			defaultMuted: boolean;
-			defaultPlaybackRate: number;
-			disableRemotePlayback: boolean;
-			loop: boolean;
-			playbackRate: number;
-			preload: 'none' | 'metadata' | 'auto' | '';
-			preservesPitch: boolean;
-			src: string;
-			srcObject: MediaStream | MediaSource | Blob | File;
-			volume: number;
+			"autoplay": boolean;
+			"controls": boolean;
+			"controlsList": string;
+			"crossOrigin": 'anonymous' | 'use-credentials' | '';
+			"currentTime": number;
+			"defaultMuted": boolean;
+			"defaultPlaybackRate": number;
+			"disableRemotePlayback": boolean;
+			"loop": boolean;
+			"playbackRate": number;
+			"preload": 'none' | 'metadata' | 'auto' | '';
+			"preservesPitch": boolean;
+			"src": string;
+			"srcObject": MediaStream | MediaSource | Blob | File;
+			"volume": number;
 		};
 		events: {
-			encrypted: MediaEncryptedEvent;
-			waitingforkey: Event;
+			"encrypted": MediaEncryptedEvent;
+			"waitingforkey": Event;
 		};
 	};
-	b: {
+	"b": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	base: {
+	"base": {
 		attributes: {
-			href: string;
-			target: '_self' | '_blank' | '_parent' | '_top' | (string & {});
+			"href": string;
+			"target": '_self' | '_blank' | '_parent' | '_top' | (string & {});
 		};
 		properties: {
-			href: string;
-			target: '_self' | '_blank' | '_parent' | '_top' | (string & {});
+			"href": string;
+			"target": '_self' | '_blank' | '_parent' | '_top' | (string & {});
 		};
 		events: {};
 	};
-	/** @deprecated */ basefont: {
+	/** @deprecated */ "basefont": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	bdi: {
+	"bdi": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	bdo: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ bgsound: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ big: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ blink: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	blockquote: {
+	"bdo": {
 		attributes: {
-			cite: string;
+			"dir": 'ltr' | 'rtl';
+		};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "bgsound": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "big": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "blink": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"blockquote": {
+		attributes: {
+			"cite": string;
 		};
 		properties: {
-			cite: string;
+			"cite": string;
 		};
 		events: {};
 	};
-	body: {
+	"body": {
 		attributes: {
-			/** @deprecated */ alink: string;
-			/** @deprecated */ background: string;
-			/** @deprecated */ bgcolor: string;
-			/** @deprecated */ link: string;
-			/** @deprecated */ text: string;
-			/** @deprecated */ vlink: string;
+			/** @deprecated */ "alink": string;
+			/** @deprecated */ "background": string;
+			/** @deprecated */ "bgcolor": string;
+			/** @deprecated */ "link": string;
+			/** @deprecated */ "text": string;
+			/** @deprecated */ "vlink": string;
 		};
 		properties: {
-			/** @deprecated */ aLink: string;
-			/** @deprecated */ background: string;
-			/** @deprecated */ bgColor: string;
-			/** @deprecated */ link: string;
-			/** @deprecated */ text: string;
-			/** @deprecated */ vLink: string;
-		};
-		events: {
-			afterprint: Event;
-			beforeprint: Event;
-			beforeunload: BeforeUnloadEvent;
-			blur: FocusEvent;
-			error: ErrorEvent;
-			focus: FocusEvent;
-			gamepadconnected: GamepadEvent;
-			gamepaddisconnected: GamepadEvent;
-			hashchange: HashChangeEvent;
-			languagechange: Event;
-			load: Event;
-			message: MessageEvent;
-			messageerror: MessageEvent;
-			offline: Event;
-			online: Event;
-			pagehide: PageTransitionEvent;
-			pagereveal: PageRevealEvent;
-			pageshow: PageTransitionEvent;
-			pageswap: PageSwapEvent;
-			popstate: PopStateEvent;
-			rejectionhandled: PromiseRejectionEvent;
-			resize: UIEvent;
-			scroll: Event;
-			storage: StorageEvent;
-			unhandledrejection: PromiseRejectionEvent;
-			unload: Event;
-		};
-	};
-	br: {
-		attributes: {
-			/** @deprecated */ clear: string;
-		};
-		properties: {
-			/** @deprecated */ clear: string;
-		};
-		events: {};
-	};
-	button: {
-		attributes: {
-			command:
-				| 'show-modal'
-				| 'close'
-				| 'show-popover'
-				| 'hide-popover'
-				| 'toggle-popover'
-				| (string & {});
-			disabled: boolean;
-			formaction: string;
-			formenctype:
-				| 'application/x-www-form-urlencoded'
-				| 'multipart/form-data'
-				| 'text/plain';
-			formmethod: 'post' | 'get' | 'dialog';
-			formnovalidate: boolean;
-			formtarget: '_self' | '_blank' | '_parent' | '_top' | (string & {});
-			name: string;
-			popovertargetaction: 'hide' | 'show' | 'toggle';
-			type: 'submit' | 'reset' | 'button' | 'menu';
-			value: string;
-		};
-		properties: {
-			command:
-				| 'show-modal'
-				| 'close'
-				| 'show-popover'
-				| 'hide-popover'
-				| 'toggle-popover'
-				| (string & {});
-			commandForElement: Element;
-			disabled: boolean;
-			formAction: string;
-			formEnctype:
-				| 'application/x-www-form-urlencoded'
-				| 'multipart/form-data'
-				| 'text/plain';
-			formMethod: 'post' | 'get' | 'dialog';
-			formNoValidate: boolean;
-			formTarget: string;
-			name: string;
-			popoverTargetAction: 'hide' | 'show' | 'toggle';
-			popoverTargetElement: Element;
-			type: 'submit' | 'reset' | 'button' | 'menu';
-			value: string;
-		};
-		events: {};
-	};
-	canvas: {
-		attributes: {
-			height: number | string;
-			/** @deprecated */ 'moz-opaque': boolean;
-			width: number | string;
-		};
-		properties: {
-			height: number | string;
-			/** @deprecated */ mozOpaque: boolean;
-			mozPrintCallback: event;
-			width: number | string;
-		};
-		events: {};
-	};
-	caption: {
-		attributes: {
-			/** @deprecated */ align: 'left' | 'center' | 'right';
-		};
-		properties: {
-			/** @deprecated */ align: 'left' | 'center' | 'right';
-		};
-		events: {};
-	};
-	/** @deprecated */ center: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	cite: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	code: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	col: {
-		attributes: {
-			/** @deprecated */ align:
-				| 'left'
-				| 'center'
-				| 'right'
-				| 'justify'
-				| 'char';
-			/** @deprecated */ char: string;
-			/** @deprecated */ charoff: string;
-			span: number | string;
-			/** @deprecated */ valign: 'baseline' | 'bottom' | 'middle' | 'top';
-			/** @deprecated */ width: number | string;
-		};
-		properties: {
-			/** @deprecated */ align:
-				| 'left'
-				| 'center'
-				| 'right'
-				| 'justify'
-				| 'char';
-			/** @deprecated */ ch: string;
-			/** @deprecated */ chOff: string;
-			span: number | string;
-			/** @deprecated */ vAlign: string;
-			/** @deprecated */ width: number | string;
-		};
-		events: {};
-	};
-	colgroup: {
-		attributes: {
-			/** @deprecated */ align:
-				| 'left'
-				| 'center'
-				| 'right'
-				| 'justify'
-				| 'char';
-			/** @deprecated */ char: string;
-			/** @deprecated */ charoff: string;
-			span: number | string;
-			/** @deprecated */ valign: 'baseline' | 'bottom' | 'middle' | 'top';
-			/** @deprecated */ width: number | string;
-		};
-		properties: {
-			/** @deprecated */ align:
-				| 'left'
-				| 'center'
-				| 'right'
-				| 'justify'
-				| 'char';
-			/** @deprecated */ ch: string;
-			/** @deprecated */ chOff: string;
-			span: number | string;
-			/** @deprecated */ vAlign: string;
-			/** @deprecated */ width: number | string;
-		};
-		events: {};
-	};
-	/** @deprecated */ content: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	data: {
-		attributes: {
-			value: string | string[] | number;
-		};
-		properties: {
-			value: string | string[] | number;
-		};
-		events: {};
-	};
-	datalist: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	dd: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	del: {
-		attributes: {
-			cite: string;
-			datetime: string;
-		};
-		properties: {
-			cite: string;
-			dateTime: string;
-		};
-		events: {};
-	};
-	details: {
-		attributes: {
-			name: string;
-			open: boolean;
-		};
-		properties: {
-			name: string;
-			open: boolean;
+			/** @deprecated */ "aLink": string;
+			/** @deprecated */ "background": string;
+			/** @deprecated */ "bgColor": string;
+			/** @deprecated */ "link": string;
+			/** @deprecated */ "text": string;
+			/** @deprecated */ "vLink": string;
 		};
 		events: {
-			toggle: ToggleEvent;
+			"afterprint": Event;
+			"beforeprint": Event;
+			"beforeunload": BeforeUnloadEvent;
+			"blur": FocusEvent;
+			"error": ErrorEvent;
+			"focus": FocusEvent;
+			"gamepadconnected": GamepadEvent;
+			"gamepaddisconnected": GamepadEvent;
+			"hashchange": HashChangeEvent;
+			"languagechange": Event;
+			"load": Event;
+			"message": MessageEvent;
+			"messageerror": MessageEvent;
+			"offline": Event;
+			"online": Event;
+			"pagehide": PageTransitionEvent;
+			"pagereveal": PageRevealEvent;
+			"pageshow": PageTransitionEvent;
+			"pageswap": PageSwapEvent;
+			"popstate": PopStateEvent;
+			"rejectionhandled": PromiseRejectionEvent;
+			"resize": UIEvent;
+			"scroll": Event;
+			"storage": StorageEvent;
+			"unhandledrejection": PromiseRejectionEvent;
+			"unload": Event;
 		};
 	};
-	dfn: {
+	"br": {
+		attributes: {
+			/** @deprecated */ "clear": string;
+		};
+		properties: {
+			/** @deprecated */ "clear": string;
+		};
+		events: {};
+	};
+	"button": {
+		attributes: {
+			"command": 'show-modal' | 'close' | 'show-popover' | 'hide-popover' | 'toggle-popover' | (string & {});
+			"commandfor": string;
+			"disabled": boolean;
+			"form": string;
+			"formaction": string;
+			"formenctype": 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+			"formmethod": 'post' | 'get' | 'dialog';
+			"formnovalidate": boolean;
+			"formtarget": '_self' | '_blank' | '_parent' | '_top' | (string & {});
+			"name": string;
+			"popovertarget": string;
+			"popovertargetaction": 'hide' | 'show' | 'toggle';
+			"type": 'submit' | 'reset' | 'button' | 'menu';
+			"value": string;
+		};
+		properties: {
+			"command": 'show-modal' | 'close' | 'show-popover' | 'hide-popover' | 'toggle-popover' | (string & {});
+			"commandForElement": Element;
+			"disabled": boolean;
+			"formAction": string;
+			"formEnctype": 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+			"formMethod": 'post' | 'get' | 'dialog';
+			"formNoValidate": boolean;
+			"formTarget": string;
+			"name": string;
+			"popoverTargetAction": 'hide' | 'show' | 'toggle';
+			"popoverTargetElement": Element;
+			"type": 'submit' | 'reset' | 'button' | 'menu';
+			"value": string;
+		};
+		events: {};
+	};
+	"canvas": {
+		attributes: {
+			"height": number | string;
+			/** @deprecated */ "moz-opaque": boolean;
+			"width": number | string;
+		};
+		properties: {
+			"height": number | string;
+			/** @deprecated */ "mozOpaque": boolean;
+			"mozPrintCallback": event;
+			"width": number | string;
+		};
+		events: {};
+	};
+	"caption": {
+		attributes: {
+			/** @deprecated */ "align": 'left' | 'center' | 'right';
+		};
+		properties: {
+			/** @deprecated */ "align": 'left' | 'center' | 'right';
+		};
+		events: {};
+	};
+	/** @deprecated */ "center": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	dialog: {
+	"cite": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"code": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"col": {
 		attributes: {
-			closedby: 'any' | 'closerequest' | 'none';
-			open: boolean;
+			/** @deprecated */ "align": 'left' | 'center' | 'right' | 'justify' | 'char';
+			/** @deprecated */ "char": string;
+			/** @deprecated */ "charoff": string;
+			"span": number | string;
+			/** @deprecated */ "valign": 'baseline' | 'bottom' | 'middle' | 'top';
+			/** @deprecated */ "width": number | string;
 		};
 		properties: {
-			closedBy: string;
-			open: boolean;
-			returnValue: string;
+			/** @deprecated */ "align": 'left' | 'center' | 'right' | 'justify' | 'char';
+			/** @deprecated */ "ch": string;
+			/** @deprecated */ "chOff": string;
+			"span": number | string;
+			/** @deprecated */ "vAlign": string;
+			/** @deprecated */ "width": number | string;
+		};
+		events: {};
+	};
+	"colgroup": {
+		attributes: {
+			/** @deprecated */ "align": 'left' | 'center' | 'right' | 'justify' | 'char';
+			/** @deprecated */ "char": string;
+			/** @deprecated */ "charoff": string;
+			"span": number | string;
+			/** @deprecated */ "valign": 'baseline' | 'bottom' | 'middle' | 'top';
+			/** @deprecated */ "width": number | string;
+		};
+		properties: {
+			/** @deprecated */ "align": 'left' | 'center' | 'right' | 'justify' | 'char';
+			/** @deprecated */ "ch": string;
+			/** @deprecated */ "chOff": string;
+			"span": number | string;
+			/** @deprecated */ "vAlign": string;
+			/** @deprecated */ "width": number | string;
+		};
+		events: {};
+	};
+	/** @deprecated */ "content": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"data": {
+		attributes: {
+			"value": string | string[] | number;
+		};
+		properties: {
+			"value": string | string[] | number;
+		};
+		events: {};
+	};
+	"datalist": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"dd": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"del": {
+		attributes: {
+			"cite": string;
+			"datetime": string;
+		};
+		properties: {
+			"cite": string;
+			"dateTime": string;
+		};
+		events: {};
+	};
+	"details": {
+		attributes: {
+			"name": string;
+			"open": boolean;
+		};
+		properties: {
+			"name": string;
+			"open": boolean;
 		};
 		events: {
-			cancel: Event;
-			close: Event;
+			"toggle": ToggleEvent;
 		};
 	};
-	/** @deprecated */ dir: {
-		attributes: {
-			/** @deprecated */ compact: boolean;
-		};
-		properties: {
-			/** @deprecated */ compact: boolean;
-		};
-		events: {};
-	};
-	div: {
-		attributes: {
-			/** @deprecated */ align: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-		};
-		events: {};
-	};
-	dl: {
-		attributes: {
-			/** @deprecated */ compact: boolean;
-		};
-		properties: {
-			/** @deprecated */ compact: boolean;
-		};
-		events: {};
-	};
-	dt: {
+	"dfn": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	em: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	embed: {
+	"dialog": {
 		attributes: {
-			/** @deprecated */ align: 'left' | 'right' | 'justify' | 'center';
-			height: number | string;
-			/** @deprecated */ name: string;
-			src: string;
-			type: string;
-			width: number | string;
+			"closedby": 'any' | 'closerequest' | 'none';
+			"open": boolean;
 		};
 		properties: {
-			/** @deprecated */ align: 'left' | 'right' | 'justify' | 'center';
-			height: number | string;
-			/** @deprecated */ name: string;
-			src: string;
-			type: string;
-			width: number | string;
-		};
-		events: {};
-	};
-	fencedframe: {
-		attributes: {
-			allow: string;
-			height: string;
-			sandbox: string;
-			width: string;
-		};
-		properties: {
-			allow: string;
-			config: unknown;
-			height: string;
-			sandbox: string;
-			width: string;
-		};
-		events: {};
-	};
-	fieldset: {
-		attributes: {
-			disabled: boolean;
-			name: string;
-		};
-		properties: {
-			disabled: boolean;
-			name: string;
-		};
-		events: {};
-	};
-	figcaption: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	figure: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ font: {
-		attributes: {
-			/** @deprecated */ color: string;
-			/** @deprecated */ face: string;
-			/** @deprecated */ size: string;
-		};
-		properties: {
-			/** @deprecated */ color: string;
-			/** @deprecated */ face: string;
-			/** @deprecated */ size: string;
-		};
-		events: {};
-	};
-	footer: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	form: {
-		attributes: {
-			'accept-charset': string;
-			action: string;
-			autocomplete: 'on' | 'off';
-			enctype:
-				| 'application/x-www-form-urlencoded'
-				| 'multipart/form-data'
-				| 'text/plain';
-			method: 'post' | 'get' | 'dialog';
-			name: string;
-			novalidate: boolean;
-			rel: string;
-			target: '_self' | '_blank' | '_parent' | '_top' | (string & {});
-		};
-		properties: {
-			acceptCharset: string;
-			action: string;
-			autocomplete: 'on' | 'off';
-			encoding:
-				| 'application/x-www-form-urlencoded'
-				| 'multipart/form-data'
-				| 'text/plain';
-			method: 'post' | 'get' | 'dialog';
-			name: string;
-			noValidate: boolean;
-			relList: string;
-			target: '_self' | '_blank' | '_parent' | '_top' | (string & {});
-		};
-		events: {};
-	};
-	/** @deprecated */ frame: {
-		attributes: {
-			/** @deprecated */ frameborder: string;
-			/** @deprecated */ longdesc: string;
-			/** @deprecated */ marginheight: string;
-			/** @deprecated */ marginwidth: string;
-			/** @deprecated */ name: string;
-			/** @deprecated */ noresize: boolean;
-			/** @deprecated */ scrolling: string;
-			/** @deprecated */ src: string;
-		};
-		properties: {
-			/** @deprecated */ frameBorder: string;
-			/** @deprecated */ longDesc: string;
-			/** @deprecated */ marginHeight: string;
-			/** @deprecated */ marginWidth: string;
-			/** @deprecated */ name: string;
-			/** @deprecated */ noResize: boolean;
-			/** @deprecated */ scrolling: string;
-			/** @deprecated */ src: string;
-		};
-		events: {};
-	};
-	/** @deprecated */ frameset: {
-		attributes: {
-			/** @deprecated */ cols: string;
-			/** @deprecated */ rows: string;
-		};
-		properties: {
-			/** @deprecated */ cols: string;
-			/** @deprecated */ rows: string;
+			"closedBy": string;
+			"open": boolean;
+			"returnValue": string;
 		};
 		events: {
-			afterprint: Event;
-			beforeprint: Event;
-			beforeunload: BeforeUnloadEvent;
-			blur: FocusEvent;
-			error: ErrorEvent;
-			focus: FocusEvent;
-			gamepadconnected: GamepadEvent;
-			gamepaddisconnected: GamepadEvent;
-			hashchange: HashChangeEvent;
-			languagechange: Event;
-			load: Event;
-			message: MessageEvent;
-			messageerror: MessageEvent;
-			offline: Event;
-			online: Event;
-			pagehide: PageTransitionEvent;
-			pagereveal: PageRevealEvent;
-			pageshow: PageTransitionEvent;
-			pageswap: PageSwapEvent;
-			popstate: PopStateEvent;
-			rejectionhandled: PromiseRejectionEvent;
-			resize: UIEvent;
-			scroll: Event;
-			storage: StorageEvent;
-			unhandledrejection: PromiseRejectionEvent;
-			unload: Event;
+			"cancel": Event;
+			"close": Event;
 		};
 	};
-	h1: {
+	/** @deprecated */ "dir": {
 		attributes: {
-			/** @deprecated */ align: string;
+			/** @deprecated */ "compact": boolean;
 		};
 		properties: {
-			/** @deprecated */ align: string;
+			/** @deprecated */ "compact": boolean;
 		};
 		events: {};
 	};
-	h2: {
+	"div": {
 		attributes: {
-			/** @deprecated */ align: string;
+			/** @deprecated */ "align": string;
 		};
 		properties: {
-			/** @deprecated */ align: string;
+			/** @deprecated */ "align": string;
 		};
 		events: {};
 	};
-	h3: {
+	"dl": {
 		attributes: {
-			/** @deprecated */ align: string;
+			/** @deprecated */ "compact": boolean;
 		};
 		properties: {
-			/** @deprecated */ align: string;
+			/** @deprecated */ "compact": boolean;
 		};
 		events: {};
 	};
-	h4: {
-		attributes: {
-			/** @deprecated */ align: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-		};
-		events: {};
-	};
-	h5: {
-		attributes: {
-			/** @deprecated */ align: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-		};
-		events: {};
-	};
-	h6: {
-		attributes: {
-			/** @deprecated */ align: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-		};
-		events: {};
-	};
-	head: {
+	"dt": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	header: {
+	"em": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	hgroup: {
+	"embed": {
+		attributes: {
+			/** @deprecated */ "align": 'left' | 'right' | 'justify' | 'center';
+			"height": number | string;
+			/** @deprecated */ "name": string;
+			"src": string;
+			"type": string;
+			"width": number | string;
+		};
+		properties: {
+			/** @deprecated */ "align": 'left' | 'right' | 'justify' | 'center';
+			"height": number | string;
+			/** @deprecated */ "name": string;
+			"src": string;
+			"type": string;
+			"width": number | string;
+		};
+		events: {};
+	};
+	"fencedframe": {
+		attributes: {
+			"allow": string;
+			"height": string;
+			"sandbox": string;
+			"width": string;
+		};
+		properties: {
+			"allow": string;
+			"config": unknown;
+			"height": string;
+			"sandbox": string;
+			"width": string;
+		};
+		events: {};
+	};
+	"fieldset": {
+		attributes: {
+			"disabled": boolean;
+			"form": string;
+			"name": string;
+		};
+		properties: {
+			"disabled": boolean;
+			"name": string;
+		};
+		events: {};
+	};
+	"figcaption": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	hr: {
-		attributes: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ color: string;
-			/** @deprecated */ noshade: boolean;
-			/** @deprecated */ size: string;
-			/** @deprecated */ width: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ color: string;
-			/** @deprecated */ noShade: boolean;
-			/** @deprecated */ size: string;
-			/** @deprecated */ width: string;
-		};
-		events: {};
-	};
-	html: {
-		attributes: {
-			/** @deprecated */ version: string;
-		};
-		properties: {
-			/** @deprecated */ version: string;
-		};
-		events: {};
-	};
-	i: {
+	"figure": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	iframe: {
+	/** @deprecated */ "font": {
 		attributes: {
-			adauctionheaders: boolean;
-			/** @deprecated */ align: string;
-			allow: string;
-			allowfullscreen: boolean;
-			/** @deprecated */ allowpaymentrequest: boolean;
-			browsingtopics: boolean;
-			credentialless: boolean;
-			csp: string;
-			/** @deprecated */ frameborder: number | string;
-			height: number | string;
-			loading: 'eager' | 'lazy';
-			/** @deprecated */ longdesc: string;
-			/** @deprecated */ marginheight: number | string;
-			/** @deprecated */ marginwidth: number | string;
-			name: string;
-			privatetoken: string;
-			referrerpolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			sandbox:
-				| 'allow-downloads-without-user-activation'
-				| 'allow-downloads'
-				| 'allow-forms'
-				| 'allow-modals'
-				| 'allow-orientation-lock'
-				| 'allow-pointer-lock'
-				| 'allow-popups'
-				| 'allow-popups-to-escape-sandbox'
-				| 'allow-presentation'
-				| 'allow-same-origin'
-				| 'allow-scripts'
-				| 'allow-storage-access-by-user-activation'
-				| 'allow-top-navigation'
-				| 'allow-top-navigation-by-user-activation'
-				| 'allow-top-navigation-to-custom-protocols'
-				| string;
-			/** @deprecated */ scrolling: 'yes' | 'no' | 'auto';
-			sharedstoragewritable: boolean;
-			src: string;
-			srcdoc: string;
-			width: number | string;
+			/** @deprecated */ "color": string;
+			/** @deprecated */ "face": string;
+			/** @deprecated */ "size": string;
 		};
 		properties: {
-			adAuctionHeaders: boolean;
-			/** @deprecated */ align: string;
-			allow: string;
-			allowFullscreen: boolean;
-			/** @deprecated */ allowPaymentRequest: boolean;
-			browsingTopics: boolean;
-			credentialless: boolean;
-			csp: string;
-			/** @deprecated */ frameBorder: number | string;
-			height: number | string;
-			loading: 'eager' | 'lazy';
-			/** @deprecated */ longDesc: string;
-			/** @deprecated */ marginHeight: number;
-			/** @deprecated */ marginWidth: number;
-			name: string;
-			privateToken: string;
-			referrerPolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			sandbox:
-				| 'allow-downloads-without-user-activation'
-				| 'allow-downloads'
-				| 'allow-forms'
-				| 'allow-modals'
-				| 'allow-orientation-lock'
-				| 'allow-pointer-lock'
-				| 'allow-popups'
-				| 'allow-popups-to-escape-sandbox'
-				| 'allow-presentation'
-				| 'allow-same-origin'
-				| 'allow-scripts'
-				| 'allow-storage-access-by-user-activation'
-				| 'allow-top-navigation'
-				| 'allow-top-navigation-by-user-activation'
-				| 'allow-top-navigation-to-custom-protocols'
-				| string;
-			/** @deprecated */ scrolling: 'yes' | 'no' | 'auto';
-			sharedStorageWritable: boolean;
-			src: string;
-			srcdoc: string;
-			width: number | string;
+			/** @deprecated */ "color": string;
+			/** @deprecated */ "face": string;
+			/** @deprecated */ "size": string;
 		};
 		events: {};
 	};
-	/** @deprecated */ image: {
+	"footer": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	img: {
+	"form": {
 		attributes: {
-			/** @deprecated */ align: 'top' | 'middle' | 'bottom' | 'left' | 'right';
-			alt: string;
-			attributionsrc: string;
-			/** @deprecated */ border: string;
-			browsingtopics: boolean;
-			crossorigin: 'anonymous' | 'use-credentials' | '';
-			decoding: 'sync' | 'async' | 'auto';
-			fetchpriority: 'high' | 'low' | 'auto';
-			height: number | string;
-			/** @deprecated */ hspace: number | string;
-			ismap: boolean;
-			loading: 'eager' | 'lazy';
-			/** @deprecated */ longdesc: string;
-			/** @deprecated */ lowsrc: string;
-			/** @deprecated */ name: string;
-			referrerpolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			sharedstoragewritable: boolean;
-			sizes: string;
-			src: string;
-			srcset: string;
-			usemap: string;
-			/** @deprecated */ vspace: number | string;
-			width: number | string;
+			"accept-charset": string;
+			"action": string;
+			"autocomplete": 'on' | 'off';
+			"enctype": 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+			"method": 'post' | 'get' | 'dialog';
+			"name": string;
+			"novalidate": boolean;
+			"rel": string;
+			"target": '_self' | '_blank' | '_parent' | '_top' | (string & {});
 		};
 		properties: {
-			/** @deprecated */ align: 'top' | 'middle' | 'bottom' | 'left' | 'right';
-			alt: string;
-			attributionSrc: string;
-			/** @deprecated */ border: string;
-			browsingTopics: boolean;
-			crossOrigin: 'anonymous' | 'use-credentials' | '';
-			decoding: 'sync' | 'async' | 'auto';
-			fetchPriority: string;
-			height: number | string;
-			/** @deprecated */ hspace: number | string;
-			isMap: boolean;
-			loading: 'eager' | 'lazy';
-			/** @deprecated */ longDesc: string;
-			/** @deprecated */ lowsrc: string;
-			/** @deprecated */ name: string;
-			referrerPolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			sharedStorageWritable: boolean;
-			sizes: string;
-			src: string;
-			srcset: string;
-			useMap: string;
-			/** @deprecated */ vspace: number | string;
-			width: number | string;
+			"acceptCharset": string;
+			"action": string;
+			"autocomplete": 'on' | 'off';
+			"encoding": 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+			"method": 'post' | 'get' | 'dialog';
+			"name": string;
+			"noValidate": boolean;
+			"relList": string;
+			"target": '_self' | '_blank' | '_parent' | '_top' | (string & {});
 		};
 		events: {};
 	};
-	input: {
+	/** @deprecated */ "frame": {
 		attributes: {
-			accept: string;
-			/** @deprecated */ align: string;
-			alt: string;
-			autocomplete:
-				| 'additional-name'
-				| 'address-level1'
-				| 'address-level2'
-				| 'address-level3'
-				| 'address-level4'
-				| 'address-line1'
-				| 'address-line2'
-				| 'address-line3'
-				| 'bday'
-				| 'bday-day'
-				| 'bday-month'
-				| 'bday-year'
-				| 'billing'
-				| 'cc-additional-name'
-				| 'cc-csc'
-				| 'cc-exp'
-				| 'cc-exp-month'
-				| 'cc-exp-year'
-				| 'cc-family-name'
-				| 'cc-given-name'
-				| 'cc-name'
-				| 'cc-number'
-				| 'cc-type'
-				| 'country'
-				| 'country-name'
-				| 'current-password'
-				| 'email'
-				| 'family-name'
-				| 'fax'
-				| 'given-name'
-				| 'home'
-				| 'honorific-prefix'
-				| 'honorific-suffix'
-				| 'impp'
-				| 'language'
-				| 'mobile'
-				| 'name'
-				| 'new-password'
-				| 'nickname'
-				| 'off'
-				| 'on'
-				| 'organization'
-				| 'organization-title'
-				| 'pager'
-				| 'photo'
-				| 'postal-code'
-				| 'sex'
-				| 'shipping'
-				| 'street-address'
-				| 'tel'
-				| 'tel-area-code'
-				| 'tel-country-code'
-				| 'tel-extension'
-				| 'tel-local'
-				| 'tel-local-prefix'
-				| 'tel-local-suffix'
-				| 'tel-national'
-				| 'transaction-amount'
-				| 'transaction-currency'
-				| 'url'
-				| 'username'
-				| 'work'
-				| (string & {});
-			checked: boolean;
-			dirname: string;
-			disabled: boolean;
-			formaction: string;
-			formenctype:
-				| 'application/x-www-form-urlencoded'
-				| 'multipart/form-data'
-				| 'text/plain';
-			formmethod: 'post' | 'get' | 'dialog';
-			formnovalidate: boolean;
-			formtarget: string;
-			height: number | string;
-			incremental: boolean;
-			max: number | string;
-			maxlength: number | string;
-			min: number | string;
-			minlength: number | string;
-			multiple: boolean;
-			name: string;
-			pattern: string;
-			placeholder: string;
-			popovertargetaction: 'hide' | 'show' | 'toggle';
-			readonly: boolean;
-			required: boolean;
-			size: number | string;
-			src: string;
-			step: number | string;
-			type:
-				| 'button'
-				| 'checkbox'
-				| 'color'
-				| 'date'
-				| 'datetime-local'
-				| 'email'
-				| 'file'
-				| 'hidden'
-				| 'image'
-				| 'month'
-				| 'number'
-				| 'password'
-				| 'radio'
-				| 'range'
-				| 'reset'
-				| 'search'
-				| 'submit'
-				| 'tel'
-				| 'text'
-				| 'time'
-				| 'url'
-				| 'week'
-				| (string & {});
-			/** @deprecated */ usemap: string;
-			webkitdirectory: boolean;
-			width: number | string;
+			/** @deprecated */ "frameborder": string;
+			/** @deprecated */ "longdesc": string;
+			/** @deprecated */ "marginheight": string;
+			/** @deprecated */ "marginwidth": string;
+			/** @deprecated */ "name": string;
+			/** @deprecated */ "noresize": boolean;
+			/** @deprecated */ "scrolling": string;
+			/** @deprecated */ "src": string;
 		};
 		properties: {
-			accept: string;
-			/** @deprecated */ align: string;
-			alt: string;
-			autocomplete:
-				| 'additional-name'
-				| 'address-level1'
-				| 'address-level2'
-				| 'address-level3'
-				| 'address-level4'
-				| 'address-line1'
-				| 'address-line2'
-				| 'address-line3'
-				| 'bday'
-				| 'bday-day'
-				| 'bday-month'
-				| 'bday-year'
-				| 'billing'
-				| 'cc-additional-name'
-				| 'cc-csc'
-				| 'cc-exp'
-				| 'cc-exp-month'
-				| 'cc-exp-year'
-				| 'cc-family-name'
-				| 'cc-given-name'
-				| 'cc-name'
-				| 'cc-number'
-				| 'cc-type'
-				| 'country'
-				| 'country-name'
-				| 'current-password'
-				| 'email'
-				| 'family-name'
-				| 'fax'
-				| 'given-name'
-				| 'home'
-				| 'honorific-prefix'
-				| 'honorific-suffix'
-				| 'impp'
-				| 'language'
-				| 'mobile'
-				| 'name'
-				| 'new-password'
-				| 'nickname'
-				| 'off'
-				| 'on'
-				| 'organization'
-				| 'organization-title'
-				| 'pager'
-				| 'photo'
-				| 'postal-code'
-				| 'sex'
-				| 'shipping'
-				| 'street-address'
-				| 'tel'
-				| 'tel-area-code'
-				| 'tel-country-code'
-				| 'tel-extension'
-				| 'tel-local'
-				| 'tel-local-prefix'
-				| 'tel-local-suffix'
-				| 'tel-national'
-				| 'transaction-amount'
-				| 'transaction-currency'
-				| 'url'
-				| 'username'
-				| 'work'
-				| (string & {});
-			checked: boolean;
-			defaultChecked: boolean;
-			defaultValue: string;
-			dirName: string;
-			disabled: boolean;
-			files: FileList;
-			formAction: string;
-			formEnctype:
-				| 'application/x-www-form-urlencoded'
-				| 'multipart/form-data'
-				| 'text/plain';
-			formMethod: 'post' | 'get' | 'dialog';
-			formNoValidate: boolean;
-			formTarget: string;
-			height: number | string;
-			incremental: boolean;
-			indeterminate: boolean;
-			max: number | string;
-			maxLength: number | string;
-			min: number | string;
-			minLength: number | string;
-			multiple: boolean;
-			name: string;
-			pattern: string;
-			placeholder: string;
-			popoverTargetAction: string;
-			popoverTargetElement: Element;
-			readOnly: boolean;
-			required: boolean;
-			selectionDirection: string;
-			selectionEnd: number;
-			selectionStart: number;
-			size: number | string;
-			src: string;
-			step: number | string;
-			type:
-				| 'button'
-				| 'checkbox'
-				| 'color'
-				| 'date'
-				| 'datetime-local'
-				| 'email'
-				| 'file'
-				| 'hidden'
-				| 'image'
-				| 'month'
-				| 'number'
-				| 'password'
-				| 'radio'
-				| 'range'
-				| 'reset'
-				| 'search'
-				| 'submit'
-				| 'tel'
-				| 'text'
-				| 'time'
-				| 'url'
-				| 'week'
-				| (string & {});
-			/** @deprecated */ useMap: string;
-			value: boolean;
-			valueAsDate: Date;
-			valueAsNumber: number;
-			webkitdirectory: boolean;
-			width: number | string;
+			/** @deprecated */ "frameBorder": string;
+			/** @deprecated */ "longDesc": string;
+			/** @deprecated */ "marginHeight": string;
+			/** @deprecated */ "marginWidth": string;
+			/** @deprecated */ "name": string;
+			/** @deprecated */ "noResize": boolean;
+			/** @deprecated */ "scrolling": string;
+			/** @deprecated */ "src": string;
+		};
+		events: {};
+	};
+	/** @deprecated */ "frameset": {
+		attributes: {
+			/** @deprecated */ "cols": string;
+			/** @deprecated */ "rows": string;
+		};
+		properties: {
+			/** @deprecated */ "cols": string;
+			/** @deprecated */ "rows": string;
 		};
 		events: {
-			change: Event;
+			"afterprint": Event;
+			"beforeprint": Event;
+			"beforeunload": BeforeUnloadEvent;
+			"blur": FocusEvent;
+			"error": ErrorEvent;
+			"focus": FocusEvent;
+			"gamepadconnected": GamepadEvent;
+			"gamepaddisconnected": GamepadEvent;
+			"hashchange": HashChangeEvent;
+			"languagechange": Event;
+			"load": Event;
+			"message": MessageEvent;
+			"messageerror": MessageEvent;
+			"offline": Event;
+			"online": Event;
+			"pagehide": PageTransitionEvent;
+			"pagereveal": PageRevealEvent;
+			"pageshow": PageTransitionEvent;
+			"pageswap": PageSwapEvent;
+			"popstate": PopStateEvent;
+			"rejectionhandled": PromiseRejectionEvent;
+			"resize": UIEvent;
+			"scroll": Event;
+			"storage": StorageEvent;
+			"unhandledrejection": PromiseRejectionEvent;
+			"unload": Event;
 		};
 	};
-	ins: {
+	"h1": {
 		attributes: {
-			cite: string;
-			datetime: string;
+			/** @deprecated */ "align": string;
 		};
 		properties: {
-			cite: string;
-			dateTime: string;
+			/** @deprecated */ "align": string;
 		};
 		events: {};
 	};
-	/** @deprecated */ isindex: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	kbd: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ keygen: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	label: {
+	"h2": {
 		attributes: {
-			for: string;
+			/** @deprecated */ "align": string;
 		};
 		properties: {
-			htmlFor: string;
+			/** @deprecated */ "align": string;
 		};
 		events: {};
 	};
-	legend: {
+	"h3": {
 		attributes: {
-			/** @deprecated */ align: string;
+			/** @deprecated */ "align": string;
 		};
 		properties: {
-			/** @deprecated */ align: string;
+			/** @deprecated */ "align": string;
 		};
 		events: {};
 	};
-	li: {
+	"h4": {
 		attributes: {
-			/** @deprecated */ type: '1' | 'a' | 'A' | 'i' | 'I';
-			value: number | string;
+			/** @deprecated */ "align": string;
 		};
 		properties: {
-			/** @deprecated */ type: '1' | 'a' | 'A' | 'i' | 'I';
-			value: number | string;
+			/** @deprecated */ "align": string;
 		};
 		events: {};
 	};
-	link: {
+	"h5": {
 		attributes: {
-			as:
-				| 'audio'
-				| 'document'
-				| 'embed'
-				| 'fetch'
-				| 'font'
-				| 'image'
-				| 'object'
-				| 'script'
-				| 'style'
-				| 'track'
-				| 'video'
-				| 'worker';
-			blocking: 'render';
-			/** @deprecated */ charset: string;
-			crossorigin: 'anonymous' | 'use-credentials' | '';
-			disabled: boolean;
-			fetchpriority: 'high' | 'low' | 'auto';
-			href: string;
-			hreflang: string;
-			imagesizes: string;
-			imagesrcset: string;
-			integrity: string;
-			media: string;
-			referrerpolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			rel: string;
-			/** @deprecated */ rev: string;
-			sizes: string;
-			/** @deprecated */ target: string;
-			type: string;
+			/** @deprecated */ "align": string;
 		};
 		properties: {
-			as:
-				| 'audio'
-				| 'document'
-				| 'embed'
-				| 'fetch'
-				| 'font'
-				| 'image'
-				| 'object'
-				| 'script'
-				| 'style'
-				| 'track'
-				| 'video'
-				| 'worker';
-			blocking: 'render';
-			/** @deprecated */ charset: string;
-			crossOrigin: 'anonymous' | 'use-credentials' | '';
-			disabled: boolean;
-			fetchPriority: string;
-			href: string;
-			hreflang: string;
-			imageSizes: string;
-			imageSrcset: string;
-			integrity: string;
-			media: string;
-			referrerPolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			relList: string;
-			/** @deprecated */ rev: string;
-			sizes: string;
-			/** @deprecated */ target: string;
-			type: string;
+			/** @deprecated */ "align": string;
 		};
 		events: {};
 	};
-	/** @deprecated */ listing: {
+	"h6": {
 		attributes: {
-			/** @deprecated */ width: number;
+			/** @deprecated */ "align": string;
 		};
 		properties: {
-			/** @deprecated */ width: number;
+			/** @deprecated */ "align": string;
 		};
 		events: {};
 	};
-	main: {
+	"head": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	map: {
+	"header": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"hgroup": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"hr": {
 		attributes: {
-			name: string;
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "color": string;
+			/** @deprecated */ "noshade": boolean;
+			/** @deprecated */ "size": string;
+			/** @deprecated */ "width": string;
 		};
 		properties: {
-			name: string;
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "color": string;
+			/** @deprecated */ "noShade": boolean;
+			/** @deprecated */ "size": string;
+			/** @deprecated */ "width": string;
 		};
 		events: {};
 	};
-	mark: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ marquee: {
+	"html": {
 		attributes: {
-			/** @deprecated */ behavior: string;
-			/** @deprecated */ bgcolor: string;
-			/** @deprecated */ direction: string;
-			/** @deprecated */ height: string;
-			/** @deprecated */ hspace: number;
-			/** @deprecated */ loop: number;
-			/** @deprecated */ scrollamount: number;
-			/** @deprecated */ scrolldelay: number;
-			/** @deprecated */ truespeed: boolean;
-			/** @deprecated */ vspace: number;
-			/** @deprecated */ width: string;
+			/** @deprecated */ "version": string;
 		};
 		properties: {
-			/** @deprecated */ behavior: string;
-			/** @deprecated */ bgColor: string;
-			/** @deprecated */ direction: string;
-			/** @deprecated */ height: string;
-			/** @deprecated */ hspace: number;
-			/** @deprecated */ loop: number;
-			/** @deprecated */ scrollAmount: number;
-			/** @deprecated */ scrollDelay: number;
-			/** @deprecated */ trueSpeed: boolean;
-			/** @deprecated */ vspace: number;
-			/** @deprecated */ width: string;
+			/** @deprecated */ "version": string;
 		};
 		events: {};
 	};
-	menu: {
+	"i": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"iframe": {
 		attributes: {
-			/** @deprecated */ compact: boolean;
+			"adauctionheaders": boolean;
+			/** @deprecated */ "align": string;
+			"allow": string;
+			"allowfullscreen": boolean;
+			/** @deprecated */ "allowpaymentrequest": boolean;
+			"browsingtopics": boolean;
+			"credentialless": boolean;
+			"csp": string;
+			/** @deprecated */ "frameborder": number | string;
+			"height": number | string;
+			"loading": 'eager' | 'lazy';
+			/** @deprecated */ "longdesc": string;
+			/** @deprecated */ "marginheight": number | string;
+			/** @deprecated */ "marginwidth": number | string;
+			"name": string;
+			"privatetoken": string;
+			"referrerpolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"sandbox": 'allow-downloads-without-user-activation' | 'allow-downloads' | 'allow-forms' | 'allow-modals' | 'allow-orientation-lock' | 'allow-pointer-lock' | 'allow-popups' | 'allow-popups-to-escape-sandbox' | 'allow-presentation' | 'allow-same-origin' | 'allow-scripts' | 'allow-storage-access-by-user-activation' | 'allow-top-navigation' | 'allow-top-navigation-by-user-activation' | 'allow-top-navigation-to-custom-protocols' | string;
+			/** @deprecated */ "scrolling": 'yes' | 'no' | 'auto';
+			"sharedstoragewritable": boolean;
+			"src": string;
+			"srcdoc": string;
+			"width": number | string;
 		};
 		properties: {
-			/** @deprecated */ compact: boolean;
+			"adAuctionHeaders": boolean;
+			/** @deprecated */ "align": string;
+			"allow": string;
+			"allowFullscreen": boolean;
+			/** @deprecated */ "allowPaymentRequest": boolean;
+			"browsingTopics": boolean;
+			"credentialless": boolean;
+			"csp": string;
+			/** @deprecated */ "frameBorder": number | string;
+			"height": number | string;
+			"loading": 'eager' | 'lazy';
+			/** @deprecated */ "longDesc": string;
+			/** @deprecated */ "marginHeight": number;
+			/** @deprecated */ "marginWidth": number;
+			"name": string;
+			"privateToken": string;
+			"referrerPolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"sandbox": 'allow-downloads-without-user-activation' | 'allow-downloads' | 'allow-forms' | 'allow-modals' | 'allow-orientation-lock' | 'allow-pointer-lock' | 'allow-popups' | 'allow-popups-to-escape-sandbox' | 'allow-presentation' | 'allow-same-origin' | 'allow-scripts' | 'allow-storage-access-by-user-activation' | 'allow-top-navigation' | 'allow-top-navigation-by-user-activation' | 'allow-top-navigation-to-custom-protocols' | string;
+			/** @deprecated */ "scrolling": 'yes' | 'no' | 'auto';
+			"sharedStorageWritable": boolean;
+			"src": string;
+			"srcdoc": string;
+			"width": number | string;
 		};
 		events: {};
 	};
-	/** @deprecated */ menuitem: {
+	/** @deprecated */ "image": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	meta: {
+	"img": {
 		attributes: {
-			content: string;
-			'http-equiv':
-				| 'content-security-policy'
-				| 'content-type'
-				| 'default-style'
-				| 'x-ua-compatible'
-				| 'refresh';
-			media: string;
-			name: string;
-			/** @deprecated */ scheme: string;
+			/** @deprecated */ "align": 'top' | 'middle' | 'bottom' | 'left' | 'right';
+			"alt": string;
+			"attributionsrc": string;
+			/** @deprecated */ "border": string;
+			"browsingtopics": boolean;
+			"crossorigin": 'anonymous' | 'use-credentials' | '';
+			"decoding": 'sync' | 'async' | 'auto';
+			"fetchpriority": 'high' | 'low' | 'auto';
+			"height": number | string;
+			/** @deprecated */ "hspace": number | string;
+			"ismap": boolean;
+			"loading": 'eager' | 'lazy';
+			/** @deprecated */ "longdesc": string;
+			/** @deprecated */ "lowsrc": string;
+			/** @deprecated */ "name": string;
+			"referrerpolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"sharedstoragewritable": boolean;
+			"sizes": string;
+			"src": string;
+			"srcset": string;
+			"usemap": string;
+			/** @deprecated */ "vspace": number | string;
+			"width": number | string;
 		};
 		properties: {
-			content: string;
-			httpEquiv: string;
-			media: string;
-			name: string;
-			/** @deprecated */ scheme: string;
+			/** @deprecated */ "align": 'top' | 'middle' | 'bottom' | 'left' | 'right';
+			"alt": string;
+			"attributionSrc": string;
+			/** @deprecated */ "border": string;
+			"browsingTopics": boolean;
+			"crossOrigin": 'anonymous' | 'use-credentials' | '';
+			"decoding": 'sync' | 'async' | 'auto';
+			"fetchPriority": string;
+			"height": number | string;
+			/** @deprecated */ "hspace": number | string;
+			"isMap": boolean;
+			"loading": 'eager' | 'lazy';
+			/** @deprecated */ "longDesc": string;
+			/** @deprecated */ "lowsrc": string;
+			/** @deprecated */ "name": string;
+			"referrerPolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"sharedStorageWritable": boolean;
+			"sizes": string;
+			"src": string;
+			"srcset": string;
+			"useMap": string;
+			/** @deprecated */ "vspace": number | string;
+			"width": number | string;
 		};
 		events: {};
 	};
-	meter: {
+	"input": {
 		attributes: {
-			high: number | string;
-			low: number | string;
-			max: number | string;
-			min: number | string;
-			optimum: number | string;
-			value: string | string[] | number;
+			"accept": string;
+			/** @deprecated */ "align": string;
+			"alt": string;
+			"autocomplete": 'additional-name' | 'address-level1' | 'address-level2' | 'address-level3' | 'address-level4' | 'address-line1' | 'address-line2' | 'address-line3' | 'bday' | 'bday-day' | 'bday-month' | 'bday-year' | 'billing' | 'cc-additional-name' | 'cc-csc' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-family-name' | 'cc-given-name' | 'cc-name' | 'cc-number' | 'cc-type' | 'country' | 'country-name' | 'current-password' | 'email' | 'family-name' | 'fax' | 'given-name' | 'home' | 'honorific-prefix' | 'honorific-suffix' | 'impp' | 'language' | 'mobile' | 'name' | 'new-password' | 'nickname' | 'off' | 'on' | 'organization' | 'organization-title' | 'pager' | 'photo' | 'postal-code' | 'sex' | 'shipping' | 'street-address' | 'tel' | 'tel-area-code' | 'tel-country-code' | 'tel-extension' | 'tel-local' | 'tel-local-prefix' | 'tel-local-suffix' | 'tel-national' | 'transaction-amount' | 'transaction-currency' | 'url' | 'username' | 'work' | (string & {});
+			"capture": 'user' | 'environment';
+			"checked": boolean;
+			"dirname": string;
+			"disabled": boolean;
+			"form": string;
+			"formaction": string;
+			"formenctype": 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+			"formmethod": 'post' | 'get' | 'dialog';
+			"formnovalidate": boolean;
+			"formtarget": string;
+			"height": number | string;
+			"incremental": boolean;
+			"list": string;
+			"max": number | string;
+			"maxlength": number | string;
+			"min": number | string;
+			"minlength": number | string;
+			"multiple": boolean;
+			"name": string;
+			"pattern": string;
+			"placeholder": string;
+			"popovertarget": string;
+			"popovertargetaction": 'hide' | 'show' | 'toggle';
+			"readonly": boolean;
+			"required": boolean;
+			"results": number;
+			"size": number | string;
+			"src": string;
+			"step": number | string;
+			"type": 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | (string & {});
+			/** @deprecated */ "usemap": string;
+			"webkitdirectory": boolean;
+			"width": number | string;
 		};
 		properties: {
-			high: number | string;
-			low: number | string;
-			max: number | string;
-			min: number | string;
-			optimum: number | string;
-			value: string | string[] | number;
-		};
-		events: {};
-	};
-	/** @deprecated */ multicol: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	nav: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ nextid: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ nobr: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ noembed: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ noframes: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	noindex: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	noscript: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	object: {
-		attributes: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ archive: string;
-			/** @deprecated */ border: string;
-			/** @deprecated */ code: string;
-			/** @deprecated */ codebase: string;
-			/** @deprecated */ codetype: string;
-			data: string;
-			/** @deprecated */ declare: boolean;
-			height: number | string;
-			/** @deprecated */ hspace: number | string;
-			name: string;
-			/** @deprecated */ standby: string;
-			type: string;
-			/** @deprecated */ usemap: string;
-			/** @deprecated */ vspace: number | string;
-			width: number | string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ archive: string;
-			/** @deprecated */ border: string;
-			/** @deprecated */ code: string;
-			/** @deprecated */ codeBase: string;
-			/** @deprecated */ codeType: string;
-			data: string;
-			/** @deprecated */ declare: boolean;
-			height: number | string;
-			/** @deprecated */ hspace: number | string;
-			name: string;
-			/** @deprecated */ standby: string;
-			type: string;
-			/** @deprecated */ useMap: string;
-			/** @deprecated */ vspace: number | string;
-			width: number | string;
-		};
-		events: {};
-	};
-	ol: {
-		attributes: {
-			/** @deprecated */ compact: boolean;
-			reversed: boolean;
-			start: number | string;
-			type: '1' | 'a' | 'A' | 'i' | 'I';
-		};
-		properties: {
-			/** @deprecated */ compact: boolean;
-			reversed: boolean;
-			start: number | string;
-			type: '1' | 'a' | 'A' | 'i' | 'I';
-		};
-		events: {};
-	};
-	optgroup: {
-		attributes: {
-			disabled: boolean;
-			label: string;
-		};
-		properties: {
-			disabled: boolean;
-			label: string;
-		};
-		events: {};
-	};
-	option: {
-		attributes: {
-			disabled: boolean;
-			label: string;
-			selected: boolean;
-			value: string | string[] | number;
-		};
-		properties: {
-			defaultSelected: boolean;
-			disabled: boolean;
-			label: string;
-			text: string;
-			value: string | string[] | number;
-		};
-		events: {};
-	};
-	output: {
-		attributes: {
-			for: string;
-			name: string;
-		};
-		properties: {
-			defaultValue: string;
-			htmlFor: string;
-			name: string;
-			value: string;
-		};
-		events: {};
-	};
-	p: {
-		attributes: {
-			/** @deprecated */ align: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-		};
-		events: {};
-	};
-	/** @deprecated */ param: {
-		attributes: {
-			/** @deprecated */ name: string;
-			/** @deprecated */ type: string;
-			/** @deprecated */ value: string | number;
-			/** @deprecated */ valuetype: 'data' | 'ref' | 'object';
-		};
-		properties: {
-			/** @deprecated */ name: string;
-			/** @deprecated */ type: string;
-			/** @deprecated */ value: string | number;
-			/** @deprecated */ valueType: string;
-		};
-		events: {};
-	};
-	picture: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ plaintext: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ portal: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	pre: {
-		attributes: {
-			/** @deprecated */ width: number;
-		};
-		properties: {
-			/** @deprecated */ width: number;
-		};
-		events: {};
-	};
-	progress: {
-		attributes: {
-			max: number | string;
-			value: string | string[] | number;
-		};
-		properties: {
-			max: number | string;
-			value: string | string[] | number;
-		};
-		events: {};
-	};
-	q: {
-		attributes: {
-			cite: string;
-		};
-		properties: {
-			cite: string;
-		};
-		events: {};
-	};
-	/** @deprecated */ rb: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	rp: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	rt: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ rtc: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	ruby: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	s: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	samp: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	script: {
-		attributes: {
-			async: boolean;
-			attributionsrc: string;
-			blocking: 'render';
-			/** @deprecated */ charset: string;
-			crossorigin: 'anonymous' | 'use-credentials' | '';
-			defer: boolean;
-			/** @deprecated */ event: string;
-			fetchpriority: 'high' | 'low' | 'auto';
-			for: string;
-			integrity: string;
-			nomodule: boolean;
-			referrerpolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			src: string;
-			type: 'importmap' | 'module' | 'speculationrules' | (string & {});
-		};
-		properties: {
-			async: boolean;
-			attributionSrc: string;
-			blocking: 'render';
-			/** @deprecated */ charset: string;
-			crossOrigin: 'anonymous' | 'use-credentials' | '';
-			defer: boolean;
-			/** @deprecated */ event: string;
-			fetchPriority: string;
-			/** @deprecated */ htmlFor: string;
-			innerText: string;
-			integrity: string;
-			noModule: boolean;
-			referrerPolicy:
-				| 'no-referrer'
-				| 'no-referrer-when-downgrade'
-				| 'origin'
-				| 'origin-when-cross-origin'
-				| 'same-origin'
-				| 'strict-origin'
-				| 'strict-origin-when-cross-origin'
-				| 'unsafe-url';
-			src: string;
-			text: string;
-			textContent: string | number;
-			type: 'importmap' | 'module' | 'speculationrules' | (string & {});
-		};
-		events: {};
-	};
-	search: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	section: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	select: {
-		attributes: {
-			autocomplete:
-				| 'additional-name'
-				| 'address-level1'
-				| 'address-level2'
-				| 'address-level3'
-				| 'address-level4'
-				| 'address-line1'
-				| 'address-line2'
-				| 'address-line3'
-				| 'bday'
-				| 'bday-day'
-				| 'bday-month'
-				| 'bday-year'
-				| 'billing'
-				| 'cc-additional-name'
-				| 'cc-csc'
-				| 'cc-exp'
-				| 'cc-exp-month'
-				| 'cc-exp-year'
-				| 'cc-family-name'
-				| 'cc-given-name'
-				| 'cc-name'
-				| 'cc-number'
-				| 'cc-type'
-				| 'country'
-				| 'country-name'
-				| 'current-password'
-				| 'email'
-				| 'family-name'
-				| 'fax'
-				| 'given-name'
-				| 'home'
-				| 'honorific-prefix'
-				| 'honorific-suffix'
-				| 'impp'
-				| 'language'
-				| 'mobile'
-				| 'name'
-				| 'new-password'
-				| 'nickname'
-				| 'off'
-				| 'on'
-				| 'organization'
-				| 'organization-title'
-				| 'pager'
-				| 'photo'
-				| 'postal-code'
-				| 'sex'
-				| 'shipping'
-				| 'street-address'
-				| 'tel'
-				| 'tel-area-code'
-				| 'tel-country-code'
-				| 'tel-extension'
-				| 'tel-local'
-				| 'tel-local-prefix'
-				| 'tel-local-suffix'
-				| 'tel-national'
-				| 'transaction-amount'
-				| 'transaction-currency'
-				| 'url'
-				| 'username'
-				| 'work'
-				| (string & {});
-			disabled: boolean;
-			multiple: boolean;
-			name: string;
-			required: boolean;
-			size: number | string;
-		};
-		properties: {
-			autocomplete:
-				| 'additional-name'
-				| 'address-level1'
-				| 'address-level2'
-				| 'address-level3'
-				| 'address-level4'
-				| 'address-line1'
-				| 'address-line2'
-				| 'address-line3'
-				| 'bday'
-				| 'bday-day'
-				| 'bday-month'
-				| 'bday-year'
-				| 'billing'
-				| 'cc-additional-name'
-				| 'cc-csc'
-				| 'cc-exp'
-				| 'cc-exp-month'
-				| 'cc-exp-year'
-				| 'cc-family-name'
-				| 'cc-given-name'
-				| 'cc-name'
-				| 'cc-number'
-				| 'cc-type'
-				| 'country'
-				| 'country-name'
-				| 'current-password'
-				| 'email'
-				| 'family-name'
-				| 'fax'
-				| 'given-name'
-				| 'home'
-				| 'honorific-prefix'
-				| 'honorific-suffix'
-				| 'impp'
-				| 'language'
-				| 'mobile'
-				| 'name'
-				| 'new-password'
-				| 'nickname'
-				| 'off'
-				| 'on'
-				| 'organization'
-				| 'organization-title'
-				| 'pager'
-				| 'photo'
-				| 'postal-code'
-				| 'sex'
-				| 'shipping'
-				| 'street-address'
-				| 'tel'
-				| 'tel-area-code'
-				| 'tel-country-code'
-				| 'tel-extension'
-				| 'tel-local'
-				| 'tel-local-prefix'
-				| 'tel-local-suffix'
-				| 'tel-national'
-				| 'transaction-amount'
-				| 'transaction-currency'
-				| 'url'
-				| 'username'
-				| 'work'
-				| (string & {});
-			disabled: boolean;
-			length: number;
-			multiple: boolean;
-			name: string;
-			required: boolean;
-			selectedIndex: number;
-			size: number | string;
-			value: string | string[] | number;
+			"accept": string;
+			/** @deprecated */ "align": string;
+			"alt": string;
+			"autocomplete": 'additional-name' | 'address-level1' | 'address-level2' | 'address-level3' | 'address-level4' | 'address-line1' | 'address-line2' | 'address-line3' | 'bday' | 'bday-day' | 'bday-month' | 'bday-year' | 'billing' | 'cc-additional-name' | 'cc-csc' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-family-name' | 'cc-given-name' | 'cc-name' | 'cc-number' | 'cc-type' | 'country' | 'country-name' | 'current-password' | 'email' | 'family-name' | 'fax' | 'given-name' | 'home' | 'honorific-prefix' | 'honorific-suffix' | 'impp' | 'language' | 'mobile' | 'name' | 'new-password' | 'nickname' | 'off' | 'on' | 'organization' | 'organization-title' | 'pager' | 'photo' | 'postal-code' | 'sex' | 'shipping' | 'street-address' | 'tel' | 'tel-area-code' | 'tel-country-code' | 'tel-extension' | 'tel-local' | 'tel-local-prefix' | 'tel-local-suffix' | 'tel-national' | 'transaction-amount' | 'transaction-currency' | 'url' | 'username' | 'work' | (string & {});
+			"checked": boolean;
+			"defaultChecked": boolean;
+			"defaultValue": string;
+			"dirName": string;
+			"disabled": boolean;
+			"files": FileList;
+			"formAction": string;
+			"formEnctype": 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain';
+			"formMethod": 'post' | 'get' | 'dialog';
+			"formNoValidate": boolean;
+			"formTarget": string;
+			"height": number | string;
+			"incremental": boolean;
+			"indeterminate": boolean;
+			"max": number | string;
+			"maxLength": number | string;
+			"min": number | string;
+			"minLength": number | string;
+			"multiple": boolean;
+			"name": string;
+			"pattern": string;
+			"placeholder": string;
+			"popoverTargetAction": string;
+			"popoverTargetElement": Element;
+			"readOnly": boolean;
+			"required": boolean;
+			"selectionDirection": string;
+			"selectionEnd": number;
+			"selectionStart": number;
+			"size": number | string;
+			"src": string;
+			"step": number | string;
+			"type": 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | (string & {});
+			/** @deprecated */ "useMap": string;
+			"value": boolean;
+			"valueAsDate": Date;
+			"valueAsNumber": number;
+			"webkitdirectory": boolean;
+			"width": number | string;
 		};
 		events: {
-			change: Event;
+			"cancel": Event;
+			"change": Event;
 		};
 	};
-	selectedcontent: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ shadow: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	slot: {
+	"ins": {
 		attributes: {
-			name: string;
+			"cite": string;
+			"datetime": string;
 		};
 		properties: {
-			name: string;
+			"cite": string;
+			"dateTime": string;
 		};
 		events: {};
 	};
-	small: {
+	/** @deprecated */ "isindex": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	source: {
+	"kbd": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "keygen": {
 		attributes: {
-			height: number | string;
-			media: string;
-			sizes: string;
-			src: string;
-			srcset: string;
-			type: string;
-			width: number | string;
+			/** @deprecated */ "form": string;
+		};
+		properties: {};
+		events: {};
+	};
+	"label": {
+		attributes: {
+			"for": string;
 		};
 		properties: {
-			height: number | string;
-			media: string;
-			sizes: string;
-			src: string;
-			srcset: string;
-			type: string;
-			width: number | string;
+			"htmlFor": string;
 		};
 		events: {};
 	};
-	/** @deprecated */ spacer: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	span: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ strike: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	strong: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	style: {
+	"legend": {
 		attributes: {
-			blocking: 'render';
-			media: string;
-			/** @deprecated */ type: string;
+			/** @deprecated */ "align": string;
 		};
 		properties: {
-			blocking: 'render';
-			disabled: boolean;
-			media: string;
-			/** @deprecated */ type: string;
+			/** @deprecated */ "align": string;
 		};
 		events: {};
 	};
-	sub: {
+	"li": {
+		attributes: {
+			/** @deprecated */ "type": '1' | 'a' | 'A' | 'i' | 'I';
+			"value": number | string;
+		};
+		properties: {
+			/** @deprecated */ "type": '1' | 'a' | 'A' | 'i' | 'I';
+			"value": number | string;
+		};
+		events: {};
+	};
+	"link": {
+		attributes: {
+			"as": 'audio' | 'document' | 'embed' | 'fetch' | 'font' | 'image' | 'object' | 'script' | 'style' | 'track' | 'video' | 'worker';
+			"blocking": 'render';
+			/** @deprecated */ "charset": string;
+			"crossorigin": 'anonymous' | 'use-credentials' | '';
+			"disabled": boolean;
+			"fetchpriority": 'high' | 'low' | 'auto';
+			"href": string;
+			"hreflang": string;
+			"imagesizes": string;
+			"imagesrcset": string;
+			"integrity": string;
+			"media": string;
+			"referrerpolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"rel": string;
+			/** @deprecated */ "rev": string;
+			"sizes": string;
+			/** @deprecated */ "target": string;
+			"type": string;
+		};
+		properties: {
+			"as": 'audio' | 'document' | 'embed' | 'fetch' | 'font' | 'image' | 'object' | 'script' | 'style' | 'track' | 'video' | 'worker';
+			"blocking": 'render';
+			/** @deprecated */ "charset": string;
+			"crossOrigin": 'anonymous' | 'use-credentials' | '';
+			"disabled": boolean;
+			"fetchPriority": string;
+			"href": string;
+			"hreflang": string;
+			"imageSizes": string;
+			"imageSrcset": string;
+			"integrity": string;
+			"media": string;
+			"referrerPolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"relList": string;
+			/** @deprecated */ "rev": string;
+			"sizes": string;
+			/** @deprecated */ "target": string;
+			"type": string;
+		};
+		events: {};
+	};
+	/** @deprecated */ "listing": {
+		attributes: {
+			/** @deprecated */ "width": number;
+		};
+		properties: {
+			/** @deprecated */ "width": number;
+		};
+		events: {};
+	};
+	"main": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	summary: {
+	"map": {
+		attributes: {
+			"name": string;
+		};
+		properties: {
+			"name": string;
+		};
+		events: {};
+	};
+	"mark": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	sup: {
+	/** @deprecated */ "marquee": {
+		attributes: {
+			/** @deprecated */ "behavior": string;
+			/** @deprecated */ "bgcolor": string;
+			/** @deprecated */ "direction": string;
+			/** @deprecated */ "height": string;
+			/** @deprecated */ "hspace": number;
+			/** @deprecated */ "loop": number;
+			/** @deprecated */ "scrollamount": number;
+			/** @deprecated */ "scrolldelay": number;
+			/** @deprecated */ "truespeed": boolean;
+			/** @deprecated */ "vspace": number;
+			/** @deprecated */ "width": string;
+		};
+		properties: {
+			/** @deprecated */ "behavior": string;
+			/** @deprecated */ "bgColor": string;
+			/** @deprecated */ "direction": string;
+			/** @deprecated */ "height": string;
+			/** @deprecated */ "hspace": number;
+			/** @deprecated */ "loop": number;
+			/** @deprecated */ "scrollAmount": number;
+			/** @deprecated */ "scrollDelay": number;
+			/** @deprecated */ "trueSpeed": boolean;
+			/** @deprecated */ "vspace": number;
+			/** @deprecated */ "width": string;
+		};
+		events: {};
+	};
+	"menu": {
+		attributes: {
+			/** @deprecated */ "compact": boolean;
+		};
+		properties: {
+			/** @deprecated */ "compact": boolean;
+		};
+		events: {};
+	};
+	/** @deprecated */ "menuitem": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	table: {
+	"meta": {
 		attributes: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ bgcolor: string;
-			/** @deprecated */ border: string;
-			/** @deprecated */ cellpadding: string;
-			/** @deprecated */ cellspacing: string;
-			/** @deprecated */ frame: string;
-			/** @deprecated */ rules: string;
-			/** @deprecated */ summary: string;
-			/** @deprecated */ width: number | string;
+			"charset": string;
+			"content": string;
+			"http-equiv": 'content-security-policy' | 'content-type' | 'default-style' | 'x-ua-compatible' | 'refresh';
+			"media": string;
+			"name": string;
+			/** @deprecated */ "scheme": string;
 		};
 		properties: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ bgColor: string;
-			/** @deprecated */ border: string;
-			caption: HTMLTableCaptionElement;
-			/** @deprecated */ cellPadding: number | string;
-			/** @deprecated */ cellSpacing: number | string;
-			/** @deprecated */ frame: string;
-			/** @deprecated */ rules: string;
-			/** @deprecated */ summary: string;
-			tFoot: HTMLTableSectionElement;
-			tHead: HTMLTableSectionElement;
-			/** @deprecated */ width: number | string;
+			"content": string;
+			"httpEquiv": string;
+			"media": string;
+			"name": string;
+			/** @deprecated */ "scheme": string;
 		};
 		events: {};
 	};
-	tbody: {
+	"meter": {
 		attributes: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ char: string;
-			/** @deprecated */ charoff: string;
-			/** @deprecated */ valign: string;
+			"form": string;
+			"high": number | string;
+			"low": number | string;
+			"max": number | string;
+			"min": number | string;
+			"optimum": number | string;
+			"value": string | string[] | number;
 		};
 		properties: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ ch: string;
-			/** @deprecated */ chOff: string;
-			/** @deprecated */ vAlign: string;
+			"high": number | string;
+			"low": number | string;
+			"max": number | string;
+			"min": number | string;
+			"optimum": number | string;
+			"value": string | string[] | number;
 		};
 		events: {};
 	};
-	td: {
+	/** @deprecated */ "multicol": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"nav": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "nextid": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "nobr": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "noembed": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "noframes": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"noindex": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"noscript": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"object": {
 		attributes: {
-			/** @deprecated */ abbr: string;
-			/** @deprecated */ align:
-				| 'left'
-				| 'center'
-				| 'right'
-				| 'justify'
-				| 'char';
-			/** @deprecated */ axis: string;
-			/** @deprecated */ bgcolor: string;
-			/** @deprecated */ char: string;
-			/** @deprecated */ charoff: string;
-			colspan: number | string;
-			headers: string;
-			/** @deprecated */ height: number | string;
-			/** @deprecated */ nowrap: boolean;
-			rowspan: number | string;
-			/** @deprecated */ scope: 'col' | 'row' | 'rowgroup' | 'colgroup';
-			/** @deprecated */ valign: 'baseline' | 'bottom' | 'middle' | 'top';
-			/** @deprecated */ width: number | string;
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "archive": string;
+			/** @deprecated */ "border": string;
+			/** @deprecated */ "code": string;
+			/** @deprecated */ "codebase": string;
+			/** @deprecated */ "codetype": string;
+			"data": string;
+			/** @deprecated */ "declare": boolean;
+			"form": string;
+			"height": number | string;
+			/** @deprecated */ "hspace": number | string;
+			"name": string;
+			/** @deprecated */ "standby": string;
+			"type": string;
+			/** @deprecated */ "usemap": string;
+			/** @deprecated */ "vspace": number | string;
+			"width": number | string;
+			"wmode": string;
 		};
 		properties: {
-			/** @deprecated */ abbr: string;
-			/** @deprecated */ align:
-				| 'left'
-				| 'center'
-				| 'right'
-				| 'justify'
-				| 'char';
-			/** @deprecated */ axis: string;
-			/** @deprecated */ bgColor: string;
-			/** @deprecated */ ch: string;
-			/** @deprecated */ chOff: string;
-			colSpan: number | string;
-			headers: string;
-			/** @deprecated */ height: number | string;
-			/** @deprecated */ noWrap: boolean;
-			rowSpan: number | string;
-			/** @deprecated */ scope: 'col' | 'row' | 'rowgroup' | 'colgroup';
-			/** @deprecated */ vAlign: string;
-			/** @deprecated */ width: number | string;
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "archive": string;
+			/** @deprecated */ "border": string;
+			/** @deprecated */ "code": string;
+			/** @deprecated */ "codeBase": string;
+			/** @deprecated */ "codeType": string;
+			"data": string;
+			/** @deprecated */ "declare": boolean;
+			"height": number | string;
+			/** @deprecated */ "hspace": number | string;
+			"name": string;
+			/** @deprecated */ "standby": string;
+			"type": string;
+			/** @deprecated */ "useMap": string;
+			/** @deprecated */ "vspace": number | string;
+			"width": number | string;
 		};
 		events: {};
 	};
-	template: {
+	"ol": {
 		attributes: {
-			shadowrootclonable: boolean;
-			shadowrootdelegatesfocus: boolean;
-			shadowrootmode: 'open' | 'closed';
-			shadowrootserializable: boolean;
+			/** @deprecated */ "compact": boolean;
+			"reversed": boolean;
+			"start": number | string;
+			"type": '1' | 'a' | 'A' | 'i' | 'I';
 		};
 		properties: {
-			shadowRootClonable: boolean;
-			shadowRootDelegatesFocus: boolean;
-			shadowRootMode: string;
-			shadowRootSerializable: boolean;
+			/** @deprecated */ "compact": boolean;
+			"reversed": boolean;
+			"start": number | string;
+			"type": '1' | 'a' | 'A' | 'i' | 'I';
 		};
 		events: {};
 	};
-	textarea: {
+	"optgroup": {
 		attributes: {
-			autocomplete:
-				| 'additional-name'
-				| 'address-level1'
-				| 'address-level2'
-				| 'address-level3'
-				| 'address-level4'
-				| 'address-line1'
-				| 'address-line2'
-				| 'address-line3'
-				| 'bday'
-				| 'bday-day'
-				| 'bday-month'
-				| 'bday-year'
-				| 'billing'
-				| 'cc-additional-name'
-				| 'cc-csc'
-				| 'cc-exp'
-				| 'cc-exp-month'
-				| 'cc-exp-year'
-				| 'cc-family-name'
-				| 'cc-given-name'
-				| 'cc-name'
-				| 'cc-number'
-				| 'cc-type'
-				| 'country'
-				| 'country-name'
-				| 'current-password'
-				| 'email'
-				| 'family-name'
-				| 'fax'
-				| 'given-name'
-				| 'home'
-				| 'honorific-prefix'
-				| 'honorific-suffix'
-				| 'impp'
-				| 'language'
-				| 'mobile'
-				| 'name'
-				| 'new-password'
-				| 'nickname'
-				| 'off'
-				| 'on'
-				| 'organization'
-				| 'organization-title'
-				| 'pager'
-				| 'photo'
-				| 'postal-code'
-				| 'sex'
-				| 'shipping'
-				| 'street-address'
-				| 'tel'
-				| 'tel-area-code'
-				| 'tel-country-code'
-				| 'tel-extension'
-				| 'tel-local'
-				| 'tel-local-prefix'
-				| 'tel-local-suffix'
-				| 'tel-national'
-				| 'transaction-amount'
-				| 'transaction-currency'
-				| 'url'
-				| 'username'
-				| 'work'
-				| (string & {});
-			cols: number | string;
-			dirname: string;
-			disabled: boolean;
-			maxlength: number | string;
-			minlength: number | string;
-			name: string;
-			placeholder: string;
-			readonly: boolean;
-			required: boolean;
-			rows: number | string;
-			wrap: 'hard' | 'soft' | 'off';
+			"disabled": boolean;
+			"label": string;
 		};
 		properties: {
-			autocomplete:
-				| 'additional-name'
-				| 'address-level1'
-				| 'address-level2'
-				| 'address-level3'
-				| 'address-level4'
-				| 'address-line1'
-				| 'address-line2'
-				| 'address-line3'
-				| 'bday'
-				| 'bday-day'
-				| 'bday-month'
-				| 'bday-year'
-				| 'billing'
-				| 'cc-additional-name'
-				| 'cc-csc'
-				| 'cc-exp'
-				| 'cc-exp-month'
-				| 'cc-exp-year'
-				| 'cc-family-name'
-				| 'cc-given-name'
-				| 'cc-name'
-				| 'cc-number'
-				| 'cc-type'
-				| 'country'
-				| 'country-name'
-				| 'current-password'
-				| 'email'
-				| 'family-name'
-				| 'fax'
-				| 'given-name'
-				| 'home'
-				| 'honorific-prefix'
-				| 'honorific-suffix'
-				| 'impp'
-				| 'language'
-				| 'mobile'
-				| 'name'
-				| 'new-password'
-				| 'nickname'
-				| 'off'
-				| 'on'
-				| 'organization'
-				| 'organization-title'
-				| 'pager'
-				| 'photo'
-				| 'postal-code'
-				| 'sex'
-				| 'shipping'
-				| 'street-address'
-				| 'tel'
-				| 'tel-area-code'
-				| 'tel-country-code'
-				| 'tel-extension'
-				| 'tel-local'
-				| 'tel-local-prefix'
-				| 'tel-local-suffix'
-				| 'tel-national'
-				| 'transaction-amount'
-				| 'transaction-currency'
-				| 'url'
-				| 'username'
-				| 'work'
-				| (string & {});
-			cols: number | string;
-			defaultValue: string;
-			dirName: string;
-			disabled: boolean;
-			maxLength: number | string;
-			minLength: number | string;
-			name: string;
-			placeholder: string;
-			readOnly: boolean;
-			required: boolean;
-			rows: number | string;
-			selectionDirection: string;
-			selectionEnd: number;
-			selectionStart: number;
-			value: string | string[] | number;
-			wrap: 'hard' | 'soft' | 'off';
+			"disabled": boolean;
+			"label": string;
+		};
+		events: {};
+	};
+	"option": {
+		attributes: {
+			"disabled": boolean;
+			"label": string;
+			"selected": boolean;
+			"value": string | string[] | number;
+		};
+		properties: {
+			"defaultSelected": boolean;
+			"disabled": boolean;
+			"label": string;
+			"text": string;
+			"value": string | string[] | number;
+		};
+		events: {};
+	};
+	"output": {
+		attributes: {
+			"for": string;
+			"form": string;
+			"name": string;
+		};
+		properties: {
+			"defaultValue": string;
+			"htmlFor": string;
+			"name": string;
+			"value": string;
+		};
+		events: {};
+	};
+	"p": {
+		attributes: {
+			/** @deprecated */ "align": string;
+		};
+		properties: {
+			/** @deprecated */ "align": string;
+		};
+		events: {};
+	};
+	/** @deprecated */ "param": {
+		attributes: {
+			/** @deprecated */ "name": string;
+			/** @deprecated */ "type": string;
+			/** @deprecated */ "value": string | number;
+			/** @deprecated */ "valuetype": 'data' | 'ref' | 'object';
+		};
+		properties: {
+			/** @deprecated */ "name": string;
+			/** @deprecated */ "type": string;
+			/** @deprecated */ "value": string | number;
+			/** @deprecated */ "valueType": string;
+		};
+		events: {};
+	};
+	"picture": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "plaintext": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "portal": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"pre": {
+		attributes: {
+			/** @deprecated */ "width": number;
+		};
+		properties: {
+			/** @deprecated */ "width": number;
+		};
+		events: {};
+	};
+	"progress": {
+		attributes: {
+			"max": number | string;
+			"value": string | string[] | number;
+		};
+		properties: {
+			"max": number | string;
+			"value": string | string[] | number;
+		};
+		events: {};
+	};
+	"q": {
+		attributes: {
+			"cite": string;
+		};
+		properties: {
+			"cite": string;
+		};
+		events: {};
+	};
+	/** @deprecated */ "rb": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"rp": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"rt": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "rtc": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"ruby": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"s": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"samp": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"script": {
+		attributes: {
+			"async": boolean;
+			"attributionsrc": string;
+			"blocking": 'render';
+			/** @deprecated */ "charset": string;
+			"crossorigin": 'anonymous' | 'use-credentials' | '';
+			"defer": boolean;
+			/** @deprecated */ "event": string;
+			"fetchpriority": 'high' | 'low' | 'auto';
+			"for": string;
+			"integrity": string;
+			"nomodule": boolean;
+			"referrerpolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"src": string;
+			"type": 'importmap' | 'module' | 'speculationrules' | (string & {});
+		};
+		properties: {
+			"async": boolean;
+			"attributionSrc": string;
+			"blocking": 'render';
+			/** @deprecated */ "charset": string;
+			"crossOrigin": 'anonymous' | 'use-credentials' | '';
+			"defer": boolean;
+			/** @deprecated */ "event": string;
+			"fetchPriority": string;
+			/** @deprecated */ "htmlFor": string;
+			"innerText": string;
+			"integrity": string;
+			"noModule": boolean;
+			"referrerPolicy": 'no-referrer' | 'no-referrer-when-downgrade' | 'origin' | 'origin-when-cross-origin' | 'same-origin' | 'strict-origin' | 'strict-origin-when-cross-origin' | 'unsafe-url';
+			"src": string;
+			"text": string;
+			"textContent": string | number;
+			"type": 'importmap' | 'module' | 'speculationrules' | (string & {});
+		};
+		events: {};
+	};
+	"search": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"section": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"select": {
+		attributes: {
+			"autocomplete": 'additional-name' | 'address-level1' | 'address-level2' | 'address-level3' | 'address-level4' | 'address-line1' | 'address-line2' | 'address-line3' | 'bday' | 'bday-day' | 'bday-month' | 'bday-year' | 'billing' | 'cc-additional-name' | 'cc-csc' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-family-name' | 'cc-given-name' | 'cc-name' | 'cc-number' | 'cc-type' | 'country' | 'country-name' | 'current-password' | 'email' | 'family-name' | 'fax' | 'given-name' | 'home' | 'honorific-prefix' | 'honorific-suffix' | 'impp' | 'language' | 'mobile' | 'name' | 'new-password' | 'nickname' | 'off' | 'on' | 'organization' | 'organization-title' | 'pager' | 'photo' | 'postal-code' | 'sex' | 'shipping' | 'street-address' | 'tel' | 'tel-area-code' | 'tel-country-code' | 'tel-extension' | 'tel-local' | 'tel-local-prefix' | 'tel-local-suffix' | 'tel-national' | 'transaction-amount' | 'transaction-currency' | 'url' | 'username' | 'work' | (string & {});
+			"disabled": boolean;
+			"form": string;
+			"multiple": boolean;
+			"name": string;
+			"required": boolean;
+			"size": number | string;
+		};
+		properties: {
+			"autocomplete": 'additional-name' | 'address-level1' | 'address-level2' | 'address-level3' | 'address-level4' | 'address-line1' | 'address-line2' | 'address-line3' | 'bday' | 'bday-day' | 'bday-month' | 'bday-year' | 'billing' | 'cc-additional-name' | 'cc-csc' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-family-name' | 'cc-given-name' | 'cc-name' | 'cc-number' | 'cc-type' | 'country' | 'country-name' | 'current-password' | 'email' | 'family-name' | 'fax' | 'given-name' | 'home' | 'honorific-prefix' | 'honorific-suffix' | 'impp' | 'language' | 'mobile' | 'name' | 'new-password' | 'nickname' | 'off' | 'on' | 'organization' | 'organization-title' | 'pager' | 'photo' | 'postal-code' | 'sex' | 'shipping' | 'street-address' | 'tel' | 'tel-area-code' | 'tel-country-code' | 'tel-extension' | 'tel-local' | 'tel-local-prefix' | 'tel-local-suffix' | 'tel-national' | 'transaction-amount' | 'transaction-currency' | 'url' | 'username' | 'work' | (string & {});
+			"disabled": boolean;
+			"length": number;
+			"multiple": boolean;
+			"name": string;
+			"required": boolean;
+			"selectedIndex": number;
+			"size": number | string;
+			"value": string | string[] | number;
 		};
 		events: {
-			change: Event;
+			"change": Event;
 		};
 	};
-	tfoot: {
-		attributes: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ char: string;
-			/** @deprecated */ charoff: string;
-			/** @deprecated */ valign: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ ch: string;
-			/** @deprecated */ chOff: string;
-			/** @deprecated */ vAlign: string;
-		};
-		events: {};
-	};
-	th: {
-		attributes: {
-			abbr: string;
-			/** @deprecated */ align:
-				| 'left'
-				| 'center'
-				| 'right'
-				| 'justify'
-				| 'char';
-			/** @deprecated */ axis: string;
-			/** @deprecated */ bgcolor: string;
-			/** @deprecated */ char: string;
-			/** @deprecated */ charoff: string;
-			colspan: number | string;
-			headers: string;
-			/** @deprecated */ height: string;
-			/** @deprecated */ nowrap: boolean;
-			rowspan: number | string;
-			scope: 'col' | 'row' | 'rowgroup' | 'colgroup';
-			/** @deprecated */ valign: 'baseline' | 'bottom' | 'middle' | 'top';
-			/** @deprecated */ width: number | string;
-		};
-		properties: {
-			abbr: string;
-			/** @deprecated */ align:
-				| 'left'
-				| 'center'
-				| 'right'
-				| 'justify'
-				| 'char';
-			/** @deprecated */ axis: string;
-			/** @deprecated */ bgColor: string;
-			/** @deprecated */ ch: string;
-			/** @deprecated */ chOff: string;
-			colSpan: number | string;
-			headers: string;
-			/** @deprecated */ height: string;
-			/** @deprecated */ noWrap: boolean;
-			rowSpan: number | string;
-			scope: 'col' | 'row' | 'rowgroup' | 'colgroup';
-			/** @deprecated */ vAlign: string;
-			/** @deprecated */ width: number | string;
-		};
-		events: {};
-	};
-	thead: {
-		attributes: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ char: string;
-			/** @deprecated */ charoff: string;
-			/** @deprecated */ valign: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ ch: string;
-			/** @deprecated */ chOff: string;
-			/** @deprecated */ vAlign: string;
-		};
-		events: {};
-	};
-	time: {
-		attributes: {
-			datetime: string;
-		};
-		properties: {
-			dateTime: string;
-		};
-		events: {};
-	};
-	title: {
-		attributes: {};
-		properties: {
-			text: string;
-		};
-		events: {};
-	};
-	tr: {
-		attributes: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ bgcolor: string;
-			/** @deprecated */ char: string;
-			/** @deprecated */ charoff: string;
-			/** @deprecated */ valign: string;
-		};
-		properties: {
-			/** @deprecated */ align: string;
-			/** @deprecated */ bgColor: string;
-			/** @deprecated */ ch: string;
-			/** @deprecated */ chOff: string;
-			/** @deprecated */ vAlign: string;
-		};
-		events: {};
-	};
-	track: {
-		attributes: {
-			default: boolean;
-			kind:
-				| 'alternative'
-				| 'descriptions'
-				| 'main'
-				| 'main-desc'
-				| 'translation'
-				| 'commentary'
-				| 'subtitles'
-				| 'captions'
-				| 'chapters'
-				| 'metadata';
-			label: string;
-			src: string;
-			srclang: string;
-		};
-		properties: {
-			default: boolean;
-			kind:
-				| 'alternative'
-				| 'descriptions'
-				| 'main'
-				| 'main-desc'
-				| 'translation'
-				| 'commentary'
-				| 'subtitles'
-				| 'captions'
-				| 'chapters'
-				| 'metadata';
-			label: string;
-			src: string;
-			srclang: string;
-		};
-		events: {};
-	};
-	/** @deprecated */ tt: {
+	"selectedcontent": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	Unknown: {
+	/** @deprecated */ "shadow": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	ul: {
+	"slot": {
 		attributes: {
-			/** @deprecated */ compact: boolean;
-			/** @deprecated */ type: string;
+			"name": string;
 		};
 		properties: {
-			/** @deprecated */ compact: boolean;
-			/** @deprecated */ type: string;
+			"name": string;
 		};
 		events: {};
 	};
-	var: {
+	"small": {
 		attributes: {};
 		properties: {};
 		events: {};
 	};
-	video: {
+	"source": {
 		attributes: {
-			autoplay: boolean;
-			controls: boolean;
-			controlslist:
-				| 'nodownload'
-				| 'nofullscreen'
-				| 'noplaybackrate'
-				| 'noremoteplayback'
-				| (string & {});
-			crossorigin: 'anonymous' | 'use-credentials' | '';
-			disablepictureinpicture: boolean;
-			disableremoteplayback: boolean;
-			height: number | string;
-			loop: boolean;
-			muted: boolean;
-			playsinline: boolean;
-			poster: string;
-			preload: 'none' | 'metadata' | 'auto' | '';
-			src: string;
-			width: number | string;
+			"height": number | string;
+			"media": string;
+			"sizes": string;
+			"src": string;
+			"srcset": string;
+			"type": string;
+			"width": number | string;
 		};
 		properties: {
-			autoplay: boolean;
-			controls: boolean;
-			controlsList: string;
-			crossOrigin: 'anonymous' | 'use-credentials' | '';
-			currentTime: number;
-			defaultMuted: boolean;
-			defaultPlaybackRate: number;
-			disablePictureInPicture: boolean;
-			disableRemotePlayback: boolean;
-			height: number | string;
-			loop: boolean;
-			playbackRate: number;
-			playsInline: boolean;
-			poster: string;
-			preload: 'none' | 'metadata' | 'auto' | '';
-			preservesPitch: boolean;
-			src: string;
-			srcObject: MediaStream | MediaSource | Blob | File;
-			volume: number;
-			width: number | string;
+			"height": number | string;
+			"media": string;
+			"sizes": string;
+			"src": string;
+			"srcset": string;
+			"type": string;
+			"width": number | string;
+		};
+		events: {};
+	};
+	/** @deprecated */ "spacer": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"span": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "strike": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"strong": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"style": {
+		attributes: {
+			"blocking": 'render';
+			"media": string;
+			/** @deprecated */ "type": string;
+		};
+		properties: {
+			"blocking": 'render';
+			"disabled": boolean;
+			"media": string;
+			/** @deprecated */ "type": string;
+		};
+		events: {};
+	};
+	"sub": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"summary": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"sup": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"table": {
+		attributes: {
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "bgcolor": string;
+			/** @deprecated */ "border": string;
+			/** @deprecated */ "cellpadding": string;
+			/** @deprecated */ "cellspacing": string;
+			/** @deprecated */ "frame": string;
+			/** @deprecated */ "rules": string;
+			/** @deprecated */ "summary": string;
+			/** @deprecated */ "width": number | string;
+		};
+		properties: {
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "bgColor": string;
+			/** @deprecated */ "border": string;
+			"caption": HTMLTableCaptionElement;
+			/** @deprecated */ "cellPadding": number | string;
+			/** @deprecated */ "cellSpacing": number | string;
+			/** @deprecated */ "frame": string;
+			/** @deprecated */ "rules": string;
+			/** @deprecated */ "summary": string;
+			"tFoot": HTMLTableSectionElement;
+			"tHead": HTMLTableSectionElement;
+			/** @deprecated */ "width": number | string;
+		};
+		events: {};
+	};
+	"tbody": {
+		attributes: {
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "char": string;
+			/** @deprecated */ "charoff": string;
+			/** @deprecated */ "valign": string;
+		};
+		properties: {
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "ch": string;
+			/** @deprecated */ "chOff": string;
+			/** @deprecated */ "vAlign": string;
+		};
+		events: {};
+	};
+	"td": {
+		attributes: {
+			/** @deprecated */ "abbr": string;
+			/** @deprecated */ "align": 'left' | 'center' | 'right' | 'justify' | 'char';
+			/** @deprecated */ "axis": string;
+			/** @deprecated */ "bgcolor": string;
+			/** @deprecated */ "char": string;
+			/** @deprecated */ "charoff": string;
+			"colspan": number | string;
+			"headers": string;
+			/** @deprecated */ "height": number | string;
+			/** @deprecated */ "nowrap": boolean;
+			"rowspan": number | string;
+			/** @deprecated */ "scope": 'col' | 'row' | 'rowgroup' | 'colgroup';
+			/** @deprecated */ "valign": 'baseline' | 'bottom' | 'middle' | 'top';
+			/** @deprecated */ "width": number | string;
+		};
+		properties: {
+			/** @deprecated */ "abbr": string;
+			/** @deprecated */ "align": 'left' | 'center' | 'right' | 'justify' | 'char';
+			/** @deprecated */ "axis": string;
+			/** @deprecated */ "bgColor": string;
+			/** @deprecated */ "ch": string;
+			/** @deprecated */ "chOff": string;
+			"colSpan": number | string;
+			"headers": string;
+			/** @deprecated */ "height": number | string;
+			/** @deprecated */ "noWrap": boolean;
+			"rowSpan": number | string;
+			/** @deprecated */ "scope": 'col' | 'row' | 'rowgroup' | 'colgroup';
+			/** @deprecated */ "vAlign": string;
+			/** @deprecated */ "width": number | string;
+		};
+		events: {};
+	};
+	"template": {
+		attributes: {
+			"shadowrootclonable": boolean;
+			"shadowrootdelegatesfocus": boolean;
+			"shadowrootmode": 'open' | 'closed';
+			"shadowrootserializable": boolean;
+		};
+		properties: {
+			"shadowRootClonable": boolean;
+			"shadowRootDelegatesFocus": boolean;
+			"shadowRootMode": string;
+			"shadowRootSerializable": boolean;
+		};
+		events: {};
+	};
+	"textarea": {
+		attributes: {
+			"autocomplete": 'additional-name' | 'address-level1' | 'address-level2' | 'address-level3' | 'address-level4' | 'address-line1' | 'address-line2' | 'address-line3' | 'bday' | 'bday-day' | 'bday-month' | 'bday-year' | 'billing' | 'cc-additional-name' | 'cc-csc' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-family-name' | 'cc-given-name' | 'cc-name' | 'cc-number' | 'cc-type' | 'country' | 'country-name' | 'current-password' | 'email' | 'family-name' | 'fax' | 'given-name' | 'home' | 'honorific-prefix' | 'honorific-suffix' | 'impp' | 'language' | 'mobile' | 'name' | 'new-password' | 'nickname' | 'off' | 'on' | 'organization' | 'organization-title' | 'pager' | 'photo' | 'postal-code' | 'sex' | 'shipping' | 'street-address' | 'tel' | 'tel-area-code' | 'tel-country-code' | 'tel-extension' | 'tel-local' | 'tel-local-prefix' | 'tel-local-suffix' | 'tel-national' | 'transaction-amount' | 'transaction-currency' | 'url' | 'username' | 'work' | (string & {});
+			"cols": number | string;
+			"dirname": string;
+			"disabled": boolean;
+			"form": string;
+			"maxlength": number | string;
+			"minlength": number | string;
+			"name": string;
+			"placeholder": string;
+			"readonly": boolean;
+			"required": boolean;
+			"rows": number | string;
+			"wrap": 'hard' | 'soft' | 'off';
+		};
+		properties: {
+			"autocomplete": 'additional-name' | 'address-level1' | 'address-level2' | 'address-level3' | 'address-level4' | 'address-line1' | 'address-line2' | 'address-line3' | 'bday' | 'bday-day' | 'bday-month' | 'bday-year' | 'billing' | 'cc-additional-name' | 'cc-csc' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-family-name' | 'cc-given-name' | 'cc-name' | 'cc-number' | 'cc-type' | 'country' | 'country-name' | 'current-password' | 'email' | 'family-name' | 'fax' | 'given-name' | 'home' | 'honorific-prefix' | 'honorific-suffix' | 'impp' | 'language' | 'mobile' | 'name' | 'new-password' | 'nickname' | 'off' | 'on' | 'organization' | 'organization-title' | 'pager' | 'photo' | 'postal-code' | 'sex' | 'shipping' | 'street-address' | 'tel' | 'tel-area-code' | 'tel-country-code' | 'tel-extension' | 'tel-local' | 'tel-local-prefix' | 'tel-local-suffix' | 'tel-national' | 'transaction-amount' | 'transaction-currency' | 'url' | 'username' | 'work' | (string & {});
+			"cols": number | string;
+			"defaultValue": string;
+			"dirName": string;
+			"disabled": boolean;
+			"maxLength": number | string;
+			"minLength": number | string;
+			"name": string;
+			"placeholder": string;
+			"readOnly": boolean;
+			"required": boolean;
+			"rows": number | string;
+			"selectionDirection": string;
+			"selectionEnd": number;
+			"selectionStart": number;
+			"value": string | string[] | number;
+			"wrap": 'hard' | 'soft' | 'off';
 		};
 		events: {
-			encrypted: MediaEncryptedEvent;
-			enterpictureinpicture: PictureInPictureEvent;
-			leavepictureinpicture: PictureInPictureEvent;
-			resize: UIEvent;
-			waitingforkey: Event;
+			"change": Event;
 		};
 	};
-	wbr: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	webview: {
-		attributes: {};
-		properties: {};
-		events: {};
-	};
-	/** @deprecated */ xmp: {
+	"tfoot": {
 		attributes: {
-			/** @deprecated */ width: number;
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "char": string;
+			/** @deprecated */ "charoff": string;
+			/** @deprecated */ "valign": string;
 		};
 		properties: {
-			/** @deprecated */ width: number;
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "ch": string;
+			/** @deprecated */ "chOff": string;
+			/** @deprecated */ "vAlign": string;
+		};
+		events: {};
+	};
+	"th": {
+		attributes: {
+			"abbr": string;
+			/** @deprecated */ "align": 'left' | 'center' | 'right' | 'justify' | 'char';
+			/** @deprecated */ "axis": string;
+			/** @deprecated */ "bgcolor": string;
+			/** @deprecated */ "char": string;
+			/** @deprecated */ "charoff": string;
+			"colspan": number | string;
+			"headers": string;
+			/** @deprecated */ "height": string;
+			/** @deprecated */ "nowrap": boolean;
+			"rowspan": number | string;
+			"scope": 'col' | 'row' | 'rowgroup' | 'colgroup';
+			/** @deprecated */ "valign": 'baseline' | 'bottom' | 'middle' | 'top';
+			/** @deprecated */ "width": number | string;
+		};
+		properties: {
+			"abbr": string;
+			/** @deprecated */ "align": 'left' | 'center' | 'right' | 'justify' | 'char';
+			/** @deprecated */ "axis": string;
+			/** @deprecated */ "bgColor": string;
+			/** @deprecated */ "ch": string;
+			/** @deprecated */ "chOff": string;
+			"colSpan": number | string;
+			"headers": string;
+			/** @deprecated */ "height": string;
+			/** @deprecated */ "noWrap": boolean;
+			"rowSpan": number | string;
+			"scope": 'col' | 'row' | 'rowgroup' | 'colgroup';
+			/** @deprecated */ "vAlign": string;
+			/** @deprecated */ "width": number | string;
+		};
+		events: {};
+	};
+	"thead": {
+		attributes: {
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "char": string;
+			/** @deprecated */ "charoff": string;
+			/** @deprecated */ "valign": string;
+		};
+		properties: {
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "ch": string;
+			/** @deprecated */ "chOff": string;
+			/** @deprecated */ "vAlign": string;
+		};
+		events: {};
+	};
+	"time": {
+		attributes: {
+			"datetime": string;
+		};
+		properties: {
+			"dateTime": string;
+		};
+		events: {};
+	};
+	"title": {
+		attributes: {};
+		properties: {
+			"text": string;
+		};
+		events: {};
+	};
+	"tr": {
+		attributes: {
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "bgcolor": string;
+			/** @deprecated */ "char": string;
+			/** @deprecated */ "charoff": string;
+			/** @deprecated */ "valign": string;
+		};
+		properties: {
+			/** @deprecated */ "align": string;
+			/** @deprecated */ "bgColor": string;
+			/** @deprecated */ "ch": string;
+			/** @deprecated */ "chOff": string;
+			/** @deprecated */ "vAlign": string;
+		};
+		events: {};
+	};
+	"track": {
+		attributes: {
+			"default": boolean;
+			"kind": 'alternative' | 'descriptions' | 'main' | 'main-desc' | 'translation' | 'commentary' | 'subtitles' | 'captions' | 'chapters' | 'metadata';
+			"label": string;
+			"src": string;
+			"srclang": string;
+		};
+		properties: {
+			"default": boolean;
+			"kind": 'alternative' | 'descriptions' | 'main' | 'main-desc' | 'translation' | 'commentary' | 'subtitles' | 'captions' | 'chapters' | 'metadata';
+			"label": string;
+			"src": string;
+			"srclang": string;
+		};
+		events: {};
+	};
+	/** @deprecated */ "tt": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"u": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"ul": {
+		attributes: {
+			/** @deprecated */ "compact": boolean;
+			/** @deprecated */ "type": string;
+		};
+		properties: {
+			/** @deprecated */ "compact": boolean;
+			/** @deprecated */ "type": string;
+		};
+		events: {};
+	};
+	"var": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"video": {
+		attributes: {
+			"autoplay": boolean;
+			"controls": boolean;
+			"controlslist": 'nodownload' | 'nofullscreen' | 'noplaybackrate' | 'noremoteplayback' | (string & {});
+			"crossorigin": 'anonymous' | 'use-credentials' | '';
+			"disablepictureinpicture": boolean;
+			"disableremoteplayback": boolean;
+			"height": number | string;
+			"loop": boolean;
+			"muted": boolean;
+			"playsinline": boolean;
+			"poster": string;
+			"preload": 'none' | 'metadata' | 'auto' | '';
+			"src": string;
+			"width": number | string;
+		};
+		properties: {
+			"autoplay": boolean;
+			"controls": boolean;
+			"controlsList": string;
+			"crossOrigin": 'anonymous' | 'use-credentials' | '';
+			"currentTime": number;
+			"defaultMuted": boolean;
+			"defaultPlaybackRate": number;
+			"disablePictureInPicture": boolean;
+			"disableRemotePlayback": boolean;
+			"height": number | string;
+			"loop": boolean;
+			"playbackRate": number;
+			"playsInline": boolean;
+			"poster": string;
+			"preload": 'none' | 'metadata' | 'auto' | '';
+			"preservesPitch": boolean;
+			"src": string;
+			"srcObject": MediaStream | MediaSource | Blob | File;
+			"volume": number;
+			"width": number | string;
+		};
+		events: {
+			"encrypted": MediaEncryptedEvent;
+			"enterpictureinpicture": PictureInPictureEvent;
+			"leavepictureinpicture": PictureInPictureEvent;
+			"resize": UIEvent;
+			"waitingforkey": Event;
+		};
+	};
+	"wbr": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	"webview": {
+		attributes: {};
+		properties: {};
+		events: {};
+	};
+	/** @deprecated */ "xmp": {
+		attributes: {
+			/** @deprecated */ "width": number;
+		};
+		properties: {
+			/** @deprecated */ "width": number;
 		};
 		events: {};
 	};
@@ -7946,6 +7289,7 @@ interface BaseSVGElements {
 			charSet: string;
 			crossorigin: string;
 			defer: boolean;
+			fetchPriority: unknown;
 			integrity: string;
 			nomodule: unknown;
 			noModule: boolean;
@@ -9832,4 +9176,3 @@ export type {
 	BaseSVGElement,
 	BaseSVGElements,
 };
-//# sourceMappingURL=intrinsics.gen.d.ts.map
