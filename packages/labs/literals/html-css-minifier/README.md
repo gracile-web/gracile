@@ -8,6 +8,8 @@ _Minify HTML and CSS markup inside JavaScript template literal strings._
 
 </div>
 
+<!--  -->
+
 ## Why?
 
 Template literals are often used in JavaScript to write HTML and CSS markup

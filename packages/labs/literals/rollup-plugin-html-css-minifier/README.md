@@ -10,6 +10,8 @@ to minify HTML and CSS markup inside JavaScript template literal strings.
 
 </div>
 
+<!--  -->
+
 ## Usage
 
 > [!IMPORTANT]  

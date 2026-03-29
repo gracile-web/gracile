@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@3.0.0...@literals/rollup-plugin-html-css-minifier@4.0.0) (2026-03-29)
+
+### ⚠ BREAKING CHANGES
+
+* CSS interpolation support was removed in the previous cycle.
+This commit corrects the semver signal that was missed due to a parser bug.
+
+### Features
+
+* mark (again) @literals/rollup-plugin-minify-html-literals v4: incorrect previous major ([fcde64b](https://github.com/gracile-web/gracile/commit/fcde64b25706f3bf1f81d82d7d2d3f98fded72ca))
+
 ## [3.0.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@3.0.0-next.0...@literals/rollup-plugin-html-css-minifier@3.0.0) (2026-03-29)
 
 **Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
