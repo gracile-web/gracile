@@ -10,6 +10,7 @@
     "literals",
     "template",
     "tagged",
+    "compression",
     "lit-html"
   ],
   "repository": {

@@ -1,13 +1,14 @@
 # rollup-plugin-minify-html-literals
 
-[![npm](https://img.shields.io/npm/v/%40literals%2Frollup-plugin-html-css-minifier.svg)](https://www.npmjs.com/package/%40literals%2Frollup-plugin-html-css-minifier)
-
-<!-- [![Build Status](https://travis-ci.com/asyncLiz/rollup-plugin-minify-html-literals.svg?branch=master)](https://travis-ci.com/asyncLiz/rollup-plugin-minify-html-literals) -->
-<!-- [![Coverage Status](https://coveralls.io/repos/github/asyncLiz/rollup-plugin-minify-html-literals/badge.svg?branch=master)](https://coveralls.io/github/asyncLiz/rollup-plugin-minify-html-literals?branch=master) -->
-
 Uses
 [@literals/html-css-minifier](https://www.npmjs.com/package/@literals/html-css-minifier)
 to minify HTML and CSS markup inside JavaScript template literal strings.
+
+<div class="git-only">
+
+[![npm](https://img.shields.io/npm/v/%40literals%2Frollup-plugin-html-css-minifier.svg)](https://www.npmjs.com/package/%40literals%2Frollup-plugin-html-css-minifier)
+
+</div>
 
 ## Usage
 
