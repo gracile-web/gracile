@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.4.2-next.0...@gracile-labs/better-errors@0.4.2-next.1) (2026-03-29)
+
+**Note:** Version bump only for package @gracile-labs/better-errors
+
 ## [0.4.2-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.4.1...@gracile-labs/better-errors@0.4.2-next.0) (2026-03-29)
 
 **Note:** Version bump only for package @gracile-labs/better-errors
