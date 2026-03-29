@@ -3,7 +3,8 @@ import { pathToFileURL } from 'node:url';
 
 import { collectErrorMetadata } from '@gracile-labs/better-errors/dev/utils';
 import { enhanceViteSSRError } from '@gracile-labs/better-errors/dev/vite';
-import { isRunnableDevEnvironment, type ViteDevServer } from 'vite';
+import { type ViteDevServer, type RunnableDevEnvironment } from 'vite';
+import { getLogger } from '@gracile/internal-utils/logger/helpers';
 
 import { GracileError, GracileErrorData } from '../errors/errors.js';
 
@@ -27,6 +28,8 @@ const incorrectRouteModuleError = (p: string): GracileError =>
 		message: GracileErrorData.InvalidRouteExport.message(p),
 	});
 
+const logger = getLogger();
+
 export async function loadForeignRouteObject({
 	vite,
 	route,
@@ -44,10 +47,22 @@ export async function loadForeignRouteObject({
 		try {
 			const ssrEnvironment = vite.environments.ssr;
 
-			if (!isRunnableDevEnvironment(ssrEnvironment))
-				throw new Error('Not in a SSR path');
+			// NOTE: Use duck-typing instead of `instanceof RunnableDevEnvironment` to avoid
+			// false negatives when multiple Vite copies are present (e.g. linked packages).
+			if (!('runner' in ssrEnvironment)) throw new Error('Not in a SSR path');
 
-			unknownRouteModule = await ssrEnvironment.runner.import(route.filePath);
+			unknownRouteModule = await (
+				ssrEnvironment as RunnableDevEnvironment
+			).runner.import(route.filePath);
+
+			// if (!isRunnableDevEnvironment(ssrEnvironment))
+
+			// logger.error(
+			// 	`Plugin detected Vite version: ${version}. You might want to check for duplicated Vite versions.`,
+			// );
+
+			// 	throw new Error('Not in a SSR path');
+			// unknownRouteModule = await ssrEnvironment.runner.import(route.filePath);
 		} catch (error) {
 			const error_ = error;
 
