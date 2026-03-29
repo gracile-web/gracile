@@ -57,8 +57,8 @@ packages:
   - ./starter-projects/templates-lab/*
 
 catalog:
-  vite: ^8.0.1
-  lit: ^3.2.1
+  vite: ^8.0.3
+  lit: ^3.3.2
   '@lit-labs/ssr': ^4.0.0
   '@lit-labs/ssr-client': ^1.1.8
   picocolors: ^1.1.1
