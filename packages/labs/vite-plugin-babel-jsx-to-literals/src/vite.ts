@@ -1,5 +1,5 @@
 import { babel } from '@rollup/plugin-babel';
-import type { PluginOption } from 'vite';
+import { version, type PluginOption } from 'vite';
 import babelPluginJsxToLiterals, {
 	type PluginOptions as JsxPluginOptions,
 } from '@gracile-labs/babel-plugin-jsx-to-literals';
@@ -94,8 +94,11 @@ export function gracileJsx(
 			name: VITE_PLUGIN_NAME,
 
 			config() {
-				// TODO: Vite 7/8 bifurcation (esbuild/oxc)
-				return { esbuild: { jsx: 'preserve' }, oxc: { jsx: 'preserve' } };
+				const viteMajor = Number.parseInt(version, 10); // version is "X.Y.Z"
+				if (viteMajor >= 8) {
+					return { oxc: { jsx: 'preserve' } };
+				}
+				return { esbuild: { jsx: 'preserve' } };
 			},
 		} as const satisfies PluginOption,
 

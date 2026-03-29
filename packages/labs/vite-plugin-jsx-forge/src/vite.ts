@@ -2,7 +2,7 @@ import typescript, {
 	type RollupTypescriptOptions,
 	type RollupTypescriptPluginOptions,
 } from '@rollup/plugin-typescript';
-import type { PluginOption } from 'vite';
+import { version, type PluginOption } from 'vite';
 // @ts-expect-error - No types available for ts-patch
 import tspCompiler from 'ts-patch/compiler/typescript.js';
 
@@ -23,11 +23,15 @@ export function gracileJsxTs(
 	return [
 		{
 			name: VITE_PLUGIN_NAME,
+			// TODO: Investigate if it's always needed.
 
 			config() {
-				// TODO: Investigate if it's always needed.
-				// TODO: Vite 7/8 bifurcation (esbuild/oxc)
-				return { esbuild: { jsx: 'preserve' }, oxc: { jsx: 'preserve' } };
+				const viteMajor = Number.parseInt(version, 10); // version is "X.Y.Z"
+
+				if (viteMajor >= 8) {
+					return { oxc: { jsx: 'preserve' } };
+				}
+				return { esbuild: { jsx: 'preserve' } };
 			},
 		} as const satisfies PluginOption,
 

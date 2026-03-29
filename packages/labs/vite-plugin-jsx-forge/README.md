@@ -60,7 +60,8 @@ work.
 }
 ```
 
-### Ambient types
+<!-- NOTE: I think this is blatantly wrong -->
+<!-- ### Ambient types
 
 Add the JSX types reference in a `.d.ts` file (or use a
 [triple-slash directive](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html)
@@ -76,7 +77,7 @@ Or import the ambient types from this package directly:
 
 ```ts
 /// <reference types="@gracile-labs/vite-plugin-jsx-forge/ambient" />
-```
+``` -->
 
 ## Usage
 
