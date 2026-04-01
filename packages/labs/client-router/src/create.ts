@@ -11,7 +11,6 @@ import { SignalHost } from '@gracile/client/signal-host';
 import { GracileRouter } from './_internal/gracile-client-router.js';
 import * as prefetching from './_internal/prefetching.js';
 import type { Config, RouteDefinition } from './types.js';
-import { reAdoptAllStylesFix } from './_internal/adopt-styles-hydrate-fix.js';
 
 if (!enabled) throw new Error('Gracile client router is disabled!');
 
@@ -242,9 +241,7 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 								// NOTE 2: Rollup will yell without this comment.
 								// It's fine, we are getting already processed `<link>`, so,
 								// their always correct and well funded.
-								scriptImports.push(
-									import(/* @vite-ignore */ script.src),
-								);
+								scriptImports.push(import(/* @vite-ignore */ script.src));
 							}
 						}
 						await Promise.all(scriptImports);
@@ -290,8 +287,6 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 					// MARK: Hydrate or render
 					if (!isInitiallyHydrated) {
 						try {
-							// TODO: try
-							requestIdleCallback(() => {});
 							hydrate(renderedTemplate, document.body, hydrationOptions);
 							isInitiallyHydrated = true;
 
@@ -308,8 +303,6 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 					// TODO: early detection
 					if (url.pathname !== previousPathname) {
 						render(renderedTemplate, document.body, hydrationOptions);
-
-						await reAdoptAllStylesFix(document.body);
 
 						// MARK: Extras meta
 						if (parsedDocument) {

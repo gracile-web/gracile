@@ -1,4 +1,5 @@
 import { html } from '@gracile/gracile/server-html';
+import './features/app-wrapper.js';
 
 export const document = (props: { url: URL; title?: string | null }) => html`
 	<!doctype html>

@@ -600,9 +600,7 @@ test.describe('Client Router — Shadow DOM Styles After Navigation', () => {
 
 	// -- Direct load (SSR + hydration) — baseline sanity check ----------------
 
-	test('SSR: full-stack-widget has styles on direct load', async ({
-		page,
-	}) => {
+	test('SSR: full-stack-widget has styles on direct load', async ({ page }) => {
 		await page.goto('/', GOTO_OPTIONS);
 		await expect(page.locator('full-stack-widget')).toBeVisible();
 		// SSR delivers styles via DSD <style> tags, not adoptedStyleSheets.

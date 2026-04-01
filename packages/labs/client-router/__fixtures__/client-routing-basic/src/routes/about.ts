@@ -5,6 +5,7 @@ import { html } from 'lit';
 
 import { document } from '../document.js';
 import { topMenu } from '../features/top-menu.js';
+// NOTE: app-wrapper is imported via document.ts; NOT here.
 
 export default defineRoute({
 	document: (context) => document({ ...context, title: 'About' }),
