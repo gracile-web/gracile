@@ -1,0 +1,12 @@
+{
+	"name": "@gracile/fixture-css-dedup",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"dependencies": {
+		"@gracile/gracile": "workspace:^",
+		"@gracile-labs/css-helpers": "workspace:^",
+		"lit": "catalog:",
+		"vite": "catalog:"
+	}
+}

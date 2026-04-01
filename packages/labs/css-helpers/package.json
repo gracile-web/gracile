@@ -38,22 +38,26 @@
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
-    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
+    "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@gracile/engine": "workspace:^",
+    "@gracile/internal-utils": "workspace:^",
     "@gracile/server": "workspace:^",
     "@lit-labs/ssr-client": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
+    "@playwright/test": "catalog:",
     "lit": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "@lit-labs/ssr": "catalog:"
+    "@lit-labs/ssr": "catalog:",
+    "vite": "catalog:"
   },
   "publishConfig": {
     "access": "public",
