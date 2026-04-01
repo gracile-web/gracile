@@ -53,8 +53,7 @@
     "@gracile/engine": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@gracile/server": "workspace:^",
-    "@lit-labs/ssr": "catalog:",
-    "urlpattern-polyfill": "catalog:"
+    "@lit-labs/ssr": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",

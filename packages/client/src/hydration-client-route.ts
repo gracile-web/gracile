@@ -5,7 +5,6 @@ import { hydrate } from '@lit-labs/ssr-client';
 // eslint-disable-next-line import-x/no-unresolved
 import { routeImports } from 'gracile:client:routes';
 import { premiseUrl } from '@gracile/internal-utils/paths';
-import { URLPattern } from 'urlpattern-polyfill/urlpattern';
 
 async function init(options?: HydrationOptions): Promise<void> {
 	const url = new URL(globalThis.document.location.href);

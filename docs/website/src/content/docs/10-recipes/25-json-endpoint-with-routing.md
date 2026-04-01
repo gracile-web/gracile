@@ -24,30 +24,6 @@ routing in a single file.
 For that, we can use a `[...rest].ts` "catch-all" route and process the URL
 forward ourselves.
 
-## Pre-requisites
-
-In this recipe, we will explore the `URLPattern` API to help us with
-**routing**.  
-At the time this guide is written,
-[isn't supported widely](https://caniuse.com/mdn-api_urlpattern), whether on
-server runtimes or browsers.
-
-<!-- NOTE: Feature not found -->
-<!-- <caniuse-embed feature="mdn-api_urlpattern" periods="future_1,current,past_1,past_2"></caniuse-embed>
-
-<div class="git-only">
-
-[**URLPattern API** on caniuse.com](https://caniuse.com/mdn-api_urlpattern)
-
-</div> -->
-
-Fortunately, there is a polyfill available, which is the one used under the hood
-by Gracile already to achieve file-based routing.
-
-```sh
-npm i urlpattern-polyfill
-```
-
 ## Files
 
 Here is a very contrived example, from where you can elaborate with `POST`, more
@@ -68,8 +44,6 @@ export const document = () => html` ... `;
 // @filename: /src/routes/api/[...path].ts
 
 import { defineRoute } from '@gracile/gracile/route';
-// NOTE: Usually defined as a global in the browser.
-import { URLPattern } from 'urlpattern-polyfill';
 
 const petDb = [
   { id: 1, name: 'Rantanplan', type: 'dog' },

@@ -20,7 +20,6 @@ import * as plugin from '@gracile/gracile/plugin';
 import { defineRoute } from '@gracile/gracile/route';
 import * as server from '@gracile/gracile/server';
 import * as serverHtml from '@gracile/gracile/server-html';
-import * as urlPattern from '@gracile/gracile/url-pattern';
 import { html as litServerHtml } from '@lit-labs/ssr';
 import { resolve } from 'import-meta-resolve';
 import { html } from 'lit';
@@ -70,10 +69,6 @@ describe('gracile package should do its exports correctly', () => {
 	test('vite plugin', () => {
 		assert.equal(typeof plugin.gracile, 'function');
 		assert.equal(typeof serverRuntime.createGracileHandler, 'function');
-	});
-
-	test('url pattern', () => {
-		assert.equal(urlPattern.URLPattern.constructor.name, 'Function');
 	});
 
 	//

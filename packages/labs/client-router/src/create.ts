@@ -1,8 +1,3 @@
-// TODO: Remove this polyfill when FF, Safari etc. support it.
-// Maybe it's a better practice to let the user load it's own polyfill.
-// It's the only place in the Gracile codebase where a polyfill is
-// "shipped silently".
-import 'urlpattern-polyfill';
 import '@gracile/client/lit-element-hydrate-support';
 
 import { render, type RenderOptions, type TemplateResult } from 'lit';

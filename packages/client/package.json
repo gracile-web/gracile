@@ -42,8 +42,7 @@
     "@gracile/engine": "workspace:^",
     "@gracile/internal-utils": "workspace:^",
     "@lit-labs/ssr": "catalog:",
-    "@lit-labs/ssr-client": "catalog:",
-    "urlpattern-polyfill": "catalog:"
+    "@lit-labs/ssr-client": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",

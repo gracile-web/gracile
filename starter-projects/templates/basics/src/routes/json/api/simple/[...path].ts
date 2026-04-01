@@ -1,7 +1,4 @@
 import { defineRoute } from '@gracile/gracile/route';
-// NOTE: Usually defined as a global in the browser.
-import { URLPattern } from '@gracile/gracile/url-pattern';
-
 import { DEV_URL } from '../../../../constants.js';
 
 const API_BASE = '/json/api/simple';

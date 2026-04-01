@@ -1,5 +1,3 @@
-// import type { URLPattern } from 'urlpattern-polyfill';
-
 export interface Config {
 	fallback?: string | undefined;
 	plugins?: Plugin[] | undefined;

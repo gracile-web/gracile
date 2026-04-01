@@ -47,8 +47,6 @@ export function virtualRoutes({
 				const routesArray = [...routes];
 
 				return `
-import { URLPattern } from '@gracile/gracile/url-pattern';
-
 const routes = new Map(${
 					//
 					JSON.stringify(routesArray, null, 2).replaceAll(

@@ -49,8 +49,7 @@
     "@gracile/internal-utils": "workspace:^",
     "@lit-labs/ssr-client": "catalog:",
     "@lit/reactive-element": "^2.1.2",
-    "lit": "catalog:",
-    "urlpattern-polyfill": "catalog:"
+    "lit": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",

@@ -118,8 +118,7 @@
     "strip-markdown": "^6.0.0",
     "unified": "^11.0.4",
     "unist-util-visit": "^5.0.0",
-    "unpic": "^3.19.0",
-    "urlpattern-polyfill": "catalog:"
+    "unpic": "^3.19.0"
   },
   "devDependencies": {
     "@importable/yaml": "^0.1.1",
