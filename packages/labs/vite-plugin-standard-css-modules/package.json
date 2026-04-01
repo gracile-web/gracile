@@ -48,15 +48,19 @@
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
-    "test:integration": "node --test dist/test/*.test.js"
+    "test:integration": "node --test dist/test/*.test.js",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "magic-string": "catalog:"
   },
   "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
     "@oxc-project/types": "^0.121.0",
+    "@playwright/test": "catalog:",
     "@types/node": "catalog:",
+    "rolldown": "1.0.0-rc.13",
     "typescript": "catalog:",
     "vite": "catalog:"
   },

@@ -7,17 +7,13 @@
 import type { ImportAttribute, ImportDeclaration } from '@oxc-project/types';
 import MagicString from 'magic-string';
 import { createFilter, type Plugin } from 'vite';
+import type { parseSync } from 'rolldown/utils';
 
 // ---------------------------------------------------------------------------
 // Lazy parser resolution: prefer rolldown (ships with Vite 8) over oxc-parser
 // ---------------------------------------------------------------------------
 
-type ParseSync = (
-	filename: string,
-	sourceText: string,
-	options?: object | null,
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-) => { program: { body: any[] } };
+type ParseSync = typeof parseSync;
 
 let _parseSync: ParseSync | undefined;
 
@@ -26,13 +22,11 @@ export async function resolveParser(): Promise<ParseSync> {
 	if (_parseSync) return _parseSync;
 
 	try {
-		// @ts-expect-error — rolldown is an optional peer (ships with Vite 8).
-		// eslint-disable-next-line import-x/no-unresolved
 		const mod = await import('rolldown/utils');
-		_parseSync = mod.parseSync as ParseSync;
+		_parseSync = mod.parseSync;
 	} catch {
 		const mod = await import('oxc-parser');
-		_parseSync = mod.parseSync as ParseSync;
+		_parseSync = mod.parseSync;
 	}
 
 	return _parseSync;
@@ -64,6 +58,8 @@ export interface Options {
 	outputMode?: 'CSSStyleSheet' | 'CSSResult';
 	/** Enable verbose logging. */
 	log?: boolean;
+	/** **Experimental**. Enable HMR (Hot Module Replacement) for CSS modules. */
+	hmr?: boolean;
 }
 
 // -----------------------------------------------------------------------------
@@ -110,8 +106,41 @@ function maybeCssImportAttributes(code: string): boolean {
 export const defaultOptions: Required<Omit<Options, 'outputMode'>> = {
 	include: ['**/*.{js,jsx,ts,tsx,mjs,mts,cjs,cts}'],
 	exclude: ['**/node_modules/**'],
+	hmr: false,
 	log: false,
 };
+
+// -----------------------------------------------------------------------------
+// HMR — virtual module for DSD (Declarative Shadow DOM) reconciliation
+// -----------------------------------------------------------------------------
+
+const VIRTUAL_HMR_ID = 'virtual:standard-css-modules/hmr';
+const RESOLVED_VIRTUAL_HMR_ID = '\0' + VIRTUAL_HMR_ID;
+
+/**
+ * Client-side runtime that traverses open shadow roots and updates `<style>`
+ * elements whose content contains a matching CSS module marker comment.
+ * This covers the gap between DSD delivery and Lit hydration — once hydrated,
+ * `adoptedStyleSheets` takes precedence and is updated via `replaceSync`.
+ */
+const HMR_RUNTIME_CODE = /* js */ String.raw`
+export function updateDsdStyles(id, newCss) {
+  const marker = "/* __csm:" + id + " */";
+  const walk = (root) => {
+    for (const el of root.querySelectorAll("*")) {
+      const sr = el.shadowRoot;
+      if (!sr) continue;
+      for (const style of sr.querySelectorAll("style")) {
+        if (style.textContent !== null && style.textContent.includes(marker)) {
+          style.textContent = marker + "\n" + newCss;
+        }
+      }
+      walk(sr);
+    }
+  };
+  walk(document);
+}
+`;
 
 // -----------------------------------------------------------------------------
 // Helpers (exported for testing)
@@ -181,24 +210,84 @@ export function findCssImports(
 
 /**
  * Build the replacement source text for a single CSS import.
+ *
+ * When `dev` is provided (dev-server mode):
+ * - A CSS comment marker (`/* __csm:ID *\/`) is prepended to the CSS content
+ *   for DSD `<style>` identification.
+ * - When `dev.injectHmr` is true (client-side only), an
+ *   `import.meta.hot.accept` block is appended so CSS changes are applied
+ *   in-place via `CSSStyleSheet.replaceSync()` — no full page reload.
  */
 export function buildReplacement(
 	localName: string,
 	inlineSpecifier: string,
 	useLit: boolean,
+	dev?: { cssModuleId: string; injectHmr: boolean },
 ): string {
-	if (useLit) {
-		return (
-			`import { unsafeCSS as __unsafeCSS_${localName} } from 'lit';\n` +
+	// In dev, prepend a marker comment so DSD <style> elements can be found.
+	const markerPrefix = dev
+		? JSON.stringify(`/* __csm:${dev.cssModuleId} */\n`)
+		: null;
+	const rawExpr = markerPrefix
+		? `(${markerPrefix} + __raw_${localName})`
+		: `__raw_${localName}`;
+
+	let code: string;
+
+	code = useLit
+		? `import { unsafeCSS as __unsafeCSS_${localName} } from 'lit';\n` +
 			`import __raw_${localName} from ${JSON.stringify(inlineSpecifier)};\n` +
-			`const ${localName} = __unsafeCSS_${localName}(__raw_${localName});`
+			`const ${localName} = __unsafeCSS_${localName}(${rawExpr});`
+		: // -----------------------------------------------------------------------
+			`import __raw_${localName} from ${JSON.stringify(inlineSpecifier)};\n` +
+			`const __sheet_${localName} = new CSSStyleSheet();\n` +
+			`__sheet_${localName}.replaceSync(${rawExpr});\n` +
+			`const ${localName} = __sheet_${localName};`;
+
+	if (dev?.injectHmr) {
+		code += buildHmrBlock(
+			localName,
+			inlineSpecifier,
+			dev.cssModuleId,
+			useLit,
+			markerPrefix!,
 		);
 	}
+
+	return code;
+}
+
+/**
+ * Generate the `import.meta.hot.accept` block for graceful CSS HMR.
+ *
+ * - **CSSStyleSheet** (`type: 'css'`): calls `replaceSync()` on the existing
+ *   sheet instance — every `adoptedStyleSheets` consumer sees the update.
+ * - **CSSResult** (`type: 'css-lit'`): accesses the lazily-cached
+ *   `styleSheet` property and calls `replaceSync()` if a component instance
+ *   has already been created.
+ * - **DSD fallback**: dynamically imports the virtual HMR helper to reconcile
+ *   `<style>` elements inside open shadow roots.
+ */
+function buildHmrBlock(
+	localName: string,
+	inlineSpecifier: string,
+	cssModuleId: string,
+	useLit: boolean,
+	markerPrefix: string,
+): string {
+	const sheetUpdate = useLit
+		? `try { const __s = ${localName}.styleSheet; if (__s) __s.replaceSync(__css); } catch {}`
+		: `__sheet_${localName}.replaceSync(__css);`;
+
 	return (
-		`import __raw_${localName} from ${JSON.stringify(inlineSpecifier)};\n` +
-		`const __sheet_${localName} = new CSSStyleSheet();\n` +
-		`__sheet_${localName}.replaceSync(__raw_${localName});\n` +
-		`const ${localName} = __sheet_${localName};`
+		`\nif (import.meta.hot) {` +
+		`\n  import.meta.hot.accept(${JSON.stringify(inlineSpecifier)}, async (__m) => {` +
+		`\n    if (!__m) return;` +
+		`\n    const __css = ${markerPrefix} + __m.default;` +
+		`\n    ${sheetUpdate}` +
+		`\n    (await import(${JSON.stringify(VIRTUAL_HMR_ID)})).updateDsdStyles(${JSON.stringify(cssModuleId)}, __css);` +
+		`\n  });` +
+		`\n}`
 	);
 }
 
@@ -215,9 +304,25 @@ export function standardCssModules(options?: Options): any {
 	/** CSS file → Set of JS importers (for HMR). */
 	const cssToImporters = new Map<string, Set<string>>();
 
+	let root = '';
+	let isDev = false;
+
 	return {
 		name: 'standard-css-modules',
 		enforce: 'pre',
+
+		configResolved(config) {
+			root = config.root;
+			isDev = config.command === 'serve';
+		},
+
+		resolveId(id) {
+			if (id === VIRTUAL_HMR_ID) return RESOLVED_VIRTUAL_HMR_ID;
+		},
+
+		load(id) {
+			if (id === RESOLVED_VIRTUAL_HMR_ID) return HMR_RUNTIME_CODE;
+		},
 
 		async transform(code, id, transformOptions) {
 			if (!filter(id)) return null;
@@ -259,10 +364,22 @@ export function standardCssModules(options?: Options): any {
 					opts.outputMode === 'CSSResult' ||
 					(opts.outputMode !== 'CSSStyleSheet' && (type === 'css-lit' || ssr));
 
+				// In dev mode (with hmr enabled), inject CSS marker for DSD
+				// reconciliation and HMR accept handler for graceful CSS swapping.
+				const dev =
+					isDev && opts.hmr
+						? {
+								cssModuleId: resolvedCssPath.startsWith(root)
+									? resolvedCssPath.slice(root.length)
+									: resolvedCssPath,
+								injectHmr: !ssr,
+							}
+						: undefined;
+
 				s.overwrite(
 					node.start,
 					node.end,
-					buildReplacement(localName, inlineSpecifier, useLit),
+					buildReplacement(localName, inlineSpecifier, useLit, dev),
 				);
 
 				if (opts.log) {
@@ -281,26 +398,24 @@ export function standardCssModules(options?: Options): any {
 			};
 		},
 
-		handleHotUpdate({ file, server }) {
+		handleHotUpdate({ file }) {
+			if (!opts.hmr) return;
 			if (!CSS_EXTENSIONS_RE.test(file)) return;
 
 			const importers = cssToImporters.get(file);
 			if (!importers?.size) return;
 
-			const modules = [];
-			for (const importerPath of importers) {
-				const mod = server.moduleGraph.getModuleById(importerPath);
-				if (mod) modules.push(mod);
-			}
-
-			if (modules.length > 0 && opts.log) {
+			if (opts.log) {
 				console.info(
-					`[standard-css-modules] HMR: ${file} → invalidating`,
-					modules.map((m) => m.id),
+					`[standard-css-modules] HMR: ${file} → graceful CSS swap via`,
+					[...importers],
 				);
 			}
 
-			return modules.length > 0 ? modules : undefined;
+			// Return undefined — let Vite's default HMR propagation handle it.
+			// The ?inline module is invalidated automatically (shares the same
+			// `file` property), and our import.meta.hot.accept handlers in the
+			// importing JS modules pick up the dep update gracefully.
 		},
-	} as const;
+	} as const satisfies Plugin;
 }

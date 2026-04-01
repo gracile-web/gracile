@@ -1,0 +1,11 @@
+{
+  "name": "@gracile/fixture-hmr-css-modules",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "vite-plugin-standard-css-modules": "workspace:^",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  }
+}
