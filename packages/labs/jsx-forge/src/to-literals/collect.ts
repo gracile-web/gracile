@@ -74,7 +74,7 @@ function handleChild(context: Context, childNode: Ts.Node): void {
 	} else if (isElementLike) {
 		collectLiteralEntitiesInJsx(childNode, context);
 	} else if (isText) {
-		const text = childNode.text.trim();
+		const text = cleanJsxText(childNode.text);
 		if (text.length > 0) appendStaticToCurrentLiteral(text);
 	} else if (isEmptyChildrenExpression) {
 		handleHtmlComment(context, childNode);
@@ -156,4 +156,42 @@ function handleJsxElement(
 		flags.closingTag = tag.closingTag;
 		flags.skipBody = tag.skipBody ?? false;
 	}
+}
+
+/**
+ * Replicate the standard JSX text whitespace cleanup algorithm.
+ *
+ * - Each line's indentation is collapsed, but significant spaces adjacent
+ *   to sibling inline elements are preserved (e.g. `"in "` before `<strong>`).
+ * - Whitespace-only text nodes become empty strings (caller skips them).
+ */
+function cleanJsxText(raw: string): string {
+	const lines = raw.split(/\r\n|\n|\r/);
+
+	let result = '';
+
+	for (let i = 0; i < lines.length; i++) {
+		const isFirstLine = i === 0;
+		const isLastLine = i === lines.length - 1;
+
+		// Normalize tabs → spaces (same as Babel)
+		let line = lines[i]!.replaceAll('\t', ' ');
+
+		// Trim leading whitespace on every line except the first
+		// (the first line's leading content may be glued to a preceding sibling).
+		if (!isFirstLine) line = line.trimStart();
+
+		// Trim trailing whitespace on every line except the last
+		// (the last line's trailing content may be glued to a following sibling).
+		if (!isLastLine) line = line.trimEnd();
+
+		if (line) {
+			// Lines after the first non-empty line are separated by a single space
+			// (replaces the newline that was between them).
+			if (!isFirstLine) result += ' ';
+			result += line;
+		}
+	}
+
+	return result;
 }

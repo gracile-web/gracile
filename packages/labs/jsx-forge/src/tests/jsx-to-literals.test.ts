@@ -70,6 +70,17 @@ describe('Basic elements', () => {
 		const result = body(`const el = <><hr /><br /><img src="#" /></>;`);
 		assert.match(result, /html `<hr><br><img src="#">`/);
 	});
+
+	test('text adjacent to inline elements preserves spaces', () => {
+		const result = body(`const el = <p>
+			Open this page in <strong>multiple tabs</strong> — all state is synced
+			via <code>BroadcastChannel</code> with no server or persistence.
+		</p>;`);
+		assert.match(result, /in <strong>/);
+		assert.match(result, /<\/strong> /);
+		assert.match(result, /synced via <code>/);
+		assert.match(result, /<\/code> with/);
+	});
 });
 
 // ===========================================================================
