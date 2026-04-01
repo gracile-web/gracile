@@ -3,6 +3,8 @@
 /* eslint-disable */
 import * as fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import type { ShikiTransformer } from 'shiki';
+import { codeToHtml, createCssVariablesTheme } from 'shiki';
 import type { BetterErrorData } from './../errors-data.js';
 
 import type { ErrorPayload, ViteDevServer } from 'vite';
@@ -12,8 +14,6 @@ import {
 	createSafeError,
 	renderErrorMarkdown,
 } from './utils.js';
-import { html, render } from '@lit-labs/ssr';
-import { collectResultSync } from '@lit-labs/ssr/lib/render-result.js';
 import type { ErrorWithMetadata } from '../errors.js';
 import { FailedToLoadModuleSSR } from '../errors-data.js';
 
@@ -138,12 +138,12 @@ export interface BetterErrorPayload {
 const ALTERNATIVE_JS_EXTS = ['cjs', 'mjs'];
 const ALTERNATIVE_MD_EXTS = ['mdoc'];
 
-// let _cssVariablesTheme: ReturnType<typeof createCssVariablesTheme>;
-// const cssVariablesTheme = () =>
-// 	_cssVariablesTheme ??
-// 	(_cssVariablesTheme = createCssVariablesTheme({
-// 		variablePrefix: '--astro-code-',
-// 	}));
+let _cssVariablesTheme: ReturnType<typeof createCssVariablesTheme>;
+const cssVariablesTheme = () =>
+	_cssVariablesTheme ??
+	(_cssVariablesTheme = createCssVariablesTheme({
+		variablePrefix: '--gracile-code-',
+	}));
 
 /**
  * Generate a payload for Vite's error overlay
@@ -178,42 +178,25 @@ export async function getViteErrorPayload({
 	// 	highlighterLang = 'md';
 	// }
 
-	// const highlightedCode = err.fullCode
-	// 	? await codeToHtml(err.fullCode, {
-	// 			lang: highlighterLang ?? 'text',
-	// 			theme: cssVariablesTheme(),
-	// 			transformers: [
-	// 				transformerCompactLineOptions(
-	// 					err.loc?.line
-	// 						? [{ line: err.loc.line, classes: ['error-line'] }]
-	// 						: undefined,
-	// 				),
-	// 			],
-	// 		})
-	// 	: undefined;
+	let highlighterLang = err.loc?.file?.split('.').pop();
+	if (ALTERNATIVE_JS_EXTS.includes(highlighterLang ?? '')) {
+		highlighterLang = 'js';
+	} else if (ALTERNATIVE_MD_EXTS.includes(highlighterLang ?? '')) {
+		highlighterLang = 'md';
+	}
 
 	const highlightedCode = err.fullCode
-		? collectResultSync(
-				render(html`
-					<div id="code-content">
-						<pre
-							class="shiki css-variables"
-							style="background-color:var(--betterr-code-background);color:var(--betterr-code-foreground)"
-							tabindex="0"
-						><code>${err.fullCode
-							.split('\n')
-							.map(
-								(l, i) =>
-									html`<span
-											class="line ${err.loc?.line === i + 1
-												? 'error-line'
-												: ''} "
-											>${l}</span
-										>${'\n'}`,
-							)}</code></pre>
-					</div>
-				`),
-			)
+		? await codeToHtml(err.fullCode, {
+				lang: highlighterLang ?? 'text',
+				theme: cssVariablesTheme(),
+				transformers: [
+					transformerCompactLineOptions(
+						err.loc?.line
+							? [{ line: err.loc.line, classes: ['error-line'] }]
+							: undefined,
+					),
+				],
+			})
 		: undefined;
 
 	return {
@@ -240,26 +223,26 @@ export async function getViteErrorPayload({
 	};
 }
 
-// /**
-//  * Transformer for `shiki`'s legacy `lineOptions`, allows to add classes to specific lines
-//  * FROM: https://github.com/shikijs/shiki/blob/4a58472070a9a359a4deafec23bb576a73e24c6a/packages/transformers/src/transformers/compact-line-options.ts
-//  * LICENSE: https://github.com/shikijs/shiki/blob/4a58472070a9a359a4deafec23bb576a73e24c6a/LICENSE
-//  */
-// function transformerCompactLineOptions(
-// 	lineOptions: {
-// 		/**
-// 		 * 1-based line number.
-// 		 */
-// 		line: number;
-// 		classes?: string[];
-// 	}[] = [],
-// ): ShikiTransformer {
-// 	return {
-// 		name: '@shikijs/transformers:compact-line-options',
-// 		line(node, line) {
-// 			const lineOption = lineOptions.find((o) => o.line === line);
-// 			if (lineOption?.classes) this.addClassToHast(node, lineOption.classes);
-// 			return node;
-// 		},
-// 	};
-// }
+/**
+ * Transformer for `shiki`'s legacy `lineOptions`, allows to add classes to specific lines
+ * FROM: https://github.com/shikijs/shiki/blob/4a58472070a9a359a4deafec23bb576a73e24c6a/packages/transformers/src/transformers/compact-line-options.ts
+ * LICENSE: https://github.com/shikijs/shiki/blob/4a58472070a9a359a4deafec23bb576a73e24c6a/LICENSE
+ */
+function transformerCompactLineOptions(
+	lineOptions: {
+		/**
+		 * 1-based line number.
+		 */
+		line: number;
+		classes?: string[];
+	}[] = [],
+): ShikiTransformer {
+	return {
+		name: '@shikijs/transformers:compact-line-options',
+		line(node, line) {
+			const lineOption = lineOptions.find((o) => o.line === line);
+			if (lineOption?.classes) this.addClassToHast(node, lineOption.classes);
+			return node;
+		},
+	};
+}

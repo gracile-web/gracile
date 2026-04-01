@@ -46,10 +46,8 @@
   },
   "dependencies": {
     "@gracile/internal-utils": "workspace:^",
-    "@lit-labs/ssr": "catalog:",
-    "@lit-labs/ssr-client": "catalog:",
-    "lit": "catalog:",
-    "picocolors": "catalog:"
+    "picocolors": "catalog:",
+    "shiki": "catalog:"
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
