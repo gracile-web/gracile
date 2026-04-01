@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "./node_modules/@gracile/server/dist/document.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "RouteTemplateOutlet",
+          "cssParts": [],
+          "slots": [
+            {
+              "description": "The page content.",
+              "name": ""
+            }
+          ],
+          "members": [],
+          "superclass": {},
+          "summary": "Base document outlet for route page injection.",
+          "documentation": "",
+          "dependencies": [],
+          "tagName": "route-template-outlet",
+          "customElement": true,
+          "modulePath": "./node_modules/@gracile/server/dist/document.js",
+          "definitionPath": "./node_modules/@gracile/server/dist/document.js"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "RouteTemplateOutlet",
+            "module": "./node_modules/@gracile/server/dist/document.js"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "route-template-outlet",
+          "declaration": {
+            "name": "RouteTemplateOutlet",
+            "module": "./node_modules/@gracile/server/dist/document.js"
+          }
+        }
+      ]
+    }
+  ],
+  "package": {
+    "name": "@gracile/gracile",
+    "description": "A thin, full-stack, web framework",
+    "version": "0.9.5",
+    "author": "Julian Cataldo",
+    "homepage": "https://gracile.js.org",
+    "license": "ISC"
+  }
+}

@@ -38,6 +38,7 @@
     "./tsconfigs/*",
     "!/dist/**/*.test.*"
   ],
+  "customElements": "custom-elements.json",
   "scripts": {
     "// pretest": "node --run build",
     "build": "tsc",
