@@ -8,6 +8,9 @@
  * @internal
  */
 
+import { getPluginContext } from '@gracile/internal-utils/plugin-context';
+import type { ResolvedConfig, UserConfig } from 'vite';
+
 import type { RenderedRouteDefinition } from '../routes/render.js';
 import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
@@ -33,6 +36,23 @@ export interface PluginSharedState {
 
 	/** The output mode: 'static' or 'server'. */
 	outputMode: 'static' | 'server';
+}
+
+/**
+ * Merge previously-registered element renderers from the Gracile config into
+ * the given Vite config's plugin context, then write the unified
+ * `litSsrRenderInfo` back so all consumers share the same reference.
+ */
+export function syncLitSsrRenderers(
+	gracileConfig: GracileConfig,
+	viteConfig: UserConfig | ResolvedConfig,
+): void {
+	const context = getPluginContext(viteConfig);
+	const existing = gracileConfig.litSsr?.renderInfo?.elementRenderers ?? [];
+	if (existing.length > 0)
+		context.litSsrRenderInfo.elementRenderers.push(...existing);
+	gracileConfig.litSsr ??= {};
+	gracileConfig.litSsr.renderInfo = context.litSsrRenderInfo;
 }
 
 /**

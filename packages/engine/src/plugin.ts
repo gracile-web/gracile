@@ -9,7 +9,10 @@ import type { GracileConfig } from './user-config.js';
 import { htmlRoutesLoader } from './vite/html-routes.js';
 import { hmrSsrReload } from './vite/hmr.js';
 import { virtualRoutesClient, virtualRoutes } from './vite/virtual-routes.js';
-import { createPluginSharedState } from './vite/plugin-shared-state.js';
+import {
+	createPluginSharedState,
+	syncLitSsrRenderers,
+} from './vite/plugin-shared-state.js';
 import { gracileServePlugin } from './vite/plugin-serve.js';
 import { gracileClientBuildPlugin } from './vite/plugin-client-build.js';
 import { gracileBuildEnvironmentPlugin } from './vite/plugin-build-environment.js';
@@ -61,18 +64,12 @@ export const gracile = (config?: GracileConfig): any[] => {
 		gracileConfig: state.gracileConfig,
 	});
 
-	let sharedPluginContext: PluginContext | undefined;
-
 	return [
 		// MARK: 1. Plugin context setup
 		{
 			name: 'vite-plugin-gracile-context',
 			config(viteConfig) {
-				sharedPluginContext = getPluginContext(viteConfig);
-
-				state.gracileConfig.litSsr ??= { renderInfo: {} };
-				state.gracileConfig.litSsr.renderInfo =
-					sharedPluginContext.litSsrRenderInfo;
+				syncLitSsrRenderers(state.gracileConfig, viteConfig);
 			},
 		} as const,
 

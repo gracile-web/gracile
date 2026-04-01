@@ -12,11 +12,13 @@
  * @internal
  */
 
-import { getPluginContext } from '@gracile/internal-utils/plugin-context';
 import { createServer, type PluginOption } from 'vite';
 
 import { buildRoutes } from './build-routes.js';
-import type { PluginSharedState } from './plugin-shared-state.js';
+import {
+	syncLitSsrRenderers,
+	type PluginSharedState,
+} from './plugin-shared-state.js';
 
 export function gracileClientBuildPlugin({
 	state,
@@ -43,11 +45,12 @@ export function gracileClientBuildPlugin({
 				plugins: [virtualRoutesForClient],
 			});
 
-			// NOTE: Important. Get the dev. server elements renderers.
-			state.gracileConfig.litSsr ??= {};
-			state.gracileConfig.litSsr.renderInfo = getPluginContext(
+			// Merge previously-registered renderers (from user config and
+			// add-on plugins) into the temp server's fresh context.
+			syncLitSsrRenderers(
+				state.gracileConfig,
 				viteServerForClientHtmlBuild.config,
-			)?.litSsrRenderInfo;
+			);
 
 			const htmlPages = await buildRoutes({
 				viteServerForBuild: viteServerForClientHtmlBuild,
