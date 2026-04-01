@@ -1,5 +1,5 @@
-import type { AdoptGlobalStyles } from './dist/global-css-provider.js';
-import type { AdoptSharedStyle } from './dist/shared-style-provider.js';
+import type { AdoptGlobalStyles } from './dist/global/provider.js';
+import type { AdoptSharedStyle } from './dist/shared/shared-style-provider.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

@@ -43,14 +43,14 @@ export const SHARED_STYLE_CE_SCRIPT = /* js */ `{
  * @example
  *
  * ```ts
- * import { sharedStyleProvider } from '@gracile-labs/css-helpers/shared-style-provider';
+ * import { SharedStyleProvider } from '@gracile-labs/css-helpers/shared-style-provider';
  * import { html } from '@gracile/gracile/server-html';
  *
  * export const document = () => html`
  *   <!doctype html>
  *   <html lang="en">
  *     <head>
- *       ${sharedStyleProvider()}
+ *       ${SharedStyleProvider()}
  *     </head>
  *     <body>
  *       <route-template-outlet></route-template-outlet>
@@ -59,11 +59,12 @@ export const SHARED_STYLE_CE_SCRIPT = /* js */ `{
  * `;
  * ```
  */
-export const sharedStyleProvider = (): ServerRenderedTemplate =>
+export const SharedStyleProvider = (): ServerRenderedTemplate =>
 	html`${unsafeHTML(/* html */ `
 <script>
   ${SHARED_STYLE_CE_SCRIPT}
 </script>
 `)}`;
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export declare abstract class AdoptSharedStyle {}

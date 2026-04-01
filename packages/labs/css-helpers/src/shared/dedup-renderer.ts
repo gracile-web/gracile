@@ -32,7 +32,7 @@ const STYLE_ID_PREFIX = '__lit-s-';
  *   `<adopt-shared-style style-id="__lit-s-{tag}">` (adopts from cache).
  *
  * Place **before** the default `LitElementRenderer` in `elementRenderers`.
- * Pair with `sharedStyleProvider()` in the document `<head>`.
+ * Pair with `SharedStyleProvider()` in the document `<head>`.
  *
  * @example
  *

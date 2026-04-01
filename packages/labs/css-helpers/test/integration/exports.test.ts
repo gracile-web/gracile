@@ -14,7 +14,7 @@ import { noop } from '@gracile/internal-test-utils/noop';
 
 describe('@gracile-labs/css-helpers exports', () => {
 	test('global styles provider', () => {
-		assert.equal(typeof cssHelpersGlobalCss.globalStylesProvider, 'function');
+		assert.equal(typeof cssHelpersGlobalCss.GlobalStylesProvider, 'function');
 
 		const globalStyles =
 			null as unknown as HTMLElementTagNameMap['adopt-global-styles'];
@@ -24,7 +24,7 @@ describe('@gracile-labs/css-helpers exports', () => {
 	});
 
 	test('shared style provider', () => {
-		assert.equal(typeof cssHelpersSharedStyle.sharedStyleProvider, 'function');
+		assert.equal(typeof cssHelpersSharedStyle.SharedStyleProvider, 'function');
 
 		const sharedStyle =
 			null as unknown as HTMLElementTagNameMap['adopt-shared-style'];

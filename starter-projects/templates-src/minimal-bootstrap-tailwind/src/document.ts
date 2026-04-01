@@ -1,5 +1,5 @@
 import { html } from '@gracile/gracile/server-html';
-import { globalStylesProvider } from '@gracile-labs/css-helpers/global-css-provider';
+import { GlobalStylesProvider } from '@gracile-labs/css-helpers/global-css-provider';
 
 export const document = (props: { url: URL; title?: string | null }) => html`
 	<!doctype html>
@@ -24,7 +24,7 @@ export const document = (props: { url: URL; title?: string | null }) => html`
 			<link type="image/svg+xml" href="/favicon.svg" rel="icon" />
 
 			<!-- Use with '<adopt-global-styles>' in Custom Elements shadow hosts. -->
-			${globalStylesProvider()}
+			${GlobalStylesProvider()}
 		</head>
 
 		<body>

@@ -3,17 +3,44 @@ import { pageAssetsCustomLocation } from '@gracile/server/document';
 // * It will collect all declared `<link>` **before** this helper, in the template.
 // * This is useful if you want to exclude
 import { html, type ServerRenderedTemplate } from '@lit-labs/ssr';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 // From: https://eisenbergeffect.medium.com/using-global-styles-in-shadow-dom-5b80e802e89d
+
+export const GLOBAL_STYLES_CE_SCRIPT = /* js */ `{
+	let globalSheets = null;
+	function getGlobalStyleSheets() {
+		if (globalSheets === null)
+			globalSheets = [...document.styleSheets].map((x) => {
+				const sheet = new CSSStyleSheet();
+				sheet.replaceSync(
+					[...x.cssRules].map((rule) => rule.cssText).join(' '),
+				);
+				return sheet;
+			});
+		return globalSheets;
+	}
+	class AdoptGlobalStyles extends HTMLElement {
+		connectedCallback() {
+			this.getRootNode().adoptedStyleSheets.push(...getGlobalStyleSheets());
+			this.remove();
+		}
+	}
+	customElements.define('adopt-global-styles', AdoptGlobalStyles);
+}`;
+
 /**
  * Will declare the `<adopt-global-styles>` Custom Element eagerly.
  *
  * Use it in conjunction with `<adopt-global-styles>` in your Custom Elements
  * Shadow roots.
  *
+ * Alternatively, use the `globalStylesAdopter()` Vite plugin from
+ * `@gracile-labs/css-helpers/global/vite` for automatic injection.
+ *
  * @example
  * ```js
- * import { globalStylesProvider } from '@gracile/gracile/document';
+ * import { GlobalStylesProvider } from '@gracile-labs/css-helpers/global/provider';
  * import { html } from '@gracile/gracile/server-html';
  *
  * export const document = () => html`
@@ -23,7 +50,7 @@ import { html, type ServerRenderedTemplate } from '@lit-labs/ssr';
  * 			<title>My page</title>
  * 			<!-- ... -->
  *
- * 			${globalStylesProvider()}
+ * 			${GlobalStylesProvider()}
  * 		</head>
  *
  * 		<body>
@@ -33,32 +60,13 @@ import { html, type ServerRenderedTemplate } from '@lit-labs/ssr';
  * `;
  * ```
  */
-export const globalStylesProvider = (): ServerRenderedTemplate => html`
+export const GlobalStylesProvider = (): ServerRenderedTemplate => html`
 	${pageAssetsCustomLocation() /* BEFORE! So everything is collected */}
-
-	<script>
-		{
-			let globalSheets = null;
-			function getGlobalStyleSheets() {
-				if (globalSheets === null)
-					globalSheets = [...document.styleSheets].map((x) => {
-						const sheet = new CSSStyleSheet();
-						sheet.replaceSync(
-							[...x.cssRules].map((rule) => rule.cssText).join(' '),
-						);
-						return sheet;
-					});
-				return globalSheets;
-			}
-			class AdoptGlobalStyles extends HTMLElement {
-				connectedCallback() {
-					this.getRootNode().adoptedStyleSheets.push(...getGlobalStyleSheets());
-					this.remove();
-				}
-			}
-			customElements.define('adopt-global-styles', AdoptGlobalStyles);
-		}
-	</script>
+	${unsafeHTML(/* html */ `
+<script>
+  ${GLOBAL_STYLES_CE_SCRIPT}
+</script>
+`)}
 `;
 
 /**
@@ -66,7 +74,7 @@ export const globalStylesProvider = (): ServerRenderedTemplate => html`
  * so it shares the same stylesheet as the ones used globally by
  * the document, in the Light DOM.
  *
- * You have to use it with `globalStylesProvider`, in your document head,
+ * You have to use it with `GlobalStylesProvider`, in your document head,
  * so that the helper is defined inline, which prevents FOUC.
  *
  * @example

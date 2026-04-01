@@ -32,7 +32,9 @@ test.describe('DSD Style Deduplication', () => {
 
 		// No plain <style> without id inside subsequent my-card shadow roots
 		// Split by template shadowroot boundaries and check
-		const templateBlocks = html.split(/<template shadowrootmode="open">/g);
+		const templateBlocks = html.split(
+			/<template\s[^>]*shadowrootmode="open"[^>]*>/g,
+		);
 		// First block is before any shadow root — skip.
 		// Blocks 2+ are the shadow roots of the 3 <my-card> instances.
 		// Block index 1 = first my-card (has <style id=...>)
