@@ -5,7 +5,7 @@ import {
 import type { Plugin } from 'vite';
 
 import { DedupLitElementRenderer } from './dedup-renderer.js';
-import { SHARED_STYLE_CE_SCRIPT } from './shared-style-provider.js';
+import { SHARED_STYLE_CE_SCRIPT } from './provider.js';
 
 /**
  * Gracile Vite plugin for DSD style deduplication.
