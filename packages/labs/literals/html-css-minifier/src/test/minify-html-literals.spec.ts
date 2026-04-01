@@ -28,8 +28,8 @@ class MagicStringLike {
 	generateMap(options?: Partial<SourceMapOptions>): SourceMap {
 		return {
 			version: 3,
-			file: (options && options.file) || null,
-			sources: [(options && options.source) || null],
+			file: (options && options.file) || 'file.js.map',
+			sources: [(options && options.source) || 'file.js'],
 			sourcesContent: [],
 			names: [],
 			mappings: '',

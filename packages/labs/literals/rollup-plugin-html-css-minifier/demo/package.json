@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@gracile/gracile": "workspace:^",
-    "@hono/node-server": "^1.19.10",
+    "@hono/node-server": "catalog:",
     "@literals/rollup-plugin-html-css-minifier": "workspace:^",
-    "hono": "^4.12.7",
-    "lit": "^3.2.1",
+    "hono": "catalog:",
+    "lit": "catalog:",
     "vite": "catalog:"
   },
   "devDependencies": {

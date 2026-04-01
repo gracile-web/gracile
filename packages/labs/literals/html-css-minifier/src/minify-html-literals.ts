@@ -122,18 +122,15 @@ export interface MagicStringLike {
 
 /**
  * A v3 SourceMap.
- *
- * <code>magic-string> incorrectly declares the SourceMap type with a version
- * string instead of a number, so <code>minify-html-literals</code> declares
- * its own type.
  */
 export interface SourceMap {
-	version: number | string;
-	file: string | null;
-	sources: Array<string | null>;
-	sourcesContent: Array<string | null>;
+	version: number;
+	file: string;
+	sources: string[];
+	sourcesContent?: string[];
 	names: string[];
 	mappings: string;
+
 	toString(): string;
 	toUrl(): string;
 }
@@ -270,8 +267,6 @@ export async function minifyHTMLLiterals(
 	};
 
 	if (!options.MagicString) {
-		// FIXME:
-		// @ts-expect-error Typing mismatch
 		options.MagicString = MagicString;
 	}
 
@@ -307,8 +302,6 @@ export async function minifyHTMLLiterals(
 		validate = options.validate || defaultValidation;
 	}
 
-	// FIXME:
-	// @ts-expect-error Typing mismatch
 	const ms = new options.MagicString(source);
 	await Promise.all(
 		templates.map(async (template) => {
