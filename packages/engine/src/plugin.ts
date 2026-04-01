@@ -1,8 +1,4 @@
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
-import {
-	getPluginContext,
-	type PluginContext,
-} from '@gracile/internal-utils/plugin-context';
 import type { PluginOption } from 'vite';
 
 import type { GracileConfig } from './user-config.js';

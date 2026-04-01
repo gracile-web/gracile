@@ -2,10 +2,7 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
-import { URLPattern as URLPatternPolyfill } from 'urlpattern-polyfill/urlpattern';
-
-const URLPattern =
-	URLPatternPolyfill as unknown as typeof globalThis.URLPattern;
+import '../init.js';
 
 import {
 	RouteModule,

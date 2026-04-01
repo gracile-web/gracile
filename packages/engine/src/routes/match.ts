@@ -1,4 +1,5 @@
 import type { ViteDevServer } from 'vite';
+import { URLPatternList } from 'url-pattern-list';
 
 import { loadForeignRouteObject } from './load-module.js';
 import type * as R from './route.js';
@@ -14,15 +15,43 @@ type MatchedRoute = {
 
 export type TrailingSlashRedirect = { redirect: string };
 
+// In production the manifest is static, so the cached list is reused on every
+// request.  In dev `collectRoutes` clears and repopulates the same Map, so we
+// store a snapshot of its values to detect when a rebuild is needed.
+const patternListCache = new WeakMap<
+	R.RoutesManifest,
+	{ routes: R.Route[]; list: URLPatternList<R.Route> }
+>();
+
+function getPatternList(routes: R.RoutesManifest): URLPatternList<R.Route> {
+	const currentRoutes = [...routes.values()];
+	const cached = patternListCache.get(routes);
+
+	if (cached && cached.routes.length === currentRoutes.length) {
+		let same = true;
+		for (const [index, currentRoute] of currentRoutes.entries()) {
+			if (cached.routes[index] !== currentRoute) {
+				same = false;
+				break;
+			}
+		}
+		if (same) return cached.list;
+	}
+
+	const list = new URLPatternList<R.Route>();
+	for (const route of currentRoutes) {
+		list.addPattern(route.pattern, route);
+	}
+	patternListCache.set(routes, { routes: currentRoutes, list });
+	return list;
+}
+
 /** @internal Exported for unit testing. */
 export function matchRouteFromUrl(
 	url: string,
 	routes: R.RoutesManifest,
 	trailingSlash: 'always' | 'never' | 'ignore' = 'ignore',
 ): MatchedRoute | TrailingSlashRedirect | null {
-	let match: URLPatternResult | undefined;
-	let foundRoute: R.Route | undefined;
-
 	const rawPathname = new URL(url).pathname;
 
 	// Handle redirect cases for 'always' and 'never' before matching.
@@ -43,19 +72,13 @@ export function matchRouteFromUrl(
 			? rawPathname + '/'
 			: rawPathname;
 
-	for (const [, route] of routes) {
-		if (match) break;
+	const patternList = getPatternList(routes);
+	const listMatch = patternList.match(`http://gracile${pathname}`);
 
-		const matchResult =
-			route.pattern.exec(`http://gracile${pathname}`) || undefined;
+	if (!listMatch) return null;
 
-		if (matchResult) {
-			match = matchResult;
-			foundRoute = route;
-		}
-	}
-
-	if (!match || !foundRoute) return null;
+	const match = listMatch.result;
+	const foundRoute = listMatch.value;
 
 	const parameters: Parameters_ = Object.freeze({ ...match.pathname.groups });
 
