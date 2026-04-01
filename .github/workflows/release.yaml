@@ -135,17 +135,6 @@ jobs:
         shell: bash
         run: node --run build:libs
 
-      - name: Generate Typedoc
-        shell: bash
-        run: node --run docs:generate
-
-      - name: Build docs website
-        shell: bash
-        env:
-          VITE_DOCS_IS_NEXT:
-            ${{ github.ref == 'refs/heads/next' && 'true' || 'false' }}
-        run: node --run build:docs
-
       # MARK: Lint/Checks post-build
 
       - name: Cache ESLint results
@@ -185,6 +174,17 @@ jobs:
       - name: Tests — E2E
         shell: bash
         run: node --run test:e2e
+
+      - name: Generate Typedoc
+        shell: bash
+        run: node --run docs:generate
+
+      - name: Build docs website
+        shell: bash
+        env:
+          VITE_DOCS_IS_NEXT:
+            ${{ github.ref == 'refs/heads/next' && 'true' || 'false' }}
+        run: node --run build:docs
 
       # MARK: Starter Projects — Smoke Test (pre-publish, workspace-linked)
 
