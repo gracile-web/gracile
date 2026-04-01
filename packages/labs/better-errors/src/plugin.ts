@@ -27,6 +27,6 @@ export function betterErrors(): any[] {
 				// Replace the Vite overlay with ours
 				return patchOverlay(code);
 			},
-		} satisfies PluginOption,
+		} as const satisfies PluginOption,
 	];
 }

@@ -686,7 +686,10 @@ class ErrorOverlay extends HTMLElement {
 		const docslink = this.root.querySelector<HTMLElement>('#message');
 		if (docslink && err.docslink) {
 			docslink.append(
-				this.createLink(`See Docs Reference${openNewWindowIcon}`, err.docslink),
+				ErrorOverlay.createLink(
+					`See Docs Reference${openNewWindowIcon}`,
+					err.docslink,
+				),
 			);
 		}
 
@@ -716,7 +719,7 @@ class ErrorOverlay extends HTMLElement {
 					codeFile.title = absoluteFileLocation;
 				}
 
-				const editorLink = this.createLink(
+				const editorLink = ErrorOverlay.createLink(
 					`Open in editor${openNewWindowIcon}`,
 					// eslint-disable-next-line unicorn/no-useless-undefined
 					undefined,
@@ -812,7 +815,7 @@ class ErrorOverlay extends HTMLElement {
 		}
 	}
 
-	createLink(text: string, href: string | undefined): HTMLDivElement {
+	static createLink(text: string, href: string | undefined): HTMLDivElement {
 		const linkContainer = document.createElement('div');
 		const linkElement = href
 			? document.createElement('a')

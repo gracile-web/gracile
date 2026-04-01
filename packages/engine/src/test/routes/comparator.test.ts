@@ -2,6 +2,8 @@
 import assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
 
+import '../init.js';
+
 import {
 	prepareSortableRoutes,
 	routeComparator,

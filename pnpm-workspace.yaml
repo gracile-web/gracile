@@ -86,10 +86,6 @@ catalog:
   vite-plugin-solid: ^2.11.6
   # utilities
   clsx: ^2.1.1
-  # testing
-  chai: ^5.1.1
-  '@types/chai': ^4.3.16
-  '@types/sinon': ^5.0.1
   # vite ecosystem plugins
   '@preact/preset-vite': ^2.10.1
   '@sveltejs/vite-plugin-svelte': ^5.0.3

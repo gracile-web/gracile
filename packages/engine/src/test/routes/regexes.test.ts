@@ -4,6 +4,8 @@ import { describe, test } from 'node:test';
 
 import { REGEXES } from '../../routes/load-module.js';
 
+import '../init.js';
+
 describe('REGEXES.param — [name] dynamic segments', () => {
 	test('matches [foo]', () => {
 		assert.ok(REGEXES.param.test('[foo]'));
