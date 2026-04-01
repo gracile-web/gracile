@@ -182,6 +182,10 @@ jobs:
         shell: bash
         run: node --run test:integration
 
+      - name: Tests — E2E
+        shell: bash
+        run: node --run test:e2e
+
       # MARK: Starter Projects — Smoke Test (pre-publish, workspace-linked)
 
       - name: 'Regenerate starter-project templates'

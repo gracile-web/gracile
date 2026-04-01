@@ -32,6 +32,8 @@ node --run test:unit
 
 node --run test:integration
 
+node --run test:e2e
+
 # MARK: Starter projects
 
 pnpm --prefix starter-projects run generate

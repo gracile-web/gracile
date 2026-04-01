@@ -44,8 +44,10 @@ packages:
   - ./packages/engine/__fixtures__/server-express
   - ./packages/engine/__fixtures__/ce-tracker
   - ./packages/labs/client-router/__fixtures__/client-routing-basic
+  - ./packages/labs/css-helpers/__fixtures__/css-dedup-basic
   - ./packages/labs/hmr/__fixtures__/hmr-basic-lit
   - ./packages/labs/islands/__fixtures__/static-site-islands
+  - ./packages/labs/vite-plugin-standard-css-modules/__fixtures__/hmr-css-modules
 
   # Demos
   - ./packages/labs/vite-plugin-standard-css-modules/demo
@@ -97,5 +99,12 @@ catalog:
   'sass': '^1.80.6'
   'signal-polyfill': '^0.2.2'
   magic-string: '^0.30.21'
+  shiki: '^3.23.0'
+  rolldown: v1.0.0-rc.12
+  lightningcss: '^1.32.0'
+  oxc-parser: '^0.121.0'
+  oxc-transform: '^0.121.0'
+  '@oxc-project/types': '^0.121.0'
+  html-minifier-next: '^5.2.1'
   # reminder: some deps are intentionally not auto-cataloged yet (mixed/special ranges); align versions first
   # sinon, @lit-labs/signals, sitemap, Babel packages, rollup peer ranges, etc.
