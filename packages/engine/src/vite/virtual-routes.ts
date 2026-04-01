@@ -5,6 +5,7 @@ import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
+import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
 
 /**
  * Server-side routes virtual module (`gracile:routes`).
@@ -27,7 +28,7 @@ export function virtualRoutes({
 			apply: 'build',
 
 			applyToEnvironment(environment) {
-				return environment.name === 'ssr';
+				return environment.name === GRACILE_ENVIRONMENT_NAMES.ssr;
 			},
 
 			resolveId(id) {

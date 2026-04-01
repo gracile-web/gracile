@@ -1,5 +1,7 @@
 import type { PluginOption, EnvironmentModuleNode } from 'vite';
 
+import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
+
 // Matches route entry files in `src/routes/`, excluding client-only siblings
 // (e.g. `(home).client.ts`). These are isomorphic modules that live in both the
 // SSR and client module graphs when the client router is active.
@@ -15,7 +17,7 @@ export function hmrSsrReload(): PluginOption {
 			order: 'post',
 
 			handler({ modules, server, timestamp }) {
-				if (this.environment.name !== 'ssr') return;
+				if (this.environment.name !== GRACILE_ENVIRONMENT_NAMES.ssr) return;
 
 				let needsReload = false;
 

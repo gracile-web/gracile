@@ -22,6 +22,7 @@ import { createFilter, type PluginOption } from 'vite';
 import { REGEX_TAG_LINK, REGEX_TAG_SCRIPT } from '../render/route-template.js';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
+import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
 
 function stripPremises(input: string): string {
 	return input
@@ -42,7 +43,7 @@ export function gracileHtmlRoutesBuildPlugins({
 			enforce: 'pre',
 
 			applyToEnvironment(environment) {
-				return environment.name !== 'ssr';
+				return environment.name !== GRACILE_ENVIRONMENT_NAMES.ssr;
 			},
 
 			resolveId(id) {
@@ -95,7 +96,7 @@ export function gracileHtmlRoutesBuildPlugins({
 			enforce: 'post',
 
 			applyToEnvironment(environment) {
-				return environment.name !== 'ssr';
+				return environment.name !== GRACILE_ENVIRONMENT_NAMES.ssr;
 			},
 
 			buildStart() {

@@ -19,6 +19,7 @@ import { join } from 'node:path';
 import type { PluginOption, ViteBuilder } from 'vite';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
+import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
 
 export function gracileBuildEnvironmentPlugin({
 	state,
@@ -39,7 +40,7 @@ export function gracileBuildEnvironmentPlugin({
 		},
 
 		configEnvironment(name, config) {
-			if (name === 'client') {
+			if (name === GRACILE_ENVIRONMENT_NAMES.client) {
 				if (!state.clientBuildInputList) return null;
 
 				return {
@@ -49,13 +50,13 @@ export function gracileBuildEnvironmentPlugin({
 						},
 						outDir: join(
 							config.build?.outDir || 'dist',
-							isServerMode ? 'client' : '',
+							isServerMode ? GRACILE_ENVIRONMENT_NAMES.client : '',
 						),
 					},
 				};
 			}
 
-			if (name === 'ssr' && isServerMode) {
+			if (name === GRACILE_ENVIRONMENT_NAMES.ssr && isServerMode) {
 				return {
 					build: {
 						outDir: 'dist/server',
@@ -94,7 +95,7 @@ export function gracileBuildEnvironmentPlugin({
 			await builder.build(client);
 
 			if (isServerMode) {
-				const ssr = builder.environments['ssr'];
+				const ssr = builder.environments[GRACILE_ENVIRONMENT_NAMES.ssr];
 				if (!ssr) throw new Error('Missing ssr build environment.');
 				await builder.build(ssr);
 			}

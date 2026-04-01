@@ -18,6 +18,7 @@ import { rename, rm } from 'node:fs/promises';
 import type { PluginOption } from 'vite';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
+import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
 
 // ── Client asset collector ───────────────────────────────────────────
 
@@ -34,7 +35,7 @@ export function gracileCollectClientAssetsPlugin({
 		name: 'vite-plugin-gracile-collect-client-assets-for-server',
 
 		applyToEnvironment(environment) {
-			return environment.name !== 'ssr';
+			return environment.name !== GRACILE_ENVIRONMENT_NAMES.ssr;
 		},
 
 		writeBundle(_, bundle) {
@@ -66,7 +67,7 @@ export function gracileEntrypointPlugin({
 		apply: 'build',
 
 		applyToEnvironment(environment) {
-			return environment.name === 'ssr';
+			return environment.name === GRACILE_ENVIRONMENT_NAMES.ssr;
 		},
 
 		resolveId(id) {
@@ -119,7 +120,7 @@ export function gracileMoveServerAssetsPlugin({
 		apply: 'build',
 
 		applyToEnvironment(environment) {
-			return environment.name === 'ssr';
+			return environment.name === GRACILE_ENVIRONMENT_NAMES.ssr;
 		},
 
 		async writeBundle(_, bundle) {

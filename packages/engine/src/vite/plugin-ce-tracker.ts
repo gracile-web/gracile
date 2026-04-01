@@ -23,6 +23,8 @@ import {
 	hasCeRegistrations,
 } from '../dev/ssr-ce-tracker.js';
 
+import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
+
 // ── Helpers ─────────────────────────────────────────────────────────
 
 /** Recursively collect all transitive imports of a module. */
@@ -79,7 +81,7 @@ export function gracileCETrackerPlugin(): Plugin {
 			order: 'pre',
 
 			handler({ modules, timestamp }) {
-				if (this.environment.name !== 'ssr') return;
+				if (this.environment.name !== GRACILE_ENVIRONMENT_NAMES.ssr) return;
 
 				const invalidated = new Set<EnvironmentModuleNode>();
 
