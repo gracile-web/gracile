@@ -1,0 +1,19 @@
+diff --git a/dist/renderer/utils.js b/dist/renderer/utils.js
+index dc592980df14df1f275f6e20f18c08a1bbaac2d3..f95f54b001838e60b13c2eeb14995c0cf9255877 100644
+--- a/dist/renderer/utils.js
++++ b/dist/renderer/utils.js
+@@ -27,6 +27,13 @@ export function copyMediaFiles(project, outputDirectory) {
+     const media = path.join(outputDirectory, '_media');
+     const toCopy = project.files.getNameToAbsoluteMap();
+     for (const [fileName, absolute] of toCopy.entries()) {
+-        copySync(absolute, path.join(media, fileName));
++        try {
++            const stat = fs.statSync(absolute);
++            if (stat.isFile()) {
++                copySync(absolute, path.join(media, fileName));
++            }
++        } catch {
++            // skip files that cannot be stat'd
++        }
+     }
+ }
