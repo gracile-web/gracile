@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import test from 'node:test';
 
-import { renderLitTemplate } from '@gracile/gracile/server-html';
+import { renderLitTemplate } from '@gracile/gracile/render-lit-template';
 
 import { myServerTemplate1 } from '../../src/features/my-server-template-1.js';
 import { myTemplate1 } from '../../src/features/my-template-1.js';
