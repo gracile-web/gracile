@@ -210,8 +210,7 @@ const config = [
 			// 'packages/labs/**',
 		],
 		rules: {
-
-						'@typescript-eslint/explicit-function-return-type': [
+			'@typescript-eslint/explicit-function-return-type': [
 				'error',
 				{
 					allowExpressions: true,
