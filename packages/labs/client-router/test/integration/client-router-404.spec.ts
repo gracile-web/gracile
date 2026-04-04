@@ -116,13 +116,16 @@ test.describe('Client Router — 404 Route', () => {
 
 		await expect(page).toHaveTitle('404: Not found');
 		await expect(page.locator('h1')).toHaveText('404: Not found');
-		await expect(page.locator('pre')).toHaveText('/missing-without-client-404/');
+		await expect(page.locator('pre')).toHaveText(
+			'/missing-without-client-404/',
+		);
 		expect(fullReload).toBe(true);
 		expect(
 			pageErrors.find(
 				(error) =>
-					error.message.includes('Failed to fetch dynamically imported module') ||
-					error.message.includes('No route or fallback matched'),
+					error.message.includes(
+						'Failed to fetch dynamically imported module',
+					) || error.message.includes('No route or fallback matched'),
 			),
 		).toBeUndefined();
 	});

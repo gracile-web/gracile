@@ -1,3 +1,4 @@
+// TODO: When other transformers land, extract and share TS sidecar builder.
 import * as ts from 'typescript';
 import { createJsxToLiteralsTransformer } from 'jsx-forge/to-literals';
 import { PRESETS } from 'jsx-forge/presets/lit';
@@ -150,9 +151,11 @@ export function gracileJsxTs(options?: VitePluginOptions): Plugin[] {
 
 				let sourceFile = program.getSourceFile(id);
 
-				if (sourceFile && sourceFile.text !== code) {
-					// Source is stale (HMR / upstream Vite plugin changed it).
-					// Patch the host temporarily and do a cheap incremental rebuild.
+				if (!sourceFile || sourceFile.text !== code) {
+					// Either:
+					// - File is unknown (new .tsx added, or .ts renamed to .tsx)
+					// - Source is stale (HMR / upstream Vite plugin changed it)
+					// Patch the host and do a cheap incremental rebuild.
 					const fresh = ts.createSourceFile(
 						id,
 						code,
@@ -172,6 +175,11 @@ export function gracileJsxTs(options?: VitePluginOptions): Plugin[] {
 							...rest,
 						);
 					};
+
+					// Ensure the file is in rootNames so the program includes it.
+					if (!parsedCommandLine.fileNames.includes(id)) {
+						parsedCommandLine.fileNames.push(id);
+					}
 
 					// Stale module resolution cache could serve wrong results
 					// if an import was added/removed. Clear it for the rebuild.

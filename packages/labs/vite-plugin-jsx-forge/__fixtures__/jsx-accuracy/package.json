@@ -1,0 +1,14 @@
+{
+  "name": "@gracile-labs/fixture-jsx-accuracy",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@gracile-labs/vite-plugin-jsx-forge": "workspace:^",
+    "jsx-forge": "workspace:^",
+    "lit": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

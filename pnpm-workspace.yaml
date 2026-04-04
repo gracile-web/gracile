@@ -48,6 +48,7 @@ packages:
   - ./packages/labs/hmr/__fixtures__/hmr-basic-lit
   - ./packages/labs/islands/__fixtures__/static-site-islands
   - ./packages/labs/vite-plugin-standard-css-modules/__fixtures__/hmr-css-modules
+  - ./packages/labs/vite-plugin-jsx-forge/__fixtures__/jsx-accuracy
 
   # Demos
   - ./packages/labs/vite-plugin-standard-css-modules/demo
