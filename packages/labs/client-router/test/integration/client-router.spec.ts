@@ -237,7 +237,7 @@ test.describe('Client Router — Per-Route Sibling CSS', () => {
 
 		// Home CSS is present
 		await expect(
-			page.locator('head link[rel="stylesheet"][href*="home"]'),
+			page.locator('head link[rel="stylesheet"][href*="(home)"]'),
 		).toBeAttached();
 		// About CSS is absent
 		await expect(
@@ -255,7 +255,7 @@ test.describe('Client Router — Per-Route Sibling CSS', () => {
 		).toBeAttached();
 		// Home CSS is removed
 		await expect(
-			page.locator('head link[rel="stylesheet"][href*="home"]'),
+			page.locator('head link[rel="stylesheet"][href*="(home)"]'),
 		).not.toBeAttached();
 	});
 
@@ -264,7 +264,7 @@ test.describe('Client Router — Per-Route Sibling CSS', () => {
 
 		// Verify home CSS present initially
 		await expect(
-			page.locator('head link[rel="stylesheet"][href*="home"]'),
+			page.locator('head link[rel="stylesheet"][href*="(home)"]'),
 		).toBeAttached();
 
 		// Home → About
@@ -276,7 +276,7 @@ test.describe('Client Router — Per-Route Sibling CSS', () => {
 			page.locator('head link[rel="stylesheet"][href*="about"]'),
 		).toBeAttached();
 		await expect(
-			page.locator('head link[rel="stylesheet"][href*="home"]'),
+			page.locator('head link[rel="stylesheet"][href*="(home)"]'),
 		).not.toBeAttached();
 
 		// About → Home (back to A)
@@ -286,7 +286,7 @@ test.describe('Client Router — Per-Route Sibling CSS', () => {
 
 		// Home CSS is back
 		await expect(
-			page.locator('head link[rel="stylesheet"][href*="home"]'),
+			page.locator('head link[rel="stylesheet"][href*="(home)"]'),
 		).toBeAttached();
 		// About CSS is gone
 		await expect(
@@ -304,7 +304,7 @@ test.describe('Client Router — Per-Route Sibling CSS', () => {
 	test('per-route CSS survives A → B → C → A full cycle', async ({ page }) => {
 		await page.goto('/', GOTO_OPTIONS);
 		await expect(
-			page.locator('head link[rel="stylesheet"][href*="home"]'),
+			page.locator('head link[rel="stylesheet"][href*="(home)"]'),
 		).toBeAttached();
 
 		// Home → About
@@ -321,7 +321,7 @@ test.describe('Client Router — Per-Route Sibling CSS', () => {
 			page.locator('head link[rel="stylesheet"][href*="about"]'),
 		).not.toBeAttached();
 		await expect(
-			page.locator('head link[rel="stylesheet"][href*="home"]'),
+			page.locator('head link[rel="stylesheet"][href*="(home)"]'),
 		).not.toBeAttached();
 
 		// Contact → Home (back to A)
@@ -330,7 +330,7 @@ test.describe('Client Router — Per-Route Sibling CSS', () => {
 		await expect(page.locator('h1')).toHaveText('Home Page');
 
 		await expect(
-			page.locator('head link[rel="stylesheet"][href*="home"]'),
+			page.locator('head link[rel="stylesheet"][href*="(home)"]'),
 		).toBeAttached();
 		await expect(
 			page.locator('head link[rel="stylesheet"][href*="about"]'),
