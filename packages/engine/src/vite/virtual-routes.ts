@@ -1,10 +1,5 @@
 import { normalizeToPosix } from '@gracile/internal-utils/paths';
-import {
-	createFilter,
-	type EnvironmentModuleNode,
-	type Plugin,
-	type ViteDevServer,
-} from 'vite';
+import { createFilter, type Plugin, type ViteDevServer } from 'vite';
 
 import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
@@ -24,7 +19,7 @@ export function invalidateClientRoutesModule(server: ViteDevServer): void {
 
 	server.environments.client.moduleGraph.invalidateModule(
 		virtualModule,
-		/* Invalidated modules */ new Set(),
+		/* Invalidated modules, unused, reset each time. */ new Set(),
 		Date.now(),
 		true,
 	);

@@ -135,9 +135,6 @@ export default defineConfig({
 		// Inspect(),
 	],
 
-	esbuild: {
-		target: 'es2023',
-	},
 	oxc: {
 		target: 'es2023',
 	},
