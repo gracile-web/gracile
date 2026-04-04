@@ -135,6 +135,7 @@ export class GracileRouter extends EventTarget {
 		const parameters = match.pathname.groups ?? {};
 
 		return {
+			resolvedPathname: match.pathname.input,
 			url,
 			title:
 				typeof title === 'function' ? title({ parameters, query, url }) : title,
@@ -163,13 +164,58 @@ export class GracileRouter extends EventTarget {
 		return null;
 	}
 
-	#resolveRoute(url: URL): { route: Route; context: Context } | null {
-		const directMatch = this.#matchRoute(url);
+	#resolveTrailingSlash(url: URL): {
+		matcherUrl: URL;
+		navigationUrl: URL;
+		redirected: boolean;
+	} {
+		const policy = this.config?.trailingSlash ?? 'ignore';
+		const matcherUrl = new URL(url.href);
+		const pathname = matcherUrl.pathname;
+
+		if (pathname === '/')
+			return {
+				matcherUrl,
+				navigationUrl: new URL(url.href),
+				redirected: false,
+			};
+
+		if (policy === 'ignore') {
+			if (!pathname.endsWith('/')) matcherUrl.pathname = `${pathname}/`;
+			return {
+				matcherUrl,
+				navigationUrl: new URL(url.href),
+				redirected: false,
+			};
+		}
+
+		if (policy === 'always' && !pathname.endsWith('/')) {
+			matcherUrl.pathname = `${pathname}/`;
+			return { matcherUrl, navigationUrl: matcherUrl, redirected: true };
+		}
+
+		if (policy === 'never' && pathname.endsWith('/')) {
+			matcherUrl.pathname = pathname.slice(0, -1);
+			return { matcherUrl, navigationUrl: matcherUrl, redirected: true };
+		}
+
+		return {
+			matcherUrl,
+			navigationUrl: new URL(url.href),
+			redirected: false,
+		};
+	}
+
+	#resolveRoute(
+		matcherUrl: URL,
+		contextUrl: URL = matcherUrl,
+	): { route: Route; context: Context } | null {
+		const directMatch = this.#matchRoute(matcherUrl, contextUrl);
 		if (directMatch) return directMatch;
 
 		if (!this.config?.fallback) return null;
 
-		return this.#matchRoute(this.fallback, url);
+		return this.#matchRoute(this.fallback, contextUrl);
 	}
 
 	static hardNavigate(
@@ -250,9 +296,20 @@ export class GracileRouter extends EventTarget {
 			url = new URL(url, GracileRouter.baseUrl);
 		}
 
+		const trailingSlashResult = this.#resolveTrailingSlash(url);
+		const matcherUrl = trailingSlashResult.matcherUrl;
+
+		if (trailingSlashResult.redirected) {
+			void this.navigate(trailingSlashResult.navigationUrl, {
+				...options,
+				replace: true,
+			});
+			return;
+		}
+
 		this.#savedScrollPosition.set(this.context.url.href, window.scrollY);
 
-		let matchedRoute = this.#resolveRoute(url);
+		let matchedRoute = this.#resolveRoute(matcherUrl, url);
 		log(`Navigating to ${url.pathname}${url.search}${url.hash}`, {
 			context: matchedRoute?.context ?? this.context,
 			route: this.route,
@@ -273,11 +330,26 @@ export class GracileRouter extends EventTarget {
 					const condition = await Promise.resolve(result.condition());
 					if (!condition) {
 						url = new URL(result.redirect, GracileRouter.baseUrl);
-						matchedRoute = this.#resolveRoute(url);
+						const redirectTrailingSlashResult = this.#resolveTrailingSlash(url);
+
+						if (redirectTrailingSlashResult.redirected) {
+							void this.navigate(redirectTrailingSlashResult.navigationUrl, {
+								...options,
+								replace: true,
+							});
+							return;
+						}
+
+						matchedRoute = this.#resolveRoute(
+							redirectTrailingSlashResult.matcherUrl,
+							url,
+						);
 						if (matchedRoute) this.context = matchedRoute.context;
+
 						plugins = matchedRoute
 							? this.#collectPlugins(matchedRoute.route)
 							: [];
+
 						log('Redirecting', { context: this.context, route: this.route });
 					}
 				}

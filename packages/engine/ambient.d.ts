@@ -19,6 +19,8 @@ declare module 'gracile:client:routes' {
 
 	export const mode: 'static' | 'server';
 
+	export const trailingSlash: 'always' | 'never' | 'ignore';
+
 	export const routeImports: Map<
 		string,
 		() => Promise<{

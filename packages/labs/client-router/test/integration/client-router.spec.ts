@@ -115,6 +115,41 @@ test.describe('Client Router — Direct URL Access', () => {
 		await expect(page).toHaveTitle('Contact');
 		await expect(page.locator('h1')).toHaveText('Contact Page');
 	});
+
+	test('loads about page directly without trailing slash', async ({ page }) => {
+		await page.goto('/about', GOTO_OPTIONS);
+
+		await expect(page).toHaveURL(/\/about$/);
+		await expect(page).toHaveTitle('About');
+		await expect(page.locator('h1')).toHaveText('About Page');
+	});
+});
+
+test.describe('Client Router — Trailing Slash', () => {
+	test('navigates to slashless route href under trailingSlash ignore', async ({
+		page,
+	}) => {
+		await page.goto('/', GOTO_OPTIONS);
+
+		let fullReload = false;
+		page.on('load', () => {
+			fullReload = true;
+		});
+
+		await page.evaluate(() => {
+			const link = document.createElement('a');
+			link.href = '/about';
+			link.dataset.testid = 'about-no-slash';
+			link.textContent = 'About no slash';
+			document.body.append(link);
+		});
+
+		await page.getByTestId('about-no-slash').click();
+		await page.waitForURL('**/about');
+		await expect(page).toHaveTitle('About');
+		await expect(page.locator('h1')).toHaveText('About Page');
+		expect(fullReload).toBe(false);
+	});
 });
 
 test.describe('Client Router — Head Reconciliation', () => {

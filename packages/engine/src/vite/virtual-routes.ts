@@ -174,6 +174,7 @@ const routeImports = new Map(
 export const enabled = true;
 
 export const mode = '${mode}';
+export const trailingSlash = '${gracileConfig.trailingSlash ?? 'ignore'}';
 
 export { routeImports };
 `;

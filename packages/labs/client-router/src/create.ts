@@ -3,7 +3,7 @@ import '@gracile/client/lit-element-hydrate-support';
 import { render, type RenderOptions, type TemplateResult } from 'lit';
 import { RouteModule } from '@gracile/engine/routes/route';
 // eslint-disable-next-line import-x/no-unresolved
-import { routeImports, enabled } from 'gracile:client:routes';
+import { routeImports, enabled, trailingSlash } from 'gracile:client:routes';
 import { hydrate } from '@lit-labs/ssr-client';
 import { premiseUrl } from '@gracile/internal-utils/paths';
 import { SignalHost } from '@gracile/client/signal-host';
@@ -68,7 +68,7 @@ export function prefetchRoutePremises(options: {
 }
 
 export type GracileRouterConfig = Partial<
-	Pick<Config, 'plugins' | 'routes' | 'signalHost'>
+	Pick<Config, 'plugins' | 'routes' | 'signalHost' | 'trailingSlash'>
 >;
 
 /**
@@ -108,7 +108,7 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 			title: () => document.title,
 
 			// MARK: Render/Hydrate
-			async render(/* context */) {
+			async render(context) {
 				// // NOTE: Didn't matched
 				// if (context.url.pathname !== document.location.pathname) {
 				//   // FIXME: Doesn't collect/replace sibling assets.
@@ -124,9 +124,10 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 				let loaded = loadedRoutes.get(path);
 
 				const { url } = GracileRouter;
+				const routePremisePath = context.resolvedPathname || url.pathname;
 
-				const cachedDocumentForRoute = cachedDocuments.get(url.pathname);
-				const cachedTemplateForRoute = cachedTemplates.get(url.pathname);
+				const cachedDocumentForRoute = cachedDocuments.get(routePremisePath);
+				const cachedTemplateForRoute = cachedTemplates.get(routePremisePath);
 
 				// MARK: Import/Cache
 				if (!loaded) {
@@ -152,14 +153,14 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 				//// TODO: Separate doc, not needed on first load, same for server mode
 				if (!cachedDocumentForRoute && isInitiallyHydrated) {
 					premiseToFetch.push(
-						fetch(premiseUrl(url.pathname, 'doc')).then((r) =>
+						fetch(premiseUrl(routePremisePath, 'doc')).then((r) =>
 							r.text().then((r) => (freshRouteData.document = r)),
 						),
 					);
 				}
 				if (!cachedTemplateForRoute) {
 					premiseToFetch.push(
-						fetch(premiseUrl(url.pathname, 'props')).then((r) =>
+						fetch(premiseUrl(routePremisePath, 'props')).then((r) =>
 							r.json().then((r) => (freshRouteData.props = r)),
 						),
 					);
@@ -178,7 +179,7 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 						freshRouteData.document,
 						'text/html',
 					);
-					cachedDocuments.set(url.pathname, parsedDocument);
+					cachedDocuments.set(routePremisePath, parsedDocument);
 				}
 
 				// NOTE: Happens at first route change. Initial load already has assets.
@@ -257,11 +258,7 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 					}
 
 					// MARK: Load template
-					const parameters =
-						// NOTE: We have this info server side, but it's easy to derive it
-						// here, client-side, without complicating the payload for such
-						// trivial things.
-						router.route?.urlPattern?.exec(url)?.pathname?.groups || {};
+					const parameters = context.parameters || {};
 
 					let renderedTemplate = cachedTemplateForRoute;
 					if (!cachedTemplateForRoute) {
@@ -276,7 +273,7 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 						)) as TemplateResult;
 
 						cachedTemplates.set(
-							url.pathname,
+							routePremisePath,
 							// NOTE: It's not supposed to be a ServerRenderedTemplate, otherwise
 							// it would have crash way before.
 							renderedTemplate as TemplateResult,
@@ -336,6 +333,7 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 	const router = new GracileRouter({
 		...config,
 		fallback: ROUTE_URL_404,
+		trailingSlash: config?.trailingSlash || trailingSlash,
 		plugins:
 			config?.plugins ||
 			[

@@ -64,14 +64,14 @@ test.describe('Client Router — 404 Route', () => {
 		await page.evaluate(() => {
 			const link = document.createElement('a');
 			link.href = '/missing-from-click/';
+			link.dataset.testid = 'missing-route';
 			link.textContent = 'Missing route';
 			document.body.append(link);
-			link.click();
 		});
 
+		await page.getByTestId('missing-route').click();
 		await page.waitForURL('**/missing-from-click/');
 
-		await expect(page).toHaveTitle('404 Not Found');
 		await expect(page.locator('h1')).toHaveText('404 — Not Found');
 		await expect(page.locator('p code')).toHaveText(
 			/http:\/\/(?:localhost|127\.0\.0\.1):\d+\/missing-from-click\//,

@@ -3,6 +3,7 @@ export interface Config {
 	plugins?: Plugin[] | undefined;
 	routes: RouteDefinition[];
 	signalHost?: boolean | undefined;
+	trailingSlash?: 'always' | 'never' | 'ignore' | undefined;
 }
 
 export interface Plugin {
@@ -19,6 +20,7 @@ export interface Context {
 	title?: string | undefined;
 	query: Record<string, string>;
 	parameters: Partial<Record<string, string>>;
+	resolvedPathname?: string | undefined;
 	url: URL;
 	[key: string]: unknown;
 }
