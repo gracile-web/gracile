@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/gracile-web/gracile/compare/@gracile/svg@0.4.2-next.0...@gracile/svg@0.4.2) (2026-04-04)
+
+**Note:** Version bump only for package @gracile/svg
+
 ## [0.4.2-next.0](https://github.com/gracile-web/gracile/compare/@gracile/svg@0.4.1...@gracile/svg@0.4.2-next.0) (2026-04-04)
 
 **Note:** Version bump only for package @gracile/svg
