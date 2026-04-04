@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.10.4-next.0...@gracile/engine@0.11.0-next.0) (2026-04-04)
+
+### Features
+
+* handle client side url trailing slash policy ([9190e16](https://github.com/gracile-web/gracile/commit/9190e1669f1459b04129ff57cc1ee717856c4e51))
+* proper support for 404 client route + fix client routes invalidation ([28fd62f](https://github.com/gracile-web/gracile/commit/28fd62f3d83977dcbeef81eff3b9b14d0642832f))
+
+### Bug Fixes
+
+* unused import, old esbuild flag ([9cf2893](https://github.com/gracile-web/gracile/commit/9cf28935322988bdb558e19d3a380ac0e0aa5182))
+
 ## [0.10.4-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.10.3...@gracile/engine@0.10.4-next.0) (2026-04-04)
 
 ### Bug Fixes

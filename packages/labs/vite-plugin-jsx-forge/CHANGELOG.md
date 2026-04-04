@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.3.0-next.0...@gracile-labs/vite-plugin-jsx-forge@0.3.0-next.1) (2026-04-04)
+
+### Bug Fixes
+
+* handle tsx <-> ts rename scenarios + type accuracy & stress tests ([95daec7](https://github.com/gracile-web/gracile/commit/95daec72bda06b80d4926fc295739ec5ca627b9a))
+
 ## [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.2.1...@gracile-labs/vite-plugin-jsx-forge@0.3.0-next.0) (2026-04-04)
 
 ### Features

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.4.0-next.0...@gracile-labs/client-router@0.4.0-next.1) (2026-04-04)
+
+### Features
+
+* handle client side url trailing slash policy ([9190e16](https://github.com/gracile-web/gracile/commit/9190e1669f1459b04129ff57cc1ee717856c4e51))
+* proper support for 404 client route + fix client routes invalidation ([28fd62f](https://github.com/gracile-web/gracile/commit/28fd62f3d83977dcbeef81eff3b9b14d0642832f))
+
+### Bug Fixes
+
+* handle tsx <-> ts rename scenarios + type accuracy & stress tests ([95daec7](https://github.com/gracile-web/gracile/commit/95daec72bda06b80d4926fc295739ec5ca627b9a))
+
 ## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.3.3...@gracile-labs/client-router@0.4.0-next.0) (2026-04-04)
 
 ### Features

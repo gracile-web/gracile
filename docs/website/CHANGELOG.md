@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.3-next.1](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.12.3-next.0...@gracile/docs@0.12.3-next.1) (2026-04-04)
+
+### Bug Fixes
+
+* unused import, old esbuild flag ([9cf2893](https://github.com/gracile-web/gracile/commit/9cf28935322988bdb558e19d3a380ac0e0aa5182))
+
 ## [0.12.3-next.0](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.12.2...@gracile/docs@0.12.3-next.0) (2026-04-04)
 
 ### Bug Fixes
