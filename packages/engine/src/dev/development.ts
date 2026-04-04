@@ -2,15 +2,30 @@ import { getLogger } from '@gracile/internal-utils/logger/helpers';
 import c from 'picocolors';
 import { type ViteDevServer } from 'vite';
 
-import { collectRoutes, WATCHED_FILES_REGEX } from '../routes/collect.js';
+import {
+	collectRoutes,
+	WATCHED_ROUTES_FILES_REGEX,
+} from '../routes/collect.js';
 import type { RoutesManifest } from '../routes/route.js';
 import {
 	createGracileHandler,
 	type GracileHandler,
 } from '../server/request.js';
 import type { GracileConfig } from '../user-config.js';
+import { invalidateClientRoutesModule } from '../vite/virtual-routes.js';
 
 import { generateRoutesTypings } from './route-typings.js';
+
+function serializeRoutes(routes: RoutesManifest): string {
+	return JSON.stringify(
+		[...routes.entries()].map(([pattern, route]) => ({
+			pattern,
+			filePath: route.filePath,
+			hasParams: route.hasParams,
+			pageAssets: [...route.pageAssets].sort(),
+		})),
+	);
+}
 
 export async function createDevelopmentHandler({
 	routes,
@@ -31,7 +46,9 @@ export async function createDevelopmentHandler({
 	logger.info('');
 	logger.info(c.dim('Creating the request handler…'), { timestamp: true });
 
-	const collectAndCodegen = async (): Promise<void> => {
+	let previousRoutesSnapshot = serializeRoutes(routes);
+
+	const collectAndCodegen = async (): Promise<boolean> => {
 		await collectRoutes(
 			routes,
 			root,
@@ -39,10 +56,18 @@ export async function createDevelopmentHandler({
 			gracileConfig.trailingSlash,
 		);
 
+		const nextRoutesSnapshot = serializeRoutes(routes);
+		const didRoutesChange = nextRoutesSnapshot !== previousRoutesSnapshot;
+		previousRoutesSnapshot = nextRoutesSnapshot;
+
+		if (didRoutesChange) invalidateClientRoutesModule(vite);
+
 		if (gracileConfig.experimental?.generateRoutesTypings)
 			await generateRoutesTypings(root, routes).catch((error) =>
 				logger.error(String(error)),
 			);
+
+		return didRoutesChange;
 	};
 
 	await collectAndCodegen();
@@ -50,14 +75,16 @@ export async function createDevelopmentHandler({
 	let wait: ReturnType<typeof setTimeout>;
 	vite.watcher.on('all', (event, file) => {
 		if (
-			WATCHED_FILES_REGEX.test(file) &&
+			WATCHED_ROUTES_FILES_REGEX.test(file) &&
 			['add', 'unlink'].includes(event)
 			//
 		) {
 			clearTimeout(wait);
 			wait = setTimeout(() => {
 				collectAndCodegen()
-					.then(() => vite.hot.send('vite:invalidate'))
+					.then((didRoutesChange) => {
+						if (didRoutesChange) vite.hot.send('vite:invalidate');
+					})
 					.catch((error) => logger.error(String(error)));
 			}, 100);
 		}

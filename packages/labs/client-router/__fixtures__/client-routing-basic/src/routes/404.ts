@@ -1,5 +1,5 @@
 import { defineRoute } from '@gracile/gracile/route';
-import { html } from '@gracile/gracile/server-html';
+import { html } from 'lit';
 
 import { document } from '../document.js';
 

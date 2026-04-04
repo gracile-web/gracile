@@ -1,11 +1,34 @@
 import { normalizeToPosix } from '@gracile/internal-utils/paths';
-import { createFilter, type Plugin } from 'vite';
+import {
+	createFilter,
+	type EnvironmentModuleNode,
+	type Plugin,
+	type ViteDevServer,
+} from 'vite';
 
 import type { RoutesManifest } from '../routes/route.js';
 import type { GracileConfig } from '../user-config.js';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
 import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
+
+export const GRACILE_CLIENT_ROUTES_MODULE_ID = 'gracile:client:routes';
+export const RESOLVED_GRACILE_CLIENT_ROUTES_MODULE_ID = `\0${GRACILE_CLIENT_ROUTES_MODULE_ID}`;
+
+export function invalidateClientRoutesModule(server: ViteDevServer): void {
+	const virtualModule = server.environments.client.moduleGraph.getModuleById(
+		RESOLVED_GRACILE_CLIENT_ROUTES_MODULE_ID,
+	);
+
+	if (!virtualModule) return;
+
+	server.environments.client.moduleGraph.invalidateModule(
+		virtualModule,
+		/* Invalidated modules */ new Set(),
+		Date.now(),
+		true,
+	);
+}
 
 /**
  * Server-side routes virtual module (`gracile:routes`).
@@ -102,8 +125,8 @@ export function virtualRoutesClient({
 	mode: 'static' | 'server';
 	gracileConfig: GracileConfig;
 }): Plugin[] {
-	const virtualModuleId = 'gracile:client:routes';
-	const resolvedVirtualModuleId = `\0${virtualModuleId}`;
+	const virtualModuleId = GRACILE_CLIENT_ROUTES_MODULE_ID;
+	const resolvedVirtualModuleId = RESOLVED_GRACILE_CLIENT_ROUTES_MODULE_ID;
 
 	const premisesFilter = createFilter(
 		gracileConfig.pages?.premises?.include,
@@ -113,7 +136,6 @@ export function virtualRoutesClient({
 	return [
 		{
 			name: 'gracile-client-routes',
-			// TODO: Proper invalidation!
 
 			config() {
 				return {

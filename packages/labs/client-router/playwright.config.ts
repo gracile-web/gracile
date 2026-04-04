@@ -10,6 +10,7 @@ export default defineConfig({
 	testMatch: '**/*.spec.ts',
 	timeout: 30_000,
 	retries: 1,
+	workers: 1,
 	use: {
 		baseURL: 'http://localhost:5189',
 	},
@@ -17,7 +18,7 @@ export default defineConfig({
 		command: `npx vite --port 5189`,
 		cwd: fixtureDir,
 		port: 5189,
-		reuseExistingServer: !process.env['CI'],
+		reuseExistingServer: false,
 	},
 	projects: [
 		{

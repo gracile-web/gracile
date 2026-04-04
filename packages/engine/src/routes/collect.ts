@@ -71,7 +71,7 @@ export function extractRoutePatterns(
 	};
 }
 
-export const WATCHED_FILES_REGEX =
+export const WATCHED_ROUTES_FILES_REGEX =
 	/\/src\/routes\/(.*)\.(js|ts|jsx|tsx|html|css|scss|sass|less|styl|stylus)$/;
 
 export async function collectRoutes(
