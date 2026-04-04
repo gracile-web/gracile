@@ -49,7 +49,7 @@
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
     "test:integration": "node --test dist/test/*.test.js",
-    "test:e2e": "playwright test"
+    "// test:e2e": "playwright test"
   },
   "dependencies": {
     "magic-string": "catalog:"

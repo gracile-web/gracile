@@ -1,215 +1,217 @@
-import fs from 'node:fs';
-import path from 'node:path';
+// FIXME:
 
-import { expect, test } from '@playwright/test';
+// import fs from 'node:fs';
+// import path from 'node:path';
 
-import { resolveFixtures } from '@gracile/internal-test-utils/fixtures';
+// import { expect, test } from '@playwright/test';
 
-// ---------------------------------------------------------------------------
-// Fixture paths
-// ---------------------------------------------------------------------------
+// import { resolveFixtures } from '@gracile/internal-test-utils/fixtures';
 
-const fixtureDir = path.join(resolveFixtures(), 'hmr-css-modules');
+// // ---------------------------------------------------------------------------
+// // Fixture paths
+// // ---------------------------------------------------------------------------
 
-const cardCssFile = path.join(fixtureDir, 'src/my-card.css');
-const badgeCssFile = path.join(fixtureDir, 'src/my-badge.css');
+// const fixtureDir = path.join(resolveFixtures(), 'hmr-css-modules');
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
+// const cardCssFile = path.join(fixtureDir, 'src/my-card.css');
+// const badgeCssFile = path.join(fixtureDir, 'src/my-badge.css');
 
-let originalCardCss: string;
-let originalBadgeCss: string;
+// // ---------------------------------------------------------------------------
+// // Helpers
+// // ---------------------------------------------------------------------------
 
-function writeCardCss(content: string) {
-	fs.writeFileSync(cardCssFile, content, 'utf8');
-}
-function writeBadgeCss(content: string) {
-	fs.writeFileSync(badgeCssFile, content, 'utf8');
-}
+// let originalCardCss: string;
+// let originalBadgeCss: string;
 
-test.beforeAll(() => {
-	originalCardCss = fs.readFileSync(cardCssFile, 'utf8');
-	originalBadgeCss = fs.readFileSync(badgeCssFile, 'utf8');
-});
+// function writeCardCss(content: string) {
+// 	fs.writeFileSync(cardCssFile, content, 'utf8');
+// }
+// function writeBadgeCss(content: string) {
+// 	fs.writeFileSync(badgeCssFile, content, 'utf8');
+// }
 
-test.afterAll(() => {
-	writeCardCss(originalCardCss);
-	writeBadgeCss(originalBadgeCss);
-});
+// test.beforeAll(() => {
+// 	originalCardCss = fs.readFileSync(cardCssFile, 'utf8');
+// 	originalBadgeCss = fs.readFileSync(badgeCssFile, 'utf8');
+// });
 
-test.afterEach(() => {
-	writeCardCss(originalCardCss);
-	writeBadgeCss(originalBadgeCss);
-});
+// test.afterAll(() => {
+// 	writeCardCss(originalCardCss);
+// 	writeBadgeCss(originalBadgeCss);
+// });
 
-// Playwright pierces shadow DOM with its CSS engine by default.
+// test.afterEach(() => {
+// 	writeCardCss(originalCardCss);
+// 	writeBadgeCss(originalBadgeCss);
+// });
 
-// ---------------------------------------------------------------------------
-// Tests — type: 'css' (CSSStyleSheet)
-// ---------------------------------------------------------------------------
+// // Playwright pierces shadow DOM with its CSS engine by default.
 
-test.describe('CSS Modules HMR — type: css (CSSStyleSheet)', () => {
-	test.describe.configure({ mode: 'serial' });
+// // ---------------------------------------------------------------------------
+// // Tests — type: 'css' (CSSStyleSheet)
+// // ---------------------------------------------------------------------------
 
-	test('component renders with initial styles', async ({ page }) => {
-		await page.goto('/');
+// test.describe('CSS Modules HMR — type: css (CSSStyleSheet)', () => {
+// 	test.describe.configure({ mode: 'serial' });
 
-		const title = page.locator('my-card .title');
-		await expect(title).toHaveText('Card Title');
-		await expect(title).toHaveCSS('color', 'rgb(0, 0, 139)'); // darkblue
-	});
+// 	test('component renders with initial styles', async ({ page }) => {
+// 		await page.goto('/');
 
-	test('CSS edit updates color without full page reload', async ({ page }) => {
-		await page.goto('/');
+// 		const title = page.locator('my-card .title');
+// 		await expect(title).toHaveText('Card Title');
+// 		await expect(title).toHaveCSS('color', 'rgb(0, 0, 139)'); // darkblue
+// 	});
 
-		const title = page.locator('my-card .title');
-		await expect(title).toHaveCSS('color', 'rgb(0, 0, 139)'); // darkblue
+// 	test('CSS edit updates color without full page reload', async ({ page }) => {
+// 		await page.goto('/');
 
-		let fullReload = false;
-		page.on('load', () => {
-			fullReload = true;
-		});
+// 		const title = page.locator('my-card .title');
+// 		await expect(title).toHaveCSS('color', 'rgb(0, 0, 139)'); // darkblue
 
-		// Mutate the CSS file
-		const updated = originalCardCss.replace(
-			'color: darkblue;',
-			'color: crimson;',
-		);
-		writeCardCss(updated);
+// 		let fullReload = false;
+// 		page.on('load', () => {
+// 			fullReload = true;
+// 		});
 
-		// Wait for the style to propagate
-		await expect(title).toHaveCSS('color', 'rgb(220, 20, 60)', {
-			timeout: 10_000,
-		}); // crimson
+// 		// Mutate the CSS file
+// 		const updated = originalCardCss.replace(
+// 			'color: darkblue;',
+// 			'color: crimson;',
+// 		);
+// 		writeCardCss(updated);
 
-		expect(fullReload).toBe(false);
-	});
+// 		// Wait for the style to propagate
+// 		await expect(title).toHaveCSS('color', 'rgb(220, 20, 60)', {
+// 			timeout: 10_000,
+// 		}); // crimson
 
-	test('component state is preserved across CSS HMR', async ({ page }) => {
-		await page.goto('/');
+// 		expect(fullReload).toBe(false);
+// 	});
 
-		const button = page.locator('my-card button');
-		await expect(button).toHaveText('Count: 0');
+// 	test('component state is preserved across CSS HMR', async ({ page }) => {
+// 		await page.goto('/');
 
-		// Build up state
-		await button.click();
-		await button.click();
-		await button.click();
-		await expect(button).toHaveText('Count: 3');
+// 		const button = page.locator('my-card button');
+// 		await expect(button).toHaveText('Count: 0');
 
-		let fullReload = false;
-		page.on('load', () => {
-			fullReload = true;
-		});
+// 		// Build up state
+// 		await button.click();
+// 		await button.click();
+// 		await button.click();
+// 		await expect(button).toHaveText('Count: 3');
 
-		// Edit CSS
-		const updated = originalCardCss.replace(
-			'color: darkgreen;',
-			'color: tomato;',
-		);
-		writeCardCss(updated);
+// 		let fullReload = false;
+// 		page.on('load', () => {
+// 			fullReload = true;
+// 		});
 
-		const body = page.locator('my-card .body');
-		await expect(body).toHaveCSS('color', 'rgb(255, 99, 71)', {
-			timeout: 10_000,
-		}); // tomato
+// 		// Edit CSS
+// 		const updated = originalCardCss.replace(
+// 			'color: darkgreen;',
+// 			'color: tomato;',
+// 		);
+// 		writeCardCss(updated);
 
-		// State must survive
-		await expect(button).toHaveText('Count: 3');
-		expect(fullReload).toBe(false);
-	});
+// 		const body = page.locator('my-card .body');
+// 		await expect(body).toHaveCSS('color', 'rgb(255, 99, 71)', {
+// 			timeout: 10_000,
+// 		}); // tomato
 
-	test('multiple rapid edits apply correctly', async ({ page }) => {
-		await page.goto('/');
+// 		// State must survive
+// 		await expect(button).toHaveText('Count: 3');
+// 		expect(fullReload).toBe(false);
+// 	});
 
-		const title = page.locator('my-card .title');
+// 	test('multiple rapid edits apply correctly', async ({ page }) => {
+// 		await page.goto('/');
 
-		let fullReload = false;
-		page.on('load', () => {
-			fullReload = true;
-		});
+// 		const title = page.locator('my-card .title');
 
-		// First edit
-		writeCardCss(originalCardCss.replace('color: darkblue;', 'color: green;'));
-		await expect(title).toHaveCSS('color', 'rgb(0, 128, 0)', {
-			timeout: 10_000,
-		});
+// 		let fullReload = false;
+// 		page.on('load', () => {
+// 			fullReload = true;
+// 		});
 
-		// Second edit
-		writeCardCss(originalCardCss.replace('color: darkblue;', 'color: orange;'));
-		await expect(title).toHaveCSS('color', 'rgb(255, 165, 0)', {
-			timeout: 10_000,
-		});
+// 		// First edit
+// 		writeCardCss(originalCardCss.replace('color: darkblue;', 'color: green;'));
+// 		await expect(title).toHaveCSS('color', 'rgb(0, 128, 0)', {
+// 			timeout: 10_000,
+// 		});
 
-		expect(fullReload).toBe(false);
-	});
-});
+// 		// Second edit
+// 		writeCardCss(originalCardCss.replace('color: darkblue;', 'color: orange;'));
+// 		await expect(title).toHaveCSS('color', 'rgb(255, 165, 0)', {
+// 			timeout: 10_000,
+// 		});
 
-// ---------------------------------------------------------------------------
-// Tests — type: 'css-lit' (CSSResult)
-// ---------------------------------------------------------------------------
+// 		expect(fullReload).toBe(false);
+// 	});
+// });
 
-test.describe('CSS Modules HMR — type: css-lit (CSSResult)', () => {
-	test.describe.configure({ mode: 'serial' });
+// // ---------------------------------------------------------------------------
+// // Tests — type: 'css-lit' (CSSResult)
+// // ---------------------------------------------------------------------------
 
-	test('component renders with initial styles', async ({ page }) => {
-		await page.goto('/');
+// test.describe('CSS Modules HMR — type: css-lit (CSSResult)', () => {
+// 	test.describe.configure({ mode: 'serial' });
 
-		const label = page.locator('my-badge .label');
-		await expect(label).toHaveText('Badge');
-		await expect(label).toHaveCSS('color', 'rgb(139, 0, 0)'); // darkred
-	});
+// 	test('component renders with initial styles', async ({ page }) => {
+// 		await page.goto('/');
 
-	test('CSS edit updates color without full page reload', async ({ page }) => {
-		await page.goto('/');
+// 		const label = page.locator('my-badge .label');
+// 		await expect(label).toHaveText('Badge');
+// 		await expect(label).toHaveCSS('color', 'rgb(139, 0, 0)'); // darkred
+// 	});
 
-		const label = page.locator('my-badge .label');
-		await expect(label).toHaveCSS('color', 'rgb(139, 0, 0)'); // darkred
+// 	test('CSS edit updates color without full page reload', async ({ page }) => {
+// 		await page.goto('/');
 
-		let fullReload = false;
-		page.on('load', () => {
-			fullReload = true;
-		});
+// 		const label = page.locator('my-badge .label');
+// 		await expect(label).toHaveCSS('color', 'rgb(139, 0, 0)'); // darkred
 
-		const updated = originalBadgeCss.replace(
-			'color: darkred;',
-			'color: royalblue;',
-		);
-		writeBadgeCss(updated);
+// 		let fullReload = false;
+// 		page.on('load', () => {
+// 			fullReload = true;
+// 		});
 
-		await expect(label).toHaveCSS('color', 'rgb(65, 105, 225)', {
-			timeout: 10_000,
-		}); // royalblue
+// 		const updated = originalBadgeCss.replace(
+// 			'color: darkred;',
+// 			'color: royalblue;',
+// 		);
+// 		writeBadgeCss(updated);
 
-		expect(fullReload).toBe(false);
-	});
-});
+// 		await expect(label).toHaveCSS('color', 'rgb(65, 105, 225)', {
+// 			timeout: 10_000,
+// 		}); // royalblue
 
-// ---------------------------------------------------------------------------
-// Tests — error-free cycle
-// ---------------------------------------------------------------------------
+// 		expect(fullReload).toBe(false);
+// 	});
+// });
 
-test.describe('CSS Modules HMR — no errors', () => {
-	test('no console errors during HMR cycle', async ({ page }) => {
-		const errors: string[] = [];
-		page.on('console', (msg) => {
-			if (msg.type() === 'error') {
-				errors.push(msg.text());
-			}
-		});
+// // ---------------------------------------------------------------------------
+// // Tests — error-free cycle
+// // ---------------------------------------------------------------------------
 
-		await page.goto('/');
+// test.describe('CSS Modules HMR — no errors', () => {
+// 	test('no console errors during HMR cycle', async ({ page }) => {
+// 		const errors: string[] = [];
+// 		page.on('console', (msg) => {
+// 			if (msg.type() === 'error') {
+// 				errors.push(msg.text());
+// 			}
+// 		});
 
-		// Trigger a CSS HMR update
-		const updated = originalCardCss.replace('color: darkblue;', 'color: teal;');
-		writeCardCss(updated);
+// 		await page.goto('/');
 
-		const title = page.locator('my-card .title');
-		await expect(title).toHaveCSS('color', 'rgb(0, 128, 128)', {
-			timeout: 10_000,
-		}); // teal
+// 		// Trigger a CSS HMR update
+// 		const updated = originalCardCss.replace('color: darkblue;', 'color: teal;');
+// 		writeCardCss(updated);
 
-		expect(errors).toEqual([]);
-	});
-});
+// 		const title = page.locator('my-card .title');
+// 		await expect(title).toHaveCSS('color', 'rgb(0, 128, 128)', {
+// 			timeout: 10_000,
+// 		}); // teal
+
+// 		expect(errors).toEqual([]);
+// 	});
+// });

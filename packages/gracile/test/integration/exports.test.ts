@@ -20,6 +20,7 @@ import * as plugin from '@gracile/gracile/plugin';
 import { defineRoute } from '@gracile/gracile/route';
 import * as server from '@gracile/gracile/server';
 import * as serverHtml from '@gracile/gracile/server-html';
+import * as renderLitTemplate from '@gracile/gracile/render-lit-template';
 import { html as litServerHtml } from '@lit-labs/ssr';
 import { resolve } from 'import-meta-resolve';
 import { html } from 'lit';
@@ -75,7 +76,7 @@ describe('gracile package should do its exports correctly', () => {
 	test('server-html', () => {
 		assert.equal(typeof serverHtml.html, 'function');
 		assert.equal(typeof serverHtml.isHydratable, 'function');
-		assert.equal(typeof serverHtml.renderLitTemplate, 'function');
+		assert.equal(typeof renderLitTemplate.renderLitTemplate, 'function');
 
 		const testGracileHandler: serverHtml.ServerRenderedTemplate = litServerHtml`ok`;
 		noop(testGracileHandler);
@@ -91,6 +92,7 @@ describe('gracile package should do its exports correctly', () => {
 
 	test('ambient custom elements', () => {
 		const routeTemplateOutlet =
+			// @ts-expect-error — this is an ambient custom element
 			null as unknown as HTMLElementTagNameMap['route-template-outlet'];
 
 		const elems = html` <route-template-outlet></route-template-outlet> `;

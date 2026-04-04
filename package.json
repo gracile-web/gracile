@@ -49,6 +49,7 @@
     "sort-pjson": "pnpm sort-package-json '**/package.json'",
     "test:integration": "turbo test:integration --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* --continue --concurrency 1",
     "test:unit": "turbo test:unit --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* --concurrency 34",
+    "test:e2e": "turbo test:e2e --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* --concurrency 34",
     "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* test:unit:dev"
   },
   "resolutions": {
