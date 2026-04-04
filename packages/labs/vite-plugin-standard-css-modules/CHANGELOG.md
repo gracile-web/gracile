@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.0](https://github.com/gracile-web/gracile/compare/vite-plugin-standard-css-modules@0.2.0-next.0...vite-plugin-standard-css-modules@0.2.0) (2026-04-04)
+
+**Note:** Version bump only for package vite-plugin-standard-css-modules
+
 ## [0.2.0-next.0](https://github.com/gracile-web/gracile/compare/vite-plugin-standard-css-modules@0.1.1...vite-plugin-standard-css-modules@0.2.0-next.0) (2026-04-04)
 
 ### Features
