@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.5...@gracile-labs/css-helpers@0.3.0-next.0) (2026-04-04)
+
+### Features
+
+* dsd styles dedupper ([d0156c2](https://github.com/gracile-web/gracile/commit/d0156c2337176d45d95128f2ba58303c335f9c56))
+
+### Bug Fixes
+
+* remove old error overlay export, paths ([b0b3684](https://github.com/gracile-web/gracile/commit/b0b3684b8ec6793c96a9ba1eb9b1eecaadc37eb7))
+* reorganize, align apis ([4b686bc](https://github.com/gracile-web/gracile/commit/4b686bc7f4f153214fb077a3166dc1ad32711e47))
+
 ## [0.2.5](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.4...@gracile-labs/css-helpers@0.2.5) (2026-03-29)
 
 **Note:** Version bump only for package @gracile-labs/css-helpers

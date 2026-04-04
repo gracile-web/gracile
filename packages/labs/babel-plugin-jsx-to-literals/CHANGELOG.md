@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/babel-plugin-jsx-to-literals@0.2.0...@gracile-labs/babel-plugin-jsx-to-literals@0.2.1-next.0) (2026-04-04)
+
+**Note:** Version bump only for package @gracile-labs/babel-plugin-jsx-to-literals
+
 # [0.2.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/babel-plugin-jsx-to-literals@0.2.0-next.0...@gracile-labs/babel-plugin-jsx-to-literals@0.2.0) (2026-03-23)
 
 **Note:** Version bump only for package @gracile-labs/babel-plugin-jsx-to-literals

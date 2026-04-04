@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@4.0.0...@literals/rollup-plugin-html-css-minifier@4.0.1-next.0) (2026-04-04)
+
+### Bug Fixes
+
+* realign MagicString types, use catalog ([f98ba33](https://github.com/gracile-web/gracile/commit/f98ba33b784d6322db332c23e474ce25ab9cd5ba))
+
 ## [4.0.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@3.0.0...@literals/rollup-plugin-html-css-minifier@4.0.0) (2026-03-29)
 
 ### ⚠ BREAKING CHANGES

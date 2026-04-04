@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.2.1...@gracile-labs/vite-plugin-jsx-forge@0.3.0-next.0) (2026-04-04)
+
+### Features
+
+* rehaul jsx handling in vite, no rollup ts plugin + ts patch anymore ([eda2dd2](https://github.com/gracile-web/gracile/commit/eda2dd2a8bd7adad48a589a6c5d5410ebf446457))
+
+### Bug Fixes
+
+* tslib peerdep for decorator support, oxc/esbuild bifurcation ([e2ebe8b](https://github.com/gracile-web/gracile/commit/e2ebe8bd9cc10819fbe9cd6605ac136fb1678417))
+
 ## [0.2.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.2.1-next.1...@gracile-labs/vite-plugin-jsx-forge@0.2.1) (2026-03-23)
 
 **Note:** Version bump only for package @gracile-labs/vite-plugin-jsx-forge

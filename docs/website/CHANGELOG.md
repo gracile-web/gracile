@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.3-next.0](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.12.2...@gracile/docs@0.12.3-next.0) (2026-04-04)
+
+### Bug Fixes
+
+* remove url pattern polyfill ([94d1130](https://github.com/gracile-web/gracile/commit/94d1130df8d56db56c20248c65a88a9da7f4c08f))
+* rollup chunk hack isn't needed anymore ([6fda2e0](https://github.com/gracile-web/gracile/commit/6fda2e043ebc289910b6433e75dc78242e4f360f))
+
 ## [0.12.2](https://github.com/gracile-web/gracile/compare/@gracile/docs@0.12.1...@gracile/docs@0.12.2) (2026-03-29)
 
 **Note:** Version bump only for package @gracile/docs

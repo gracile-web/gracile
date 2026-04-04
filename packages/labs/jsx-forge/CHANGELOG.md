@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/jsx-forge@0.2.0...jsx-forge@0.3.0-next.0) (2026-04-04)
+
+### Features
+
+* "idiomatic" (expected, convenient) jsx text whitespace trimming ([4e9d2b3](https://github.com/gracile-web/gracile/commit/4e9d2b37844c87c0affa43033ec2f148e73a0079))
+* rehaul jsx handling in vite, no rollup ts plugin + ts patch anymore ([eda2dd2](https://github.com/gracile-web/gracile/commit/eda2dd2a8bd7adad48a589a6c5d5410ebf446457))
+
+### Bug Fixes
+
+* treat vendored wea intrinsics as source ([e091e8a](https://github.com/gracile-web/gracile/commit/e091e8adf4665cfd73da59bbcc9189e241b8d43a))
+
 # [0.2.0](https://github.com/gracile-web/gracile/compare/jsx-forge@0.2.0-next.0...jsx-forge@0.2.0) (2026-03-23)
 
 **Note:** Version bump only for package jsx-forge

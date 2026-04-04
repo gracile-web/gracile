@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.4-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.10.3...@gracile/engine@0.10.4-next.0) (2026-04-04)
+
+### Bug Fixes
+
+* lint, types… ([43c9f78](https://github.com/gracile-web/gracile/commit/43c9f78c41d9cf1677cbb74c49d0a16f983d8b5b))
+* merge user and plugins provided lit element renderers ([12c69ac](https://github.com/gracile-web/gracile/commit/12c69ac392bc7ce49e8a757766d9673df3409f60))
+* remove url pattern polyfill ([94d1130](https://github.com/gracile-web/gracile/commit/94d1130df8d56db56c20248c65a88a9da7f4c08f))
+* ssr hmr breaks with mixed module graph, i.e. when using client router ([12e9790](https://github.com/gracile-web/gracile/commit/12e9790d9f6672b9a1182f0a0a5beb87516193ad))
+* ts6 global interface merging, loosen ssr env check to prevent dupped vite hazards ([827266a](https://github.com/gracile-web/gracile/commit/827266a9ae9261f8495140cd6a8316a118be4388))
+
+### Performance Improvements
+
+* use `url-pattern-list` instead of for loop ([e08759a](https://github.com/gracile-web/gracile/commit/e08759ac7203de7d1317340bb074b2333db6ac1b))
+
 ## [0.10.3](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.10.2...@gracile/engine@0.10.3) (2026-03-29)
 
 **Note:** Version bump only for package @gracile/engine

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.6-next.0](https://github.com/gracile-web/gracile/compare/@gracile/client@0.5.5...@gracile/client@0.5.6-next.0) (2026-04-04)
+
+### Bug Fixes
+
+* remove url pattern polyfill ([94d1130](https://github.com/gracile-web/gracile/commit/94d1130df8d56db56c20248c65a88a9da7f4c08f))
+
 ## [0.5.5](https://github.com/gracile-web/gracile/compare/@gracile/client@0.5.4...@gracile/client@0.5.5) (2026-03-29)
 
 **Note:** Version bump only for package @gracile/client

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.3.3...@gracile-labs/client-router@0.4.0-next.0) (2026-04-04)
+
+### Features
+
+* rehaul jsx handling in vite, no rollup ts plugin + ts patch anymore ([eda2dd2](https://github.com/gracile-web/gracile/commit/eda2dd2a8bd7adad48a589a6c5d5410ebf446457))
+
+### Bug Fixes
+
+* no client side styles adoption after a route change ([d78ab9a](https://github.com/gracile-web/gracile/commit/d78ab9ac1ce3bb9a4325ad63a827f9ef6ff1ac20))
+* remove end symptom curing fix, invalid approach ([d934b39](https://github.com/gracile-web/gracile/commit/d934b399dd387e20f9d3be809d177544e7a1e4d9))
+* remove url pattern polyfill ([94d1130](https://github.com/gracile-web/gracile/commit/94d1130df8d56db56c20248c65a88a9da7f4c08f))
+
 ## [0.3.3](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.3.2...@gracile-labs/client-router@0.3.3) (2026-03-29)
 
 **Note:** Version bump only for package @gracile-labs/client-router

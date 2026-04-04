@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.5...@gracile/gracile@0.10.0-next.0) (2026-04-04)
+
+### Features
+
+* expose special custom elements via cem ([c06356c](https://github.com/gracile-web/gracile/commit/c06356c23ce3de2ff31744ce0ee046849bce7c26))
+
+### Bug Fixes
+
+* remove old error overlay export, paths ([b0b3684](https://github.com/gracile-web/gracile/commit/b0b3684b8ec6793c96a9ba1eb9b1eecaadc37eb7))
+* remove url pattern polyfill ([94d1130](https://github.com/gracile-web/gracile/commit/94d1130df8d56db56c20248c65a88a9da7f4c08f))
+* split render lit template and server html re-exports ([693f337](https://github.com/gracile-web/gracile/commit/693f337481225e94bf2d479baa53fbe80e1ea003))
+
 ## [0.9.5](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.4...@gracile/gracile@0.9.5) (2026-03-29)
 
 **Note:** Version bump only for package @gracile/gracile

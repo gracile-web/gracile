@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.4.3...@gracile-labs/better-errors@0.5.0-next.0) (2026-04-04)
+
+### Features
+
+* rehaul vite dev error overlay (revert to astro's approach) ([27b368d](https://github.com/gracile-web/gracile/commit/27b368d0cf1a444253a1b6958c668e75658b31cf))
+
+### Bug Fixes
+
+* lint, types… ([43c9f78](https://github.com/gracile-web/gracile/commit/43c9f78c41d9cf1677cbb74c49d0a16f983d8b5b))
+
 ## [0.4.3](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.4.2...@gracile-labs/better-errors@0.4.3) (2026-03-29)
 
 **Note:** Version bump only for package @gracile-labs/better-errors
