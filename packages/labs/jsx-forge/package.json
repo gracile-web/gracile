@@ -18,6 +18,9 @@
   "exports": {
     ".": "./dist/index.js",
     "./transform": "./dist/ts-patch-transformer-plugin.js",
+    "./to-literals": "./dist/to-literals/to-literals.js",
+    "./presets/lit": "./dist/presets/lit.js",
+    "./types": "./dist/types.js",
     "./package.json": "./package.json",
     "./jsx-runtime": "./dist/jsx-namespace.d.ts",
     "./lit-compiler": "./dist/lit-compiler-ts-patch-plugin.js"

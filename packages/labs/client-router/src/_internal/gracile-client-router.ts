@@ -22,7 +22,7 @@ const log = console.log;
  * [`@thepassle/app-tools`](https://github.com/thepassle/app-tools) router (license ISC).
  */
 export class GracileRouter extends EventTarget {
-	public context = {
+	public context: Context = {
 		parameters: {},
 		query: {},
 		title: '',
@@ -97,11 +97,9 @@ export class GracileRouter extends EventTarget {
 	}
 
 	public get fallback(): URL {
-		return new URL(
-			this.config?.fallback ||
-				GracileRouter.baseUrl.href.slice(window.location.origin.length),
-			GracileRouter.baseUrl,
-		);
+		if (!this.config?.fallback)
+			throw new Error('[ROUTER] No fallback configured');
+		return new URL(this.config.fallback, GracileRouter.baseUrl);
 	}
 
 	public static get baseUrl(): URL {
@@ -127,27 +125,69 @@ export class GracileRouter extends EventTarget {
 		window.scrollTo({ behavior: 'instant', left: 0, top });
 	}
 
-	#matchRoute(url: URL): Route | null {
+	static createContext(
+		route: Route,
+		url: URL,
+		match: URLPatternResult,
+	): Context {
+		const { title } = route;
+		const query = Object.fromEntries(new URLSearchParams(url.search));
+		const parameters = match.pathname.groups ?? {};
+
+		return {
+			url,
+			title:
+				typeof title === 'function' ? title({ parameters, query, url }) : title,
+			parameters,
+			query,
+		};
+	}
+
+	#matchRoute(
+		matcherUrl: URL,
+		contextUrl: URL = matcherUrl,
+	): { route: Route; context: Context } | null {
 		for (const route of this.routes) {
-			const match = route.urlPattern.exec(url);
+			const match = route.urlPattern.exec(matcherUrl);
 			if (match) {
-				const { title } = route;
-				const query = Object.fromEntries(new URLSearchParams(url.search));
-				const parameters = match?.pathname?.groups ?? {};
-				this.context = {
-					url,
-					title:
-						typeof title === 'function'
-							? title({ parameters, query, url })
-							: title,
-					parameters: parameters,
-					query,
+				return {
+					route,
+					context: GracileRouter.createContext(route, contextUrl, match),
 				};
-				return route;
 			}
 		}
-		log(`No route matched for ${url.pathname}${url.search}${url.hash}`, url);
+		log(
+			`No route matched for ${matcherUrl.pathname}${matcherUrl.search}${matcherUrl.hash}`,
+			matcherUrl,
+		);
 		return null;
+	}
+
+	#resolveRoute(url: URL): { route: Route; context: Context } | null {
+		const directMatch = this.#matchRoute(url);
+		if (directMatch) return directMatch;
+
+		if (!this.config?.fallback) return null;
+
+		return this.#matchRoute(this.fallback, url);
+	}
+
+	static hardNavigate(
+		url: URL,
+		options: {
+			replace?: boolean;
+		} = {},
+	): void {
+		log(
+			`[ROUTER] No client route matched for ${url.pathname}${url.search}${url.hash}. Falling back to browser navigation.`,
+		);
+
+		if (options.replace) {
+			window.location.replace(url.href);
+			return;
+		}
+
+		window.location.href = url.href;
 	}
 
 	#notifyUrlChanged(): void {
@@ -212,13 +252,17 @@ export class GracileRouter extends EventTarget {
 
 		this.#savedScrollPosition.set(this.context.url.href, window.scrollY);
 
-		let route = this.#matchRoute(url) || this.#matchRoute(this.fallback);
+		let matchedRoute = this.#resolveRoute(url);
 		log(`Navigating to ${url.pathname}${url.search}${url.hash}`, {
-			context: this.context,
+			context: matchedRoute?.context ?? this.context,
 			route: this.route,
 		});
 
-		let plugins: Plugin[] = route ? this.#collectPlugins(route) : [];
+		if (matchedRoute) this.context = matchedRoute.context;
+
+		let plugins: Plugin[] = matchedRoute
+			? this.#collectPlugins(matchedRoute.route)
+			: [];
 
 		for (const plugin of plugins) {
 			try {
@@ -229,8 +273,11 @@ export class GracileRouter extends EventTarget {
 					const condition = await Promise.resolve(result.condition());
 					if (!condition) {
 						url = new URL(result.redirect, GracileRouter.baseUrl);
-						route = this.#matchRoute(url) || this.#matchRoute(this.fallback);
-						plugins = route ? this.#collectPlugins(route) : [];
+						matchedRoute = this.#resolveRoute(url);
+						if (matchedRoute) this.context = matchedRoute.context;
+						plugins = matchedRoute
+							? this.#collectPlugins(matchedRoute.route)
+							: [];
 						log('Redirecting', { context: this.context, route: this.route });
 					}
 				}
@@ -240,10 +287,16 @@ export class GracileRouter extends EventTarget {
 			}
 		}
 
-		this.route = route;
+		this.route = matchedRoute?.route ?? null;
 
 		if (!this.route) {
-			throw new Error(`[ROUTER] No route or fallback matched for url ${url}`);
+			GracileRouter.hardNavigate(
+				url,
+				typeof options.replace === 'boolean'
+					? { replace: options.replace }
+					: {},
+			);
+			return;
 		}
 
 		for (const plugin of plugins) {

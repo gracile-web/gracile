@@ -181,6 +181,8 @@ const config = [
 			'packages/labs/og-images-generator/types/**',
 			'packages/labs/og-images-generator/demos/**',
 
+			'packages/labs/vite-plugin-jsx-forge/demo',
+
 			'packages/labs/literals/rollup-plugin-html-css-minifier/demo/**',
 
 			'packages/labs/vite-plugin-standard-css-modules/css-modules.d.ts',
@@ -208,7 +210,14 @@ const config = [
 			// 'packages/labs/**',
 		],
 		rules: {
-			'@typescript-eslint/explicit-function-return-type': 'error',
+
+						'@typescript-eslint/explicit-function-return-type': [
+				'error',
+				{
+					allowExpressions: true,
+					allowTypedFunctionExpressions: true,
+				},
+			],
 		},
 	},
 	{

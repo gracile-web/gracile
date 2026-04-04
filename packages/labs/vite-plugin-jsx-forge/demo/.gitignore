@@ -1,0 +1,8 @@
+# build output
+dist/
+
+# generated stuff
+.gracile/
+
+# dependencies
+node_modules/
