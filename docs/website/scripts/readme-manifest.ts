@@ -6,7 +6,7 @@
  * docs/website/ for `dest`.
  *
  * The collect-readmes.ts script reads this manifest and copies files at
- * docs:generate time. The destination files are git-ignored — they are
+ * docs:collect time. The destination files are git-ignored — they are
  * generated artifacts, never committed.
  */
 export const README_MAP: { src: string; dest: string }[] = [

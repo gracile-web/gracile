@@ -102,15 +102,10 @@ jobs:
       #   shell: bash
       #   run: node --run syncpack:lint
 
-      # NOTE: Audit is for prod only because a lot of root packages (like lerna etc.)
-      # are used old packages with intricate dependency trees, and they are
-      # never shipped to the user. But that's not 100% optimal, as devDeps could
-      # provoke some sec issues, too? A middleground is better than nothing and
-      # regularly blocked releases for obscure root mono-repo tooling deps.
       - name:
           'Verify the integrity of provenance attestations and registry
           signatures for installed [prod] dependencies'
-        run: 'node --run audit'
+        run: node --run audit
 
       # MARK: Lint/Checks pre-build
 
@@ -136,6 +131,10 @@ jobs:
         run: node --run build:libs
 
       # MARK: Lint/Checks post-build
+
+      - name: Prepare docs content (Typedoc, READMEs)
+        shell: bash
+        run: node --run docs:prepare
 
       - name: Cache ESLint results
         uses: actions/cache@v4
@@ -174,10 +173,6 @@ jobs:
       - name: Tests — E2E
         shell: bash
         run: node --run test:e2e
-
-      - name: Generate Typedoc
-        shell: bash
-        run: node --run docs:generate
 
       - name: Build docs website
         shell: bash

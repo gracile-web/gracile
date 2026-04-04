@@ -2,7 +2,7 @@
  * Copies each package README.md (canonical source) into its corresponding
  * docs website content path, as defined in readme-manifest.ts.
  *
- * Run as part of `docs:generate` — the output files are git-ignored.
+ * Run as part of `docs:collect` — the output files are git-ignored.
  */
 
 import { copyFile, mkdir } from 'node:fs/promises';

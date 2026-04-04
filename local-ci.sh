@@ -22,6 +22,8 @@ node --run clean
 
 node --run build:libs
 
+node --run docs:prepare
+
 node --run lint:es
 
 node --run test:unit
@@ -29,8 +31,6 @@ node --run test:unit
 node --run test:integration
 
 node --run test:e2e
-
-node --run docs:generate
 
 node --run build:docs
 
