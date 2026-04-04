@@ -17,3 +17,24 @@
 #     exit 1
 #   fi
 # fi
+
+# ── Check for unpulled remote changes ───────────────────────────────
+# Abort if the current branch is behind origin (e.g. a "next" release
+# was published and we forgot to pull).
+
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+if [ -n "$branch" ] && git rev-parse --verify "origin/$branch" >/dev/null 2>&1; then
+  git fetch --quiet origin "$branch" 2>/dev/null
+
+  behind=$(git rev-list --count "HEAD..origin/$branch" 2>/dev/null)
+
+  if [ "${behind:-0}" -gt 0 ]; then
+    echo ""
+    echo "🚨 HOLD UP! Local branch '$branch' is $behind commit(s) behind origin."
+    echo ""
+    echo "Run:  git pull"
+    echo ""
+    exit 1
+  fi
+fi

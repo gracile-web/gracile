@@ -14,6 +14,20 @@
     }
   },
 
+  "ignoreChanges": [
+    "*.md",
+    "**/test/**",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
+    "turbo.json",
+    "eslint.config.js",
+    "tsconfig.json",
+    "typedoc*.json*",
+    "local-ci.sh",
+    "scripts/**",
+    "starter-projects/**"
+  ],
+
   "packages": [
     "./packages/gracile",
 
