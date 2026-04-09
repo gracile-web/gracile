@@ -26,6 +26,7 @@ packages:
   - ./packages/labs/devtools
   - ./packages/labs/functional
   - ./packages/labs/hmr
+  - ./packages/labs/hmr-v2
   - ./packages/labs/islands
   - ./packages/labs/og-images-generator
   - ./packages/labs/vite-plugin-standard-css-modules
@@ -46,6 +47,7 @@ packages:
   - ./packages/labs/client-router/__fixtures__/client-routing-basic
   - ./packages/labs/css-helpers/__fixtures__/css-dedup-basic
   - ./packages/labs/hmr/__fixtures__/hmr-basic-lit
+  - ./packages/labs/hmr-v2/__fixtures__/hmr-scenarios
   - ./packages/labs/islands/__fixtures__/static-site-islands
   - ./packages/labs/vite-plugin-standard-css-modules/__fixtures__/hmr-css-modules
   - ./packages/labs/vite-plugin-jsx-forge/__fixtures__/jsx-accuracy

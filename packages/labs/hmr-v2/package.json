@@ -1,0 +1,16 @@
+{
+  "name": "@gracile-labs/hmr-v2",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Placeholder for future fine-grained HMR. Houses the god test suite for ALL HMR scenarios across the Gracile stack.",
+  "type": "module",
+  "scripts": {
+    "test:integration": "playwright test"
+  },
+  "devDependencies": {
+    "@gracile/internal-test-utils": "workspace:^",
+    "@playwright/test": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

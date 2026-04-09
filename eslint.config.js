@@ -39,6 +39,7 @@ const config = [
 					'./packages/labs/islands/tsconfig.json',
 					'./packages/labs/vite-plugin-babel-jsx-to-literals/tsconfig.json',
 					'./packages/labs/hmr/tsconfig.json',
+					'./packages/labs/hmr-v2/tsconfig.json',
 					'./packages/labs/babel-plugin-jsx-to-literals/tsconfig.json',
 					'./packages/labs/jsx-forge/tsconfig.json',
 					'./packages/labs/vite-plugin-jsx-forge/tsconfig.json',
@@ -273,7 +274,7 @@ const config = [
 			'unicorn/no-keyword-prefix': 'off',
 			'unicorn/consistent-destructuring': 'off',
 			'@typescript-eslint/no-unused-expressions': 'off',
-			'no-console': 'off',
+			'no-console': 'error',
 		},
 	},
 

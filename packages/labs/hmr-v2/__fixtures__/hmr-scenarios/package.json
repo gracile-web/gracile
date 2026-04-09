@@ -1,0 +1,11 @@
+{
+  "name": "@gracile/fixture-hmr-scenarios",
+  "type": "module",
+  "dependencies": {
+    "@gracile/gracile": "workspace:^",
+    "@gracile/server": "workspace:^",
+    "@lit-labs/ssr": "catalog:",
+    "lit": "catalog:",
+    "vite": "catalog:"
+  }
+}
