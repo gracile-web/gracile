@@ -19,6 +19,7 @@ import {
 } from './vite/plugin-server-build.js';
 import { gracileCETrackerPlugin } from './vite/plugin-ce-tracker.js';
 import { gracileHtmlRoutesBuildPlugins } from './vite/plugin-html-routes-build.js';
+import { gracileHandlerVirtualPlugin } from './vite/plugin-handler-virtual.js';
 
 // When plugin-client-build creates a temporary dev server via createServer(),
 // the user's vite.config is re-evaluated, calling gracile() again.
@@ -108,6 +109,9 @@ export const gracile = (config?: GracileConfig): any[] => {
 
 		// MARK: 10. Server virtual routes (SSR environment only)
 		...virtualRoutes({ state }),
+
+		// MARK: 10b. Handler virtual module (gracile:handler)
+		...gracileHandlerVirtualPlugin({ state }),
 
 		// MARK: 11. Server entrypoint (SSR environment only)
 		gracileEntrypointPlugin({ state }),

@@ -55,6 +55,35 @@ export interface GracileConfig {
 	trailingSlash?: 'always' | 'never' | 'ignore';
 
 	/**
+	 * Settings for server mode.
+	 *
+	 * Only meaningful when `output` is `'server'`.
+	 */
+	server?: {
+		/**
+		 * Path to the user's server entry file (e.g. `'./server.ts'`).
+		 *
+		 * When set, Gracile will:
+		 * - **Dev**: load the file via the Vite SSR environment and bridge it
+		 *   into the dev server as middleware (Vite keeps the HTTP listener).
+		 * - **Build**: use it as the SSR build input so the entire server is
+		 *   bundled into `dist/server/`.
+		 *
+		 * The entry file should `import { handler } from 'gracile:handler'`
+		 * and export a default app (Hono/Express) instance.
+		 *
+		 * @example
+		 * ```ts
+		 * gracile({
+		 *   output: 'server',
+		 *   server: { entry: './server.ts' },
+		 * })
+		 * ```
+		 */
+		entry?: string;
+	};
+
+	/**
 	 * Settings for the development mode.
 	 */
 	dev?: {
@@ -63,6 +92,9 @@ export interface GracileConfig {
 		 * Useful for mocking the production server.
 		 *
 		 * For `server` mode only.
+		 *
+		 * Not needed when using `server.entry` — the user's own middleware
+		 * provides locals directly.
 		 */
 		locals?: (context: { nodeRequest: Connect.IncomingMessage }) => unknown;
 	};

@@ -36,6 +36,9 @@ export interface PluginSharedState {
 
 	/** The output mode: 'static' or 'server'. */
 	outputMode: 'static' | 'server';
+
+	/** Resolved path to the user's server entry file, if configured. */
+	serverEntry: string | null;
 }
 
 /**
@@ -69,5 +72,6 @@ export function createPluginSharedState(
 		root: null,
 		gracileConfig: config || ({} as GracileConfig),
 		outputMode: config?.output || 'static',
+		serverEntry: config?.server?.entry ?? null,
 	};
 }

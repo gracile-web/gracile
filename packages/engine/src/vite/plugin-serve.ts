@@ -4,18 +4,85 @@
  * Sets up the Gracile request handler, route watcher, and dev-time
  * logging for `vite dev`.
  *
+ * When `server.entry` is configured, the user's server file is loaded
+ * via the SSR environment runner and bridged into Vite's middleware
+ * stack.  Otherwise falls back to the built-in `nodeAdapter` path.
+ *
  * @internal
  */
 
+import type {
+	IncomingMessage,
+	RequestListener,
+	ServerResponse,
+} from 'node:http';
+
 import { getVersion } from '@gracile/internal-utils/version';
 import c from 'picocolors';
-import type { Logger, PluginOption } from 'vite';
+import type {
+	Logger,
+	PluginOption,
+	RunnableDevEnvironment,
+	ViteDevServer,
+} from 'vite';
+import { createServerAdapter } from '@whatwg-node/server';
 
 import { createDevelopmentHandler } from '../dev/development.js';
 import { nodeAdapter } from '../server/adapters/node.js';
 import type { GracileConfig } from '../user-config.js';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
+import { setDevelopmentHandler } from './plugin-handler-virtual.js';
+
+// ── Helpers ──────────────────────────────────────────────────────────
+
+/**
+ * Detect whether the exported `app` is a Hono-style app (has `.fetch`)
+ * or a connect/express-style middleware function.
+ */
+function isFetchApp(
+	app: unknown,
+): app is { fetch: (request: Request) => Promise<Response> } {
+	return (
+		typeof app === 'object' &&
+		app !== null &&
+		'fetch' in app &&
+		typeof (app as Record<string, unknown>)['fetch'] === 'function'
+	);
+}
+
+/**
+ * Bridge a fetch-based app (Hono) into Node's `(req, res, next)` middleware.
+ *
+ * Uses `@whatwg-node/server` to handle both directions:
+ * Node `IncomingMessage` → standard `Request` and standard `Response` → Node `ServerResponse`.
+ */
+function createFetchBridge(
+	getApp: () => { fetch: (request: Request) => Promise<Response> } | null,
+	logger: Logger,
+): RequestListener {
+	const adapter = createServerAdapter((request) => {
+		const app = getApp();
+		if (!app) {
+			return new Response('Server entry not loaded yet', { status: 503 });
+		}
+		return app.fetch(request);
+	});
+
+	return async (request, response) => {
+		try {
+			await adapter(request, response);
+		} catch (error) {
+			logger.error(String(error));
+			if (!response.headersSent) {
+				response.statusCode = 500;
+				response.end('Internal server error');
+			}
+		}
+	};
+}
+
+// ── Plugin ───────────────────────────────────────────────────────────
 
 export function gracileServePlugin({
 	state,
@@ -62,6 +129,10 @@ export function gracileServePlugin({
 				gracileConfig: state.gracileConfig,
 			});
 
+			// Publish the handler so `gracile:handler` virtual module
+			// can delegate to it at runtime.
+			setDevelopmentHandler(handler);
+
 			logger.info(c.dim('Vite development server is starting…'), {
 				timestamp: true,
 			});
@@ -77,6 +148,14 @@ export function gracileServePlugin({
 				}, 100);
 			});
 
+			// ── Integrated server entry mode ─────────────────────────
+			if (state.serverEntry) {
+				return () => {
+					setupIntegratedServerEntry(server, state, logger);
+				};
+			}
+
+			// ── Classic mode (built-in nodeAdapter) ──────────────────
 			return () => {
 				server.middlewares.use((request, response, next) => {
 					const locals = config?.dev?.locals?.({ nodeRequest: request });
@@ -87,4 +166,80 @@ export function gracileServePlugin({
 			};
 		},
 	} as const;
+}
+
+// ── Integrated server entry setup ────────────────────────────────────
+
+function setupIntegratedServerEntry(
+	server: ViteDevServer,
+	state: PluginSharedState,
+	logger: Logger,
+): void {
+	const entry = state.serverEntry!;
+	const ssrEnvironment = server.environments['ssr'] as RunnableDevEnvironment;
+
+	// Mutable reference that gets hot-swapped on HMR.
+	let currentApp: unknown = null;
+
+	const loadEntry = async (): Promise<void> => {
+		try {
+			const entryModule = await ssrEnvironment.runner.import(entry);
+			currentApp = entryModule.default ?? entryModule.app ?? null;
+
+			if (currentApp) {
+				logger.info(c.green(`[gracile] Server entry loaded: ${entry}`), {
+					timestamp: true,
+				});
+			} else {
+				logger.warn(
+					c.yellow(
+						`[gracile] Server entry "${entry}" did not export a \`default\` or \`app\`. ` +
+							`The integrated server will not handle requests until this is fixed.`,
+					),
+				);
+			}
+		} catch (error) {
+			logger.error(
+				`[gracile] Failed to load server entry "${entry}": ${String(error)}`,
+			);
+			currentApp = null;
+		}
+	};
+
+	// Initial load
+	void loadEntry();
+
+	// Re-load when the entry (or its deps) are invalidated.
+	server.watcher.on('change', () => {
+		// The module runner will automatically invalidate; we just
+		// need to re-import.
+		void loadEntry();
+	});
+
+	// Bridge: detect Hono (fetch-based) vs Express (connect-based)
+	const fetchBridge = createFetchBridge(
+		() => (isFetchApp(currentApp) ? currentApp : null),
+		logger,
+	);
+
+	server.middlewares.use((request, response, next) => {
+		if (!currentApp) return next();
+
+		if (isFetchApp(currentApp)) {
+			Promise.resolve(fetchBridge(request, response)).catch((error: unknown) =>
+				next(error),
+			);
+		} else if (typeof currentApp === 'function') {
+			// Connect / Express style
+			(
+				currentApp as (
+					request: IncomingMessage,
+					response: ServerResponse,
+					next: () => void,
+				) => void
+			)(request, response, next);
+		} else {
+			next();
+		}
+	});
 }

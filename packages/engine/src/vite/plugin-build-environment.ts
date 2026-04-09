@@ -57,6 +57,10 @@ export function gracileBuildEnvironmentPlugin({
 			}
 
 			if (name === GRACILE_ENVIRONMENT_NAMES.ssr && isServerMode) {
+				// When `server.entry` is configured, use the user's server
+				// file as the SSR build input instead of the virtual entrypoint.
+				const ssrInput = state.serverEntry ?? 'entrypoint.js';
+
 				return {
 					build: {
 						outDir: 'dist/server',
@@ -66,7 +70,7 @@ export function gracileBuildEnvironmentPlugin({
 						cssCodeSplit: true,
 
 						rollupOptions: {
-							input: 'entrypoint.js',
+							input: ssrInput,
 
 							output: {
 								entryFileNames: '[name].js',

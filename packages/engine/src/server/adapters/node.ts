@@ -1,22 +1,14 @@
-import { Writable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
 import { nodeCondition } from '@gracile/internal-utils/node-condition/production-ssr';
 import { createLogger } from '@gracile/internal-utils/logger/helpers';
-import { createServerAdapter } from '@whatwg-node/server';
+import { normalizeNodeRequest, sendNodeResponse } from '@whatwg-node/server';
+import { createFetch } from '@whatwg-node/fetch';
 
 import { GracileError, GracileErrorData } from '../../errors/errors.js';
 import { constants } from '../constants.js';
-import {
-	type AdapterOptions,
-	type GracileHandler,
-	isRedirect,
-} from '../request.js';
-
-// NOTE: Find a more canonical way to ponyfill the Node HTTP request to standard Request
-// @ts-expect-error Abusing this feature!
-const nodeRequestToStandardRequest = createServerAdapter((request) => request);
+import type { AdapterOptions, GracileHandler } from '../request.js';
 
 function standardResponseInitToNodeResponse(
 	responseInit: ResponseInit | Response,
@@ -73,15 +65,12 @@ export function nodeAdapter(
 	): Promise<void | ServerResponse<IncomingMessage>> {
 		const logger = createLogger(options?.logger);
 
+		const fetchAPI = createFetch();
+
 		let webRequest: Request;
 
 		try {
-			webRequest = (await Promise.resolve(
-				nodeRequestToStandardRequest.handleNodeRequest(
-					// HACK: Exact optional properties
-					request as IncomingMessage & { url?: string; method?: string },
-				),
-			)) as unknown as Request;
+			webRequest = normalizeNodeRequest(request, fetchAPI, response);
 		} catch (error) {
 			throw new GracileError(
 				{
@@ -115,23 +104,9 @@ export function nodeAdapter(
 			});
 			return result.body.pipe(response);
 		}
-		if (result?.response) {
-			standardResponseInitToNodeResponse(result.response, response);
 
-			const redirect = isRedirect(result.response);
-			if (redirect) return response.end(result.body);
-
-			if (result.response.body) {
-				const piped = await result.response.body
-					.pipeTo(
-						Writable.toWeb(
-							response,
-						) as WritableStream /* NOTE: Minor typing mismatch (node:stream/web vs. TS global) */,
-					)
-					.catch((error) => logger.error(String(error)));
-				return piped;
-			}
-		}
+		if (result?.response)
+			return sendNodeResponse(result.response, response, request, false);
 
 		throw new GracileError({
 			...GracileErrorData.InvalidResponseInAdapter,

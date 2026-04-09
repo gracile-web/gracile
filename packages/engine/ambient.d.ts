@@ -7,6 +7,10 @@
 // 	export const routeAssets: import('./src/routes/route.js').RoutesAssets;
 // }
 
+declare module 'gracile:handler' {
+	export const handler: import('./src/server/request.js').GracileHandler;
+}
+
 declare namespace Gracile {
 	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 	interface Locals {

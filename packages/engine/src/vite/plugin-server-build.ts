@@ -19,6 +19,7 @@ import type { PluginOption } from 'vite';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
 import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
+import { createServerEntrypointGracileHandler } from './server-handler.js';
 
 // ── Client asset collector ───────────────────────────────────────────
 
@@ -55,6 +56,11 @@ export function gracileCollectClientAssetsPlugin({
  * This is the server's main entry: it imports routes and creates the
  * Gracile handler.
  *
+ * When `server.entry` is configured, this virtual module is no longer
+ * the build's Rollup input (the user's server file is instead) — but
+ * the handler creation code is still used by the `gracile:handler`
+ * virtual module, so this plugin remains active for backward compat.
+ *
  * Scoped to the SSR environment via `applyToEnvironment`.
  */
 export function gracileEntrypointPlugin({
@@ -71,31 +77,20 @@ export function gracileEntrypointPlugin({
 		},
 
 		resolveId(id) {
-			if (id === 'entrypoint.js') {
+			// When `server.entry` is set, the virtual entrypoint is no
+			// longer needed as a build input — skip resolution.
+			if (id === 'entrypoint.js' && !state.serverEntry) {
 				return id;
 			}
+
 			return null;
 		},
 
 		load(id) {
 			if (id === 'entrypoint.js' && state.routes && state.renderedRoutes) {
-				return `
-import { routeAssets, routeImports, routes } from 'gracile:routes';
-import { createGracileHandler } from '@gracile/gracile/_internals/server-runtime';
-import { createLogger } from '@gracile/gracile/_internals/logger';
-
-createLogger();
-
-export const handler = createGracileHandler({
-	root: process.cwd(),
-	routes,
-	routeImports,
-	routeAssets,
-	serverMode: true,
-	gracileConfig: ${JSON.stringify(state.gracileConfig, null, 2)}
-});
-`;
+				return createServerEntrypointGracileHandler(state.gracileConfig);
 			}
+
 			return null;
 		},
 	} as const;
