@@ -50,7 +50,7 @@ export function mergeRenderInfo(
 	return {
 		...renderInfo,
 		elementRenderers: [
-			...(renderInfo?.elementRenderers || []),
+			...(renderInfo?.elementRenderers?.filter(Boolean) || []),
 			LitElementRenderer,
 		],
 	};

@@ -42,6 +42,7 @@ export function createGracileHandler({
 	root,
 	serverMode,
 	gracileConfig,
+	elementRenderers,
 }: {
 	vite?: ViteDevServer | undefined;
 	routes: R.RoutesManifest;
@@ -50,7 +51,19 @@ export function createGracileHandler({
 	root: string;
 	serverMode?: boolean | undefined;
 	gracileConfig: GracileConfig;
+	elementRenderers?: unknown[] | undefined;
 }): GracileHandler {
+	// Merge renderer classes provided by codegen into the config's renderInfo.
+	if (elementRenderers?.length) {
+		gracileConfig.litSsr ??= {};
+		gracileConfig.litSsr.renderInfo ??= {};
+		const existing = gracileConfig.litSsr.renderInfo.elementRenderers ?? [];
+		gracileConfig.litSsr.renderInfo.elementRenderers = [
+			...elementRenderers,
+			...existing,
+		] as typeof existing;
+	}
+
 	const logger = getLogger();
 
 	const middleware: GracileHandler = async (

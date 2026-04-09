@@ -15,7 +15,8 @@
 import { join } from 'node:path';
 import { rename, rm } from 'node:fs/promises';
 
-import type { PluginOption } from 'vite';
+import type { PluginOption, ResolvedConfig } from 'vite';
+import { getPluginContext } from '@gracile/internal-utils/plugin-context';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
 import { GRACILE_ENVIRONMENT_NAMES } from './constants.js';
@@ -68,12 +69,18 @@ export function gracileEntrypointPlugin({
 }: {
 	state: PluginSharedState;
 }): PluginOption {
+	let resolvedConfig: ResolvedConfig | undefined;
+
 	return {
 		name: 'vite-plugin-gracile-entry',
 		apply: 'build',
 
 		applyToEnvironment(environment) {
 			return environment.name === GRACILE_ENVIRONMENT_NAMES.ssr;
+		},
+
+		configResolved(config) {
+			resolvedConfig = config;
 		},
 
 		resolveId(id) {
@@ -88,7 +95,14 @@ export function gracileEntrypointPlugin({
 
 		load(id) {
 			if (id === 'entrypoint.js' && state.routes && state.renderedRoutes) {
-				return createServerEntrypointGracileHandler(state.gracileConfig);
+				const context = resolvedConfig
+					? getPluginContext(resolvedConfig)
+					: undefined;
+
+				return createServerEntrypointGracileHandler(
+					state.gracileConfig,
+					context?.rendererModules ?? [],
+				);
 			}
 
 			return null;

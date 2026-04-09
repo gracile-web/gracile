@@ -16,7 +16,8 @@
  * @internal
  */
 
-import type { Plugin } from 'vite';
+import type { Plugin, ResolvedConfig } from 'vite';
+import { getPluginContext } from '@gracile/internal-utils/plugin-context';
 
 import type { GracileHandler } from '../server/request.js';
 
@@ -67,6 +68,8 @@ export function gracileHandlerVirtualPlugin({
 }: {
 	state: PluginSharedState;
 }): Plugin[] {
+	let resolvedConfig: ResolvedConfig | undefined;
+
 	return [
 		// -- Serve (dev) --------------------------------------------------
 		{
@@ -103,6 +106,10 @@ export const handler = (...args) => getDevelopmentHandler()(...args);
 				return environment.name === GRACILE_ENVIRONMENT_NAMES.ssr;
 			},
 
+			configResolved(config) {
+				resolvedConfig = config;
+			},
+
 			resolveId(id) {
 				if (id === GRACILE_HANDLER_MODULE_ID)
 					return RESOLVED_GRACILE_HANDLER_MODULE_ID;
@@ -113,9 +120,16 @@ export const handler = (...args) => getDevelopmentHandler()(...args);
 				if (id !== RESOLVED_GRACILE_HANDLER_MODULE_ID) return null;
 				if (!state.routes || !state.renderedRoutes) return null;
 
+				const context = resolvedConfig
+					? getPluginContext(resolvedConfig)
+					: undefined;
+
 				// Same handler-creation code currently emitted by
 				// gracileEntrypointPlugin for the virtual `entrypoint.js`.
-				return createServerEntrypointGracileHandler(state.gracileConfig);
+				return createServerEntrypointGracileHandler(
+					state.gracileConfig,
+					context?.rendererModules ?? [],
+				);
 			},
 		} as const,
 	];

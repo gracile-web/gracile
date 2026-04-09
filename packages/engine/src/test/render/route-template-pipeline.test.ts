@@ -42,6 +42,14 @@ describe('mergeRenderInfo', () => {
 			true,
 		);
 	});
+
+	it('filters null entries from elementRenderers', () => {
+		const result = mergeRenderInfo({
+			elementRenderers: [null as never],
+		});
+		// null should be filtered out, only LitElementRenderer remains
+		nodeAssert.equal(result.elementRenderers!.length, 1);
+	});
 });
 
 // ── injectSiblingAssets ──────────────────────────────────────────────
