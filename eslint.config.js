@@ -50,6 +50,7 @@ const config = [
 					'./packages/labs/literals/html-css-minifier/tsconfig.json',
 					'./packages/labs/literals/rollup-plugin-html-css-minifier/tsconfig.json',
 					'./packages/labs/vite-plugin-standard-css-modules/tsconfig.json',
+					'./packages/labs/lit-macros/tsconfig.json',
 					'./docs/website/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,

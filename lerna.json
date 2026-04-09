@@ -58,6 +58,7 @@
     "./packages/labs/og-images-generator",
     "./packages/labs/vite-plugin-jsx-forge",
     "./packages/labs/vite-plugin-standard-css-modules",
+    "./packages/labs/lit-macros",
     "./packages/labs/literals/parser",
     "./packages/labs/literals/html-css-minifier",
     "./packages/labs/literals/rollup-plugin-html-css-minifier",

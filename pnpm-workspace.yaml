@@ -35,6 +35,8 @@ packages:
   - ./packages/labs/vite-plugin-babel-jsx-to-literals
   - ./packages/labs/jsx-forge
   - ./packages/labs/vite-plugin-jsx-forge
+  # Labs — Lit Macros
+  - ./packages/labs/lit-macros
   # Labs — Literals
   - ./packages/labs/literals/parser
   - ./packages/labs/literals/html-css-minifier

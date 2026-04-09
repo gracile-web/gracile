@@ -1,0 +1,70 @@
+{
+  "name": "@gracile-labs/lit-macros",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Vite plugin to compile Lit decorators into static class idioms — zero-runtime, OXC-powered",
+  "keywords": [
+    "vite-plugin",
+    "lit",
+    "lit-element",
+    "decorators",
+    "macros",
+    "compiler",
+    "oxc",
+    "web-components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracile-web/gracile",
+    "directory": "packages/labs/lit-macros"
+  },
+  "license": "MIT",
+  "author": "Julian Cataldo <jcprofree@gmail.com>",
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js",
+    "./vite": "./dist/vite.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "!dist/test"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf ./dist ./coverage",
+    "test:unit": "c8 node --enable-source-maps --test dist/test/*.spec.js",
+    "test:unit:dev": "c8 node --enable-source-maps --test --watch dist/test/*.spec.js",
+    "bench": "node scripts/bench-transform.mjs"
+  },
+  "dependencies": {
+    "magic-string": "catalog:"
+  },
+  "peerDependencies": {
+    "rolldown": "catalog:",
+    "vite": "^7.0.0 || ^8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "rolldown": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@gracile/internal-tsconfigs": "workspace:^",
+    "@gracile/internal-test-utils": "workspace:^",
+    "@oxc-project/types": "catalog:",
+    "@types/node": "catalog:",
+    "c8": "catalog:",
+    "oxc-parser": "catalog:",
+    "oxc-transform": "catalog:",
+    "rolldown": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
