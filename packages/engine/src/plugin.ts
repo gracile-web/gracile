@@ -3,7 +3,7 @@ import type { PluginOption } from 'vite';
 
 import type { GracileConfig } from './user-config.js';
 import { htmlRoutesLoader } from './vite/html-routes.js';
-import { hmrSsrReload } from './vite/hmr.js';
+import { hmrSsrReload, hmrClientSelfAccept } from './vite/hmr.js';
 import { virtualRoutesClient, virtualRoutes } from './vite/virtual-routes.js';
 import {
 	createPluginSharedState,
@@ -75,6 +75,9 @@ export const gracile = (config?: GracileConfig): any[] => {
 
 		// MARK: 3. HMR SSR reload
 		hmrSsrReload(),
+
+		// MARK: 3b. HMR client self-accept (.client. files)
+		hmrClientSelfAccept(),
 
 		// MARK: 4. Dev serve middleware
 		gracileServePlugin({
