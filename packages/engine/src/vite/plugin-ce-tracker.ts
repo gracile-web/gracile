@@ -56,6 +56,8 @@ export function gracileCETrackerPlugin(): Plugin {
 	return {
 		name: 'vite-plugin-gracile-ce-tracker',
 
+		apply: 'serve',
+
 		configureServer() {
 			installCeTracker();
 		},
