@@ -17,7 +17,6 @@
             }
           ],
           "members": [],
-          "superclass": {},
           "summary": "Base document outlet for route page injection.",
           "documentation": "",
           "dependencies": [],
