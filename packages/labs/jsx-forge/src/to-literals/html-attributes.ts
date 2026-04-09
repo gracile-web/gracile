@@ -26,7 +26,7 @@ export function appendAttribute(
 		? childNode.name.name.getText()
 		: childNode.name.getText();
 
-	const checker = program.getTypeChecker();
+	const checker = program?.getTypeChecker();
 
 	const expression =
 		childNode.initializer &&
@@ -35,7 +35,8 @@ export function appendAttribute(
 			? childNode.initializer.expression
 			: undefined;
 
-	const type = expression ? checker.getTypeAtLocation(expression) : undefined;
+	const type =
+		expression && checker ? checker.getTypeAtLocation(expression) : undefined;
 
 	const customAttribute = getCustomAttribute(
 		preset,
@@ -78,7 +79,7 @@ export function getCustomAttribute(
 	namespaceName: string | undefined,
 	attributeName: string,
 	ts: typeof Ts,
-	checker: Ts.TypeChecker,
+	checker: Ts.TypeChecker | undefined,
 	type: Ts.Type | undefined,
 ): PresetAttribute | undefined {
 	return preset.attributes.find(
@@ -93,7 +94,7 @@ export function getCustomAttribute(
 			(!attribute.when.namespace && attribute.when.name
 				? attribute.when.name === attributeName
 				: false) ||
-			(type /* && !attribute.when.namespace */
+			(type && checker
 				? attribute.when.type?.isAssignableTo &&
 					checker.isTypeAssignableTo(
 						getBuiltinType(checker, attribute.when.type.isAssignableTo),

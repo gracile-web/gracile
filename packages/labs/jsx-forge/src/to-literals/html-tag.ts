@@ -46,12 +46,25 @@ export function handleTag(
 			bodyReplacement = appendAttribute(childNode, context);
 		}
 		if (ts.isJsxSpreadAttribute(childNode)) {
-			const checker = program.getTypeChecker();
+			const checker = program?.getTypeChecker();
+
+			if (!checker) {
+				// Without a type checker we cannot enumerate spread properties.
+				// Emit a compile-time diagnostic so the user knows to either
+				// enable typeAware mode or avoid spread attributes.
+				const pos = childNode.getStart?.() ?? 0;
+				const file = childNode.getSourceFile?.()?.fileName ?? '<unknown>';
+				// eslint-disable-next-line no-console
+				console.warn(
+					`[jsx-forge] Spread attributes require typeAware mode. ` +
+						`Skipped spread at ${file}:${String(pos)}. ` +
+						`Use explicit attributes or enable { typeAware: true }.`,
+				);
+				return;
+			}
 
 			const type = checker.getTypeAtLocation(childNode.expression);
 			const properties = checker.getPropertiesOfType(type);
-
-			console.log({ c: childNode.expression, type });
 
 			for (const property of properties) {
 				const declaration = property.declarations?.at(0);

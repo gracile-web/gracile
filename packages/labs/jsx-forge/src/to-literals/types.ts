@@ -23,7 +23,7 @@ export interface Context {
 	globalFlags: { literalFlavor: string };
 	imports: Map<string, Import>;
 	preset: Preset;
-	program: Ts.Program;
+	program: Ts.Program | undefined;
 	ts: TsWithInternals;
 	visitNode: <T extends Ts.Node>(expression: T) => T;
 }

@@ -134,7 +134,8 @@ function handleJsxElement(
 	) {
 		flags.isLiteralSelector = true;
 		const previousFlavorType = flavor.literalFlavor;
-		flavor.literalFlavor = customLiteralTagDirective;
+		flavor.literalFlavor =
+			(preset.antiCollisionImportPrefix ?? '') + customLiteralTagDirective;
 
 		const visited = visitNode(
 			factory.createJsxFragment(

@@ -288,7 +288,7 @@ describe('For-each directive', () => {
 		// keyFn should come before the html tagged template
 		assert.match(
 			result,
-			/\$_repeat\(\["a", "b"], \(id\) => \(id\), \(id\) => \(html/,
+			/\$_repeat\(\["a", "b"], \(id\) => \(id\), \(id\) => \(\$_html/,
 		);
 	});
 });
@@ -301,7 +301,7 @@ describe('Use literal directives', () => {
 	test('default — imports html from lit', () => {
 		const result = raw(`const el = <div>Abc</div>;`);
 		assert.match(result.imports, /from "lit"/);
-		assert.match(result.imports, /{ html }/);
+		assert.match(result.imports, /html as \$_html/);
 	});
 
 	test('"use html-server" — imports from @lit-labs/ssr', () => {
@@ -378,8 +378,7 @@ describe('Auto-import generation', () => {
 			`const el = <div style:map={{ color: "red" }}>Hi</div>;`,
 		);
 		// The preset has antiCollisionImportPrefix: '$_'
-		// Literal imports (html) should NOT get the prefix
-		// Directive imports (styleMap) SHOULD get the prefix
+		// All auto-generated imports get the prefix (html → $_html, styleMap → $_styleMap)
 		assert.match(result.imports, /\$_styleMap/);
 	});
 });

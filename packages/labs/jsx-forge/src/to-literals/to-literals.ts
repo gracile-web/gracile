@@ -13,14 +13,14 @@ export function createJsxToLiteralsTransformer(
 	_pluginConfig = {},
 	preset: Preset = PRESETS.Default,
 ): Ts.TransformerFactory<Ts.SourceFile> {
-	if (!program) throw new ReferenceError('Missing TS Program.');
-
 	return (context) => {
 		const imports = new Map<string, Import>();
 
 		const { factory } = ts;
 
-		const defaultHtml = preset.useLiteral.default.at(0)?.as ?? 'html';
+		const defaultHtml =
+			(preset.antiCollisionImportPrefix ?? '') +
+			(preset.useLiteral.default.at(0)?.as ?? 'html');
 		const globalFlags = { literalFlavor: defaultHtml };
 		let useGlobalLiteralDirective = false;
 
@@ -66,7 +66,8 @@ export function createJsxToLiteralsTransformer(
 							preset.useLiteral[flavor as keyof typeof preset.useLiteral];
 						const flavoredHtml = flavorImport?.at(0)?.as;
 						if (flavoredHtml) {
-							globalFlags.literalFlavor = flavoredHtml;
+							globalFlags.literalFlavor =
+								(preset.antiCollisionImportPrefix ?? '') + flavoredHtml;
 
 							for (const [index, index_] of flavorImport.entries())
 								imports.set(`html:${flavor}:${index.toString()}`, index_);
@@ -190,21 +191,14 @@ export function createJsxToLiteralsTransformer(
 				const importDeclarations: Ts.ImportDeclaration[] = [];
 
 				for (const [, declaration] of imports) {
-					const isLiteralImport = Object.values(preset.useLiteral)
-						.flatMap((v) => v.map((v2) => v2.as))
-						.includes(declaration.as);
-
 					const importSpecifier = factory.createImportSpecifier(
 						false,
-						(declaration.name === declaration.as &&
-							!preset.antiCollisionImportPrefix) ||
-							isLiteralImport
+						declaration.name === declaration.as &&
+							!preset.antiCollisionImportPrefix
 							? undefined
 							: factory.createIdentifier(declaration.name),
 						factory.createIdentifier(
-							(preset.antiCollisionImportPrefix && !isLiteralImport
-								? preset.antiCollisionImportPrefix
-								: '') + declaration.as,
+							(preset.antiCollisionImportPrefix ?? '') + declaration.as,
 						),
 					);
 
