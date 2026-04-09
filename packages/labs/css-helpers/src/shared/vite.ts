@@ -1,11 +1,15 @@
+import { relative } from 'node:path';
+
 import {
 	getPluginContext,
 	type PluginContext,
 } from '@gracile/internal-utils/plugin-context';
-import type { Plugin } from 'vite';
+import type { Plugin, ResolvedConfig } from 'vite';
 
-import { DedupLitElementRenderer } from './dedup-renderer.js';
-import { SHARED_STYLE_CE_SCRIPT } from './provider.js';
+import {
+	DedupLitElementRenderer,
+	GRACILE_SRC_MARKER,
+} from './dedup-renderer.js';
 
 /**
  * Gracile Vite plugin for DSD style deduplication.
@@ -30,6 +34,7 @@ import { SHARED_STYLE_CE_SCRIPT } from './provider.js';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function dsdStyleDedup(): any[] {
 	let sharedPluginContext: PluginContext | undefined;
+	let viteConfig: ResolvedConfig;
 
 	return [
 		{
@@ -38,6 +43,18 @@ export function dsdStyleDedup(): any[] {
 
 			config(resolvedConfig) {
 				sharedPluginContext = getPluginContext(resolvedConfig);
+
+				// Register module specifier so the production server build
+				// can generate a proper import instead of JSON-serialising
+				// the class reference.
+				sharedPluginContext.rendererModules.push({
+					importSpecifier: '@gracile-labs/css-helpers/shared/dedup-renderer',
+					exportName: 'DedupLitElementRenderer',
+				});
+			},
+
+			configResolved(resolved) {
+				viteConfig = resolved;
 			},
 
 			configureServer() {
@@ -48,22 +65,15 @@ export function dsdStyleDedup(): any[] {
 					DedupLitElementRenderer,
 				);
 			},
-		} as const,
 
-		{
-			name: 'gracile-dsd-style-dedup-html',
+			transform(code, id) {
+				if (!id.endsWith('.css?inline')) return;
 
-			transformIndexHtml: {
-				order: 'post',
-				handler() {
-					return [
-						{
-							tag: 'script',
-							children: SHARED_STYLE_CE_SCRIPT,
-							injectTo: 'head',
-						},
-					];
-				},
+				const filePath = id.replace(/\?inline$/, '');
+				const sourcePath =
+					'/' + relative(viteConfig.root, filePath).replaceAll('\\', '/');
+
+				return `/*! ${GRACILE_SRC_MARKER}${sourcePath} */\n${code}`;
 			},
 		} as const,
 	] as Plugin[];

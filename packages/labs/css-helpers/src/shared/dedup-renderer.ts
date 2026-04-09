@@ -23,6 +23,14 @@ function getRegistry(renderInfo: RenderInfo): Set<string> {
 const STYLE_ID_PREFIX = '__lit-s-';
 
 /**
+ * CSS comment marker injected by the Vite plugin for `?inline` CSS imports.
+ * Format: `@gracile-src:/path/to/file.css` (wrapped in a CSS comment).
+ */
+export const GRACILE_SRC_MARKER = '@gracile-src:';
+
+const SRC_MARKER_RE = /\/\*!? @gracile-src:(.+?) \*\//;
+
+/**
  * A `LitElementRenderer` subclass that deduplicates `<style>` blocks in
  * Declarative Shadow DOM output.
  *
@@ -62,7 +70,19 @@ export class DedupLitElementRenderer extends LitElementRenderer {
 		const styleId = STYLE_ID_PREFIX + tagName;
 		const registry = getRegistry(renderInfo);
 
-		const adopter = /* html */ `<adopt-shared-style style-id="${styleId}"></adopt-shared-style>`;
+		// Scan CSS content between <style>…</style> for a source marker.
+		let noscriptFallback = '';
+		for (let i = styleOpenIdx + 1; i < styleCloseIdx; i++) {
+			const segment = result[i];
+			if (typeof segment !== 'string') continue;
+			const srcMatch = segment.match(SRC_MARKER_RE);
+			if (srcMatch) {
+				noscriptFallback = `<noscript><link rel="stylesheet" href="${srcMatch[1]}"></noscript>`;
+				break;
+			}
+		}
+
+		const adopter = /* html */ `<adopt-shared-style style-id="${styleId}">${noscriptFallback}</adopt-shared-style>`;
 
 		if (!registry.has(tagName)) {
 			// First occurrence: keep <style> but add an id, append adopter.

@@ -30,6 +30,12 @@ test.describe('DSD Style Deduplication', () => {
 		);
 		expect(adopterMatches).toHaveLength(3);
 
+		// Each adopter should contain a <noscript><link> fallback
+		const noscriptMatches = html.match(
+			/<adopt-shared-style style-id="__lit-s-my-card"><noscript><link rel="stylesheet" href="[^"]+"><\/noscript><\/adopt-shared-style>/g,
+		);
+		expect(noscriptMatches).toHaveLength(3);
+
 		// No plain <style> without id inside subsequent my-card shadow roots
 		// Split by template shadowroot boundaries and check
 		const templateBlocks = html.split(
@@ -83,5 +89,25 @@ test.describe('DSD Style Deduplication', () => {
 				.evaluate((el) => getComputedStyle(el).borderColor);
 			expect(border).toBe('rgb(70, 130, 180)');
 		}
+	});
+
+	test('no-JS: all cards are styled via noscript+link fallback', async ({
+		browser,
+	}) => {
+		const context = await browser.newContext({ javaScriptEnabled: false });
+		const page = await context.newPage();
+		await page.goto('/');
+
+		// All cards should be styled: the first has inline <style>, subsequent
+		// ones get styles via <noscript><link> which loads when JS is off.
+		for (let i = 0; i < 3; i++) {
+			const color = await page
+				.locator('my-card h2')
+				.nth(i)
+				.evaluate((el) => getComputedStyle(el).color);
+			expect(color).toBe('rgb(70, 130, 180)');
+		}
+
+		await context.close();
 	});
 });

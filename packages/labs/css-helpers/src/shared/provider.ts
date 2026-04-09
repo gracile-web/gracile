@@ -1,6 +1,10 @@
 import { html, type ServerRenderedTemplate } from '@lit-labs/ssr';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
+// TODO: Find a way to not do this by hand.
+// https://playground.oxc.rs/
+export const SHARED_STYLE_CE_SCRIPT_MINIFIED = `{const e=new Map;class t extends HTMLElement{connectedCallback(){let t=this.getAttribute(\`style-id\`);if(!t){this.remove();return}let n=this.getRootNode(),r=e.get(t);if(r)n.adoptedStyleSheets.push(r);else{let r=n.getElementById(t);if(r){let n=new CSSStyleSheet;n.replaceSync(r.textContent),e.set(t,n)}}this.remove()}}customElements.define(\`adopt-shared-style\`,t);}`;
+
 export const SHARED_STYLE_CE_SCRIPT = /* js */ `{
 	const __sharedStyleCache = new Map();
 	class AdoptSharedStyle extends HTMLElement {
@@ -60,11 +64,9 @@ export const SHARED_STYLE_CE_SCRIPT = /* js */ `{
  * ```
  */
 export const SharedStyleProvider = (): ServerRenderedTemplate =>
-	html`${unsafeHTML(/* html */ `
-<script>
-  ${SHARED_STYLE_CE_SCRIPT}
-</script>
-`)}`;
+	html`${unsafeHTML(
+		/* html */ `<script>${SHARED_STYLE_CE_SCRIPT_MINIFIED}</script>`,
+	)}`;
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export declare abstract class AdoptSharedStyle {}
