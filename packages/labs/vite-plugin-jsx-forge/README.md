@@ -22,12 +22,12 @@ npm i @gracile-labs/vite-plugin-jsx-forge jsx-forge
 ```ts
 // @filename: /vite.config.ts
 
-import { gracileJsxTs } from '@gracile-labs/vite-plugin-jsx-forge/vite';
+import { gracileJsxToLiterals } from '@gracile-labs/vite-plugin-jsx-forge/to-literals';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
-    gracileJsxTs(),
+    gracileJsxToLiterals(),
 
     // ...
   ],
@@ -156,6 +156,58 @@ tag function is imported:
 | _(default)_         | `lit`               | Standard client templates |
 | `'use html-server'` | `@lit-labs/ssr`     | Server-side rendering     |
 | `'use html-signal'` | `@lit-labs/signals` | Signal-aware templates    |
+
+### Options
+
+```ts
+gracileJsxToLiterals({
+  /** Use a full TS LanguageService for type-aware transforms. Default: true */
+  typeAware: true,
+
+  /** Path to tsconfig (resolved from project root). Default: 'tsconfig.json' */
+  tsconfig: 'tsconfig.json',
+});
+```
+
+#### `typeAware` (default: `true`)
+
+When **enabled**, the plugin maintains a TypeScript LanguageService that
+provides a type checker. This enables:
+
+- **Automatic boolean bindings** — `disabled={flag}` → `?disabled=${flag}` when
+  `flag` is typed `boolean`.
+- **Automatic `ifDefined()` wrapping** — `title={val}` →
+  `title=${ifDefined(val)}` when `val` is typed `T | undefined`.
+- **Spread attribute expansion** — `{...props}` is expanded into individual
+  attribute bindings using the type checker.
+
+When set to **`false`**, the transform is purely syntactic (no type checker).
+This is significantly faster (~20× on incremental saves) but requires you to use
+**explicit namespace prefixes** for special bindings:
+
+| Prefix   | Lit binding   | Example                     |
+| -------- | ------------- | --------------------------- |
+| `bool:`  | `?attr`       | `<input bool:checked={v}/>` |
+| `if:`    | `ifDefined()` | `<a if:href={maybeUrl}>`    |
+| `on:`    | `@event`      | `<button on:click={fn}>`    |
+| `.prop:` | `.property`   | `<el .prop:items={list}>`   |
+
+Spread attributes are **skipped** in syntactic mode (a console warning is
+emitted).
+
+### Benchmarks
+
+| Scenario                           | median  | mean      | p95      | min     | max      |
+| ---------------------------------- | ------- | --------- | -------- | ------- | -------- |
+| **Cold start .tsx** (type-aware)   | —       | 1186.6 ms | —        | —       | —        |
+| **Cold start .tsx** (syntactic)    | —       | 34.9 ms   | —        | —       | —        |
+| **Cold start .ts**                 | —       | 11.3 ms   | —        | —       | —        |
+| **Warm request .tsx** (type-aware) | 2.0 ms  | 2.1 ms    | 3.3 ms   | 1.4 ms  | 3.3 ms   |
+| **Warm request .tsx** (syntactic)  | 1.7 ms  | 1.7 ms    | 2.8 ms   | 1.2 ms  | 2.8 ms   |
+| **Warm request .ts** (baseline)    | 2.9 ms  | 3.4 ms    | 12.0 ms  | 2.2 ms  | 12.0 ms  |
+| **Incremental .tsx** (type-aware)  | 95.9 ms | 103.3 ms  | 153.4 ms | 89.1 ms | 153.4 ms |
+| **Incremental .tsx** (syntactic)   | 5.8 ms  | 6.1 ms    | 8.7 ms   | 5.0 ms  | 8.7 ms   |
+| **Incremental .ts** (baseline)     | 4.5 ms  | 4.7 ms    | 5.7 ms   | 4.0 ms  | 5.7 ms   |
 
 ---
 

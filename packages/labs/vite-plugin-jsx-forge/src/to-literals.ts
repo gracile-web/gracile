@@ -13,24 +13,111 @@ export interface VitePluginOptions {
 	 * Defaults to `'tsconfig.json'` resolved from `root`.
 	 */
 	tsconfig?: string;
+
+	/**
+	 * When `true` (default), uses a TypeScript LanguageService for type-aware
+	 * transforms — automatic `?attr` boolean bindings, `ifDefined()` wrapping
+	 * for `T | undefined`, and type-based spread expansion.
+	 *
+	 * When `false`, runs a purely **syntactic** transform (no type checker).
+	 * Much faster (~5× on incremental), but type-based bindings are disabled.
+	 * Use explicit namespace prefixes (`bool:`, `if:`, `on:`, `.prop:`) instead.
+	 */
+	typeAware?: boolean;
 }
 
 /**
  * Vite plugin that transforms `.tsx` JSX into Lit tagged template literals.
  *
- * Creates a TypeScript `Program` for type-aware JSX transformation, then uses
- * `program.emit` (single-file, in-memory) with the jsx-forge transformer.
- * The output is JS. Vite's esbuild/OXC step passes it through unchanged.
+ * Uses a TypeScript **LanguageService** for efficient incremental updates.
+ * On each transform, only the changed file's version is bumped — the service
+ * reuses module resolution, symbol tables, and type information for unchanged
+ * files. Emits via `program.emit` with the jsx-forge transformer.
  * No `@rollup/plugin-typescript` or `ts-patch` needed.
  */
-export function gracileJsxTs(options?: VitePluginOptions): Plugin[] {
-	let program: ts.Program;
-	let compilerHost: ts.CompilerHost;
-	let parsedCommandLine: ts.ParsedCommandLine;
-	let projectRoot: string;
-	let cachedTransformer: ts.TransformerFactory<ts.SourceFile> | undefined;
+export function jsxToLiterals(options?: VitePluginOptions): Plugin[] {
+	const typeAware = options?.typeAware !== false;
 
-	/** Compiler options overrides to keep the program slim and single-purpose. */
+	return typeAware ? createTypeAwarePlugin(options) : createSyntacticPlugin();
+}
+
+// ---------------------------------------------------------------------------
+// Syntactic-only path (no LanguageService, no type checker)
+// ---------------------------------------------------------------------------
+
+function createSyntacticPlugin(): Plugin[] {
+	let cachedTransformer: ts.TransformerFactory<ts.SourceFile> | undefined;
+	const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
+
+	function getTransformer(): ts.TransformerFactory<ts.SourceFile> {
+		cachedTransformer ??= createJsxToLiteralsTransformer(
+			ts as unknown as TsWithInternals,
+			undefined,
+			{},
+			PRESETS.Default,
+		);
+
+		return cachedTransformer;
+	}
+
+	return [
+		{
+			name: VITE_PLUGIN_NAME,
+			enforce: 'pre',
+
+			transform(code, id) {
+				if (!id.endsWith('.tsx') && !id.endsWith('.jsx')) return;
+
+				const sourceFile = ts.createSourceFile(
+					id,
+					code,
+					ts.ScriptTarget.ESNext,
+					/* setParentNodes */ true,
+					ts.ScriptKind.TSX,
+				);
+
+				const result = ts.transform(sourceFile, [getTransformer()], {
+					jsx: ts.JsxEmit.Preserve,
+				});
+
+				const transformed = result.transformed[0];
+				if (!transformed) {
+					result.dispose();
+					return;
+				}
+
+				const output = printer.printFile(transformed);
+				result.dispose();
+
+				return { code: output, map: null };
+			},
+		} as const satisfies Plugin,
+	];
+}
+
+// ---------------------------------------------------------------------------
+// Type-aware path (LanguageService + full checker)
+// ---------------------------------------------------------------------------
+
+function createTypeAwarePlugin(options?: VitePluginOptions): Plugin[] {
+	let parsedCommandLine: ts.ParsedCommandLine;
+	let service: ts.LanguageService;
+	let cachedTransformer: ts.TransformerFactory<ts.SourceFile> | undefined;
+	let currentProgram: ts.Program | undefined;
+
+	/** Per-file version + content tracking for the LanguageServiceHost. */
+	const fileVersions = new Map<
+		string,
+		{ version: number; content: string | undefined }
+	>();
+
+	/** Cached file-name list — invalidated when fileVersions changes. */
+	let cachedFileNames: string[] | undefined;
+
+	/** Snapshot cache for files read from disk (never touched by Vite). */
+	const diskSnapshotCache = new Map<string, ts.IScriptSnapshot>();
+
+	/** Compiler options overrides to keep the service slim and single-purpose. */
 	const SLIM_OVERRIDES: ts.CompilerOptions = {
 		// We emit JS so program.emit works with our custom transformer.
 		noEmit: false,
@@ -51,24 +138,16 @@ export function gracileJsxTs(options?: VitePluginOptions): Plugin[] {
 		skipDefaultLibCheck: true,
 	};
 
-	/** (Re-)create the TS Program from the parsed tsconfig. */
-	function buildProgram(): void {
-		// Reuse the host across rebuilds; it's cheap to keep.
-		compilerHost ??= ts.createCompilerHost(parsedCommandLine.options);
-
-		program = ts.createProgram({
-			rootNames: parsedCommandLine.fileNames,
-			options: parsedCommandLine.options,
-			host: compilerHost,
-			oldProgram: program, // incremental reuse
-		});
-
-		// Invalidate transformer cache when the program changes.
-		cachedTransformer = undefined;
-	}
-
 	/** Get (or create) the transformer factory for the current program. */
-	function getTransformer(): ts.TransformerFactory<ts.SourceFile> {
+	function getTransformer(
+		program: ts.Program,
+	): ts.TransformerFactory<ts.SourceFile> {
+		if (currentProgram !== program) {
+			// Program instance changed — invalidate.
+			currentProgram = program;
+			cachedTransformer = undefined;
+		}
+
 		cachedTransformer ??= createJsxToLiteralsTransformer(
 			ts as unknown as TsWithInternals,
 			program,
@@ -80,10 +159,11 @@ export function gracileJsxTs(options?: VitePluginOptions): Plugin[] {
 	}
 
 	/**
-	 * Emit a single `.tsx` source file through the program with our
-	 * JSX→literals transformer. Captures JS output in memory.
+	 * Emit a single `.tsx` source file through the LanguageService's program
+	 * with our JSX→literals transformer.
 	 */
 	function emitFile(
+		program: ts.Program,
 		sourceFile: ts.SourceFile,
 	): { code: string; map: string | null } | null {
 		let code: string | null = null;
@@ -96,15 +176,14 @@ export function gracileJsxTs(options?: VitePluginOptions): Plugin[] {
 				else if (
 					fileName.endsWith('.js') ||
 					// TS doesn't know our transformer consumed all JSX.
-					// `preserve` means it still emits `.jsx` files, which get passed to
-					// Vite pipeline.
+					// `preserve` means it still emits `.jsx` files.
 					fileName.endsWith('.jsx')
 				)
 					code = text;
 			},
 			/* cancellationToken */ undefined,
 			/* emitOnlyDtsFiles */ false,
-			{ before: [getTransformer()] },
+			{ before: [getTransformer(program)] },
 		);
 
 		if (code == null) return null;
@@ -117,7 +196,7 @@ export function gracileJsxTs(options?: VitePluginOptions): Plugin[] {
 			enforce: 'pre',
 
 			configResolved(config) {
-				projectRoot = config.root;
+				const projectRoot = config.root;
 
 				const tsconfigPath = ts.findConfigFile(
 					projectRoot,
@@ -143,58 +222,74 @@ export function gracileJsxTs(options?: VitePluginOptions): Plugin[] {
 					tsconfigPath,
 				);
 
-				buildProgram();
+				// Seed initial versions from rootNames (content = undefined → read from disk).
+				for (const fileName of parsedCommandLine.fileNames) {
+					fileVersions.set(fileName, { version: 0, content: undefined });
+				}
+
+				const serviceHost: ts.LanguageServiceHost = {
+					getScriptFileNames: () => {
+						cachedFileNames ??= [...fileVersions.keys()];
+						return cachedFileNames;
+					},
+
+					getScriptVersion: (fileName) =>
+						(fileVersions.get(fileName)?.version ?? 0).toString(),
+
+					getScriptSnapshot: (fileName) => {
+						const entry = fileVersions.get(fileName);
+						if (entry?.content !== undefined)
+							return ts.ScriptSnapshot.fromString(entry.content);
+
+						// Fall back to disk — cache the snapshot for unchanged files.
+						const cached = diskSnapshotCache.get(fileName);
+						if (cached) return cached;
+
+						const text = ts.sys.readFile(fileName);
+						if (text === undefined) return;
+
+						const snapshot = ts.ScriptSnapshot.fromString(text);
+						diskSnapshotCache.set(fileName, snapshot);
+						return snapshot;
+					},
+
+					getCurrentDirectory: () => projectRoot,
+					getCompilationSettings: () => parsedCommandLine.options,
+					getDefaultLibFileName: ts.getDefaultLibFilePath,
+					fileExists: ts.sys.fileExists,
+					readFile: ts.sys.readFile,
+					readDirectory: ts.sys.readDirectory,
+					directoryExists: ts.sys.directoryExists,
+					getDirectories: ts.sys.getDirectories,
+				};
+
+				service = ts.createLanguageService(
+					serviceHost,
+					ts.createDocumentRegistry(),
+				);
 			},
 
 			transform(code, id) {
 				if (!id.endsWith('.tsx') && !id.endsWith('.jsx')) return;
 
-				let sourceFile = program.getSourceFile(id);
-
-				if (!sourceFile || sourceFile.text !== code) {
-					// Either:
-					// - File is unknown (new .tsx added, or .ts renamed to .tsx)
-					// - Source is stale (HMR / upstream Vite plugin changed it)
-					// Patch the host and do a cheap incremental rebuild.
-					const fresh = ts.createSourceFile(
-						id,
-						code,
-						parsedCommandLine.options.target ?? ts.ScriptTarget.ES2022,
-						/* setParentNodes */ true,
-						ts.ScriptKind.TSX,
-					);
-
-					const origGetSourceFile = compilerHost.getSourceFile;
-					compilerHost.getSourceFile = (fileName, languageVersion, ...rest) => {
-						if (fileName === id) return fresh;
-
-						return origGetSourceFile.call(
-							compilerHost,
-							fileName,
-							languageVersion,
-							...rest,
-						);
-					};
-
-					// Ensure the file is in rootNames so the program includes it.
-					if (!parsedCommandLine.fileNames.includes(id)) {
-						parsedCommandLine.fileNames.push(id);
-					}
-
-					// Stale module resolution cache could serve wrong results
-					// if an import was added/removed. Clear it for the rebuild.
-					compilerHost.getModuleResolutionCache?.()?.clear?.();
-
-					buildProgram();
-					sourceFile = program.getSourceFile(id);
-
-					// Restore — don't leak the patch across transform calls.
-					compilerHost.getSourceFile = origGetSourceFile;
+				// Bump version so the LanguageService knows this file changed.
+				const entry = fileVersions.get(id);
+				if (entry) {
+					entry.version++;
+					entry.content = code;
+				} else {
+					// New file — add it to tracking.
+					fileVersions.set(id, { version: 1, content: code });
+					cachedFileNames = undefined; // invalidate name list
 				}
 
+				const program = service.getProgram();
+				if (!program) return;
+
+				const sourceFile = program.getSourceFile(id);
 				if (!sourceFile) return;
 
-				const result = emitFile(sourceFile);
+				const result = emitFile(program, sourceFile);
 				if (result == null) return;
 
 				return { code: result.code, map: result.map };
