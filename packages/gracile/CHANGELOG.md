@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.10.0...@gracile/gracile@0.11.0-next.0) (2026-04-12)
+
+### Features
+
+* implement virtual module server handler, vite server entry, streamline node/fetch conversion ([37f6c71](https://github.com/gracile-web/gracile/commit/37f6c7190305cf6a042a01868cd04b30b5e86b42))
+
+### Bug Fixes
+
+* cem invalid schema ([f934616](https://github.com/gracile-web/gracile/commit/f934616a341ee819ac5e272d863ce2d8644a0094))
+
 ## [0.10.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.10.0-next.1...@gracile/gracile@0.10.0) (2026-04-04)
 
 **Note:** Version bump only for package @gracile/gracile

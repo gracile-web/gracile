@@ -1,0 +1,14 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## 0.1.0-next.0 (2026-04-12)
+
+### Features
+
+* init lit macros package ([42462ff](https://github.com/gracile-web/gracile/commit/42462ff26fc41eab519e6229ca0329cfedc69b87))
+
+### Bug Fixes
+
+* lint issues ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))

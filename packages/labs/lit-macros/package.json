@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/lit-macros",
-  "version": "0.0.0",
+  "version": "0.1.0-next.0",
   "private": true,
   "description": "Vite plugin to compile Lit decorators into static class idioms — zero-runtime, OXC-powered",
   "keywords": [
@@ -52,8 +52,8 @@
     }
   },
   "devDependencies": {
-    "@gracile/internal-tsconfigs": "workspace:^",
     "@gracile/internal-test-utils": "workspace:^",
+    "@gracile/internal-tsconfigs": "workspace:^",
     "@oxc-project/types": "catalog:",
     "@types/node": "catalog:",
     "c8": "catalog:",

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.3.0...@gracile-labs/vite-plugin-jsx-forge@0.4.0-next.0) (2026-04-12)
+
+### Features
+
+* rehaul ts pipeline with a much quicker ts ls + skippable type awareness ([8b6d573](https://github.com/gracile-web/gracile/commit/8b6d5732c24426d117c933ebe1336dc333b2817c))
+
+### Bug Fixes
+
+* lint issues ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
+
 ## [0.3.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.3.0-next.1...@gracile-labs/vite-plugin-jsx-forge@0.3.0) (2026-04-04)
 
 **Note:** Version bump only for package @gracile-labs/vite-plugin-jsx-forge

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.7.2...@gracile/internal-utils@0.8.0-next.0) (2026-04-12)
+
+### Features
+
+* element renderer plugin augmentation ([99c14c5](https://github.com/gracile-web/gracile/commit/99c14c5cd0dcb39afeb2204c1914bfa124ba764d))
+
 ## [0.7.2](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.7.2-next.0...@gracile/internal-utils@0.7.2) (2026-04-04)
 
 **Note:** Version bump only for package @gracile/internal-utils

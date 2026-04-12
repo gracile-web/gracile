@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/jsx-forge@0.3.0...jsx-forge@0.4.0-next.0) (2026-04-12)
+
+### Features
+
+* better anti collision for `html`, optional type awareness ([0c1ae3f](https://github.com/gracile-web/gracile/commit/0c1ae3fdd8e37661ef6e57f63fe660c92cf63e16))
+
 ## [0.3.0](https://github.com/gracile-web/gracile/compare/jsx-forge@0.3.0-next.0...jsx-forge@0.3.0) (2026-04-04)
 
 **Note:** Version bump only for package jsx-forge

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2-next.0](https://github.com/gracile-web/gracile/compare/og-images-generator@0.6.1...og-images-generator@0.6.2-next.0) (2026-04-12)
+
+### Bug Fixes
+
+* lint issues ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
+* unused ts expect error ([2590475](https://github.com/gracile-web/gracile/commit/25904758a0da5eddbe239c657094d0b3dbb6baef))
+
 ## [0.6.1](https://github.com/gracile-web/gracile/compare/og-images-generator@0.6.1-next.0...og-images-generator@0.6.1) (2026-04-04)
 
 **Note:** Version bump only for package og-images-generator

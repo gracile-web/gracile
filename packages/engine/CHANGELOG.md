@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.11.0...@gracile/engine@0.12.0-next.0) (2026-04-12)
+
+### Features
+
+* element renderer plugin augmentation ([99c14c5](https://github.com/gracile-web/gracile/commit/99c14c5cd0dcb39afeb2204c1914bfa124ba764d))
+* finer grain (basic) hot module replacement, fix *.client only awareness ([6288c77](https://github.com/gracile-web/gracile/commit/6288c77cdc21f2659323ef74d2ff34672ea5e8ab))
+* implement virtual module server handler, vite server entry, streamline node/fetch conversion ([37f6c71](https://github.com/gracile-web/gracile/commit/37f6c7190305cf6a042a01868cd04b30b5e86b42))
+
+### Bug Fixes
+
+* only activate ce tracker for dev env ([ee97179](https://github.com/gracile-web/gracile/commit/ee97179e2a38d2f260f9f7a8b08db519ed110422))
+
 ## [0.11.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.11.0-next.0...@gracile/engine@0.11.0) (2026-04-04)
 
 **Note:** Version bump only for package @gracile/engine
