@@ -39,7 +39,7 @@ const config = [
 					'./packages/labs/islands/tsconfig.json',
 					'./packages/labs/vite-plugin-babel-jsx-to-literals/tsconfig.json',
 					'./packages/labs/hmr/tsconfig.json',
-					'./packages/labs/hmr-v2/tsconfig.json',
+					// './packages/labs/hmr-v2/tsconfig.json',
 					'./packages/labs/babel-plugin-jsx-to-literals/tsconfig.json',
 					'./packages/labs/jsx-forge/tsconfig.json',
 					'./packages/labs/vite-plugin-jsx-forge/tsconfig.json',
@@ -155,6 +155,10 @@ const config = [
 
 	{
 		ignores: [
+			'./packages/labs/hmr-v2/**',
+
+			//
+
 			'pnpm-lock.yaml',
 			'**/integration',
 			// '**/integration/**/*_expected*',
@@ -201,6 +205,10 @@ const config = [
 			'**/dist/**',
 
 			'./scripts',
+
+			'./packages/*/scripts/**',
+			'./packages/labs/scripts/**',
+			'./packages/labs/*/scripts/bench-transform.mjs',
 		],
 	},
 	{

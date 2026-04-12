@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// eslint-disable
 
 /**
  * Benchmark: measure vite-plugin-jsx-forge transform overhead.
@@ -126,7 +127,7 @@ console.log(
 // ── Imports for syntactic server ───────────────────────────────────
 
 const { gracile } = await import('@gracile/gracile/plugin');
-const { gracileJsxToLiterals } =
+const { jsxToLiterals } =
 	await import('@gracile-labs/vite-plugin-jsx-forge/to-literals');
 
 const tsxRoute = '/'; // (home).tsx — JSX transform
@@ -186,7 +187,7 @@ console.log('\n── Syntactic-only mode (typeAware: false) ──');
 
 const { address: synAddr, vite: synVite } = await startServer({
 	configFile: false,
-	plugins: [gracileJsxToLiterals({ typeAware: false }), gracile()],
+	plugins: [jsxToLiterals({ typeAware: false }), gracile()],
 });
 
 const synColdTsx = await timeRoute(synAddr, tsxRoute);

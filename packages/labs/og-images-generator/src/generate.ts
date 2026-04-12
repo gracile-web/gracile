@@ -29,9 +29,11 @@ export interface UserConfig {
 }
 
 export async function loadUserConfig(configPath?: string): Promise<UserConfig> {
+	// eslint-disable-next-line no-console
 	console.log(CONFIG_FILE_PATH);
 	const config: unknown = await import(configPath || CONFIG_FILE_PATH).catch(
 		(error: unknown) => {
+			// eslint-disable-next-line no-console
 			console.error(error);
 			throw new Error('Configuration not found.');
 		},
@@ -83,6 +85,7 @@ export async function save(
 		}),
 	);
 
+	// eslint-disable-next-line no-console
 	console.log(c.bold(c.green(renderedImages.length + ' images generated.')));
 }
 
@@ -101,6 +104,7 @@ export async function generateOgImages(options?: PathsOptions): Promise<void> {
 
 	await save(renderedImages, optionsOrDefaults.out);
 
+	// eslint-disable-next-line no-console
 	console.log(
 		c.magenta('OG images generation completed successfully. ') +
 			c.blue('Now exiting.'),

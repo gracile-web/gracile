@@ -22,12 +22,12 @@ npm i @gracile-labs/vite-plugin-jsx-forge jsx-forge
 ```ts
 // @filename: /vite.config.ts
 
-import { gracileJsxToLiterals } from '@gracile-labs/vite-plugin-jsx-forge/to-literals';
+import { jsxToLiterals } from '@gracile-labs/vite-plugin-jsx-forge/to-literals';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
-    gracileJsxToLiterals(),
+    jsxToLiterals(),
 
     // ...
   ],
@@ -160,7 +160,7 @@ tag function is imported:
 ### Options
 
 ```ts
-gracileJsxToLiterals({
+jsxToLiterals({
   /** Use a full TS LanguageService for type-aware transforms. Default: true */
   typeAware: true,
 

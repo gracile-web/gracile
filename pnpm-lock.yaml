@@ -1390,6 +1390,9 @@ importers:
       '@gracile/internal-test-utils':
         specifier: workspace:^
         version: link:../../internal/test-utils
+      '@gracile/internal-tsconfigs':
+        specifier: workspace:^
+        version: link:../../internal/tsconfigs
       '@playwright/test':
         specifier: 'catalog:'
         version: 1.58.2

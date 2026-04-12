@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",
+    "@gracile/internal-tsconfigs": "workspace:^",
     "@playwright/test": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"

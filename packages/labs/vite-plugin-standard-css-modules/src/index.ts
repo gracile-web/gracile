@@ -383,6 +383,7 @@ export function standardCssModules(options?: Options): any {
 				);
 
 				if (opts.log) {
+					// eslint-disable-next-line no-console
 					console.info(
 						`[standard-css-modules] ${ssr ? 'SSR' : 'Client'} (${type}):`,
 						node.source.value,
@@ -406,6 +407,7 @@ export function standardCssModules(options?: Options): any {
 			if (!importers?.size) return;
 
 			if (opts.log) {
+				// eslint-disable-next-line no-console
 				console.info(
 					`[standard-css-modules] HMR: ${file} → graceful CSS swap via`,
 					[...importers],

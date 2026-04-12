@@ -27,6 +27,7 @@ class IslandElement extends HTMLElement {
 
 			island(properties, host);
 		} catch (error) {
+			// eslint-disable-next-line no-console
 			console.error(`Failed to hydrate island`, error);
 		}
 	}

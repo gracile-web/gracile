@@ -180,6 +180,7 @@ export function register(importMeta, name, clazz) {
 			try {
 				clazz.hotReplacedCallback();
 			} catch (error) {
+				// eslint-disable-next-line no-console
 				console.error(error);
 			}
 		}
@@ -196,6 +197,7 @@ export function register(importMeta, name, clazz) {
 				try {
 					element.hotReplacedCallback();
 				} catch (error) {
+					// eslint-disable-next-line no-console
 					console.error(error);
 				}
 			}

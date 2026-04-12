@@ -167,6 +167,7 @@ export function gracileHmr(pluginConfig) {
 							new RegExp(`${filePath} ?:? ?`, 'g'),
 							'',
 						);
+						// eslint-disable-next-line no-console
 						console.error(
 							`PluginSyntaxError` +
 								[strippedMessage, filePath, error.code, error.loc, error.pos]

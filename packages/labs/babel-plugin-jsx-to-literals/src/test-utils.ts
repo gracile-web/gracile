@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import-x/order */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */

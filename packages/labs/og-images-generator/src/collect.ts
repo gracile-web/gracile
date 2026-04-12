@@ -88,6 +88,7 @@ export function extractMetadataFromHtml(fileContent: string): Metadata {
 export async function collectHtmlPages(
 	options: CollectOptions,
 ): Promise<Page[]> {
+	// eslint-disable-next-line no-console
 	console.log(c.bold(c.yellow('Collecting HTML pages…')));
 
 	const files = await fastGlob(
