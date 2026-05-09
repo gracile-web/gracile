@@ -1,4 +1,6 @@
 import { html } from '@lit-labs/ssr';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { generateHydrationScript } from 'solid-js/web';
 
 export function document(context: { url: URL; title?: string }) {
 	return html`
@@ -7,6 +9,7 @@ export function document(context: { url: URL; title?: string }) {
 			<head>
 				<meta charset="UTF-8" />
 				<title>Document - Islands - ${context.title ?? 'Untitled'}</title>
+				${unsafeHTML(generateHydrationScript())}
 			</head>
 
 			<body>

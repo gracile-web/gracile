@@ -3,8 +3,8 @@ import {
 	type PluginContext,
 } from '@gracile/internal-utils/plugin-context';
 import {
-	isRunnableDevEnvironment,
 	type Plugin,
+	type RunnableDevEnvironment,
 	type ViteDevServer,
 } from 'vite';
 import { createGracileViteLogger } from '@gracile/internal-utils/logger/vite-logger';
@@ -19,11 +19,13 @@ const log = createGracileViteLogger();
 
 async function reloadRegistry(server: ViteDevServer): Promise<void> {
 	const ssrEnvironment = server.environments.ssr;
-	if (!isRunnableDevEnvironment(ssrEnvironment))
-		throw new Error('Not in a SSR path');
+
+	// NOTE: Use duck-typing instead of `isRunnableDevEnvironment` to avoid
+	// false negatives when multiple Vite copies are present (e.g. linked packages).
+	if (!('runner' in ssrEnvironment)) throw new Error('Not in a SSR path');
 
 	try {
-		registry.islands = await ssrEnvironment.runner
+		registry.islands = await (ssrEnvironment as RunnableDevEnvironment).runner
 			.import('/islands.config.ts')
 			.then((m) => m['default']);
 	} catch {

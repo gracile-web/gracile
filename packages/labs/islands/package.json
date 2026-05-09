@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/islands",
-  "version": "0.2.3-next.0",
+  "version": "0.2.2-next.0",
   "description": "Islands architecture add-on for Gracile — SSR and hydrate components from any framework",
   "keywords": [
     "custom-elements",
@@ -51,6 +51,7 @@
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
+    "test:e2e": "playwright test",
     "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'",
     "test:unit": "c8 node --test --enable-source-maps 'dist/**/*.test.js'",
     "test:unit:dev": "node --test --enable-source-maps --watch 'dist/**/*.test.js'"
@@ -64,6 +65,7 @@
   "devDependencies": {
     "@gracile/internal-test-utils": "workspace:^",
     "@gracile/internal-tsconfigs": "workspace:^",
+    "@playwright/test": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "tsx": "catalog:",
