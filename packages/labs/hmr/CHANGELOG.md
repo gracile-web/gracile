@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/gracile-web/gracile/compare/@gracile-labs/hmr@0.2.3-next.0...@gracile-labs/hmr@0.2.3) (2026-05-09)
+
+**Note:** Version bump only for package @gracile-labs/hmr
+
 ## [0.2.3-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/hmr@0.2.2...@gracile-labs/hmr@0.2.3-next.0) (2026-04-12)
 
 ### Bug Fixes
