@@ -37,7 +37,6 @@ node --run build:docs
 # MARK: Starter projects
 
 pnpm --prefix starter-projects run generate
-
 pnpm --prefix starter-projects run test:smoke
 
 # MARK: Docs
