@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.4.1-next.1...@gracile-labs/client-router@0.4.1) (2026-05-09)
+
+**Note:** Version bump only for package @gracile-labs/client-router
+
 ## [0.4.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/client-router@0.4.1-next.0...@gracile-labs/client-router@0.4.1-next.1) (2026-05-09)
 
 **Note:** Version bump only for package @gracile-labs/client-router

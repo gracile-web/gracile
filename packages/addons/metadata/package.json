@@ -1,6 +1,6 @@
 {
   "name": "@gracile/metadata",
-  "version": "0.3.5-next.0",
+  "version": "0.3.5",
   "description": "A thin, full-stack, web framework",
   "keywords": [
     "custom-elements",
