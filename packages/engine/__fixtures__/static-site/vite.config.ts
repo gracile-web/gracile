@@ -13,6 +13,11 @@ export default defineConfig(({ command }) => {
 				routes: {
 					exclude:
 						command === 'build' ? ['**/throws.ts', '**/*-failure.ts'] : [],
+
+					define: () => [
+						{ pattern: '/programmatic/static-page', filePath: 'src/programmatic/prog-static.ts' },
+						{ pattern: '/programmatic/param/:slug', filePath: 'src/programmatic/prog-param.ts' },
+					],
 				},
 
 				pages: {

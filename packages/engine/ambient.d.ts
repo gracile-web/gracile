@@ -2,13 +2,13 @@
 
 // NOTE: It's not exposed to user-land anyway, and gets bundled away
 // declare module 'gracile:routes' {
-// 	export const routes: import('./src/routes/route.js').RoutesManifest;
-// 	export const routeImports: import('./src/routes/route.js').RoutesImports;
-// 	export const routeAssets: import('./src/routes/route.js').RoutesAssets;
+// 	export const routes: import('@gracile/engine/routes/route').RoutesManifest;
+// 	export const routeImports: import('@gracile/engine/routes/route').RoutesImports;
+// 	export const routeAssets: import('@gracile/engine/routes/route').RoutesAssets;
 // }
 
 declare module 'gracile:handler' {
-	export const handler: import('./src/server/request.js').GracileHandler;
+	export const handler: import('@gracile/engine/server/request').GracileHandler;
 }
 
 declare namespace Gracile {

@@ -6,7 +6,6 @@
  */
 
 /* eslint-disable @typescript-eslint/no-floating-promises */
-import assert from 'node:assert/strict';
 import { after, before, describe, it } from 'node:test';
 
 import { getText } from '@gracile/internal-test-utils/fetch';
@@ -81,4 +80,24 @@ describe('routing torture test (static-site)', () => {
 			}
 		});
 	}
+
+	// MARK: Programmatic routes
+
+	it('programmatic static route', async () => {
+		const html = await getText(server.address, '/programmatic/static-page');
+		const $ = parseHtml(html);
+		assertH1($, 'Programmatic Static');
+	});
+
+	it('programmatic parameterized route (:slug = alpha)', async () => {
+		const html = await getText(server.address, '/programmatic/param/alpha');
+		const $ = parseHtml(html);
+		assertH1($, 'Programmatic Param - Alpha');
+	});
+
+	it('programmatic parameterized route (:slug = beta)', async () => {
+		const html = await getText(server.address, '/programmatic/param/beta');
+		const $ = parseHtml(html);
+		assertH1($, 'Programmatic Param - Beta');
+	});
 });

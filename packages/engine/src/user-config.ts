@@ -1,6 +1,50 @@
 import type { RenderInfo } from '@lit-labs/ssr';
 import type { Connect } from 'vite';
 
+import type { MaybePromise } from './routes/route.js';
+
+/**
+ * A route defined programmatically in config, complementing file-based routes.
+ *
+ * @example
+ * ```ts
+ * gracile({
+ *   routes: {
+ *     define: async () => [
+ *       { pattern: '/api/posts', filePath: 'src/custom/api-posts.ts' },
+ *       { pattern: '/blog/:slug', filePath: 'src/custom/blog-post.ts' },
+ *     ],
+ *   },
+ * });
+ * ```
+ */
+export interface ProgrammaticRoute {
+	/**
+	 * URL pattern for this route, using URLPattern syntax.
+	 *
+	 * @example `'/api/posts'`
+	 * @example `'/blog/:slug'`
+	 * @example `'/docs/:path*'`
+	 */
+	pattern: string;
+
+	/**
+	 * Path to the route module file, relative to the project root.
+	 * The file must use `defineRoute()` just like any file-based route.
+	 *
+	 * @example `'src/custom/api-posts.ts'`
+	 */
+	filePath: string;
+
+	/**
+	 * Explicit client-side assets (scripts, stylesheets) associated with this route.
+	 * If omitted, Gracile will attempt to auto-detect co-located assets by file stem.
+	 *
+	 * @example `['src/custom/api-posts.client.ts', 'src/custom/api-posts.css']`
+	 */
+	pageAssets?: string[];
+}
+
 /**
  * @example
  * `/vite.config.js`
@@ -107,6 +151,31 @@ export interface GracileConfig {
 		 * Exclude routes with an array of patterns. Useful for debugging.
 		 */
 		exclude?: string[];
+
+		/**
+		 * Define programmatic routes alongside file-based routes.
+		 *
+		 * The returned route definitions are merged with the file-based routes
+		 * found in `src/routes/`. If a programmatic route's pattern conflicts
+		 * with a file-based route, the programmatic route takes priority.
+		 *
+		 * The async function signature allows fetching route definitions from
+		 * a CMS, reading an OpenAPI spec, or any other async source.
+		 *
+		 * @example
+		 * ```ts
+		 * gracile({
+		 *   routes: {
+		 *     define: async () => [
+		 *       { pattern: '/api/posts', filePath: 'src/api/posts.ts' },
+		 *       { pattern: '/blog/:slug', filePath: 'src/blog/post.ts' },
+		 *       { pattern: '/docs/:path*', filePath: 'src/docs/catchall.ts' },
+		 *     ],
+		 *   },
+		 * });
+		 * ```
+		 */
+		define?: () => MaybePromise<ProgrammaticRoute[]>;
 	};
 
 	/**

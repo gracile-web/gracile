@@ -17,6 +17,13 @@ export default defineConfig({
 				},
 			},
 
+			routes: {
+				define: () => [
+					{ pattern: '/programmatic/server-page', filePath: 'src/programmatic/prog-server-page.ts' },
+					{ pattern: '/programmatic/item/:item', filePath: 'src/programmatic/prog-item.ts' },
+				],
+			},
+
 			pages: {
 				premises: {
 					expose: true,

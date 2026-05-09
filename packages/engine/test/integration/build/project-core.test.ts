@@ -50,6 +50,35 @@ describe('static-site build', () => {
 		]);
 	});
 
+	it('generates programmatic route pages', async () => {
+		await assertBuildContains('static-site', 'dist', [
+			'programmatic/static-page/index.html',
+			'programmatic/param/alpha/index.html',
+			'programmatic/param/beta/index.html',
+		]);
+	});
+
+	it('programmatic static page has correct content', async () => {
+		await assertHtmlFile(
+			'static-site',
+			'dist/programmatic/static-page/index.html',
+			{ bodyIncludes: ['Programmatic Static'] },
+		);
+	});
+
+	it('programmatic param page has correct content', async () => {
+		await assertHtmlFile(
+			'static-site',
+			'dist/programmatic/param/alpha/index.html',
+			{ bodyIncludes: ['Programmatic Param', 'Alpha'] },
+		);
+		await assertHtmlFile(
+			'static-site',
+			'dist/programmatic/param/beta/index.html',
+			{ bodyIncludes: ['Programmatic Param', 'Beta'] },
+		);
+	});
+
 	it('generates addon route pages', async () => {
 		await assertBuildContains('static-site', 'dist', [
 			'01-assets/00-siblings/index.html',

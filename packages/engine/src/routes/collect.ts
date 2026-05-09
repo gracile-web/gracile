@@ -7,6 +7,7 @@ import c from 'picocolors';
 import { createFilter } from 'vite';
 
 import { emptyRoutes } from '../logging/messages.js';
+import type { ProgrammaticRoute } from '../user-config.js';
 
 import { prepareSortableRoutes, routeComparator } from './comparator.js';
 import { REGEXES } from './load-module.js';
@@ -73,12 +74,63 @@ export function extractRoutePatterns(
 
 export const WATCHED_ROUTES_FILES_REGEX =
 	/\/src\/routes\/(.*)\.(js|ts|jsx|tsx|html|css|scss|sass|less|styl|stylus)$/;
+/**
+ * Normalize a user-provided pattern string (URLPattern syntax) according to
+ * the configured `trailingSlash` strategy, mirroring `extractRoutePatterns`.
+ */
+function normalizeProgrammaticPattern(
+	pattern: string,
+	trailingSlash: 'always' | 'never' | 'ignore',
+): Pick<R.Route, 'pattern' | 'hasParams'> & { patternString: string } {
+	const hasParameters = /[*:{]/.test(pattern);
+	const isRoot = pattern === '/' || pattern === '';
 
+	let normalized = pattern.startsWith('/') ? pattern : `/${pattern}`;
+
+	// Convert bare :param to {:param} to match file-based route format
+	// (file-based routes produce {:param} from [param] brackets).
+	// This ensures render.ts can correctly substitute static path values.
+	// Don't touch :param* (rest/wildcard params) — those are handled separately.
+	normalized = normalized.replaceAll(/:(\w+)(?![*+])/g, '{:$1}');
+
+	if (!isRoot) {
+		if (trailingSlash === 'never') {
+			if (normalized.endsWith('/')) normalized = normalized.slice(0, -1);
+		} else {
+			// 'always' or 'ignore' — ensure trailing slash, matching file-based behavior
+			if (!normalized.endsWith('/')) normalized = `${normalized}/`;
+		}
+	}
+
+	return {
+		patternString: normalized,
+		pattern: new URLPattern(normalized, 'http://gracile/'),
+		hasParams: hasParameters,
+	};
+}
+
+/**
+ * Convert a URLPattern string key (e.g. `/blog/{:slug}/` or `/docs/:path+/`)
+ * into a file-path-like string that `prepareSortableRoutes` / `routeComparator`
+ * can parse. Used to re-sort the manifest after merging programmatic routes.
+ */
+function patternToSortKey(patternString: string): string {
+	return (
+		patternString
+			.slice(1) // remove leading /
+			.replace(/\/$/, '') // remove trailing /
+			.replaceAll(/:(\w+)\*/g, '[...$1]') // :rest* -> [...rest]  (programmatic)
+			.replaceAll(/{:(\w+)}/g, '[$1]') // {:param} -> [param]  (file-derived)
+			.replaceAll(/:(\w+)/g, '[$1]') || // :param  -> [param]   (programmatic)
+		'index' // root pattern -> 'index'
+	);
+}
 export async function collectRoutes(
 	routes: R.RoutesManifest,
 	root: string,
 	excludePatterns: string[] = [],
 	trailingSlash: 'always' | 'never' | 'ignore' = 'ignore',
+	definedRoutes?: ProgrammaticRoute[],
 ): Promise<void> {
 	routes.clear();
 
@@ -108,7 +160,15 @@ export async function collectRoutes(
 		serverEntrypointsFilter(f),
 	);
 
-	if (serverEntrypoints.length === 0) {
+	const serverPageClientAssetsFilter = createFilter(
+		['**/*.client.{js,ts,jsx,tsx}', '**/*.{css,scss,sass,less,styl,stylus}'],
+		[...excludePatterns],
+	);
+	const serverPageClientAssets = allFilesInRoutes.filter((f) =>
+		serverPageClientAssetsFilter(f),
+	);
+
+	if (serverEntrypoints.length === 0 && !definedRoutes?.length) {
 		logger.warnOnce(emptyRoutes(), {
 			timestamp: true,
 		});
@@ -121,34 +181,27 @@ export async function collectRoutes(
 		.sort((a, b) => routeComparator(a, b))
 		.map((r) => r.route);
 
-	const serverPageClientAssetsFilter = createFilter(
-		['**/*.client.{js,ts,jsx,tsx}', '**/*.{css,scss,sass,less,styl,stylus}'],
-		[...excludePatterns],
-	);
-	const serverPageClientAssets = allFilesInRoutes.filter((f) =>
-		serverPageClientAssetsFilter(f),
-	);
+	if (serverEntrypointsSorted.length > 0)
+		logger.info(
+			`\n${c.underline(`Found ${c.bold('routes')}`)}:\n` +
+				`${c.dim('- ')}${serverEntrypointsSorted
+					.map((f) => {
+						const pathParts = f.split('/');
 
-	logger.info(
-		`\n${c.underline(`Found ${c.bold('routes')}`)}:\n` +
-			`${c.dim('- ')}${serverEntrypointsSorted
-				.map((f) => {
-					const pathParts = f.split('/');
+						return pathParts
+							.map((part, index) => {
+								if (/\[\./.test(part)) return c.cyan(c.italic(part));
+								if (/\[/.test(part)) return c.cyan(part);
+								if (/\(/.test(part)) return c.yellow(part);
+								if (index === pathParts.length - 1) return c.green(part);
+								return part;
+							})
+							.join(c.gray('/'));
+					})
+					.join(c.dim('\n- '))}\n`,
+		);
 
-					return pathParts
-						.map((part, index) => {
-							if (/\[\./.test(part)) return c.cyan(c.italic(part));
-							if (/\[/.test(part)) return c.cyan(part);
-							if (/\(/.test(part)) return c.yellow(part);
-							if (index === pathParts.length - 1) return c.green(part);
-							return part;
-						})
-						.join(c.gray('/'));
-				})
-				.join(c.dim('\n- '))}\n`,
-	);
-
-	// MARK: Associate
+	// MARK: Associate file-based routes
 
 	for (const routePath of serverEntrypointsSorted) {
 		const filePath = join(routesFolder, routePath);
@@ -175,5 +228,75 @@ export async function collectRoutes(
 				paths.removeAllExtension(assetPathWithExtension)
 			)
 				route.pageAssets.push(assetPathWithExtension);
+	}
+
+	// MARK: Programmatic routes
+
+	if (definedRoutes?.length) {
+		for (const defined of definedRoutes) {
+			const normalized = normalizeProgrammaticPattern(
+				defined.pattern,
+				trailingSlash,
+			);
+
+			const existing = routes.get(normalized.patternString);
+			if (existing) {
+				logger.warn(
+					`Programmatic route '${defined.pattern}' overrides file-based route '${existing.filePath}'.`,
+					{ timestamp: true },
+				);
+			}
+
+			const pageAssets =
+				defined.pageAssets ??
+				serverPageClientAssets
+					.map((a) => join(routesFolder, a))
+					.filter(
+						(a) =>
+							paths.removeAllExtension(a) ===
+							paths.removeAllExtension(defined.filePath),
+					);
+
+			routes.set(normalized.patternString, {
+				filePath: defined.filePath,
+				pattern: normalized.pattern,
+				hasParams: normalized.hasParams,
+				pageAssets,
+			});
+		}
+
+		// MARK: Re-sort the merged manifest
+
+		const allEntries = [...routes.entries()];
+		const keyedSortables = allEntries.map(([patternString, route]) => {
+			// File-based routes already have real file paths that
+			// prepareSortableRoutes can parse correctly.  Only programmatic
+			// routes need the pattern→key shim.
+			const routesPrefix = `${routesFolder}/`;
+			const sortKey = route.filePath.startsWith(routesPrefix)
+				? route.filePath.slice(routesPrefix.length)
+				: patternToSortKey(patternString);
+
+			return {
+				sortable: prepareSortableRoutes([sortKey])[0]!,
+				patternString,
+				route,
+			};
+		});
+
+		keyedSortables.sort((a, b) => routeComparator(a.sortable, b.sortable));
+
+		routes.clear();
+		for (const { patternString, route } of keyedSortables)
+			routes.set(patternString, route);
+
+		logger.info(
+			`\n${c.underline(`Defined ${c.bold('programmatic routes')}`)}:\n` +
+				`${c.dim('~ ')}${definedRoutes
+					.map(
+						(d) => `${c.magenta(d.pattern)} ${c.dim('→')} ${c.dim(d.filePath)}`,
+					)
+					.join(c.dim('\n~ '))}\n`,
+		);
 	}
 }

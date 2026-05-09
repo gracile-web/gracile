@@ -124,6 +124,28 @@ export async function common(address: string, item: string) {
 			assertRedirected(res, '/about/');
 		});
 
+		// MARK: Programmatic routes
+
+		await it(`programmatic static route — ${item}`, async () => {
+			const html = await getText(address, '/programmatic/server-page');
+			const $ = parseHtml(html);
+			assertH1($, 'Programmatic Server Page');
+			assertTitleIncludes($, 'Programmatic About');
+		});
+
+		await it(`programmatic parameterized route — ${item}`, async () => {
+			const html = await getText(address, '/programmatic/item/widget');
+			const $ = parseHtml(html);
+			assertH1($, 'Programmatic Item - widget');
+			assertTitleIncludes($, 'Programmatic - widget');
+		});
+
+		await it(`programmatic parameterized route (another value) — ${item}`, async () => {
+			const html = await getText(address, '/programmatic/item/gadget');
+			const $ = parseHtml(html);
+			assertH1($, 'Programmatic Item - gadget');
+		});
+
 		// Template failure test — Express only (Hono doesn't handle stream
 		// abort as gracefully).
 		if (item === 'express') {

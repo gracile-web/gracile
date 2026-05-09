@@ -31,7 +31,7 @@ type ErrorTypes =
 export class GracileError extends BetterError<ErrorTypes> {
 	type: ErrorTypes = 'GracileError';
 
-	static is(error: unknown): error is GracileError {
+	static override is(error: unknown): error is GracileError {
 		return (error as GracileError).type === 'GracileError';
 	}
 }
@@ -39,7 +39,7 @@ export class GracileError extends BetterError<ErrorTypes> {
 export class TemplateError extends GracileError {
 	type: ErrorTypes = 'TemplateError';
 
-	static is(error: unknown): error is TemplateError {
+	static override is(error: unknown): error is TemplateError {
 		return (error as TemplateError).type === 'TemplateError';
 	}
 }
@@ -47,7 +47,7 @@ export class TemplateError extends GracileError {
 export class InternalError extends GracileError {
 	type: ErrorTypes = 'InternalError';
 
-	static is(error: unknown): error is InternalError {
+	static override is(error: unknown): error is InternalError {
 		return (error as InternalError).type === 'InternalError';
 	}
 }

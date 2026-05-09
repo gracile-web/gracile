@@ -49,11 +49,13 @@ export async function createDevelopmentHandler({
 	let previousRoutesSnapshot = serializeRoutes(routes);
 
 	const collectAndCodegen = async (): Promise<boolean> => {
+		const definedRoutes = await gracileConfig.routes?.define?.();
 		await collectRoutes(
 			routes,
 			root,
 			gracileConfig.routes?.exclude,
 			gracileConfig.trailingSlash,
+			definedRoutes,
 		);
 
 		const nextRoutesSnapshot = serializeRoutes(routes);
