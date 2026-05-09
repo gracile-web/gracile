@@ -10,6 +10,12 @@ import { SignalHost } from '@gracile/client/signal-host';
 
 import { GracileRouter } from './_internal/gracile-client-router.js';
 import * as prefetching from './_internal/prefetching.js';
+import {
+	syncLinks,
+	syncDocumentMetadata,
+	syncExternalScripts,
+	syncInlineScripts,
+} from './reconciliation.js';
 import type { Config, RouteDefinition } from './types.js';
 
 if (!enabled) throw new Error('Gracile client router is disabled!');
@@ -169,8 +175,6 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 				await Promise.all(premiseToFetch);
 
 				// MARK: Collect head
-				const existingDocumentLinks = new Map<string, HTMLLinkElement>();
-				const upcomingDocumentLinks = new Map<string, HTMLLinkElement>();
 				let parsedDocument: Document | null = null;
 
 				if (cachedDocumentForRoute) parsedDocument = cachedDocumentForRoute;
@@ -182,20 +186,6 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 					cachedDocuments.set(routePremisePath, parsedDocument);
 				}
 
-				// NOTE: Happens at first route change. Initial load already has assets.
-				if (parsedDocument) {
-					for (const link of document.querySelectorAll<HTMLLinkElement>(
-						'head link',
-					))
-						existingDocumentLinks.set(link.href, link);
-					for (const link of parsedDocument.querySelectorAll<HTMLLinkElement>(
-						'head link',
-					))
-						upcomingDocumentLinks.set(link.href, link);
-				}
-
-				// TODO: Metas? `<base>`? HTML lang? Body classes? Inline styles?…
-
 				const processPage = async (resolve: () => void): Promise<void> => {
 					if (!loaded?.template) throw new Error('No template.');
 
@@ -203,58 +193,10 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 					if (isInitiallyHydrated) {
 						if (!parsedDocument) throw new ReferenceError('Missing document');
 
-						await Promise.all(
-							[...upcomingDocumentLinks.values()].map(async (link) => {
-								if (existingDocumentLinks.has(link.href) === false)
-									await new Promise<void>((resolve) => {
-										const clonedLink = link.cloneNode();
-										clonedLink.addEventListener('load', () => resolve());
-										document.head.append(clonedLink);
-									});
-							}),
-						);
-						for (const link of existingDocumentLinks.values())
-							if (upcomingDocumentLinks.has(link.href) === false) link.remove();
-
-						const existingDocumentScripts = new Map<
-							string,
-							HTMLScriptElement
-						>();
-						const upcomingDocumentScripts = new Map<
-							string,
-							HTMLScriptElement
-						>();
-
-						for (const script of document.querySelectorAll<HTMLScriptElement>(
-							'head script',
-						))
-							existingDocumentScripts.set(script.src, script);
-						for (const script of parsedDocument.querySelectorAll<HTMLScriptElement>(
-							'head script',
-						))
-							upcomingDocumentScripts.set(script.src, script);
-
-						const scriptImports: Promise<unknown>[] = [];
-						for (const script of upcomingDocumentScripts.values()) {
-							if (existingDocumentScripts.has(script.src) === false) {
-								// NOTE 1: Appending a script tag seems to be ignored by the
-								// browser. Maybe a security feature or something?
-								// NOTE 2: Rollup will yell without this comment.
-								// It's fine, we are getting already processed `<link>`, so,
-								// their always correct and well funded.
-								scriptImports.push(import(/* @vite-ignore */ script.src));
-							}
-						}
-						await Promise.all(scriptImports);
-
-						// TODO: Handle inline scripts? IDK how to treat them.
-						// They can produce side-effects. Maybe make this configurable?
-
-						// existingDocScripts.forEach((script, key) => {
-						// 	if (newDocScripts.has(script.src) === false) {
-						// 		// script.remove();
-						// 	}
-						// });
+						await syncLinks(parsedDocument);
+						await syncExternalScripts(parsedDocument);
+						syncDocumentMetadata(parsedDocument);
+						syncInlineScripts(parsedDocument);
 					}
 
 					// MARK: Load template
@@ -302,14 +244,6 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 					if (url.pathname !== previousPathname) {
 						render(renderedTemplate, document.body, hydrationOptions);
 
-						// MARK: Extras meta
-						if (parsedDocument) {
-							document.title = parsedDocument.title;
-							document.documentElement.classList.value =
-								parsedDocument.documentElement.classList.value;
-
-							// TODO: attributes…
-						}
 						previousPathname = url.pathname;
 
 						if (!url.hash) router.restoreRouteScrolling();

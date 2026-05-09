@@ -39,3 +39,5 @@ export interface RouteDefinition<RenderResult = unknown> {
 export type Route = RouteDefinition & {
 	urlPattern?: URLPattern | undefined;
 };
+
+export { GracileRouter } from './_internal/gracile-client-router.js';
