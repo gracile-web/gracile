@@ -1,16 +1,22 @@
 /**
- * Lightweight test harness for JSX → Lit tagged template literal transformations.
+ * Lightweight test harness for JSX transformer tests.
  *
- * Creates an in-memory TypeScript program from a source string, applies the
- * `createJsxToLiteralsTransformer`, and returns the emitted JS output.
+ * Provides two in-memory transform helpers:
+ *   - `transformToLiterals`  – JSX → Lit tagged template literals
+ *   - `transformToMetaJsx`   – meta-JSX dialect → framework JSX (to-jsx)
+ *
  * No disk I/O, no ts-patch — just the compiler API with custom transformers.
  */
 
 import * as ts from 'typescript';
 
-import type { TsWithInternals } from '../types.js';
+import type { TsWithInternals, TransformerPluginConfig } from '../types.js';
 import { PRESETS } from '../presets/lit.js';
-import { createJsxToLiteralsTransformer } from '../to-literals/to-literals.js';
+import {
+	createJsxToLiteralsTransformer,
+	type TransformerOptions,
+} from '../to-literals/to-literals.js';
+import { createMetaJsxTransformer } from '../to-jsx/to-jsx.js';
 
 const VIRTUAL_FILENAME = '/virtual/input.tsx';
 
@@ -56,6 +62,7 @@ export function transformToLiterals(
 	options: {
 		compilerOptions?: ts.CompilerOptions;
 		preset?: (typeof PRESETS)['Default'];
+		transformerOptions?: TransformerOptions;
 	} = {},
 ): TransformResult {
 	const compilerOptions: ts.CompilerOptions = {
@@ -78,6 +85,7 @@ export function transformToLiterals(
 		program,
 		{},
 		options.preset ?? PRESETS.Default,
+		options.transformerOptions,
 	);
 
 	let emittedCode = '';
@@ -102,6 +110,89 @@ export function transformToLiterals(
 	const importLines: string[] = [];
 	const bodyLines: string[] = [];
 
+	for (const line of lines) {
+		if (line.startsWith('import ')) {
+			importLines.push(line);
+		} else {
+			bodyLines.push(line);
+		}
+	}
+
+	return {
+		body: bodyLines.join('\n').trim(),
+		code,
+		diagnostics,
+		imports: importLines.join('\n').trim(),
+	};
+}
+
+// ---------------------------------------------------------------------------
+// to-jsx harness
+// ---------------------------------------------------------------------------
+
+export type MetaJsxFramework = 'preact' | 'react' | 'solid' | 'vue';
+
+/**
+ * Transform a meta-JSX source string through `createMetaJsxTransformer` and
+ * return the emitted JS/JSX code.
+ *
+ * Compiler mode is `react-native` so JSX nodes are preserved in the output
+ * exactly as the transformer left them — ready for a downstream JSX pipeline.
+ *
+ * @param source - TSX source with meta-JSX attributes (`on:click`, `class`, …)
+ * @param options.framework - Target framework (default: `'react'`)
+ * @param options.compilerOptions - Compiler option overrides
+ */
+export function transformToMetaJsx(
+	source: string,
+	options: {
+		framework?: MetaJsxFramework;
+		compilerOptions?: ts.CompilerOptions;
+	} = {},
+): TransformResult {
+	const compilerOptions: ts.CompilerOptions = {
+		// react-native keeps JSX nodes in the AST + emits .js (not .jsx)
+		jsx: ts.JsxEmit.ReactNative,
+		module: ts.ModuleKind.ESNext,
+		moduleResolution: ts.ModuleResolutionKind.Bundler,
+		noEmit: false,
+		strict: false, // no JSX type bindings needed in this harness
+		target: ts.ScriptTarget.ES2022,
+		...options.compilerOptions,
+	};
+
+	const pluginConfig: TransformerPluginConfig & { framework?: string } = {
+		framework: options.framework ?? 'react',
+	};
+
+	const host = createVirtualCompilerHost(source, compilerOptions);
+	const program = ts.createProgram([VIRTUAL_FILENAME], compilerOptions, host);
+	const diagnostics = ts.getPreEmitDiagnostics(program);
+
+	const transformer = createMetaJsxTransformer(
+		ts as unknown as typeof ts,
+		program,
+		pluginConfig,
+	);
+
+	let emittedCode = '';
+	program.emit(
+		undefined,
+		(fileName, text) => {
+			if (fileName.endsWith('.js') || fileName.endsWith('.jsx')) {
+				emittedCode = text;
+			}
+		},
+		undefined,
+		false,
+		{ before: [transformer] },
+	);
+
+	const code = emittedCode.replace(/\/\/# sourceMappingURL=.*$/m, '').trim();
+
+	const lines = code.split('\n');
+	const importLines: string[] = [];
+	const bodyLines: string[] = [];
 	for (const line of lines) {
 		if (line.startsWith('import ')) {
 			importLines.push(line);

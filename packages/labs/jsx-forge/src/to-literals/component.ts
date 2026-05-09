@@ -96,6 +96,26 @@ export function handlePascalCasedComponentAttribute(
 			collectedAttributes.push(
 				factory.createPropertyAssignment(attributeNode.name, visited),
 			);
+		} else if (
+			ts.isJsxExpression(attributeNode.initializer) &&
+			attributeNode.initializer.expression &&
+			!(
+				ts.isJsxElement(attributeNode.initializer.expression) ||
+				ts.isJsxSelfClosingElement(attributeNode.initializer.expression) ||
+				ts.isJsxFragment(attributeNode.initializer.expression)
+			)
+		) {
+			// General expression prop: prop={someValue} — visit and pass through as-is
+			const visited = visitNode(attributeNode.initializer.expression);
+
+			collectedAttributes.push(
+				factory.createPropertyAssignment(
+					ts.isIdentifier(attributeNode.name)
+						? attributeNode.name
+						: factory.createStringLiteral(attributeNode.name.getText()),
+					visited,
+				),
+			);
 		}
 	}
 }

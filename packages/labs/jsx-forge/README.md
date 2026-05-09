@@ -13,6 +13,7 @@ A JSX to `html` template literals TypeScript compiler transformer.
 
 ---
 
+- [TSConfig — `jsx` mode](#tsconfig--jsx-mode)
 - [Specs — JSX → HTML tagged template compiler](#specs--jsx--html-tagged-template-compiler)
   - [JSX Syntax](#jsx-syntax)
     - [Basic elements](#basic-elements)
@@ -52,6 +53,28 @@ A JSX to `html` template literals TypeScript compiler transformer.
 ---
 
 </div>
+
+## TSConfig — `jsx` mode
+
+When using **tsc + ts-patch**, use `jsx: "react-native"` — not `"preserve"`.
+
+Both keep JSX nodes in the AST so the transformer can process them, but
+`"preserve"` forces the output extension to `.jsx`, while `"react-native"` emits
+`.js` as expected.
+
+| Mode           | JSX in AST                 | Output extension |
+| -------------- | -------------------------- | ---------------- |
+| `preserve`     | kept                       | `.jsx`           |
+| `react-native` | kept                       | `.js`            |
+| `react`        | lowered to `createElement` | `.js`            |
+| `react-jsx`    | lowered to `_jsx`          | `.js`            |
+
+The `"react-native"` label is purely cosmetic here — TypeScript won't inject any
+React-specific runtime code. The transformer (running as a `before` transform)
+handles JSX → tagged templates itself.
+
+The only alternative would be `preserve` + a post-build rename step (`.jsx` →
+`.js`), which is unnecessarily fragile.
 
 ## Specs — JSX → HTML tagged template compiler
 

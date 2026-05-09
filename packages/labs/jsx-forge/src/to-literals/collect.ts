@@ -104,6 +104,7 @@ function handleJsxElement(
 	const {
 		appendExpressionToCurrentLiteral,
 		globalFlags: flavor,
+		imports,
 		preset,
 		ts,
 		visitNode,
@@ -123,16 +124,30 @@ function handleJsxElement(
 		ts.isJsxElement(node) &&
 		openingTagName.split(':').at(1);
 
+	const customLiteralTagImports = customLiteralTagDirective
+		? preset.useLiteral[
+				customLiteralTagDirective as keyof typeof preset.useLiteral
+			]
+		: undefined;
+
+	const hasDotAccess = openingTagName.includes('.');
+
 	const isPascalCasedComponent =
-		lastPartOfCompoundName.at(0) !==
-			lastPartOfCompoundName.toLowerCase().at(0) &&
+		(lastPartOfCompoundName.at(0) !==
+			lastPartOfCompoundName.toLowerCase().at(0) ||
+			hasDotAccess) &&
 		ts.isExpression(jsxElement.tagName);
 
-	if (
-		customLiteralTagDirective &&
-		customLiteralTagDirective in preset.useLiteral
-	) {
+	if (customLiteralTagDirective && customLiteralTagImports) {
 		flags.isLiteralSelector = true;
+
+		for (const [index, literalImport] of customLiteralTagImports.entries()) {
+			imports.set(`literal:${customLiteralTagDirective}:${index.toString()}`, {
+				...literalImport,
+				as: index === 0 ? customLiteralTagDirective : literalImport.as,
+			});
+		}
+
 		const previousFlavorType = flavor.literalFlavor;
 		flavor.literalFlavor =
 			(preset.antiCollisionImportPrefix ?? '') + customLiteralTagDirective;

@@ -77,7 +77,7 @@ export interface PresetAttribute {
 			cast?: string;
 			inBody?: boolean;
 			inPlace?: boolean;
-			valueFunctionWrapper: {
+			valueFunctionWrapper?: {
 				name: string;
 			};
 		};

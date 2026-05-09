@@ -99,21 +99,16 @@ export const PRESETS = {
 					namespace: 'use',
 				},
 			},
-			// IDEA: Directives
-			// {
-			// 	when: {
-			// 		namespace: 'use',
-			// 	},
-			// 	do: {
-			// 		insertExpression: {
-			// 			inPlace: true,
-			// 			valueFunctionWrapper: { useProvidedName: true },
-			// 		},
-			// 		addImports: [
-			// 			// ???
-			// 		],
-			// 	},
-			// },
+			{
+				do: {
+					insertExpression: {
+						inPlace: true,
+					},
+				},
+				when: {
+					namespace: 'use',
+				},
+			},
 			{
 				do: {
 					addImports: [
@@ -147,6 +142,10 @@ export const PRESETS = {
 				when: { name: 'svg', namespace: '$' },
 			},
 			{
+				do: { addPrefix: '?' },
+				when: { namespace: null, type: { isAssignableTo: 'boolean' } },
+			},
+			{
 				do: {
 					addImports: [
 						{
@@ -158,10 +157,6 @@ export const PRESETS = {
 					insertExpression: { valueFunctionWrapper: { name: 'ifDefined' } },
 				},
 				when: { namespace: null, type: { isAssignableTo: 'undefined' } },
-			},
-			{
-				do: { addPrefix: '?' },
-				when: { namespace: null, type: { isAssignableTo: 'boolean' } },
 			},
 		],
 

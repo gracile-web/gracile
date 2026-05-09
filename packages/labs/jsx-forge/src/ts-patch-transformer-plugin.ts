@@ -10,10 +10,9 @@ export default function transformTest(
 	pluginConfig: TransformerPluginConfig,
 	{ ts: tsInstance }: TransformerExtras,
 ): Ts.TransformerFactory<Ts.SourceFile> {
-	if (
-		!pluginConfig.transformOptions?.target ||
-		pluginConfig.transformOptions?.target === 'lit'
-	) {
+	const target = pluginConfig.target ?? pluginConfig.transformOptions?.target;
+
+	if (!target || target === 'lit') {
 		return createJsxToLiteralsTransformer(
 			tsInstance as unknown as TsWithInternals,
 			program,

@@ -192,11 +192,38 @@ describe('Namespaced attributes — Lit bindings', () => {
 		assert.match(result, /something=\${.*ifDefined\(/);
 	});
 
+	test('boolean-typed attribute gets ? prefix, not ifDefined', () => {
+		// Regression: pure boolean properties were incorrectly wrapped with
+		// ifDefined() because the undefined-type rule matched before the
+		// boolean-type rule in the preset attributes array.
+		const result = body(
+			`declare const checked: boolean; const el = <wa-checkbox checked={checked}></wa-checkbox>;`,
+		);
+		assert.match(result, /\?checked=\${checked}/);
+		assert.doesNotMatch(result, /ifDefined/);
+	});
+
+	test('boolean | undefined attribute gets ? prefix, not ifDefined', () => {
+		const result = body(
+			`declare const checked: boolean | undefined; const el = <wa-checkbox checked={checked}></wa-checkbox>;`,
+		);
+		assert.match(result, /\?checked=\${checked}/);
+		assert.doesNotMatch(result, /ifDefined/);
+	});
+
 	test('use:ref wrapped with ref()', () => {
 		const result = body(
 			`const myRef = () => {}; const el = <main use:ref={myRef}>Referenced</main>;`,
 		);
 		assert.match(result, /ref\(/);
+	});
+
+	test('generic use: directive is emitted in place', () => {
+		const result = body(
+			`declare const litDirective: unknown; const el = <span use:directive={litDirective}>Referenced</span>;`,
+		);
+		assert.match(result, /<span \$\{litDirective}>Referenced<\/span>/);
+		assert.doesNotMatch(result, / directive=\$\{/);
 	});
 
 	test('style:map attribute', () => {
@@ -259,12 +286,100 @@ describe('PascalCase components', () => {
 		assert.match(result, /Penguin/);
 	});
 
+	test('component with expression prop (variable) is not dropped', () => {
+		const result = body(
+			`const MyComp = ({ items }: any) => <ul></ul>;` +
+				`const data = [1,2,3]; const el = <MyComp items={data} />;`,
+		);
+		assert.match(result, /MyComp\({/);
+		assert.match(result, /items/);
+		assert.match(result, /data/);
+		// Must NOT pass null
+		assert.doesNotMatch(result, /MyComp\(null\)/);
+	});
+
+	test('dot-access component with expression prop is not dropped', () => {
+		const result = body(
+			`const ui = { List: ({ items }: any) => <ul></ul> };` +
+				`const data = [1,2,3]; const el = <ui.List items={data} />;`,
+		);
+		assert.match(result, /ui\.List\({/);
+		assert.match(result, /items/);
+		assert.match(result, /data/);
+		assert.doesNotMatch(result, /ui\.List\(null\)/);
+	});
+
+	test('this.method component with expression prop is not dropped', () => {
+		const result = body(
+			`const el = (this as any)._Entries({ entries: [] });` +
+				`const r = <div>{(this as any)._Entries({ entries: [] })}</div>;`,
+		);
+		// Baseline: this._Entries used as direct call must survive
+		assert.match(result, /_Entries/);
+	});
+
 	test('component with object property access', () => {
 		const result = body(
 			`const top = { MyComp: ({ children }: any) => <main>{children}</main> };` +
 				`const el = <top.MyComp>Donkey</top.MyComp>;`,
 		);
 		assert.match(result, /top\.MyComp\({/);
+	});
+
+	test('dot-access with lowercase last part is a component (call expression)', () => {
+		const result = body(
+			`const top = { myComp: ({ children }: any) => <main>{children}</main> };` +
+				`const el = <top.myComp>Cat</top.myComp>;`,
+		);
+		// Must be a function call, not a static HTML tag
+		assert.match(result, /top\.myComp\({/);
+		assert.doesNotMatch(result, /<top\.myComp>/);
+	});
+
+	test('dot-access with lowercase: children are passed as prop', () => {
+		const result = body(
+			`const top = { myComp: ({ children }: any) => <main>{children}</main> };` +
+				`const el = <top.myComp>Cat</top.myComp>;`,
+		);
+		assert.match(result, /"\$:children"/);
+		assert.match(result, /Cat/);
+	});
+
+	test('dot-access with lowercase: string-literal prop is collected', () => {
+		const result = body(
+			`const top = { myComp: ({ label }: any) => <span>{label}</span> };` +
+				`const el = <top.myComp label="hello" />;`,
+		);
+		assert.match(result, /top\.myComp\({/);
+		assert.match(result, /label/);
+		assert.match(result, /hello/);
+	});
+
+	test('dot-access with underscore-prefixed lowercase last part is a component', () => {
+		const result = body(
+			`const top = { _component: ({ children }: any) => <main>{children}</main> };` +
+				`const el = <top._component>Fox</top._component>;`,
+		);
+		assert.match(result, /top\._component\({/);
+		assert.doesNotMatch(result, /<top\._component>/);
+	});
+
+	test('dot-access with underscore-prefixed PascalCase last part is a component', () => {
+		const result = body(
+			`const top = { _Component: ({ children }: any) => <main>{children}</main> };` +
+				`const el = <top._Component>Wolf</top._Component>;`,
+		);
+		assert.match(result, /top\._Component\({/);
+		assert.doesNotMatch(result, /<top\._Component>/);
+	});
+
+	test('dot-access self-closing with lowercase is a component', () => {
+		const result = body(
+			`const ui = { spinner: () => <span>…</span> };` +
+				`const el = <ui.spinner />;`,
+		);
+		assert.match(result, /ui\.spinner\(/);
+		assert.doesNotMatch(result, /<ui\.spinner/);
 	});
 });
 
@@ -304,6 +419,18 @@ describe('Use literal directives', () => {
 		assert.match(result.imports, /html as \$_html/);
 	});
 
+	test('<use:svg> emits an svg literal', () => {
+		const result = body(`const el = <use:svg><circle /></use:svg>;`);
+		assert.match(result, /\$_svg `<circle><\/circle>`/);
+	});
+
+	test('<use:server> emits a server-flavored literal alias', () => {
+		const result = body(
+			`const el = <use:server><div>Hello</div></use:server>;`,
+		);
+		assert.match(result, /\$_server `<div>Hello<\/div>`/);
+	});
+
 	test('"use html-server" — imports from @lit-labs/ssr', () => {
 		const result = raw(`"use html-server";\nconst el = <div>Hello</div>;`);
 		assert.match(result.imports, /@lit-labs\/ssr/);
@@ -320,12 +447,31 @@ describe('Use literal directives', () => {
 // ===========================================================================
 
 describe('Auto-import generation', () => {
+	test('use:svg adds svg import', () => {
+		const result = raw(`const el = <use:svg><circle /></use:svg>;`);
+		assert.match(result.imports, /svg as \$_svg/);
+		assert.match(result.imports, /from "lit"/);
+	});
+
+	test('use:server adds aliased html import', () => {
+		const result = raw(`const el = <use:server><div>Hello</div></use:server>;`);
+		assert.match(result.imports, /html as \$_server/);
+		assert.match(result.imports, /@lit-labs\/ssr/);
+	});
+
 	test('ref directive adds ref import', () => {
 		const result = raw(
 			`const myRef = () => {}; const el = <main use:ref={myRef}>Hi</main>;`,
 		);
 		assert.match(result.imports, /ref/);
 		assert.match(result.imports, /lit\/directives\/ref\.js/);
+	});
+
+	test('generic use: directive does not add a directive import', () => {
+		const result = raw(
+			`declare const litDirective: unknown; const el = <span use:directive={litDirective}>Hi</span>;`,
+		);
+		assert.doesNotMatch(result.imports, /lit\/directives\//);
 	});
 
 	test('styleMap adds styleMap import', () => {

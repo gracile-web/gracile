@@ -6,23 +6,43 @@ import type { Context, Import, Preset } from './types.js';
 import { collectLiteralEntitiesInJsx } from './collect.js';
 import { handleForEachTagDirective } from './special.js';
 
+export interface TransformerOptions {
+	/**
+	 * Set the default `html` tagged template flavor used when no file-level
+	 * `'use html-*'` directive is present.
+	 *
+	 * - `'default'` — `html` from `lit` (the standard behavior)
+	 * - `'signal'`  — `html` from `@lit-labs/signals`
+	 * - `'server'`  — `html` from `@lit-labs/ssr`
+	 *
+	 * Individual files can still override this with a `'use html-*'` directive.
+	 *
+	 * @default 'default'
+	 */
+	defaultHtmlFlavor?: 'default' | 'server' | 'signal';
+}
+
 export function createJsxToLiteralsTransformer(
 	ts: TsWithInternals,
 	program: Ts.Program | undefined,
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	_pluginConfig = {},
 	preset: Preset = PRESETS.Default,
+	options?: TransformerOptions,
 ): Ts.TransformerFactory<Ts.SourceFile> {
 	return (context) => {
 		const imports = new Map<string, Import>();
 
 		const { factory } = ts;
 
+		const flavor = options?.defaultHtmlFlavor ?? 'default';
+		const flavorImports =
+			preset.useLiteral[flavor] ?? preset.useLiteral.default;
 		const defaultHtml =
 			(preset.antiCollisionImportPrefix ?? '') +
-			(preset.useLiteral.default.at(0)?.as ?? 'html');
+			(flavorImports.at(0)?.as ?? 'html');
 		const globalFlags = { literalFlavor: defaultHtml };
-		let useGlobalLiteralDirective = false;
+		let useGlobalLiteralDirective = flavor !== 'default';
 
 		const visitNode: Context['visitNode'] = (expression) => {
 			const visited = ts.visitNode(expression, visitor);
@@ -111,6 +131,9 @@ export function createJsxToLiteralsTransformer(
 				if (!useGlobalLiteralDirective)
 					for (const index of preset.useLiteral.default)
 						imports.set(index.as, index);
+				else if (flavor !== 'default')
+					for (const [index, index_] of flavorImports.entries())
+						imports.set(`html:${flavor}:${index.toString()}`, index_);
 
 				const strings: string[] = [''];
 				const expressions: Ts.Expression[] = [];

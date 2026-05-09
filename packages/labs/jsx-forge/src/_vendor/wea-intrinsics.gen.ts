@@ -885,6 +885,7 @@ interface BaseHTMLElements {
 			"step": number | string;
 			"type": 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | (string & {});
 			/** @deprecated */ "usemap": string;
+			"value": string | string[] | number;
 			"webkitdirectory": boolean;
 			"width": number | string;
 		};
@@ -893,9 +894,8 @@ interface BaseHTMLElements {
 			/** @deprecated */ "align": string;
 			"alt": string;
 			"autocomplete": 'additional-name' | 'address-level1' | 'address-level2' | 'address-level3' | 'address-level4' | 'address-line1' | 'address-line2' | 'address-line3' | 'bday' | 'bday-day' | 'bday-month' | 'bday-year' | 'billing' | 'cc-additional-name' | 'cc-csc' | 'cc-exp' | 'cc-exp-month' | 'cc-exp-year' | 'cc-family-name' | 'cc-given-name' | 'cc-name' | 'cc-number' | 'cc-type' | 'country' | 'country-name' | 'current-password' | 'email' | 'family-name' | 'fax' | 'given-name' | 'home' | 'honorific-prefix' | 'honorific-suffix' | 'impp' | 'language' | 'mobile' | 'name' | 'new-password' | 'nickname' | 'off' | 'on' | 'organization' | 'organization-title' | 'pager' | 'photo' | 'postal-code' | 'sex' | 'shipping' | 'street-address' | 'tel' | 'tel-area-code' | 'tel-country-code' | 'tel-extension' | 'tel-local' | 'tel-local-prefix' | 'tel-local-suffix' | 'tel-national' | 'transaction-amount' | 'transaction-currency' | 'url' | 'username' | 'work' | (string & {});
-			"checked": boolean;
 			"defaultChecked": boolean;
-			"defaultValue": string;
+			"defaultValue": string | string[] | number;
 			"dirName": string;
 			"disabled": boolean;
 			"files": FileList;
@@ -927,7 +927,6 @@ interface BaseHTMLElements {
 			"step": number | string;
 			"type": 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week' | (string & {});
 			/** @deprecated */ "useMap": string;
-			"value": boolean;
 			"valueAsDate": Date;
 			"valueAsNumber": number;
 			"webkitdirectory": boolean;

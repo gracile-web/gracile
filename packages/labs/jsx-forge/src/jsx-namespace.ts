@@ -60,7 +60,7 @@ export namespace JSX {
 	> = {
 		[EventName in keyof EventMap as `${Prefix}${EventName & string}`]: EventListener<
 			Target,
-			EventMap[EventName]
+			NonNullable<EventMap[EventName]>
 		>;
 	};
 
@@ -70,7 +70,8 @@ export namespace JSX {
 		ElementInterface extends HTMLElement | SVGElement =
 			InterfaceFromTsDom<TagName>,
 	> = Partial<
-		AddPrefixToKeys<Facets['properties'], PrefixProperty> &
+		AddPrefixToKeys<Facets['attributes'], PrefixAttribute> &
+			AddPrefixToKeys<Facets['properties'], PrefixProperty> &
 			CustomSpecialAttributes<ElementInterface> &
 			ElementChildrenAttribute &
 			EventsPrefixed<Facets['events'], ElementInterface, PrefixEventListener> &
@@ -116,7 +117,8 @@ export namespace JSX {
 		ElementInterface extends HTMLElement | SVGElement =
 			InterfaceFromTsDom<TagName>,
 	> = Partial<
-		AddPrefixToKeys<Facets['attributes'], PrefixIfDefined> &
+		AddPrefixToKeys<Facets['attributes'], PrefixAttribute> &
+			AddPrefixToKeys<Facets['attributes'], PrefixIfDefined> &
 			AddPrefixToKeys<Facets['properties'], PrefixProperty> &
 			AddPrefixToKeys<
 				FilterByContainedType<Facets['attributes'], boolean>,
@@ -153,7 +155,7 @@ export namespace JSX {
 			ExpandFacets<TagMap[TagName], TagName>;
 	};
 
-	// type PrefixAttribute = 'attr:';
+	type PrefixAttribute = 'attr:';
 	type PrefixBoolean = 'bool:';
 	type PrefixEventListener = 'on:';
 	type PrefixIfDefined = 'if:';
@@ -183,6 +185,8 @@ export namespace JSX {
 		'$:svg'?: UnsafeContent;
 		'each:key'?: Key;
 		'use:ref'?: ReferenceOrCallback<ElementInterface>;
+		// TODO: Change API, like this cool hack: `<foo attr1 {...[directive1(), directive2()]} attr2 {...[directive3()]} />`. TSX handles spread attributes with arrays.
+		'use:directive'?: unknown; // Not genericized. Framework-specific directives (e.g. Lit's `use:directive=${myDirective}`) can be typed via the preset configuration.
 	}
 
 	type SVGElementsWithoutConflicts = Omit<

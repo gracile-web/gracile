@@ -2,6 +2,7 @@ import type { PluginConfig } from 'ts-patch';
 import type * as Ts from 'typescript';
 
 export type TransformerPluginConfig = PluginConfig & {
+	target?: 'lit' | 'preact' | 'react' | 'vue';
 	transformOptions?: { target: 'lit' | 'preact' | 'react' | 'vue' };
 };
 
