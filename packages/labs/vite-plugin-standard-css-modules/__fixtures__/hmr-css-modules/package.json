@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "vite-plugin-standard-css-modules": "workspace:^",
     "lit": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "vite-plugin-standard-css-modules": "workspace:^"
   }
 }

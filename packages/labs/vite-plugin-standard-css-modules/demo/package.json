@@ -11,9 +11,9 @@
   },
   "dependencies": {
     "@gracile/gracile": "workspace:^",
-    "vite-plugin-standard-css-modules": "workspace:^",
     "lit": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "vite-plugin-standard-css-modules": "workspace:^"
   },
   "devDependencies": {
     "@types/node": "catalog:",

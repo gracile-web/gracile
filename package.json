@@ -45,14 +45,14 @@
     "lint:es": "eslint --cache .",
     "lint:es:fix": "eslint --cache --fix .",
     "list-pkg": "pnpm m ls --json --depth=-1 | node -e \"const path = require('path'); console.log(JSON.parse(require('fs').readFileSync('/dev/stdin', 'utf-8')).map((m) => path.relative(__dirname, m.path)).filter(Boolean))\" # From https://github.com/pnpm/pnpm/issues/1519",
-    "nolyfill": "pnpm dlx nolyfill install",
     "postnolyfill": "pnpm install",
     "prepare": "husky",
-    "sort-pjson": "pnpm sort-package-json '**/package.json'",
     "test:integration": "turbo test:integration --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* --continue --concurrency 1",
     "test:unit": "turbo test:unit --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* --concurrency 34",
     "test:e2e": "turbo test:e2e --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* --concurrency 34",
-    "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* test:unit:dev"
+    "test:unit:dev": "FORCE_COLOR=1 pnpm -r --parallel --filter=!@gracile/starter-projects --filter=!@gracile/template--* --filter=!@gracile/demo--* --filter=!@gracile-labs/demo--* --filter=!@literals/demo--* test:unit:dev",
+    "nolyfill": "pnpm dlx nolyfill install",
+    "sherif": "sherif"
   },
   "resolutions": {
     "braces": "3.0.3"
@@ -80,6 +80,7 @@
     "husky": "^9.1.7",
     "knip": "^6.0.1",
     "prettier": "^3.8.1",
+    "sherif": "^1.11.1",
     "sort-package-json": "^3.6.1",
     "stylelint": "^16.10.0",
     "stylelint-config-recess-order": "^5.1.1",

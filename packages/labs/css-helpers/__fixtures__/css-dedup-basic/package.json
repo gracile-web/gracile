@@ -4,8 +4,8 @@
 	"private": true,
 	"type": "module",
 	"dependencies": {
-		"@gracile/gracile": "workspace:^",
 		"@gracile-labs/css-helpers": "workspace:^",
+		"@gracile/gracile": "workspace:^",
 		"lit": "catalog:",
 		"vite": "catalog:"
 	}

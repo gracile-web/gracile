@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@gracile/gracile": "workspace:^",
     "@gracile-labs/vite-plugin-jsx-forge": "workspace:^",
+    "@gracile/gracile": "workspace:^",
     "jsx-forge": "workspace:^",
     "lit": "catalog:",
     "typescript": "catalog:",

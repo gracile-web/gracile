@@ -141,7 +141,7 @@
     "ts-lit-plugin": "^2.0.2",
     "tsx": "catalog:",
     "typedoc": "^0.28.17",
-    "typedoc-plugin-markdown": "^4.10.0",
+    "typedoc-plugin-markdown": "^4.11.0",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plugin-cross-origin-isolation": "^0.1.6",

@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@gracile/gracile": "workspace:^",
     "@gracile-labs/vite-plugin-jsx-forge": "workspace:^",
+    "@gracile/gracile": "workspace:^",
     "lit": "catalog:",
     "vite": "catalog:"
   },
