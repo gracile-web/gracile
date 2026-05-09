@@ -115,6 +115,18 @@ export function detectMemberIndent(
 	return match?.[1] || '\t';
 }
 
+/**
+ * Derive a single indent unit from member indentation.
+ * E.g. if members are at `\t\t`, unit is `\t`; if at `    `, unit is `  ` (or `    `).
+ */
+export function indentUnit(memberIndent: string): string {
+	if (memberIndent.includes('\t')) return '\t';
+	// Guess the smallest repeating space unit (2 or 4)
+	if (memberIndent.length >= 4 && memberIndent.length % 4 === 0) return '    ';
+	if (memberIndent.length >= 2 && memberIndent.length % 2 === 0) return '  ';
+	return memberIndent || '\t';
+}
+
 /** Get the start of a member including its decorators. */
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 export function firstDecoratorStart(member: any): number {

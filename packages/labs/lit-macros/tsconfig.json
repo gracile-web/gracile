@@ -1,4 +1,8 @@
 {
   "extends": "@gracile/internal-tsconfigs/config-base.json",
-  "exclude": ["./**/dist", "./coverage", "./__fixtures__"]
+  "exclude": [
+    "${configDir}/**/dist",
+    "${configDir}/coverage",
+    "${configDir}/__fixtures__"
+  ]
 }

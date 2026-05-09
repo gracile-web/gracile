@@ -176,6 +176,18 @@ describe('transformLitMacros', () => {
 		assert.ok(result, 'transform should produce output');
 		assert.equal(normalise(result.code), normalise(expected));
 	});
+
+	it('localized — @localized() → updateWhenLocaleChanges(this) in constructor', () => {
+		const input = readFixture('localized', 'input.ts');
+		const expected = readFixture('localized', 'expected.ts');
+
+		const result = transformLitMacros(input, parseSync, Visitor, {
+			sourceFileName: 'localized.ts',
+		});
+
+		assert.ok(result, 'transform should produce output');
+		assert.equal(normalise(result.code), normalise(expected));
+	});
 });
 
 // ---------------------------------------------------------------------------

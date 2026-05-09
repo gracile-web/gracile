@@ -5,6 +5,7 @@ import type { ParseSync, VisitorClass } from '../resolve-deps.js';
 import {
 	HANDLED_DECORATORS,
 	LIT_DECORATORS_RE,
+	LIT_LOCALIZE_RE,
 	QUERY_DECORATORS,
 	QUICK_CHECK_RE,
 } from './constants.js';
@@ -12,6 +13,7 @@ import { buildQueryGetter } from './query-builders.js';
 import {
 	detectMemberIndent,
 	firstDecoratorStart,
+	indentUnit,
 	removeDecoratorRange,
 	removeFieldMember,
 	removeFullLine,
@@ -51,6 +53,13 @@ export function transformLitMacros(
 	const consumedBindings = new Set<string>();
 	const litImportDecls: ImportRecord[] = [];
 
+	// ── @localized import tracking (‘@lit/localize’) ──────────────────
+
+	/** local name for `localized` from @lit/localize */
+	let localizedBinding: string | null = null;
+	let localizedConsumed = false;
+	const localizeImportDecls: ImportRecord[] = [];
+
 	// ── Per-class collected edits ─────────────────────────────────────
 
 	const classEdits: ClassEdit[] = [];
@@ -59,10 +68,9 @@ export function transformLitMacros(
 
 	function processClass(node: any): void {
 		const className: string | undefined = node.id?.name;
-		if (!className) return;
 
 		const edit: ClassEdit = {
-			className,
+			className: className ?? '',
 			classEnd: node.end,
 			bodyStart: node.body.start,
 			bodyMembers: node.body?.body ?? [],
@@ -70,24 +78,40 @@ export function transformLitMacros(
 			decoratorsToRemove: [],
 			fieldRemovals: [],
 			constructorInits: [],
+			constructorCalls: [],
 			getterReplacements: [],
 		};
 
-		// ── Class-level decorators (@customElement) ───────────────────
+		// ── Class-level decorators (@customElement, @localized) ────────
 		for (const dec of node.decorators ?? []) {
 			const info = resolveDecorator(dec);
-			if (info.importedName !== 'customElement') continue;
 
-			if (info.callExpression) {
-				const argument = info.callExpression.arguments?.[0];
-				if (argument && typeof argument.value === 'string' && argument.value) {
-					edit.defineTag = argument.value;
-					edit.decoratorsToRemove.push({
-						start: dec.start,
-						end: dec.end,
-					});
-					if (info.localName) consumedBindings.add(info.localName);
+			if (info.importedName === 'customElement') {
+				if (info.callExpression && className) {
+					const argument = info.callExpression.arguments?.[0];
+					if (
+						argument &&
+						typeof argument.value === 'string' &&
+						argument.value
+					) {
+						edit.defineTag = argument.value;
+						edit.decoratorsToRemove.push({
+							start: dec.start,
+							end: dec.end,
+						});
+						if (info.localName) consumedBindings.add(info.localName);
+					}
 				}
+				continue;
+			}
+
+			if (info.importedName === 'localized') {
+				edit.decoratorsToRemove.push({
+					start: dec.start,
+					end: dec.end,
+				});
+				edit.constructorCalls.push('updateWhenLocaleChanges(this);');
+				localizedConsumed = true;
 			}
 		}
 
@@ -188,7 +212,7 @@ export function transformLitMacros(
 		}
 
 		// ── Find existing constructor for initializer insertion ────────
-		if (edit.constructorInits.length > 0) {
+		if (edit.constructorInits.length > 0 || edit.constructorCalls.length > 0) {
 			for (const member of edit.bodyMembers) {
 				if (
 					member.type === 'MethodDefinition' &&
@@ -213,7 +237,8 @@ export function transformLitMacros(
 		if (
 			edit.defineTag ||
 			edit.properties.length > 0 ||
-			edit.getterReplacements.length > 0
+			edit.getterReplacements.length > 0 ||
+			edit.constructorCalls.length > 0
 		) {
 			classEdits.push(edit);
 		}
@@ -231,7 +256,10 @@ export function transformLitMacros(
 		// @decorator() — CallExpression wrapping an Identifier
 		if (expression.type === 'CallExpression') {
 			const name: string | undefined = expression.callee?.name;
-			const imported = name ? (litBindings.get(name) ?? null) : null;
+			const imported = name
+				? (litBindings.get(name) ??
+					(name === localizedBinding ? 'localized' : null))
+				: null;
 			return {
 				callExpression: expression,
 				importedName: imported,
@@ -241,7 +269,9 @@ export function transformLitMacros(
 
 		// @decorator — bare Identifier (no call)
 		if (expression.type === 'Identifier') {
-			const imported = litBindings.get(expression.name) ?? null;
+			const imported =
+				litBindings.get(expression.name) ??
+				(expression.name === localizedBinding ? 'localized' : null);
 			return {
 				callExpression: null,
 				importedName: imported,
@@ -255,21 +285,44 @@ export function transformLitMacros(
 	const visitor = new Visitor({
 		ImportDeclaration(node: any): void {
 			const source_: string | undefined = node.source?.value;
-			if (!source_ || !LIT_DECORATORS_RE.test(source_)) return;
+			if (!source_) return;
 
-			litImportDecls.push({
-				start: node.start,
-				end: node.end,
-				specifiers: node.specifiers ?? [],
-			});
+			// ── lit/decorators, @lit/reactive-element/decorators ───────
+			if (LIT_DECORATORS_RE.test(source_)) {
+				litImportDecls.push({
+					start: node.start,
+					end: node.end,
+					specifiers: node.specifiers ?? [],
+				});
 
-			for (const spec of node.specifiers ?? []) {
-				if (spec.type !== 'ImportSpecifier') continue;
-				const imported: string | undefined =
-					spec.imported?.name ?? spec.local?.name;
-				const local: string | undefined = spec.local?.name;
-				if (imported && local && HANDLED_DECORATORS.has(imported)) {
-					litBindings.set(local, imported);
+				for (const spec of node.specifiers ?? []) {
+					if (spec.type !== 'ImportSpecifier') continue;
+					const imported: string | undefined =
+						spec.imported?.name ?? spec.local?.name;
+					const local: string | undefined = spec.local?.name;
+					if (imported && local && HANDLED_DECORATORS.has(imported)) {
+						litBindings.set(local, imported);
+					}
+				}
+				return;
+			}
+
+			// ── @lit/localize ──────────────────────────────────────
+			if (LIT_LOCALIZE_RE.test(source_)) {
+				localizeImportDecls.push({
+					start: node.start,
+					end: node.end,
+					specifiers: node.specifiers ?? [],
+				});
+
+				for (const spec of node.specifiers ?? []) {
+					if (spec.type !== 'ImportSpecifier') continue;
+					const imported: string | undefined =
+						spec.imported?.name ?? spec.local?.name;
+					const local: string | undefined = spec.local?.name;
+					if (imported === 'localized' && local) {
+						localizedBinding = local;
+					}
 				}
 			}
 		},
@@ -314,7 +367,7 @@ export function transformLitMacros(
 				edit.bodyStart,
 				edit.bodyMembers,
 			);
-			const entryIndent = indent + indent;
+			const entryIndent = indent + indentUnit(indent);
 
 			const entries = edit.properties
 				.map((p) => `${entryIndent}${p.name}: ${p.options},`)
@@ -327,19 +380,25 @@ export function transformLitMacros(
 			changed = true;
 		}
 
-		if (edit.constructorInits.length > 0) {
+		if (edit.constructorInits.length > 0 || edit.constructorCalls.length > 0) {
 			const indent = detectMemberIndent(
 				source,
 				edit.bodyStart,
 				edit.bodyMembers,
 			);
-			const innerIndent = indent + indent;
-			const assignments = edit.constructorInits
-				.map((init) => `${innerIndent}this.${init.name} = ${init.initText};`)
-				.join('\n');
+			const innerIndent = indent + indentUnit(indent);
+
+			const lines: string[] = [];
+			for (const call of edit.constructorCalls) {
+				lines.push(`${innerIndent}${call}`);
+			}
+			for (const init of edit.constructorInits) {
+				lines.push(`${innerIndent}this.${init.name} = ${init.initText};`);
+			}
+			const body = lines.join('\n');
 
 			if (edit.constructorInfo) {
-				s.appendRight(edit.constructorInfo.superCallEnd, '\n' + assignments);
+				s.appendRight(edit.constructorInfo.superCallEnd, '\n' + body);
 			} else {
 				const hasConstructor = edit.bodyMembers.some(
 					(m: any) => m.type === 'MethodDefinition' && m.kind === 'constructor',
@@ -347,7 +406,7 @@ export function transformLitMacros(
 				if (!hasConstructor) {
 					s.appendRight(
 						edit.bodyStart + 1,
-						`\n${indent}constructor() {\n${innerIndent}super();\n${assignments}\n${indent}}\n`,
+						`\n${indent}constructor() {\n${innerIndent}super();\n${body}\n${indent}}\n`,
 					);
 				}
 			}
@@ -363,20 +422,62 @@ export function transformLitMacros(
 		}
 	}
 
-	// ── Remove fully-consumed imports ─────────────────────────────────
+	// ── Clean up decorator imports ────────────────────────────────────
 
 	for (const decl of litImportDecls) {
 		if (decl.specifiers.length === 0) continue;
-		const allConsumed = decl.specifiers.every((sp: any) => {
-			if (sp.type !== 'ImportSpecifier') return false;
-			return consumedBindings.has(sp.local?.name ?? '');
-		});
-		if (allConsumed) {
-			removeFullLine(s, source, decl.start, decl.end);
-			changed = true;
+
+		const consumed: any[] = [];
+		const kept: any[] = [];
+		for (const sp of decl.specifiers) {
+			if (sp.type !== 'ImportSpecifier') {
+				kept.push(sp);
+				continue;
+			}
+			if (consumedBindings.has(sp.local?.name ?? '')) {
+				consumed.push(sp);
+			} else {
+				kept.push(sp);
+			}
 		}
+
+		if (consumed.length === 0) continue;
+
+		if (kept.length === 0) {
+			// All specifiers consumed — remove entire import line.
+			removeFullLine(s, source, decl.start, decl.end);
+		} else {
+			// Partial — rewrite the import with only the kept specifiers.
+			const keptNames = kept.map((sp: any) => {
+				const imported: string = sp.imported?.name ?? sp.local?.name;
+				const local: string = sp.local?.name;
+				return imported === local ? imported : `${imported} as ${local}`;
+			});
+			// Rewrite the specifier range with only the kept names.
+			s.overwrite(
+				decl.specifiers[0].start,
+				decl.specifiers.at(-1).end,
+				keptNames.join(', '),
+			);
+		}
+		changed = true;
 	}
 
+	// ── Rewrite @lit/localize imports (localized → updateWhenLocaleChanges) ─
+
+	if (localizedConsumed) {
+		for (const decl of localizeImportDecls) {
+			for (const spec of decl.specifiers) {
+				if (spec.type !== 'ImportSpecifier') continue;
+				const imported: string | undefined =
+					spec.imported?.name ?? spec.local?.name;
+				if (imported === 'localized') {
+					s.overwrite(spec.start, spec.end, 'updateWhenLocaleChanges');
+					changed = true;
+				}
+			}
+		}
+	}
 	if (!changed) return null;
 
 	return {

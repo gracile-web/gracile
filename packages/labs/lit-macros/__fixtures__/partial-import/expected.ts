@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit';
-import { customElement, property, eventOptions } from 'lit/decorators.js';
+import { eventOptions } from 'lit/decorators.js';
 
 class PartialImport extends LitElement {
 	static properties = {

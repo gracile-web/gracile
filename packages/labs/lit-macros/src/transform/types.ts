@@ -40,6 +40,7 @@ export interface ClassEdit {
 	decoratorsToRemove: Array<{ start: number; end: number }>;
 	fieldRemovals: Array<{ start: number; end: number }>;
 	constructorInits: Array<{ name: string; initText: string }>;
+	constructorCalls: string[];
 	constructorInfo?: { superCallEnd: number } | undefined;
 	getterReplacements: GetterReplacement[];
 }
