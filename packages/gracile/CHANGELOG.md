@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.11.0-next.0...@gracile/gracile@0.11.0-next.1) (2026-05-09)
+
+### Features
+
+* programmatic, user definable routes ([2847c85](https://github.com/gracile-web/gracile/commit/2847c85a97b9d7d208411b2d591cc1dfcafb9d5f))
+
 ## [0.11.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.10.0...@gracile/gracile@0.11.0-next.0) (2026-04-12)
 
 ### Features

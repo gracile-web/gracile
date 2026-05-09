@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.12.0-next.0...@gracile/engine@0.12.0-next.1) (2026-05-09)
+
+### Features
+
+* programmatic, user definable routes ([2847c85](https://github.com/gracile-web/gracile/commit/2847c85a97b9d7d208411b2d591cc1dfcafb9d5f))
+* user server entry transient loading page ([45a1911](https://github.com/gracile-web/gracile/commit/45a1911ae6ed23d01db10c1c1b9a1daf72d9f53e))
+
 ## [0.12.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/engine@0.11.0...@gracile/engine@0.12.0-next.0) (2026-04-12)
 
 ### Features

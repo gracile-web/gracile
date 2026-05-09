@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.4.0-next.0...@gracile-labs/vite-plugin-jsx-forge@0.4.0-next.1) (2026-05-09)
+
+### Features
+
+* forward options to transformer ([b594377](https://github.com/gracile-web/gracile/commit/b594377b4aa687469d027252344befcb89ed00c9))
+
 ## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.3.0...@gracile-labs/vite-plugin-jsx-forge@0.4.0-next.0) (2026-04-12)
 
 ### Features

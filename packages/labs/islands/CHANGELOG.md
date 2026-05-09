@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.2.3-next.0...@gracile-labs/islands@0.2.2-next.1) (2026-05-09)
+
+### Bug Fixes
+
+* hydration (react/solid), add browser tests ([931fa82](https://github.com/gracile-web/gracile/commit/931fa828c943c1efe07ebf90384974223ff88416))
+
 ## [0.2.3-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.2.2...@gracile-labs/islands@0.2.3-next.0) (2026-04-12)
 
 ### Bug Fixes

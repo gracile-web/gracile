@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0-next.1](https://github.com/gracile-web/gracile/compare/jsx-forge@0.4.0-next.0...jsx-forge@0.4.0-next.1) (2026-05-09)
+
+### Features
+
+* enhance "to jsx"/"to literals" transformers, fix jsx namespace ([6066507](https://github.com/gracile-web/gracile/commit/6066507676557c440582f82bcd05ed50c74c3544))
+
 ## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/jsx-forge@0.3.0...jsx-forge@0.4.0-next.0) (2026-04-12)
 
 ### Features

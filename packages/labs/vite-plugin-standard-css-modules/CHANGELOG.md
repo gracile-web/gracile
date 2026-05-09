@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/vite-plugin-standard-css-modules@0.2.1-next.0...vite-plugin-standard-css-modules@0.3.0-next.0) (2026-05-09)
+
+### Features
+
+* use a shared singleton, test for ext deps handling ([335c9c2](https://github.com/gracile-web/gracile/commit/335c9c210fde8233a1c49116adc8030c24276a75))
+
 ## [0.2.1-next.0](https://github.com/gracile-web/gracile/compare/vite-plugin-standard-css-modules@0.2.0...vite-plugin-standard-css-modules@0.2.1-next.0) (2026-04-12)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.4.0-next.0...@gracile-labs/css-helpers@0.4.0-next.1) (2026-05-09)
+
+### Bug Fixes
+
+* revert to direct snippet injection, re enable tests ([a649ac6](https://github.com/gracile-web/gracile/commit/a649ac6b7dfd5165e80ad67730f5b50d32dbb916))
+
 ## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.3.0...@gracile-labs/css-helpers@0.4.0-next.0) (2026-04-12)
 
 ### Features
