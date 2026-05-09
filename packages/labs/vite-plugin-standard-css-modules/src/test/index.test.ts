@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 
 import {
-	buildReplacement,
+	buildVirtualModuleCode,
 	findCssImports,
 	getCssAttributeType,
 	resolveParser,
@@ -145,29 +145,31 @@ describe('findCssImports', () => {
 	});
 });
 
-describe('buildReplacement', () => {
-	it('generates CSSStyleSheet code for client', () => {
-		const out = buildReplacement('styles', './a.css?inline', false);
+describe('buildVirtualModuleCode', () => {
+	it('generates CSSStyleSheet code (sheet mode)', () => {
+		const out = buildVirtualModuleCode('/abs/a.css', false);
 		assert.ok(out.includes('new CSSStyleSheet()'));
 		assert.ok(out.includes('replaceSync'));
-		assert.ok(out.includes('from "./a.css?inline"'));
-		assert.ok(out.includes('const styles ='));
+		assert.ok(out.includes('from "/abs/a.css?inline"'));
+		assert.ok(out.includes('export default __sheet'));
 		assert.ok(!out.includes('unsafeCSS'));
 	});
 
-	it('generates unsafeCSS code for Lit / SSR', () => {
-		const out = buildReplacement('styles', './a.css?inline', true);
+	it('generates unsafeCSS code (lit mode)', () => {
+		const out = buildVirtualModuleCode('/abs/a.css', true);
 		assert.ok(out.includes('unsafeCSS'));
 		assert.ok(out.includes("from 'lit'"));
-		assert.ok(out.includes('from "./a.css?inline"'));
-		assert.ok(out.includes('const styles ='));
+		assert.ok(out.includes('from "/abs/a.css?inline"'));
+		assert.ok(out.includes('export default __styles'));
 		assert.ok(!out.includes('CSSStyleSheet'));
 	});
 
-	it('uses unique identifiers per localName', () => {
-		const out = buildReplacement('myStyles', './x.css?inline', true);
-		assert.ok(out.includes('__unsafeCSS_myStyles'));
-		assert.ok(out.includes('__raw_myStyles'));
+	it('uses stable identifiers (no per-import mangling)', () => {
+		const out = buildVirtualModuleCode('/abs/x.css', true);
+		assert.ok(out.includes('__raw'));
+		assert.ok(out.includes('__styles'));
+		// No localName-suffixed identifiers
+		assert.ok(!out.includes('__raw_'));
 	});
 });
 
@@ -251,5 +253,53 @@ describe('outputMode option', () => {
 		});
 		assert.ok(code.includes('unsafeCSS'));
 		assert.ok(!code.includes('__sheet_'));
+	});
+});
+
+// -----------------------------------------------------------------------------
+// Integration tests — vendor / external dependency handling
+// -----------------------------------------------------------------------------
+
+describe('vendor dependency with CSS import attributes', () => {
+	it('transforms CSS import attributes in vendor libs (default options)', async () => {
+		const code = await buildFixture('entry-vendor.ts');
+		assert.ok(
+			code.includes('CSSStyleSheet') || code.includes('replaceSync'),
+			'vendor CSS import should be transformed to CSSStyleSheet',
+		);
+		assert.ok(
+			code.includes('color:green') || code.includes('color: green'),
+			'vendor CSS content should be inlined',
+		);
+	});
+
+	it('transforms vendor deps even when excluded by filter (simulating node_modules)', async () => {
+		// This simulates the real scenario: a pre-built vendor lib lives in
+		// node_modules and is excluded by the default `exclude` pattern.
+		// The plugin MUST still transform CSS import attributes in those files
+		// because no bundler handles them natively.
+		const code = await buildFixture('entry-vendor.ts', {
+			pluginOptions: { exclude: ['**/vendor-lib/**'] },
+		});
+		assert.ok(
+			code.includes('CSSStyleSheet') || code.includes('replaceSync'),
+			'vendor CSS import should be transformed even when the file is in an excluded directory',
+		);
+		assert.ok(
+			code.includes('color:green') || code.includes('color: green'),
+			'vendor CSS content should be inlined',
+		);
+	});
+
+	it('transforms vendor CSS import attributes in SSR mode', async () => {
+		const code = await buildFixture('entry-vendor.ts', { ssr: true });
+		assert.ok(
+			code.includes('unsafeCSS'),
+			'vendor CSS import should use unsafeCSS in SSR',
+		);
+		assert.ok(
+			code.includes('color:green') || code.includes('color: green'),
+			'vendor CSS content should be inlined in SSR',
+		);
 	});
 });

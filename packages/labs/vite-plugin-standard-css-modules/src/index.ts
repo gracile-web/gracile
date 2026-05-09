@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: ISC
  */
 
+import { createHash } from 'node:crypto';
+
 import type { ImportAttribute, ImportDeclaration } from '@oxc-project/types';
 import MagicString from 'magic-string';
 import { createFilter, type Plugin } from 'vite';
@@ -41,7 +43,13 @@ export type ImportAttributeType = 'css' | 'css-lit';
 export interface Options {
 	/** Glob patterns for JS/TS files to transform (default: all JS/TS). */
 	include?: string[];
-	/** Glob patterns to exclude from transformation. */
+	/**
+	 * Glob patterns to exclude from general transformation work.
+	 *
+	 * Files that contain `with { type: 'css' | 'css-lit' }` imports are still
+	 * transformed even if excluded, because bundlers do not handle these import
+	 * attributes natively.
+	 */
 	exclude?: string[];
 	/**
 	 * Force every CSS import to produce a specific output, regardless of
@@ -116,6 +124,35 @@ export const defaultOptions: Required<Omit<Options, 'outputMode'>> = {
 
 const VIRTUAL_HMR_ID = 'virtual:standard-css-modules/hmr';
 const RESOLVED_VIRTUAL_HMR_ID = '\0' + VIRTUAL_HMR_ID;
+
+/**
+ * Virtual module prefix for per-CSS-file singletons.
+ *
+ * Full ID format: `virtual:csm/<hash>` where `<hash>` is a stable
+ * SHA-256 digest of `mode + '\0' + absoluteCssPath`.  A registry maps
+ * each hash back to its metadata so the `load` hook can generate the
+ * correct bootstrap code.
+ *
+ * We avoid embedding file-system paths in the virtual ID because
+ * Rolldown (used by Vite 8+) misidentifies path-like virtual IDs as
+ * real files and bypasses the `load` hook for export analysis.
+ */
+export const VIRTUAL_CSS_PREFIX = 'virtual:csm/';
+const RESOLVED_VIRTUAL_CSS_PREFIX = '\0' + VIRTUAL_CSS_PREFIX;
+
+/** Metadata stored per virtual CSS module. */
+export interface VirtualCssEntry {
+	cssAbsPath: string;
+	useLit: boolean;
+}
+
+/** Deterministic short hash for a mode + absolute CSS path pair. */
+export function virtualCssKey(mode: string, cssAbsPath: string): string {
+	return createHash('sha256')
+		.update(mode + '\0' + cssAbsPath)
+		.digest('hex')
+		.slice(0, 16);
+}
 
 /**
  * Client-side runtime that traverses open shadow roots and updates `<style>`
@@ -209,86 +246,61 @@ export function findCssImports(
 }
 
 /**
- * Build the replacement source text for a single CSS import.
+ * Build the code for a virtual CSS module singleton.
  *
- * When `dev` is provided (dev-server mode):
- * - A CSS comment marker (`/* __csm:ID *\/`) is prepended to the CSS content
- *   for DSD `<style>` identification.
- * - When `dev.injectHmr` is true (client-side only), an
- *   `import.meta.hot.accept` block is appended so CSS changes are applied
- *   in-place via `CSSStyleSheet.replaceSync()` — no full page reload.
+ * Every CSS file gets at most two virtual modules (one per mode: `sheet` or
+ * `lit`).  All JS files that `import … with { type: 'css' }` from the same
+ * CSS file share the **same** virtual module — and therefore the same
+ * `CSSStyleSheet` or `CSSResult` instance, exactly like a native CSS module
+ * script would behave in the browser.
+ *
+ * @param cssAbsPath  Absolute path of the CSS source file.
+ * @param useLit      `true` → emit a Lit `CSSResult`; `false` → `CSSStyleSheet`.
+ * @param dev         When set, prepend a DSD marker comment and (optionally)
+ *                    inject an `import.meta.hot.accept` block for graceful HMR.
  */
-export function buildReplacement(
-	localName: string,
-	inlineSpecifier: string,
+export function buildVirtualModuleCode(
+	cssAbsPath: string,
 	useLit: boolean,
 	dev?: { cssModuleId: string; injectHmr: boolean },
 ): string {
+	const inlineSpecifier = `${cssAbsPath}?inline`;
+
 	// In dev, prepend a marker comment so DSD <style> elements can be found.
 	const markerPrefix = dev
 		? JSON.stringify(`/* __csm:${dev.cssModuleId} */\n`)
 		: null;
-	const rawExpr = markerPrefix
-		? `(${markerPrefix} + __raw_${localName})`
-		: `__raw_${localName}`;
+	const rawExpr = markerPrefix ? `(${markerPrefix} + __raw)` : '__raw';
 
 	let code: string;
 
 	code = useLit
-		? `import { unsafeCSS as __unsafeCSS_${localName} } from 'lit';\n` +
-			`import __raw_${localName} from ${JSON.stringify(inlineSpecifier)};\n` +
-			`const ${localName} = __unsafeCSS_${localName}(${rawExpr});`
-		: // -----------------------------------------------------------------------
-			`import __raw_${localName} from ${JSON.stringify(inlineSpecifier)};\n` +
-			`const __sheet_${localName} = new CSSStyleSheet();\n` +
-			`__sheet_${localName}.replaceSync(${rawExpr});\n` +
-			`const ${localName} = __sheet_${localName};`;
+		? `import { unsafeCSS } from 'lit';\n` +
+			`import __raw from ${JSON.stringify(inlineSpecifier)};\n` +
+			`const __styles = unsafeCSS(${rawExpr});\n` +
+			`export default __styles;`
+		: `import __raw from ${JSON.stringify(inlineSpecifier)};\n` +
+			`const __sheet = new CSSStyleSheet();\n` +
+			`__sheet.replaceSync(${rawExpr});\n` +
+			`export default __sheet;`;
 
 	if (dev?.injectHmr) {
-		code += buildHmrBlock(
-			localName,
-			inlineSpecifier,
-			dev.cssModuleId,
-			useLit,
-			markerPrefix!,
-		);
+		const sheetUpdate = useLit
+			? `try { const __s = __styles.styleSheet; if (__s) __s.replaceSync(__css); } catch {}`
+			: `__sheet.replaceSync(__css);`;
+
+		code +=
+			`\nif (import.meta.hot) {` +
+			`\n  import.meta.hot.accept(${JSON.stringify(inlineSpecifier)}, async (__m) => {` +
+			`\n    if (!__m) return;` +
+			`\n    const __css = ${markerPrefix} + __m.default;` +
+			`\n    ${sheetUpdate}` +
+			`\n    (await import(${JSON.stringify(VIRTUAL_HMR_ID)})).updateDsdStyles(${JSON.stringify(dev.cssModuleId)}, __css);` +
+			`\n  });` +
+			`\n}`;
 	}
 
 	return code;
-}
-
-/**
- * Generate the `import.meta.hot.accept` block for graceful CSS HMR.
- *
- * - **CSSStyleSheet** (`type: 'css'`): calls `replaceSync()` on the existing
- *   sheet instance — every `adoptedStyleSheets` consumer sees the update.
- * - **CSSResult** (`type: 'css-lit'`): accesses the lazily-cached
- *   `styleSheet` property and calls `replaceSync()` if a component instance
- *   has already been created.
- * - **DSD fallback**: dynamically imports the virtual HMR helper to reconcile
- *   `<style>` elements inside open shadow roots.
- */
-function buildHmrBlock(
-	localName: string,
-	inlineSpecifier: string,
-	cssModuleId: string,
-	useLit: boolean,
-	markerPrefix: string,
-): string {
-	const sheetUpdate = useLit
-		? `try { const __s = ${localName}.styleSheet; if (__s) __s.replaceSync(__css); } catch {}`
-		: `__sheet_${localName}.replaceSync(__css);`;
-
-	return (
-		`\nif (import.meta.hot) {` +
-		`\n  import.meta.hot.accept(${JSON.stringify(inlineSpecifier)}, async (__m) => {` +
-		`\n    if (!__m) return;` +
-		`\n    const __css = ${markerPrefix} + __m.default;` +
-		`\n    ${sheetUpdate}` +
-		`\n    (await import(${JSON.stringify(VIRTUAL_HMR_ID)})).updateDsdStyles(${JSON.stringify(cssModuleId)}, __css);` +
-		`\n  });` +
-		`\n}`
-	);
 }
 
 // -----------------------------------------------------------------------------
@@ -299,10 +311,13 @@ function buildHmrBlock(
 export function standardCssModules(options?: Options): any {
 	const opts = { ...defaultOptions, ...options };
 
-	const filter = createFilter(opts.include, opts.exclude);
+	const includeFilter = createFilter(opts.include);
 
 	/** CSS file → Set of JS importers (for HMR). */
 	const cssToImporters = new Map<string, Set<string>>();
+
+	/** Hash → virtual CSS module metadata (shared across transform / load). */
+	const cssRegistry = new Map<string, VirtualCssEntry>();
 
 	let root = '';
 	let isDev = false;
@@ -318,14 +333,36 @@ export function standardCssModules(options?: Options): any {
 
 		resolveId(id) {
 			if (id === VIRTUAL_HMR_ID) return RESOLVED_VIRTUAL_HMR_ID;
+			if (id.startsWith(VIRTUAL_CSS_PREFIX)) return '\0' + id;
 		},
 
-		load(id) {
+		load(id, loadOptions) {
 			if (id === RESOLVED_VIRTUAL_HMR_ID) return HMR_RUNTIME_CODE;
+
+			if (id.startsWith(RESOLVED_VIRTUAL_CSS_PREFIX)) {
+				const hash = id.slice(RESOLVED_VIRTUAL_CSS_PREFIX.length);
+				const entry = cssRegistry.get(hash);
+				if (!entry) return;
+
+				const { cssAbsPath, useLit } = entry;
+				const ssr = loadOptions?.ssr === true;
+
+				const dev =
+					isDev && opts.hmr
+						? {
+								cssModuleId: cssAbsPath.startsWith(root)
+									? cssAbsPath.slice(root.length)
+									: cssAbsPath,
+								injectHmr: !ssr,
+							}
+						: undefined;
+
+				return buildVirtualModuleCode(cssAbsPath, useLit, dev);
+			}
 		},
 
 		async transform(code, id, transformOptions) {
-			if (!filter(id)) return null;
+			if (!includeFilter(id)) return null;
 			// Fast pre-filter: skip files that can't contain CSS import attributes.
 			if (!maybeCssImportAttributes(code)) return null;
 
@@ -354,8 +391,6 @@ export function standardCssModules(options?: Options): any {
 				}
 				importers.add(id);
 
-				const inlineSpecifier = `${node.source.value}?inline`;
-
 				// Determine output shape.
 				// 1. Explicit `outputMode` option overrides everything.
 				// 2. Otherwise: css-lit → CSSResult, SSR → CSSResult,
@@ -364,22 +399,19 @@ export function standardCssModules(options?: Options): any {
 					opts.outputMode === 'CSSResult' ||
 					(opts.outputMode !== 'CSSStyleSheet' && (type === 'css-lit' || ssr));
 
-				// In dev mode (with hmr enabled), inject CSS marker for DSD
-				// reconciliation and HMR accept handler for graceful CSS swapping.
-				const dev =
-					isDev && opts.hmr
-						? {
-								cssModuleId: resolvedCssPath.startsWith(root)
-									? resolvedCssPath.slice(root.length)
-									: resolvedCssPath,
-								injectHmr: !ssr,
-							}
-						: undefined;
+				// Rewrite the import to point to a virtual CSS module singleton.
+				// All importers of the same CSS file + mode share one module
+				// instance — one CSSStyleSheet or one CSSResult, like native
+				// CSS module scripts.
+				const mode = useLit ? 'lit' : 'sheet';
+				const hash = virtualCssKey(mode, resolvedCssPath);
+				cssRegistry.set(hash, { cssAbsPath: resolvedCssPath, useLit });
+				const virtualId = `${VIRTUAL_CSS_PREFIX}${hash}`;
 
 				s.overwrite(
 					node.start,
 					node.end,
-					buildReplacement(localName, inlineSpecifier, useLit, dev),
+					`import ${localName} from ${JSON.stringify(virtualId)};`,
 				);
 
 				if (opts.log) {
@@ -387,8 +419,8 @@ export function standardCssModules(options?: Options): any {
 					console.info(
 						`[standard-css-modules] ${ssr ? 'SSR' : 'Client'} (${type}):`,
 						node.source.value,
-						'in',
-						id,
+						'→',
+						virtualId,
 					);
 				}
 			}

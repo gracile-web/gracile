@@ -167,17 +167,30 @@ extensions.
 1. The plugin's `transform` hook runs with `enforce: 'pre'`.
 2. OXC's parser (`oxc-parser`) scans the file's AST for `ImportDeclaration`
    nodes with a `with { type: 'css' | 'css-lit' }` attribute on a CSS-like file.
-3. Each matching import is rewritten using `magic-string`:
-   - The CSS specifier gets a `?inline` query appended so Vite processes it
-     through its normal CSS pipeline (PostCSS, Sass, etc.) and returns the final
-     CSS string.
-   - For **client + `type: 'css'`**: a `new CSSStyleSheet()` is created and
-     populated with `replaceSync()`.
-   - For **`type: 'css-lit'`** or **SSR**: `unsafeCSS()` from `lit` wraps the
-     string into a `CSSResult`.
-4. In dev mode, the plugin injects `import.meta.hot.accept` handlers so CSS
-   edits are applied instantly via `CSSStyleSheet.replaceSync()` — no full page
-   reload.
+3. Each matching import is rewritten to a **virtual module** — e.g.
+   `virtual:csm/sheet/<resolved-css-path>` — using `magic-string`. All JS files
+   that import the same CSS file (and mode) share the **same virtual module**
+   and therefore the **same `CSSStyleSheet` or `CSSResult` instance**, exactly
+   like a native CSS module script in the browser.
+4. The virtual module's `load` hook generates the bootstrap code:
+   - It imports the CSS file with a `?inline` query so Vite processes it through
+     its normal CSS pipeline (PostCSS, Sass, etc.) and returns the final CSS
+     string.
+   - For **client + `type: 'css'`** (`sheet` mode): a single
+     `new CSSStyleSheet()` is created and populated with `replaceSync()`.
+   - For **`type: 'css-lit'`** or **SSR** (`lit` mode): a single `unsafeCSS()`
+     call from `lit` wraps the string into a `CSSResult`.
+5. In dev mode, the virtual module injects `import.meta.hot.accept` handlers so
+   CSS edits are applied instantly via `CSSStyleSheet.replaceSync()` — no full
+   page reload.
+
+### Singleton advantage
+
+Because every importer of `common.css` receives the same module reference, there
+is exactly **one** `CSSStyleSheet` (or `CSSResult`) per CSS file — no matter how
+many components adopt it. This mirrors native browser behaviour for CSS module
+scripts and avoids redundant `unsafeCSS()` calls, duplicate `const` bindings,
+and unnecessary GC pressure in large codebases.
 
 ## Hot Module Replacement (HMR)
 
