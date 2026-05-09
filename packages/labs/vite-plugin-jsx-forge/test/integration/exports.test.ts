@@ -7,12 +7,12 @@ import { noop } from '@gracile/internal-test-utils/noop';
 
 describe('vite-plugin-jsx-forge package should export correctly', () => {
 	test('vite plugin module resolves', async () => {
-		const { jsxToLiterals } =
+		const { gracileJsxToLiterals } =
 			await import('@gracile-labs/vite-plugin-jsx-forge/to-literals');
 
-		assert.equal(typeof jsxToLiterals, 'function');
+		assert.equal(typeof gracileJsxToLiterals, 'function');
 
-		const plugins = jsxToLiterals();
+		const plugins = gracileJsxToLiterals();
 		assert.equal(Array.isArray(plugins), true);
 		assert.equal(plugins.length > 0, true);
 

@@ -30,7 +30,7 @@ import {
 	parseHtml,
 } from '@gracile/internal-test-utils/html';
 import { gracile } from '@gracile/gracile/plugin';
-import { jsxToLiterals } from '@gracile-labs/vite-plugin-jsx-forge/to-literals';
+import { gracileJsxToLiterals } from '@gracile-labs/vite-plugin-jsx-forge/to-literals';
 import { createServer as viteCreateServer } from 'vite';
 
 /** Boot a dev server for **syntactic** mode against the jsx-accuracy fixture. */
@@ -43,7 +43,7 @@ async function createSyntacticServer() {
 		server: { port: 0 },
 		logLevel: 'error',
 		cacheDir: join(tmpdir(), '.vite-test', randomUUID()),
-		plugins: [jsxToLiterals({ typeAware: false }), gracile()],
+		plugins: [gracileJsxToLiterals({ typeAware: false }), gracile()],
 	});
 
 	await server.listen();

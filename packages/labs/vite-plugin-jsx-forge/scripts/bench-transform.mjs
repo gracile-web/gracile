@@ -127,7 +127,7 @@ console.log(
 // ── Imports for syntactic server ───────────────────────────────────
 
 const { gracile } = await import('@gracile/gracile/plugin');
-const { jsxToLiterals } =
+const { gracileJsxToLiterals } =
 	await import('@gracile-labs/vite-plugin-jsx-forge/to-literals');
 
 const tsxRoute = '/'; // (home).tsx — JSX transform
@@ -187,7 +187,7 @@ console.log('\n── Syntactic-only mode (typeAware: false) ──');
 
 const { address: synAddr, vite: synVite } = await startServer({
 	configFile: false,
-	plugins: [jsxToLiterals({ typeAware: false }), gracile()],
+	plugins: [gracileJsxToLiterals({ typeAware: false }), gracile()],
 });
 
 const synColdTsx = await timeRoute(synAddr, tsxRoute);

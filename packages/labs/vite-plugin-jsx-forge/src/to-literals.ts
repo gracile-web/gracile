@@ -1,13 +1,18 @@
 // TODO: When other transformers land, extract and share TS sidecar builder.
+// FIXME: Attribute awareness can something be stall.
+// Probably non JSX imported files that are not updated.
 import * as ts from 'typescript';
-import { createJsxToLiteralsTransformer } from 'jsx-forge/to-literals';
+import {
+	createJsxToLiteralsTransformer,
+	type TransformerOptions,
+} from 'jsx-forge/to-literals';
 import { PRESETS } from 'jsx-forge/presets/lit';
 import type { TsWithInternals } from 'jsx-forge/types';
 import type { Plugin } from 'vite';
 
 const VITE_PLUGIN_NAME = 'vite-plugin-jsx-forge--to-literals';
 
-export interface VitePluginOptions {
+export interface VitePluginOptions extends TransformerOptions {
 	/**
 	 * Path to the tsconfig to use for the TS Program.
 	 * Defaults to `'tsconfig.json'` resolved from `root`.
@@ -35,17 +40,19 @@ export interface VitePluginOptions {
  * files. Emits via `program.emit` with the jsx-forge transformer.
  * No `@rollup/plugin-typescript` or `ts-patch` needed.
  */
-export function jsxToLiterals(options?: VitePluginOptions): Plugin[] {
+export function gracileJsxToLiterals(options?: VitePluginOptions): Plugin[] {
 	const typeAware = options?.typeAware !== false;
 
-	return typeAware ? createTypeAwarePlugin(options) : createSyntacticPlugin();
+	return typeAware
+		? createTypeAwarePlugin(options)
+		: createSyntacticPlugin(options);
 }
 
 // ---------------------------------------------------------------------------
 // Syntactic-only path (no LanguageService, no type checker)
 // ---------------------------------------------------------------------------
 
-function createSyntacticPlugin(): Plugin[] {
+function createSyntacticPlugin(options?: VitePluginOptions): Plugin[] {
 	let cachedTransformer: ts.TransformerFactory<ts.SourceFile> | undefined;
 	const printer = ts.createPrinter({ newLine: ts.NewLineKind.LineFeed });
 
@@ -55,6 +62,7 @@ function createSyntacticPlugin(): Plugin[] {
 			undefined,
 			{},
 			PRESETS.Default,
+			options,
 		);
 
 		return cachedTransformer;
@@ -153,6 +161,7 @@ function createTypeAwarePlugin(options?: VitePluginOptions): Plugin[] {
 			program,
 			{},
 			PRESETS.Default,
+			options,
 		);
 
 		return cachedTransformer;
