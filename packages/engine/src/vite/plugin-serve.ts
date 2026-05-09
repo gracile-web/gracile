@@ -28,13 +28,19 @@ import type {
 import { createServerAdapter } from '@whatwg-node/server';
 
 import { createDevelopmentHandler } from '../dev/development.js';
+import { builtInServerEntryLoadingPage } from '../errors/pages.js';
+import { renderLitTemplate } from '../render/lit-ssr.js';
 import { nodeAdapter } from '../server/adapters/node.js';
 import type { GracileConfig } from '../user-config.js';
 
 import type { PluginSharedState } from './plugin-shared-state.js';
 import { setDevelopmentHandler } from './plugin-handler-virtual.js';
-
-// ── Helpers ──────────────────────────────────────────────────────────
+import {
+	createServerEntryReadyPath,
+	createViteClientPath,
+	getRequestPathname,
+	isHtmlNavigationRequest,
+} from './server-entry-loading.js';
 
 /**
  * Detect whether the exported `app` is a Hono-style app (has `.fetch`)
@@ -82,7 +88,52 @@ function createFetchBridge(
 	};
 }
 
-// ── Plugin ───────────────────────────────────────────────────────────
+function respondWithServerEntryReadyState(
+	request: IncomingMessage,
+	response: ServerResponse,
+	isReady: boolean,
+): void {
+	response.statusCode = isReady ? 204 : 503;
+	response.setHeader('cache-control', 'no-store');
+	response.setHeader('x-gracile-server-entry-ready', isReady ? '1' : '0');
+
+	if (!isReady) {
+		response.setHeader('retry-after', '1');
+	}
+
+	response.end(request.method === 'HEAD' ? undefined : '');
+}
+
+async function respondWithServerEntryLoadingPage({
+	request,
+	response,
+	entry,
+	base,
+}: {
+	request: IncomingMessage;
+	response: ServerResponse;
+	entry: string;
+	base: string;
+}): Promise<void> {
+	const requestPath = request.url ?? '/';
+	const loadingPage = builtInServerEntryLoadingPage({
+		entry,
+		requestPath,
+		viteClientPath: createViteClientPath(base),
+		readyPath: createServerEntryReadyPath(base),
+	});
+
+	response.statusCode = 503;
+	response.setHeader('content-type', 'text/html; charset=utf-8');
+	response.setHeader('cache-control', 'no-store');
+	response.setHeader('retry-after', '1');
+
+	response.end(
+		request.method === 'HEAD'
+			? undefined
+			: await renderLitTemplate(loadingPage),
+	);
+}
 
 export function gracileServePlugin({
 	state,
@@ -177,11 +228,14 @@ function setupIntegratedServerEntry(
 ): void {
 	const entry = state.serverEntry!;
 	const ssrEnvironment = server.environments['ssr'] as RunnableDevEnvironment;
+	const readyPath = createServerEntryReadyPath(server.config.base);
 
 	// Mutable reference that gets hot-swapped on HMR.
 	let currentApp: unknown = null;
 
 	const loadEntry = async (): Promise<void> => {
+		const wasReady = currentApp != null;
+
 		try {
 			const entryModule = await ssrEnvironment.runner.import(entry);
 			currentApp = entryModule.default ?? entryModule.app ?? null;
@@ -190,6 +244,10 @@ function setupIntegratedServerEntry(
 				logger.info(c.green(`[gracile] Server entry loaded: ${entry}`), {
 					timestamp: true,
 				});
+
+				if (!wasReady) {
+					server.ws.send({ type: 'full-reload' });
+				}
 			} else {
 				logger.warn(
 					c.yellow(
@@ -223,7 +281,26 @@ function setupIntegratedServerEntry(
 	);
 
 	server.middlewares.use((request, response, next) => {
-		if (!currentApp) return next();
+		if (getRequestPathname(request) === readyPath) {
+			respondWithServerEntryReadyState(request, response, currentApp != null);
+			return;
+		}
+
+		if (!currentApp) {
+			if (isHtmlNavigationRequest(request)) {
+				Promise.resolve(
+					respondWithServerEntryLoadingPage({
+						request,
+						response,
+						entry,
+						base: server.config.base,
+					}),
+				).catch((error: unknown) => next(error));
+				return;
+			}
+
+			return next();
+		}
 
 		if (isFetchApp(currentApp)) {
 			Promise.resolve(fetchBridge(request, response)).catch((error: unknown) =>

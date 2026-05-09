@@ -118,6 +118,201 @@ export function builtIn404Page(
 	`;
 }
 
+export function builtInServerEntryLoadingPage({
+	entry,
+	requestPath,
+	viteClientPath,
+	readyPath,
+}: {
+	entry: string;
+	requestPath: string;
+	viteClientPath: string;
+	readyPath: string;
+}): ServerRenderedTemplate {
+	return html`
+		<!doctype html>
+		<html lang="en">
+			<head>
+				<meta charset="UTF-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<meta name="robots" content="noindex" />
+				<meta name="generator" content="Gracile" />
+				<meta name="gracile-vite-client-path" content=${viteClientPath} />
+				<meta name="gracile-server-entry-ready-path" content=${readyPath} />
+				<title>Loading server entry...</title>
+				${minimalStyles()}
+				<style>
+					:root {
+						color-scheme: dark;
+						font-family: ui-sans-serif, system-ui, sans-serif;
+						background:
+							radial-gradient(
+								circle at top,
+								rgba(87, 213, 163, 0.2),
+								transparent 40%
+							),
+							linear-gradient(180deg, #11151b 0%, #0a0d11 100%);
+						color: #f5f7fb;
+					}
+
+					* {
+						box-sizing: border-box;
+					}
+
+					body {
+						min-height: 100dvh;
+						margin: 0;
+						display: grid;
+						place-items: center;
+						padding: 1.5rem;
+					}
+
+					main {
+						width: min(38rem, 100%);
+						padding: 1.5rem;
+						border: 1px solid rgba(255, 255, 255, 0.1);
+						border-radius: 1rem;
+						background: rgba(12, 16, 22, 0.84);
+						backdrop-filter: blur(12px);
+						box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+					}
+
+					.badge {
+						display: inline-flex;
+						align-items: center;
+						gap: 0.5rem;
+						padding: 0.35rem 0.7rem;
+						border-radius: 999px;
+						background: rgba(87, 213, 163, 0.12);
+						color: #8df2c8;
+						font-size: 0.84rem;
+						letter-spacing: 0.04em;
+						text-transform: uppercase;
+					}
+
+					.badge::before {
+						content: '';
+						width: 0.65rem;
+						height: 0.65rem;
+						border-radius: 999px;
+						background: currentColor;
+						box-shadow: 0 0 0 0 rgba(141, 242, 200, 0.45);
+						animation: pulse 1.4s infinite;
+					}
+
+					h1 {
+						margin: 1rem 0 0.65rem;
+						font-size: clamp(2rem, 4vw, 2.8rem);
+						line-height: 1.05;
+					}
+
+					p {
+						margin: 0;
+						color: rgba(245, 247, 251, 0.72);
+						line-height: 1.55;
+					}
+
+					dl {
+						margin: 1.5rem 0 0;
+						display: grid;
+						gap: 0.85rem;
+					}
+
+					.row {
+						padding: 0.9rem 1rem;
+						border-radius: 0.85rem;
+						background: rgba(255, 255, 255, 0.04);
+						border: 1px solid rgba(255, 255, 255, 0.08);
+					}
+
+					dt {
+						margin: 0 0 0.35rem;
+						color: rgba(245, 247, 251, 0.56);
+						font-size: 0.78rem;
+						letter-spacing: 0.06em;
+						text-transform: uppercase;
+					}
+
+					dd {
+						margin: 0;
+						font-family: ui-monospace, SFMono-Regular, monospace;
+						font-size: 0.95rem;
+						word-break: break-word;
+					}
+
+					@keyframes pulse {
+						0% {
+							box-shadow: 0 0 0 0 rgba(141, 242, 200, 0.45);
+						}
+
+						100% {
+							box-shadow: 0 0 0 14px rgba(141, 242, 200, 0);
+						}
+					}
+				</style>
+				<script>
+					const viteClientPath = document
+						.querySelector('meta[name="gracile-vite-client-path"]')
+						?.getAttribute('content');
+
+					if (viteClientPath) {
+						const viteClientScript = document.createElement('script');
+						viteClientScript.type = 'module';
+						viteClientScript.src = viteClientPath;
+						document.head.append(viteClientScript);
+					}
+
+					const readyPath = document
+						.querySelector('meta[name="gracile-server-entry-ready-path"]')
+						?.getAttribute('content');
+					let reloading = false;
+
+					const pollForServerEntry = async () => {
+						if (reloading || !readyPath) return;
+
+						try {
+							const response = await fetch(readyPath, {
+								method: 'HEAD',
+								cache: 'no-store',
+							});
+
+							if (response.status === 204) {
+								reloading = true;
+								window.location.reload();
+								return;
+							}
+						} catch {}
+
+						window.setTimeout(pollForServerEntry, 250);
+					};
+
+					window.setTimeout(pollForServerEntry, 120);
+				</script>
+			</head>
+			<body>
+				<main data-gracile-server-entry-loading>
+					<div class="badge">Gracile dev server</div>
+					<h1>Waiting for the server entry to load</h1>
+					<p>
+						This page will refresh automatically as soon as the integrated
+						server is ready.
+					</p>
+					<dl>
+						<div class="row">
+							<dt>Entry</dt>
+							<dd>${entry}</dd>
+						</div>
+						<div class="row">
+							<dt>Request</dt>
+							<dd>${requestPath}</dd>
+						</div>
+					</dl>
+				</main>
+			</body>
+		</html>
+	`;
+}
+
 // TODO: Extract
 // const ESCAPE_SEQUENCE_CHARACTER =
 // 	// eslint-disable-next-line no-control-regex
