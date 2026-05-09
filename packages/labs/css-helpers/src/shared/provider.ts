@@ -64,9 +64,11 @@ export const SHARED_STYLE_CE_SCRIPT = /* js */ `{
  * ```
  */
 export const SharedStyleProvider = (): ServerRenderedTemplate =>
-	html`${unsafeHTML(
-		/* html */ `<script>${SHARED_STYLE_CE_SCRIPT_MINIFIED}</script>`,
-	)}`;
+	html`${unsafeHTML(/* html */ `
+<script>
+  ${SHARED_STYLE_CE_SCRIPT}
+</script>
+`)}`;
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export declare abstract class AdoptSharedStyle {}
