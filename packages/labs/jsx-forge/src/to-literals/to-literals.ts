@@ -5,6 +5,7 @@ import { PRESETS } from '../presets/lit.js';
 import type { Context, Import, Preset } from './types.js';
 import { collectLiteralEntitiesInJsx } from './collect.js';
 import { handleForEachTagDirective } from './special.js';
+import { getImportModuleSpecifierText } from './to-literals.helpers.js';
 
 export interface TransformerOptions {
 	/**
@@ -108,7 +109,11 @@ export function createJsxToLiteralsTransformer(
 			}
 
 			if (ts.isImportDeclaration(node)) {
-				const moduleSpecifierText = node.moduleSpecifier.getText().slice(1, -1);
+				const moduleSpecifierText = getImportModuleSpecifierText(
+					node.moduleSpecifier,
+				);
+				if (!moduleSpecifierText) return node;
+
 				const remappedModuleSpecifierText =
 					preset.importRemap?.[moduleSpecifierText];
 				if (remappedModuleSpecifierText) {

@@ -3,6 +3,7 @@ import type { Ts } from '../types.js';
 import type { Context, RecurseFlags } from './types.js';
 import { handlePascalCasedComponent } from './component.js';
 import { handleTag } from './html-tag.js';
+import { getJsxCommentText, getJsxTagNameText } from './to-literals.helpers.js';
 
 export function collectLiteralEntitiesInJsx(
 	node: Ts.JsxElement | Ts.JsxFragment | Ts.JsxSelfClosingElement,
@@ -86,10 +87,7 @@ function handleHtmlComment(
 	childNode: Ts.JsxExpression,
 ): void {
 	const { appendStaticToCurrentLiteral } = context;
-	const match = /^{\s*\/\*\s*<!--([\S\s]*?)-->\s*\*\/\s*}$/.exec(
-		childNode.getText(),
-	);
-	const htmlComment = match?.[1];
+	const htmlComment = getJsxCommentText(childNode);
 
 	if (htmlComment)
 		// FIXME:
@@ -114,7 +112,8 @@ function handleJsxElement(
 	const jsxElement = ts.isJsxSelfClosingElement(node)
 		? node
 		: node.openingElement;
-	const openingTagName = jsxElement.tagName.getText();
+	const openingTagName = getJsxTagNameText(ts, jsxElement.tagName);
+	if (!openingTagName) return;
 
 	const lastPartOfCompoundName =
 		openingTagName.split('.').at(-1) ?? openingTagName;

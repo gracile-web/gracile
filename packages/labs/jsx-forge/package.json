@@ -35,6 +35,7 @@
     "build": "tsc",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch",
+    "test:unit": "node --test -C test 'dist/test/**/*.test.js'",
     "test:integration": "tsx --test-concurrency=1 --test -C test 'test/integration/**/*.test.ts'"
   },
   "dependencies": {

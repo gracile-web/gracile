@@ -60,6 +60,7 @@ export function normalize(s: string): string {
 export function transformToLiterals(
 	source: string,
 	options: {
+		beforeTransformers?: ts.TransformerFactory<ts.SourceFile>[];
 		compilerOptions?: ts.CompilerOptions;
 		preset?: (typeof PRESETS)['Default'];
 		transformerOptions?: TransformerOptions;
@@ -99,7 +100,7 @@ export function transformToLiterals(
 		},
 		undefined,
 		false,
-		{ before: [transformer] },
+		{ before: [...(options.beforeTransformers ?? []), transformer] },
 	);
 
 	// Normalize: trim trailing whitespace, remove sourcemap comment
