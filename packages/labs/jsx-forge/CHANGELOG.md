@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1-next.0](https://github.com/gracile-web/gracile/compare/jsx-forge@0.4.0...jsx-forge@0.4.1-next.0) (2026-05-12)
+
+### Bug Fixes
+
+* ts `getText` "Node must have a real position", syntactic workarounds ([7af9875](https://github.com/gracile-web/gracile/commit/7af98752d005fceddfebeb75173193bf48b8074f))
+
 ## [0.4.0](https://github.com/gracile-web/gracile/compare/jsx-forge@0.4.0-next.1...jsx-forge@0.4.0) (2026-05-09)
 
 **Note:** Version bump only for package jsx-forge

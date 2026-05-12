@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.4-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.2.2-next.1...@gracile-labs/islands@0.2.4-next.0) (2026-05-12)
+
+### Bug Fixes
+
+* force lerna orphaned package ([929e5a2](https://github.com/gracile-web/gracile/commit/929e5a2783558c2d21281c258088ebaf29523eed))
+
 ## [0.2.2](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.2.2-next.1...@gracile-labs/islands@0.2.2) (2026-05-09)
 
 **Note:** Version bump only for package @gracile-labs/islands

@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.3-next.0](https://github.com/gracile-web/gracile/compare/og-images-generator@0.6.2...og-images-generator@0.6.3-next.0) (2026-05-12)
+
+**Note:** Version bump only for package og-images-generator
+
 ## [0.6.2](https://github.com/gracile-web/gracile/compare/og-images-generator@0.6.2-next.0...og-images-generator@0.6.2) (2026-05-09)
 
 **Note:** Version bump only for package og-images-generator
