@@ -257,14 +257,33 @@ jobs:
           fi
 
       # MARK: [NEXT]
+      # --force-git-tag: a prior interrupted CI run may have left orphan pre-release
+      # tags (e.g. @gracile/client@0.5.8-next.0) that collide with retrying `next`.
       - name: 'Lerna publish [next]'
         if: github.ref == 'refs/heads/next'
+        id: prereleaseRelease
+        continue-on-error: true
         env:
           GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
           NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}'
           NPM_CONFIG_PROVENANCE: 'true'
         run: |
-          pnpm lerna publish --message 'chore: publish [next] pre-release' --conventional-prerelease --pre-dist-tag=next --preid=next --yes
+          pnpm lerna publish --message 'chore: publish [next] pre-release' --conventional-prerelease --pre-dist-tag=next --preid=next --force-git-tag --yes
+
+      # Fallback for interrupted `next` publishes that already produced some tags or
+      # published some package versions before failing. Publish any missing versions
+      # from the local package manifests under the `next` dist-tag.
+      - name: 'Lerna publish [next] — fallback (from-package)'
+        if:
+          ${{ always() && github.ref == 'refs/heads/next' &&
+          steps.prereleaseRelease.outcome == 'failure' }}
+        env:
+          GH_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          NODE_AUTH_TOKEN: '${{ secrets.NPM_TOKEN }}'
+          NPM_CONFIG_PROVENANCE: 'true'
+        run: |
+          echo "Pre-release publish failed — attempting recovery"
+          pnpm lerna publish from-package --dist-tag next --yes
 
       # MARK: Commit regenerated starter-project templates
       # Templates were generated pre-publish (rsync + README) and keep

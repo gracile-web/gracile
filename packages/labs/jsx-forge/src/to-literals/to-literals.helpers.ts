@@ -77,9 +77,12 @@ export function getImportModuleSpecifierText(
 }
 
 // NOTE: All text getter functions are for addressing an (undiscovered) issue
-// that started arise for some reasons:
+// that started to arise for unknown reasons:
 // Error: Debug Failure. False expression: Node must have a real position for this operation
 //     at NodeObject.assertHasRealPosition… at NodeObject.getText
+// I suspect TS version internal change, or TS LS orchestration problem.
+// One thing is sure: is totally worked at one point. Should pin and address
+// the root cause and remove these getters in the future.
 
 export function getJsxTagNameText(
 	ts: typeof Ts,
