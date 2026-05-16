@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.4.1-next.0...@gracile-labs/vite-plugin-jsx-forge@0.4.1-next.1) (2026-05-16)
+
+### Bug Fixes
+
+* re export return types (annotation issues), revert jsx-forge getText hacks ([efa3288](https://github.com/gracile-web/gracile/commit/efa32881d9c8a38c2aada9bdfebc7537e2170a01))
+
 ## [0.4.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.4.0...@gracile-labs/vite-plugin-jsx-forge@0.4.1-next.0) (2026-05-12)
 
 **Note:** Version bump only for package @gracile-labs/vite-plugin-jsx-forge

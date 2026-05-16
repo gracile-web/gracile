@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/lit-macros@0.1.1-next.0...@gracile-labs/lit-macros@0.1.1-next.1) (2026-05-16)
+
+**Note:** Version bump only for package @gracile-labs/lit-macros
+
 ## [0.1.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/lit-macros@0.1.0...@gracile-labs/lit-macros@0.1.1-next.0) (2026-05-12)
 
 **Note:** Version bump only for package @gracile-labs/lit-macros

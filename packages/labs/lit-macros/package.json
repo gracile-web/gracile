@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/lit-macros",
-  "version": "0.1.1-next.0",
+  "version": "0.1.1-next.1",
   "description": "Vite plugin to compile Lit decorators into static class idioms — zero-runtime, OXC-powered",
   "keywords": [
     "vite-plugin",
