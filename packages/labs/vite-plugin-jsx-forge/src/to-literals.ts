@@ -60,9 +60,10 @@ function createSyntacticPlugin(options?: VitePluginOptions): Plugin[] {
 		cachedTransformer ??= createJsxToLiteralsTransformer(
 			ts as unknown as TsWithInternals,
 			undefined,
-			{},
-			PRESETS.Default,
-			options,
+			{
+				preset: options?.preset ?? PRESETS.Default,
+				...options,
+			},
 		);
 
 		return cachedTransformer;
@@ -159,9 +160,7 @@ function createTypeAwarePlugin(options?: VitePluginOptions): Plugin[] {
 		cachedTransformer ??= createJsxToLiteralsTransformer(
 			ts as unknown as TsWithInternals,
 			program,
-			{},
-			PRESETS.Default,
-			options,
+			{ preset: PRESETS.Default },
 		);
 
 		return cachedTransformer;

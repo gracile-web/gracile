@@ -3,11 +3,14 @@ import type * as Ts from 'typescript';
 
 import type { TransformerPluginConfig, TsWithInternals } from './types.js';
 import { createMetaJsxTransformer } from './to-jsx/to-jsx.js';
-import { createJsxToLiteralsTransformer } from './to-literals/to-literals.js';
+import {
+	createJsxToLiteralsTransformer,
+	type TransformerOptions,
+} from './to-literals/to-literals.js';
 
 export default function transformTest(
 	program: Ts.Program,
-	pluginConfig: TransformerPluginConfig,
+	pluginConfig: TransformerPluginConfig & TransformerOptions,
 	{ ts: tsInstance }: TransformerExtras,
 ): Ts.TransformerFactory<Ts.SourceFile> {
 	const target = pluginConfig.target ?? pluginConfig.transformOptions?.target;

@@ -1,10 +1,6 @@
 import type { Ts, TsWithInternals } from '../types.js';
 
 import type { Context, Preset } from './types.js';
-import {
-	getJsxAttributeNameText,
-	getJsxTagNameText,
-} from './to-literals.helpers.js';
 
 export function handleForEachTagDirective(
 	context: Pick<Context, 'preset' | 'ts' | 'visitNode'>,
@@ -16,8 +12,7 @@ export function handleForEachTagDirective(
 	// NOTE: Remaining body block statements
 	if (
 		ts.isJsxElement(node) &&
-		getJsxTagNameText(ts, node.openingElement.tagName) ===
-			preset.forEach.tagName
+		node.openingElement.tagName.getText() === preset.forEach.tagName
 	) {
 		return ts.setTextRange(
 			visitNode(
@@ -63,8 +58,7 @@ export function handleForEachTagDirective(
 			if (withParentheses) element = statement.expression.expression;
 
 			if ((withParentheses || withDirectElement) && element) {
-				const tagName = getJsxTagNameText(ts, element.openingElement.tagName);
-				if (!tagName) return statement;
+				const tagName = element.openingElement.tagName.getText();
 
 				keyExpression = findForEachKeyExpression(element, ts, tagName, preset);
 
@@ -92,8 +86,7 @@ export function handleForEachTagDirective(
 		if (withParentheses) element = firstArgument.body.expression;
 
 		if (element) {
-			const tagName = getJsxTagNameText(ts, element.openingElement.tagName);
-			if (!tagName) return;
+			const tagName = element.openingElement.tagName.getText();
 			keyExpression = findForEachKeyExpression(element, ts, tagName, preset);
 
 			if (keyExpression) {
@@ -220,8 +213,7 @@ function findForEachKeyExpression(
 	let keyExpression: Ts.Expression | undefined;
 	element.openingElement.attributes.forEachChild((attributeNode) => {
 		if (ts.isJsxAttribute(attributeNode)) {
-			const attributeName = getJsxAttributeNameText(ts, attributeNode.name);
-			if (!attributeName) return;
+			const attributeName = attributeNode.name.getText();
 			if (
 				((tagName === preset.forEach.tagName &&
 					attributeName === preset.forEach.keyNameAttributeName) ||

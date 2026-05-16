@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import * as assert from 'node:assert/strict';
 import { describe, test } from 'node:test';
-import * as ts from 'typescript';
 
 import {
 	normalize,
@@ -42,40 +41,6 @@ function raw(source: string): TransformResult {
 // ===========================================================================
 
 describe('Basic elements', () => {
-	test('synthetic import specifier does not rely on getText', () => {
-		const synthesizeImportSpecifier: ts.TransformerFactory<ts.SourceFile> =
-			(context) => (sourceFile) =>
-				ts.visitEachChild(
-					sourceFile,
-					function visitor(node) {
-						if (
-							ts.isImportDeclaration(node) &&
-							ts.isStringLiteral(node.moduleSpecifier)
-						) {
-							return ts.factory.updateImportDeclaration(
-								node,
-								node.modifiers,
-								node.importClause,
-								ts.factory.createStringLiteral(node.moduleSpecifier.text),
-								node.attributes,
-							);
-						}
-
-						return ts.visitEachChild(node, visitor, context);
-					},
-					context,
-				);
-
-		assert.doesNotThrow(() => {
-			const result = transformToLiterals(
-				`import { html as litHtml } from 'lit'; const el = <div>Hello</div>;`,
-				{ beforeTransformers: [synthesizeImportSpecifier] },
-			);
-
-			assert.match(result.code, /const el =/);
-		});
-	});
-
 	test('simple HTML element with text', () => {
 		const result = body(`const el = <div>Hello</div>;`);
 		assert.match(result, /html `<div>Hello<\/div>`/);

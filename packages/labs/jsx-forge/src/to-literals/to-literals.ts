@@ -1,11 +1,12 @@
-import type { Ts, TsWithInternals } from '../types.js';
+import type { TransformerExtras } from 'ts-patch';
+
+import type { TransformerPluginConfig, Ts, TsWithInternals } from '../types.js';
 import { USE_HTML_FLAVOR_DIRECTIVE_PREFIX } from '../constants.js';
 import { PRESETS } from '../presets/lit.js';
 
 import type { Context, Import, Preset } from './types.js';
 import { collectLiteralEntitiesInJsx } from './collect.js';
 import { handleForEachTagDirective } from './special.js';
-import { getImportModuleSpecifierText } from './to-literals.helpers.js';
 
 export interface TransformerOptions {
 	/**
@@ -21,22 +22,26 @@ export interface TransformerOptions {
 	 * @default 'default'
 	 */
 	defaultHtmlFlavor?: 'default' | 'server' | 'signal';
+
+	preset?: Preset;
 }
+
+interface TransformerFullOptions
+	extends TransformerPluginConfig, TransformerOptions {}
 
 export function createJsxToLiteralsTransformer(
 	ts: TsWithInternals,
 	program: Ts.Program | undefined,
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	_pluginConfig = {},
-	preset: Preset = PRESETS.Default,
-	options?: TransformerOptions,
+	pluginConfig: TransformerFullOptions = {},
+	_extras?: TransformerExtras,
 ): Ts.TransformerFactory<Ts.SourceFile> {
+	const preset: Preset = pluginConfig?.preset ?? PRESETS.Default;
 	return (context) => {
 		const imports = new Map<string, Import>();
 
 		const { factory } = ts;
 
-		const flavor = options?.defaultHtmlFlavor ?? 'default';
+		const flavor = pluginConfig?.defaultHtmlFlavor ?? 'default';
 		const flavorImports =
 			preset.useLiteral[flavor] ?? preset.useLiteral.default;
 		const defaultHtml =
@@ -109,11 +114,7 @@ export function createJsxToLiteralsTransformer(
 			}
 
 			if (ts.isImportDeclaration(node)) {
-				const moduleSpecifierText = getImportModuleSpecifierText(
-					node.moduleSpecifier,
-				);
-				if (!moduleSpecifierText) return node;
-
+				const moduleSpecifierText = node.moduleSpecifier.getText().slice(1, -1);
 				const remappedModuleSpecifierText =
 					preset.importRemap?.[moduleSpecifierText];
 				if (remappedModuleSpecifierText) {

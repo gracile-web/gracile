@@ -4,7 +4,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.cts",
-    "src/tests/*.test.mts",
+    "src/test/*.test.mts",
     "jsx-namespace.d.ts"
   ],
   "exclude": [

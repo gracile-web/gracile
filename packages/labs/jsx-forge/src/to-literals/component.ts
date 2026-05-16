@@ -1,7 +1,6 @@
 import type { Ts } from '../types.js';
 
 import type { Context } from './types.js';
-import { getJsxAttributeNameText } from './to-literals.helpers.js';
 
 export function handlePascalCasedComponent(
 	context: Context,
@@ -113,9 +112,7 @@ export function handlePascalCasedComponentAttribute(
 				factory.createPropertyAssignment(
 					ts.isIdentifier(attributeNode.name)
 						? attributeNode.name
-						: factory.createStringLiteral(
-								getJsxAttributeNameText(ts, attributeNode.name) ?? '',
-							),
+						: factory.createStringLiteral(attributeNode.name.getText()),
 					visited,
 				),
 			);

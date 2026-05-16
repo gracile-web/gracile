@@ -109,7 +109,7 @@
       "array.prototype.flatmap": "npm:@nolyfill/array.prototype.flatmap@^1",
       "array.prototype.tosorted": "npm:@nolyfill/array.prototype.tosorted@^1",
       "cross-spawn": "npm:cross-spawn@^7.0.6",
-      "devalue": ">=5.6.4",
+      "devalue": ">=5.8.1",
       "es-iterator-helpers": "npm:@nolyfill/es-iterator-helpers@^1",
       "flatted": ">=3.4.2",
       "h3": ">=1.15.9",

@@ -306,3 +306,5 @@ export function createRouter(config?: GracileRouterConfig): GracileRouter {
 
 	return router;
 }
+
+export type { GracileRouter } from './_internal/gracile-client-router.js';

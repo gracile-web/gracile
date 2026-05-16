@@ -1,10 +1,7 @@
 import type { Ts } from '../types.js';
 
 import type { Context, Preset, PresetAttribute } from './types.js';
-import {
-	getBuiltinType,
-	getJsxAttributeNameText,
-} from './to-literals.helpers.js';
+import { getBuiltinType } from './to-literals.helpers.js';
 
 export function appendAttribute(
 	childNode: Ts.JsxAttribute,
@@ -22,12 +19,12 @@ export function appendAttribute(
 	let bodyReplacement: Ts.Expression | undefined;
 
 	const namespaceName = ts.isJsxNamespacedName(childNode.name)
-		? childNode.name.namespace.text
+		? childNode.name.namespace.getText()
 		: undefined;
 
 	const attributeName = ts.isJsxNamespacedName(childNode.name)
-		? childNode.name.name.text
-		: (getJsxAttributeNameText(ts, childNode.name) ?? '');
+		? childNode.name.name.getText()
+		: childNode.name.getText();
 
 	const checker = program?.getTypeChecker();
 
@@ -71,9 +68,7 @@ export function appendAttribute(
 			appendExpressionToCurrentLiteral(visited);
 		}
 	} else {
-		appendStaticToCurrentLiteral(
-			` ${getJsxAttributeNameText(ts, childNode.name) ?? ''}`,
-		);
+		appendStaticToCurrentLiteral(` ${childNode.name.getText()}`);
 	}
 
 	return bodyReplacement;

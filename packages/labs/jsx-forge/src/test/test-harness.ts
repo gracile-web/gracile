@@ -60,7 +60,6 @@ export function normalize(s: string): string {
 export function transformToLiterals(
 	source: string,
 	options: {
-		beforeTransformers?: ts.TransformerFactory<ts.SourceFile>[];
 		compilerOptions?: ts.CompilerOptions;
 		preset?: (typeof PRESETS)['Default'];
 		transformerOptions?: TransformerOptions;
@@ -84,9 +83,10 @@ export function transformToLiterals(
 	const transformer = createJsxToLiteralsTransformer(
 		ts as unknown as TsWithInternals,
 		program,
-		{},
-		options.preset ?? PRESETS.Default,
-		options.transformerOptions,
+		{
+			preset: options.preset ?? PRESETS.Default,
+			...options.transformerOptions,
+		},
 	);
 
 	let emittedCode = '';
@@ -100,7 +100,7 @@ export function transformToLiterals(
 		},
 		undefined,
 		false,
-		{ before: [...(options.beforeTransformers ?? []), transformer] },
+		{ before: [transformer] },
 	);
 
 	// Normalize: trim trailing whitespace, remove sourcemap comment
