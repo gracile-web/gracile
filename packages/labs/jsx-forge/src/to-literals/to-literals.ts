@@ -29,6 +29,8 @@ export interface TransformerOptions {
 interface TransformerFullOptions
 	extends TransformerPluginConfig, TransformerOptions {}
 
+// TODO: Migrate to the modern signature, an retest well
+// (program: ts.Program, config: PluginConfig, extras: TransformerExtras) => ts.TransformerFactory
 export function createJsxToLiteralsTransformer(
 	ts: TsWithInternals,
 	program: Ts.Program | undefined,
