@@ -1,0 +1,47 @@
+# Lightweight PR safety net for missing changesets.
+# Runs `changeset status` only when a PR touches package/source paths.
+# A PR can intentionally have no release impact by adding an empty
+# changeset: `pnpm changeset --empty`.
+
+name: Changeset check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - next
+    paths:
+      - 'packages/**'
+      - 'pnpm-workspace.yaml'
+      - '.changeset/**'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  status:
+    name: Pending changesets
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Changeset status
+        run: pnpm changeset status --since=origin/${{ github.base_ref }}
