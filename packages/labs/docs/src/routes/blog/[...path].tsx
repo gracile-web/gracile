@@ -42,7 +42,7 @@ const tree = {
 export default defineRoute({
 	staticPaths: async () => {
 		const { blogContentImportsGlob, blogMetaImports /* markdownTree */ } =
-			await import('../../content/content.js');
+			await import('@gracile-docs/content');
 		return Promise.all(
 			blogMetaImports.map(async ({ pathParams, module /* href */ }, index) => ({
 				params: { path: pathParams },

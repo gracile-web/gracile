@@ -1,12 +1,14 @@
 'use html-server';
 
+import { fileURLToPath } from 'node:url';
+
 import '../lib/iconify-icon.js';
 import '../lib/unpic-element.js';
 import '../lib/copy-button.js';
 
 import { createMetadata, type Breadcrumbs } from '@gracile/metadata';
 
-import { SITE_TITLE, SITE_URL } from '../content/global.js';
+import { SITE_TITLE, SITE_URL } from '@gracile-docs/site';
 import { colorModeCritical } from '../lib/color-mode/color-mode-critical.js';
 import { keepScrollingPositionCritical } from '../lib/keep-scroll-position/ksp-critical.js';
 
@@ -16,6 +18,12 @@ import {
 	pagePathToOgPath,
 	requestIdleCallbackPolyfill,
 } from './document-helpers.js';
+
+// Absolute paths to document-level client assets, served via Vite's /@fs/ prefix
+// because document.tsx lives in the lib (outside the consumer Vite root).
+const _docDir = fileURLToPath(new URL('.', import.meta.url));
+const DOC_STYLES = `/@fs${_docDir}document.scss`;
+const DOC_CLIENT = `/@fs${_docDir}document.client.ts`;
 
 export const document = (options: {
 	url: URL;
@@ -56,8 +64,8 @@ export const document = (options: {
 
 				{requestIdleCallbackPolyfill}
 
-				<link rel="stylesheet" href="/src/document/document.scss" />
-				<script type="module" src="/src/document/document.client.ts"></script>
+				<link rel="stylesheet" href={DOC_STYLES} />
+				<script type="module" src={DOC_CLIENT}></script>
 
 				{createMetadata({
 					siteTitle: SITE_TITLE,

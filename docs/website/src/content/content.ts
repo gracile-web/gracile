@@ -1,8 +1,8 @@
 import { type } from 'arktype';
 
-import type { MarkdownModule } from '../../lib/markdown/md-module.js';
-import { PathsHandlers } from '../lib/content/paths-handlers.js';
-import { buildTree } from '../lib/content/file-tree-builder.js';
+import type { MarkdownModule } from '@gracile-labs/docs/lib/markdown/md-module.js';
+import { PathsHandlers } from '@gracile-labs/docs/src/lib/content/paths-handlers.js';
+import { buildTree } from '@gracile-labs/docs/src/lib/content/file-tree-builder.js';
 
 export const pathsHandlers = new PathsHandlers();
 

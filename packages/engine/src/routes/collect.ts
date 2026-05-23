@@ -91,7 +91,7 @@ function normalizeProgrammaticPattern(
 	// (file-based routes produce {:param} from [param] brackets).
 	// This ensures render.ts can correctly substitute static path values.
 	// Don't touch :param* (rest/wildcard params) — those are handled separately.
-	normalized = normalized.replaceAll(/:(\w+)(?![*+])/g, '{:$1}');
+	normalized = normalized.replaceAll(/:(\w+)(?=\/|$)/g, '{:$1}');
 
 	if (!isRoot) {
 		if (trailingSlash === 'never') {

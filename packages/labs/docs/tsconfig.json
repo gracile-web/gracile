@@ -1,0 +1,11 @@
+{
+  "extends": "@gracile/gracile/tsconfigs/strictest",
+
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "@gracile-labs/vite-plugin-babel-jsx-to-literals",
+
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true
+  }
+}

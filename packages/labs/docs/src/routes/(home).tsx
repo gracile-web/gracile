@@ -10,14 +10,14 @@ import { SplashScreen } from '../features/splash-screen.jsx';
 import { FooterMain } from '../features/footer-main.jsx';
 import { NavMain } from '../features/nav-main.jsx';
 import { NavRight } from '../features/nav-right.jsx';
-import { featureList } from '../content/feature-list.js';
+import { featureList } from '@gracile-docs/feature-list';
 
 export default defineRoute({
 	handler: async () => ({
-		mainReadme: await import('../content/README.md'),
+		mainReadme: await import('/src/content/README.md'),
 		starterProjects:
-			await import('../content/docs/04-starter-projects/README.md'),
-		faq: await import('../content/docs/35-faq.md'),
+			await import('/src/content/docs/04-starter-projects/README.md'),
+		faq: await import('/src/content/docs/35-faq.md'),
 	}),
 
 	document: ({ url, props }) =>

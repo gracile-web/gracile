@@ -1,4 +1,4 @@
-import { join } from 'node:path';
+import { isAbsolute, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { collectErrorMetadata } from '@gracile-labs/better-errors/dev/utils';
@@ -45,13 +45,21 @@ export async function loadForeignRouteObject({
 			// false negatives when multiple Vite copies are present (e.g. linked packages).
 			if (!('runner' in ssrEnvironment)) throw new Error('Not in a SSR path');
 
+			const routeModuleId = isAbsolute(route.filePath)
+				? `/@fs${route.filePath}`
+				: route.filePath;
+
 			unknownRouteModule = await (
 				ssrEnvironment as RunnableDevEnvironment
-			).runner.import(route.filePath);
+			).runner.import(routeModuleId);
 		} catch (error) {
 			const error_ = error;
 
-			const filePath = pathToFileURL(join(vite.config.root, route.filePath));
+			const filePath = pathToFileURL(
+				isAbsolute(route.filePath)
+					? route.filePath
+					: join(vite.config.root, route.filePath),
+			);
 			const rootFolder = pathToFileURL(vite.config.root);
 
 			// NOTE: Maybe it's not required here? But just upstream (safeError…)

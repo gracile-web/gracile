@@ -1,6 +1,6 @@
 import type { MarkdownModule } from '@gracile/markdown/md-module';
 
-import { DISCORD_INVITE_PATH, REPO_URL } from '../content/global.js';
+import { DISCORD_INVITE_PATH, REPO_URL } from '@gracile-docs/site';
 
 import { NavOutline } from './nav-outline.jsx';
 import { ColorModeToggle } from './color-mode-toggle.jsx';

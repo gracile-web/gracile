@@ -15,7 +15,7 @@ import { LinksIndex } from '../../features/links-index.jsx';
 export default defineRoute({
 	staticPaths: async () => {
 		const { docsContentImportsGlob, docsMetaImports, markdownTree } =
-			await import('../../content/content.js');
+			await import('@gracile-docs/content');
 
 		return Promise.all(
 			docsMetaImports.map(async ({ pathParams, module /* href */ }, index) => ({

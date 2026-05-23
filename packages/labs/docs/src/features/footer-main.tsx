@@ -8,7 +8,7 @@ import {
 	REPO_URL,
 	SITE_TITLE,
 	SITE_URL,
-} from '../content/global.js';
+} from '@gracile-docs/site';
 
 export const FooterMain = (options: { url: URL; filename?: string }) => (
 	<footer class="m-footer-main">

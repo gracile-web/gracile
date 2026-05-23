@@ -1,4 +1,4 @@
-import type { MarkdownModuleConsumable } from '../content/content.js';
+import type { MarkdownModuleConsumable } from '@gracile-docs/content';
 
 export const LinksPagination = ({
 	prev,

@@ -2,7 +2,7 @@ import { defineRoute } from '@gracile/gracile/route';
 import { html } from '@gracile/gracile/server-html';
 
 import discordLogo from '../assets/icons/discord.svg';
-import { DISCORD_INVITE_URL } from '../content/global.js';
+import { DISCORD_INVITE_URL } from '@gracile-docs/site';
 import { googleAnalytics } from '../document/document-helpers.js';
 
 const waitTime = 1;

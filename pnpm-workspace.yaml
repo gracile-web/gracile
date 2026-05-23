@@ -60,6 +60,7 @@ packages:
   - ./packages/labs/literals/rollup-plugin-html-css-minifier/demo
   # Docs & starters
   - ./docs/website
+  - ./packages/labs/docs
   - ./starter-projects
   - ./starter-projects/templates/*
   - ./starter-projects/templates-lab/*

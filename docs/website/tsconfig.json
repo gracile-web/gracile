@@ -1,11 +1,7 @@
 {
-  "extends": "@gracile/gracile/tsconfigs/strictest",
-
+  "extends": "@gracile/internal-tsconfigs/config-base.json",
   "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "@gracile-labs/vite-plugin-babel-jsx-to-literals",
-
-    "resolveJsonModule": true,
-    "allowImportingTsExtensions": true
-  }
+    "types": ["@gracile-labs/docs/ambient", "vite/client"]
+  },
+  "include": ["src/**/*", "vite.config.ts", "og-images.config.js"]
 }
