@@ -3,5 +3,5 @@
   "compilerOptions": {
     "types": ["@gracile-labs/docs/ambient", "vite/client"]
   },
-  "include": ["src/**/*", "vite.config.ts", "og-images.config.js"]
+  "include": ["src/**/*"]
 }

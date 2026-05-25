@@ -2,15 +2,13 @@ import { defineRoute } from '@gracile/server/route';
 import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
 
 import { document } from '../document/document.jsx';
-import wcLogo from '../assets/webcomponents-logo.svg?url';
-import viteLogo from '../assets/vite-logo.svg?url';
-import litLogo from '../assets/lit.svg?url';
-import nodeJsLogo from '../assets/nodejs-logo.svg?url';
 import { SplashScreen } from '../features/splash-screen.jsx';
 import { FooterMain } from '../features/footer-main.jsx';
 import { NavMain } from '../features/nav-main.jsx';
 import { NavRight } from '../features/nav-right.jsx';
-import { featureList } from '@gracile-docs/feature-list';
+import { docsConfig, featureList } from '@gracile-docs/content';
+
+const { home } = docsConfig;
 
 export default defineRoute({
 	handler: async () => ({
@@ -30,9 +28,14 @@ export default defineRoute({
 
 	template: ({ url, props }) => (
 		<>
-			<NavMain name={null} />
+			<NavMain logoHtml={home.logoHtml} name={null} />
 
-			<SplashScreen />
+			<SplashScreen
+				descriptionHtml={home.descriptionHtml}
+				installCommand={home.installCommand}
+				logoHtml={home.logoHtml}
+				splashLinks={home.splashLinks}
+			/>
 
 			<main>
 				<article class="prose">
@@ -42,34 +45,21 @@ export default defineRoute({
 					</h1>
 					<section class="works-with">
 						<ul>
-							<li>
-								<img src={nodeJsLogo} />
-								<div>
-									<strong>Node.js</strong>
-									<br /> & compatible
-								</div>
-							</li>
-							<li>
-								<img src={viteLogo} />
-								<div>
-									<strong>Vite</strong>
-									<br /> ecosystem
-								</div>
-							</li>
-							<li>
-								<img src={litLogo} />
-								<div>
-									<strong>Lit</strong>
-									<br /> ecosystem
-								</div>
-							</li>
-							<li>
-								<img src={wcLogo} />
-								<div>
-									<strong>Web Components</strong>
-									<br /> & web APIs
-								</div>
-							</li>
+							<For each={[...home.worksWith]}>
+								{(item) => (
+									<li for:key={item.label}>
+										<img src={item.iconUrl} alt={item.alt} style={item.style} />
+										<div>
+											<strong>{item.label}</strong>
+											{item.detail ? (
+												<>
+													<br /> {item.detail}
+												</>
+											) : null}
+										</div>
+									</li>
+								)}
+							</For>
 						</ul>
 					</section>
 
@@ -80,15 +70,25 @@ export default defineRoute({
 
 					<section class="features cards">
 						<div>
-							<For each={featureList}>
+							<For each={[...featureList]}>
 								{(feature) => (
-									<a class="card" href={feature.href} for:key={feature.title}>
+									<a
+										class="card"
+										href={feature.href || '#'}
+										for:key={feature.title}
+									>
 										<article class="card-content">
 											<div>
 												<strong class="feature-title">{feature.title}</strong>
 												<p>
-													{feature.desc.slice(0, 75)}
-													{feature.desc.length > 75 ? '...' : ''}
+													{(feature.desc || feature.description || '').slice(
+														0,
+														75,
+													)}
+													{(feature.desc || feature.description || '').length >
+													75
+														? '...'
+														: ''}
 												</p>
 											</div>
 											{/* <footer>

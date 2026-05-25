@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { html, styled, OG_SIZE } from 'og-images-generator';
 import stripEmojiBase from 'emoji-strip';
 
-import { SITE_TITLE } from './src/content/global.js';
+const SITE_TITLE = 'Gracile';
 
 /**
  * Add unsupported emojis

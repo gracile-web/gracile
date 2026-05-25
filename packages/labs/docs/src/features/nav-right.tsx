@@ -1,6 +1,6 @@
 import type { MarkdownModule } from '@gracile/markdown/md-module';
 
-import { DISCORD_INVITE_PATH, REPO_URL } from '@gracile-docs/site';
+import { docsConfig } from '@gracile-docs/content';
 
 import { NavOutline } from './nav-outline.jsx';
 import { ColorModeToggle } from './color-mode-toggle.jsx';
@@ -9,6 +9,7 @@ import { MenuToggle } from './menu-toggle.jsx';
 // import { asideMenuState } from '../lib/app-state.js';
 
 const githubLabel = 'Source code (GitHub)';
+const { site } = docsConfig;
 
 export function NavRight(options: { markdownModule: MarkdownModule | null }) {
 	return (
@@ -23,7 +24,7 @@ export function NavRight(options: { markdownModule: MarkdownModule | null }) {
 					<a
 						title={githubLabel}
 						class="unstyled sources"
-						href={REPO_URL}
+						href={site.repoUrl}
 						target="_blank"
 						aria-label={githubLabel}
 						rel="noopener noreferrer nofollow"
@@ -35,7 +36,7 @@ export function NavRight(options: { markdownModule: MarkdownModule | null }) {
 
 					<a
 						class="unstyled"
-						href={'/' + DISCORD_INVITE_PATH}
+						href={'/' + site.discordInvitePath}
 						target="_blank"
 						rel="noopener noreferrer nofollow"
 					>

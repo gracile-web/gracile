@@ -4,37 +4,38 @@
 @use '../lib/shoelace/vars' as *;
 
 .m-splash-screen {
-	--sl-color-emerald-50: rgb(236, 253, 245);
-	--sl-color-emerald-100: rgb(209, 250, 229);
-	--sl-color-emerald-200: rgb(167, 243, 208);
-	--sl-color-emerald-300: rgb(110, 231, 183);
-	--sl-color-emerald-400: rgb(52, 211, 153);
-	--sl-color-emerald-500: rgb(16, 185, 129);
-	--sl-color-emerald-600: rgb(5, 150, 105);
-	--sl-color-emerald-700: rgb(4, 120, 87);
-	--sl-color-emerald-800: rgb(6, 95, 70);
-	--sl-color-emerald-900: rgb(6, 78, 59);
-	--sl-color-emerald-950: rgb(3, 45, 34);
+	--sl-color-emerald-50: rgb(236 253 245);
+	--sl-color-emerald-100: rgb(209 250 229);
+	--sl-color-emerald-200: rgb(167 243 208);
+	--sl-color-emerald-300: rgb(110 231 183);
+	--sl-color-emerald-400: rgb(52 211 153);
+	--sl-color-emerald-500: rgb(16 185 129);
+	--sl-color-emerald-600: rgb(5 150 105);
+	--sl-color-emerald-700: rgb(4 120 87);
+	--sl-color-emerald-800: rgb(6 95 70);
+	--sl-color-emerald-900: rgb(6 78 59);
+	--sl-color-emerald-950: rgb(3 45 34);
+
 	@include color-mode(dark) {
-		--col1: hsl(205deg 100% 8% / 100%);
-		--col2: hsl(196deg 80% 21%);
-		--col3: hsl(197deg 85% 8% / 100%);
-		--col4: hsl(180deg 85% 10% / 100%);
-		--col5: hsl(210deg 68% 8% / 100%);
-		--col6: hsl(198deg 85% 5% / 100%);
-		--col7: hsl(204deg 76% 12% / 100%);
-		--col8: hsl(192deg 84% 22%);
+		--col1: var(--docs-splash-dark-1, hsl(205deg 100% 8% / 100%));
+		--col2: var(--docs-splash-dark-2, hsl(196deg 80% 21%));
+		--col3: var(--docs-splash-dark-3, hsl(197deg 85% 8% / 100%));
+		--col4: var(--docs-splash-dark-4, hsl(180deg 85% 10% / 100%));
+		--col5: var(--docs-splash-dark-5, hsl(210deg 68% 8% / 100%));
+		--col6: var(--docs-splash-dark-6, hsl(198deg 85% 5% / 100%));
+		--col7: var(--docs-splash-dark-7, hsl(204deg 76% 12% / 100%));
+		--col8: var(--docs-splash-dark-8, hsl(192deg 84% 22%));
 	}
 
 	@include color-mode(light) {
-		--col1: hsl(205deg 100% 87% / 100%);
-		--col2: hsl(196deg 94% 90% / 100%);
-		--col3: hsl(197deg 91% 93% / 100%);
-		--col4: hsl(180deg 91% 96% / 100%);
-		--col5: hsl(210deg 74% 92% / 100%);
-		--col6: hsl(198deg 91% 88% / 100%);
-		--col7: hsl(204deg 82% 92% / 100%);
-		--col8: hsl(192deg 95% 96% / 100%);
+		--col1: var(--docs-splash-light-1, hsl(205deg 100% 87% / 100%));
+		--col2: var(--docs-splash-light-2, hsl(196deg 94% 90% / 100%));
+		--col3: var(--docs-splash-light-3, hsl(197deg 91% 93% / 100%));
+		--col4: var(--docs-splash-light-4, hsl(180deg 91% 96% / 100%));
+		--col5: var(--docs-splash-light-5, hsl(210deg 74% 92% / 100%));
+		--col6: var(--docs-splash-light-6, hsl(198deg 91% 88% / 100%));
+		--col7: var(--docs-splash-light-7, hsl(204deg 82% 92% / 100%));
+		--col8: var(--docs-splash-light-8, hsl(192deg 95% 96% / 100%));
 	}
 
 	position: relative;
@@ -227,6 +228,9 @@
 		font-family: $font-code;
 
 		.command-text {
+			display: inline-flex;
+			gap: 1ch;
+			align-items: baseline;
 			padding: 0.25rem 0.75rem;
 			background-color: color-mix(in srgb, $color-neutral-0, transparent 20%);
 			border: 1px solid $color-neutral-200;

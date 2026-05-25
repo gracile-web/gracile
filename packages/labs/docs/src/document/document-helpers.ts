@@ -15,16 +15,10 @@ export const googleAnalytics = html`<!-- Google tag (gtag.js) -->
 		gtag('config', 'G-4NJYY802RL');
 	</script>`;
 
-// <!-- DEPRECATED? -->
-// <!-- <link
-//   rel="mask-icon"
-//   href="/favicons/safari-pinned-tab.svg"
-//   color="#119ee2"
-// /> -->
-export const favicon = html`
-	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+export const favicon = (href: string, themeColor = '#119ee2') => html`
+	<link rel="icon" href=${href} type="image/svg+xml" />
 	<link rel="icon" href="/favicon.ico" sizes="any" />
-	<meta name="theme-color" content="#119ee2" />
+	<meta name="theme-color" content=${themeColor} />
 `;
 
 export const requestIdleCallbackPolyfill = html` <script>

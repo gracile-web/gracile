@@ -60,11 +60,7 @@ export async function renderOgImage(
 	const litSsred = decodeHTML(collectResultSync(renderLit(template)));
 	const satoried = satoriHtml(litSsred) as unknown as ReactNode;
 
-	const svg = await satori(
-		// @ts-expect-error - FIXME: Mismatch
-		satoried,
-		userConfig.renderOptions.satori,
-	);
+	const svg = await satori(satoried, userConfig.renderOptions.satori);
 
 	const resvg = new Resvg(svg, userConfig.renderOptions.resvg);
 

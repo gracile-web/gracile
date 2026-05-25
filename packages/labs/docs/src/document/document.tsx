@@ -8,7 +8,7 @@ import '../lib/copy-button.js';
 
 import { createMetadata, type Breadcrumbs } from '@gracile/metadata';
 
-import { SITE_TITLE, SITE_URL } from '@gracile-docs/site';
+import { docsConfig } from '@gracile-docs/content';
 import { colorModeCritical } from '../lib/color-mode/color-mode-critical.js';
 import { keepScrollingPositionCritical } from '../lib/keep-scroll-position/ksp-critical.js';
 
@@ -36,8 +36,9 @@ export const document = (options: {
 	// HACK: `/docs//` can appear due to a trailing-slash normalization issue
 	// in the paths-handler layer; strip it here until that is fixed upstream.
 	const normalizedPathname = options.url.pathname.replace(/docs\/\/$/, 'docs/');
+	const { site } = docsConfig;
 	const ogImageUrl =
-		(import.meta.env.DEV ? '' : SITE_URL.replace(/\/$/, '')) +
+		(import.meta.env.DEV ? '' : site.url.replace(/\/$/, '')) +
 		pagePathToOgPath(normalizedPathname);
 
 	return (
@@ -68,23 +69,23 @@ export const document = (options: {
 				<script type="module" src={DOC_CLIENT}></script>
 
 				{createMetadata({
-					siteTitle: SITE_TITLE,
-					pageTitle: `${SITE_TITLE} | ${options.title}`,
+					siteTitle: site.title,
+					pageTitle: `${site.title} | ${options.title}`,
 
 					pageDescription: options.description ?? '-',
 					ogImageUrl,
 
 					generator: 'Gracile v0-Alpha',
-					canonicalUrl: SITE_URL,
-					author: 'Julian Cataldo',
-					license: 'ISC',
+					canonicalUrl: site.url,
+					author: site.authors,
+					license: site.license,
 					favicon: false,
 
 					jsonLd: { breadcrumbs: options.breadcrumbs || [] },
 					colorScheme: 'dark light',
 				})}
 
-				{favicon}
+				{favicon(site.logoHref, site.themeColor)}
 			</head>
 
 			<body data-pagefind-body>

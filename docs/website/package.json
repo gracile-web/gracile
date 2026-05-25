@@ -15,7 +15,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf ./dist .gracile",
-    "postbuild": "pagefind --site dist/client"
+    "postbuild": "pagefind --site dist"
   },
   "dependencies": {
     "@gracile-labs/docs": "workspace:^",

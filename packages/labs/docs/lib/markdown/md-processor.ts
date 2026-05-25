@@ -99,6 +99,7 @@ export const mdProcessor = unified()
 			'tsx',
 			'jsx',
 			'md',
+			'vue',
 			'mdx',
 			{
 				name: 'twoslash',
@@ -107,6 +108,7 @@ export const mdProcessor = unified()
 			'yaml',
 			'sh',
 			'astro',
+			'svelte',
 			'nginx',
 			'sql',
 			'json',

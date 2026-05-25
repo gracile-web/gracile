@@ -16,9 +16,10 @@ import { standardCssModules } from 'vite-plugin-standard-css-modules';
 import { vitePluginMarkdownLit } from '../lib/markdown/vite-plugin-markdown-lit.ts';
 
 const HERE = import.meta.dirname;
-const PKG_ROOT = dirname(HERE); // → packages/labs/docs
+const PKG_ROOT = dirname(HERE); // -> packages/labs/docs
 const ROUTES_DIR = join(HERE, 'routes');
 const PAGEFIND_PUBLIC_DIR = join(PKG_ROOT, 'public', 'pagefind');
+const USER_THEME_ASSET = 'src/content/theme.css';
 
 const PAGEFIND_MIME_TYPES: Record<string, string> = {
 	'.css': 'text/css; charset=utf-8',
@@ -28,42 +29,72 @@ const PAGEFIND_MIME_TYPES: Record<string, string> = {
 	'.pagefind': 'application/wasm',
 };
 
-/**
- * Convert an absolute filesystem path to Vite's `/@fs/` format.
- * The engine's `injectSiblingAssets` prepends a `/`, so we supply `@fs<abs>`
- * which becomes `/@fs<abs>` — Vite's out-of-root file serving prefix.
- */
 function toFsUrl(absPath: string): string {
 	return `@fs${absPath}`;
 }
 
-/**
- * Options for the {@link gracileDocs} Vite preset.
- *
- * The shell expects the consumer to provide their brand/content modules at:
- * - `/src/content/global.js` — brand constants (SITE_TITLE, SITE_URL, …)
- * - `/src/content/feature-list.ts` — home-page feature grid
- * - `/src/content/content.ts` — markdown glob aggregator
- * - `/src/content/docs/**\/*.md` — documentation markdown corpus
- * - `/src/content/blog/**\/*.md` — blog markdown corpus (optional)
- */
 export interface GracileDocsOptions {
-	/**
-	 * Public URL of the consumer site (used by the sitemap plugin).
-	 * Should match `SITE_URL` exported from the consumer's `/src/content/global.js`.
-	 */
 	siteUrl: string;
-
-	/**
-	 * Iconify icon names to bundle from the Phosphor set.
-	 * Defaults to the full Gracile docs icon set.
-	 */
 	iconSet?: string[];
-
-	/**
-	 * Extra Gracile config to merge on top of the shell defaults.
-	 */
 	gracile?: Parameters<typeof gracile>[0];
+}
+
+export interface DocsConfig {
+	site: DocsSiteConfig;
+	home: DocsHomeConfig;
+}
+
+export interface DocsSiteConfig {
+	title: string;
+	subtitle: string;
+	url: string;
+	logoHref: string;
+	themeColor?: string;
+	description: string;
+	issuesUrl: string;
+	repoUrl: string;
+	docsRepoUrl: string;
+	discordInvitePath: string;
+	discordInviteUrl: string;
+	playgroundUrl: string;
+	sponsorUrl?: string;
+	mainSiteUrl?: string;
+	nextSiteUrl?: string;
+	license: string;
+	version: string;
+	authors: string;
+}
+
+export interface DocsHomeConfig {
+	logoHtml: string;
+	descriptionHtml: string;
+	installCommand: string;
+	splashLinks: DocsSplashLink[];
+	worksWith: DocsWorksWithItem[];
+}
+
+export interface DocsSplashLink {
+	label: string;
+	href: string;
+	icon: string;
+}
+
+export interface DocsWorksWithItem {
+	label: string;
+	detail?: string;
+	iconUrl: string;
+	alt?: string;
+	style?: string;
+}
+
+export interface DocsFeature {
+	title: string;
+	desc?: string;
+	description?: string;
+	href?: string;
+	icon?: string;
+	tags?: string[];
+	[key: string]: unknown;
 }
 
 const DEFAULT_ICON_SET = [
@@ -142,17 +173,8 @@ function iconifyLoader({
 	};
 }
 
-/**
- * Vite alias resolver that wires the lib's `@gracile-docs/*` imports
- * to the consumer's `/src/content/*` files.
- *
- * The actual resolution happens against the Vite project root, so the
- * consumer just needs to keep these files at the canonical location.
- */
 function shellContentAliasPlugin(): PluginOption {
 	const map: Record<string, string> = {
-		'@gracile-docs/site': '/src/content/global.js',
-		'@gracile-docs/feature-list': '/src/content/feature-list.ts',
 		'@gracile-docs/content': '/src/content/content.ts',
 	};
 	return {
@@ -160,11 +182,19 @@ function shellContentAliasPlugin(): PluginOption {
 		enforce: 'pre',
 		config(userConfig) {
 			const consumerRoot = userConfig.root ?? process.cwd();
-			// Allow Vite to serve lib files outside the consumer root via /@fs/.
-			// Also force a single copy of Lit regardless of which node_modules it
-			// is resolved from (lib vs consumer).
+			const consumerParent = dirname(consumerRoot);
+			const consumerGrandParent = dirname(consumerParent);
 			return {
-				server: { fs: { allow: [consumerRoot, PKG_ROOT] } },
+				server: {
+					fs: {
+						allow: [
+							consumerRoot,
+							consumerParent,
+							consumerGrandParent,
+							PKG_ROOT,
+						],
+					},
+				},
 				resolve: {
 					dedupe: [
 						'lit',
@@ -183,15 +213,19 @@ function shellContentAliasPlugin(): PluginOption {
 		async resolveId(id) {
 			const target = map[id];
 			if (!target) return null;
-			// Defer to Vite's standard resolver, treating `target` as root-relative.
 			return this.resolve(target, undefined, { skipSelf: true });
 		},
 	};
 }
 
 function pagefindDevAssetsPlugin(): PluginOption {
+	let consumerRoot = process.cwd();
+
 	return {
 		name: 'gracile-docs:pagefind-dev-assets',
+		configResolved(config) {
+			consumerRoot = config.root;
+		},
 		configureServer(server) {
 			server.middlewares.use(async (req, res, next) => {
 				const url = req.url ? new URL(req.url, 'http://localhost') : null;
@@ -203,19 +237,28 @@ function pagefindDevAssetsPlugin(): PluginOption {
 				}
 
 				const relativePath = pathname.slice('/pagefind/'.length);
-				const filePath = join(PAGEFIND_PUBLIC_DIR, relativePath);
+				const filePaths = [
+					join(consumerRoot, 'public', 'pagefind', relativePath),
+					join(consumerRoot, 'dist', 'pagefind', relativePath),
+					join(PAGEFIND_PUBLIC_DIR, relativePath),
+				];
 
-				try {
-					const contents = await readFile(filePath);
-					const mimeType =
-						PAGEFIND_MIME_TYPES[extname(filePath)] ??
-						'application/octet-stream';
-					res.statusCode = 200;
-					res.setHeader('Content-Type', mimeType);
-					res.end(contents);
-				} catch {
-					next();
+				for (const filePath of filePaths) {
+					try {
+						const contents = await readFile(filePath);
+						const mimeType =
+							PAGEFIND_MIME_TYPES[extname(filePath)] ??
+							'application/octet-stream';
+						res.statusCode = 200;
+						res.setHeader('Content-Type', mimeType);
+						res.end(contents);
+						return;
+					} catch {
+						// Try the next source. Consumers win over the bundled Gracile fallback.
+					}
 				}
+
+				next();
 			});
 		},
 	};
@@ -230,6 +273,7 @@ function shellRoutes(): Parameters<typeof gracile>[0] {
 					pattern: '/',
 					filePath: join(ROUTES_DIR, '(home).tsx'),
 					pageAssets: [
+						USER_THEME_ASSET,
 						toFsUrl(join(ROUTES_DIR, '(home).client.ts')),
 						toFsUrl(join(ROUTES_DIR, '(home).scss')),
 					],
@@ -237,16 +281,18 @@ function shellRoutes(): Parameters<typeof gracile>[0] {
 				{
 					pattern: '/404',
 					filePath: join(ROUTES_DIR, '404.tsx'),
-					pageAssets: [toFsUrl(join(ROUTES_DIR, '404.scss'))],
+					pageAssets: [USER_THEME_ASSET, toFsUrl(join(ROUTES_DIR, '404.scss'))],
 				},
 				{
 					pattern: '/chat',
 					filePath: join(ROUTES_DIR, 'chat.tsx'),
+					pageAssets: [USER_THEME_ASSET],
 				},
 				{
 					pattern: '/docs/:path*/',
 					filePath: join(ROUTES_DIR, 'docs', '[...path].tsx'),
 					pageAssets: [
+						USER_THEME_ASSET,
 						toFsUrl(join(ROUTES_DIR, 'docs', '[...path].client.ts')),
 						toFsUrl(join(ROUTES_DIR, 'docs', '[...path].scss')),
 					],
@@ -254,25 +300,16 @@ function shellRoutes(): Parameters<typeof gracile>[0] {
 				{
 					pattern: '/blog/:path*/',
 					filePath: join(ROUTES_DIR, 'blog', '[...path].tsx'),
-					pageAssets: [toFsUrl(join(ROUTES_DIR, 'blog', '[...path].scss'))],
+					pageAssets: [
+						USER_THEME_ASSET,
+						toFsUrl(join(ROUTES_DIR, 'blog', '[...path].scss')),
+					],
 				},
 			],
 		},
 	};
 }
 
-/**
- * Gracile docs shell — a Vite preset that wires the entire documentation site
- * (routes, document, features, markdown processing, sitemap, OG images, icons,
- * minification, JSX, CSS Modules) for a consumer.
- *
- * The consumer provides only:
- * - Markdown content under `/src/content/{docs,blog}/**\/*.md`
- * - Brand constants in `/src/content/global.js`
- * - Home feature grid in `/src/content/feature-list.ts`
- * - Content aggregator in `/src/content/content.ts`
- * - `og-images.config.js` (brand template) at project root
- */
 export async function gracileDocs(
 	options: GracileDocsOptions,
 ): Promise<PluginOption[]> {
@@ -281,7 +318,7 @@ export async function gracileDocs(
 	);
 
 	const userGracileConfig = options.gracile ?? {};
-	const shell = shellRoutes();
+	const shell = shellRoutes()!;
 	const mergedGracile = {
 		...shell,
 		...userGracileConfig,
@@ -307,16 +344,10 @@ export async function gracileDocs(
 	];
 }
 
-/**
- * Recommended Rollup options for consumers — wire via Vite's `build.rollupOptions`.
- */
 export const gracileDocsRollupOptions = {
 	plugins: [strip({})],
 };
 
-/**
- * Recommended Vite `resolve.dedupe` entries to avoid duplicate Lit copies.
- */
 export const gracileDocsDedupe = [
 	'lit',
 	'lit-html',

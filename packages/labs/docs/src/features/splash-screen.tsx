@@ -4,15 +4,22 @@ import graphPaper from '../assets/icons/graph-paper.svg' with {
 	type: 'svg',
 	format: 'lit',
 };
-import gracileLogo from '../assets/gracile-logo.svg' with {
-	type: 'svg',
-	format: 'lit',
-};
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-export const SplashScreen = () => (
+export const SplashScreen = ({
+	descriptionHtml,
+	installCommand,
+	logoHtml,
+	splashLinks,
+}: {
+	descriptionHtml: string;
+	installCommand: string;
+	logoHtml: string;
+	splashLinks: ReadonlyArray<{ label: string; href: string; icon: string }>;
+}) => (
 	<header class="m-splash-screen">
 		<For each={Array.from({ length: 8 }).fill(null)}>
-			{(_, index) => <div for:key={index} class={`bg bg-${index}`}></div>}
+			{(_, index) => <div for:key={index} class={`bg bg-${index + 1}`}></div>}
 		</For>
 
 		<svg width="100%" height="100%" class="bg bg-noise">
@@ -49,46 +56,34 @@ export const SplashScreen = () => (
 			<rect x="0" y="0" width="100%" height="100%" fill="url(#graph)"></rect>
 		</svg>
 
-		<div class="logo">{gracileLogo}</div>
+		<div class="logo">{unsafeHTML(logoHtml)}</div>
 
-		<p class="description">
-			A thin, full-stack,
-			<strong>web</strong> framework
-		</p>
+		<p class="description">{unsafeHTML(descriptionHtml)}</p>
 
 		<div class="ctas">
-			<a class="unstyled" href={`/docs/references/`} data-prefetch="load">
-				<i-c o="books-duotone"></i-c>
-				References
-			</a>
-
-			<a
-				class="unstyled"
-				href={`/docs/learn/getting-started/`}
-				data-prefetch="load"
-			>
-				<i-c o="play-duotone"></i-c>
-				Get started
-			</a>
-
-			<a
-				class="unstyled"
-				href={
-					'/docs/playground/' /* NOTE: When finished, use `/playground/`, not the placeholder */
-				}
-				data-prefetch="load"
-			>
-				<i-c o="app-window-duotone"></i-c>
-				Playground
-			</a>
+			<For each={[...splashLinks]}>
+				{(link) => (
+					<a
+						class="unstyled"
+						href={link.href}
+						data-prefetch="load"
+						for:key={link.href}
+					>
+						{unsafeHTML(`<i-c o="${link.icon}"></i-c>`)}
+						{link.label}
+					</a>
+				)}
+			</For>
 		</div>
 
 		<div class="create-gracile-command">
 			<div class="command-text">
-				<span>npm</span> <span>create</span> <span>gracile@latest</span>
+				{installCommand.split(' ').map((part) => (
+					<span>{part}</span>
+				))}
 			</div>
 
-			<copy-button text="npm create gracile@latest"></copy-button>
+			{unsafeHTML(`<copy-button text="${installCommand}"></copy-button>`)}
 		</div>
 	</header>
 );

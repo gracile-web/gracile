@@ -11,6 +11,7 @@ import { NavRight } from '../../features/nav-right.jsx';
 import { document } from '../../document/document.jsx';
 import { LinksPagination } from '../../features/links-pagination.jsx';
 import { LinksIndex } from '../../features/links-index.jsx';
+import { docsConfig } from '@gracile-docs/content';
 
 export default defineRoute({
 	staticPaths: async () => {
@@ -107,6 +108,7 @@ export default defineRoute({
 		return (
 			<>
 				<NavMain
+					logoHtml={docsConfig.home.logoHtml}
 					name={'docs'}
 					pathname={url.pathname}
 					tree={props.markdownTree}

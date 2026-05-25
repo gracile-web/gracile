@@ -3,6 +3,7 @@ import { defineRoute } from '@gracile/server/route';
 import { document } from '../document/document.jsx';
 import { FooterMain } from '../features/footer-main.jsx';
 import { NavMain } from '../features/nav-main.jsx';
+import { docsConfig } from '@gracile-docs/content';
 
 export default defineRoute({
 	document: (context) =>
@@ -15,7 +16,7 @@ export default defineRoute({
 
 	template: ({ url }) => (
 		<>
-			<NavMain name={null} />
+			<NavMain logoHtml={docsConfig.home.logoHtml} name={null} />
 
 			<main>
 				<h1>404 - Page not found</h1>

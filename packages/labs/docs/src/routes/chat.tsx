@@ -2,10 +2,11 @@ import { defineRoute } from '@gracile/gracile/route';
 import { html } from '@gracile/gracile/server-html';
 
 import discordLogo from '../assets/icons/discord.svg';
-import { DISCORD_INVITE_URL } from '@gracile-docs/site';
+import { docsConfig } from '@gracile-docs/content';
 import { googleAnalytics } from '../document/document-helpers.js';
 
 const waitTime = 1;
+const { site } = docsConfig;
 
 export default defineRoute({
 	document: () => (
@@ -31,11 +32,11 @@ export default defineRoute({
 					}
 				</style>`}
 
-				<title>Gracile - Discord Server (redirecting…)</title>
+				<title>{site.title} - Discord Server (redirecting…)</title>
 
 				<meta
 					http-equiv="refresh"
-					content={`${waitTime};URL=${DISCORD_INVITE_URL}`}
+					content={`${waitTime};URL=${site.discordInviteUrl}`}
 				/>
 			</head>
 
