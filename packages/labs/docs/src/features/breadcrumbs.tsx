@@ -1,5 +1,3 @@
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
-
 import chevronDoubleRight from '../assets/icons/chevron-double-right.svg' with {
 	type: 'svg',
 	format: 'lit',
@@ -28,22 +26,21 @@ export function BreadCrumbs({
 				{chevronDoubleRight}
 			</div>
 
-			<For each={breadCrumbs}>
-				{(b) => [
-					b.url,
-					b.title ? (
-						<div class="part" for:key={b.url}>
+			{breadCrumbs.map((b) => (
+				<for:each key={b.url}>
+					{b.title ? (
+						<div class="part">
 							{b.url ? (
-								<a href={b.url} unsafe:html={b.title} />
+								<a href={b.url} $:html={b.title} />
 							) : (
-								<span unsafe:html={b.title} />
+								<span $:html={b.title} />
 							)}
 
 							{chevronRight}
 						</div>
-					) : null,
-				]}
-			</For>
+					) : null}
+				</for:each>
+			))}
 		</nav>
 	);
 }

@@ -1,8 +1,8 @@
 import { defineRoute } from '@gracile/server/route';
 
-import { document } from '../document/document.jsx';
-import { FooterMain } from '../features/footer-main.jsx';
-import { NavMain } from '../features/nav-main.jsx';
+import { document } from '../document/document.js';
+import { FooterMain } from '../features/footer-main.js';
+import { NavMain } from '../features/nav-main.js';
 import { docsConfig } from '@gracile-docs/content';
 
 export default defineRoute({

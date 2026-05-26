@@ -2,10 +2,22 @@
   "extends": "@gracile/gracile/tsconfigs/strictest",
 
   "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "@gracile-labs/vite-plugin-babel-jsx-to-literals",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": true,
 
-    "resolveJsonModule": true,
-    "allowImportingTsExtensions": true
-  }
+    "jsx": "react-native",
+    "jsxImportSource": "jsx-forge",
+    "plugins": [
+      {
+        "transform": "jsx-forge/transform"
+      }
+    ],
+
+    "resolveJsonModule": true
+  },
+
+  "include": ["src/**/*"]
 }

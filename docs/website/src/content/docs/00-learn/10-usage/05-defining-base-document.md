@@ -38,7 +38,7 @@ export const document = (props: { url: URL; title?: string }) => html`
       ${criticalAssets}
 
       <!-- NOTE: Global stylesheets or ES modules for this document. -->
-      <link rel="stylesheet" href="/src/styles/global.scss" />
+      <link rel="stylesheet" href="/src/styles/global.css" />
       <!-- CAUTION: Use the full real path (relative to the project root) -->
       <script type="module" src="/src/document.client.ts"></script>
 

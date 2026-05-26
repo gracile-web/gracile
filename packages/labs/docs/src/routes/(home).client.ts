@@ -1,4 +1,4 @@
-import { router } from '../lib/router.ts';
+import { router } from '../lib/router.js';
 
 function initCardsHover() {
 	const wrappers = globalThis.document.querySelectorAll('.cards');

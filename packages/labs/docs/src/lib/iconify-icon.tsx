@@ -51,7 +51,7 @@ export class IconifyIcon extends LitElement {
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 256 256"
 				style={`height: ${this.size}; width: ${this.size}`}
-				unsafe:svg={icon}
+				$:svg={icon}
 			/>
 		);
 	}

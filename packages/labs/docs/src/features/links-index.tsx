@@ -1,5 +1,3 @@
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
-
 import type { MarkdownModuleConsumable } from '@gracile-docs/content';
 
 export const LinksIndex = ({
@@ -8,14 +6,14 @@ export const LinksIndex = ({
 	index: MarkdownModuleConsumable[];
 }) => (
 	<div class="m-links-index">
-		<For each={index}>
-			{(page) => (
-				<a href={page.href} class="unstyled" for:key={page.href}>
-					<div class="title" unsafe:html={page.module.titleHtml} />
+		{index.map((page) => (
+			<for:each key={page.href}>
+				<a href={page.href} class="unstyled">
+					<div class="title" $:html={page.module.titleHtml} />
 
 					<p>{page.module.excerpt}</p>
 				</a>
-			)}
-		</For>
+			</for:each>
+		))}
 	</div>
 );

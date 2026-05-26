@@ -1061,9 +1061,6 @@ importers:
       '@gracile-labs/client-router':
         specifier: workspace:^
         version: link:../client-router
-      '@gracile-labs/vite-plugin-babel-jsx-to-literals':
-        specifier: workspace:^
-        version: link:../vite-plugin-babel-jsx-to-literals
       '@gracile/client':
         specifier: workspace:^
         version: link:../../client
@@ -1299,12 +1296,15 @@ importers:
       '@types/picomatch':
         specifier: ^3.0.1
         version: 3.0.2
-      importable:
-        specifier: ^0.1.0
-        version: 0.1.0(typescript@6.0.2)
+      jsx-forge:
+        specifier: workspace:^
+        version: link:../jsx-forge
       sass:
         specifier: 'catalog:'
         version: 1.98.0
+      ts-patch:
+        specifier: ^3.3.0
+        version: 3.3.0
       tsx:
         specifier: 'catalog:'
         version: 4.21.0
@@ -6287,11 +6287,6 @@ packages:
   import-meta-resolve@4.2.0:
     resolution: {integrity: sha512-Iqv2fzaTQN28s/FwZAoFq0ZSs/7hMAHJVX+w8PZl3cY19Pxk6jFFalxQoIfW2826i/fDLXv8IiEZRIT0lDuWcg==}
 
-  importable@0.1.0:
-    resolution: {integrity: sha512-KdtsjA+ifjamEgHOfR0CYI9VyIdIPalJwBPhkogSLqr6dsLlk/JgCbrfaITruZfc2V6wvBL1f/d2AWPOGuShlA==}
-    peerDependencies:
-      typescript: ^5
-
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
@@ -8119,7 +8114,7 @@ packages:
     resolution: {integrity: sha512-OJ/ibxhPlqrMM0UiNHJ/0CKQkoKF243/AEmplt3qpRgkW8VG7IfOS41h7V8TjITqdByHzrjcS/2si+y4lIh8NA==}
     engines: {node: '>=18.12'}
     peerDependencies:
-      typescript: 6.0.2
+      typescript: '>=4.8.4'
 
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
@@ -12714,10 +12709,6 @@ snapshots:
     optional: true
 
   import-meta-resolve@4.2.0: {}
-
-  importable@0.1.0(typescript@6.0.2):
-    dependencies:
-      typescript: 6.0.2
 
   imurmurhash@0.1.4: {}
 

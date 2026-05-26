@@ -1,10 +1,9 @@
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import graphPaper from '../assets/icons/graph-paper.svg' with {
 	type: 'svg',
 	format: 'lit',
 };
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 export const SplashScreen = ({
 	descriptionHtml,
@@ -18,9 +17,11 @@ export const SplashScreen = ({
 	splashLinks: ReadonlyArray<{ label: string; href: string; icon: string }>;
 }) => (
 	<header class="m-splash-screen">
-		<For each={Array.from({ length: 8 }).fill(null)}>
-			{(_, index) => <div for:key={index} class={`bg bg-${index + 1}`}></div>}
-		</For>
+		{Array.from({ length: 8 }).map((_, index) => (
+			<for:each key={index}>
+				<div class={`bg bg-${index + 1}`}></div>
+			</for:each>
+		))}
 
 		<svg width="100%" height="100%" class="bg bg-noise">
 			<filter id="noiseFilter">
@@ -61,19 +62,14 @@ export const SplashScreen = ({
 		<p class="description">{unsafeHTML(descriptionHtml)}</p>
 
 		<div class="ctas">
-			<For each={[...splashLinks]}>
-				{(link) => (
-					<a
-						class="unstyled"
-						href={link.href}
-						data-prefetch="load"
-						for:key={link.href}
-					>
+			{[...splashLinks].map((link) => (
+				<for:each key={link.href}>
+					<a class="unstyled" href={link.href} data-prefetch="load">
 						{unsafeHTML(`<i-c o="${link.icon}"></i-c>`)}
 						{link.label}
 					</a>
-				)}
-			</For>
+				</for:each>
+			))}
 		</div>
 
 		<div class="create-gracile-command">

@@ -52,6 +52,7 @@ const config = [
 					'./packages/labs/vite-plugin-standard-css-modules/tsconfig.json',
 					'./packages/labs/lit-macros/tsconfig.json',
 					'./docs/website/tsconfig.json',
+					'./packages/labs/docs/tsconfig.json',
 				],
 				tsconfigRootDir: import.meta.dirname,
 			},

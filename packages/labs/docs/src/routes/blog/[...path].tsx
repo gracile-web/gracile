@@ -1,16 +1,15 @@
 import { defineRoute } from '@gracile/server/route';
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
-import { NavMain } from '../../features/nav-main.jsx';
+import { NavMain } from '../../features/nav-main.js';
 import {
 	BreadCrumbs,
 	type BreadCrumbsList,
-} from '../../features/breadcrumbs.jsx';
-import { NavRight } from '../../features/nav-right.jsx';
-import { document } from '../../document/document.jsx';
-import { FooterMain } from '../../features/footer-main.jsx';
-import { LinksPagination } from '../../features/links-pagination.jsx';
+} from '../../features/breadcrumbs.js';
+import { NavRight } from '../../features/nav-right.js';
+import { document } from '../../document/document.js';
+import { FooterMain } from '../../features/footer-main.js';
+import { LinksPagination } from '../../features/links-pagination.js';
 
 const tree = {
 	docs: {
@@ -117,24 +116,22 @@ export default defineRoute({
 					</article>
 				) : (
 					<>
-						<h1 unsafe:html={props.current.titleHtml} />
+						<h1 $:html={props.current.titleHtml} />
 						{props.current.excerpt}
 
 						<hr />
 
-						<For
-							each={Object.values(
-								props.blogMetaImports.filter((p) => p.pathParams),
-							)}
-						>
-							{(post) => (
-								<ul for:key={post.href}>
+						{Object.values(
+							props.blogMetaImports.filter((p) => p.pathParams),
+						).map((post) => (
+							<for:each key={post.href}>
+								<ul>
 									<li>
-										<a href={post.href} unsafe:html={post.module.titleHtml} />
+										<a href={post.href} $:html={post.module.titleHtml} />
 									</li>
 								</ul>
-							)}
-						</For>
+							</for:each>
+						))}
 					</>
 				)}
 

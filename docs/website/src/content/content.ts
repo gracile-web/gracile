@@ -1,13 +1,13 @@
 import { type } from 'arktype';
 import type { MarkdownModule } from '@gracile-labs/docs/lib/markdown/md-module.js';
 import type { DocsConfig } from '@gracile-labs/docs/vite';
-import { PathsHandlers } from '@gracile-labs/docs/src/lib/content/paths-handlers.js';
-import { buildTree } from '@gracile-labs/docs/src/lib/content/file-tree-builder.js';
-import nodejsLogo from '@gracile-labs/docs/src/assets/nodejs-logo.svg?url';
-import viteLogo from '@gracile-labs/docs/src/assets/vite-logo.svg?url';
-import litLogo from '@gracile-labs/docs/src/assets/lit.svg?url';
-import webComponentsLogo from '@gracile-labs/docs/src/assets/webcomponents-logo.svg?url';
-import gracileLogo from '@gracile-labs/docs/src/assets/gracile-logo.svg?raw';
+import { PathsHandlers } from '@gracile-labs/docs/content/paths-handlers';
+import { buildTree } from '@gracile-labs/docs/content/file-tree-builder';
+import nodejsLogo from '@gracile-labs/docs/assets/nodejs-logo.svg?url';
+import viteLogo from '@gracile-labs/docs/assets/vite-logo.svg?url';
+import litLogo from '@gracile-labs/docs/assets/lit.svg?url';
+import webComponentsLogo from '@gracile-labs/docs/assets/webcomponents-logo.svg?url';
+import gracileLogo from '@gracile-labs/docs/assets/gracile-logo.svg?raw';
 
 import packageJson from '../../package.json' with { type: 'json' };
 

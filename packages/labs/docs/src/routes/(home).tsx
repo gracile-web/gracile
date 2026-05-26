@@ -1,12 +1,11 @@
 import { defineRoute } from '@gracile/server/route';
-import { For } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/components/for';
-
-import { document } from '../document/document.jsx';
-import { SplashScreen } from '../features/splash-screen.jsx';
-import { FooterMain } from '../features/footer-main.jsx';
-import { NavMain } from '../features/nav-main.jsx';
-import { NavRight } from '../features/nav-right.jsx';
 import { docsConfig, featureList } from '@gracile-docs/content';
+
+import { document } from '../document/document.js';
+import { SplashScreen } from '../features/splash-screen.js';
+import { FooterMain } from '../features/footer-main.js';
+import { NavMain } from '../features/nav-main.js';
+import { NavRight } from '../features/nav-right.js';
 
 const { home } = docsConfig;
 
@@ -45,9 +44,9 @@ export default defineRoute({
 					</h1>
 					<section class="works-with">
 						<ul>
-							<For each={[...home.worksWith]}>
-								{(item) => (
-									<li for:key={item.label}>
+							{[...home.worksWith].map((item) => (
+								<for:each key={item.label}>
+									<li>
 										<img src={item.iconUrl} alt={item.alt} style={item.style} />
 										<div>
 											<strong>{item.label}</strong>
@@ -58,8 +57,8 @@ export default defineRoute({
 											) : null}
 										</div>
 									</li>
-								)}
-							</For>
+								</for:each>
+							))}
 						</ul>
 					</section>
 
@@ -70,13 +69,9 @@ export default defineRoute({
 
 					<section class="features cards">
 						<div>
-							<For each={[...featureList]}>
-								{(feature) => (
-									<a
-										class="card"
-										href={feature.href || '#'}
-										for:key={feature.title}
-									>
+							{[...featureList].map((feature) => (
+								<for:each key={feature.title}>
+									<a class="card" href={feature.href || '#'}>
 										<article class="card-content">
 											<div>
 												<strong class="feature-title">{feature.title}</strong>
@@ -91,15 +86,10 @@ export default defineRoute({
 														: ''}
 												</p>
 											</div>
-											{/* <footer>
-                      <For each={feature.tags} key={(tag) => tag}>
-                        {(tag) => <span class="tag">{tag}</span>}
-                      </For>
-                    </footer> */}
 										</article>
 									</a>
-								)}
-							</For>
+								</for:each>
+							))}
 						</div>
 
 						<footer class="features-more">
@@ -107,11 +97,11 @@ export default defineRoute({
 						</footer>
 					</section>
 
-					<h1 unsafe:html={props.starterProjects.titleHtml} />
+					<h1 $:html={props.starterProjects.titleHtml} />
 					<section class="cards tiles">
-						<For each={props.starterProjects.toc.at(0)?.children || []}>
-							{(lvl) => (
-								<div class="card card-link" for:key={lvl.id}>
+						{(props.starterProjects.toc.at(0)?.children || []).map((lvl) => (
+							<for:each key={lvl.id}>
+								<div class="card card-link">
 									<a
 										href={`/docs/starter-projects/#doc_${lvl.id}`}
 										class="card-content"
@@ -119,43 +109,25 @@ export default defineRoute({
 										{lvl.value}
 									</a>
 								</div>
-							)}
-						</For>
+							</for:each>
+						))}
 					</section>
 
-					<section class="home-readme" unsafe:html={props.mainReadme.content} />
+					<section class="home-readme" $:html={props.mainReadme.content} />
 
-					<h1 unsafe:html={props.faq.titleHtml} />
+					<h1 $:html={props.faq.titleHtml} />
 
 					<section class="cards tiles">
-						<For each={props.faq.toc.at(0)?.children || []}>
-							{(lvl) => (
-								<div class="card card-link" for:key={lvl.id}>
+						{(props.faq.toc.at(0)?.children || []).map((lvl) => (
+							<for:each key={lvl.id}>
+								<div class="card card-link">
 									<a href={`/docs/faq/#doc_${lvl.id}`} class="card-content">
 										{lvl.value}
 									</a>
 								</div>
-							)}
-						</For>
+							</for:each>
+						))}
 					</section>
-
-					{/* <h1>
-						<i-c o="ph:newspaper" />
-						Blog
-					</h1>
-					<section class="cards tiles">
-						<For each={blogMetaImports.slice(0, 6).filter((p) => p.pathParams)}>
-							{(post) => (
-								<div class="card card-link" for:key={post.href}>
-									<a
-										href={post.href}
-										class="card-content"
-										unsafe:html={post.module.title}
-									/>
-								</div>
-							)}
-						</For>
-					</section> */}
 				</article>
 			</main>
 

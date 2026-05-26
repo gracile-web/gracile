@@ -9,6 +9,9 @@ import set from 'lodash-es/set';
 
 export type TreeNodeData = {
 	href: string;
+	originalPath: string;
+	path: string;
+	title?: string;
 	titleHtml?: string;
 };
 

@@ -11,7 +11,7 @@ import { Prefetcher } from '../lib/prefetch/prefetch-document.js';
 const prefetcher = new Prefetcher();
 prefetcher.collectLinks();
 
-// import '../lib/copy-button.jsx';
+// import '../lib/copy-button.js';
 // import '../lib/iconify-icon.js';
 
 requestIdleCallback(() => {

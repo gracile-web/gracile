@@ -5,8 +5,8 @@ import gracileLogo from '../assets/gracile-logo.svg' with {
 	format: 'lit',
 };
 
-import { MenuToggle } from './menu-toggle.jsx';
-import { NavTree } from './nav-tree.jsx';
+import { MenuToggle } from './menu-toggle.js';
+import { NavTree } from './nav-tree.js';
 
 export const NavMain = ({
 	logoHtml,

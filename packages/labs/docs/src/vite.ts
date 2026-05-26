@@ -5,7 +5,6 @@ import type { PluginOption } from 'vite';
 import { gracile } from '@gracile/gracile/plugin';
 import { viteSvgPlugin } from '@gracile/svg/vite';
 import { viteSitemapPlugin } from '@gracile/sitemap/vite';
-import { gracileJsx } from '@gracile-labs/vite-plugin-babel-jsx-to-literals/vite';
 import { viteOgImagesGenerator } from 'og-images-generator/vite';
 import strip from '@rollup/plugin-strip';
 import { literalsHtmlCssMinifier } from '@literals/rollup-plugin-html-css-minifier';
@@ -13,7 +12,7 @@ import { getIcons } from '@iconify/utils';
 import { loadCollection } from '@iconify/json';
 import { standardCssModules } from 'vite-plugin-standard-css-modules';
 
-import { vitePluginMarkdownLit } from '../lib/markdown/vite-plugin-markdown-lit.ts';
+import { vitePluginMarkdownLit } from './lib/markdown/vite-plugin-markdown-lit.js';
 
 const HERE = import.meta.dirname;
 const PKG_ROOT = dirname(HERE); // -> packages/labs/docs
@@ -271,38 +270,38 @@ function shellRoutes(): Parameters<typeof gracile>[0] {
 			define: () => [
 				{
 					pattern: '/',
-					filePath: join(ROUTES_DIR, '(home).tsx'),
+					filePath: join(ROUTES_DIR, '(home).js'),
 					pageAssets: [
 						USER_THEME_ASSET,
-						toFsUrl(join(ROUTES_DIR, '(home).client.ts')),
-						toFsUrl(join(ROUTES_DIR, '(home).scss')),
+						toFsUrl(join(ROUTES_DIR, '(home).client.js')),
+						toFsUrl(join(ROUTES_DIR, '(home).css')),
 					],
 				},
 				{
 					pattern: '/404',
-					filePath: join(ROUTES_DIR, '404.tsx'),
-					pageAssets: [USER_THEME_ASSET, toFsUrl(join(ROUTES_DIR, '404.scss'))],
+					filePath: join(ROUTES_DIR, '404.js'),
+					pageAssets: [USER_THEME_ASSET, toFsUrl(join(ROUTES_DIR, '404.css'))],
 				},
 				{
 					pattern: '/chat',
-					filePath: join(ROUTES_DIR, 'chat.tsx'),
+					filePath: join(ROUTES_DIR, 'chat.js'),
 					pageAssets: [USER_THEME_ASSET],
 				},
 				{
 					pattern: '/docs/:path*/',
-					filePath: join(ROUTES_DIR, 'docs', '[...path].tsx'),
+					filePath: join(ROUTES_DIR, 'docs', '[...path].js'),
 					pageAssets: [
 						USER_THEME_ASSET,
-						toFsUrl(join(ROUTES_DIR, 'docs', '[...path].client.ts')),
-						toFsUrl(join(ROUTES_DIR, 'docs', '[...path].scss')),
+						toFsUrl(join(ROUTES_DIR, 'docs', '[...path].client.js')),
+						toFsUrl(join(ROUTES_DIR, 'docs', '[...path].css')),
 					],
 				},
 				{
 					pattern: '/blog/:path*/',
-					filePath: join(ROUTES_DIR, 'blog', '[...path].tsx'),
+					filePath: join(ROUTES_DIR, 'blog', '[...path].js'),
 					pageAssets: [
 						USER_THEME_ASSET,
-						toFsUrl(join(ROUTES_DIR, 'blog', '[...path].scss')),
+						toFsUrl(join(ROUTES_DIR, 'blog', '[...path].css')),
 					],
 				},
 			],
@@ -338,7 +337,6 @@ export async function gracileDocs(
 		vitePluginMarkdownLit(),
 		viteSitemapPlugin({ siteUrl: options.siteUrl }),
 		viteOgImagesGenerator({ additionalPatterns: ['!**/__*'] }),
-		gracileJsx(),
 		standardCssModules({ outputMode: 'CSSResult' }),
 		literalsHtmlCssMinifier(),
 	];

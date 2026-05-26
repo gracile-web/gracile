@@ -1,11 +1,11 @@
-import type { MarkdownModule } from '@gracile/markdown/md-module';
+import type { MarkdownModule } from '../lib/markdown/md-module.js';
 
 import { docsConfig } from '@gracile-docs/content';
 
-import { NavOutline } from './nav-outline.jsx';
-import { ColorModeToggle } from './color-mode-toggle.jsx';
-import { SiteSearch } from './site-search.jsx';
-import { MenuToggle } from './menu-toggle.jsx';
+import { NavOutline } from './nav-outline.js';
+import { ColorModeToggle } from './color-mode-toggle.js';
+import { SiteSearch } from './site-search.js';
+import { MenuToggle } from './menu-toggle.js';
 // import { asideMenuState } from '../lib/app-state.js';
 
 const githubLabel = 'Source code (GitHub)';

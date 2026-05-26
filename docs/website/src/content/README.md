@@ -12,7 +12,7 @@ A thin, full-stack, **web** framework.
 
 <!-- ```html
       < !-- NOTE: Bundles entrypoints for the current page assets -- >
-      <link rel="stylesheet" href="/src/routes/index.scss" />
+      <link rel="stylesheet" href="/src/routes/index.css" />
       <script type="module" src="/src/routes/index.client.ts"></script>
 
 
@@ -46,7 +46,7 @@ export const document = (props: { url: URL; title?: string }) => html`
   <html lang="en">
     <head>
       <!-- NOTE: Global assets -->
-      <link rel="stylesheet" href="/src/styles/global.scss" />
+      <link rel="stylesheet" href="/src/styles/global.css" />
       <script type="module" src="/src/document.client.ts"></script>
 
       <!-- NOTE: SEO -->

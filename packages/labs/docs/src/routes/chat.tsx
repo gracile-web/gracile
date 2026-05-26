@@ -1,8 +1,10 @@
+'use html-server';
+
 import { defineRoute } from '@gracile/gracile/route';
 import { html } from '@gracile/gracile/server-html';
+import { docsConfig } from '@gracile-docs/content';
 
 import discordLogo from '../assets/icons/discord.svg';
-import { docsConfig } from '@gracile-docs/content';
 import { googleAnalytics } from '../document/document-helpers.js';
 
 const waitTime = 1;

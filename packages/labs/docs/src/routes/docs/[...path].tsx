@@ -1,17 +1,17 @@
 import { defineRoute } from '@gracile/server/route';
 import picomatch from 'picomatch';
+import { docsConfig } from '@gracile-docs/content';
 
-import { NavMain } from '../../features/nav-main.jsx';
-import { FooterMain } from '../../features/footer-main.jsx';
+import { NavMain } from '../../features/nav-main.js';
+import { FooterMain } from '../../features/footer-main.js';
 import {
 	BreadCrumbs,
 	type BreadCrumbsList,
-} from '../../features/breadcrumbs.jsx';
-import { NavRight } from '../../features/nav-right.jsx';
-import { document } from '../../document/document.jsx';
-import { LinksPagination } from '../../features/links-pagination.jsx';
-import { LinksIndex } from '../../features/links-index.jsx';
-import { docsConfig } from '@gracile-docs/content';
+} from '../../features/breadcrumbs.js';
+import { NavRight } from '../../features/nav-right.js';
+import { document } from '../../document/document.js';
+import { LinksPagination } from '../../features/links-pagination.js';
+import { LinksIndex } from '../../features/links-index.js';
 
 export default defineRoute({
 	staticPaths: async () => {
@@ -119,7 +119,7 @@ export default defineRoute({
 					<article
 						class="prose"
 						data-toc-content
-						unsafe:html={props.content || 'No content for this page!'}
+						$:html={props.content || 'No content for this page!'}
 					></article>
 
 					{props.prev || props.next ? (

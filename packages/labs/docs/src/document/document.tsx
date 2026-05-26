@@ -22,8 +22,8 @@ import {
 // Absolute paths to document-level client assets, served via Vite's /@fs/ prefix
 // because document.tsx lives in the lib (outside the consumer Vite root).
 const _docDir = fileURLToPath(new URL('.', import.meta.url));
-const DOC_STYLES = `/@fs${_docDir}document.scss`;
-const DOC_CLIENT = `/@fs${_docDir}document.client.ts`;
+const DOC_STYLES = `/@fs${_docDir}document.css`;
+const DOC_CLIENT = `/@fs${_docDir}document.client.js`;
 
 export const document = (options: {
 	url: URL;

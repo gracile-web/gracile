@@ -14,7 +14,7 @@ export const LinksPagination = ({
 					<i-c o="ph:skip-back-duotone"></i-c>
 					<span>Previous</span>
 				</header>
-				<div class="title" unsafe:html={prev?.module.titleHtml} />
+				<div class="title" $:html={prev?.module.titleHtml} />
 			</a>
 		) : (
 			<div>{/* flex placeholder */}</div>
@@ -28,7 +28,7 @@ export const LinksPagination = ({
 					<i-c o="ph:skip-forward-duotone"></i-c>
 				</header>
 
-				<div class="title" unsafe:html={next?.module.titleHtml} />
+				<div class="title" $:html={next?.module.titleHtml} />
 			</a>
 		) : (
 			<div>{/* flex placeholder */}</div>

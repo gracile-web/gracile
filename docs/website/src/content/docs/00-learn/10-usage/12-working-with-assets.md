@@ -19,7 +19,7 @@ Want to split? Add a tag. Want to group and optimize multiple modules together?
 Just import them from a unique entry point, Rollup will do the rest. -->
 
 ```html
-<link rel="stylesheet" href="/src/document.scss" />
+<link rel="stylesheet" href="/src/document.css" />
 <script type="module" src="/src/document.client.ts"></script>
 ```
 

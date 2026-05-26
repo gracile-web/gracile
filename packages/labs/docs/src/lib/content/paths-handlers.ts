@@ -1,13 +1,13 @@
-import type { MarkdownModule } from '@gracile/markdown/md-module';
+import type { MarkdownModule } from '../markdown/md-module.js';
 
 import type { TreeNodeData } from './file-tree-builder.js';
 
 export class PathsHandlers {
 	static readonly DEFAULT_CONTENT_FOLDER_PATH: string = '/src/content/';
-	static readonly DEFAULT_PATHNAME_PREFIX: RegExp = /\/(docs|blog)\//;
+	static readonly DEFAULT_PATHNAME_PREFIX = /\/(docs|blog)\//;
 
 	public readonly CONTENT_FOLDER_PATH: string;
-	public readonly PATHNAME_PREFIX: string;
+	public readonly PATHNAME_PREFIX: RegExp;
 
 	constructor(options?: {
 		contentFolderPath?: string /*  docsPathName?: string  */;
