@@ -1,0 +1,21 @@
+:not(pre) > code:not(.twoslash-popup-code) {
+	padding: 0 0.4rem;
+	background: var(--sl-color-neutral-0);
+	border-radius: var(--sl-border-radius-medium);
+	outline: 1px solid var(--sl-color-neutral-400);
+}
+
+.typedoc-table {
+	margin: var(--sl-spacing-2x-large) 0;
+	overflow-x: auto;
+
+	table {
+		margin: 0;
+	}
+
+	p {
+		margin-block: 0.5em;
+		font-size: var(--sl-font-size-small);
+		line-height: var(--sl-line-height-dense);
+	}
+}

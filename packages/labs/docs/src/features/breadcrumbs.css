@@ -1,0 +1,36 @@
+.m-bread-crumbs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1ch;
+	align-items: center;
+	padding: var(--sl-spacing-large) var(--sl-spacing-4x-large) 0
+		var(--sl-spacing-4x-large);
+	font-size: var(--sl-font-size-small);
+	opacity: 0.9;
+
+	@media (width >= env(--breakpoint-xl, 1200px)) {
+		padding: var(--sl-spacing-x-large) var(--sl-spacing-x-large) 0 0;
+		margin-bottom: -2ex;
+		font-size: var(--sl-font-size-x-small);
+	}
+
+	.part {
+		display: flex;
+		gap: 1ch;
+		align-items: center;
+	}
+
+	a {
+		display: flex;
+		align-items: center;
+
+		i-c {
+			margin-right: 1ch;
+		}
+	}
+
+	svg {
+		width: 2ex;
+		height: 2ex;
+	}
+}

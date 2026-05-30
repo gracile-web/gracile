@@ -1,0 +1,38 @@
+.m-site-search {
+	top: 6.2rem;
+	right: 0;
+	left: 0;
+	z-index: 1;
+
+	button {
+		all: unset;
+		display: inline-flex;
+		gap: var(--sl-spacing-medium);
+		align-items: center;
+		width: calc(100% - 1.4rem * 2);
+		padding: var(--sl-spacing-x-small) var(--sl-spacing-small);
+		margin: var(--sl-spacing-x-small);
+		color: var(--sl-color-neutral-800);
+		cursor: text;
+		background: var(--sl-color-gray-100);
+		border: 1px solid var(--sl-color-neutral-300);
+		border-radius: var(--sl-border-radius-small);
+
+		&:focus {
+			outline: var(--sl-focus-ring-style);
+		}
+
+		&:hover {
+			background: var(--sl-color-gray-200);
+			border: 1px solid var(--sl-color-neutral-400);
+		}
+
+		kbd {
+			position: absolute;
+			right: 2.5rem;
+			font-family: inherit;
+			font-size: var(--sl-font-size-small);
+			color: var(--sl-color-neutral-900);
+		}
+	}
+}

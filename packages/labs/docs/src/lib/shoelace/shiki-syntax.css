@@ -1,0 +1,22 @@
+.shiki {
+	--shiki-color-text: var(--sl-color-neutral-900);
+	--shiki-foreground: var(--sl-color-neutral-950);
+	--shiki-color-background: var(--sl-color-neutral-50);
+	--shiki-token-constant: var(--sl-color-emerald-700);
+	--shiki-token-string: var(--sl-color-violet-700);
+	--shiki-token-comment: var(--sl-color-neutral-700);
+	--shiki-token-keyword: var(--sl-color-red-700);
+	--shiki-token-parameter: var(--sl-color-purple-700);
+	--shiki-token-function: var(--sl-color-blue-700);
+	--shiki-token-string-expression: var(--sl-color-orange-700);
+	--shiki-token-punctuation: var(--sl-color-neutral-700);
+	--shiki-token-link: var(--sl-color-violet-700);
+
+	tab-size: 2ch;
+	counter-reset: line;
+
+	& .highlighted-line {
+		background-color: var(--sl-color-gray-200);
+		outline: 2px solid var(--sl-color-gray-300);
+	}
+}

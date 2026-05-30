@@ -1,0 +1,61 @@
+@import '../styles/global.css';
+@import '../styles/scrollbars.css';
+
+html.layout-blog,
+html.layout-default,
+html.layout-bare {
+	body {
+		margin: 0;
+		overflow-y: scroll;
+		font-family: system-ui, sans-serif;
+		font-size: calc(0.75em + 0.13vw + 0.13vh);
+		line-height: var(--sl-line-height-normal);
+		color: var(--sl-color-neutral-900);
+		background-color: var(--sl-color-neutral-50);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	box-sizing: border-box;
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
+	}
+
+	scroll-padding-top: var(--sl-spacing-4x-large);
+
+	@media (width >= env(--breakpoint-lg, 992px)) {
+		scroll-behavior: initial;
+	}
+
+	@media (width >= env(--breakpoint-xl, 1200px)) {
+		scroll-padding-top: var(--sl-spacing-x-large);
+	}
+}
+
+/**
+ * Shell default brand palette (emerald).
+ * Uses .sl-theme-light and .sl-theme-dark alongside :root to match
+ * Shoelace's 0-1-0 specificity (light.css uses .sl-theme-light, dark.css
+ * uses .sl-theme-dark). Since this stylesheet is loaded after Shoelace's
+ * themes, source order wins. Consumer overrides in src/content/theme.css
+ * are injected as a <link> after this stylesheet, so they win in turn.
+ */
+:root,
+.sl-theme-light,
+.sl-theme-dark {
+	--sl-color-primary-50: var(--sl-color-emerald-50);
+	--sl-color-primary-100: var(--sl-color-emerald-100);
+	--sl-color-primary-200: var(--sl-color-emerald-200);
+	--sl-color-primary-300: var(--sl-color-emerald-300);
+	--sl-color-primary-400: var(--sl-color-emerald-400);
+	--sl-color-primary-500: var(--sl-color-emerald-500);
+	--sl-color-primary-600: var(--sl-color-emerald-600);
+	--sl-color-primary-700: var(--sl-color-emerald-700);
+	--sl-color-primary-800: var(--sl-color-emerald-800);
+	--sl-color-primary-900: var(--sl-color-emerald-900);
+	--sl-color-primary-950: var(--sl-color-emerald-950);
+}

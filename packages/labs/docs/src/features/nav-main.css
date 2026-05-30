@@ -1,0 +1,99 @@
+@import 'nav-tree.css';
+
+.m-nav-main {
+	position: fixed;
+	z-index: 1;
+	width: calc(100% - 1vw - 1.5rem);
+	height: 100%;
+	background: linear-gradient(
+		to right,
+		var(--sl-color-neutral-0),
+		var(--sl-color-neutral-50)
+	);
+	isolation: isolate;
+	border-right: 1px solid
+		color-mix(in oklab, var(--sl-color-neutral-50), transparent 90%);
+	box-shadow: 1rem 1rem 1rem
+		color-mix(in oklab, var(--sl-color-neutral-0), transparent 90%);
+	opacity: 0;
+	transition:
+		opacity var(--sl-transition-medium),
+		transform var(--sl-transition-medium);
+	transform: translateX(-100%);
+
+	[menu-left='opened'] & {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	@media (width >= env(--breakpoint-md, 768px)) {
+		width: 47vw;
+	}
+
+	@media (width >= env(--breakpoint-lg, 992px)) {
+		width: 40vw;
+	}
+
+	@media (width >= env(--breakpoint-xl, 1200px)) {
+		top: 0;
+		display: initial;
+		width: var(--main-nav-width);
+		isolation: initial;
+		opacity: 1;
+		transform: initial;
+	}
+
+	.toggle {
+		padding: 1rem;
+	}
+
+	.layout-bare & {
+		position: absolute;
+		height: initial;
+		background: none;
+		border: none;
+		box-shadow: none;
+	}
+
+	.home {
+		& > div {
+			display: flex;
+			align-items: flex-end;
+		}
+
+		.logo {
+			display: inline-block;
+			height: 2.2rem;
+			overflow: hidden;
+
+			svg {
+				width: 6rem;
+				height: 3.3rem;
+				fill: currentcolor;
+			}
+		}
+
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		@media (width >= env(--breakpoint-xl, 1200px)) {
+			left: 2rem;
+			justify-content: flex-start;
+		}
+
+		padding: 0.25rem;
+		margin: 0.75rem 1rem;
+		color: var(--sl-color-neutral-900);
+		isolation: isolate;
+
+		@media (width >= env(--breakpoint-xl, 1200px)) {
+			left: initial;
+		}
+
+		&:hover {
+			color: var(--sl-color-primary-700);
+		}
+	}
+}

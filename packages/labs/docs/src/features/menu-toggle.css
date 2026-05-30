@@ -1,0 +1,78 @@
+.c-menu-toggle {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	padding: 0.75rem;
+	font-size: 1rem;
+	color: color-mix(in oklab, var(--sl-color-neutral-700), transparent 10%);
+	cursor: pointer;
+	user-select: none;
+	border: none;
+	border-radius: 0 0 1rem;
+	box-shadow: 0.1rem 0.1rem 0.3rem
+		color-mix(in oklab, var(--sl-color-neutral-0), transparent 80%);
+
+	&:hover {
+		text-decoration: underline;
+	}
+
+	@media (prefers-color-scheme: light) {
+		background-color: var(--sl-color-neutral-200);
+
+		&:hover {
+			text-decoration: underline;
+			background-color: var(--sl-color-neutral-300);
+		}
+	}
+
+	[data-color-mode='light'] &,
+	[data-color-mode='light']& {
+		background-color: var(--sl-color-neutral-200);
+
+		&:hover {
+			text-decoration: underline;
+			background-color: var(--sl-color-neutral-300);
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		background-color: var(--sl-color-neutral-0);
+
+		&:hover {
+			background-color: var(--sl-color-neutral-300);
+		}
+	}
+
+	[data-color-mode='dark'] &,
+	[data-color-mode='dark']& {
+		background-color: var(--sl-color-neutral-0);
+
+		&:hover {
+			background-color: var(--sl-color-neutral-300);
+		}
+	}
+
+	&.right {
+		right: 0;
+		left: initial;
+		border-radius: 0 0 0 1rem;
+	}
+
+	svg {
+		width: 2rem;
+		height: 2rem;
+	}
+
+	.layout-bare & {
+		display: none;
+	}
+
+	@media (width >= env(--breakpoint-xl, 1200px)) {
+		display: none;
+	}
+}
+
+html[data-menu-panel='active'] {
+	overflow: hidden;
+}

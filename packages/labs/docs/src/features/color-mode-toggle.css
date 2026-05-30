@@ -1,0 +1,64 @@
+.c-color-mode-toggle {
+	display: flex;
+	gap: 0.8rem;
+	align-items: center;
+	padding: 0.5rem 0.667rem;
+	color: var(--sl-color-neutral-800);
+	cursor: pointer;
+	background: transparent;
+	isolation: isolate;
+	border: 1px solid transparent;
+	border-radius: 99em;
+
+	&:hover {
+		color: var(--sl-color-primary-500);
+		border: 1px solid var(--sl-color-neutral-500);
+	}
+
+	.moon,
+	.sun {
+		pointer-events: none;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.moon {
+			opacity: 0.3;
+		}
+
+		.sun {
+			opacity: 0.9;
+		}
+	}
+
+	[data-color-mode='dark'] &,
+	[data-color-mode='dark']& {
+		.moon {
+			opacity: 0.3;
+		}
+
+		.sun {
+			opacity: 0.9;
+		}
+	}
+
+	@media (prefers-color-scheme: light) {
+		.moon {
+			opacity: 0.9;
+		}
+
+		.sun {
+			opacity: 0.3;
+		}
+	}
+
+	[data-color-mode='light'] &,
+	[data-color-mode='light']& {
+		.moon {
+			opacity: 0.9;
+		}
+
+		.sun {
+			opacity: 0.3;
+		}
+	}
+}

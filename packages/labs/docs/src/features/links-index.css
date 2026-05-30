@@ -1,0 +1,45 @@
+.m-links-index {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3dvw 2dvw;
+	align-items: flex-start;
+	justify-content: space-evenly;
+	padding: 4rem 0 0;
+	margin-top: 4rem;
+	font-size: calc(0.6rem + 0.3dvw);
+	line-height: 1.5;
+
+	p {
+		white-space: pre-wrap;
+	}
+
+	.title {
+		display: flex;
+		gap: 0.5em;
+		padding: var(--sl-spacing-x-small) 0 var(--sl-spacing-x-small) 0;
+		font-size: var(--sl-font-size-large);
+		font-weight: var(--sl-font-weight-bold);
+		line-height: var(--sl-line-height-normal);
+	}
+
+	a {
+		display: block;
+		flex-basis: 44%;
+		min-width: 17rem;
+		max-width: 28rem;
+		padding: 0.6rem calc(0.5em + 1.15dvw);
+		color: var(--sl-color-neutral-800);
+		border: 1px solid
+			color-mix(in oklab, var(--sl-color-primary-400), transparent 25%);
+		border-radius: 0.25rem;
+		box-shadow: 0.5rem 0.5rem 0.5rem
+			color-mix(in oklab, var(--sl-color-neutral-0), transparent 70%);
+
+		&:hover {
+			color: var(--sl-color-primary-700);
+			border-color: var(--sl-color-primary-400);
+			box-shadow: 0.5rem 0.5rem 0.5rem
+				color-mix(in oklab, var(--sl-color-neutral-0), transparent 85%);
+		}
+	}
+}

@@ -44,8 +44,10 @@
     "public"
   ],
   "scripts": {
-    "build": "pnpm clean && tsc --pretty false || true; pnpm build:assets",
+    "build": "tsc",
+    "postbuild": "node --run build:assets && node --run build:css",
     "build:assets": "rsync -a --include='*/' --include='*.css' --include='*.svg' --include='*.ico' --include='*.txt' --include='*.d.ts' --exclude='*' src/ dist/",
+    "build:css": "postcss 'dist/**/*.css' --config . --replace",
     "clean": "rm -rf ./dist",
     "dev": "tsc --watch"
   },
@@ -128,6 +130,9 @@
   },
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
+    "postcss": "^8.4.41",
+    "postcss-cli": "^11.0.1",
+    "postcss-env-function": "^8.0.0",
     "@importable/yaml": "^0.1.1",
     "@types/emoji-strip": "^1.0.2",
     "@types/lodash-es": "^4.17.12",

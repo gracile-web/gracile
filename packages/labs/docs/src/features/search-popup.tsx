@@ -10,10 +10,10 @@ await import(/* @vite-ignore */ pagefindUiPath);
 
 // FIXME: focus trap for searchbox (pagefind svelte's component issue ?)
 
-import links from '../styles/typography/links.scss' with { type: 'css' };
+import links from '../styles/typography/links.css' with { type: 'css' };
 import { router } from '../lib/router.js';
 
-import styles from './search-popup.scss' with { type: 'css' };
+import styles from './search-popup.css' with { type: 'css' };
 
 @customElement('search-popup')
 export class SearchPopup extends LitElement {
