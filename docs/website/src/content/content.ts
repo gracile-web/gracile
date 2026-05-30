@@ -37,6 +37,8 @@ export const docsConfig: DocsConfig = {
 		logoHtml: gracileLogo,
 		descriptionHtml: 'A thin, full-stack, <strong>web</strong> framework',
 		installCommand: 'npm create gracile@latest',
+		starterProjectsPath: '/src/content/docs/04-starter-projects/README.md',
+		faqPath: '/src/content/docs/35-faq.md',
 		splashLinks: [
 			{ icon: 'books-duotone', label: 'References', href: '/docs/references/' },
 			{

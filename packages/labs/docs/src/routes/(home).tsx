@@ -12,6 +12,12 @@ const { home } = docsConfig;
 export default defineRoute({
 	handler: async () => ({
 		mainReadme: await import('/src/content/README.md'),
+		// starterProjects: home.starterProjectsPath
+		// 	? await import(/* @vite-ignore */ home.starterProjectsPath)
+		// 	: null,
+		// faq: home.faqPath
+		// 	? await import(/* @vite-ignore */ home.faqPath)
+		// 	: null,
 		starterProjects:
 			await import('/src/content/docs/04-starter-projects/README.md'),
 		faq: await import('/src/content/docs/35-faq.md'),
@@ -97,37 +103,47 @@ export default defineRoute({
 						</footer>
 					</section>
 
-					<h1 $:html={props.starterProjects.titleHtml} />
-					<section class="cards tiles">
-						{(props.starterProjects.toc.at(0)?.children || []).map((lvl) => (
-							<for:each key={lvl.id}>
-								<div class="card card-link">
-									<a
-										href={`/docs/starter-projects/#doc_${lvl.id}`}
-										class="card-content"
-									>
-										{lvl.value}
-									</a>
-								</div>
-							</for:each>
-						))}
-					</section>
+					{props.starterProjects ? (
+						<>
+							<h1 $:html={props.starterProjects.titleHtml} />
+							<section class="cards tiles">
+								{(props.starterProjects.toc.at(0)?.children || []).map(
+									(lvl) => (
+										<for:each key={lvl.id}>
+											<div class="card card-link">
+												<a
+													href={`/docs/starter-projects/#doc_${lvl.id}`}
+													class="card-content"
+												>
+													{lvl.value}
+												</a>
+											</div>
+										</for:each>
+									),
+								)}
+							</section>
+						</>
+					) : null}
 
 					<section class="home-readme" $:html={props.mainReadme.content} />
 
-					<h1 $:html={props.faq.titleHtml} />
+					{props.faq ? (
+						<>
+							<h1 $:html={props.faq.titleHtml} />
 
-					<section class="cards tiles">
-						{(props.faq.toc.at(0)?.children || []).map((lvl) => (
-							<for:each key={lvl.id}>
-								<div class="card card-link">
-									<a href={`/docs/faq/#doc_${lvl.id}`} class="card-content">
-										{lvl.value}
-									</a>
-								</div>
-							</for:each>
-						))}
-					</section>
+							<section class="cards tiles">
+								{(props.faq.toc.at(0)?.children || []).map((lvl) => (
+									<for:each key={lvl.id}>
+										<div class="card card-link">
+											<a href={`/docs/faq/#doc_${lvl.id}`} class="card-content">
+												{lvl.value}
+											</a>
+										</div>
+									</for:each>
+								))}
+							</section>
+						</>
+					) : null}
 				</article>
 			</main>
 

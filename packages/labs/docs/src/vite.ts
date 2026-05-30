@@ -68,6 +68,8 @@ export interface DocsHomeConfig {
 	logoHtml: string;
 	descriptionHtml: string;
 	installCommand: string;
+	starterProjectsPath?: string;
+	faqPath?: string;
 	splashLinks: DocsSplashLink[];
 	worksWith: DocsWorksWithItem[];
 }
