@@ -96,6 +96,8 @@ export interface DocsWorksWithItem {
 	label: string;
 	detail?: string;
 	iconUrl: string;
+	iconDarkUrl?: string;
+	iconLightUrl?: string;
 	alt?: string;
 	style?: string;
 }

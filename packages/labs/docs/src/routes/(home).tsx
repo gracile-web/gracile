@@ -53,7 +53,14 @@ export default defineRoute({
 							{[...home.worksWith].map((item) => (
 								<for:each key={item.label}>
 									<li>
-										<img src={item.iconUrl} alt={item.alt} style={item.style} />
+										<img
+											src={item.iconUrl}
+											data-icon-default-url={item.iconUrl}
+											data-icon-dark-url={item.iconDarkUrl ?? ''}
+											data-icon-light-url={item.iconLightUrl ?? ''}
+											alt={item.alt ?? ''}
+											style={item.style ?? ''}
+										/>
 										<div>
 											<strong>{item.label}</strong>
 											{item.detail ? (

@@ -22,7 +22,8 @@ export const docsConfig: DocsConfig = {
 		description: 'A thin, full-stack, web framework',
 		issuesUrl: 'https://github.com/gracile-web/gracile/issues/',
 		repoUrl: 'https://github.com/gracile-web/gracile/',
-		docsRepoUrl: 'https://github.com/gracile-web/website/',
+		docsRepoUrl:
+			'https://github.com/gracile-web/gracile/edit/next/docs/website',
 		discordInvitePath: 'chat/',
 		discordInviteUrl: 'https://discord.gg/Q8nTZKZ9H4',
 		playgroundUrl: '/playground/',

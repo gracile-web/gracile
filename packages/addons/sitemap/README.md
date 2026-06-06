@@ -24,6 +24,10 @@ export default defineConfig({
     viteSitemapPlugin({
       // IMPORTANT: This is mandatory.
       siteUrl: SITE_URL,
+      // NOTE: Defaults to [/(\^|[/\\])__[^/\\]*\.html$/],
+      // ignoring internal files like `/about/__index.doc.html`.
+      // Pass `exclude: []` to include every built HTML file.
+      exclude: [/\/private\//],
       // NOTE: This is the default robots.txt that you can override if needed.
       robotsTxt: [
         ['User-agent', '*'],

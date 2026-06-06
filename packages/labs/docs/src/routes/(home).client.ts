@@ -1,5 +1,25 @@
 import { router } from '../lib/router.js';
 
+const root = document.documentElement;
+const themedIconSelector = 'img[data-icon-dark-url], img[data-icon-light-url]';
+
+function syncThemedIcons() {
+	const colorMode =
+		root.getAttribute('data-color-mode') === 'light' ? 'light' : 'dark';
+	const modeDataKey =
+		colorMode === 'light' ? 'iconLightUrl' : 'iconDarkUrl';
+
+	for (const image of document.querySelectorAll<HTMLImageElement>(
+		themedIconSelector,
+	)) {
+		const nextUrl = image.dataset[modeDataKey] || image.dataset.iconDefaultUrl;
+
+		if (nextUrl && image.getAttribute('src') !== nextUrl) {
+			image.setAttribute('src', nextUrl);
+		}
+	}
+}
+
 function initCardsHover() {
 	const wrappers = globalThis.document.querySelectorAll('.cards');
 
@@ -23,7 +43,16 @@ function initCardsHover() {
 	}
 }
 
+new MutationObserver(syncThemedIcons).observe(root, {
+	attributeFilter: ['data-color-mode'],
+	attributes: true,
+});
+
+syncThemedIcons();
 requestIdleCallback(() => initCardsHover());
-const callback = () => requestIdleCallback(() => initCardsHover());
+const callback = () => {
+	syncThemedIcons();
+	requestIdleCallback(() => initCardsHover());
+};
 router.removeEventListener('route-rendered', callback);
 router.addEventListener('route-rendered', callback);

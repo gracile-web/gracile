@@ -18,7 +18,7 @@ export const FooterMain = (options: { url: URL; filename?: string }) => (
 				<>
 					<div class="sep">—</div>
 					<a
-						href={`${site.docsRepoUrl}edit/main${options.filename}`}
+						href={`${site.docsRepoUrl}${options.filename}`}
 						target="_blank"
 						rel="noopener noreferrer nofollow"
 					>

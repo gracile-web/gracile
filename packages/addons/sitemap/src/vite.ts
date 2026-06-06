@@ -7,7 +7,9 @@ import type { PluginOption } from 'vite';
 
 const VITE_PLUGIN_NAME = 'vite-plugin-gracile-sitemap';
 
-export function viteSitemapPlugin(options: {
+export const SITEMAP_DEFAULT_EXCLUDE = [/(^|[/\\])__[^/\\]*\.html$/];
+
+export interface ViteSitemapPluginOptions {
 	siteUrl: string;
 	/**
 	 * Default value:
@@ -18,11 +20,29 @@ export function viteSitemapPlugin(options: {
 	 */
 	robotsTxt?: [string, string][] | false;
 
+	/**
+	 * Exclude generated sitemap paths with regex patterns.
+	 *
+	 * @defaultValue `SITEMAP_DEFAULT_EXCLUDE`, which ignores `__*.html` assets.
+	 */
+	exclude?: RegExp[];
+}
+
+function isExcludedPath(path: string, patterns: RegExp[]): boolean {
+	return patterns.some((pattern) => {
+		pattern.lastIndex = 0;
+		return pattern.test(path);
+	});
+}
+
+export function viteSitemapPlugin(
+	options: ViteSitemapPluginOptions,
 	// NOTE: for Vite versions mismatches with `exactOptionalPropertyTypes`?
 	// This `any[]` AND with a plugin -array- makes ESLint and TS shut up.
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-}): any[] {
+): any[] {
 	const logger = getLogger();
+	const exclude = options.exclude ?? SITEMAP_DEFAULT_EXCLUDE;
 
 	let isSsrBuild = false;
 
@@ -47,7 +67,8 @@ export function viteSitemapPlugin(options: {
 					.filter(([, asset]) => asset.fileName.endsWith('.html'))
 					.map(([, asset]) =>
 						`/${asset.fileName}`.replace(/\/index\.html$/, '/'),
-					);
+					)
+					.filter((path) => isExcludedPath(path, exclude) === false);
 
 				if (links.length < 2) {
 					logger.warn(
