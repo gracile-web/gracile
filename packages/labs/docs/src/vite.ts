@@ -13,6 +13,10 @@ import { loadCollection } from '@iconify/json';
 import { standardCssModules } from 'vite-plugin-standard-css-modules';
 
 import { vitePluginMarkdownLit } from './lib/markdown/vite-plugin-markdown-lit.js';
+import {
+	createDocsOgImagesConfig,
+	type DocsOgImagesColorPalette,
+} from './og-images/shared.js';
 
 const HERE = import.meta.dirname;
 const PKG_ROOT = dirname(HERE); // -> packages/labs/docs
@@ -36,6 +40,13 @@ export interface GracileDocsOptions {
 	siteUrl: string;
 	iconSet?: string[];
 	gracile?: Parameters<typeof gracile>[0];
+	ogImagesGenerator?: {
+		enabled?: boolean;
+		logoSvg?: string;
+		siteTitle?: string;
+		siteSubtitle?: string;
+		colorPalette?: DocsOgImagesColorPalette;
+	};
 }
 
 export interface DocsConfig {
@@ -66,6 +77,7 @@ export interface DocsSiteConfig {
 
 export interface DocsHomeConfig {
 	logoHtml: string;
+	logoSplashScreenHtml: string;
 	descriptionHtml: string;
 	installCommand: string;
 	starterProjectsPath?: string;
@@ -320,6 +332,12 @@ export async function gracileDocs(
 
 	const userGracileConfig = options.gracile ?? {};
 	const shell = shellRoutes()!;
+	const ogImagesConfig = createDocsOgImagesConfig({
+		logoSvg: options.ogImagesGenerator?.logoSvg,
+		siteTitle: options.ogImagesGenerator?.siteTitle,
+		siteSubtitle: options.ogImagesGenerator?.siteSubtitle,
+		colorPalette: options.ogImagesGenerator?.colorPalette,
+	});
 	const mergedGracile = {
 		...shell,
 		...userGracileConfig,
@@ -338,14 +356,22 @@ export async function gracileDocs(
 		viteSvgPlugin(),
 		vitePluginMarkdownLit(),
 		viteSitemapPlugin({ siteUrl: options.siteUrl }),
-		viteOgImagesGenerator({ additionalPatterns: ['!**/__*'] }),
+		options.ogImagesGenerator?.enabled === false
+			? null
+			: viteOgImagesGenerator({
+					additionalPatterns: ['!**/__*'],
+					config: ogImagesConfig,
+				}),
 		standardCssModules({ outputMode: 'CSSResult' }),
 		literalsHtmlCssMinifier(),
+
+		// TODO: Test if it works with vite (not rollup)
+		strip({}),
 	];
 }
 
 export const gracileDocsRollupOptions = {
-	plugins: [strip({})],
+	plugins: [],
 };
 
 export const gracileDocsDedupe = [

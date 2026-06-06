@@ -1,7 +1,9 @@
 /** Ambient module declaration for the consumer content entrypoint. */
 
 declare module '@gracile-docs/content' {
-	import type { MarkdownModule } from '@gracile/markdown/md-module';
+	// import type { MarkdownModule } from '@gracile/markdown/md-module';
+
+	import type { MarkdownModule } from './lib/markdown/md-module.js';
 
 	import type { DocsConfig, DocsFeature } from '@gracile-labs/docs/vite';
 
@@ -31,3 +33,14 @@ declare module '@gracile-docs/content' {
 		markdownModulesToTreeNode(modules: Record<string, MarkdownModule>): unknown;
 	};
 }
+
+// declare module 'jsx-forge/jsx-runtime' {
+// 	namespace JSX {
+// 		interface IntrinsicElements {
+// 			/**
+// 			 * Gracile router template outlet (used in server rendered document).
+// 			 */
+// 			'route-template-outlet': Record<string, never>;
+// 		}
+// 	}
+// }

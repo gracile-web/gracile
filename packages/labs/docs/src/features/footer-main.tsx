@@ -73,14 +73,14 @@ export const FooterMain = (options: { url: URL; filename?: string }) => (
 			{site.mainSiteUrl || site.nextSiteUrl ? (
 				import.meta.env.VITE_DOCS_IS_NEXT === 'true' ? (
 					<small>
-						Next docs v{site.version} •
+						Next docs v{site.version} •{' '}
 						{site.mainSiteUrl ? (
 							<a href={site.mainSiteUrl}>Go to Main</a>
 						) : null}
 					</small>
 				) : (
 					<small>
-						Main docs v{site.version} •
+						Main docs v{site.version} •{' '}
 						{site.nextSiteUrl ? (
 							<a href={site.nextSiteUrl}>Go to Next</a>
 						) : null}

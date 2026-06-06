@@ -8,12 +8,12 @@ import graphPaper from '../assets/icons/graph-paper.svg' with {
 export const SplashScreen = ({
 	descriptionHtml,
 	installCommand,
-	logoHtml,
+	logoSplashScreenHtml,
 	splashLinks,
 }: {
 	descriptionHtml: string;
 	installCommand: string;
-	logoHtml: string;
+	logoSplashScreenHtml: string;
 	splashLinks: ReadonlyArray<{ label: string; href: string; icon: string }>;
 }) => (
 	<header class="m-splash-screen">
@@ -23,7 +23,9 @@ export const SplashScreen = ({
 			</for:each>
 		))}
 
-		<svg width="100%" height="100%" class="bg bg-noise">
+		{/* NOTE: Disabled for performance issue
+		A noise without a blend mode (the culprit), is necessarily ugly */}
+		{/* <svg width="100%" height="100%" class="bg bg-noise">
 			<filter id="noiseFilter">
 				<feTurbulence
 					type="fractalNoise"
@@ -40,7 +42,7 @@ export const SplashScreen = ({
 				filter="url(#noiseFilter)"
 				fill="url(#graph)"
 			></rect>
-		</svg>
+		</svg> */}
 		<svg width="100%" height="100%" class="bg bg-grid">
 			<defs>
 				<pattern
@@ -57,7 +59,7 @@ export const SplashScreen = ({
 			<rect x="0" y="0" width="100%" height="100%" fill="url(#graph)"></rect>
 		</svg>
 
-		<div class="logo">{unsafeHTML(logoHtml)}</div>
+		<div class="logo">{unsafeHTML(logoSplashScreenHtml)}</div>
 
 		<p class="description">{unsafeHTML(descriptionHtml)}</p>
 

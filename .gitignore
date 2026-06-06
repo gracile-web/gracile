@@ -47,3 +47,5 @@ test-results
 
 # Local Netlify folder
 .netlify
+
+.local-paths.cjs

@@ -39,7 +39,7 @@ export namespace JSX {
 	> extends StandardSpecialAttributes<ElementInterface> {
 		'class:list'?: ClassArray | undefined;
 		'class:map'?: ClassInfo | undefined;
-		'style:map'?: (CssCustomProperty & csstype.Properties) | undefined;
+		'style:map'?: (CssCustomProperties & csstype.Properties) | undefined;
 	}
 
 	export interface ElementChildrenAttribute {
@@ -75,7 +75,9 @@ export namespace JSX {
 			CustomSpecialAttributes<ElementInterface> &
 			ElementChildrenAttribute &
 			EventsPrefixed<Facets['events'], ElementInterface, PrefixEventListener> &
-			Facets['attributes']
+			Facets['attributes'] & {
+				'style:map'?: CssCustomProperties & Facets['cssProperties'];
+			}
 	>;
 
 	export interface IntrinsicElements
@@ -107,8 +109,9 @@ export namespace JSX {
 
 	export type TemplateElement = unknown;
 
-	interface CssCustomProperty {
-		[key: `--${string}`]: string;
+	// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+	interface CssCustomProperties {
+		// [key: `--${string}`]: string;
 	}
 
 	type ExpandFacets<

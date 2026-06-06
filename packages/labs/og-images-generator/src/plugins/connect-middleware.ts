@@ -1,8 +1,8 @@
 import type { NextHandleFunction } from 'connect';
 
 import { extractMetadataFromHtml } from '../collect.js';
-import type { UserConfig } from '../generate.js';
-import { loadUserConfig } from '../generate.js';
+import type { GenerateOgImagesOptions, UserConfig } from '../generate.js';
+import { resolveUserConfig } from '../generate.js';
 import { ogPathToPagePath, DEFAULT_OG_PATH_PREFIX } from '../paths.js';
 import { renderOgImage } from '../render.js';
 
@@ -12,14 +12,23 @@ export interface ConnectOgOptions {
 	pathPrefix?: string;
 	trailingSlash?: boolean;
 	configReloader?: ConfigReloader;
+	configPath?: string;
+	config?: GenerateOgImagesOptions['config'];
 }
 
 export async function connectOgImagesGenerator(
 	options?: ConnectOgOptions,
 ): Promise<NextHandleFunction> {
+	let configOptions:
+		| Pick<GenerateOgImagesOptions, 'config' | 'configPath'>
+		| undefined;
+	if (options?.config) configOptions = { config: options.config };
+	else if (options?.configPath)
+		configOptions = { configPath: options.configPath };
+
 	let config: UserConfig | null = options?.configReloader
 		? null
-		: await loadUserConfig();
+		: await resolveUserConfig(configOptions);
 
 	const prefix = options?.pathPrefix ?? DEFAULT_OG_PATH_PREFIX;
 
@@ -44,6 +53,11 @@ export async function connectOgImagesGenerator(
 		const associatedPageHtml = await fetched.text();
 
 		const meta = extractMetadataFromHtml(associatedPageHtml);
+
+		// eslint-disable-next-line no-console
+		console.info(
+			`[og-images-generator] Rendering ${request.url} from ${path}.`,
+		);
 
 		const image = await renderOgImage(config, { path, meta });
 

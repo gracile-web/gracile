@@ -1,9 +1,9 @@
-import type { TemplateResult } from 'lit';
+import type { HTMLTemplateResult } from 'lit';
 import { nothing } from 'lit';
 
 import type { MarkdownModule, TocLevel } from '../lib/markdown/md-module.js';
 
-const recurse = (toc: TocLevel[]): TemplateResult<1> => (
+const recurse = (toc: TocLevel[]): HTMLTemplateResult => (
 	<>
 		{toc.map((level) => (
 			<for:each key={level.id}>
@@ -29,7 +29,9 @@ const recurse = (toc: TocLevel[]): TemplateResult<1> => (
 	</>
 );
 
-export const NavOutline = (options: { toc: MarkdownModule['toc'] }) => (
+export const NavOutline = (options: {
+	toc: MarkdownModule['toc'];
+}): HTMLTemplateResult => (
 	<nav class="m-nav-outline">
 		<ul>{recurse(options.toc)}</ul>
 	</nav>

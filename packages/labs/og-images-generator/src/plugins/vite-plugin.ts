@@ -1,6 +1,11 @@
 import type { ViteDevServer, PluginOption } from 'vite';
 
-import type { PathsOptions } from '../collect.js';
+import {
+	CONFIG_FILE_NAME,
+	resolveConfigPath,
+	normalizeUserConfig,
+	type GenerateOgImagesOptions,
+} from '../generate.js';
 
 import {
 	connectOgImagesGenerator,
@@ -10,18 +15,32 @@ import { rollupOgImagesGenerator } from './rollup-plugin.js';
 
 export const applyViteDevServerMiddleware = async (
 	server: ViteDevServer,
+	options?: Pick<GenerateOgImagesOptions, 'config' | 'configPath'>,
 ): Promise<void> => {
+	if (options?.config) {
+		server.middlewares.use(
+			await connectOgImagesGenerator({ config: options.config }),
+		);
+		return;
+	}
+
+	const viteConfigPath = `/@fs${resolveConfigPath(
+		options?.configPath ?? `./${CONFIG_FILE_NAME}`,
+	)}`;
+
 	server.middlewares.use(
 		await connectOgImagesGenerator({
-			configReloader: (() =>
-				server.ssrLoadModule(
-					'./og-images.config.js',
+			configReloader: (async () =>
+				normalizeUserConfig(
+					await server.ssrLoadModule(viteConfigPath),
 				)) as unknown as ConfigReloader,
 		}),
 	);
 };
 
-export function viteOgImagesGenerator(options?: PathsOptions): PluginOption {
+export function viteOgImagesGenerator(
+	options?: GenerateOgImagesOptions,
+): PluginOption {
 	let isBuild = false;
 
 	const rollupPlugin = rollupOgImagesGenerator(options);
@@ -45,6 +64,6 @@ export function viteOgImagesGenerator(options?: PathsOptions): PluginOption {
 			await rollupPlugin.closeBundle.call(this);
 		},
 
-		configureServer: (server) => applyViteDevServerMiddleware(server),
+		configureServer: (server) => applyViteDevServerMiddleware(server, options),
 	} as const;
 }

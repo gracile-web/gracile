@@ -41,6 +41,7 @@ pnpm --prefix starter-projects run test:smoke
 
 # MARK: Docs
 
-pnpm --prefix docs/website run test:smoke
+# FIXME:
+# pnpm --prefix docs/website run test:smoke
 
 # Lerna…

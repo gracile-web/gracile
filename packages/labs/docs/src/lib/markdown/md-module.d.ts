@@ -1,5 +1,6 @@
 export interface TocLevel {
 	value: string;
+	html: string;
 	id: string;
 	depth: number;
 	children: TocLevel[];

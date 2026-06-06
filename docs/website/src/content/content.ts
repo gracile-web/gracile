@@ -35,6 +35,7 @@ export const docsConfig: DocsConfig = {
 	},
 	home: {
 		logoHtml: gracileLogo,
+		logoSplashScreenHtml: gracileLogo,
 		descriptionHtml: 'A thin, full-stack, <strong>web</strong> framework',
 		installCommand: 'npm create gracile@latest',
 		starterProjectsPath: '/src/content/docs/04-starter-projects/README.md',

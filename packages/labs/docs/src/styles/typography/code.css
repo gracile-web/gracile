@@ -7,6 +7,10 @@ pre.shiki {
 	overflow: auto visible;
 }
 
+.twoslash-popup-code > pre.shiki {
+	margin: 0;
+}
+
 pre.shiki code {
 	font-family: 'Fira Code', monospace;
 

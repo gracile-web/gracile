@@ -1,5 +1,8 @@
 /// <reference types="@gracile/gracile/ambient" />
-/// <reference types="@gracile/markdown/ambient" />
+
+import type { MarkdownModule } from './lib/markdown/md-module.js';
+
+//// <reference types="@gracile/markdown/ambient" />
 
 declare module 'iconify:loader' {
 	export const iconSet: {
@@ -7,3 +10,11 @@ declare module 'iconify:loader' {
 		icons: Record<string, { body: string }>;
 	};
 }
+
+declare module '*.md' {
+	const markdownModule: MarkdownModule;
+
+	export default markdownModule;
+}
+
+export {};

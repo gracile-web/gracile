@@ -1,5 +1,3 @@
-import type { TransformerExtras } from 'ts-patch';
-
 import type { TransformerPluginConfig, Ts, TsWithInternals } from '../types.js';
 import { USE_HTML_FLAVOR_DIRECTIVE_PREFIX } from '../constants.js';
 import { PRESETS } from '../presets/lit.js';
@@ -35,7 +33,7 @@ export function createJsxToLiteralsTransformer(
 	ts: TsWithInternals,
 	program: Ts.Program | undefined,
 	pluginConfig: TransformerFullOptions = {},
-	_extras?: TransformerExtras,
+	/* _extras?: TransformerExtras */
 ): Ts.TransformerFactory<Ts.SourceFile> {
 	const preset: Preset = pluginConfig?.preset ?? PRESETS.Default;
 	return (context) => {

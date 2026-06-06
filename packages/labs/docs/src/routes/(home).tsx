@@ -12,15 +12,15 @@ const { home } = docsConfig;
 export default defineRoute({
 	handler: async () => ({
 		mainReadme: await import('/src/content/README.md'),
-		// starterProjects: home.starterProjectsPath
-		// 	? await import(/* @vite-ignore */ home.starterProjectsPath)
-		// 	: null,
-		// faq: home.faqPath
-		// 	? await import(/* @vite-ignore */ home.faqPath)
-		// 	: null,
-		starterProjects:
-			await import('/src/content/docs/04-starter-projects/README.md'),
-		faq: await import('/src/content/docs/35-faq.md'),
+
+		// TODO: Those imports should happen at the CONSUMER level
+		starterProjects: home.starterProjectsPath
+			? await import(/* @vite-ignore */ home.starterProjectsPath)
+			: null,
+		faq: home.faqPath ? await import(/* @vite-ignore */ home.faqPath) : null,
+		// starterProjects:
+		// 	await import('/src/content/docs/04-starter-projects/README.md'),
+		// faq: await import('/src/content/docs/35-faq.md'),
 	}),
 
 	document: ({ url, props }) =>
@@ -38,7 +38,7 @@ export default defineRoute({
 			<SplashScreen
 				descriptionHtml={home.descriptionHtml}
 				installCommand={home.installCommand}
-				logoHtml={home.logoHtml}
+				logoSplashScreenHtml={home.logoSplashScreenHtml}
 				splashLinks={home.splashLinks}
 			/>
 

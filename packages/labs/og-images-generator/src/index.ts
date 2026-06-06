@@ -12,6 +12,12 @@ export type { RenderOptions } from './render.js';
 export { styled } from './dummy-literals.js';
 
 export type { ServerRenderedTemplate as LitServerTemplate } from '@lit-labs/ssr';
-export type { TemplateOptions, Template } from './generate.js';
+export type {
+	GenerateOgImagesOptions,
+	TemplateOptions,
+	Template,
+	UserConfig,
+	UserConfigInput,
+} from './generate.js';
 
 export { html } from '@lit-labs/ssr';

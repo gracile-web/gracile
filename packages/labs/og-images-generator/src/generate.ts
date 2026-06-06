@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import c from 'picocolors';
 import type { ServerRenderedTemplate } from '@lit-labs/ssr';
@@ -28,16 +29,20 @@ export interface UserConfig {
 	template: Template;
 }
 
-export async function loadUserConfig(configPath?: string): Promise<UserConfig> {
-	// eslint-disable-next-line no-console
-	console.log(CONFIG_FILE_PATH);
-	const config: unknown = await import(configPath || CONFIG_FILE_PATH).catch(
-		(error: unknown) => {
-			// eslint-disable-next-line no-console
-			console.error(error);
-			throw new Error('Configuration not found.');
-		},
-	);
+export type UserConfigInput = UserConfig | Promise<UserConfig>;
+
+export interface GenerateOgImagesOptions extends PathsOptions {
+	configPath?: string;
+	config?: UserConfigInput;
+}
+
+export function resolveConfigPath(configPath = CONFIG_FILE_NAME): string {
+	return path.isAbsolute(configPath)
+		? configPath
+		: path.resolve(process.cwd(), configPath);
+}
+
+export function normalizeUserConfig(config: unknown): UserConfig {
 	if (typeof config !== 'object' || !config)
 		throw new Error('Configuration is invalid.');
 	if (!('template' in config))
@@ -52,8 +57,6 @@ export async function loadUserConfig(configPath?: string): Promise<UserConfig> {
 	if (!('satori' in config.renderOptions))
 		throw new Error('Satori options are mandatory.');
 
-	// We assume the user has their config. properly typed from there,
-	// further libs will throw in case of an invalid config.
 	const resvg = (
 		'resvg' in config.renderOptions ? config.renderOptions.resvg : {}
 	) as ResvgRenderOptions;
@@ -63,6 +66,29 @@ export async function loadUserConfig(configPath?: string): Promise<UserConfig> {
 		template: config.template as UserConfig['template'],
 		renderOptions: { satori, resvg },
 	};
+}
+
+export async function loadUserConfig(configPath?: string): Promise<UserConfig> {
+	const resolvedConfigPath = resolveConfigPath(configPath);
+	// eslint-disable-next-line no-console
+	console.log(resolvedConfigPath);
+	const config: unknown = await import(
+		pathToFileURL(resolvedConfigPath).href
+	).catch((error: unknown) => {
+		// eslint-disable-next-line no-console
+		console.error(error);
+		throw new Error('Configuration not found.');
+	});
+
+	return normalizeUserConfig(config);
+}
+
+export async function resolveUserConfig(
+	options?: Pick<GenerateOgImagesOptions, 'config' | 'configPath'>,
+): Promise<UserConfig> {
+	if (options?.config) return normalizeUserConfig(await options.config);
+
+	return loadUserConfig(options?.configPath);
 }
 
 export async function save(
@@ -89,7 +115,9 @@ export async function save(
 	console.log(c.bold(c.green(renderedImages.length + ' images generated.')));
 }
 
-export async function generateOgImages(options?: PathsOptions): Promise<void> {
+export async function generateOgImages(
+	options?: GenerateOgImagesOptions,
+): Promise<void> {
 	const optionsOrDefaults: CollectOptions = {
 		base: options?.base || './dist',
 		out: options?.out || './dist/og',
@@ -99,7 +127,7 @@ export async function generateOgImages(options?: PathsOptions): Promise<void> {
 	};
 
 	const pages = await collectHtmlPages(optionsOrDefaults);
-	const config = await loadUserConfig();
+	const config = await resolveUserConfig(options);
 	const renderedImages = await renderAllPagesOg(pages, config);
 
 	await save(renderedImages, optionsOrDefaults.out);

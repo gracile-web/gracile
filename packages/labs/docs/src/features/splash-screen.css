@@ -90,8 +90,13 @@
 
 	.bg-grid {
 		filter: blur(0.5px);
-		mix-blend-mode: overlay;
-		opacity: 0.32;
+
+		/* NOTE: Disabled for performance issues (eating GPU cycles) */
+
+		/* mix-blend-mode: overlay;
+		opacity: 0.32; */
+
+		opacity: 0.035;
 	}
 
 	.bg-noise {
@@ -190,11 +195,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 31vh;
+		height: var(--splash-screen-logo-height, 31vh);
 
 		svg {
-			width: 50vw;
-			max-width: 18rem;
+			width: var(--splash-screen-logo-width, 50vw);
+			max-width: var(--splash-screen-logo-max-width, 18rem);
 			fill: currentcolor;
 		}
 	}
@@ -203,7 +208,6 @@
 		margin-top: 5rem;
 		margin-bottom: 5rem;
 		font-family: monospace;
-		font-weight: 100;
 	}
 
 	.ctas {

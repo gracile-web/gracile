@@ -17,5 +17,6 @@ prefetcher.collectLinks();
 requestIdleCallback(() => {
 	void import('../lib/color-mode/color-mode.js');
 	void import('@shoelace-style/shoelace/dist/components/tooltip/tooltip.js');
+	// void import('@awesome.me/webawesome/dist/components/tooltip/tooltip.js');
 	void import('../features/search-popup.js');
 });

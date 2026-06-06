@@ -10,8 +10,9 @@ import { NavRight } from '../../features/nav-right.js';
 import { document } from '../../document/document.js';
 import { FooterMain } from '../../features/footer-main.js';
 import { LinksPagination } from '../../features/links-pagination.js';
+import type { FileTree } from '../../lib/content/file-tree-builder.js';
 
-const tree = {
+const tree: FileTree = {
 	docs: {
 		directory: {
 			blog: {

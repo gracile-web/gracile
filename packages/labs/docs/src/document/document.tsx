@@ -1,14 +1,13 @@
 'use html-server';
 
-import { fileURLToPath } from 'node:url';
-
 import '../lib/iconify-icon.js';
 import '../lib/unpic-element.js';
 import '../lib/copy-button.js';
 
 import { createMetadata, type Breadcrumbs } from '@gracile/metadata';
-
 import { docsConfig } from '@gracile-docs/content';
+
+import { navCurrentPageCritical } from '../lib/nav-current-page-critical.js';
 import { colorModeCritical } from '../lib/color-mode/color-mode-critical.js';
 import { keepScrollingPositionCritical } from '../lib/keep-scroll-position/ksp-critical.js';
 
@@ -21,9 +20,10 @@ import {
 
 // Absolute paths to document-level client assets, served via Vite's /@fs/ prefix
 // because document.tsx lives in the lib (outside the consumer Vite root).
-const _docDir = fileURLToPath(new URL('.', import.meta.url));
-const DOC_STYLES = `/@fs${_docDir}document.css`;
-const DOC_CLIENT = `/@fs${_docDir}document.client.js`;
+
+const _docDir = import.meta.dirname;
+const DOC_STYLES = `/@fs${_docDir}/document.css`;
+const DOC_CLIENT = `/@fs${_docDir}/document.client.js`;
 
 export const document = (options: {
 	url: URL;
@@ -56,6 +56,7 @@ export const document = (options: {
 				}`,
 				'layout-' + (options.layout || 'default'),
 				'sl-theme-dark',
+				// 'wa-theme-default',
 			]}
 		>
 			<head>
@@ -92,6 +93,7 @@ export const document = (options: {
 				<route-template-outlet></route-template-outlet>
 
 				{keepScrollingPositionCritical}
+				{navCurrentPageCritical}
 			</body>
 		</html>
 	);

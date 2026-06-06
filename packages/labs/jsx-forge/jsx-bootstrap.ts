@@ -1,4 +1,6 @@
 `
+type _CssCustomProperties = Record<keyof GlobalCss['properties'], string>;
+
 declare module 'jsx-forge/jsx-runtime' {
 	namespace JSX {
 		interface IntrinsicElements
@@ -6,6 +8,8 @@ declare module 'jsx-forge/jsx-runtime' {
 				CustomElementsAll,
 				JSX.BaseHTMLElement
 			> {}
+
+		interface CssCustomProperties extends _CssCustomProperties {}
 	}
 }
 `;

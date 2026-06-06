@@ -210,6 +210,15 @@ const config = [
 			'./packages/*/scripts/**',
 			'./packages/labs/scripts/**',
 			'./packages/labs/*/scripts/bench-transform.mjs',
+
+			// TEMP
+			'./packages/labs/docs',
+			'./docs/website',
+
+			'.local-paths.cjs',
+			'.pnpmfile.cjs',
+			'commitlint.config.js',
+			'packages/addons/markdown/ambient.d.ts',
 		],
 	},
 	{

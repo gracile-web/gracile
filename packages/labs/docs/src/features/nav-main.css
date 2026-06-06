@@ -67,8 +67,8 @@
 			overflow: hidden;
 
 			svg {
-				width: 6rem;
-				height: 3.3rem;
+				width: var(--nav-logo-width, 6rem);
+				height: var(--nav-logo-height, 3.3rem);
 				fill: currentcolor;
 			}
 		}

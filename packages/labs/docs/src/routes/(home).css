@@ -178,6 +178,11 @@
 			color-mix(in oklab, var(--sl-color-neutral-0), transparent 50%) 75vw,
 			var(--sl-color-neutral-0)
 		);
+
+		& > pre {
+			margin-top: 5rem;
+			margin-bottom: 5rem;
+		}
 	}
 
 	.works-with {
@@ -194,7 +199,7 @@
 			all: unset;
 			display: flex;
 			flex-wrap: wrap;
-			gap: 8vw;
+			gap: 4dvh 8dvw;
 			justify-content: space-evenly;
 
 			li {

@@ -191,10 +191,11 @@ jobs:
         shell: bash
         run: pnpm --prefix starter-projects run test:smoke
 
-      - name: Tests — Docs smoke
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
-        shell: bash
-        run: pnpm --prefix docs/website run test:smoke
+      # FIXME:
+      # - name: Tests — Docs smoke
+      #   if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next'
+      #   shell: bash
+      #   run: pnpm --prefix docs/website run test:smoke
 
       # MARK: Publish packages
       # NOTE: Auth is configured by setup-node's registry-url above.

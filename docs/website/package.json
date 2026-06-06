@@ -22,7 +22,7 @@
     "@gracile/gracile": "workspace:^",
     "arktype": "2.0.0-rc.23",
     "emoji-strip": "^1.0.1",
-    "lit": "^3.3.3",
+    "lit": "catalog:",
     "og-images-generator": "workspace:^",
     "pagefind": "^1.1.1"
   },

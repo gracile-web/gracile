@@ -11,8 +11,19 @@
     "jsx": "react-native",
     "jsxImportSource": "jsx-forge",
     "plugins": [
+      // {
+      //   "name": "web-elements-analyzer"
+      // },
+      // {
+      //   "transform": "web-elements-analyzer/transformer",
+      //   "transformProgram": true
+      // },
       {
         "transform": "jsx-forge/transform"
+      },
+      {
+        "transform": "@lit/ts-transformers",
+        "import": "idiomaticDecoratorsTransformer"
       }
     ],
 

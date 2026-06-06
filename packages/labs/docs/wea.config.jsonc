@@ -1,0 +1,9 @@
+{
+	"$schema": "./node_modules/web-elements-analyzer/schemas/config.schema.json",
+
+	"persist": {
+		"typings": true,
+		"namespaceTypings": true,
+		"globalMaps": true,
+	},
+}
