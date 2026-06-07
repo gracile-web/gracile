@@ -2,3 +2,5 @@ node_modules
 dist
 .gracile
 *.log
+.imagekit-assets
+.env*

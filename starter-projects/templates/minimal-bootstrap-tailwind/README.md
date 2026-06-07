@@ -23,11 +23,11 @@ npm create gracile@latest -t minimal-bootstrap-tailwind
 ## 🏗️ Project Structure
 
 ```text
-├─ ⬛️ README.md
 ├─ 🟠 package.json
 ├─ 🟨 postcss.config.js
 ├─ 📂 public/
 │   └─ 🔶 favicon.svg
+├─ ⬛️ README.md
 ├─ 📂 src/
 │   ├─ 🟦 ambient.d.ts
 │   ├─ 📂 content/

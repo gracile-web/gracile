@@ -2,6 +2,7 @@
   "name": "@gracile/template--minimal-minification",
   "version": "0.0.2",
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "vite build",
     "build:static": "DEMO_MODE=static vite build",

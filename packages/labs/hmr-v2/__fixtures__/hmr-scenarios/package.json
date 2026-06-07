@@ -1,5 +1,6 @@
 {
   "name": "@gracile/fixture-hmr-scenarios",
+  "private": true,
   "type": "module",
   "dependencies": {
     "@gracile/gracile": "workspace:^",

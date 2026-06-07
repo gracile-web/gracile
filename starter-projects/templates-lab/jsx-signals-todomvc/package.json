@@ -2,6 +2,7 @@
   "name": "@gracile/template--minimal-todomvc",
   "version": "0.0.4",
   "type": "module",
+  "private": true,
   "imports": {
     "#jsx-lit": "./src/lib/inject.ts"
   },

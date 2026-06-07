@@ -23,10 +23,10 @@ npm create gracile@latest -t minimal-server-express
 ## 🏗️ Project Structure
 
 ```text
-├─ ⬛️ README.md
 ├─ 🟠 package.json
 ├─ 📂 public/
 │   └─ 🔶 favicon.svg
+├─ ⬛️ README.md
 ├─ 🟨 server.js
 ├─ 📂 src/
 │   ├─ 🟦 ambient.d.ts

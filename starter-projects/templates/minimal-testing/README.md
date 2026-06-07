@@ -44,7 +44,6 @@ test:all
 ## 🏗️ Project Structure
 
 ```text
-├─ ⬛️ README.md
 ├─ 🟠 package.json
 ├─ 📂 playwright/
 │   ├─ undefined index.html
@@ -53,6 +52,7 @@ test:all
 ├─ 🟦 playwright.config.ts
 ├─ 📂 public/
 │   └─ 🔶 favicon.svg
+├─ ⬛️ README.md
 ├─ 🟨 server.js
 ├─ 📂 src/
 │   ├─ 🟦 ambient.d.ts

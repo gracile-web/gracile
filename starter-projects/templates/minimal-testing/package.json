@@ -2,6 +2,7 @@
   "name": "@gracile/template--minimal-testing",
   "version": "0.0.2",
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "vite build",
     "check": "tsc",

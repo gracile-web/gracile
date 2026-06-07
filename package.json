@@ -56,14 +56,15 @@
     "change": "changeset",
     "changeset:status": "changeset status --since=origin/main",
     "version:packages": "changeset version",
-    "release": "changeset publish",
-    "release:snapshot": "changeset version --snapshot canary && changeset publish --tag canary --no-git-tag"
+    "// release": "changeset publish",
+    "// release:snapshot": "changeset version --snapshot canary && changeset publish --tag canary --no-git-tag",
+    "release:ci": "tsx scripts/release.ts"
   },
   "resolutions": {
     "braces": "3.0.3"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/changelog-github": "1.0.0-next.4",
     "@changesets/cli": "^2.31.0",
     "@commitlint/cli": "^21.0.1",
     "@commitlint/types": "^21.0.1",

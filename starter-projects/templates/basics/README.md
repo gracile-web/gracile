@@ -32,10 +32,10 @@ Features:
 ## 🏗️ Project Structure
 
 ```text
-├─ ⬛️ README.md
 ├─ 🟠 package.json
 ├─ 📂 public/
 │   └─ 🔶 favicon.svg
+├─ ⬛️ README.md
 ├─ 🟨 server.js
 ├─ 📂 src/
 │   ├─ 🟦 ambient.d.ts
