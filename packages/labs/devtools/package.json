@@ -1,6 +1,7 @@
 {
   "name": "@gracile-labs/devtools",
   "version": "0.0.0",
+  "private": true,
   "description": "In-browser DevTools panel for Gracile — inspect routes, components, and framework state",
   "keywords": [
     "custom-elements",
@@ -55,7 +56,6 @@
     }
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   }
 }

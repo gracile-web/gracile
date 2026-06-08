@@ -47,7 +47,6 @@
     "typescript": "catalog:"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   }
 }

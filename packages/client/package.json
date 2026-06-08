@@ -58,8 +58,7 @@
     }
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "// disabledDeps": {
     "@webcomponents/template-shadowroot": "0.x",

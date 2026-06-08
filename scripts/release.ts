@@ -34,7 +34,14 @@ CLI flags (all optional):
 ------------------------------------------------------------------------------*/
 
 import { spawnSync, type SpawnSyncReturns } from 'node:child_process';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import {
+	existsSync,
+	mkdtempSync,
+	readdirSync,
+	readFileSync,
+	rmSync,
+} from 'node:fs';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import { parseArgs } from 'node:util';
@@ -93,6 +100,7 @@ if (phase === 'all' || phase === 'publish') {
 
 function prepareRelease(): void {
 	configureGitUser();
+	validateNoUnplannedUnpublishedPublicPackages();
 
 	if (isNext) {
 		enterPreModeIfNeeded();
@@ -189,6 +197,15 @@ interface PnpmListPackage {
 	path?: string;
 }
 
+interface ChangesetStatus {
+	releases?: ChangesetRelease[];
+}
+
+interface ChangesetRelease {
+	name?: string;
+	type?: string;
+}
+
 function validateStableRelease(): void {
 	const preJson = path.join(cwd, '.changeset', 'pre.json');
 	if (existsSync(preJson)) {
@@ -275,6 +292,73 @@ function hasPendingChangesets(): boolean {
 	return readdirSync(changesetDir).some(
 		(file: string) => file.endsWith('.md') && file !== 'README.md',
 	);
+}
+
+function validateNoUnplannedUnpublishedPublicPackages(): void {
+	const plannedReleasePackages = changesetReleasePackageNames();
+	const unplannedUnpublishedPackages = readPackageJsonFiles()
+		.filter(({ packageJson }) => packageJson.private !== true)
+		.filter(
+			({ packageJson }) =>
+				typeof packageJson.name === 'string' &&
+				typeof packageJson.version === 'string',
+		)
+		.filter(({ packageJson }) => !plannedReleasePackages.has(packageJson.name!))
+		.filter(
+			({ packageJson }) =>
+				!npmPackageVersionExists(packageJson.name!, packageJson.version!),
+		);
+
+	if (unplannedUnpublishedPackages.length === 0) {
+		return;
+	}
+
+	for (const { file, packageJson } of unplannedUnpublishedPackages) {
+		error(
+			`${packageJson.name}@${packageJson.version} is public and missing from npm, but is not in the current Changesets release plan (${file}).`,
+		);
+	}
+
+	fail(
+		'Changesets would try to publish unplanned public packages. Add changesets for them, bootstrap/publish them intentionally, or mark them private.',
+	);
+}
+
+function changesetReleasePackageNames(): Set<string> {
+	const tempDir = mkdtempSync(path.join(tmpdir(), 'changeset-status-'));
+	const outputFile = path.join(tempDir, 'status.json');
+
+	try {
+		run('pnpm', ['changeset', 'status', '--output', outputFile], {
+			stdio: 'pipe',
+		});
+
+		const status = JSON.parse(
+			readFileSync(outputFile, 'utf8'),
+		) as ChangesetStatus;
+
+		return new Set(
+			(status.releases ?? [])
+				.filter((release) => release.type !== 'none')
+				.map((release) => release.name)
+				.filter((name): name is string => typeof name === 'string'),
+		);
+	} finally {
+		rmSync(tempDir, { recursive: true, force: true });
+	}
+}
+
+function npmPackageVersionExists(name: string, version: string): boolean {
+	const result = run(
+		'npm',
+		['view', `${name}@${version}`, 'version', '--json'],
+		{
+			check: false,
+			stdio: 'pipe',
+		},
+	);
+
+	return result.status === 0;
 }
 
 function createGitHubReleases(): void {
