@@ -60,8 +60,5 @@
     "@lit-labs/ssr": "catalog:",
     "lit": "catalog:"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "// name": "@gracile/server"
 }

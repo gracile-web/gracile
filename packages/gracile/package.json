@@ -66,9 +66,6 @@
     "tsx": "catalog:",
     "typescript": "catalog:"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "// @gracile/add": "workspace:^",
   "// bin": {
     "gracile": "./dist/bin/gracile.js",

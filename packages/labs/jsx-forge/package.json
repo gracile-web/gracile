@@ -58,9 +58,6 @@
       "optional": true
     }
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "webElements": {
     "format": "jsx",
     "jsxBootstrapPath": "./jsx-bootstrap.ts",

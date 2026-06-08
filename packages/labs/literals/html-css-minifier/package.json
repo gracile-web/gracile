@@ -51,8 +51,5 @@
     "@types/node": "catalog:",
     "c8": "catalog:",
     "typescript": "catalog:"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

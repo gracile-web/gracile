@@ -47,8 +47,5 @@
     "@types/node": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

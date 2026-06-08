@@ -68,8 +68,5 @@
     "vite": {
       "optional": true
     }
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

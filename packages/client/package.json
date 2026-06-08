@@ -57,9 +57,6 @@
       "optional": true
     }
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "// disabledDeps": {
     "@webcomponents/template-shadowroot": "0.x",
     "typedoc": "^0.25.8"

@@ -57,8 +57,5 @@
     "@types/node": "catalog:",
     "typescript": "catalog:"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "// @gracile/add": "workspace:^"
 }

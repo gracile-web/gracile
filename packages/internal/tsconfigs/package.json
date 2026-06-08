@@ -10,8 +10,5 @@
   "files": [],
   "devDependencies": {
     "typescript": "catalog:"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

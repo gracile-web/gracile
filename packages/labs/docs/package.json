@@ -154,9 +154,6 @@
     "@gracile/gracile": "workspace:^",
     "vite": "^7.0.0 || ^8.0.0"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "engines": {
     "node": ">=20"
   }

@@ -74,8 +74,5 @@
     "@lit-labs/ssr-client": "catalog:",
     "lit": "catalog:",
     "vite": "^7.0.0 || ^8.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
