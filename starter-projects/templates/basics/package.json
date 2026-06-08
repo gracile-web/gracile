@@ -1,8 +1,8 @@
 {
   "name": "@gracile/template--basics",
   "version": "0.0.3",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "check": "tsc",

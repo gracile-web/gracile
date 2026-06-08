@@ -1,8 +1,8 @@
 {
   "name": "@gracile/template--minimal-island",
   "version": "0.0.1",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "check": "tsc",

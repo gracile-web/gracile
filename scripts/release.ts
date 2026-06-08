@@ -329,9 +329,28 @@ function changesetReleasePackageNames(): Set<string> {
 	const outputFile = path.join(tempDir, 'status.json');
 
 	try {
-		run('pnpm', ['changeset', 'status', '--output', outputFile], {
-			stdio: 'pipe',
-		});
+		const result = run(
+			'pnpm',
+			[
+				'changeset',
+				'status',
+				'--since',
+				`origin/${stableBranch}`,
+				'--output',
+				outputFile,
+			],
+			{
+				check: false,
+				stdio: 'pipe',
+			},
+		);
+
+		if (result.status !== 0) {
+			printCapturedOutput(result);
+			fail(
+				'Could not compute the Changesets release plan. See Changesets output above.',
+			);
+		}
 
 		const status = JSON.parse(
 			readFileSync(outputFile, 'utf8'),
@@ -572,7 +591,6 @@ function publishEnv(): NodeJS.ProcessEnv {
 		...githubEnv(),
 		GH_TOKEN: process.env.GH_TOKEN || process.env.GITHUB_TOKEN || '',
 		NODE_AUTH_TOKEN: process.env.NODE_AUTH_TOKEN || process.env.NPM_TOKEN || '',
-		NPM_CONFIG_PROVENANCE: process.env.NPM_CONFIG_PROVENANCE || 'true',
 	};
 }
 
@@ -618,10 +636,25 @@ function run(
 	}
 
 	if (result.status !== 0) {
+		if (options.stdio === 'pipe') {
+			printCapturedOutput(result);
+		}
 		throw new Error(`${printable} exited with status ${result.status}`);
 	}
 
 	return result;
+}
+
+function printCapturedOutput(result: SpawnSyncReturns<string>): void {
+	const stdout = result.stdout?.trim();
+	if (stdout) {
+		console.error(stdout);
+	}
+
+	const stderr = result.stderr?.trim();
+	if (stderr) {
+		console.error(stderr);
+	}
 }
 
 function isMutatingCommand(command: string, commandArgs: string[]): boolean {
