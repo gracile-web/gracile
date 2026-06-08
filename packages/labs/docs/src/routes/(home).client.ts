@@ -6,8 +6,7 @@ const themedIconSelector = 'img[data-icon-dark-url], img[data-icon-light-url]';
 function syncThemedIcons() {
 	const colorMode =
 		root.getAttribute('data-color-mode') === 'light' ? 'light' : 'dark';
-	const modeDataKey =
-		colorMode === 'light' ? 'iconLightUrl' : 'iconDarkUrl';
+	const modeDataKey = colorMode === 'light' ? 'iconLightUrl' : 'iconDarkUrl';
 
 	for (const image of document.querySelectorAll<HTMLImageElement>(
 		themedIconSelector,
