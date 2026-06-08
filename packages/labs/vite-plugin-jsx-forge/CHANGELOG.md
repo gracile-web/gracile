@@ -1,13 +1,22 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 1.0.0-next.2
+
+### Patch Changes
+
+- Updated dependencies
+  [[`f687199`](https://github.com/gracile-web/gracile/commit/f6871990e9a4f94305ff27e343fd41d1a3fbe2c6)]:
+  - jsx-forge@0.5.0-next.2
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.4.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.4.1-next.0...@gracile-labs/vite-plugin-jsx-forge@0.4.1-next.1) (2026-05-16)
 
 ### Bug Fixes
 
-* re export return types (annotation issues), revert jsx-forge getText hacks ([efa3288](https://github.com/gracile-web/gracile/commit/efa32881d9c8a38c2aada9bdfebc7537e2170a01))
+- re export return types (annotation issues), revert jsx-forge getText hacks
+  ([efa3288](https://github.com/gracile-web/gracile/commit/efa32881d9c8a38c2aada9bdfebc7537e2170a01))
 
 ## [0.4.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.4.0...@gracile-labs/vite-plugin-jsx-forge@0.4.1-next.0) (2026-05-12)
 
@@ -25,17 +34,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* forward options to transformer ([b594377](https://github.com/gracile-web/gracile/commit/b594377b4aa687469d027252344befcb89ed00c9))
+- forward options to transformer
+  ([b594377](https://github.com/gracile-web/gracile/commit/b594377b4aa687469d027252344befcb89ed00c9))
 
 ## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.3.0...@gracile-labs/vite-plugin-jsx-forge@0.4.0-next.0) (2026-04-12)
 
 ### Features
 
-* rehaul ts pipeline with a much quicker ts ls + skippable type awareness ([8b6d573](https://github.com/gracile-web/gracile/commit/8b6d5732c24426d117c933ebe1336dc333b2817c))
+- rehaul ts pipeline with a much quicker ts ls + skippable type awareness
+  ([8b6d573](https://github.com/gracile-web/gracile/commit/8b6d5732c24426d117c933ebe1336dc333b2817c))
 
 ### Bug Fixes
 
-* lint issues ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
+- lint issues
+  ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
 
 ## [0.3.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.3.0-next.1...@gracile-labs/vite-plugin-jsx-forge@0.3.0) (2026-04-04)
 
@@ -45,17 +57,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* handle tsx <-> ts rename scenarios + type accuracy & stress tests ([95daec7](https://github.com/gracile-web/gracile/commit/95daec72bda06b80d4926fc295739ec5ca627b9a))
+- handle tsx <-> ts rename scenarios + type accuracy & stress tests
+  ([95daec7](https://github.com/gracile-web/gracile/commit/95daec72bda06b80d4926fc295739ec5ca627b9a))
 
 ## [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.2.1...@gracile-labs/vite-plugin-jsx-forge@0.3.0-next.0) (2026-04-04)
 
 ### Features
 
-* rehaul jsx handling in vite, no rollup ts plugin + ts patch anymore ([eda2dd2](https://github.com/gracile-web/gracile/commit/eda2dd2a8bd7adad48a589a6c5d5410ebf446457))
+- rehaul jsx handling in vite, no rollup ts plugin + ts patch anymore
+  ([eda2dd2](https://github.com/gracile-web/gracile/commit/eda2dd2a8bd7adad48a589a6c5d5410ebf446457))
 
 ### Bug Fixes
 
-* tslib peerdep for decorator support, oxc/esbuild bifurcation ([e2ebe8b](https://github.com/gracile-web/gracile/commit/e2ebe8bd9cc10819fbe9cd6605ac136fb1678417))
+- tslib peerdep for decorator support, oxc/esbuild bifurcation
+  ([e2ebe8b](https://github.com/gracile-web/gracile/commit/e2ebe8bd9cc10819fbe9cd6605ac136fb1678417))
 
 ## [0.2.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.2.1-next.1...@gracile-labs/vite-plugin-jsx-forge@0.2.1) (2026-03-23)
 
@@ -77,7 +92,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* prepare vite 8 migration - pre minor bug fixes ([a9bb25f](https://github.com/gracile-web/gracile/commit/a9bb25fb55dd9fe11fff874acf9d10e64d99617a))
+- prepare vite 8 migration - pre minor bug fixes
+  ([a9bb25f](https://github.com/gracile-web/gracile/commit/a9bb25fb55dd9fe11fff874acf9d10e64d99617a))
 
 ## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.1.1-next.0...@gracile-labs/vite-plugin-jsx-forge@0.1.1) (2026-03-22)
 
@@ -99,7 +115,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* group jsx packages, minor fixes ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
+- group jsx packages, minor fixes
+  ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
 
 # [0.1.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile-labs/vite-plugin-jsx-forge@0.1.0-next.1...@gracile-labs/vite-plugin-jsx-forge@0.1.0-next.2) (2026-03-21)
 
@@ -113,12 +130,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* full rollupTypescript options and address leaking rollup tsc watcher ([c6e7203](https://github.com/gracile-web/gracile/commit/c6e7203b135436b8e210907bb402fc3a75c3e8f7))
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
-* ts compiler "real" path, add peer dep ([7106004](https://github.com/gracile-web/gracile/commit/71060045ad22a313bad4077adfa3e530cbdc52fc))
-* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+- full rollupTypescript options and address leaking rollup tsc watcher
+  ([c6e7203](https://github.com/gracile-web/gracile/commit/c6e7203b135436b8e210907bb402fc3a75c3e8f7))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- ts compiler "real" path, add peer dep
+  ([7106004](https://github.com/gracile-web/gracile/commit/71060045ad22a313bad4077adfa3e530cbdc52fc))
+- ventilate all integration tests in each package
+  ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
 
 ### Features
 
-* incorporate external gracile packages ([d97e488](https://github.com/gracile-web/gracile/commit/d97e488bf5c75d7aefbd0c8956212142e80719a1))
-* more readmes (new packages) ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
+- incorporate external gracile packages
+  ([d97e488](https://github.com/gracile-web/gracile/commit/d97e488bf5c75d7aefbd0c8956212142e80719a1))
+- more readmes (new packages)
+  ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
