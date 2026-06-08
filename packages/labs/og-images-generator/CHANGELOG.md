@@ -1,7 +1,16 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.6.3-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.6.3-next.1](https://github.com/gracile-web/gracile/compare/og-images-generator@0.6.3-next.0...og-images-generator@0.6.3-next.1) (2026-05-16)
 
@@ -19,8 +28,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* lint issues ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
-* unused ts expect error ([2590475](https://github.com/gracile-web/gracile/commit/25904758a0da5eddbe239c657094d0b3dbb6baef))
+- lint issues
+  ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
+- unused ts expect error
+  ([2590475](https://github.com/gracile-web/gracile/commit/25904758a0da5eddbe239c657094d0b3dbb6baef))
 
 ## [0.6.1](https://github.com/gracile-web/gracile/compare/og-images-generator@0.6.1-next.0...og-images-generator@0.6.1) (2026-04-04)
 
@@ -38,7 +49,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* migrate to typescript 6 + monorepo wide shared settings for new packages ([40c1743](https://github.com/gracile-web/gracile/commit/40c1743287fb68cb13de50ac8131b347fe6b6ba1))
+- migrate to typescript 6 + monorepo wide shared settings for new packages
+  ([40c1743](https://github.com/gracile-web/gracile/commit/40c1743287fb68cb13de50ac8131b347fe6b6ba1))
 
 ## [0.5.1-next.0](https://github.com/gracile-web/gracile/compare/og-images-generator@0.5.0...og-images-generator@0.5.1-next.0) (2026-03-22)
 
@@ -52,8 +64,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* make vite a peerdep, align all to 7/8 ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
-* prepare vite 8 migration - pre minor bug fixes ([a9bb25f](https://github.com/gracile-web/gracile/commit/a9bb25fb55dd9fe11fff874acf9d10e64d99617a))
+- make vite a peerdep, align all to 7/8
+  ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
+- prepare vite 8 migration - pre minor bug fixes
+  ([a9bb25f](https://github.com/gracile-web/gracile/commit/a9bb25fb55dd9fe11fff874acf9d10e64d99617a))
 
 ## [0.4.1](https://github.com/gracile-web/gracile/compare/og-images-generator@0.4.1-next.0...og-images-generator@0.4.1) (2026-03-22)
 
@@ -71,7 +85,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* group jsx packages, minor fixes ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
+- group jsx packages, minor fixes
+  ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
 
 # [0.4.0-next.1](https://github.com/gracile-web/gracile/compare/og-images-generator@0.4.0-next.0...og-images-generator@0.4.0-next.1) (2026-03-21)
 
@@ -81,12 +96,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* lint/format with monorepo rules ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
-* prevent multiple generation after closing bundle in build (3x to 1x) using a build only guard ([fadd371](https://github.com/gracile-web/gracile/commit/fadd371346de12a55f490e6b0f46d7ac9e471db2))
-* prevent plugin duplication, convert to typescript, enable tests ([dd85864](https://github.com/gracile-web/gracile/commit/dd85864e351854284013b3a797a9aedc0278fc2e))
-* types and lint ([4815c11](https://github.com/gracile-web/gracile/commit/4815c1153a4d8120d376be8e7d14828265a5e479))
+- lint/format with monorepo rules
+  ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- prevent multiple generation after closing bundle in build (3x to 1x) using a
+  build only guard
+  ([fadd371](https://github.com/gracile-web/gracile/commit/fadd371346de12a55f490e6b0f46d7ac9e471db2))
+- prevent plugin duplication, convert to typescript, enable tests
+  ([dd85864](https://github.com/gracile-web/gracile/commit/dd85864e351854284013b3a797a9aedc0278fc2e))
+- types and lint
+  ([4815c11](https://github.com/gracile-web/gracile/commit/4815c1153a4d8120d376be8e7d14828265a5e479))
 
 ### Features
 
-* more readmes (new packages) ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
+- more readmes (new packages)
+  ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))

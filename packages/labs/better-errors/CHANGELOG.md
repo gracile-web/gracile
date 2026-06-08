@@ -1,7 +1,20 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.5.2-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+- Updated dependencies
+  [[`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd)]:
+  - @gracile/internal-utils@0.8.1-next.2
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.5.2-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.5.2-next.0...@gracile-labs/better-errors@0.5.2-next.1) (2026-05-16)
 
@@ -19,7 +32,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* align vite plugin entry ([afb640b](https://github.com/gracile-web/gracile/commit/afb640b38e49a866eb11730defd26e8c92eb692b))
+- align vite plugin entry
+  ([afb640b](https://github.com/gracile-web/gracile/commit/afb640b38e49a866eb11730defd26e8c92eb692b))
 
 ## [0.5.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.5.0-next.0...@gracile-labs/better-errors@0.5.0) (2026-04-04)
 
@@ -29,11 +43,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* rehaul vite dev error overlay (revert to astro's approach) ([27b368d](https://github.com/gracile-web/gracile/commit/27b368d0cf1a444253a1b6958c668e75658b31cf))
+- rehaul vite dev error overlay (revert to astro's approach)
+  ([27b368d](https://github.com/gracile-web/gracile/commit/27b368d0cf1a444253a1b6958c668e75658b31cf))
 
 ### Bug Fixes
 
-* lint, types… ([43c9f78](https://github.com/gracile-web/gracile/commit/43c9f78c41d9cf1677cbb74c49d0a16f983d8b5b))
+- lint, types…
+  ([43c9f78](https://github.com/gracile-web/gracile/commit/43c9f78c41d9cf1677cbb74c49d0a16f983d8b5b))
 
 ## [0.4.3](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.4.2...@gracile-labs/better-errors@0.4.3) (2026-03-29)
 
@@ -75,8 +91,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* make vite a peerdep, align all to 7/8 ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
-* prepare vite 8 migration - pre minor bug fixes ([a9bb25f](https://github.com/gracile-web/gracile/commit/a9bb25fb55dd9fe11fff874acf9d10e64d99617a))
+- make vite a peerdep, align all to 7/8
+  ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
+- prepare vite 8 migration - pre minor bug fixes
+  ([a9bb25f](https://github.com/gracile-web/gracile/commit/a9bb25fb55dd9fe11fff874acf9d10e64d99617a))
 
 ## [0.3.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.3.1-next.0...@gracile-labs/better-errors@0.3.1) (2026-03-22)
 
@@ -102,17 +120,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* dynamic tag support for html minifier ([313cc5f](https://github.com/gracile-web/gracile/commit/313cc5f00e4ea8a2d18d8db9a0079ad031c9524e))
+- dynamic tag support for html minifier
+  ([313cc5f](https://github.com/gracile-web/gracile/commit/313cc5f00e4ea8a2d18d8db9a0079ad031c9524e))
 
 # [0.3.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.2.1-next.0...@gracile-labs/better-errors@0.3.0-next.0) (2026-03-15)
 
 ### Bug Fixes
 
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
 
 ### Features
 
-* readmes from package collection, format content ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))
+- readmes from package collection, format content
+  ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))
 
 ## [0.2.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.2.0-next.4...@gracile-labs/better-errors@0.2.1-next.0) (2026-03-07)
 
@@ -134,7 +155,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* update all deps + gh actions, fix npm token, use catalog protocol, fix build & tests ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
+- update all deps + gh actions, fix npm token, use catalog protocol, fix build &
+  tests
+  ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
 
 # [0.2.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.2.0-next.0...@gracile-labs/better-errors@0.2.0-next.1) (2026-03-01)
 
@@ -144,7 +167,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* rehaul old flaky tests harness, update to Vite (7) + node 25 types ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
+- rehaul old flaky tests harness, update to Vite (7) + node 25 types
+  ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
 
 ## [0.1.3](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.1.3-next.0...@gracile-labs/better-errors@0.1.3) (2025-04-07)
 
@@ -162,7 +186,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* update to vite 5 to 6.x, nanoid vulnerability ([bd16c45](https://github.com/gracile-web/gracile/commit/bd16c45c66d09ec491cda84a09d161747ab89e57))
+- update to vite 5 to 6.x, nanoid vulnerability
+  ([bd16c45](https://github.com/gracile-web/gracile/commit/bd16c45c66d09ec491cda84a09d161747ab89e57))
 
 ## [0.1.2-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.1.2-next.0...@gracile-labs/better-errors@0.1.2-next.1) (2024-11-03)
 
@@ -180,7 +205,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* disable better errors for now (causes hydration issues) ([ff241fa](https://github.com/gracile-web/gracile/commit/ff241faada5ccd5343ee97c4ba776ba49ace8496))
+- disable better errors for now (causes hydration issues)
+  ([ff241fa](https://github.com/gracile-web/gracile/commit/ff241faada5ccd5343ee97c4ba776ba49ace8496))
 
 # [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/better-errors@0.1.0-next.0...@gracile-labs/better-errors@0.1.0) (2024-08-25)
 
@@ -190,4 +216,5 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* introduce "better errors" package ([09ac5dd](https://github.com/gracile-web/gracile/commit/09ac5dd2d011a84716b2a53a4df996360cad6dee))
+- introduce "better errors" package
+  ([09ac5dd](https://github.com/gracile-web/gracile/commit/09ac5dd2d011a84716b2a53a4df996360cad6dee))

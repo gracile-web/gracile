@@ -1,7 +1,20 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.2.4-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+- Updated dependencies
+  [[`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd)]:
+  - @gracile/internal-utils@0.8.1-next.2
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.2.4-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.2.4-next.0...@gracile-labs/islands@0.2.4-next.1) (2026-05-16)
 
@@ -11,7 +24,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* force lerna orphaned package ([929e5a2](https://github.com/gracile-web/gracile/commit/929e5a2783558c2d21281c258088ebaf29523eed))
+- force lerna orphaned package
+  ([929e5a2](https://github.com/gracile-web/gracile/commit/929e5a2783558c2d21281c258088ebaf29523eed))
 
 ## [0.2.2](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.2.2-next.1...@gracile-labs/islands@0.2.2) (2026-05-09)
 
@@ -21,13 +35,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* hydration (react/solid), add browser tests ([931fa82](https://github.com/gracile-web/gracile/commit/931fa828c943c1efe07ebf90384974223ff88416))
+- hydration (react/solid), add browser tests
+  ([931fa82](https://github.com/gracile-web/gracile/commit/931fa828c943c1efe07ebf90384974223ff88416))
 
 ## [0.2.3-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.2.2...@gracile-labs/islands@0.2.3-next.0) (2026-04-12)
 
 ### Bug Fixes
 
-* lint issues ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
+- lint issues
+  ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
 
 ## [0.2.2](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.2.2-next.0...@gracile-labs/islands@0.2.2) (2026-04-04)
 
@@ -57,7 +73,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* make vite a peerdep, align all to 7/8 ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
+- make vite a peerdep, align all to 7/8
+  ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
 
 ## [0.1.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.1.1-next.0...@gracile-labs/islands@0.1.1) (2026-03-22)
 
@@ -79,7 +96,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* group jsx packages, minor fixes ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
+- group jsx packages, minor fixes
+  ([1718a61](https://github.com/gracile-web/gracile/commit/1718a61c32b05bf5151b92a9ecc72763b0d4ea04))
 
 # [0.1.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile-labs/islands@0.1.0-next.1...@gracile-labs/islands@0.1.0-next.2) (2026-03-21)
 
@@ -89,23 +107,33 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* cve - h3, use main lodash-es + publish og generator, clean deps ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
+- cve - h3, use main lodash-es + publish og generator, clean deps
+  ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
 
 ### Features
 
-* migrate ssrLoadModule to ModuleRunner ([4c7040a](https://github.com/gracile-web/gracile/commit/4c7040a55c7f2b09e6df5ca3d187ab519d5cc338))
+- migrate ssrLoadModule to ModuleRunner
+  ([4c7040a](https://github.com/gracile-web/gracile/commit/4c7040a55c7f2b09e6df5ca3d187ab519d5cc338))
 
 # 0.1.0-next.0 (2026-03-18)
 
 ### Bug Fixes
 
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
-* types ([12bdf74](https://github.com/gracile-web/gracile/commit/12bdf74d23e9981590ec1bd19bcf47d0f8053430))
-* types and lint ([4815c11](https://github.com/gracile-web/gracile/commit/4815c1153a4d8120d376be8e7d14828265a5e479))
-* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- types
+  ([12bdf74](https://github.com/gracile-web/gracile/commit/12bdf74d23e9981590ec1bd19bcf47d0f8053430))
+- types and lint
+  ([4815c11](https://github.com/gracile-web/gracile/commit/4815c1153a4d8120d376be8e7d14828265a5e479))
+- ventilate all integration tests in each package
+  ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
 
 ### Features
 
-* implement islands add-on, extensible lit ssr element renderer, gracile plugins context ([e495b00](https://github.com/gracile-web/gracile/commit/e495b003d03335bcc43f96ea8fefaa4c68f5503b))
-* more readmes (new packages) ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
-* readmes from package collection, format content ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))
+- implement islands add-on, extensible lit ssr element renderer, gracile plugins
+  context
+  ([e495b00](https://github.com/gracile-web/gracile/commit/e495b003d03335bcc43f96ea8fefaa4c68f5503b))
+- more readmes (new packages)
+  ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
+- readmes from package collection, format content
+  ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))

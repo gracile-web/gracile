@@ -1,7 +1,16 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.8.1-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.8.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.8.1-next.0...@gracile/internal-utils@0.8.1-next.1) (2026-05-16)
 
@@ -19,7 +28,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* element renderer plugin augmentation ([99c14c5](https://github.com/gracile-web/gracile/commit/99c14c5cd0dcb39afeb2204c1914bfa124ba764d))
+- element renderer plugin augmentation
+  ([99c14c5](https://github.com/gracile-web/gracile/commit/99c14c5cd0dcb39afeb2204c1914bfa124ba764d))
 
 ## [0.7.2](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.7.2-next.0...@gracile/internal-utils@0.7.2) (2026-04-04)
 
@@ -49,7 +59,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* make vite a peerdep, align all to 7/8 ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
+- make vite a peerdep, align all to 7/8
+  ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
 
 ## [0.6.2](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.2-next.0...@gracile/internal-utils@0.6.2) (2026-03-22)
 
@@ -67,14 +78,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* use global symbol to survive realms mismatches (hack) ([970da67](https://github.com/gracile-web/gracile/commit/970da67b6ce0e6a45db4e813d4e37e3e782574b5))
+- use global symbol to survive realms mismatches (hack)
+  ([970da67](https://github.com/gracile-web/gracile/commit/970da67b6ce0e6a45db4e813d4e37e3e782574b5))
 
 ## [0.6.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.1-next.0...@gracile/internal-utils@0.6.1-next.1) (2026-03-15)
 
 ### Bug Fixes
 
-* lint/format with monorepo rules (docs) ([63757c1](https://github.com/gracile-web/gracile/commit/63757c16e0a38c144954d82106862edf76b38580))
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- lint/format with monorepo rules (docs)
+  ([63757c1](https://github.com/gracile-web/gracile/commit/63757c16e0a38c144954d82106862edf76b38580))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
 
 ## [0.6.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.0-next.3...@gracile/internal-utils@0.6.1-next.0) (2026-03-07)
 
@@ -88,25 +102,31 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* implement islands add-on, extensible lit ssr element renderer, gracile plugins context ([e495b00](https://github.com/gracile-web/gracile/commit/e495b003d03335bcc43f96ea8fefaa4c68f5503b))
+- implement islands add-on, extensible lit ssr element renderer, gracile plugins
+  context
+  ([e495b00](https://github.com/gracile-web/gracile/commit/e495b003d03335bcc43f96ea8fefaa4c68f5503b))
 
 # [0.6.0-next.2](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.0-next.1...@gracile/internal-utils@0.6.0-next.2) (2026-03-01)
 
 ### Features
 
-* update all deps + gh actions, fix npm token, use catalog protocol, fix build & tests ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
+- update all deps + gh actions, fix npm token, use catalog protocol, fix build &
+  tests
+  ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
 
 # [0.6.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.6.0-next.0...@gracile/internal-utils@0.6.0-next.1) (2026-03-01)
 
 ### Bug Fixes
 
-* minor cherry picks from local wip branch ([8b06487](https://github.com/gracile-web/gracile/commit/8b06487d0a0810a1aa7708a963cc8186091531bb))
+- minor cherry picks from local wip branch
+  ([8b06487](https://github.com/gracile-web/gracile/commit/8b06487d0a0810a1aa7708a963cc8186091531bb))
 
 # [0.6.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.5.1...@gracile/internal-utils@0.6.0-next.0) (2026-03-01)
 
 ### Features
 
-* rehaul old flaky tests harness, update to Vite (7) + node 25 types ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
+- rehaul old flaky tests harness, update to Vite (7) + node 25 types
+  ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
 
 ## [0.5.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.5.1-next.0...@gracile/internal-utils@0.5.1) (2025-04-07)
 
@@ -124,19 +144,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* update to vite 5 to 6.x, nanoid vulnerability ([bd16c45](https://github.com/gracile-web/gracile/commit/bd16c45c66d09ec491cda84a09d161747ab89e57))
+- update to vite 5 to 6.x, nanoid vulnerability
+  ([bd16c45](https://github.com/gracile-web/gracile/commit/bd16c45c66d09ec491cda84a09d161747ab89e57))
 
 # [0.5.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.5.0-next.0...@gracile/internal-utils@0.5.0-next.1) (2024-11-03)
 
 ### Features
 
-* error when premises are accessed but not enabled ([cf48891](https://github.com/gracile-web/gracile/commit/cf48891aa435505a4c19447526b893ca353cdcb8))
+- error when premises are accessed but not enabled
+  ([cf48891](https://github.com/gracile-web/gracile/commit/cf48891aa435505a4c19447526b893ca353cdcb8))
 
 # [0.5.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.4.0...@gracile/internal-utils@0.5.0-next.0) (2024-10-26)
 
 ### Features
 
-* add doctype automatically if missing, align lit template type, add new file route formats ([1c90262](https://github.com/gracile-web/gracile/commit/1c9026208ca1b58ee0e3777929ea0136e5ef715f))
+- add doctype automatically if missing, align lit template type, add new file
+  route formats
+  ([1c90262](https://github.com/gracile-web/gracile/commit/1c9026208ca1b58ee0e3777929ea0136e5ef715f))
 
 # [0.4.0](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.4.0-next.0...@gracile/internal-utils@0.4.0) (2024-08-25)
 
@@ -146,12 +170,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* windows paths to posix conversion for code generated routes [#7](https://github.com/gracile-web/gracile/issues/7) ([f7a62d1](https://github.com/gracile-web/gracile/commit/f7a62d1f965ece24b33a3476dfd8df28aa82b7b1))
+- windows paths to posix conversion for code generated routes
+  [#7](https://github.com/gracile-web/gracile/issues/7)
+  ([f7a62d1](https://github.com/gracile-web/gracile/commit/f7a62d1f965ece24b33a3476dfd8df28aa82b7b1))
 
 ### Features
 
-* global getter for logger/version ([c76c1ec](https://github.com/gracile-web/gracile/commit/c76c1ec1e5b6104ef5c40695768e84af5167baf9))
-* logger options for adapters, organize windows utils, add 500 page support (incomplete) ([dbd01f4](https://github.com/gracile-web/gracile/commit/dbd01f4512fee435de0e28ecdd7bc3e8eb2628c4))
+- global getter for logger/version
+  ([c76c1ec](https://github.com/gracile-web/gracile/commit/c76c1ec1e5b6104ef5c40695768e84af5167baf9))
+- logger options for adapters, organize windows utils, add 500 page support
+  (incomplete)
+  ([dbd01f4](https://github.com/gracile-web/gracile/commit/dbd01f4512fee435de0e28ecdd7bc3e8eb2628c4))
 
 ## [0.3.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.3.1-next.0...@gracile/internal-utils@0.3.1) (2024-08-14)
 
@@ -177,22 +206,30 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* move utils, add loggings, refactor tests ([6182f2b](https://github.com/gracile-web/gracile/commit/6182f2bd9694d059ec6d8cd1a57cbc379136d922))
-* prefix gracile env, set dev condition for dev cli ([8f96a21](https://github.com/gracile-web/gracile/commit/8f96a2175c6d554a9e21126bdb023248a40c5647))
-* use type errors instead of bare errors ([51afce8](https://github.com/gracile-web/gracile/commit/51afce83f241aabed751097a2ff06f31fd5c2d27))
+- move utils, add loggings, refactor tests
+  ([6182f2b](https://github.com/gracile-web/gracile/commit/6182f2bd9694d059ec6d8cd1a57cbc379136d922))
+- prefix gracile env, set dev condition for dev cli
+  ([8f96a21](https://github.com/gracile-web/gracile/commit/8f96a2175c6d554a9e21126bdb023248a40c5647))
+- use type errors instead of bare errors
+  ([51afce8](https://github.com/gracile-web/gracile/commit/51afce83f241aabed751097a2ff06f31fd5c2d27))
 
 ### Features
 
-* add pretty address printer to userland ([4d341a6](https://github.com/gracile-web/gracile/commit/4d341a6225c3c38af713054d82604f08769f2cb5))
-* env loader for userland server, extract internal envs ([1370c08](https://github.com/gracile-web/gracile/commit/1370c08c0cabd9416f741f7eb93fc15f4906432e))
-* multi-modal logger for node export conditions ([976153c](https://github.com/gracile-web/gracile/commit/976153cbc44031fa8d67c963d6b38d5e96fec7ee))
-* support for user provided server entrypoint ([fc16377](https://github.com/gracile-web/gracile/commit/fc16377f34b30548c1abd055da5552445790ecbb))
+- add pretty address printer to userland
+  ([4d341a6](https://github.com/gracile-web/gracile/commit/4d341a6225c3c38af713054d82604f08769f2cb5))
+- env loader for userland server, extract internal envs
+  ([1370c08](https://github.com/gracile-web/gracile/commit/1370c08c0cabd9416f741f7eb93fc15f4906432e))
+- multi-modal logger for node export conditions
+  ([976153c](https://github.com/gracile-web/gracile/commit/976153cbc44031fa8d67c963d6b38d5e96fec7ee))
+- support for user provided server entrypoint
+  ([fc16377](https://github.com/gracile-web/gracile/commit/fc16377f34b30548c1abd055da5552445790ecbb))
 
 ## [0.0.4](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.0.3...@gracile/internal-utils@0.0.4) (2024-05-25)
 
 ### Bug Fixes
 
-* tsconfigs, dist ([94e7de0](https://github.com/gracile-web/gracile/commit/94e7de079f887bee5936c8b0f8a0301f60c8b215))
+- tsconfigs, dist
+  ([94e7de0](https://github.com/gracile-web/gracile/commit/94e7de079f887bee5936c8b0f8a0301f60c8b215))
 
 ## [0.0.3](https://github.com/gracile-web/gracile/compare/@gracile/internal-utils@0.0.2...@gracile/internal-utils@0.0.3) (2024-05-09)
 

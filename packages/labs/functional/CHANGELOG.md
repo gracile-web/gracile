@@ -1,7 +1,16 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.2.3-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.2.3-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/functional@0.2.3-next.0...@gracile-labs/functional@0.2.3-next.1) (2026-05-16)
 
@@ -35,7 +44,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* migrate to typescript 6 + monorepo wide shared settings for new packages ([40c1743](https://github.com/gracile-web/gracile/commit/40c1743287fb68cb13de50ac8131b347fe6b6ba1))
+- migrate to typescript 6 + monorepo wide shared settings for new packages
+  ([40c1743](https://github.com/gracile-web/gracile/commit/40c1743287fb68cb13de50ac8131b347fe6b6ba1))
 
 ## [0.1.3-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/functional@0.1.2...@gracile-labs/functional@0.1.3-next.0) (2026-03-22)
 
@@ -81,7 +91,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* more readmes (new packages) ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
+- more readmes (new packages)
+  ([f90c03b](https://github.com/gracile-web/gracile/commit/f90c03bf0b0d69ebd3a8ea95a03083d5a2312ed1))
 
 # [0.1.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/functional@0.1.0-next.0...@gracile-labs/functional@0.1.0-next.1) (2026-03-15)
 
@@ -91,10 +102,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* lint/format with monorepo rules ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
-* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+- lint/format with monorepo rules
+  ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- ventilate all integration tests in each package
+  ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
 
 ### Features
 
-* incorporate external gracile packages ([d97e488](https://github.com/gracile-web/gracile/commit/d97e488bf5c75d7aefbd0c8956212142e80719a1))
+- incorporate external gracile packages
+  ([d97e488](https://github.com/gracile-web/gracile/commit/d97e488bf5c75d7aefbd0c8956212142e80719a1))

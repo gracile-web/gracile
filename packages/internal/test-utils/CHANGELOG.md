@@ -1,7 +1,20 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.1.4-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+- Updated dependencies
+  [[`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd)]:
+  - @gracile/internal-utils@0.8.1-next.2
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.1.4-next.1](https://github.com/gracile-web/gracile/compare/@gracile/internal-test-utils@0.1.4-next.0...@gracile/internal-test-utils@0.1.4-next.1) (2026-05-16)
 
@@ -47,7 +60,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* make vite a peerdep, align all to 7/8 ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
+- make vite a peerdep, align all to 7/8
+  ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
 
 ## [0.0.2](https://github.com/gracile-web/gracile/compare/@gracile/internal-test-utils@0.0.2-next.0...@gracile/internal-test-utils@0.0.2) (2026-03-22)
 
@@ -65,5 +79,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* use Vite `buildApp` in test harness, split envs configs, refactor pipeline, static/server build ([7eb32d7](https://github.com/gracile-web/gracile/commit/7eb32d75e7ff8d900c9dbd64d8f5d8704ffba920))
-* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+- use Vite `buildApp` in test harness, split envs configs, refactor pipeline,
+  static/server build
+  ([7eb32d7](https://github.com/gracile-web/gracile/commit/7eb32d75e7ff8d900c9dbd64d8f5d8704ffba920))
+- ventilate all integration tests in each package
+  ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))

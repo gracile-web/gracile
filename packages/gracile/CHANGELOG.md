@@ -1,13 +1,31 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.11.1-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+- Updated dependencies
+  [[`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd)]:
+  - @gracile-labs/better-errors@0.5.2-next.2
+  - @gracile/internal-utils@0.8.1-next.2
+  - @gracile/client@0.5.8-next.2
+  - @gracile/engine@0.12.1-next.2
+  - @gracile/server@0.7.8-next.2
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.11.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.11.1-next.0...@gracile/gracile@0.11.1-next.1) (2026-05-16)
 
 ### Bug Fixes
 
-* re export return types (annotation issues), revert jsx-forge getText hacks ([efa3288](https://github.com/gracile-web/gracile/commit/efa32881d9c8a38c2aada9bdfebc7537e2170a01))
+- re export return types (annotation issues), revert jsx-forge getText hacks
+  ([efa3288](https://github.com/gracile-web/gracile/commit/efa32881d9c8a38c2aada9bdfebc7537e2170a01))
 
 ## [0.11.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.11.0...@gracile/gracile@0.11.1-next.0) (2026-05-12)
 
@@ -21,17 +39,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* programmatic, user definable routes ([2847c85](https://github.com/gracile-web/gracile/commit/2847c85a97b9d7d208411b2d591cc1dfcafb9d5f))
+- programmatic, user definable routes
+  ([2847c85](https://github.com/gracile-web/gracile/commit/2847c85a97b9d7d208411b2d591cc1dfcafb9d5f))
 
 ## [0.11.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.10.0...@gracile/gracile@0.11.0-next.0) (2026-04-12)
 
 ### Features
 
-* implement virtual module server handler, vite server entry, streamline node/fetch conversion ([37f6c71](https://github.com/gracile-web/gracile/commit/37f6c7190305cf6a042a01868cd04b30b5e86b42))
+- implement virtual module server handler, vite server entry, streamline
+  node/fetch conversion
+  ([37f6c71](https://github.com/gracile-web/gracile/commit/37f6c7190305cf6a042a01868cd04b30b5e86b42))
 
 ### Bug Fixes
 
-* cem invalid schema ([f934616](https://github.com/gracile-web/gracile/commit/f934616a341ee819ac5e272d863ce2d8644a0094))
+- cem invalid schema
+  ([f934616](https://github.com/gracile-web/gracile/commit/f934616a341ee819ac5e272d863ce2d8644a0094))
 
 ## [0.10.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.10.0-next.1...@gracile/gracile@0.10.0) (2026-04-04)
 
@@ -45,13 +67,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* expose special custom elements via cem ([c06356c](https://github.com/gracile-web/gracile/commit/c06356c23ce3de2ff31744ce0ee046849bce7c26))
+- expose special custom elements via cem
+  ([c06356c](https://github.com/gracile-web/gracile/commit/c06356c23ce3de2ff31744ce0ee046849bce7c26))
 
 ### Bug Fixes
 
-* remove old error overlay export, paths ([b0b3684](https://github.com/gracile-web/gracile/commit/b0b3684b8ec6793c96a9ba1eb9b1eecaadc37eb7))
-* remove url pattern polyfill ([94d1130](https://github.com/gracile-web/gracile/commit/94d1130df8d56db56c20248c65a88a9da7f4c08f))
-* split render lit template and server html re-exports ([693f337](https://github.com/gracile-web/gracile/commit/693f337481225e94bf2d479baa53fbe80e1ea003))
+- remove old error overlay export, paths
+  ([b0b3684](https://github.com/gracile-web/gracile/commit/b0b3684b8ec6793c96a9ba1eb9b1eecaadc37eb7))
+- remove url pattern polyfill
+  ([94d1130](https://github.com/gracile-web/gracile/commit/94d1130df8d56db56c20248c65a88a9da7f4c08f))
+- split render lit template and server html re-exports
+  ([693f337](https://github.com/gracile-web/gracile/commit/693f337481225e94bf2d479baa53fbe80e1ea003))
 
 ## [0.9.5](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.4...@gracile/gracile@0.9.5) (2026-03-29)
 
@@ -129,9 +155,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* lint/format with monorepo rules ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
-* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+- lint/format with monorepo rules
+  ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- ventilate all integration tests in each package
+  ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
 
 # [0.9.0-next.7](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.6...@gracile/gracile@0.9.0-next.7) (2026-03-09)
 
@@ -142,6 +171,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @gracile/gracile
 
 # [0.9.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.4...@gracile/gracile@0.9.0-next.5) (2026-03-06)
+
 # [0.9.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.4...@gracile/gracile@0.9.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile/gracile
@@ -158,7 +188,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* update all deps + gh actions, fix npm token, use catalog protocol, fix build & tests ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
+- update all deps + gh actions, fix npm token, use catalog protocol, fix build &
+  tests
+  ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
 
 # [0.9.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.9.0-next.0...@gracile/gracile@0.9.0-next.1) (2026-03-01)
 
@@ -168,7 +200,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* rehaul old flaky tests harness, update to Vite (7) + node 25 types ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
+- rehaul old flaky tests harness, update to Vite (7) + node 25 types
+  ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
 
 ## [0.8.2](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.8.2-next.0...@gracile/gracile@0.8.2) (2025-04-07)
 
@@ -198,7 +231,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* support for light dom signal host, invokable api ([3470044](https://github.com/gracile-web/gracile/commit/34700449a5a6eff8509e03f3b7100121ab7c2a83))
+- support for light dom signal host, invokable api
+  ([3470044](https://github.com/gracile-web/gracile/commit/34700449a5a6eff8509e03f3b7100121ab7c2a83))
 
 ## [0.7.2-next.1](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.7.2-next.0...@gracile/gracile@0.7.2-next.1) (2024-11-03)
 
@@ -208,7 +242,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* remove experimental full hydration from public api ([cabeb78](https://github.com/gracile-web/gracile/commit/cabeb787f439520cfa86c1453ae3bd20406af18a))
+- remove experimental full hydration from public api
+  ([cabeb78](https://github.com/gracile-web/gracile/commit/cabeb787f439520cfa86c1453ae3bd20406af18a))
 
 ## [0.7.1](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.7.1-next.0...@gracile/gracile@0.7.1) (2024-08-28)
 
@@ -226,16 +261,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* global getter for logger/version ([c76c1ec](https://github.com/gracile-web/gracile/commit/c76c1ec1e5b6104ef5c40695768e84af5167baf9))
-* introduce "better errors" package ([09ac5dd](https://github.com/gracile-web/gracile/commit/09ac5dd2d011a84716b2a53a4df996360cad6dee))
-* logger options for adapters, organize windows utils, add 500 page support (incomplete) ([dbd01f4](https://github.com/gracile-web/gracile/commit/dbd01f4512fee435de0e28ecdd7bc3e8eb2628c4))
+- global getter for logger/version
+  ([c76c1ec](https://github.com/gracile-web/gracile/commit/c76c1ec1e5b6104ef5c40695768e84af5167baf9))
+- introduce "better errors" package
+  ([09ac5dd](https://github.com/gracile-web/gracile/commit/09ac5dd2d011a84716b2a53a4df996360cad6dee))
+- logger options for adapters, organize windows utils, add 500 page support
+  (incomplete)
+  ([dbd01f4](https://github.com/gracile-web/gracile/commit/dbd01f4512fee435de0e28ecdd7bc3e8eb2628c4))
 
 # [0.7.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.6.0...@gracile/gracile@0.7.0-next.0) (2024-08-22)
 
 ### Features
 
-* expose render lit template for tests, rename server consts, remove css helpers from core ([195e1c8](https://github.com/gracile-web/gracile/commit/195e1c86f05b182706e2970b6ade021668ec1d17))
-* global styles provider for shadow roots ([ef494df](https://github.com/gracile-web/gracile/commit/ef494df2b9351adebc470de585e8ccc594d8d579))
+- expose render lit template for tests, rename server consts, remove css helpers
+  from core
+  ([195e1c8](https://github.com/gracile-web/gracile/commit/195e1c86f05b182706e2970b6ade021668ec1d17))
+- global styles provider for shadow roots
+  ([ef494df](https://github.com/gracile-web/gracile/commit/ef494df2b9351adebc470de585e8ccc594d8d579))
 
 # [0.6.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.6.0-next.0...@gracile/gracile@0.6.0) (2024-08-14)
 
@@ -245,7 +287,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* migrate `printAddressInfos` to `printUrls` ([81a2681](https://github.com/gracile-web/gracile/commit/81a26811fcc0c87b034788fa43ebb21e81987547))
+- migrate `printAddressInfos` to `printUrls`
+  ([81a2681](https://github.com/gracile-web/gracile/commit/81a26811fcc0c87b034788fa43ebb21e81987547))
 
 ## [0.5.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.5.0...@gracile/gracile@0.5.1-next.0) (2024-08-13)
 
@@ -259,7 +302,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* exports "localhost" env and exclude all test dist files ([9af46de](https://github.com/gracile-web/gracile/commit/9af46de74c613d5a21f4b816f1b0b250b37aaee0))
+- exports "localhost" env and exclude all test dist files
+  ([9af46de](https://github.com/gracile-web/gracile/commit/9af46de74c613d5a21f4b816f1b0b250b37aaee0))
 
 # [0.4.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.4.0-next.0...@gracile/gracile@0.4.0) (2024-08-09)
 
@@ -285,20 +329,26 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* request idle callback polyfill wrong loading ([ad8099e](https://github.com/gracile-web/gracile/commit/ad8099e8d26d9ee80c18389c1d0ec9b2c8b9db29))
+- request idle callback polyfill wrong loading
+  ([ad8099e](https://github.com/gracile-web/gracile/commit/ad8099e8d26d9ee80c18389c1d0ec9b2c8b9db29))
 
 # [0.1.0](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.0.5...@gracile/gracile@0.1.0) (2024-06-08)
 
 ### Bug Fixes
 
-* prefix gracile env, set dev condition for dev cli ([8f96a21](https://github.com/gracile-web/gracile/commit/8f96a2175c6d554a9e21126bdb023248a40c5647))
+- prefix gracile env, set dev condition for dev cli
+  ([8f96a21](https://github.com/gracile-web/gracile/commit/8f96a2175c6d554a9e21126bdb023248a40c5647))
 
 ### Features
 
-* cleaner, less intrusive server api ([301de32](https://github.com/gracile-web/gracile/commit/301de329f0ae91efee471a2db94cfe4baa5fc57a))
-* env loader for userland server, extract internal envs ([1370c08](https://github.com/gracile-web/gracile/commit/1370c08c0cabd9416f741f7eb93fc15f4906432e))
-* genericize gracile handler to connect like ([d6fd2cf](https://github.com/gracile-web/gracile/commit/d6fd2cfbd9d2e22aa99e9b4cc8763ed099e1643e))
-* multi-modal logger for node export conditions ([976153c](https://github.com/gracile-web/gracile/commit/976153cbc44031fa8d67c963d6b38d5e96fec7ee))
+- cleaner, less intrusive server api
+  ([301de32](https://github.com/gracile-web/gracile/commit/301de329f0ae91efee471a2db94cfe4baa5fc57a))
+- env loader for userland server, extract internal envs
+  ([1370c08](https://github.com/gracile-web/gracile/commit/1370c08c0cabd9416f741f7eb93fc15f4906432e))
+- genericize gracile handler to connect like
+  ([d6fd2cf](https://github.com/gracile-web/gracile/commit/d6fd2cfbd9d2e22aa99e9b4cc8763ed099e1643e))
+- multi-modal logger for node export conditions
+  ([976153c](https://github.com/gracile-web/gracile/commit/976153cbc44031fa8d67c963d6b38d5e96fec7ee))
 
 ## [0.0.5](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.0.4...@gracile/gracile@0.0.5) (2024-05-25)
 
@@ -308,7 +358,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* make multiarg for env work on linux ([bc2e77f](https://github.com/gracile-web/gracile/commit/bc2e77f08bab47a65770335cdd96fd952811d901))
+- make multiarg for env work on linux
+  ([bc2e77f](https://github.com/gracile-web/gracile/commit/bc2e77f08bab47a65770335cdd96fd952811d901))
 
 ## [0.0.3](https://github.com/gracile-web/gracile/compare/@gracile/gracile@0.0.2...@gracile/gracile@0.0.3) (2024-05-09)
 

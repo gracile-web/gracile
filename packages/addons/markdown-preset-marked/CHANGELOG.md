@@ -1,7 +1,20 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.2.4-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+- Updated dependencies
+  [[`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd)]:
+  - @gracile/markdown@0.6.4-next.2
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.2.4-next.1](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.2.4-next.0...@gracile/markdown-preset-marked@0.2.4-next.1) (2026-05-16)
 
@@ -47,7 +60,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* make vite a peerdep, align all to 7/8 ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
+- make vite a peerdep, align all to 7/8
+  ([6f912c9](https://github.com/gracile-web/gracile/commit/6f912c9a25d7689094170f204e22fb006362d7d4))
 
 ## [0.1.2](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.1.2-next.0...@gracile/markdown-preset-marked@0.1.2) (2026-03-22)
 
@@ -81,8 +95,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
-* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- ventilate all integration tests in each package
+  ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
 
 ## [0.1.1-next.0](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.1.0-next.3...@gracile/markdown-preset-marked@0.1.1-next.0) (2026-03-07)
 
@@ -100,19 +116,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* update all deps + gh actions, fix npm token, use catalog protocol, fix build & tests ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
+- update all deps + gh actions, fix npm token, use catalog protocol, fix build &
+  tests
+  ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
 
 # [0.1.0-next.1](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.1.0-next.0...@gracile/markdown-preset-marked@0.1.0-next.1) (2026-03-01)
 
 ### Bug Fixes
 
-* minor cherry picks from local wip branch ([8b06487](https://github.com/gracile-web/gracile/commit/8b06487d0a0810a1aa7708a963cc8186091531bb))
+- minor cherry picks from local wip branch
+  ([8b06487](https://github.com/gracile-web/gracile/commit/8b06487d0a0810a1aa7708a963cc8186091531bb))
 
 # [0.1.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.14...@gracile/markdown-preset-marked@0.1.0-next.0) (2026-03-01)
 
 ### Features
 
-* rehaul old flaky tests harness, update to Vite (7) + node 25 types ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
+- rehaul old flaky tests harness, update to Vite (7) + node 25 types
+  ([6a4b75d](https://github.com/gracile-web/gracile/commit/6a4b75d3a44436628844e8435e3470a1738481ba))
 
 ## [0.0.14](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.14-next.0...@gracile/markdown-preset-marked@0.0.14) (2025-04-07)
 
@@ -130,7 +150,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* update to vite 5 to 6.x, nanoid vulnerability ([bd16c45](https://github.com/gracile-web/gracile/commit/bd16c45c66d09ec491cda84a09d161747ab89e57))
+- update to vite 5 to 6.x, nanoid vulnerability
+  ([bd16c45](https://github.com/gracile-web/gracile/commit/bd16c45c66d09ec491cda84a09d161747ab89e57))
 
 ## [0.0.13-next.1](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.13-next.0...@gracile/markdown-preset-marked@0.0.13-next.1) (2024-11-03)
 
@@ -152,7 +173,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* remove fast-glob, update marked, lerna, after audit issues ([d5a4ac2](https://github.com/gracile-web/gracile/commit/d5a4ac22fd958b7ecfbda972383bd3e3f9517d9c))
+- remove fast-glob, update marked, lerna, after audit issues
+  ([d5a4ac2](https://github.com/gracile-web/gracile/commit/d5a4ac22fd958b7ecfbda972383bd3e3f9517d9c))
 
 ## [0.0.11](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.11-next.0...@gracile/markdown-preset-marked@0.0.11) (2024-08-14)
 
@@ -190,7 +212,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* tsconfigs, dist ([94e7de0](https://github.com/gracile-web/gracile/commit/94e7de079f887bee5936c8b0f8a0301f60c8b215))
+- tsconfigs, dist
+  ([94e7de0](https://github.com/gracile-web/gracile/commit/94e7de079f887bee5936c8b0f8a0301f60c8b215))
 
 ## [0.0.3](https://github.com/gracile-web/gracile/compare/@gracile/markdown-preset-marked@0.0.2...@gracile/markdown-preset-marked@0.0.3) (2024-05-09)
 

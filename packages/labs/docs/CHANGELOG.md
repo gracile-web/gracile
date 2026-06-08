@@ -1,5 +1,31 @@
 # Change Log
 
+## 0.0.1-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+- Updated dependencies
+  [[`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd)]:
+  - @literals/rollup-plugin-html-css-minifier@4.0.3-next.2
+  - vite-plugin-standard-css-modules@0.3.1-next.2
+  - @gracile/markdown-preset-marked@0.2.4-next.2
+  - og-images-generator@0.6.3-next.2
+  - @gracile-labs/client-router@0.4.2-next.2
+  - @gracile/markdown@0.6.4-next.2
+  - @gracile/metadata@0.3.6-next.2
+  - @gracile/sitemap@0.5.4-next.2
+  - @gracile/internal-utils@0.8.1-next.2
+  - @gracile/svg@0.4.4-next.2
+  - @gracile/gracile@0.11.1-next.2
+  - @gracile/client@0.5.8-next.2
+  - @gracile/engine@0.12.1-next.2
+  - @gracile/server@0.7.8-next.2
+
 ## 0.0.1-next.1
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@gracile-labs/hmr-v2",
-  "version": "0.0.0",
+  "version": "0.0.1-next.0",
   "private": true,
   "description": "Placeholder for future fine-grained HMR. Houses the god test suite for ALL HMR scenarios across the Gracile stack.",
   "type": "module",

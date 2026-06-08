@@ -1,164 +1,217 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 4.0.3-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+- Updated dependencies
+  [[`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd)]:
+  - @literals/html-css-minifier@4.0.3-next.2
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [4.0.3-next.1](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@4.0.3-next.0...@literals/rollup-plugin-html-css-minifier@4.0.3-next.1) (2026-05-16)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [4.0.3-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@4.0.2...@literals/rollup-plugin-html-css-minifier@4.0.3-next.0) (2026-05-12)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [4.0.2](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@4.0.2-next.0...@literals/rollup-plugin-html-css-minifier@4.0.2) (2026-05-09)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [4.0.2-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@4.0.1...@literals/rollup-plugin-html-css-minifier@4.0.2-next.0) (2026-04-12)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [4.0.1](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@4.0.1-next.0...@literals/rollup-plugin-html-css-minifier@4.0.1) (2026-04-04)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [4.0.1-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@4.0.0...@literals/rollup-plugin-html-css-minifier@4.0.1-next.0) (2026-04-04)
 
 ### Bug Fixes
 
-* realign MagicString types, use catalog ([f98ba33](https://github.com/gracile-web/gracile/commit/f98ba33b784d6322db332c23e474ce25ab9cd5ba))
+- realign MagicString types, use catalog
+  ([f98ba33](https://github.com/gracile-web/gracile/commit/f98ba33b784d6322db332c23e474ce25ab9cd5ba))
 
 ## [4.0.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@3.0.0...@literals/rollup-plugin-html-css-minifier@4.0.0) (2026-03-29)
 
 ### ⚠ BREAKING CHANGES
 
-* CSS interpolation support was removed in the previous cycle.
-This commit corrects the semver signal that was missed due to a parser bug.
+- CSS interpolation support was removed in the previous cycle. This commit
+  corrects the semver signal that was missed due to a parser bug.
 
 ### Features
 
-* mark (again) @literals/rollup-plugin-minify-html-literals v4: incorrect previous major ([fcde64b](https://github.com/gracile-web/gracile/commit/fcde64b25706f3bf1f81d82d7d2d3f98fded72ca))
+- mark (again) @literals/rollup-plugin-minify-html-literals v4: incorrect
+  previous major
+  ([fcde64b](https://github.com/gracile-web/gracile/commit/fcde64b25706f3bf1f81d82d7d2d3f98fded72ca))
 
 ## [3.0.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@3.0.0-next.0...@literals/rollup-plugin-html-css-minifier@3.0.0) (2026-03-29)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [3.0.0-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.1.1-next.0...@literals/rollup-plugin-html-css-minifier@3.0.0-next.0) (2026-03-29)
 
 ### ⚠ BREAKING CHANGES
 
-* CSS interpolation support was removed in the previous cycle.
-This commit corrects the semver signal that was missed due to a parser bug.
+- CSS interpolation support was removed in the previous cycle. This commit
+  corrects the semver signal that was missed due to a parser bug.
 
 ### Features
 
-* mark @literals/rollup-plugin-minify-html-literals v3: css interpolation removed ([dd5a04e](https://github.com/gracile-web/gracile/commit/dd5a04e2c6d3f7201074235ec87d3bfd8206d8ff))
+- mark @literals/rollup-plugin-minify-html-literals v3: css interpolation
+  removed
+  ([dd5a04e](https://github.com/gracile-web/gracile/commit/dd5a04e2c6d3f7201074235ec87d3bfd8206d8ff))
 
 ## [2.1.1-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.1.0...@literals/rollup-plugin-html-css-minifier@2.1.1-next.0) (2026-03-29)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 # [2.1.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.1.0-next.0...@literals/rollup-plugin-html-css-minifier@2.1.0) (2026-03-23)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 # [2.1.0-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.6-next.1...@literals/rollup-plugin-html-css-minifier@2.1.0-next.0) (2026-03-23)
 
 ### Features
 
-* migrate to typescript 6 + monorepo wide shared settings for new packages ([40c1743](https://github.com/gracile-web/gracile/commit/40c1743287fb68cb13de50ac8131b347fe6b6ba1))
+- migrate to typescript 6 + monorepo wide shared settings for new packages
+  ([40c1743](https://github.com/gracile-web/gracile/commit/40c1743287fb68cb13de50ac8131b347fe6b6ba1))
 
 ## [2.0.6-next.1](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.6-next.0...@literals/rollup-plugin-html-css-minifier@2.0.6-next.1) (2026-03-22)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [2.0.6-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.5...@literals/rollup-plugin-html-css-minifier@2.0.6-next.0) (2026-03-22)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [2.0.5](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.5-next.0...@literals/rollup-plugin-html-css-minifier@2.0.5) (2026-03-22)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [2.0.5-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.4...@literals/rollup-plugin-html-css-minifier@2.0.5-next.0) (2026-03-22)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [2.0.4](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.4-next.0...@literals/rollup-plugin-html-css-minifier@2.0.4) (2026-03-22)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [2.0.4-next.0](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.3-next.0...@literals/rollup-plugin-html-css-minifier@2.0.4-next.0) (2026-03-22)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## [2.0.3](https://github.com/gracile-web/gracile/compare/@literals/rollup-plugin-html-css-minifier@2.0.3-next.0...@literals/rollup-plugin-html-css-minifier@2.0.3) (2026-03-22)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 ## 2.0.3-next.0 (2026-03-21)
 
 ### Bug Fixes
 
-* cve - h3, use main lodash-es + publish og generator, clean deps ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
-* lint/format with monorepo rules ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
-* re-enable test + version bump for initial publish ([a2018ef](https://github.com/gracile-web/gracile/commit/a2018efea44b1e0f0b51e8645652ef3e4a5a511c))
-* ts compiler "real" path, add peer dep ([7106004](https://github.com/gracile-web/gracile/commit/71060045ad22a313bad4077adfa3e530cbdc52fc))
+- cve - h3, use main lodash-es + publish og generator, clean deps
+  ([31138f0](https://github.com/gracile-web/gracile/commit/31138f07f53916dfb3b3cf3899d9719b00a108a0))
+- lint/format with monorepo rules
+  ([0784f7a](https://github.com/gracile-web/gracile/commit/0784f7a64132e19c74e503deb8194598142c7081))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- re-enable test + version bump for initial publish
+  ([a2018ef](https://github.com/gracile-web/gracile/commit/a2018efea44b1e0f0b51e8645652ef3e4a5a511c))
+- ts compiler "real" path, add peer dep
+  ([7106004](https://github.com/gracile-web/gracile/commit/71060045ad22a313bad4077adfa3e530cbdc52fc))
 
 ## [2.0.2](https://github.com/JulianCataldo/literals/compare/@literals/rollup-plugin-html-css-minifier@2.0.1...@literals/rollup-plugin-html-css-minifier@2.0.2) (2024-07-29)
 
 ### Bug Fixes
 
-* wrong package includes ([b1ecc1a](https://github.com/JulianCataldo/literals/commit/b1ecc1aceae9d0cc57fed8c1e153f35bfc7d3a34))
+- wrong package includes
+  ([b1ecc1a](https://github.com/JulianCataldo/literals/commit/b1ecc1aceae9d0cc57fed8c1e153f35bfc7d3a34))
 
 ## [2.0.1](https://github.com/JulianCataldo/literals/compare/@literals/rollup-plugin-html-css-minifier@2.0.0...@literals/rollup-plugin-html-css-minifier@2.0.1) (2024-07-29)
 
 ### Bug Fixes
 
-* missing dist files, use package.json file includes instead of npmignore, reorder ci ([ee10c4f](https://github.com/JulianCataldo/literals/commit/ee10c4fc71759bbe48534673ca06bcfd82be3871))
+- missing dist files, use package.json file includes instead of npmignore,
+  reorder ci
+  ([ee10c4f](https://github.com/JulianCataldo/literals/commit/ee10c4fc71759bbe48534673ca06bcfd82be3871))
 
 # [2.0.0](https://github.com/JulianCataldo/literals/compare/@literals/rollup-plugin-html-css-minifier@1.2.7...@literals/rollup-plugin-html-css-minifier@2.0.0) (2024-07-28)
 
-* fix!: replace `html-minifier` with `html-minifier-terser` ([38a5e19](https://github.com/JulianCataldo/literals/commit/38a5e19d9a250d2eb39518b741450a6b2d0b5785))
+- fix!: replace `html-minifier` with `html-minifier-terser`
+  ([38a5e19](https://github.com/JulianCataldo/literals/commit/38a5e19d9a250d2eb39518b741450a6b2d0b5785))
 
 ### BREAKING CHANGES
 
-* The new API now uses a promise.
+- The new API now uses a promise.
 
 ## 1.2.7 (2024-07-28)
 
-**Note:** Version bump only for package @literals/rollup-plugin-html-css-minifier
+**Note:** Version bump only for package
+@literals/rollup-plugin-html-css-minifier
 
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[standard-version](https://github.com/conventional-changelog/standard-version)
+for commit guidelines.
 
 ### [1.2.6](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/compare/v1.2.5...v1.2.6) (2021-03-09)
 
 ### Bug Fixes
 
-* add support for rollup 2.0.0 ([f305718](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/f30571856c744efc3a90cc2f5b0c97a122ea3043)), closes [#15](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/15)
-* upate minify-html-literals to v1.3.5 ([ab89bb0](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/ab89bb00b2391b7c342f05cca73d640f68e7c7c5))
+- add support for rollup 2.0.0
+  ([f305718](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/f30571856c744efc3a90cc2f5b0c97a122ea3043)),
+  closes
+  [#15](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/15)
+- upate minify-html-literals to v1.3.5
+  ([ab89bb0](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/ab89bb00b2391b7c342f05cca73d640f68e7c7c5))
 
 ### [1.2.5](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/compare/v1.2.4...v1.2.5) (2020-08-18)
 
 ### Bug Fixes
 
-* update minify-html-literals to v1.3.2 ([3408e5c](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/3408e5c8edd76452dc58745444e33e70ef1a93e3))
+- update minify-html-literals to v1.3.2
+  ([3408e5c](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/3408e5c8edd76452dc58745444e33e70ef1a93e3))
 
 ### [1.2.4](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/compare/v1.2.3...v1.2.4) (2020-06-10)
 
 ### Bug Fixes
 
-* update minify-html-literals to v1.3.1 ([a1eb2ef](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/a1eb2ef26587c2abc521ffe66d16a6c22451043b))
+- update minify-html-literals to v1.3.1
+  ([a1eb2ef](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/a1eb2ef26587c2abc521ffe66d16a6c22451043b))
 
 ### [1.2.3](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/compare/v1.2.2...v1.2.3) (2020-02-08)
 
 ### Bug Fixes
 
-- update to minify-html-literals v1.3.0 ([56cfb8d](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/56cfb8d3dfc5d828a824cbeb92c3aab53bda379a))
+- update to minify-html-literals v1.3.0
+  ([56cfb8d](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/56cfb8d3dfc5d828a824cbeb92c3aab53bda379a))
 
 <a name="1.2.2"></a>
 
@@ -166,7 +219,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- failure to minify templates prefixed with comments ([ea8c98e](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/ea8c98e))
+- failure to minify templates prefixed with comments
+  ([ea8c98e](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/ea8c98e))
 
 <a name="1.2.1"></a>
 
@@ -174,7 +228,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- remove source files from package ([b784735](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/b784735))
+- remove source files from package
+  ([b784735](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/b784735))
 
 <a name="1.2.0"></a>
 
@@ -182,11 +237,14 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- accept rollup 1 as peerDep ([#2](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/2)) ([2867985](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/2867985))
+- accept rollup 1 as peerDep
+  ([#2](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/2))
+  ([2867985](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/2867985))
 
 ### Features
 
-- minify CSS tagged template literals ([6baf3c2](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/6baf3c2))
+- minify CSS tagged template literals
+  ([6baf3c2](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/6baf3c2))
 
 <a name="1.1.2"></a>
 
@@ -194,7 +252,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- update minify-html-literals to 1.1.2 ([2a26e9c](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/2a26e9c))
+- update minify-html-literals to 1.1.2
+  ([2a26e9c](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/2a26e9c))
 
 <a name="1.1.1"></a>
 
@@ -202,7 +261,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- update minify-html-literals to 1.1.1 ([6abe9bb](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/6abe9bb))
+- update minify-html-literals to 1.1.1
+  ([6abe9bb](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/6abe9bb))
 
 <a name="1.1.0"></a>
 
@@ -210,7 +270,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-- update minify-html-literals to 1.1.0 ([a1d9f1d](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/a1d9f1d))
+- update minify-html-literals to 1.1.0
+  ([a1d9f1d](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/a1d9f1d))
 
 <a name="1.0.7"></a>
 
@@ -218,7 +279,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- do not remove tag whitespace ([7d4d289](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/7d4d289))
+- do not remove tag whitespace
+  ([7d4d289](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/7d4d289))
 
 <a name="1.0.6"></a>
 
@@ -226,7 +288,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- do not collapse boolean attributes for Polymer binding syntax ([8597d14](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/8597d14))
+- do not collapse boolean attributes for Polymer binding syntax
+  ([8597d14](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/8597d14))
 
 <a name="1.0.5"></a>
 
@@ -234,7 +297,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- update parse-literals to minify escaped characters properly ([ff2df26](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/ff2df26))
+- update parse-literals to minify escaped characters properly
+  ([ff2df26](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/ff2df26))
 
 <a name="1.0.4"></a>
 
@@ -242,7 +306,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- update minify-html-literals to not sort attributes or classes ([dc66de0](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/dc66de0))
+- update minify-html-literals to not sort attributes or classes
+  ([dc66de0](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/dc66de0))
 
 <a name="1.0.3"></a>
 
@@ -250,7 +315,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- update minify-html-literals to use hires sourcemaps ([8dcb055](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/8dcb055))
+- update minify-html-literals to use hires sourcemaps
+  ([8dcb055](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/8dcb055))
 
 <a name="1.0.2"></a>
 
@@ -258,8 +324,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- do not require fileName in minify options ([9543ef1](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/9543ef1))
-- update dependencies and typings ([0a43630](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/0a43630))
+- do not require fileName in minify options
+  ([9543ef1](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/9543ef1))
+- update dependencies and typings
+  ([0a43630](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/0a43630))
 
 <a name="1.0.1"></a>
 
@@ -267,7 +335,8 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- typescript build issues ([0d1b01f](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/0d1b01f))
+- typescript build issues
+  ([0d1b01f](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/0d1b01f))
 
 <a name="1.0.0"></a>
 
@@ -275,4 +344,5 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-- initial release ([e3f2d8c](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/e3f2d8c))
+- initial release
+  ([e3f2d8c](https://github.com/asyncLiz/rollup-plugin-minify-html-literals/commit/e3f2d8c))

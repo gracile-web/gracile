@@ -1,7 +1,22 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+## 0.4.1-next.2
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
+- Updated dependencies
+  [[`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd)]:
+  - @gracile/internal-utils@0.8.1-next.2
+  - @gracile/engine@0.12.1-next.2
+  - @gracile/server@0.7.8-next.2
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## [0.4.1-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.4.1-next.0...@gracile-labs/css-helpers@0.4.1-next.1) (2026-05-16)
 
@@ -23,17 +38,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* revert to direct snippet injection, re enable tests ([a649ac6](https://github.com/gracile-web/gracile/commit/a649ac6b7dfd5165e80ad67730f5b50d32dbb916))
+- revert to direct snippet injection, re enable tests
+  ([a649ac6](https://github.com/gracile-web/gracile/commit/a649ac6b7dfd5165e80ad67730f5b50d32dbb916))
 
 ## [0.4.0-next.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.3.0...@gracile-labs/css-helpers@0.4.0-next.0) (2026-04-12)
 
 ### Features
 
-* support no js styling via <link> in dsd ([82a8f67](https://github.com/gracile-web/gracile/commit/82a8f6770bd9c1be98ee536c3dab700b54532ef5))
+- support no js styling via <link> in dsd
+  ([82a8f67](https://github.com/gracile-web/gracile/commit/82a8f6770bd9c1be98ee536c3dab700b54532ef5))
 
 ### Bug Fixes
 
-* lint issues ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
+- lint issues
+  ([4c1402f](https://github.com/gracile-web/gracile/commit/4c1402fc4dc7f0da4bd8ed0b96967290bbd20cb3))
 
 ## [0.3.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.3.0-next.1...@gracile-labs/css-helpers@0.3.0) (2026-04-04)
 
@@ -47,12 +65,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* dsd styles dedupper ([d0156c2](https://github.com/gracile-web/gracile/commit/d0156c2337176d45d95128f2ba58303c335f9c56))
+- dsd styles dedupper
+  ([d0156c2](https://github.com/gracile-web/gracile/commit/d0156c2337176d45d95128f2ba58303c335f9c56))
 
 ### Bug Fixes
 
-* remove old error overlay export, paths ([b0b3684](https://github.com/gracile-web/gracile/commit/b0b3684b8ec6793c96a9ba1eb9b1eecaadc37eb7))
-* reorganize, align apis ([4b686bc](https://github.com/gracile-web/gracile/commit/4b686bc7f4f153214fb077a3166dc1ad32711e47))
+- remove old error overlay export, paths
+  ([b0b3684](https://github.com/gracile-web/gracile/commit/b0b3684b8ec6793c96a9ba1eb9b1eecaadc37eb7))
+- reorganize, align apis
+  ([4b686bc](https://github.com/gracile-web/gracile/commit/4b686bc7f4f153214fb077a3166dc1ad32711e47))
 
 ## [0.2.5](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.4...@gracile-labs/css-helpers@0.2.5) (2026-03-29)
 
@@ -130,12 +151,15 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* more lint, more `catalog:` ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
-* ventilate all integration tests in each package ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
+- more lint, more `catalog:`
+  ([e27f9a7](https://github.com/gracile-web/gracile/commit/e27f9a7f36577288e8b96ef53d1e6cec9c182c02))
+- ventilate all integration tests in each package
+  ([a7390b5](https://github.com/gracile-web/gracile/commit/a7390b5870cf0b73da674ddb951157d6050d85c3))
 
 ### Features
 
-* readmes from package collection, format content ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))
+- readmes from package collection, format content
+  ([6395cf5](https://github.com/gracile-web/gracile/commit/6395cf509e4fee969e2273d66b6e7d1d2af1cd07))
 
 # [0.2.0-next.5](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.4...@gracile-labs/css-helpers@0.2.0-next.5) (2026-03-09)
 
@@ -146,6 +170,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @gracile-labs/css-helpers
 
 # [0.2.0-next.3](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.2...@gracile-labs/css-helpers@0.2.0-next.3) (2026-03-06)
+
 # [0.2.0](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.2.0-next.2...@gracile-labs/css-helpers@0.2.0) (2026-03-06)
 
 **Note:** Version bump only for package @gracile-labs/css-helpers
@@ -162,7 +187,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* update all deps + gh actions, fix npm token, use catalog protocol, fix build & tests ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
+- update all deps + gh actions, fix npm token, use catalog protocol, fix build &
+  tests
+  ([afb94b5](https://github.com/gracile-web/gracile/commit/afb94b5d5b094e30b18b635542c4cd10cd53cae6))
 
 ## [0.1.2-next.1](https://github.com/gracile-web/gracile/compare/@gracile-labs/css-helpers@0.1.2-next.0...@gracile-labs/css-helpers@0.1.2-next.1) (2026-03-01)
 
@@ -188,9 +215,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* force bump package for publish ([f356e76](https://github.com/gracile-web/gracile/commit/f356e76f1ba145deb87694bf507e04e0b6acff26))
+- force bump package for publish
+  ([f356e76](https://github.com/gracile-web/gracile/commit/f356e76f1ba145deb87694bf507e04e0b6acff26))
 
 ### Features
 
-* error when premises are accessed but not enabled ([cf48891](https://github.com/gracile-web/gracile/commit/cf48891aa435505a4c19447526b893ca353cdcb8))
-* new labs packages "css-helpers" and "client-router" ([c43af50](https://github.com/gracile-web/gracile/commit/c43af501c94529341757500f3aaaf06b172693dc))
+- error when premises are accessed but not enabled
+  ([cf48891](https://github.com/gracile-web/gracile/commit/cf48891aa435505a4c19447526b893ca353cdcb8))
+- new labs packages "css-helpers" and "client-router"
+  ([c43af50](https://github.com/gracile-web/gracile/commit/c43af501c94529341757500f3aaaf06b172693dc))

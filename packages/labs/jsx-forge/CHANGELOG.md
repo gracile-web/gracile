@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.5.0-next.3
+
+### Patch Changes
+
+- [`b1f3072`](https://github.com/gracile-web/gracile/commit/b1f307202f4f8b315a4dca3e77e6ff0eda39bdbd) -
+  Republish/reversion everything after Lerna > Changesets migration
+
+  Also remove all publishConfigs (not needed anymore with TP workflow)
+
 ## 0.5.0-next.2
 
 ### Minor Changes
