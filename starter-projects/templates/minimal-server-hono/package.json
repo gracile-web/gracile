@@ -1,8 +1,8 @@
 {
   "name": "@gracile/template--minimal-server-hono",
-  "version": "0.0.3-next.0",
-  "private": true,
+  "version": "0.0.2",
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "vite build",
     "check": "tsc",

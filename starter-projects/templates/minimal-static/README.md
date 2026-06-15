@@ -23,10 +23,11 @@ npm create gracile@latest -t minimal-static
 ## 🏗️ Project Structure
 
 ```text
+├─ ⬛️ CHANGELOG.md
+├─ ⬛️ README.md
 ├─ 🟠 package.json
 ├─ 📂 public/
 │   └─ 🔶 favicon.svg
-├─ ⬛️ README.md
 ├─ 📂 src/
 │   ├─ 🟦 ambient.d.ts
 │   ├─ 🟦 document.client.ts

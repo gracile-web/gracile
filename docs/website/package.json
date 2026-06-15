@@ -1,6 +1,6 @@
 {
   "name": "@gracile/docs",
-  "version": "0.12.5-next.2",
+  "version": "0.12.5-next.3",
   "private": true,
   "description": "Gracile.js — official documentation website (consumer of @gracile-labs/docs shell).",
   "license": "ISC",

@@ -23,10 +23,11 @@ npm create gracile@latest -t minimal-minification
 ## 🏗️ Project Structure
 
 ```text
+├─ ⬛️ CHANGELOG.md
+├─ ⬛️ README.md
 ├─ 🟠 package.json
 ├─ 📂 public/
 │   └─ 🔶 favicon.svg
-├─ ⬛️ README.md
 ├─ 🟨 server.js
 ├─ 📂 src/
 │   ├─ 🟦 ambient.d.ts
