@@ -72,7 +72,7 @@
     "@eslint/markdown": "^7.5.1",
     "@types/node": "25.3.3",
     "c8": "11.0.0",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.3",
     "eslint": "^9.39.3",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-x": "^4.16.1",
@@ -91,7 +91,7 @@
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-order": "^6.0.4",
-    "tsx": "^4.21.0",
+    "tsx": "^4.22.4",
     "turbo": "^2.9.14",
     "typedoc": "^0.28.17",
     "typedoc-plugin-markdown": "^4.11.0",
@@ -101,7 +101,9 @@
   "packageManager": "pnpm@9.15.9",
   "pnpm": {
     "auditConfig": {
-      "ignoreCves": []
+      "ignoreCves": [
+        "CVE-2026-53550"
+      ]
     },
     "overrides": {
       "@eslint/plugin-kit": "npm:@eslint/plugin-kit@^0.3.4",
@@ -139,6 +141,7 @@
       "undici": "^7.24.0",
       "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
       "handlebars": ">=4.7.9",
+      "shell-quote": "1.8.4",
       "node-forge": ">=1.4.0",
       "path-to-regexp": ">=8.4.0",
       "fastify": ">=5.8.5",
@@ -154,7 +157,9 @@
       "qs": ">=6.15.2",
       "lodash": ">=4.18.0",
       "lodash-es": ">=4.18.0",
-      "vite": ">=8.0.5",
+      "vite": "8.0.16",
+      "esbuild": "0.28.1",
+      "@babel/core": "7.29.7",
       "uuid@>=11.0.0 <11.1.1": ">=11.1.1",
       "uuid@>=13.0.0 <13.0.1": ">=13.0.1",
       "astro": ">=6.1.6",

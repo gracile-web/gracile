@@ -15,3 +15,4 @@ docs/website/public/pagefind
 packages/labs/og-images-generator/types
 docs/website/src/content/docs/*-references
 starter-projects/templates
+.changeset/pre.json
