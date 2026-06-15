@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.0.1-next.3
+
+### Patch Changes
+
+- [`4e9e3d6`](https://github.com/gracile-web/gracile/commit/4e9e3d69831926af54ef6b8416a6367ba579f1f3) -
+  Fix path resolution for Iconify JSON
+
+  Iconify wasn't surviving publishing (worked linked only)
+
+  \+ Added `.js` to lodash-es/set imports (Vite was hiding the break locally?)
+
 ## 0.0.1-next.2
 
 ### Patch Changes
