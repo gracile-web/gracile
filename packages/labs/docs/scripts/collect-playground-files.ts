@@ -4,7 +4,7 @@ import { join, relative } from 'node:path';
 // eslint-disable-next-line import-x/no-named-as-default
 import glob from 'fast-glob';
 import type { FileSystemTree } from '@webcontainer/api';
-import set from 'lodash-es/set';
+import set from 'lodash-es/set.js';
 
 const files: FileSystemTree = {
 	'package.json': {

@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { dirname, extname, join } from 'node:path';
 
 import type { PluginOption } from 'vite';
@@ -329,7 +330,7 @@ export async function gracileDocs(
 	options: GracileDocsOptions,
 ): Promise<PluginOption[]> {
 	const iconData = await loadCollection(
-		join(PKG_ROOT, 'node_modules', '@iconify', 'json', 'json', 'ph.json'),
+		fileURLToPath(import.meta.resolve('@iconify/json/json/ph.json')),
 	);
 
 	const userGracileConfig = options.gracile ?? {};

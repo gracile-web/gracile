@@ -1,7 +1,7 @@
 // Based on: https://github.com/pthm/node-path-list-to-tree
 
 // import get from 'lodash.get';
-import set from 'lodash-es/set';
+import set from 'lodash-es/set.js';
 
 // import { PathsHandlers } from './paths-handlers.js';
 
