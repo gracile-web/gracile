@@ -1,5 +1,5 @@
 ---
-'@gracile/docs': patch
+'@gracile-labs/docs': patch
 ---
 
 Fix path resolution for Iconify JSON
