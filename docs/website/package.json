@@ -15,7 +15,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf ./dist .gracile",
-    "postbuild": "pagefind --site dist"
+    "postbuild": "pagefind --site dist",
+    "deploy": "netlify deploy --no-build -d ./docs/website/dist",
+    "deploy:main": "netlify deploy --site \"$NETLIFY_SITE_ID\" --no-build --prod -d ./docs/website/dist",
+    "deploy:next": "netlify deploy --site \"$NETLIFY_SITE_ID\" --no-build --alias next -d ./docs/website/dist"
   },
   "dependencies": {
     "@gracile-labs/docs": "workspace:^",
@@ -29,6 +32,7 @@
   "devDependencies": {
     "@gracile/internal-tsconfigs": "workspace:^",
     "@types/node": "catalog:",
+    "netlify-cli": "^26.1.0",
     "typescript": "catalog:",
     "vite": "catalog:"
   }
