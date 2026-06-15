@@ -165,7 +165,9 @@
       "astro": ">=6.1.6",
       "@hono/node-server": ">=1.19.13",
       "tmp": ">=0.2.6",
-      "defu": ">=6.1.5"
+      "defu": ">=6.1.5",
+      "@opentelemetry/core": ">=2.8.0",
+      "markdown-it": ">=14.2.0"
     },
     "patchedDependencies": {
       "typedoc-plugin-markdown@4.11.0": "patches/typedoc-plugin-markdown@4.11.0.patch"
